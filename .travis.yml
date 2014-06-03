@@ -4,7 +4,7 @@ rvm:
 
 deploy:
   provider: heroku
-  app: powerful-basin-1714
+  app: kalevankierros
   api_key:
     secure: Ev466/UZStDK64HTI8K1b2NZV3pxCCI5DKXbm1VKNSPLwX7BCvc4vPffB667hsBSfPSub3wCbApLTV55BR3PbUmwF6M1zAx2XqJ6qrSOI/MaWLWKOfDwrqTENYgtXm1IiK0Hm0+gtXOXVfhhdQAI1hCwip9GWkk+YAO2oZCxUE4=
 
