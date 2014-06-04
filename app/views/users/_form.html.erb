@@ -12,30 +12,46 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :first_name %><br>
+    <%= f.label :first_name, 'Etunimi' %><br>
     <%= f.text_field :first_name %>
   </div>
   <div class="field">
-    <%= f.label :last_name %><br>
+    <%= f.label :last_name, 'Sukunimi' %><br>
     <%= f.text_field :last_name %>
   </div>
   <div class="field">
-    <%= f.label :username %><br>
+    <%= f.label :username, 'Käyttäjätunnus' %><br>
     <%= f.text_field :username %>
   </div>
   <div class="field">
-    <%= f.label :email %><br>
+    <%= f.label :email, 'Sähköpostiosoite' %><br>
     <%= f.text_field :email %>
   </div>
   <div class="field">
-    <%= f.label :password %><br>
+    <%= f.label :phone_number, 'Puhelinnumero' %>
+    <%= f.text_field :phone_number %>
+  </div>
+  <div class="field">
+    <%= f.label :birth_date, 'Syntymäaika' %>
+    <%= f.date_select(:birth_date, start_year: Time.now.year - 100, end_year: Time.now.year, order: [:day, :month, :year], use_month_numbers:true) %>
+  </div>
+  <div class="field">
+    <%= f.label :gender, 'Sukupuoli' %>
+    <%= f.select :gender, [['Mies' , 'M'],['Nainen', 'F']] %>
+  </div>
+  <div class="field">
+    <%= f.label :address, 'Osoite' %><br>
+    <%= f.text_field :address %>
+  </div>
+  <div class="field">
+    <%= f.label :password, 'Salasana' %><br>
     <%= f.password_field :password %>
   </div>
   <div class="field">
-    <%= f.label :password_confirmation %><br>
+    <%= f.label :password_confirmation, 'Salasana uudestaan' %><br>
     <%= f.password_field :password_confirmation %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "Rekisteröidy" %>
   </div>
 <% end %>
