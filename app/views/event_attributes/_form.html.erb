@@ -1,0 +1,27 @@
+<%= form_for(@event_attribute) do |f| %>
+  <% if @event_attribute.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@event_attribute.errors.count, "error") %> prohibited this event_attribute from being saved:</h2>
+
+      <ul>
+      <% @event_attribute.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :attributetype %>
+    <%= f.select :attributetype, options_for_select(@attribute_values) %>
+  </div>
+  <div class="field">
+    <%= f.label :attribute_value %>
+    <%= f.text_field :attribute_value %>
+  </div>
+
+    <%= f.hidden_field :event_id, :value => params[:event_id] %>
+    <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

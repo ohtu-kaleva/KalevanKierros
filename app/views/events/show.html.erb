@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong><%= @event.name %></strong>
+</p>
+
+<p>
+  <strong>Ilmoittautuminen alkaa.</strong>
+  <%= @event.start_date %>
+</p>
+
+<p>
+  <strong>Ilmoittautuminen päättyy:</strong>
+  <%= @event.end_date %>
+</p>
+
+<p>
+  <strong>Kuvaus</strong>
+  <%= @event.description %>
+</p>
+
+<strong>Tapahtuman kentät:</strong>
+<% @event.event_attributes.each do |f| %>
+    <div class="field">
+    <% if f.attributetype == "select" %>
+      <%= f.select
+    <% end %>
+    </div>
+<% end %>
+
+<%= link_to 'Lisää kenttä', add_event_attribute_path({:event_id => @event.id}) %> |
+<%= link_to 'Edit', edit_event_path(@event) %> |
+<%= link_to 'Back', events_path %>
