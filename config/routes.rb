@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  resources :event_attributes
+
+  resources :events
+
   resources :users
   resources :sessions, only: [:new, :create]
 
@@ -7,6 +11,7 @@ Rails.application.routes.draw do
   get 'signup', to: 'users#new'
   get 'signin', to: 'sessions#new'
   delete 'signout', to: 'sessions#destroy'
+  get 'events/:event_id/event_attributes/new', to: 'event_attributes#new', as: 'add_event_attribute'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
