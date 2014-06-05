@@ -20,13 +20,33 @@
 </p>
 
 <strong>Tapahtuman kentät:</strong>
+<% #form_for(@enrollment) do |e| %>
 <% @event.event_attributes.each do |f| %>
-    <div class="field">
-    <% if f.attributetype == "select" %>
-      <%= f.select
+        <strong><%= f.attribute_label %></strong>
+        <div class="field">
+        <% if f.attributetype == "select" %>
+            <%= select_tag :sel, options_for_select(f.get_options_to_form(f.attribute_value)) %>
+        <% end %>
+
+        <% if f.attributetype == "radio_button" %>
+        <% f.get_options_to_form(f.attribute_value).each do |v| %>
+            <%= radio_button_tag(:sel, v) %>
+            <%= label_tag(:radio, v) %><br>
+        <% end %>
+        <% end %>
+
+        <% if f.attributetype == "check_box" %>
+        <% f.get_options_to_form(f.attribute_value).each do |v| %>
+            <%= check_box_tag(:sel, v) %>
+            <%= label_tag(:check, v) %><br>
+        <% end %>
+        <% end %>
+        <% if f.attributetype == "text_field" %>
+        <%= text_field_tag(:sel, f.attribute_value) %>
+        <% end %>
+        </div>
     <% end %>
-    </div>
-<% end %>
+<% #end %>
 
 <%= link_to 'Lisää kenttä', add_event_attribute_path({:event_id => @event.id}) %> |
 <%= link_to 'Edit', edit_event_path(@event) %> |

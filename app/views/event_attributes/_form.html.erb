@@ -12,16 +12,25 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :attributetype %>
+    <%= f.label :name, 'Kentän nimi:' %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :attribute_label, 'Kentän otsikko'%><br>
+    <%= f.text_field :attribute_label %>
+  </div>
+  <div class="field">
+    <%= f.label :attributetype, 'Valitse kentän tyyppi:' %><br>
     <%= f.select :attributetype, options_for_select(@attribute_values) %>
   </div>
   <div class="field">
-    <%= f.label :attribute_value %>
+    <%= f.label :attribute_value, 'Kirjoita kentän valinnat kaksoispisteellä eroteltuna:' %><br>
     <%= f.text_field :attribute_value %>
   </div>
 
     <%= f.hidden_field :event_id, :value => params[:event_id] %>
+
     <div class="actions">
-    <%= f.submit %>
+    <%= f.submit 'Lisää kenttä ilmoittautumislomakkeeseen' %>
   </div>
 <% end %>

@@ -62,10 +62,6 @@ class EventAttributesController < ApplicationController
     end
   end
 
-  def get_options_to_form(values)
-    values.spl
-  end
-
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_event_attribute
@@ -74,6 +70,6 @@ class EventAttributesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_attribute_params
-      params.require(:event_attribute).permit(:event_id, :attributetype, :attribute_value)
+      params.require(:event_attribute).permit(:event_id, :attributetype, :attribute_value, :attribute_label, :name)
     end
 end
