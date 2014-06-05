@@ -11,8 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
-ActiveRecord::Schema.define(version: 20140605111535) do
+ActiveRecord::Schema.define(version: 20140605112633) do
 
   create_table "event_attributes", force: true do |t|
     t.integer  "event_id"
@@ -45,6 +44,7 @@ ActiveRecord::Schema.define(version: 20140605111535) do
     t.string   "address"
     t.date     "birth_date"
     t.string   "gender"
+    t.boolean  "admin",           default: false, null: false
   end
 
 end
