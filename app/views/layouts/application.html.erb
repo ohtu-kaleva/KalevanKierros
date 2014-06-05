@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<meta charset="UTF-8">
 <html>
 <head>
   <title>OhtuKaleva</title>
@@ -7,7 +8,20 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-
+<div class="navibar">
+  <% if current_user.nil? %>
+    <%= link_to 'Kirjaudu sisään', signin_path %> | 
+    <%= link_to 'Rekisteröidy', signup_path %> |
+  <% else %>
+    <%= link_to 'Kirjaudu ulos', signout_path, :method => 'delete' %> |
+    <%= link_to 'Muuta tietojasi', edit_user_path(current_user) %> | 
+  <% end %>
+  <% if user_is_admin? %>
+    <%= link_to 'Hallinnoi käyttäjiä', users_path %> |
+    <%= link_to 'Luo uusi tapahtuma', new_event_path %> |
+    <%= link_to 'Listaa tapahtumat', events_path %> | 
+  <% end %>
+</div>
 <%= yield %>
 
 </body>

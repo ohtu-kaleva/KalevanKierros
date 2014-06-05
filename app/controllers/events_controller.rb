@@ -1,5 +1,6 @@
 class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy]
+  before_action :redirect_if_user_not_admin, only: [:new, :edit, :update, :destroy, :index]
 
   # GET /events
   # GET /events.json
@@ -10,7 +11,6 @@ class EventsController < ApplicationController
   # GET /events/1
   # GET /events/1.json
   def show
-    @enrollment
   end
 
   # GET /events/new
