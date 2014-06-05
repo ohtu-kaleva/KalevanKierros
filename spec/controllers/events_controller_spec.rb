@@ -19,5 +19,5 @@ require 'spec_helper'
 # that an instance is receiving a specific message.
 
 describe EventsController do
-
+  pending "add some examples to (or delete) #{__FILE__}"
 end

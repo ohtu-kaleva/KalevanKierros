@@ -57,6 +57,11 @@ gem 'bcrypt', '~> 3.1.7'
 
 group :development, :test do
   gem 'rspec-rails', '~> 2.14.1'
+  gem 'byebug'
 end
-
-gem 'simplecov', require: false
+group :test do
+  gem 'simplecov', require: false
+  gem 'capybara'
+  gem 'launchy'
+  gem 'factory_girl_rails'
+end

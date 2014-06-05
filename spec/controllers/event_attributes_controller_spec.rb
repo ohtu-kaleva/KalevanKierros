@@ -19,11 +19,5 @@ require 'spec_helper'
 # that an instance is receiving a specific message.
 
 describe EventAttributesController do
-
-  it "parses the given string correctly" do
-    ta = EventAttributesController.get_options_to_form("value1:value2:value3")
-    puts ta
-    n = ta[0]
-    expect(n).to be("value1")
-  end
+  pending "add some examples to (or delete) #{__FILE__}"
 end
