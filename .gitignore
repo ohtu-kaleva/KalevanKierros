@@ -27,3 +27,6 @@ pickle-email-*.html
 ## Environment normalisation:
 /.bundle
 /vendor/bundle
+
+.idea/workspace.xml
+.idea/tasks.xml

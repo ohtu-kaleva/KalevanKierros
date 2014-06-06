@@ -8,21 +8,99 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-<div class="navibar">
-  <% if current_user.nil? %>
-    <%= link_to 'Kirjaudu sisään', signin_path %> | 
-    <%= link_to 'Rekisteröidy', signup_path %> |
-  <% else %>
-    <%= link_to 'Kirjaudu ulos', signout_path, :method => 'delete' %> |
-    <%= link_to 'Muuta tietojasi', edit_user_path(current_user) %> | 
-  <% end %>
-  <% if user_is_admin? %>
-    <%= link_to 'Hallinnoi käyttäjiä', users_path %> |
-    <%= link_to 'Luo uusi tapahtuma', new_event_path %> |
-    <%= link_to 'Listaa tapahtumat', events_path %> | 
-  <% end %>
-</div>
-<%= yield %>
+<!-- navibar -->
 
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <a href="/" class="navbar-brand"><%= image_tag 'kk-logo-transparent.png', height: '50', style: 'margin-top: -15px;'  %></a>
+      <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <div class="navbar-collapse collapse" id="navbar-main">
+      <ul class="nav navbar-nav">
+        <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="themes">Esittely <span class="caret"></span></a>
+          <ul class="dropdown-menu" aria-labelledby="themes">
+            <li><a href="#"/">Kalevan Kierros</a></li>
+            <li class="divider"></li>
+            <li><a href="#"/">Ilmoittautuminen</a></li>
+            <li><a href="#"/">Pistelasku</a></li>
+            <li><a href="#"/">Säännöt</a></li>
+            <li><a href="#"/">Hallituksen kokoukset</a></li>
+            <li><a href="#"/">Arkistoidut</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="themes">Osalajit <span class="caret"></span></a>
+          <ul class="dropdown-menu" aria-labelledby="themes">
+            <li><a href="#"/">Luistelu</a></li>
+            <li><a href="#"/">Hiihto</a></li>
+            <li><a href="#"/">Juoksu</a></li>
+            <li><a href="#"/">Soutu</a></li>
+            <li><a href="#"/">Pyöräily</a></li>
+            <li><a href="#"/">Suunnistus</a></li>
+          </ul>
+        </li>
+
+        <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="themes">Tulokset <span class="caret"></span></a>
+          <ul class="dropdown-menu" aria-labelledby="themes">
+            <li><a href="#"/">Vuosi 2014</a></li>
+            <li><a href="#"/">Vuosi 2013</a></li>
+            <li><a href="#"/">Vuosi 2012</a></li>
+            <li><a href="#"/">Vuosi 2012</a></li>
+            <li><a href="#"/">Vuosi 2011</a></li>
+            <li><a href="#"/">Tilastot</a></li>
+            <li><a href="#"/">Tuloslehtiarkisto</a></li>
+          </ul>
+        </li>
+
+        <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="themes">Yhteystiedot <span class="caret"></span></a>
+          <ul class="dropdown-menu" aria-labelledby="themes">
+            <li><a href="#"/">Palaute</a></li>
+            <li class="divider"></li>
+            <li><a href="#"/">Hallitus</a></li>
+            <li><a href="#"/">Seurat</a></li>
+            <li><a href="#"/">Linkkejä</a></li>
+            <li><a href="#"/">Postituslista</a></li>
+          </ul>
+        </li>
+
+      </ul>
+
+      <ul class="nav navbar-nav navbar-right">
+        <% if current_user.nil? %>
+            <li><%= link_to 'Kirjaudu sisään', signin_path %></li>
+            <li><%= link_to 'Rekisteröidy', signup_path %></li>
+        <% else %>
+            <li><%= link_to 'Kirjaudu ulos', signout_path, :method => 'delete' %></li>
+            <li><%= link_to 'Muuta tietojasi', edit_user_path(current_user) %></li>
+        <% end %>
+        <% if user_is_admin? %>
+        <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="adminmenu">Ylläpito <span class="caret"></span></a>
+          <ul class="dropdown-menu" aria-labelledby="ylläpito">
+            <li><%= link_to 'Hallinnoi käyttäjiä', users_path %></li>
+            <li><%= link_to 'Luo uusi tapahtuma', new_event_path %></li>
+            <li><%= link_to 'Listaa tapahtumat', events_path %></li>
+          </ul>
+        </li>
+        <% end %>
+      </ul>
+
+    </div>
+  </div>
+</div>
+<!-- /navibar -->
+
+<div class="container">
+
+<%= yield %>
+</div>
 </body>
 </html>

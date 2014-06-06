@@ -14,3 +14,30 @@
  *= require_self
  *= require rails_bootstrap_forms
  */
+
+// Example using 'Cerulean' bootswatch
+//
+
+$brand-primary: #12377e;
+$navbar-height: 70px;
+
+// First import journal variables
+@import "bootswatch/cerulean/variables";
+
+// Then bootstrap itself
+@import 'bootstrap/glyphicons';
+@import "bootstrap";
+@import "bootstrap/mixins";
+
+// Bootstrap body padding for fixed navbar
+body { padding-top: 60px; }
+
+// Responsive styles go here in case you want them
+//@import "bootstrap-responsive";
+
+// And finally bootswatch style itself
+@import "bootswatch/cerulean/bootswatch";
+
+// Whatever application styles you have go last
+//@import "base";
+
