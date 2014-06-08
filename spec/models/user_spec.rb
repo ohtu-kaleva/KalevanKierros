@@ -2,6 +2,12 @@ require 'spec_helper'
 
 describe User do
 
+  it "should not be valid without parameters" do
+    user = User.new
+
+    expect(user).not_to be_valid
+  end
+
   it "has the username set correctly" do
     user = User.new username:"Tyhjis"
 
