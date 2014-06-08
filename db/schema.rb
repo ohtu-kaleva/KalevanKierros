@@ -11,11 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140605112633) do
+ActiveRecord::Schema.define(version: 20140607221204) do
 
   create_table "event_attributes", force: true do |t|
     t.integer  "event_id"
-    t.string   "attributetype"
+    t.string   "attribute_type"
     t.string   "attribute_value"
     t.datetime "created_at"
     t.datetime "updated_at"

@@ -20,8 +20,8 @@
     <%= f.text_field :attribute_label %>
   </div>
   <div class="field">
-    <%= f.label :attributetype, 'Valitse kentän tyyppi:' %><br>
-    <%= f.select :attributetype, options_for_select(@attribute_values) %>
+    <%= f.label :attribute_type, 'Valitse kentän tyyppi:' %><br>
+    <%= f.select :attribute_type, options_for_select(@attribute_types) %>
   </div>
   <div class="field">
     <%= f.label :attribute_value, 'Kirjoita kentän valinnat kaksoispisteellä eroteltuna:' %><br>

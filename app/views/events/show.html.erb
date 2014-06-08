@@ -5,7 +5,7 @@
 </p>
 
 <p>
-  <strong>Ilmoittautuminen alkaa.</strong>
+  <strong>Ilmoittautuminen alkaa:</strong>
   <%= @event.start_date %>
 </p>
 
@@ -25,24 +25,24 @@
 <% @event.event_attributes.each do |f| %>
         <strong><%= f.attribute_label %></strong>
         <div class="field">
-        <% if f.attributetype == "select" %>
+        <% if f.attribute_type == "select" %>
             <%= select_tag :sel, options_for_select(f.get_options_to_form(f.attribute_value)) %>
         <% end %>
 
-        <% if f.attributetype == "radio_button" %>
+        <% if f.attribute_type == "radio_button" %>
         <% f.get_options_to_form(f.attribute_value).each do |v| %>
             <%= radio_button_tag(:sel, v) %>
             <%= label_tag(:radio, v) %><br>
         <% end %>
         <% end %>
 
-        <% if f.attributetype == "check_box" %>
+        <% if f.attribute_type == "check_box" %>
         <% f.get_options_to_form(f.attribute_value).each do |v| %>
             <%= check_box_tag(:sel, v) %>
             <%= label_tag(:check, v) %><br>
         <% end %>
         <% end %>
-        <% if f.attributetype == "text_field" %>
+        <% if f.attribute_type == "text_field" %>
         <%= text_field_tag(:sel, f.attribute_value) %>
         <% end %>
         </div>

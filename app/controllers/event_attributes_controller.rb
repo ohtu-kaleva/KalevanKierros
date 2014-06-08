@@ -15,7 +15,7 @@ class EventAttributesController < ApplicationController
   # GET /event_attributes/new
   def new
     @event_attribute = EventAttribute.new
-    @attribute_values = ['radio_button', 'check_box', 'text_field', 'select', 'plain_text']
+    @attribute_types = ['radio_button', 'check_box', 'text_field', 'select', 'plain_text']
   end
 
   # GET /event_attributes/1/edit
@@ -70,6 +70,6 @@ class EventAttributesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_attribute_params
-      params.require(:event_attribute).permit(:event_id, :attributetype, :attribute_value, :attribute_label, :name)
+      params.require(:event_attribute).permit(:event_id, :attribute_type, :attribute_value, :attribute_label, :name)
     end
 end
