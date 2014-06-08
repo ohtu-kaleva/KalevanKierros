@@ -1,6 +1,7 @@
 class EventAttributesController < ApplicationController
-  before_action :set_event_attribute, only: [:show, :edit, :update, :destroy]
   before_action :redirect_if_user_not_admin
+  before_action :set_event_attribute_or_redirect, only: [:show, :edit, :update, :destroy]
+  before_action :set_attribute_types, only: [:new, :edit]
 
   # GET /event_attributes
   # GET /event_attributes.json
@@ -16,7 +17,6 @@ class EventAttributesController < ApplicationController
   # GET /event_attributes/new
   def new
     @event_attribute = EventAttribute.new
-    @attribute_types = ['radio_button', 'check_box', 'text_field', 'select', 'plain_text']
   end
 
   # GET /event_attributes/1/edit
@@ -65,8 +65,16 @@ class EventAttributesController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_event_attribute
-      @event_attribute = EventAttribute.find(params[:id])
+    def set_event_attribute_or_redirect
+      @event_attribute = EventAttribute.find_by params[:id]
+      return if @event_attribute
+
+      redirect_to :root
+    end
+
+    def set_attribute_types
+      @attribute_types = ['radio_button', 'check_box', 'text_field', 'select',
+                          'plain_text']
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

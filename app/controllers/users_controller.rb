@@ -1,7 +1,6 @@
 class UsersController < ApplicationController
   before_action :redirect_if_user_not_admin, only: [:index]
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
-  before_action :check_user_for_redirection, only:  [:show, :edit, :update, :destroy]
+  before_action :set_user_or_redirect, only:  [:show, :edit, :update, :destroy]
 
   # GET /users
   # GET /users.json
@@ -65,8 +64,13 @@ class UsersController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_user
-      @user = User.find(params[:id])
+    def set_user_or_redirect
+      if current_user
+          @user = User.find_by id: params[:id]
+          return if @user && (current_user.id == @user.id || user_is_admin?)
+      end
+
+      redirect_to :root
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

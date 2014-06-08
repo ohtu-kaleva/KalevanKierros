@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-  before_action :set_event, only: [:show, :edit, :update, :destroy]
+  before_action :set_event_or_redirect, only: [:show, :edit, :update, :destroy]
   before_action :redirect_if_user_not_admin, except: [:show]
 
   # GET /events
@@ -64,8 +64,11 @@ class EventsController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_event
-      @event = Event.find(params[:id])
+    def set_event_or_redirect
+      @event = Event.find_by params[:id]
+      return if @event
+
+      redirect_to :root
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
