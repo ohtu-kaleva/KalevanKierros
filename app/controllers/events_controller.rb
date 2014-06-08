@@ -1,6 +1,6 @@
 class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy]
-  before_action :redirect_if_user_not_admin, only: [:new, :edit, :update, :destroy, :index]
+  before_action :redirect_if_user_not_admin, except: [:show]
 
   # GET /events
   # GET /events.json

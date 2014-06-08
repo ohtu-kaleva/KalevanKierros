@@ -1,5 +1,6 @@
 class EventAttributesController < ApplicationController
   before_action :set_event_attribute, only: [:show, :edit, :update, :destroy]
+  before_action :redirect_if_user_not_admin
 
   # GET /event_attributes
   # GET /event_attributes.json
