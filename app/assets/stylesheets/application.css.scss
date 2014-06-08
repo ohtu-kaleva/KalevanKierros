@@ -21,7 +21,7 @@
 $brand-primary: #12377e;
 $navbar-height: 70px;
 $icon-font-path: '/assets/';
-
+$screen-sm: 992px;
 
 // First import journal variables
 @import "bootswatch/cerulean/variables";
@@ -29,7 +29,7 @@ $icon-font-path: '/assets/';
 // Then bootstrap itself
 @import 'bootstrap/glyphicons';
 @import "bootstrap";
-//@import "bootstrap/mixins";
+@import "bootstrap/mixins";
 
 // Bootstrap body padding for fixed navbar
 body { padding-top: 80px; }
@@ -38,7 +38,7 @@ body { padding-top: 80px; }
 //@import "bootstrap-responsive";
 
 // And finally bootswatch style itself
-//@import "bootswatch/cerulean/bootswatch";
+@import "bootswatch/cerulean/bootswatch";
 
 // Whatever application styles you have go last
 //@import "base";
