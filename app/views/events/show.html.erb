@@ -20,24 +20,24 @@
 </p>
 
 <% if user_is_admin? %>
-<strong>Tapahtuman kentät:</strong>
+<strong>Tapahtuman kentät:</strong><br>
 <% #form_for(@enrollment) do |e| %>
 <% @event.event_attributes.each do |f| %>
         <strong><%= f.attribute_label %></strong>
         <div class="field">
         <% if f.attribute_type == "select" %>
-            <%= select_tag :sel, options_for_select(f.get_options_to_form(f.attribute_value)) %>
+            <%= select_tag :sel, options_for_select(f.get_options_to_form) %>
         <% end %>
 
         <% if f.attribute_type == "radio_button" %>
-        <% f.get_options_to_form(f.attribute_value).each do |v| %>
+        <% f.get_options_to_form.each do |v| %>
             <%= radio_button_tag(:sel, v) %>
             <%= label_tag(:radio, v) %><br>
         <% end %>
         <% end %>
 
         <% if f.attribute_type == "check_box" %>
-        <% f.get_options_to_form(f.attribute_value).each do |v| %>
+        <% f.get_options_to_form.each do |v| %>
             <%= check_box_tag(:sel, v) %>
             <%= label_tag(:check, v) %><br>
         <% end %>
