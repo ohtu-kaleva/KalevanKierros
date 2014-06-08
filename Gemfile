@@ -20,6 +20,7 @@ gem 'sass-rails', '~> 4.0.3'
 
 # Bootstrap 3
 gem 'bootstrap-sass', '~> 3.1.1'
+gem 'bootstrap-glyphicons'
 
 # Bootstrap-forms
 gem 'bootstrap_form'
@@ -33,7 +34,6 @@ gem 'therubyracer',  platforms: :ruby
 
 # Bootswatch-rails
 gem 'bootswatch-rails'
-gem 'bootstrap-glyphicons'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'

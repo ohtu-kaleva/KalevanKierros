@@ -8,6 +8,17 @@ Rails.application.routes.draw do
 
   root 'static_pages#home'
   get 'static_pages/home'
+
+  #static pages
+
+  get 'yhteystiedot', to: 'static_pages#yhteystiedot'
+  get 'yhteystiedot/palaute', to: 'static_pages#palaute'
+  get 'yhteystiedot/hallitus', to: 'static_pages#hallitus'
+  get 'yhteystiedot/seurat', to: 'static_pages#seurat'
+  get 'yhteystiedot/linkkeja', to: 'static_pages#linkkeja'
+  get 'yhteystiedot/postituslista', to: 'static_pages#postituslista'
+
+
   get 'signup', to: 'users#new'
   get 'signin', to: 'sessions#new'
   delete 'signout', to: 'sessions#destroy'
