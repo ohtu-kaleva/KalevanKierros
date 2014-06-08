@@ -3,10 +3,6 @@ require "spec_helper"
 describe EventAttributesController do
   describe "routing" do
 
-    it "routes to #index" do
-      get("/event_attributes").should route_to("event_attributes#index")
-    end
-
     it "routes to #new" do
       get("/event_attributes/new").should route_to("event_attributes#new")
     end

@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :event_attributes
+  resources :event_attributes, except: [:index]
 
   resources :events
 
@@ -36,6 +36,8 @@ Rails.application.routes.draw do
   get 'signin', to: 'sessions#new'
   delete 'signout', to: 'sessions#destroy'
   get 'events/:event_id/event_attributes/new', to: 'event_attributes#new', as: 'add_event_attribute'
+
+  get '*path' => redirect('/')
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
