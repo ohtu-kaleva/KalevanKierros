@@ -1,61 +1,35 @@
 <div class="col-lg-4">
   <div class="bs-component">
 
-  <%= bootstrap_form_for(@user) do |f| %>
-  <% if @user.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+    <%= bootstrap_form_for(@user) do |f| %>
+        <% if @user.errors.any? %>
+            <div id="error_explanation">
+              <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
 
-      <ul>
-      <% @user.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+              <ul>
+                <% @user.errors.full_messages.each do |message| %>
+                    <li><%= message %></li>
+                <% end %>
+              </ul>
+            </div>
+        <% end %>
 
-  <div class="field">
-    <%= f.label :first_name, 'Etunimi' %><br>
-    <%= f.text_field :first_name %>
+        <%= f.text_field :first_name, label: "Etunimi: " %>
+        <%= f.text_field :last_name, label: "Sukunimi: " %>
+
+        <%= f.text_field :username, label: "Käyttäjätunnus: " %>
+        <%= f.text_field :email, label: "Sähköpostiosoite: " %>
+
+        <%= f.text_field :phone_number, label: "Puhelinnumero: " %>
+        <%= f.date_select(:birth_date, start_year: Time.now.year - 100, end_year: Time.now.year, order: [:day, :month, :year]) %>
+        <%= f.select :gender, [['Mies', 'M'], ['Nainen', 'F']], label: "Sukupuoli: " %>
+        <%= f.text_field :address, label: "Osoite: " %>
+
+        <%= f.password_field :password, label: "Salasana: " %>
+        <%= f.password_field :password_confirmation, label: "Salasana uudestaan: " %>
+
+        <%= f.submit "Rekisteröidy" %>
+
+    <% end %>
   </div>
-  <div class="field">
-    <%= f.label :last_name, 'Sukunimi' %><br>
-    <%= f.text_field :last_name %>
-  </div>
-  <div class="field">
-    <%= f.label :username, 'Käyttäjätunnus' %><br>
-    <%= f.text_field :username %>
-  </div>
-  <div class="field">
-    <%= f.label :email, 'Sähköpostiosoite' %><br>
-    <%= f.text_field :email %>
-  </div>
-  <div class="field">
-    <%= f.label :phone_number, 'Puhelinnumero' %>
-    <%= f.text_field :phone_number %>
-  </div>
-  <div class="field">
-    <%= f.label :birth_date, 'Syntymäaika' %>
-    <%= f.date_select(:birth_date, start_year: Time.now.year - 100, end_year: Time.now.year, order: [:day, :month, :year], use_month_numbers:true) %>
-  </div>
-  <div class="field">
-    <%= f.label :gender, 'Sukupuoli' %>
-    <%= f.select :gender, [['Mies' , 'M'],['Nainen', 'F']] %>
-  </div>
-  <div class="field">
-    <%= f.label :address, 'Osoite' %><br>
-    <%= f.text_field :address %>
-  </div>
-  <div class="field">
-    <%= f.label :password, 'Salasana' %><br>
-    <%= f.password_field :password %>
-  </div>
-  <div class="field">
-    <%= f.label :password_confirmation, 'Salasana uudestaan' %><br>
-    <%= f.password_field :password_confirmation %>
-  </div>
-  <div class="actions">
-    <%= f.submit "Rekisteröidy" %>
-  </div>
-<% end %>
-      </div></div>
+</div>
