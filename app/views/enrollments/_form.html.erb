@@ -1,0 +1,46 @@
+<%= form_for(@enrollment) do |f| %>
+    <% if @enrollment.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@enrollment.errors.count, "error") %> prohibited this enrollment being created!</h2>
+
+        <ul>
+          <% @enrollment.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+          <% end %>
+        </ul>
+        </div>
+    <% end %>
+    <p>Olet ilmoittautumassa tapahtumaan: <%= @event.name %><br>
+    Täytä seuraavat asiat oikein.
+    </p>
+
+    <% @event.event_attributes.each do |f| %>
+        <strong><%= f.attribute_label %></strong>
+        <div class="field">
+          <% if f.attribute_type == "select" %>
+              <%= select_tag :sel, options_for_select(f.get_options_to_form) %>
+          <% end %>
+
+          <% if f.attribute_type == "radio_button" %>
+              <% f.get_options_to_form.each do |v| %>
+                  <%= radio_button_tag(:sel, v) %>
+                  <%= label_tag(:radio, v) %><br>
+              <% end %>
+          <% end %>
+
+          <% if f.attribute_type == "check_box" %>
+              <% f.get_options_to_form.each do |v| %>
+                  <%= check_box_tag(:sel, v) %>
+                  <%= label_tag(:check, v) %><br>
+              <% end %>
+          <% end %>
+          <% if f.attribute_type == "text_field" %>
+              <%= text_field_tag(:sel, f.attribute_value) %>
+          <% end %>
+        </div>
+    <% end %>
+
+    <div class="actions">
+      <%= f.submit 'Lähetä ilmoittautuminen eteenpäin' %>
+    </div>
+<% end %>

@@ -1,5 +1,7 @@
 class User < ActiveRecord::Base
   has_secure_password
+  has_many :enrollments
+  has_many :events, through: :enrollments
 
   validates :username, uniqueness: true, length: { minimum: 3 }
   validates :first_name, presence: true

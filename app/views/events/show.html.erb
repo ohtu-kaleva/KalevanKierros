@@ -19,6 +19,10 @@
   <%= @event.description %>
 </p>
 
+<p>
+  <strong><%= @event.id %></strong>
+</p>
+
 <% if user_is_admin? %>
 <strong>Tapahtuman kentät:</strong><br>
 <% #form_for(@enrollment) do |e| %>
@@ -51,4 +55,5 @@
 <%= link_to 'Lisää kenttä', add_event_attribute_path({:event_id => @event.id}) %> |
 <%= link_to 'Edit', edit_event_path(@event) %> |
 <% end %>
+<%= link_to 'Ilmoittaudu', add_enrollment_path({:event_id => @event.id}) %>
 <%= link_to 'Back', events_path %>
