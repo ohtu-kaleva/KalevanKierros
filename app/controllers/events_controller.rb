@@ -65,7 +65,7 @@ class EventsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_event_or_redirect
-      @event = Event.find_by params[:id]
+      @event = Event.find_by id: params[:id]
       return if @event
 
       redirect_to :root
