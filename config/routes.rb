@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 
   resources :users
   resources :sessions, only: [:new, :create]
+  resources :enrollments, only: [:new, :show, :create]
 
   root 'static_pages#home'
   get 'static_pages/home'
@@ -36,6 +37,7 @@ Rails.application.routes.draw do
   get 'signin', to: 'sessions#new'
   delete 'signout', to: 'sessions#destroy'
   get 'events/:event_id/event_attributes/new', to: 'event_attributes#new', as: 'add_event_attribute'
+  get 'events/:event_id/enrollments/new', to: 'enrollments#new', as: 'add_enrollment'
 
   get '*path' => redirect('/')
 

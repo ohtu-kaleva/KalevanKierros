@@ -1,5 +1,7 @@
 class Event < ActiveRecord::Base
   has_many :event_attributes
+  has_many :enrollments
+  has_many :participants, through: :enrollments, source: :user
 
   validates :name, :start_date, :end_date, presence: true
   validates :name, uniqueness: true
