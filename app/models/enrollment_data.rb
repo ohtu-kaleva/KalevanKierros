@@ -1,3 +1,3 @@
 class EnrollmentData < ActiveRecord::Base
-  belongs_to :enrollment
+  belongs_to :enrollment, dependent: :destroy
 end

@@ -10,6 +10,7 @@ class EnrollmentsController < ApplicationController
     data_list = []
     event = Event.find(params[:enrollment][:event_id])
     attrs = event.event_attributes
+    # loop for creating information for data
     attrs.each do |a|
       if params.has_key? a.name
         if params[a.name].nil?
@@ -25,7 +26,10 @@ class EnrollmentsController < ApplicationController
       d.enrollment_id = @enrollment.id
       d.save
     end
-    redirect_to :root
+    if not current_user.nil?
+      current_user.enrollments << @enrollment
+    end
+    redirect_to :root, notice: "Ilmoittautumisesi tapahtumaan on kirjattu."
   end
 
 
@@ -36,8 +40,7 @@ class EnrollmentsController < ApplicationController
 
   end
 
-
   def enrollment_params
-    params.require(:enrollment).permit(:event_id, :user_id)
+    params.require(:enrollment).permit(:event_id)
   end
 end
