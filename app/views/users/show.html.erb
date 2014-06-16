@@ -21,6 +21,12 @@
 </p>
 
 <% if not current_user.nil? and current_user.id == @user.id %>
+<p>
+  <strong>Olet ilmoittautunut seuraaviin tapahtumiin</strong><br>
+  <% @user.enrollments.each do |enrollment| %>
+    <%= link_to enrollment.event.name, enrollment_path(enrollment.id) %><br>
+  <% end %>
+</p>
 <%= link_to 'Edit', edit_user_path(@user) %>
 <% end %> |
 <%= link_to 'Back', users_path %>

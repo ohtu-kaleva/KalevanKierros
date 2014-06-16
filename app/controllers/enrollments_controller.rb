@@ -1,5 +1,8 @@
 class EnrollmentsController < ApplicationController
 
+  before_action :check_for_existing_enrollment, only:  [:new, :create]
+  before_action :set_enrollment_or_redirect, only: [:show]
+
   def new
     @event = Event.find_by id: params[:event_id]
     @enrollment = Enrollment.new
@@ -32,12 +35,30 @@ class EnrollmentsController < ApplicationController
     redirect_to :root, notice: "Ilmoittautumisesi tapahtumaan on kirjattu."
   end
 
-
-
+  def show
+    @data = @enrollment.enrollment_datas
+  end
   private
+
+  def check_for_existing_enrollment
+    if not current_user.nil?
+      if not current_user.enrollments.nil? and not current_user.enrollments.find_by(event_id: params[:event_id]).nil?
+        redirect_to :back, notice: "Olet jo ilmoittautunut tapahtumaan."
+      end
+    end
+  end
 
   def check_for_permitted_values(value, attribute_options)
 
+  end
+
+  def set_enrollment_or_redirect
+    if current_user
+      puts params[:enrollment_id]
+      @enrollment = Enrollment.find_by(id: params[:enrollment_id])
+      return if @enrollment && ((current_user.id == @enrollment.user_id) || user_is_admin?)
+    end
+    redirect_to :root
   end
 
   def enrollment_params

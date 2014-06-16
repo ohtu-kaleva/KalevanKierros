@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<table class="table table-bordered">
+  <tr>
+    <th>Ilmoittautumisen tiedon otsikko</th>
+    <th>Tiedon sisältämä data</th>
+  </tr>
+<% @data.each do |data| %>
+  <tr>
+    <td><%= data.name %></td>
+    <td><%= data.value %></td>
+  </tr>
+<% end %>
+</table>
+<%= link_to 'Takaisin', user_path(current_user) %>

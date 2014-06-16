@@ -82,6 +82,7 @@
         <% else %>
             <li><%= link_to 'Kirjaudu ulos', signout_path, :method => 'delete' %></li>
             <li><%= link_to 'Muuta tietojasi', edit_user_path(current_user) %></li>
+            <li><%= link_to 'Tarkastele ilmoittautumisiasi', user_path(current_user) %></li>
         <% end %>
         <% if user_is_admin? %>
         <li class="dropdown">

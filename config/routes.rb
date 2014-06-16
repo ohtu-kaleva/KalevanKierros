@@ -5,7 +5,7 @@ Rails.application.routes.draw do
 
   resources :users
   resources :sessions, only: [:new, :create]
-  resources :enrollments, only: [:new, :show, :create]
+  resources :enrollments, only: [:create]
 
   root 'static_pages#home'
   get 'static_pages/home'
@@ -38,7 +38,7 @@ Rails.application.routes.draw do
   delete 'signout', to: 'sessions#destroy'
   get 'events/:event_id/event_attributes/new', to: 'event_attributes#new', as: 'add_event_attribute'
   get 'events/:event_id/enrollments/new', to: 'enrollments#new', as: 'add_enrollment'
-
+  get 'enrollments/:enrollment_id', to: 'enrollments#show', as: 'enrollment'
   get '*path' => redirect('/')
 
   # The priority is based upon order of creation: first created -> highest priority.
