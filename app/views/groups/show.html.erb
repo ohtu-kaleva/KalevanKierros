@@ -1,0 +1,23 @@
+<p id="notice"><%= notice %></p>
+
+<h1><%= @group.name %></h1>
+<table class="table table-bordered">
+<thead>
+<tr>
+    <th>Jäsenen nimi</th>
+    <th>Jäsenen sähköposti</th>
+</tr>
+</thead>
+<tbody>
+  <% @users.each do |u| %>
+<tr>
+  <td><%= u.first_name %> <%= u.last_name %></td>
+  <td><%= u.email %></td>
+</tr>
+<% end %>
+</tbody>
+</table>
+<%= link_to 'Etusivu', root_path %> |
+<% if not current_user.nil? and @group.id == current_user.group_id %>
+    <%= link_to 'Lisää henkilö joukkueeseen', add_user_to_group_path(@group.id) %>
+<% end %>

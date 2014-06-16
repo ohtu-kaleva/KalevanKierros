@@ -1,0 +1,25 @@
+<%= form_for(@group) do |f| %>
+    <% if @group.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@event_attribute.errors.count, "error") %> prohibited this event_attribute from being saved:</h2>
+
+          <ul>
+            <% @event_attribute.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <div class="field">
+      <%= f.label :name, 'Joukkueen nimi:' %><br>
+      <%= f.text_field :name %>
+    </div>
+
+    <div class="field">
+    </div>
+
+    <div class="actions">
+      <%= f.submit 'Luo joukkue' %>
+    </div>
+<% end %>

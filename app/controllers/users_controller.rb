@@ -11,6 +11,8 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
+    @enrollments = @user.enrollments
+    @group = @user.group
   end
 
   # GET /users/new
@@ -36,6 +38,10 @@ class UsersController < ApplicationController
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  def add_user_to_group
+    @users = User.all
   end
 
   # PATCH/PUT /users/1

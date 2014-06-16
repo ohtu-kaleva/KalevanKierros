@@ -21,12 +21,20 @@
 </p>
 
 <% if not current_user.nil? and current_user.id == @user.id %>
+<% if not @enrollments.nil? %>
 <p>
   <strong>Olet ilmoittautunut seuraaviin tapahtumiin</strong><br>
-  <% @user.enrollments.each do |enrollment| %>
+  <% @enrollments.each do |enrollment|%>
     <%= link_to enrollment.event.name, enrollment_path(enrollment.id) %><br>
   <% end %>
 </p>
+<% end %>
+<% if not @group.nil? %>
+   <p>
+     <strong>Kuulut joukkueeseen: </strong>
+     <%= link_to @group.name, group_path %>
+   </p>
+<% end %>
 <%= link_to 'Edit', edit_user_path(@user) %>
 <% end %> |
 <%= link_to 'Back', users_path %>
