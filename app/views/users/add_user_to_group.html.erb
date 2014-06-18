@@ -1,4 +1,19 @@
-<h1>Lisää käyttäjä</h1>
+<h1>Olet lisäämässä jäsentä ryhmään <%= @group.name %></h1>
+<table class="table table-bordered">
+<thead>
+    <tr>
+      <th>Etunimi</th>
+      <th>Sukunimi</th>
+      <th>Lisää</th>
+    </tr>
+</thead>
+<tbody>
 <% @users.each do |u| %>
-    <%= u.first_name %> <%= u.last_name %><br>
+    <tr>
+      <td><%= u.first_name %></td>
+      <td><%= u.last_name %></td>
+      <td><%= button_to 'Lisää', { :controller => "users", :action => "update_user_group_relation", :group_id => params[:group_id], :user_id => u.id, :method => :post } %></td>
+    </tr>
 <% end %>
+</tbody>
+</table>

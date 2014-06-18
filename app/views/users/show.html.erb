@@ -21,7 +21,7 @@
 </p>
 
 <% if not current_user.nil? and current_user.id == @user.id %>
-<% if not @enrollments.nil? %>
+<% if not @enrollments.nil? or @enrollment.count > 0 %>
 <p>
   <strong>Olet ilmoittautunut seuraaviin tapahtumiin</strong><br>
   <% @enrollments.each do |enrollment|%>
@@ -32,7 +32,7 @@
 <% if not @group.nil? %>
    <p>
      <strong>Kuulut joukkueeseen: </strong>
-     <%= link_to @group.name, group_path %>
+     <%= link_to @group.name, group_path(@group) %>
    </p>
 <% end %>
 <%= link_to 'Edit', edit_user_path(@user) %>

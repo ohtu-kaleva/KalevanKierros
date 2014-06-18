@@ -41,7 +41,8 @@ class UsersController < ApplicationController
   end
 
   def add_user_to_group
-    @users = User.all
+    @group = Group.find_by id: params[:group_id]
+    @users = User.all.select{ |user| user.group_id.nil? }
   end
 
   # PATCH/PUT /users/1
@@ -55,6 +56,13 @@ class UsersController < ApplicationController
         format.html { render :edit }
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
+    end
+  end
+
+  def update_user_group_relation
+    user = User.find_by id: params[:user_id]
+    if user.update_attribute(:group_id, params[:group_id])
+      redirect_to :root, notice: 'Jäsen lisätty ryhmään.'
     end
   end
 
