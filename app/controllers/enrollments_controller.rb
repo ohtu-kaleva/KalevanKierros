@@ -4,9 +4,16 @@ class EnrollmentsController < ApplicationController
   before_action :set_enrollment_or_redirect, only: [:show]
 
   def new
-    @event = Event.find_by id: params[:event_id]
-    @enrollment = Enrollment.new
-    @enrollment.enrollment_datas.build
+    if current_user
+      @event = Event.find_by id: params[:event_id]
+      if @event
+        @enrollment = Enrollment.new
+        @enrollment.enrollment_datas.build
+        return
+      end
+    end
+
+    redirect_to root_path
   end
 
   def create
