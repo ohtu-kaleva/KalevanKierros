@@ -2,6 +2,7 @@ class EnrollmentsController < ApplicationController
 
   before_action :check_for_existing_enrollment, only:  [:new, :create]
   before_action :set_enrollment_or_redirect, only: [:show]
+  before_action :redirect_if_user_not_admin, only: [:show_enrollments_for_event, :index]
 
   def new
     if current_user
