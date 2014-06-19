@@ -13,4 +13,10 @@ class User < ActiveRecord::Base
   validates :password, presence: true
   validates :password, length: { minimum: 6 },
                        format: { with: /.*(\d.*[A-Z]|[A-Z].*\d).*/}
+
+  def get_enrollment_data_for_event(id)
+    e = enrollments.find_by event_id: id
+    puts e.enrollment_datas
+    e.enrollment_datas
+  end
 end

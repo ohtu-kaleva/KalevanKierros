@@ -16,6 +16,10 @@ class EnrollmentsController < ApplicationController
     redirect_to root_path
   end
 
+  def index
+    @events = Event.all
+  end
+
   def create
     data_list = []
     event = Event.find(params[:enrollment][:event_id])
@@ -44,6 +48,10 @@ class EnrollmentsController < ApplicationController
 
   def show
     @data = @enrollment.enrollment_datas
+  end
+
+  def show_enrollments_for_event
+    @event = Event.find_by id: params[:event_id]
   end
   private
 

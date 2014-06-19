@@ -1,0 +1,5 @@
+<h1>Ilmoittautumiset tapahtumittain</h1>
+
+<% @events.each do |event| %>
+<%= link_to event.name, show_enrollments_path(event.id) %><br>
+<% end %>

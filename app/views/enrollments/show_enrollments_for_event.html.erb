@@ -1,0 +1,19 @@
+<h1><%= @event.name %></h1>
+<table class="table table-bordered">
+  <thead>
+    <th>Osallistujan nimi</th>
+    <th>Osallistujan sähköposti</th>
+    <% @event.event_attributes.each do |attr| %>
+        <th><%= attr.name %></th>
+    <% end %>
+  </thead>
+  <tbody>
+    <% @event.participants.each do |user| %>
+    <td><%= user.first_name %> <%= user.last_name %></td>
+    <td><%= user.email %></td>
+    <% user.get_enrollment_data_for_event(@event.id).each do |data| %>
+        <td><%= data.value %></td>
+    <% end %>
+    <% end %>
+  </tbody>
+</table>

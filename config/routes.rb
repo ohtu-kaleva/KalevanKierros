@@ -5,7 +5,7 @@ Rails.application.routes.draw do
 
   resources :users
   resources :sessions, only: [:new, :create]
-  resources :enrollments, only: [:create]
+  resources :enrollments, only: [:create, :index]
   resources :groups, only: [:new, :create, :show]
 
   root 'static_pages#home'
@@ -42,6 +42,7 @@ Rails.application.routes.draw do
   get 'enrollments/:enrollment_id', to: 'enrollments#show', as: 'enrollment'
   get 'groups/:group_id/add_user', to: 'users#add_user_to_group', as: 'add_user_to_group'
   post 'groups/:group_id/add_user', to: 'users#update_user_group_relation'
+  get 'event_enrollments/:event_id/', to: 'enrollments#show_enrollments_for_event', as: 'show_enrollments'
   get '*path' => redirect('/')
 
   # The priority is based upon order of creation: first created -> highest priority.
