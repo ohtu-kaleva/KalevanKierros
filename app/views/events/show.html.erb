@@ -1,8 +1,9 @@
+<div class="col-lg-6">
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong><%= @event.name %></strong>
-</p>
+<h2 class="eventtitle">
+  <%= @event.name %>
+</h2>
 
 <p>
   <strong>Ilmoittautuminen alkaa:</strong>
@@ -53,7 +54,8 @@
     <% end %>
 <% #end %>
 <%= link_to 'Lisää kenttä', add_event_attribute_path({:event_id => @event.id}) %> |
-<%= link_to 'Edit', edit_event_path(@event) %> |
+<%= link_to 'Muokkaa tapahtumaa', edit_event_path(@event) %> |
 <% end %>
-<%= link_to 'Ilmoittaudu', add_enrollment_path({:event_id => @event.id}) %>
-<%= link_to 'Back', events_path %>
+<%= link_to 'Ilmoittaudu tapahtumaan', add_enrollment_path({:event_id => @event.id}) %> |
+<%= link_to 'Palaa takaisin', events_path %>
+</div>

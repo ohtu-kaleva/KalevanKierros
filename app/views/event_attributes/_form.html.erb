@@ -1,36 +1,33 @@
-<%= form_for(@event_attribute) do |f| %>
-  <% if @event_attribute.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@event_attribute.errors.count, "error") %> prohibited this event_attribute from being saved:</h2>
+<%= bootstrap_form_for(@event_attribute) do |f| %>
+    <% if @event_attribute.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@event_attribute.errors.count, "error") %> prohibited this event_attribute from being
+            saved:</h2>
 
-      <ul>
-      <% @event_attribute.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+          <ul>
+            <% @event_attribute.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <div class="field">
+      <%= f.text_field :name, label: 'Kentän nimi' %>
     </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :name, 'Kentän nimi:' %><br>
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :attribute_label, 'Kentän otsikko'%><br>
-    <%= f.text_field :attribute_label %>
-  </div>
-  <div class="field">
-    <%= f.label :attribute_type, 'Valitse kentän tyyppi:' %><br>
-    <%= f.select :attribute_type, options_for_select(@attribute_types) %>
-  </div>
-  <div class="field">
-    <%= f.label :attribute_value, 'Kirjoita kentän valinnat puolipisteellä eroteltuna:' %><br>
-    <%= f.text_field :attribute_value %>
-  </div>
+    <div class="field">
+      <%= f.text_field :attribute_label, label: 'Kentän otsikko' %>
+    </div>
+    <div class="field">
+      <%= f.select :attribute_type, options_for_select(@attribute_types), label: 'Valitse kentän tyyppi' %>
+    </div>
+    <div class="field">
+      <%= f.text_field :attribute_value, label: 'Kirjoita kentän valinnat puolipisteellä eroteltuna:' %>
+    </div>
 
     <%= f.hidden_field :event_id, :value => params[:event_id] %>
 
     <div class="actions">
-    <%= f.submit 'Lisää kenttä ilmoittautumislomakkeeseen' %>
-  </div>
+      <%= f.submit 'Lisää kenttä ilmoittautumislomakkeeseen' %>
+    </div>
 <% end %>

@@ -30,7 +30,7 @@ class EventAttributesController < ApplicationController
 
     respond_to do |format|
       if @event_attribute.save
-        format.html { redirect_to @event_attribute.event, notice: 'Event attribute was successfully created.' }
+        format.html { redirect_to @event_attribute.event, notice: 'Valinta lisättiin onnistuneesti.' }
         format.json { render :show, status: :created, location: @event_attribute }
       else
         format.html { render :new }
@@ -44,7 +44,7 @@ class EventAttributesController < ApplicationController
   def update
     respond_to do |format|
       if @event_attribute.update(event_attribute_params)
-        format.html { redirect_to @event_attribute, notice: 'Event attribute was successfully updated.' }
+        format.html { redirect_to @event_attribute, notice: 'Valinta päivitettiin onnistuneesti' }
         format.json { render :show, status: :ok, location: @event_attribute }
       else
         format.html { render :edit }
@@ -58,7 +58,7 @@ class EventAttributesController < ApplicationController
   def destroy
     @event_attribute.destroy
     respond_to do |format|
-      format.html { redirect_to event_attributes_url, notice: 'Event attribute was successfully destroyed.' }
+      format.html { redirect_to event_attributes_url, notice: 'Valinta poistettiin onnistuneesti.' }
       format.json { head :no_content }
     end
   end
@@ -73,8 +73,8 @@ class EventAttributesController < ApplicationController
     end
 
     def set_attribute_types
-      @attribute_types = ['radio_button', 'check_box', 'text_field', 'select',
-                          'plain_text']
+      @attribute_types = [['Valintanappi', 'radio_button'], ['Valintalaatikko', 'check_box'], ['Tekstikenttä', 'text_field'], ['Pudotusvalikko', 'select'],
+                          ['Tekstilaatikko', 'plain_text']]
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

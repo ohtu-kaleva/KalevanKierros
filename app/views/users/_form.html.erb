@@ -1,6 +1,3 @@
-<div class="col-lg-4">
-  <div class="bs-component">
-
     <%= bootstrap_form_for(@user) do |f| %>
         <% if @user.errors.any? %>
             <div id="error_explanation">
@@ -21,15 +18,16 @@
         <%= f.text_field :email, label: "Sähköpostiosoite: " %>
 
         <%= f.text_field :phone_number, label: "Puhelinnumero: " %>
-        <%= f.date_select(:birth_date, start_year: Time.now.year - 100, end_year: Time.now.year, order: [:day, :month, :year]) %>
+        <%= f.date_select(:birth_date, :default => {day: 1, month: 1, year: 1980}, start_year: Time.now.year - 100, end_year: Time.now.year, order: [:day, :month, :year], label: 'Syntymäpäivä' ) %>
         <%= f.select :gender, [['Mies', 'M'], ['Nainen', 'F']], label: "Sukupuoli: " %>
         <%= f.text_field :address, label: "Osoite: " %>
 
         <%= f.password_field :password, label: "Salasana: " %>
         <%= f.password_field :password_confirmation, label: "Salasana uudestaan: " %>
 
-        <%= f.submit "Rekisteröidy" %>
-
+        <% if defined?(subpage) && subpage.to_s == 'edit' %>
+            <%= f.submit "Muokkaa tietoja" %>
+        <% else %>
+            <%= f.submit "Rekisteröidy" %>
+        <% end %>
     <% end %>
-  </div>
-</div>

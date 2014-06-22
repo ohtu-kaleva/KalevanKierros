@@ -1,8 +1,16 @@
 <div class="col-lg-12">
   <div class="bs-component">
+    <% if defined?(viesti) %>
+        <div class="jumbotron">
+          <p class="lead"><%= notice %></p>
+        </div>
+    <% end %>
     <div class="jumbotron"><h1>Kalevan kierros</h1>
 
-      <p class="lead">Tervetuloa Kalevan kierroksen demoon!</p>
+      <p class="lead">Tervetuloa Kalevan kierroksen demoon
+        <% unless current_user.nil? %>
+            <strong><%= current_user.first_name %></strong>
+        <% end %>!</p>
     </div>
   </div>
 </div>

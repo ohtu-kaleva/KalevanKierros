@@ -10,7 +10,7 @@ class GroupsController < ApplicationController
 
     respond_to do |format|
       if @group.save
-        format.html { redirect_to :root, notice: 'Event was successfully created.' }
+        format.html { redirect_to :root, notice: 'Ryhmä luotu onnistuneesti.' }
       else
         format.html { render :new }
       end

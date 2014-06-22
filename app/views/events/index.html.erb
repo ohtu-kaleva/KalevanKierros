@@ -1,12 +1,14 @@
-<h1>Listing events</h1>
+<div class="col-lg-12">
+  <h1>Selaa tapahtumia</h1>
 
-<table>
+<table id="events" class="table table-striped tablesorter-blue">
   <thead>
     <tr>
       <th>Nimi:</th>
-      <th>Näytä:</th>
-      <th>Muokkaa:</th>
-      <th>Poista:</th>
+      <th>Alkamispäivä:</th>
+      <th></th>
+      <th></th>
+      <th></th>
     </tr>
   </thead>
 
@@ -14,14 +16,23 @@
     <% @events.each do |event| %>
       <tr>
         <td><%= event.name %></td>
-        <td><%= link_to 'Show', event %></td>
-        <td><%= link_to 'Edit', edit_event_path(event) %></td>
-        <td><%= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= event.start_date %></td>
+        <td><%= link_to 'Näytä tapahtuman tiedot', event %></td>
+        <td><% if user_is_admin? %><%= link_to 'Muokkaa tapahtumaa', edit_event_path(event)  %> <% end %></td>
+        <td><% if user_is_admin? %><%= link_to 'Poista tapahtuma', event, method: :delete, data: { confirm: 'Oletko varma että haluat poistaa tapahtuman?' } %><% end %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
+  <script type="text/javascript">
 
+      $(document).ready(function () {
+                  $("#events").tablesorter( {headers: {2: {sorter:false}, 3: {sorter:false}, 4: {sorter:false}}});
+              }
+      );
+  </script>
 <br>
-
-<%= link_to 'New Event', new_event_path %>
+<% if user_is_admin? %>
+     <%= link_to 'Luo uusi tapahtuma', new_event_path %>
+<% end %>
+</div>

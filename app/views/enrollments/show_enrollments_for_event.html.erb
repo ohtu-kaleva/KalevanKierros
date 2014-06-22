@@ -1,19 +1,29 @@
-<h1><%= @event.name %></h1>
-<table class="table table-bordered">
-  <thead>
+<div class="col-lg-6">
+
+  <h1><%= @event.name %></h1>
+  <table id="eventparticipants" class="table table-striped tablesorter-blue">
+    <thead>
     <th>Osallistujan nimi</th>
     <th>Osallistujan sähköposti</th>
     <% @event.event_attributes.each do |attr| %>
         <th><%= attr.name %></th>
     <% end %>
-  </thead>
-  <tbody>
+    </thead>
+    <tbody>
     <% @event.participants.each do |user| %>
-    <td><%= user.first_name %> <%= user.last_name %></td>
-    <td><%= user.email %></td>
-    <% user.get_enrollment_data_for_event(@event.id).each do |data| %>
-        <td><%= data.value %></td>
+        <td><%= user.first_name %> <%= user.last_name %></td>
+        <td><%= user.email %></td>
+        <% user.get_enrollment_data_for_event(@event.id).each do |data| %>
+            <td><%= data.value %></td>
+        <% end %>
     <% end %>
-    <% end %>
-  </tbody>
-</table>
+    </tbody>
+  </table>
+  <script type="text/javascript">
+
+      $(document).ready(function () {
+                  $("#eventparticipants").tablesorter( {headers: {2: {sorter:false}, 3: {sorter:false}, 4: {sorter:false}}});
+              }
+      );
+  </script>
+</div>

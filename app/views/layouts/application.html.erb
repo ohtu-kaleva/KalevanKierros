@@ -80,9 +80,16 @@
             <li><%= link_to 'Kirjaudu sisään', signin_path %></li>
             <li><%= link_to 'Rekisteröidy', signup_path %></li>
         <% else %>
-            <li><%= link_to 'Kirjaudu ulos', signout_path, :method => 'delete' %></li>
-            <li><%= link_to 'Muuta tietojasi', edit_user_path(current_user) %></li>
-            <li><%= link_to 'Tarkastele ilmoittautumisiasi', user_path(current_user) %></li>
+            <li class="dropdown">
+              <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="adminmenu">Omat tiedot <span class="caret"></span></a>
+              <ul class="dropdown-menu" aria-labelledby="omat tiedot">
+                <li><%= link_to 'Listaa tapahtumat', events_path %></li>
+                <li><%= link_to 'Tarkastele ilmoittautumisiasi', user_path(current_user) %></li>
+                <li class="divider"></li>
+                <li><%= link_to 'Muuta tietojasi', edit_user_path(current_user) %></li>
+                <li><%= link_to 'Kirjaudu ulos', signout_path, :method => 'delete' %></li>
+              </ul>
+            </li>
         <% end %>
         <% if user_is_admin? %>
         <li class="dropdown">

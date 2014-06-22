@@ -1,34 +1,34 @@
-<%= form_for(@event) do |f| %>
-  <% if @event.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@event.errors.count, "error") %> prohibited this event from being saved:</h2>
+<%= bootstrap_form_for(@event) do |f| %>
+    <% if @event.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@event.errors.count, "error") %> prohibited this event from being saved:</h2>
 
-      <ul>
-      <% @event.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+          <ul>
+            <% @event.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <div class="field">
+      <%= f.text_field :name, label: 'Tapahtuman nimi' %>
     </div>
-  <% end %>
+    <div class="field">
+      <%= f.date_select :start_date, label: 'Tapahtuman aloituspäivämäärä' %>
+    </div>
+    <div class="field">
+      <%= f.date_select :end_date, label: 'Tapahtuman päättymispäivämäärä' %>
+    </div>
+    <div class="field">
+      <%= f.text_area :description, label: 'Tapahtuman kuvaus' %>
+    </div>
 
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :start_date %><br>
-    <%= f.date_select :start_date %>
-  </div>
-  <div class="field">
-    <%= f.label :end_date %><br>
-    <%= f.date_select :end_date %>
-  </div>
-  <div class="field">
-    <%= f.label :description %><br>
-    <%= f.text_area :description %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+    <div class="actions">
+      <% if defined?(subpage) && subpage.to_s == 'edit' %>
+          <%= f.submit "Muokkaa" %>
+      <% else %>
+          <%= f.submit "Luo tapahtuma" %>
+      <% end %>
+    </div>
 <% end %>

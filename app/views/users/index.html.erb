@@ -1,31 +1,39 @@
-<h1>Listing users</h1>
+<div class="col-lg-12">
+  <h1>Rekisteröityneet käyttäjät</h1>
 
-<table>
-  <thead>
+  <table id="users" class="table table-striped tablesorter-blue">
+    <thead>
     <tr>
-      <th>First name</th>
-      <th>Last name</th>
-      <th>Username</th>
-      <th>E-mail</th>
+      <th>Sukunimi</th>
+      <th>Etunimi</th>
+      <th>Käyttäjänimi</th>
+      <th>Sähköposti</th>
       <th colspan="3"></th>
     </tr>
-  </thead>
+    </thead>
 
-  <tbody>
+    <tbody>
     <% @users.each do |user| %>
-      <tr>
-        <td><%= user.first_name %></td>
-        <td><%= user.last_name %></td>
-        <td><%= user.username %></td>
-        <td><%= user.email %></td>
-        <td><%= link_to 'Show', user %></td>
-        <td><%= link_to 'Edit', edit_user_path(user) %></td>
-        <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+        <tr>
+          <td><%= user.last_name %></td>
+          <td><%= user.first_name %></td>
+          <td><%= user.username %></td>
+          <td><%= user.email %></td>
+          <td><%= link_to 'Näytä', user %></td>
+          <td><%= link_to 'Muokkaa', edit_user_path(user) %></td>
+          <td><%= link_to 'Poista', user, method: :delete, data: {confirm: 'Are you sure?' } %></td>
+        </tr>
     <% end %>
-  </tbody>
-</table>
+    </tbody>
+  </table>
+  <script type="text/javascript">
 
-<br>
+      $(document).ready(function () {
+                  $("#users").tablesorter( {headers: {4: {sorter:false}}});
+              }
+      );
+  </script>
+  <br>
 
-<%= link_to 'New User', new_user_path %>
+  <%= link_to 'Luo uusi käyttäjä', new_user_path %>
+</div>
