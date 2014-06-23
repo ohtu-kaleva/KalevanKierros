@@ -23,6 +23,9 @@
     <div class="field">
       <%= f.text_area :description, label: 'Tapahtuman kuvaus' %>
     </div>
+    <div class="field">
+      <%= f.check_box :open, label: 'Avoin ilmoittautuminen' %>
+    </div>
 
     <div class="actions">
       <% if defined?(subpage) && subpage.to_s == 'edit' %>
