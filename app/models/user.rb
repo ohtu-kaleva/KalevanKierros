@@ -2,6 +2,7 @@ class User < ActiveRecord::Base
   has_secure_password
   has_many :enrollments
   has_many :events, through: :enrollments
+  has_one :kk_enrollment
   belongs_to :group
 
   validates :username, uniqueness: true, length: { minimum: 3 }
@@ -19,4 +20,4 @@ class User < ActiveRecord::Base
     puts e.enrollment_datas
     e.enrollment_datas
   end
-end
+ end

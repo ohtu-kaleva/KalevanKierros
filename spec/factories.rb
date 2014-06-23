@@ -9,6 +9,16 @@ FactoryGirl.define do
     address "Teletappikuja 1, 666 Teletappikaupunki"
     birth_date "27-5-1989"
     gender "M"
+    kk_number 12345
+      factory :user_with_kk_enrollment do |user|
+        after(:create) do |user|
+          user.kk_enrollment = FactoryGirl.create(:kk_enrollment, user: user)
+        end
+      end
+  end
+
+  factory :kk_enrollment do
+    user
   end
 
   factory :event do

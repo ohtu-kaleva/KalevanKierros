@@ -1,0 +1,24 @@
+<h1>Listing kk-enrollments</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Nimi:</th>
+      <th>Näytä:</th>
+      <th>Muokkaa:</th>
+      <th>Poista:</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @kk_enrollments.each do |enrollment| %>
+      <tr>
+        <td><%= enrollment %></td>
+        <td><%# enrollment.user.first_name %></td>
+        <td><%# enrollment.user.last_name %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>

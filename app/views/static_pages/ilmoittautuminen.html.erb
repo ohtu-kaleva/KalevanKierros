@@ -13,4 +13,10 @@
 
   <p>Kalevan Kierrokseen ilmoittautumisen jälkeen ovat sitten vuorossa Kierroksen osalajit. Niihin ilmoittaudutaan ja maksetaan osallistumismaksut erikseen. Osalajien kilpailukutsut ja ilmoittautumisohjeet tulevat Kierroksen sivuille, kun osalaji alkaa olla ajankohtainen. Osakilpailuista peritään osallistumismaksu, joka on yleensä noin 35 euron suuruinen.</p>
 
+  <% if current_user %>
+    <%= button_to('Ilmoittaudu kierrokselle', new_kk_enrollment_path(current_user.id), method: :get) %>
+  <% else %>
+    <%= button_to('Kirjaudu sisään ilmoittautuaksesi', signin_path, method: :get) %>
+  <% end %>
+
 </div>
