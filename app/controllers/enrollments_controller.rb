@@ -24,30 +24,31 @@ class EnrollmentsController < ApplicationController
     data_list = []
     event = Event.find(params[:enrollment][:event_id])
     if Date.today <= event.end_date
-    attrs = event.event_attributes
-    # loop for creating information for data
-    attrs.each do |a|
-      if params.has_key? a.name
-        if params[a.name].nil?
-          redirect_to :root
-          return
+      attrs = event.event_attributes
+      # loop for creating information for data
+      attrs.each do |a|
+        if params.has_key? a.name
+          if params[a.name].nil?
+            redirect_to :root
+            return
+          end
         end
+        data_list.append(EnrollmentData.new(name:a.name, value:params[a.name]))
       end
-      data_list.append(EnrollmentData.new(name:a.name, value:params[a.name]))
-    end
-    @enrollment = Enrollment.new(enrollment_params)
-    @enrollment.save
-    data_list.each do |d|
-      d.enrollment_id = @enrollment.id
-      d.save
-    end
-    if not current_user.nil?
-      current_user.enrollments << @enrollment
-    end
+      @enrollment = Enrollment.new(enrollment_params)
+      @enrollment.save
+      data_list.each do |d|
+        d.enrollment_id = @enrollment.id
+        d.save
+      end
+      if not current_user.nil?
+        current_user.enrollments << @enrollment
+      end
     else
       redirect_to events_path, notice: "Ilmoittautuminen on jo sulkeutunut."
+      return
     end
-    redirect_to :root, notice: "Ilmoittautumisesi tapahtumaan on kirjattu."
+    redirect_to events_path, notice: "Ilmoittautumisesi tapahtumaan on kirjattu."
   end
 
   def show
