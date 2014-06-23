@@ -1,5 +1,11 @@
 require 'spec_helper'
 
 describe Enrollment do
-  pending "add some examples to (or delete) #{__FILE__}"
+  let!(:user) { FactoryGirl.create :user, password:"S4lainen", password_confirmation:"S4lainen" }
+  let!(:event) { FactoryGirl.create :event }
+
+  it "is created properly" do
+    enrollment = Enrollment.create(user_id: user.id, event_id: event.id)
+    expect(Enrollment.count).to eq(1)
+  end
 end
