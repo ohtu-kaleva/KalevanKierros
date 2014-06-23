@@ -4,13 +4,11 @@ class EventAttributesController < ApplicationController
   before_action :set_attribute_types, only: [:new, :edit]
 
   # GET /event_attributes
-  # GET /event_attributes.json
   def index
     @event_attributes = EventAttribute.all
   end
 
   # GET /event_attributes/1
-  # GET /event_attributes/1.json
   def show
   end
 
@@ -24,46 +22,35 @@ class EventAttributesController < ApplicationController
   end
 
   # POST /event_attributes
-  # POST /event_attributes.json
   def create
     @event_attribute = EventAttribute.new(event_attribute_params)
 
-    respond_to do |format|
-      if @event_attribute.save
-        format.html { redirect_to @event_attribute.event, notice: 'Valinta lisättiin onnistuneesti.' }
-        format.json { render :show, status: :created, location: @event_attribute }
-      else
-        format.html { render :new }
-        format.json { render json: @event_attribute.errors, status: :unprocessable_entity }
-      end
+    if @event_attribute.save
+      redirect_to @event_attribute.event, flash: { success: 'Valinta lisättiin onnistuneesti.' }
+    else
+      set_attribute_types
+      params[:event_id] = event_attribute_params[:event_id]
+      render :new
     end
   end
 
   # PATCH/PUT /event_attributes/1
-  # PATCH/PUT /event_attributes/1.json
   def update
-    respond_to do |format|
-      if @event_attribute.update(event_attribute_params)
-        format.html { redirect_to @event_attribute, notice: 'Valinta päivitettiin onnistuneesti' }
-        format.json { render :show, status: :ok, location: @event_attribute }
-      else
-        format.html { render :edit }
-        format.json { render json: @event_attribute.errors, status: :unprocessable_entity }
-      end
+    if @event_attribute.update(event_attribute_params)
+      redirect_to @event_attribute, flash: { success: 'Valinta päivitettiin onnistuneesti.' }
+    else
+      render :edit
     end
   end
 
   # DELETE /event_attributes/1
-  # DELETE /event_attributes/1.json
   def destroy
     @event_attribute.destroy
-    respond_to do |format|
-      format.html { redirect_to event_attributes_url, notice: 'Valinta poistettiin onnistuneesti.' }
-      format.json { head :no_content }
-    end
+    redirect_to event_attributes_url, flash: { success: 'Valinta poistettiin onniistuneesti.' }
   end
 
   private
+
     # Use callbacks to share common setup or constraints between actions.
     def set_event_attribute_or_redirect
       @event_attribute = EventAttribute.find_by id: params[:id]

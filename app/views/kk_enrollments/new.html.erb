@@ -1,0 +1,16 @@
+<h1>Ilmoittautuminen Kalevan Kierrokselle <%= Date.today.year %></h1>
+
+<strong>Tarkista tiedot ilmoittautumiseen:</strong>
+<div class="field">
+  <strong>Etunimi:</strong> <%= @user.first_name %><br>
+  <strong>Sukunimi:</strong> <%= @user.last_name %><br>
+  <strong>Sähköposti:</strong> <%= @user.email %><br>
+  <strong>Puhelinnumero:</strong>  <%= @user.phone_number %><br>
+  <strong>Osoite:</strong> <%= @user.address %><br>
+  <strong>Syntymäaika:</strong> <%= @user.birth_date %><br>
+  <strong>Sukupuoli:</strong> <%= @user.gender %><br>
+</div>
+
+<%= button_to 'Muokkaa tietoja', edit_user_path, method: :get %><br>
+
+<%= button_to 'Ilmoittaudu kierrokselle', url_for(controller: :kk_enrollments, action: :create) %>

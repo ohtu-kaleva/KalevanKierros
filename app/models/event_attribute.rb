@@ -1,6 +1,7 @@
 class EventAttribute < ActiveRecord::Base
   belongs_to :event
-  validates :attribute_type, :name, :attribute_label, presence: true
+  validates :attribute_type, :name, :attribute_label, presence: true,
+                             allow_blank: false
   validate :attribute_type_allowed
 
   def get_options_to_form

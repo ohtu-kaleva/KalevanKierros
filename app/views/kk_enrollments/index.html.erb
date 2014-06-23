@@ -1,0 +1,25 @@
+<div class="col-lg-12">
+  <h1>Kierrosilmoittautumiset</h1>
+
+<table id="kk_enrollments" class="table table-striped tablesorter-blue">
+  <thead>
+    <tr>
+      <th>Kiertäjänumero</th>
+      <th>Etunimi</th>
+      <th>Sukunimi</th>
+      <th>Maksettu</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @kk_enrollments.each do |enrollment| %>
+      <tr>
+        <td><%= enrollment.user.kk_number %></td>
+        <td><%= enrollment.user.first_name %></td>
+        <td><%= enrollment.user.last_name %></td>
+        <td><%= enrollment.paid == true ? 'Kyllä' : 'Ei' %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<br>

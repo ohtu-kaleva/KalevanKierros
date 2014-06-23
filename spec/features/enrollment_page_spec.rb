@@ -5,7 +5,7 @@ include SigninHelper
 feature 'Enrollment page' do
   let!(:event) { FactoryGirl.create :event_with_attributes }
   let!(:user) do
-    FactoryGirl.create :user, password: 'S4lainen',
+    FactoryGirl.create :user_with_kk_enrollment, password: 'S4lainen',
       password_confirmation: 'S4lainen'
   end
 
@@ -13,6 +13,7 @@ feature 'Enrollment page' do
     sign_in(username: 'Tyhjis', password: 'S4lainen')
 
     visit add_enrollment_path(event.id)
+
     choose 'monivalinta', option: 'ei'
     check 'valintatieto'
     fill_in 'tekstikenttä', with: 'testikommentti'

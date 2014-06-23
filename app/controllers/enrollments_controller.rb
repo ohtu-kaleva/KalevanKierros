@@ -5,16 +5,25 @@ class EnrollmentsController < ApplicationController
   before_action :redirect_if_user_not_admin, only: [:show_enrollments_for_event, :index]
 
   def new
-    if current_user
-      @event = Event.find_by id: params[:event_id]
-      if @event
-        @enrollment = Enrollment.new
-        @enrollment.enrollment_datas.build
-        return
-      end
-    end
+    @event = Event.find_by id: params[:event_id]
+    if @event
+      if !@event.open
+        @user = current_user
+        if !@user
+          redirect_to signin_path and return
+        end
 
-    redirect_to root_path
+        if !@user.kk_enrollment
+          redirect_to root_path, flash: { notice: 'Ilmoittaudu ensin kalevan kierrokselle' }
+          return
+        end
+      end
+
+      @enrollment = Enrollment.new
+      @enrollment.enrollment_datas.build
+    else
+      redirect_to root_path
+    end
   end
 
   def index
@@ -22,29 +31,37 @@ class EnrollmentsController < ApplicationController
   end
 
   def create
-    data_list = []
-    event = Event.find(params[:enrollment][:event_id])
-    attrs = event.event_attributes
-    # loop for creating information for data
-    attrs.each do |a|
-      if params.has_key? a.name
-        if params[a.name].nil?
-          redirect_to :root
-          return
+    event = Event.find_by id: params[:enrollment][:event_id]
+    if event
+      if event.open || (current_user && current_user.kk_enrollment)
+        data_list = []
+        attrs = event.event_attributes.select {|a| a.attribute_type != 'plain_text' }
+
+        # loop for creating information for data
+        attrs.each do |a|
+          if !params.has_key? a.name || params[a.name].nil?
+            redirect_to root_path and return
+          end
+          data_list.append(EnrollmentData.new(name:a.name, value:params[a.name]))
+        end
+
+        @enrollment = Enrollment.new(enrollment_params)
+        if @enrollment.save
+          data_list.each do |d|
+            d.enrollment_id = @enrollment.id
+            d.save
+          end
+          if current_user
+            current_user.enrollments << @enrollment
+          end
+          flash[:success] = "Ilmoittautumisesi tapahtumaan on kirjattu."
+        else
+          render :new and return
         end
       end
-      data_list.append(EnrollmentData.new(name:a.name, value:params[a.name]))
     end
-    @enrollment = Enrollment.new(enrollment_params)
-    @enrollment.save
-    data_list.each do |d|
-      d.enrollment_id = @enrollment.id
-      d.save
-    end
-    if not current_user.nil?
-      current_user.enrollments << @enrollment
-    end
-    redirect_to :root, notice: "Ilmoittautumisesi tapahtumaan on kirjattu."
+
+    redirect_to root_path
   end
 
   def show
@@ -57,9 +74,9 @@ class EnrollmentsController < ApplicationController
   private
 
   def check_for_existing_enrollment
-    if not current_user.nil?
-      if not current_user.enrollments.nil? and not current_user.enrollments.find_by(event_id: params[:event_id]).nil?
-        redirect_to :back, notice: "Olet jo ilmoittautunut tapahtumaan."
+    if current_user
+      if current_user.enrollments and current_user.enrollments.find_by(event_id: params[:event_id])
+        redirect_to events_path, flash: { error: "Olet jo ilmoittautunut tapahtumaan." }
       end
     end
   end
@@ -70,7 +87,6 @@ class EnrollmentsController < ApplicationController
 
   def set_enrollment_or_redirect
     if current_user
-      puts params[:enrollment_id]
       @enrollment = Enrollment.find_by(id: params[:enrollment_id])
       return if @enrollment && ((current_user.id == @enrollment.user_id) || user_is_admin?)
     end

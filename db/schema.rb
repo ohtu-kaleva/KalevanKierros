@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140616133234) do
+ActiveRecord::Schema.define(version: 20140622192708) do
 
   create_table "enrollment_data", force: true do |t|
     t.integer  "enrollment_id"
@@ -45,6 +45,7 @@ ActiveRecord::Schema.define(version: 20140616133234) do
     t.string   "description"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "open",        default: false, null: false
   end
 
   create_table "groups", force: true do |t|
@@ -52,6 +53,15 @@ ActiveRecord::Schema.define(version: 20140616133234) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "kk_enrollments", force: true do |t|
+    t.integer  "user_id"
+    t.boolean  "paid",       default: false, null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "kk_enrollments", ["user_id"], name: "index_kk_enrollments_on_user_id", unique: true
 
   create_table "users", force: true do |t|
     t.string   "first_name"
@@ -67,6 +77,9 @@ ActiveRecord::Schema.define(version: 20140616133234) do
     t.string   "gender"
     t.boolean  "admin",           default: false, null: false
     t.integer  "group_id"
+    t.integer  "kk_number"
   end
+
+  add_index "users", ["kk_number"], name: "index_users_on_kk_number", unique: true
 
 end
