@@ -15,6 +15,8 @@
 
   <% if current_user %>
     <%= button_to('Ilmoittaudu kierrokselle', new_kk_enrollment_path(current_user.id), method: :get) %>
+    <br>
+    <%= button_to('Ilmoita joukkue', new_group_path(current_user.id), method: :get) %>
   <% else %>
     <%= button_to('Kirjaudu sisään ilmoittautuaksesi', signin_path, method: :get) %>
   <% end %>

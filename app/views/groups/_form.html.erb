@@ -13,7 +13,21 @@
 
     <div class="field">
       <%= f.label :name, 'Joukkueen nimi:' %><br>
-      <%= f.text_field :name %>
+      <%= f.text_field :name %><br>
+      Anna jäsenten kiertäjänumerot:<br>
+      <%= label :first_member, '1. ' %>
+      <%= text_field_tag 'kk_numbers[]' %><br>
+      <%= label :second_member, '2.' %>
+      <%= text_field_tag 'kk_numbers[]' %><br>
+      <%= label :third_member, '3.' %>
+      <%= text_field_tag 'kk_numbers[]' %><br>
+      <%= label :fourth_member, '4.' %>
+      <%= text_field_tag 'kk_numbers[]' %><br>
+      <%= label :fifth_member, '5.' %>
+      <%= text_field_tag 'kk_numbers[]' %><br>
+      <%= label :sixth_member, '6.' %>
+      <%= text_field_tag 'kk_numbers[]' %><br>
+      <br>
     </div>
 
     <div class="field">

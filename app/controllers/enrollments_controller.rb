@@ -14,7 +14,7 @@ class EnrollmentsController < ApplicationController
         end
 
         if !@user.kk_enrollment
-          redirect_to new_kk_enrollment_path(@user.id), flash: { notice: 'Ilmoittaudu ensin kierrokselle' }
+          redirect_to root_path, flash: { notice: 'Ilmoittaudu ensin kalevan kierrokselle' }
           return
         end
       end
