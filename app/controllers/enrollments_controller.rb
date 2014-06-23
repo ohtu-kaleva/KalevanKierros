@@ -13,7 +13,6 @@ class EnrollmentsController < ApplicationController
         return
       end
     end
-
     redirect_to root_path
   end
 
@@ -24,6 +23,7 @@ class EnrollmentsController < ApplicationController
   def create
     data_list = []
     event = Event.find(params[:enrollment][:event_id])
+    if Date.today <= event.end_date
     attrs = event.event_attributes
     # loop for creating information for data
     attrs.each do |a|
@@ -43,6 +43,9 @@ class EnrollmentsController < ApplicationController
     end
     if not current_user.nil?
       current_user.enrollments << @enrollment
+    end
+    else
+      redirect_to events_path, notice: "Ilmoittautuminen on jo sulkeutunut."
     end
     redirect_to :root, notice: "Ilmoittautumisesi tapahtumaan on kirjattu."
   end
