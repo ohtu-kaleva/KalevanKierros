@@ -6,6 +6,7 @@
     <tr>
       <th>Nimi:</th>
       <th>Alkamispäivä:</th>
+      <th>Ilmoittautuminen päättyy:</th>
       <th></th>
       <th></th>
       <th></th>
@@ -17,6 +18,7 @@
       <tr>
         <td><%= event.name %></td>
         <td><%= event.start_date %></td>
+        <td><%= event.end_date %></td>
         <td><%= link_to 'Näytä tapahtuman tiedot', event %></td>
         <td><% if user_is_admin? %><%= link_to 'Muokkaa tapahtumaa', edit_event_path(event)  %> <% end %></td>
         <td><% if user_is_admin? %><%= link_to 'Poista tapahtuma', event, method: :delete, data: { confirm: 'Oletko varma että haluat poistaa tapahtuman?' } %><% end %></td>
