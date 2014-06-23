@@ -3,13 +3,11 @@ class EventsController < ApplicationController
   before_action :redirect_if_user_not_admin, except: [:show, :index]
 
   # GET /events
-  # GET /events.json
   def index
     @events = Event.all
   end
 
   # GET /events/1
-  # GET /events/1.json
   def show
   end
 
@@ -23,43 +21,29 @@ class EventsController < ApplicationController
   end
 
   # POST /events
-  # POST /events.json
   def create
     @event = Event.new(event_params)
 
-    respond_to do |format|
-      if @event.save
-        format.html { redirect_to @event, notice: 'Tapahtuma luotu onnistuneesti.' }
-        format.json { render :show, status: :created, location: @event }
-      else
-        format.html { render :new }
-        format.json { render json: @event.errors, status: :unprocessable_entity }
-      end
+    if @event.save
+      redirect_to @event, flash: { success: 'Tapahtuma luotu onnistuneesti.' }
+    else
+      render :new
     end
   end
 
   # PATCH/PUT /events/1
-  # PATCH/PUT /events/1.json
   def update
-    respond_to do |format|
-      if @event.update(event_params)
-        format.html { redirect_to @event, notice: 'Tapahtumaa muokattu onnistuneesti.' }
-        format.json { render :show, status: :ok, location: @event }
-      else
-        format.html { render :edit }
-        format.json { render json: @event.errors, status: :unprocessable_entity }
-      end
+    if @event.update(event_params)
+      redirect_to @event, flash: { success: 'Tapahtumaa muokattu onnistuneesti.' }
+    else
+      render :edit
     end
   end
 
   # DELETE /events/1
-  # DELETE /events/1.json
   def destroy
     @event.destroy
-    respond_to do |format|
-      format.html { redirect_to events_url, notice: 'Tapahtuma poistettiin onnistuneesti.' }
-      format.json { head :no_content }
-    end
+    redirect_to events_url, flash: { success: 'Tapahtuma poistettiin onnistuneesti.' }
   end
 
   private

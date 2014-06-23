@@ -1,5 +1,4 @@
 <div class="col-lg-6">
-<p id="notice"><%= notice %></p>
 
 <h2 class="eventtitle">
   <%= @event.name %>
@@ -48,7 +47,10 @@
         <% end %>
         <% end %>
         <% if f.attribute_type == "text_field" %>
-        <%= text_field_tag(:sel, f.attribute_value) %>
+          <%= text_field_tag(:sel, f.attribute_value) %>
+        <% end %>
+        <% if f.attribute_type == "plain_text" %>
+          <%= f.attribute_value %>
         <% end %>
         </div>
     <% end %>

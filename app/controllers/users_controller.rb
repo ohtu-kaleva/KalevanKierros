@@ -3,13 +3,11 @@ class UsersController < ApplicationController
   before_action :set_user_or_redirect, only:  [:show, :edit, :update, :destroy]
 
   # GET /users
-  # GET /users.json
   def index
     @users = User.all
   end
 
   # GET /users/1
-  # GET /users/1.json
   def show
     @enrollments = @user.enrollments
     @group = @user.group
@@ -25,18 +23,13 @@ class UsersController < ApplicationController
   end
 
   # POST /users
-  # POST /users.json
   def create
     @user = User.new(user_params)
 
-    respond_to do |format|
-      if @user.save
-        format.html { redirect_to root_url, notice: 'Käyttäjätunnus luotu, kirjaudu sisään oikeasta yläkulmasta.' }
-        format.json { render :show, status: :created, location: @user }
-      else
-        format.html { render :new }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
-      end
+    if @user.save
+      redirect_to root_url, flash: { success: 'Käyttäjätunnus luotu, kirjaudu sisään oikeasta yläkulmasta.' }
+    else
+      render :new
     end
   end
 
@@ -46,34 +39,25 @@ class UsersController < ApplicationController
   end
 
   # PATCH/PUT /users/1
-  # PATCH/PUT /users/1.json
   def update
-    respond_to do |format|
-      if @user.update(user_params)
-        format.html { redirect_to @user, notice: 'Käyttäjätiedot päivitetty onnistuneesti.' }
-        format.json { render :show, status: :ok, location: @user }
-      else
-        format.html { render :edit }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
-      end
+    if @user.update(user_params)
+      redirect_to @user, success: 'Käyttäjätiedot päivitetty onnistuneesti.'
+    else
+      render :edit
     end
   end
 
   def update_user_group_relation
     user = User.find_by id: params[:user_id]
     if user.update_attribute(:group_id, params[:group_id])
-      redirect_to :root, notice: 'Jäsen lisätty ryhmään.'
+      redirect_to :root, flash: { success: 'Jäsen lisätty ryhmään.' }
     end
   end
 
   # DELETE /users/1
-  # DELETE /users/1.json
   def destroy
     @user.destroy
-    respond_to do |format|
-      format.html { redirect_to users_url, notice: 'Käyttäjä poistettu onnistuneesti.' }
-      format.json { head :no_content }
-    end
+      redirect_to users_url, flash: { success: 'Käyttäjä poistettu onnistuneesti.' }
   end
 
   private

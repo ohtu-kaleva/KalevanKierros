@@ -18,7 +18,7 @@
         <strong><%= e.attribute_label %></strong><br>
 
           <% if e.attribute_type == "select" %>
-              <%= select_tag e.name, options_for_select(e.get_options_to_form) %>
+            <%= select_tag e.name, options_for_select(e.get_options_to_form) %><br>
           <% end %>
 
           <% if e.attribute_type == "radio_button" %>
@@ -36,7 +36,11 @@
           <% end %>
 
           <% if e.attribute_type == "text_field" %>
-              <%= text_field_tag(e.name, e.attribute_value) %>
+            <%= text_field_tag(e.name, e.attribute_value) %><br>
+          <% end %>
+
+          <% if e.attribute_type == "plain_text" %>
+            <%= e.attribute_value %>
           <% end %>
     <% end %>
  <%= f.hidden_field :event_id, :value => params[:event_id] %>
