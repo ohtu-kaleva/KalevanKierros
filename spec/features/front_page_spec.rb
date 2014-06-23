@@ -50,7 +50,7 @@ describe "Front page" do
 
     it "edit information should take to right page" do
       click_link 'Muuta tietojasi'
-      expect(page).to have_content 'Editing user'
+      expect(page).to have_content 'Muokkaa tietoja'
     end
 
     describe "as admin" do
