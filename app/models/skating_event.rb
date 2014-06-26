@@ -1,0 +1,3 @@
+class SkatingEvent < Event
+
+end

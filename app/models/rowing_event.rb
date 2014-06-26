@@ -1,0 +1,3 @@
+class RowingEvent < Event
+
+end
