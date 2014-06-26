@@ -16,17 +16,17 @@
       <%= f.text_field :name %><br>
       Anna jäsenten kiertäjänumerot:<br>
       <%= label :first_member, '1. ' %>
-      <%= text_field_tag 'kk_numbers[]' %><br>
+      <%= autocomplete_field_tag 'kk_numbers[]', '', autocomplete_user_kk_number_users_path %><br>
       <%= label :second_member, '2.' %>
-      <%= text_field_tag 'kk_numbers[]' %><br>
+      <%= autocomplete_field_tag 'kk_numbers[]', '', autocomplete_user_kk_number_users_path %><br>
       <%= label :third_member, '3.' %>
-      <%= text_field_tag 'kk_numbers[]' %><br>
+      <%= autocomplete_field_tag 'kk_numbers[]', '', autocomplete_user_kk_number_users_path %><br>
       <%= label :fourth_member, '4.' %>
-      <%= text_field_tag 'kk_numbers[]' %><br>
+      <%= autocomplete_field_tag 'kk_numbers[]', '', autocomplete_user_kk_number_users_path %><br>
       <%= label :fifth_member, '5.' %>
-      <%= text_field_tag 'kk_numbers[]' %><br>
+      <%= autocomplete_field_tag 'kk_numbers[]', '', autocomplete_user_kk_number_users_path %><br>
       <%= label :sixth_member, '6.' %>
-      <%= text_field_tag 'kk_numbers[]' %><br>
+      <%= autocomplete_field_tag 'kk_numbers[]', '', autocomplete_user_kk_number_users_path %><br>
       <br>
     </div>
 

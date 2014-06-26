@@ -3,7 +3,9 @@ Rails.application.routes.draw do
 
   resources :events
 
-  resources :users
+  resources :users do
+    get :autocomplete_user_kk_number, :on => :collection
+  end
   resources :sessions, only: [:new, :create]
   resources :enrollments, only: [:create, :index]
   resources :groups, only: [:new, :create, :show]

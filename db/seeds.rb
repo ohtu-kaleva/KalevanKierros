@@ -12,23 +12,23 @@ User.new(first_name: 'admin', last_name: 'admin', username: 'admin',
 User.new(first_name: 'erkki', last_name: 'jaakkola', username: 'testi1',
          email: 'erkki@ahti.com', phone_number: 12345, address: 'Osoite1',
          birth_date: Date.today, gender: 'M', admin: false, password: 'Salasana1',
-         password_confirmation: 'Salasana1', kk_number: 1).save
+         password_confirmation: 'Salasana1', kk_number: 105905).save
 User.new(first_name: 'jaska', last_name: 'virtanen', username: 'testi2',
          email: 'jaska@ahti.com', phone_number: 12345, address: 'Osoite2',
          birth_date: Date.today, gender: 'M', admin: false, password: 'Salasana1',
-         password_confirmation: 'Salasana1', kk_number: 2).save
+         password_confirmation: 'Salasana1', kk_number: 294955).save
 User.new(first_name: 'sami', last_name: 'lahtinen', username: 'testi3',
          email: 'sami@ahti.com', phone_number: 12345, address: 'Osoite3',
          birth_date: Date.today, gender: 'M', admin: false, password: 'Salasana1',
-         password_confirmation: 'Salasana1', kk_number: 3).save
+         password_confirmation: 'Salasana1', kk_number: 349835).save
 User.new(first_name: 'pekka', last_name: 'lehto', username: 'testi4',
          email: 'pekka@ahti.com', phone_number: 12345, address: 'Osoite4',
          birth_date: Date.today, gender: 'M', admin: false, password: 'Salasana1',
-         password_confirmation: 'Salasana1', kk_number: 4).save
+         password_confirmation: 'Salasana1', kk_number: 458954).save
 User.new(first_name: 'jukka', last_name: 'koskinen', username: 'testi5',
          email: 'jukka@ahti.com', phone_number: 12345, address: 'Osoite5',
          birth_date: Date.today, gender: 'M', admin: false, password: 'Salasana1',
-         password_confirmation: 'Salasana1', kk_number: 5).save
+         password_confirmation: 'Salasana1', kk_number: 593505).save
 @event1 = Event.new(name:'Avoin tapahtuma', start_date: 'Tue, 24 Jun 2014',
           end_date: 'Tue, 24 Jun 2015', description: 'Kaikille avoin tapahtuma', open: true)
 @event1.save

@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_action :redirect_if_user_not_admin, only: [:index]
   before_action :set_user_or_redirect, only:  [:show, :edit, :update, :destroy]
+  autocomplete :user, :kk_number
 
   # GET /users
   def index
