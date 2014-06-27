@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   #static pages
 
   get 'esittely/kalevankierros', to: 'static_pages#kalevankierros'
+  get 'esittely/lajikuvaukset', to: 'static_pages#lajikuvaukset'
   get 'esittely/ilmoittautuminen', to: 'static_pages#ilmoittautuminen'
   get 'esittely/pistelasku', to: 'static_pages#pistelasku'
   get 'esittely/saannot', to: 'static_pages#saannot'
