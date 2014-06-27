@@ -8,7 +8,9 @@ Rails.application.routes.draw do
   end
   resources :sessions, only: [:new, :create]
   resources :enrollments, only: [:create, :index]
-  resources :groups, only: [:new, :create, :show]
+  resources :groups, only: [:new, :create, :show] do
+    get :usersearch, :on => :collection
+  end
 
   get 'kk_enrollments', to: 'kk_enrollments#index'
   get 'users/:id/kk_enrollments/new', to: 'kk_enrollments#new', as: 'new_kk_enrollment'

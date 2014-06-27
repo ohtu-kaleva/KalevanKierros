@@ -16,19 +16,22 @@
       <%= f.text_field :name %><br>
       Anna jäsenten kiertäjänumerot:<br>
       <%= label :first_member, '1. ' %>
-      <%= autocomplete_field_tag 'kk_numbers[]', '', autocomplete_user_kk_number_users_path %><br>
+      <%= text_field_tag 'kk_numbers[]', nil, "data-autocomplete" => "/users/usersearch"  %><br>
       <%= label :second_member, '2.' %>
-      <%= autocomplete_field_tag 'kk_numbers[]', '', autocomplete_user_kk_number_users_path %><br>
+      <%= text_field_tag 'kk_numbers[]', nil, "data-autocomplete" => "/users/usersearch"  %><br>
       <%= label :third_member, '3.' %>
-      <%= autocomplete_field_tag 'kk_numbers[]', '', autocomplete_user_kk_number_users_path %><br>
+      <%= text_field_tag 'kk_numbers[]', nil, "data-autocomplete" => "/users/usersearch"   %><br>
       <%= label :fourth_member, '4.' %>
-      <%= autocomplete_field_tag 'kk_numbers[]', '', autocomplete_user_kk_number_users_path %><br>
+      <%= text_field_tag 'kk_numbers[]', nil, "data-autocomplete" => "/users/usersearch"   %><br>
       <%= label :fifth_member, '5.' %>
-      <%= autocomplete_field_tag 'kk_numbers[]', '', autocomplete_user_kk_number_users_path %><br>
+      <%= text_field_tag 'kk_numbers[]', nil, "data-autocomplete" => "/users/usersearch"   %><br>
       <%= label :sixth_member, '6.' %>
-      <%= autocomplete_field_tag 'kk_numbers[]', '', autocomplete_user_kk_number_users_path %><br>
+      <%= text_field_tag 'kk_numbers[]', nil, "data-autocomplete" => "/users/usersearch"   %><br>
       <br>
     </div>
+    <script type="text/javascript">
+        $( "input" ).autocomplete({ source: <%= raw(usersearch) %>});
+    </script>
 
     <div class="field">
     </div>

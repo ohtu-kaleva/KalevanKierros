@@ -1,5 +1,13 @@
 class GroupsController < ApplicationController
   before_action :set_group_or_redirect, only: [:show]
+  helper_method :usersearch
+
+  def usersearch
+    usersearch = User.all
+    usersearch.map{|user| {:label =>  user.kk_number.to_s << ' ' << user.first_name << ' ' << user.last_name, :value => user.kk_number } }.to_json
+
+  end
+
   def new
     set_user_and_check_enrollment
 
