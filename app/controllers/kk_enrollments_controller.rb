@@ -33,6 +33,10 @@ class KkEnrollmentsController < ApplicationController
     end
   end
 
+  def open
+    redirect_to admin_kk_enrollment_path, flash:  { success: 'Kierrosilmoittautuminen avattu' }
+  end
+
   # PATCH/PUT /kk_enrollments/1
   def update
 

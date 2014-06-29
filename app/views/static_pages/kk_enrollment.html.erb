@@ -1,6 +1,7 @@
 <h1>Kierroksen hallinta</h1>
-<%= button_to('Avaa ilmoittautuminen', root_path, method: :get) %>
+<%= button_to('Avaa ilmoittautuminen', kk_enrollment_open_path) %>
 <br>
-<%= button_to('Sulje ilmoittautuminen', root_path, method: :get) %>
+<%# button_to('Sulje ilmoittautuminen', root_path) %>
+<%# lisää tähän nappulan vaihdos %>
 <br>
 <%= button_to('Näytä ilmoittautumiset', kk_enrollments_path, method: :get) %>
