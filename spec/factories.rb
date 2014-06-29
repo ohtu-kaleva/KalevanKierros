@@ -84,4 +84,9 @@ FactoryGirl.define do
       attribute_label 'Tekstikenttä'
     end
   end
+
+  factory :app_setting do
+    name 'KkEnrollmentStatus'
+    value 'closed'
+  end
 end
