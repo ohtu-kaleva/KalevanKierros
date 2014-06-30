@@ -7,13 +7,13 @@ class GroupsController < ApplicationController
       @group = Group.new
       @users = User.all
     else
-      redirect_to root_path, flash: { alert: 'Kierrokselle ei voi ilmoittautua' }
+      redirect_to root_path, flash: { error: 'Kierrokselle ei voi ilmoittautua' }
     end
   end
 
   def create
     if !enrollment_open?
-      redirect_to root_path, flash: { alert: 'Kierrokselle ei voi ilmoittautua' }
+      redirect_to root_path, flash: { error: 'Kierrokselle ei voi ilmoittautua' }
     end
 
     set_user_and_check_enrollment

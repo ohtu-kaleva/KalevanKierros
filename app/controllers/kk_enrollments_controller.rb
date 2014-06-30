@@ -16,7 +16,7 @@ class KkEnrollmentsController < ApplicationController
       set_user_and_check_enrollment
       @kk_enrollment = KkEnrollment.new
     else
-      redirect_to root_path, flash: { alert: 'Kierrokselle ei voi ilmoittautua' }
+      redirect_to root_path, flash: { error: 'Kierrokselle ei voi ilmoittautua' }
     end
   end
 
@@ -27,7 +27,7 @@ class KkEnrollmentsController < ApplicationController
   # POST /kk_enrollments
   def create
     if !enrollment_open?
-      redirect_to root_path, flash: { alert: 'Kierrokselle ei voi ilmoittautua' }
+      redirect_to root_path, flash: { error: 'Kierrokselle ei voi ilmoittautua' }
     end
 
     set_user_and_check_enrollment
@@ -41,16 +41,20 @@ class KkEnrollmentsController < ApplicationController
     end
   end
 
-  def open
+  def change_enrollment_status
     status = AppSetting.find_by name: 'KkEnrollmentStatus'
+    message = ''
+
     if status.value.eql?('closed')
       status.value = 'open'
+      message = 'Kierrosilmoittautuminen avattu'
     else
       status.value = 'closed'
+      message = 'Kierrosilmoittautuminen suljettu'
     end
 
     if status.save
-      redirect_to admin_kk_enrollment_path, flash:  { success: 'Kierrosilmoittautuminen avattu' }
+      redirect_to admin_kk_enrollment_path, flash: { success: message }
     else
       redirect_to root_path, flash: { error: 'Operaatio ei onnistunut' }
     end
