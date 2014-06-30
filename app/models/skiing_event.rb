@@ -1,0 +1,2 @@
+class SkiingEvent < Event
+end

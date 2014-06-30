@@ -1,0 +1,2 @@
+class RunningEvent < Event
+end
