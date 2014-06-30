@@ -91,8 +91,4 @@ class KkEnrollmentsController < ApplicationController
         return
       end
     end
-
-    def enrollment_open?
-      AppSetting.find_by(name: 'KkEnrollmentStatus').value.eql?('open')
-    end
 end

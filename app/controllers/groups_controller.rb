@@ -1,13 +1,21 @@
 class GroupsController < ApplicationController
   before_action :set_group_or_redirect, only: [:show]
   def new
-    set_user_and_check_enrollment
+    if enrollment_open?
+      set_user_and_check_enrollment
 
-    @group = Group.new
-    @users = User.all
+      @group = Group.new
+      @users = User.all
+    else
+      redirect_to root_path, flash: { alert: 'Kierrokselle ei voi ilmoittautua' }
+    end
   end
 
   def create
+    if !enrollment_open?
+      redirect_to root_path, flash: { alert: 'Kierrokselle ei voi ilmoittautua' }
+    end
+
     set_user_and_check_enrollment
 
     kk_numbers = params[:kk_numbers].select { |e| !e.empty? }
