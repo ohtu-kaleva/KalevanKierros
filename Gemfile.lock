@@ -29,11 +29,10 @@ GEM
       tzinfo (~> 1.1)
     addressable (2.3.6)
     arel (5.0.1.20140414130214)
+    autoprefixer-rails (2.1.0.20140628)
+      execjs
     bcrypt (3.1.7)
-    bootstrap-glyphicons (0.0.1)
-      railties (>= 3.0)
-      sass (>= 3.2)
-    bootstrap-sass (3.1.1.1)
+    bootstrap-sass (3.2.0.0)
       sass (~> 3.2)
     bootstrap_form (2.1.1)
     bootswatch-rails (3.1.1)
@@ -76,6 +75,8 @@ GEM
       thor (>= 0.14, < 2.0)
     jquery-tablesorter (1.12.2)
       railties (>= 3.1, < 5)
+    jquery-ui-rails (4.2.1)
+      railties (>= 3.2.16)
     json (1.8.1)
     launchy (2.4.2)
       addressable (~> 2.3)
@@ -178,9 +179,9 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  autoprefixer-rails
   bcrypt (~> 3.1.7)
-  bootstrap-glyphicons
-  bootstrap-sass (~> 3.1.1)
+  bootstrap-sass (~> 3.2.0)
   bootstrap_form
   bootswatch-rails
   byebug
@@ -190,6 +191,7 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   jquery-tablesorter
+  jquery-ui-rails
   launchy
   pg
   rails (= 4.1.1)

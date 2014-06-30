@@ -19,8 +19,9 @@ end
 gem 'sass-rails', '~> 4.0.3'
 
 # Bootstrap 3
-gem 'bootstrap-sass', '~> 3.1.1'
-gem 'bootstrap-glyphicons'
+gem 'bootstrap-sass', '~> 3.2.0'
+gem 'autoprefixer-rails'
+#gem 'bootstrap-glyphicons'
 
 # Bootstrap-forms
 gem 'bootstrap_form'
@@ -37,6 +38,7 @@ gem 'bootswatch-rails'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
+gem 'jquery-ui-rails'
 gem 'jquery-tablesorter'
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
