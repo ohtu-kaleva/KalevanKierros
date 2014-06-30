@@ -17,48 +17,46 @@
       Anna jäsenten kiertäjänumerot: <br>
       <div class="input-group">
         <span class="input-group-addon">1.</span>
-        <%= text_field_tag 'kk_numbers[]', nil, :class => "form-control form-inline"  %>
+        <%= text_field_tag 'kk_numbers[]', nil, :class => "form-control form-inline autocomplete"  %>
         <span class="input-group-addon">&nbsp; </span>
       </div>
       <div class="input-group">
         <span class="input-group-addon">2.</span>
-        <%= text_field_tag 'kk_numbers[]', nil, :class => "form-control form-inline"  %>
+        <%= text_field_tag 'kk_numbers[]', nil, :class => "form-control form-inline autocomplete"  %>
         <span class="input-group-addon">&nbsp; </span>
       </div>
       <div class="input-group">
         <span class="input-group-addon">3.</span>
-        <%= text_field_tag 'kk_numbers[]', nil, :class => "form-control form-inline"  %>
+        <%= text_field_tag 'kk_numbers[]', nil, :class => "form-control form-inline autocomplete"  %>
         <span class="input-group-addon">&nbsp; </span>
       </div>
       <div class="input-group">
         <span class="input-group-addon">4.</span>
-        <%= text_field_tag 'kk_numbers[]', nil, :class => "form-control form-inline"  %>
+        <%= text_field_tag 'kk_numbers[]', nil, :class => "form-control form-inline autocomplete"  %>
         <span class="input-group-addon">&nbsp; </span>
       </div>
       <div class="input-group">
         <span class="input-group-addon">5.</span>
-        <%= text_field_tag 'kk_numbers[]', nil, :class => "form-control form-inline"  %>
+        <%= text_field_tag 'kk_numbers[]', nil, :class => "form-control form-inline autocomplete"  %>
         <span class="input-group-addon">&nbsp; </span>
       </div>
       <div class="input-group">
         <span class="input-group-addon">6.</span>
-        <%= text_field_tag 'kk_numbers[]', nil, :class => "form-control form-inline"  %>
+        <%= text_field_tag 'kk_numbers[]', nil, :class => "form-control form-inline autocomplete"  %>
         <span class="input-group-addon">&nbsp; </span>
       </div><br/>
       <br>
     </div>
 
     <script type="text/javascript">
-        $( "input" ).autocomplete({ delay:50, minLength:2, autoFocus: true,
+        $( "input.autocomplete" ).autocomplete({ delay:50, minLength:2, autoFocus: true,
             select: function(event, ui){
                 var parent  = $(event.target);
                 var element = parent.next('span');
                 var name = ui.item.label.replace(/\d{2,}?\s/, "");
-//                element.html(ui.item.label.slice(9) + '&nbsp;<span class="clearmember">x</span>');
                 element.html(name + '&nbsp;<a href="#"><span class="glyphicon glyphicon-remove clearmember"></span></a>');
                 $( "span.clearmember" ).click(function(){ parent.prop('readonly', false); parent.val(''); element.html(''); });
                 parent.prop('readonly', true);
-//              parent.addClass("form-control-static");
 
             },
             source: <%= raw(usersearch) %>});
