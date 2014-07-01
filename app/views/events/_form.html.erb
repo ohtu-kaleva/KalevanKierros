@@ -11,7 +11,7 @@
         </div>
     <% end %>
     <div class="field">
-      <%= f.select :type, options_for_select(@event_types), label: 'Jos haluat valmiin pohjan tapahtumalle, valitse jokin seuraavista.' %>
+      <%= select_tag :type, options_for_select([['Tyhjä', ''],['Juoksu', 'RunningEvent'], ['Soutu', 'RowingEvent'], ['Hiihto', 'SkiingEvent'], ['Suunnistus', 'OrienteeringEvent'], ['Luistelu', 'SkatingEvent'], ['Pyöräily', 'CyclingEvent']]), label: 'Jos haluat valmiin pohjan tapahtumalle, valitse jokin seuraavista.' %>
     </div>
     <div class="field">
       <%= f.text_field :name, label: 'Tapahtuman nimi' %>

@@ -6,7 +6,6 @@ class Event < ActiveRecord::Base
   validates :name, :start_date, :end_date, presence: true
   validates :name, uniqueness: true
   validate :validate_end_date
-  self.inheritance_column = :type
 
 
 

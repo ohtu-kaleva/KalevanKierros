@@ -1,2 +1,0 @@
-class RunningEvent < Event
-end

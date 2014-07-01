@@ -7,12 +7,12 @@ Rails.application.routes.draw do
   resources :sessions, only: [:new, :create]
   resources :enrollments, only: [:create, :index]
   resources :groups, only: [:new, :create, :show]
-  resources :running_events, :controller => 'events', :type => 'RunningEvent', except: [:new, :create]
-  resources :orienteering_events, :controller => 'events', :type => 'OrienteeringEvent'
-  resources :skiing_events, :controller => 'events', :type => 'SkiingEvent'
-  resources :skating_events, :controller => 'events', :type => 'SkatingEvent'
-  resources :rowing_events, :controller => 'events', :type => 'RowingEvent'
-  resources :cycling_events, :controller => 'events', :type => 'CyclingEvent'
+  #resources :running_events, :controller => 'events', :type => 'RunningEvent', except: [:new, :create]
+  #resources :orienteering_events, :controller => 'events', :type => 'OrienteeringEvent'
+  #resources :skiing_events, :controller => 'events', :type => 'SkiingEvent'
+  #resources :skating_events, :controller => 'events', :type => 'SkatingEvent'
+  #resources :rowing_events, :controller => 'events', :type => 'RowingEvent'
+  #resources :cycling_events, :controller => 'events', :type => 'CyclingEvent'
 
   get 'kk_enrollments', to: 'kk_enrollments#index'
   get 'users/:id/kk_enrollments/new', to: 'kk_enrollments#new', as: 'new_kk_enrollment'
@@ -20,14 +20,6 @@ Rails.application.routes.draw do
 
   root 'static_pages#home'
   get 'static_pages/home'
-
-  get 'running_events/new', to: 'events#new_running'
-  get 'new_rowing', to: 'events#new_rowing'
-  get 'new_skating', to: 'events#new_skating'
-  get 'new_skiing', to: 'events#new_skiing'
-  get 'new_orienteering', to: 'events#new_orienteering'
-  get 'new_cycling', to: 'events#new_cycling'
-  post 'running_events/new', to: 'events#create_running'
   #static pages
 
   get 'esittely/kalevankierros', to: 'static_pages#kalevankierros'

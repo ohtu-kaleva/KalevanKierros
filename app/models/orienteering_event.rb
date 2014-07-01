@@ -1,3 +1,0 @@
-class OrienteeringEvent < Event
-
-end

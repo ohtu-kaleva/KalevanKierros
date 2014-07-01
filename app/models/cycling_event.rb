@@ -1,3 +1,0 @@
-class CyclingEvent < Event
-
-end
