@@ -24,7 +24,7 @@ class EventsController < ApplicationController
   # POST /events
   def create
     puts params
-    if params[:event][:type] == 'empty'
+    if params[:event][:type].nil?
     @event = Event.new(event_params)
 
     if @event.save
@@ -116,6 +116,6 @@ class EventsController < ApplicationController
     end
 
     def event_types
-      @event_types = [['Tyhjä', 'empty'],['Juoksu', 'RunningEvent'], ['Soutu', 'RowingEvent'], ['Hiihto', 'SkiingEvent'], ['Suunnistus', 'OrienteeringEvent'], ['Luistelu', 'SkatingEvent'], ['Pyöräily', 'CyclingEvent']]
+      @event_types = [['Tyhjä', nil],['Juoksu', 'RunningEvent'], ['Soutu', 'RowingEvent'], ['Hiihto', 'SkiingEvent'], ['Suunnistus', 'OrienteeringEvent'], ['Luistelu', 'SkatingEvent'], ['Pyöräily', 'CyclingEvent']]
     end
 end
