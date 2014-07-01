@@ -1,8 +1,5 @@
 <div class="col-lg-4">
   <div class="bs-component">
-    <% flash.each do |key, value| %>
-        <div class="alert alert-<%= key %>"><%= value %></div>
-    <% end %>
     <h1>Kirjaudu sisään</h1>
 
     <%= bootstrap_form_tag url: sessions_path do |f| %>

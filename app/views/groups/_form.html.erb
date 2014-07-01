@@ -12,38 +12,37 @@
     <% end %>
 
     <div class="field">
-      <%= f.label :name, 'Joukkueen nimi:' %><br>
-      <%= f.text_field :name %><br>
+      <%= f.text_field :name, label: "Joukkueen nimi:" %><br>
       Anna jäsenten kiertäjänumerot: <br>
       <div class="input-group">
         <span class="input-group-addon">1.</span>
-        <%= text_field_tag 'kk_numbers[]', nil, :class => "form-control form-inline autocomplete"  %>
-        <span class="input-group-addon">&nbsp; </span>
+        <%= text_field_tag 'kk_numbers[]', nil, :class => "form-control autocomplete", :id => "member1"  %>
+        <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk "></span></span>
       </div>
       <div class="input-group">
         <span class="input-group-addon">2.</span>
-        <%= text_field_tag 'kk_numbers[]', nil, :class => "form-control form-inline autocomplete"  %>
-        <span class="input-group-addon">&nbsp; </span>
+        <%= text_field_tag 'kk_numbers[]', nil, :class => "form-control autocomplete", :id => "member2" %>
+        <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk "></span></span>
       </div>
       <div class="input-group">
         <span class="input-group-addon">3.</span>
-        <%= text_field_tag 'kk_numbers[]', nil, :class => "form-control form-inline autocomplete"  %>
-        <span class="input-group-addon">&nbsp; </span>
+        <%= text_field_tag 'kk_numbers[]', nil, :class => "form-control autocomplete", :id => "member3"  %>
+        <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk "></span></span>
       </div>
       <div class="input-group">
         <span class="input-group-addon">4.</span>
-        <%= text_field_tag 'kk_numbers[]', nil, :class => "form-control form-inline autocomplete"  %>
-        <span class="input-group-addon">&nbsp; </span>
+        <%= text_field_tag 'kk_numbers[]', nil, :class => "form-control autocomplete", :id => "member4"  %>
+        <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk "></span></span>
       </div>
       <div class="input-group">
         <span class="input-group-addon">5.</span>
-        <%= text_field_tag 'kk_numbers[]', nil, :class => "form-control form-inline autocomplete"  %>
-        <span class="input-group-addon">&nbsp; </span>
+        <%= text_field_tag 'kk_numbers[]', nil, :class => "form-control autocomplete", :id => "member5"  %>
+        <span class="input-group-addon">&nbsp;&nbsp;&nbsp; </span>
       </div>
       <div class="input-group">
         <span class="input-group-addon">6.</span>
-        <%= text_field_tag 'kk_numbers[]', nil, :class => "form-control form-inline autocomplete"  %>
-        <span class="input-group-addon">&nbsp; </span>
+        <%= text_field_tag 'kk_numbers[]', nil, :class => "form-control autocomplete", :id => "member6"  %>
+        <span class="input-group-addon">&nbsp;&nbsp;&nbsp;</span>
       </div><br/>
       <br>
     </div>
@@ -52,14 +51,45 @@
         $( "input.autocomplete" ).autocomplete({ delay:50, minLength:2, autoFocus: true,
             select: function(event, ui){
                 var parent  = $(event.target);
+                var id = parent.attr('id');
                 var element = parent.next('span');
                 var name = ui.item.label.replace(/\d{2,}?\s/, "");
-                element.html(name + '&nbsp;<a href="#"><span class="glyphicon glyphicon-remove clearmember"></span></a>');
-                $( "span.clearmember" ).click(function(){ parent.prop('readonly', false); parent.val(''); element.html(''); });
+                element.html(name + '&nbsp;<a href="#"><span onclick="clearInput(event, \'' + id +'\')" class="glyphicon glyphicon-remove clearmember"></span></a>');
                 parent.prop('readonly', true);
-
             },
             source: <%= raw(usersearch) %>});
+        function clearInput(event, id){
+            event.preventDefault();
+            var element = $('#' + id);
+            element.prop('readonly', false);
+            element.val('');
+            element.next('span').html('&nbsp;&nbsp;&nbsp;');
+        }
+
+        $(document).ready(function() {
+            $('form').bootstrapValidator({
+                message: 'Virheellinen syöte',
+                feedbackIcons: {
+                    valid: 'glyphicon glyphicon-ok',
+                    invalid: 'glyphicon glyphicon-asterisk',
+                    validating: 'glyphicon glyphicon-refresh'
+                },
+                fields: {
+                    'group[name]': {
+                        message: 'Joukkueen nimi ei ole kelvollinen',
+                        validators: {
+                            notEmpty: {
+                                message: 'Joukkueella tulee olla nimi'
+                            },
+                            stringLength: {
+                                min: 2,
+                                message: 'Joukkueen nimessä tulee olla vähintään 2 merkkiä'
+                            }
+                        }
+                    }
+                }
+            });
+        });
     </script>
 
     <div class="field">

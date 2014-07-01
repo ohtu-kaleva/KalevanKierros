@@ -28,6 +28,88 @@
         <% if defined?(subpage) && subpage.to_s == 'edit' %>
             <%= f.submit "Muokkaa tietoja" %>
         <% else %>
-            <%= f.submit "Rekisteröidy" %>
+            <%= f.submit "Rekisteröidy", :class => "btn btn-primary" %>
         <% end %>
     <% end %>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('form').bootstrapValidator({
+            message: 'Virheellinen syöte',
+            feedbackIcons: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-asterisk',
+                validating: 'glyphicon glyphicon-refresh'
+            },
+            fields: {
+                'user[first_name]': {
+                    validators: {
+                        notEmpty: {
+                            message: 'Etunimi ei voi olla tyhjä'
+                        }
+                    }
+                },
+                'user[last_name]': {
+                    validators: {
+                        notEmpty: {
+                            message: 'Sukunimi ei voi olla tyhjä'
+                        }
+                    }
+                },
+                'user[username]': {
+                    validators: {
+                        notEmpty: {
+                            message: 'Käyttäjänimi ei voi olla tyhjä'
+                        },
+                        stringLength: {
+                            min: 3,
+                            message: 'Käyttäjänimessä tulee olla vähintään 3 merkkiä'
+                        }
+                    }
+                },
+                'user[email]': {
+                    validators: {
+                        emailAddress: {
+                            message: 'Anna täydellinen sähköpostiosoite'
+                        }
+                    }
+                },
+                'user[address]': {
+                    validators: {
+                        notEmpty: {
+                            message: 'Osoite ei voi olla tyhjä'
+                        },
+                        stringLength: {
+                            min: 5,
+                            message: 'Osoitteessa tulee olla vähintään 5 merkkiä'
+                        }
+                    }
+                },
+                'user[password]': {
+                    validators: {
+                        notEmpty: {
+                            message: 'Salasana ei voi olla tyhjä'
+                        },
+                        stringLength: {
+                            min: 6,
+                            message: 'Salasanan tulee olla vähintään 6 merkkiä pitkä'
+                        },
+                        regexp: {
+                            regexp: /.*(\d.*[A-Z]|[A-Z].*\d).*/,
+                            message: 'Salasanassa tulee olla isoja ja pieniä kirjaimia sekä numeroita'
+                        }
+                    }
+                },
+                'user[password_confirmation]': {
+                    validators: {
+                        identical: {
+                            field: 'user[password]',
+                            message: 'Salasanat eivät täsmää'
+                        }
+                    }
+                }
+
+
+            }
+        });
+    });
+</script>
