@@ -1,0 +1,18 @@
+<table border="1">
+  <tr>
+    <th>Osallistujan nimi</th>
+    <th>Osallistujan sähköposti</th>
+    <% @event.event_attributes.each do |attr| %>
+          <th><%= attr.name %></th>
+    <% end %>
+  </tr>
+  <% @event.participants.each do |user| %>
+      <tr>
+        <td><%= user.first_name %> <%= user.last_name %></td>
+        <td><%= user.email %></td>
+        <% user.get_enrollment_data_for_event(@event.id).each do |data| %>
+            <td><%= data.value %></td>
+        <% end %>
+      </tr>
+  <% end %>
+</table>

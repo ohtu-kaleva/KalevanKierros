@@ -70,6 +70,11 @@ class EnrollmentsController < ApplicationController
 
   def show_enrollments_for_event
     @event = Event.find_by id: params[:event_id]
+    respond_to do |format|
+      format.html
+      format.csv { send_data @event.to_csv }
+      format.xls
+    end
   end
   private
 
