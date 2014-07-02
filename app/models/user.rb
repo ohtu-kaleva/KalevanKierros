@@ -17,7 +17,6 @@ class User < ActiveRecord::Base
 
   def get_enrollment_data_for_event(id)
     e = enrollments.find_by event_id: id
-    puts e.enrollment_datas
     e.enrollment_datas
   end
  end

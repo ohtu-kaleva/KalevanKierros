@@ -11,14 +11,21 @@
     </thead>
     <tbody>
     <% @event.participants.each do |user| %>
+        <tr>
         <td><%= user.first_name %> <%= user.last_name %></td>
         <td><%= user.email %></td>
         <% user.get_enrollment_data_for_event(@event.id).sort_by {|attribute_index|}.each do |data| %>
             <td><%= data.value %></td>
         <% end %>
+        </tr>
     <% end %>
     </tbody>
   </table>
+  <p>
+    <%= link_to 'Lataa csv-tiedostona', show_enrollments_path(@event.id, format: :csv) %><br>
+    <%= link_to 'Lataa excel-tiedostona (xls)', show_enrollments_path(@event.id, format: :xls) %><br>
+    <%= link_to 'Lataa excel-tiedostona (xlsx)', show_enrollments_path(@event.id, format: :xlsx) %>
+  </p>
   <script type="text/javascript">
 
       $(document).ready(function () {
