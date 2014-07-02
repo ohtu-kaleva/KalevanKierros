@@ -42,7 +42,8 @@ class EnrollmentsController < ApplicationController
           if !params.has_key? a.name || params[a.name].nil?
             redirect_to root_path and return
           end
-          data_list.append(EnrollmentData.new(name:a.name, value:params[a.name]))
+          attribute_index = EventAttribute.where(event_id: event.id).where(name: a.name).first.attribute_index
+          data_list.append(EnrollmentData.new(name:a.name, value:params[a.name], attribute_index: attribute_index))
         end
 
         @enrollment = Enrollment.new(enrollment_params)

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140701121753) do
+ActiveRecord::Schema.define(version: 20140701132257) do
 
   create_table "enrollment_data", force: true do |t|
     t.integer  "enrollment_id"
@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(version: 20140701121753) do
     t.string   "value"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "attribute_index"
   end
 
   create_table "enrollments", force: true do |t|
@@ -36,6 +37,7 @@ ActiveRecord::Schema.define(version: 20140701121753) do
     t.datetime "updated_at"
     t.string   "name"
     t.string   "attribute_label"
+    t.integer  "attribute_index"
   end
 
   create_table "events", force: true do |t|

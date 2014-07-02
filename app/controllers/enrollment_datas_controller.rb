@@ -13,6 +13,6 @@ class EnrollmentDatasController < ApplicationController
   private
 
   def enrollment_data_params
-    params.require(:enrollment_data).permit(:name, :value, :enrollment_id)
+    params.require(:enrollment_data).permit(:name, :value, :enrollment_id, :attribute_index)
   end
 end
