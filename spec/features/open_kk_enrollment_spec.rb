@@ -3,7 +3,6 @@ require 'spec_helper'
 include SigninHelper
 
 feature 'Opening enrollment' do
-  let!(:status) { FactoryGirl.create :app_setting }
   let!(:user) { FactoryGirl.create :user, :admin, password: 'Salainen1',
                 password_confirmation: 'Salainen1' }
   before :each do

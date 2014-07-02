@@ -5,5 +5,6 @@ class CreateAppSettings < ActiveRecord::Migration
       t.string :value, null: false
       t.timestamps
     end
+    AppSetting.create name: 'KkEnrollmentStatus', value: 'closed'
   end
 end
