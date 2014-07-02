@@ -43,8 +43,12 @@ class KkEnrollmentsController < ApplicationController
 
   def change_enrollment_status
     status = AppSetting.find_by name: 'KkEnrollmentStatus'
-    message = ''
 
+    if !status
+      status = AppSetting.new name: 'KkEnrollmentStatus', value: 'closed'
+    end
+
+    message = ''
     if status.value.eql?('closed')
       status.value = 'open'
       message = 'Kierrosilmoittautuminen avattu'
