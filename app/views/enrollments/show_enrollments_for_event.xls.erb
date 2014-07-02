@@ -1,18 +1,29 @@
-<table border="1">
-  <tr>
-    <th>Osallistujan nimi</th>
-    <th>Osallistujan sähköposti</th>
-    <% @event.event_attributes.each do |attr| %>
-          <th><%= attr.name %></th>
-    <% end %>
-  </tr>
-  <% @event.participants.each do |user| %>
-      <tr>
-        <td><%= user.first_name %> <%= user.last_name %></td>
-        <td><%= user.email %></td>
-        <% user.get_enrollment_data_for_event(@event.id).each do |data| %>
-            <td><%= data.value %></td>
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+          xmlns:o="urn:schemas-microsoft-com:office:office"
+          xmlns:x="urn:schemas-microsoft-com:office:excel"
+          xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+          xmlns:html="http://www.w3.org/TR/REC-html40">
+  <Worksheet ss:Name="Sheet1">
+    <Table>
+      <Row>
+        <Cell><Data ss:Type="String">Osallistujan nimi</Data></Cell>
+        <Cell><Data ss:Type="String">Osallistujan sähköposti</Data></Cell>
+        <Cell><Data ss:Type="String">Osallistujan kk-numero</Data></Cell>
+        <% @event.event_attributes.each do |attr| %>
+        <Cell><Data ss:Type="String"><%= attr.name %></Data></Cell>
         <% end %>
-      </tr>
-  <% end %>
-</table>
+      </Row>
+      <% @event.participants.each do |user| %>
+          <Row>
+            <Cell><Data ss:Type="String"><%= user.first_name %></Data></Cell>
+            <Cell><Data ss:Type="String"><%= user.last_name %></Data></Cell>
+            <Cell><Data ss:Type="String"><%= user.kk_number %></Data></Cell>
+            <% user.get_enrollment_data_for_event(@event.id).each do |data| %>
+            <Cell><Data ss:Type="String"><%= data.value %></Data></Cell>
+            <% end %>
+          </Row>
+      <% end %>
+    </Table>
+  </Worksheet>
+</Workbook>

@@ -20,15 +20,15 @@ class Event < ActiveRecord::Base
   def to_csv(options = {})
     CSV.generate(options) do |csv|
       csv << [name]
-      csv << csv_headers
+      csv << spreadsheet_headers
       participants.each do |p|
         csv << enrollment_data_as_array(p)
       end
     end
   end
 
-  def csv_headers
-    attr_names = ["Etunimi", "Sukunimi", "Sähköposti", "Kieräjänumero"]
+  def spreadsheet_headers
+    attr_names = ["Etunimi", "Sukunimi", "Sähköposti", "Kiertäjänumero"]
     event_attributes.each do |attr|
       attr_names.append attr.name
     end
