@@ -81,7 +81,7 @@ class EnrollmentsController < ApplicationController
             wb.add_worksheet do |sheet|
               sheet.add_row
               sheet.add_row [@event.name]
-              sheet.add_row @event.spreadsheet_headers, :style => [:title]
+              sheet.add_row @event.spreadsheet_headers
               @event.participants.each do |user|
                 sheet.add_row @event.enrollment_data_as_array(user)
               end
