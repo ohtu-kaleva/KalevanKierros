@@ -73,23 +73,9 @@ class EnrollmentsController < ApplicationController
     @event = Event.find_by id: params[:event_id]
     respond_to do |format|
       format.html
-      format.csv { send_data @event.to_csv }
+      format.csv { send_data @event.to_csv, :filename => "ilmoittautumiset.csv" }
       format.xls
-      format.xlsx do
-        Axlsx::Package.new do |enrollments|
-          enrollments.workbook do |wb|
-            wb.add_worksheet do |sheet|
-              sheet.add_row
-              sheet.add_row [@event.name]
-              sheet.add_row @event.spreadsheet_headers
-              @event.participants.each do |user|
-                sheet.add_row @event.enrollment_data_as_array(user)
-              end
-            end
-          end
-          send_data enrollments.to_stream.read, :filename => "ilmoittautumiset.xlsx"
-        end
-      end
+      format.xlsx { send_data @event.to_xlsx.to_stream.read, :filename => "ilmoittautumiset.xlsx" }
     end
   end
   private
