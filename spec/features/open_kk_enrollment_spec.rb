@@ -4,7 +4,7 @@ include SigninHelper
 
 feature 'Opening enrollment' do
   let!(:user) { FactoryGirl.create :user, :admin, password: 'Salainen1',
-                password_confirmation: 'Salainen1' }
+      password_confirmation: 'Salainen1' }
   before :each do
     sign_in(username: 'Tyhjis', password: 'Salainen1')
   end
@@ -13,7 +13,7 @@ feature 'Opening enrollment' do
     scenario 'User tries to enroll' do
       click_link 'Esittely'
       click_link 'Ilmoittautuminen'
-      expect(page).not_to have_button 'Ilmoittaudu kierrokselle'
+      expect(page).not_to have_link 'Ilmoittaudu kierrokselle'
 
       visit new_kk_enrollment_path(user.id)
       expect(page).to have_content 'Kierrokselle ei voi ilmoittautua'
@@ -39,7 +39,7 @@ feature 'Opening enrollment' do
     scenario 'User creates new enrollment' do
       click_link 'Esittely'
       click_link 'Ilmoittautuminen'
-      click_button 'Ilmoittaudu kierrokselle'
+      click_link 'Ilmoittaudu kierrokselle'
       click_button 'Ilmoittaudu kierrokselle'
       expect(page).to have_content 'Ilmoittautuminen onnistui'
       expect(page).not_to have_content 'Kierrokselle ei voi ilmoittautua'

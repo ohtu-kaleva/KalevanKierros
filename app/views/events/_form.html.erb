@@ -12,7 +12,7 @@
     <% end %>
     <div class="field">
       <label class="control-label" for="type">Jos haluat valmiin pohjan tapahtumalle, valitse jokin seuraavista:</label>
-      <%= select_tag :type, options_for_select([['', ''],['Juoksu', 'RunningEvent'], ['Soutu', 'RowingEvent'], ['Hiihto', 'SkiingEvent'], ['Suunnistus', 'OrienteeringEvent'], ['Luistelu', 'SkatingEvent'], ['Pyöräily', 'CyclingEvent']]), :class => "form-control" %>
+      <%= select_tag :type, options_for_select([['Tyhjä', ''],['Juoksu', 'RunningEvent'], ['Soutu', 'RowingEvent'], ['Hiihto', 'SkiingEvent'], ['Suunnistus', 'OrienteeringEvent'], ['Luistelu', 'SkatingEvent'], ['Pyöräily', 'CyclingEvent']]), :class => "form-control" %>
       <%= f.text_field :name, label: 'Tapahtuman nimi' %>
       <%= f.date_select :start_date, label: 'Tapahtuman ilmoittautumisen aloituspäivämäärä' %>
       <%= f.date_select :end_date, label: 'Tapahtuman ilmoittautumisen päättymispäivämäärä' %>
