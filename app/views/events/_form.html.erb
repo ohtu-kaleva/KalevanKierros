@@ -1,4 +1,4 @@
-<%= bootstrap_form_for(@event) do |f| %>
+<%= bootstrap_form_for(@event, html: {autocomplete: "off"}) do |f| %>
     <% if @event.errors.any? %>
         <div id="error_explanation">
           <h2><%= pluralize(@event.errors.count, "error") %> prohibited this event from being saved:</h2>
@@ -11,38 +11,80 @@
         </div>
     <% end %>
     <div class="field">
-      <%= select_tag :type, options_for_select([['Tyhjä', ''],['Juoksu', 'RunningEvent'], ['Soutu', 'RowingEvent'], ['Hiihto', 'SkiingEvent'], ['Suunnistus', 'OrienteeringEvent'], ['Luistelu', 'SkatingEvent'], ['Pyöräily', 'CyclingEvent']]), label: 'Jos haluat valmiin pohjan tapahtumalle, valitse jokin seuraavista.' %>
-    </div>
-    <div class="field">
+      <label class="control-label" for="type">Jos haluat valmiin pohjan tapahtumalle, valitse jokin seuraavista:</label>
+      <%= select_tag :type, options_for_select([['', ''],['Juoksu', 'RunningEvent'], ['Soutu', 'RowingEvent'], ['Hiihto', 'SkiingEvent'], ['Suunnistus', 'OrienteeringEvent'], ['Luistelu', 'SkatingEvent'], ['Pyöräily', 'CyclingEvent']]), :class => "form-control" %>
       <%= f.text_field :name, label: 'Tapahtuman nimi' %>
-    </div>
-    <div class="field">
       <%= f.date_select :start_date, label: 'Tapahtuman ilmoittautumisen aloituspäivämäärä' %>
-    </div>
-    <div class="field">
       <%= f.date_select :end_date, label: 'Tapahtuman ilmoittautumisen päättymispäivämäärä' %>
-    </div>
-    <div class="field">
       <%= f.date_select :second_end_date, label: 'Tapahtuman jälki-ilmoittautumisen päättymispäivämäärä' %>
-    </div>
-    <div class="field">
       <%= f.text_field :price, label: 'Osallistumismaksu sentteinä' %>
-    </div>
-    <div class="field">
-      <%= f.text_field :second_price, label: 'Jälki-ilmoittautumisen osallistumismaksu sentteinä' %>
-    </div>
-    <div class="field">
+      <%= f.text_field :second_price, label: 'Jälki-ilmoittautumismaksu sentteinä' %>
       <%= f.text_area :description, label: 'Tapahtuman kuvaus' %>
-    </div>
-    <div class="field">
       <%= f.check_box :open, label: 'Avoin ilmoittautuminen' %>
+
     </div>
 
     <div class="actions">
       <% if defined?(subpage) && subpage.to_s == 'edit' %>
-          <%= f.submit "Muokkaa" %>
+          <%= f.submit "Muokkaa", :class => "btn btn-primary" %>
       <% else %>
-          <%= f.submit "Luo tapahtuma" %>
+          <%= f.submit "Luo tapahtuma", :class => "btn btn-primary" %>
       <% end %>
     </div>
+
+            <style type="text/css">.input-group .form-control {
+                margin: 0px !important;
+            }</style>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('form').bootstrapValidator({
+                message: 'Virheellinen syöte',
+                feedbackIcons: {
+                    valid: 'glyphicon glyphicon-ok',
+                    invalid: 'glyphicon glyphicon-asterisk',
+                    validating: 'glyphicon glyphicon-refresh'
+                },
+                fields: {
+                    'event[name]': {
+                        validators: {
+                            notEmpty: {
+                                message: 'Tapahtuman nimi ei voi olla tyhjä'
+                            }
+                        }
+                    },
+                    'event[price]': {
+                        validators: {
+                            stringLength: {
+                                min: 3,
+                                message: 'Minimimaksu 100 senttiä (1€)'
+                            },
+                            integer: {
+                                message: 'Syötä jälki-ilmoittautumisen osallistumismaksu sentteinä'
+                            },
+                            notEmpty: {}
+                        }
+                    },
+                    'event[second_price]': {
+                        validators: {
+                            stringLength: {
+                                min: 3,
+                                message: 'Minimimaksu 100 senttiä (1€)'
+                            },
+                            integer: {
+                                message: 'Syötä jälki-ilmoittautumisen osallistumismaksu sentteinä'
+                            },
+                            notEmpty: {}
+                        }
+                    },
+                    'event[description]': {
+                        validators: {
+                            notEmpty: {
+                                message: 'Syötä tapahtumalle kuvaus'
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
 <% end %>

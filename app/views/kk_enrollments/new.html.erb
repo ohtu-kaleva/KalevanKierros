@@ -1,16 +1,33 @@
 <h1>Ilmoittautuminen Kalevan Kierrokselle <%= Date.today.year %></h1>
 
-<strong>Tarkista tiedot ilmoittautumiseen:</strong>
+<p>Ole hyvä ja tarkista tietosi ennen ilmoittautumista:</p>
+
+
 <div class="field">
-  <strong>Etunimi:</strong> <%= @user.first_name %><br>
-  <strong>Sukunimi:</strong> <%= @user.last_name %><br>
-  <strong>Sähköposti:</strong> <%= @user.email %><br>
-  <strong>Puhelinnumero:</strong>  <%= @user.phone_number %><br>
-  <strong>Osoite:</strong> <%= @user.address %><br>
-  <strong>Syntymäaika:</strong> <%= @user.birth_date %><br>
-  <strong>Sukupuoli:</strong> <%= @user.gender %><br>
+  <label class="control-label" for="user_name">Etunimi: </label>
+  <p id="user_name"><%= @user.first_name %> <%= @user.last_name %></p>
+  <label class="control-label" for="user_address">Etunimi: </label>
+  <p id="user_address"> <%= @user.address %></p>
+  <label class="control-label" for="user_email">Sähköposti: </label>
+  <p id="user_email"><%= @user.email %></p>
+  <label class="control-label" for="user_phone_number">Puhelinnumero: </label>
+  <p id="user_phone_number"><%= @user.phone_number %></p>
+  <label class="control-label" for="user_birth_date">Syntymäaika: </label>
+  <p id="user_birth_date"><%= @user.birth_date %></p>
+  <label class="control-label" for="user_gender">Sukupuoli: </label>
+  <p id="user_gender"><%= @user.gender=='F' ? 'Nainen' : 'Mies' %></p>
 </div>
 
-<%= button_to 'Muokkaa tietoja', edit_user_path, method: :get %><br>
+<style type="text/css">
+  div.field > label{
+      font-weight: normal;
+  }
+    div.field > p {
+        margin-top: -5px;
+        font-size: 16px;
+    }
+</style>
 
-<%= button_to 'Ilmoittaudu kierrokselle', url_for(controller: :kk_enrollments, action: :create) %>
+<p><%= link_to ('<span class="glyphicon glyphicon-edit"></span> Muokkaa tietoja').html_safe, edit_user_path, :class => ""%></p>
+
+<%= button_to 'Ilmoittaudu kierrokselle', url_for(controller: :kk_enrollments, action: :create ), :class => "btn btn-info" %>
