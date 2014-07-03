@@ -25,6 +25,9 @@ FactoryGirl.define do
     name 'Testievent'
     start_date Date.today + 3.days
     end_date Date.today + 1.week
+    second_end_date Date.today + 2.week
+    price 1000
+    second_price 2000
     description 'Testikuvaus'
 
     factory :event_with_attributes do
