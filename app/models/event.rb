@@ -3,11 +3,10 @@ class Event < ActiveRecord::Base
   has_many :enrollments, dependent: :destroy
   has_many :participants, through: :enrollments, source: :user
 
-  validates :name, :start_date, :end_date, presence: true
+  validates :name, :start_date, :end_date, :second_end_date, :price, :second_price, presence: true
   validates :name, uniqueness: true
   validate :validate_end_date
-
-
+  validate :validate_second_end_date
 
   def validate_end_date
     if start_date && end_date
@@ -15,6 +14,14 @@ class Event < ActiveRecord::Base
     end
 
     errors.add(:end_date, 'is invalid')
+  end
+
+  def validate_second_end_date
+    if start_date && end_date && second_end_date
+      return if second_end_date >= Date.today && second_end_date >= start_date && second_end_date >= end_date
+    end
+
+    errors.add(:second_end_date, 'is invalid')
   end
 
   def to_csv(options = {})

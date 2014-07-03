@@ -17,10 +17,19 @@
       <%= f.text_field :name, label: 'Tapahtuman nimi' %>
     </div>
     <div class="field">
-      <%= f.date_select :start_date, label: 'Tapahtuman aloituspäivämäärä' %>
+      <%= f.date_select :start_date, label: 'Tapahtuman ilmoittautumisen aloituspäivämäärä' %>
     </div>
     <div class="field">
-      <%= f.date_select :end_date, label: 'Tapahtuman päättymispäivämäärä' %>
+      <%= f.date_select :end_date, label: 'Tapahtuman ilmoittautumisen päättymispäivämäärä' %>
+    </div>
+    <div class="field">
+      <%= f.date_select :second_end_date, label: 'Tapahtuman jälki-ilmoittautumisen päättymispäivämäärä' %>
+    </div>
+    <div class="field">
+      <%= f.text_field :price, label: 'Osallistumismaksu sentteinä' %>
+    </div>
+    <div class="field">
+      <%= f.text_field :second_price, label: 'Jälki-ilmoittautumisen osallistumismaksu sentteinä' %>
     </div>
     <div class="field">
       <%= f.text_area :description, label: 'Tapahtuman kuvaus' %>
