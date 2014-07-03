@@ -14,6 +14,7 @@ class GroupsController < ApplicationController
   def create
     if !enrollment_open?
       redirect_to root_path, flash: { error: 'Kierrokselle ei voi ilmoittautua' }
+      return
     end
 
     set_user_and_check_enrollment
@@ -46,7 +47,6 @@ class GroupsController < ApplicationController
         KkEnrollment.new(user_id: m.id).save
       end
       redirect_to :root, flash: { success: 'Ryhmä luotu onnistuneesti' }
-      return
     else
       render :new
     end
@@ -70,7 +70,7 @@ class GroupsController < ApplicationController
   def set_user_and_check_enrollment
     @user = current_user
     if !@user
-      redirect_to signin_path
+      redirect_to signin_path and return
     end
 
     if @user.kk_enrollment

@@ -28,6 +28,7 @@ class KkEnrollmentsController < ApplicationController
   def create
     if !enrollment_open?
       redirect_to root_path, flash: { error: 'Kierrokselle ei voi ilmoittautua' }
+      return
     end
 
     set_user_and_check_enrollment
