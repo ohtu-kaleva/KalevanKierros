@@ -25,6 +25,7 @@ class ApplicationController < ActionController::Base
   end
 
   def enrollment_open?
-    AppSetting.find_by(name: 'KkEnrollmentStatus').value.eql?('open')
+    setting = AppSetting.find_by(name: 'KkEnrollmentStatus')
+    return setting && setting.value == 'open'
   end
 end
