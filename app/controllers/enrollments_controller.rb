@@ -73,9 +73,9 @@ class EnrollmentsController < ApplicationController
     @event = Event.find_by id: params[:event_id]
     respond_to do |format|
       format.html
-      format.csv { send_data @event.to_csv, :filename => "ilmoittautumiset.csv" }
+      format.csv { send_data @event.to_csv, :filename => @event.name + "_ilmoittautumiset.csv" }
       format.xls
-      format.xlsx { send_data @event.to_xlsx.to_stream.read, :filename => "ilmoittautumiset.xlsx" }
+      format.xlsx { send_data @event.to_xlsx.to_stream.read, :filename => @event.name + "_ilmoittautumiset.xlsx" }
     end
   end
   private
