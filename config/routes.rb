@@ -14,7 +14,9 @@ Rails.application.routes.draw do
   #resources :rowing_events, :controller => 'events', :type => 'RowingEvent'
   #resources :cycling_events, :controller => 'events', :type => 'CyclingEvent'
 
+  get 'admin/kk_enrollment', to: 'static_pages#kk_enrollment'
   get 'kk_enrollments', to: 'kk_enrollments#index'
+  post 'kk_enrollment/change', to: 'kk_enrollments#change_enrollment_status'
   get 'users/:id/kk_enrollments/new', to: 'kk_enrollments#new', as: 'new_kk_enrollment'
   post 'users/:id/kk_enrollments/new', to: 'kk_enrollments#create'
 

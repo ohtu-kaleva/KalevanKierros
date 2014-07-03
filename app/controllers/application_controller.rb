@@ -3,7 +3,8 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
-  helper_method :current_user, :user_is_admin?, :redirect_if_user_not_admin, :usersearch
+  helper_method :current_user, :user_is_admin?, :redirect_if_user_not_admin, :usersearch,
+                :enrollment_open?
 
   def current_user
     return nil if session[:user_id].nil?
@@ -29,4 +30,8 @@ class ApplicationController < ActionController::Base
     usersearch.map{|user| {:label =>  user.kk_number.to_s << ' ' << user.first_name.capitalize << ' ' << user.last_name.capitalize, :value => user.kk_number } }.to_json
   end
 
+  def enrollment_open?
+    setting = AppSetting.find_by(name: 'KkEnrollmentStatus')
+    return setting && setting.value == 'open'
+  end
 end

@@ -13,6 +13,13 @@
 
 ActiveRecord::Schema.define(version: 20140703115338) do
 
+  create_table "app_settings", force: true do |t|
+    t.string   "name",       null: false
+    t.string   "value",      null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "enrollment_data", force: true do |t|
     t.integer  "enrollment_id"
     t.string   "name"
