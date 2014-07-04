@@ -1,8 +1,8 @@
 class EnrollmentsController < ApplicationController
 
   before_action :check_for_existing_enrollment, only:  [:new, :create]
-  before_action :set_enrollment_or_redirect, only: [:show]
-  before_action :redirect_if_user_not_admin, only: [:show_enrollments_for_event, :index]
+  before_action :set_enrollment_or_redirect, only: [:show, :destroy]
+  before_action :redirect_if_user_not_admin, only: [:show_enrollments_for_event, :index, :show, :destroy]
 
   def new
     @event = Event.find_by id: params[:event_id]
@@ -77,6 +77,12 @@ class EnrollmentsController < ApplicationController
       format.xls
       format.xlsx { send_data @event.to_xlsx.to_stream.read, :filename => @event.name + "_ilmoittautumiset.xlsx" }
     end
+  end
+
+  def destroy
+    id = @enrollment.event.id
+    @enrollment.destroy
+    redirect_to show_enrollments_path(id), flash: { success: 'Ilmoittautuminen peruttu onnistuneesti' }
   end
   private
 

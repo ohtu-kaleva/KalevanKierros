@@ -8,15 +8,17 @@
     <% @event.event_attributes.sort_by {|attribute_index|}.each do |attr| %>
         <th><%= attr.name %></th>
     <% end %>
+    <th>Näytä</th>
     </thead>
     <tbody>
-    <% @event.participants.each do |user| %>
+    <% @event.enrollments.each do |enrollment| %>
         <tr>
-        <td><%= user.first_name %> <%= user.last_name %></td>
-        <td><%= user.email %></td>
-        <% user.get_enrollment_data_for_event(@event.id).sort_by {|attribute_index|}.each do |data| %>
+          <td><%= enrollment.user.first_name %> <%= enrollment.user.last_name %></td>
+          <td><%= enrollment.user.email %></td>
+          <% enrollment.user.get_enrollment_data_for_event(@event.id).sort_by {|attribute_index|}.each do |data| %>
             <td><%= data.value %></td>
-        <% end %>
+          <% end %>
+          <td><%= link_to 'Poista', enrollment_path(enrollment.id) %></td>
         </tr>
     <% end %>
     </tbody>

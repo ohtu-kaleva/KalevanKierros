@@ -52,9 +52,11 @@ Rails.application.routes.draw do
   get 'events/:event_id/event_attributes/new', to: 'event_attributes#new', as: 'add_event_attribute'
   get 'events/:event_id/enrollments/new', to: 'enrollments#new', as: 'add_enrollment'
   get 'enrollments/:enrollment_id', to: 'enrollments#show', as: 'enrollment'
+  delete 'enrollments/:enrollment_id', to: 'enrollments#destroy', as: 'delete_enrollment'
   get 'groups/:group_id/add_user', to: 'users#add_user_to_group', as: 'add_user_to_group'
   post 'groups/:group_id/add_user', to: 'users#update_user_group_relation'
   get 'event_enrollments/:event_id/', to: 'enrollments#show_enrollments_for_event', as: 'show_enrollments'
+  delete 'event_enrollments/destoy/:id', to: 'enrollments#destroy', as: 'destroy_enrollment'
  # get '*path' => redirect('/')
 
   # The priority is based upon order of creation: first created -> highest priority.
