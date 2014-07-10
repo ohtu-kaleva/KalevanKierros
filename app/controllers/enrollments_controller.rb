@@ -36,14 +36,20 @@ class EnrollmentsController < ApplicationController
       if event.open || (current_user && current_user.kk_enrollment)
         data_list = []
         attrs = event.event_attributes.select {|a| a.attribute_type != 'plain_text' }
-
+        puts params
         # loop for creating information for data
         attrs.each do |a|
-          if !params.has_key? a.name || params[a.name].nil?
+          if !params.has_key? a.name
             redirect_to root_path and return
           end
-          attribute_index = EventAttribute.where(event_id: event.id).where(name: a.name).first.attribute_index
-          data_list.append(EnrollmentData.new(name:a.name, value:params[a.name], attribute_index: attribute_index))
+          if params[a.name].kind_of?(Array)
+            value = params[a.name].join(' ')
+            attribute_index = EventAttribute.where(event_id: event.id).where(name: a.name).first.attribute_index
+            data_list.append(EnrollmentData.new(name:a.name, value:value, attribute_index: attribute_index))
+          else
+            attribute_index = EventAttribute.where(event_id: event.id).where(name: a.name).first.attribute_index
+            data_list.append(EnrollmentData.new(name:a.name, value:params[a.name], attribute_index: attribute_index))
+          end
         end
 
         @enrollment = Enrollment.new(enrollment_params)

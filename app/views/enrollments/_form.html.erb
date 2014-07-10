@@ -30,8 +30,9 @@
 
           <% if e.attribute_type == "check_box" %>
               <% e.get_options_to_form.each do |v| %>
-                  <%= check_box_tag(e.name, v) %>
-                  <%= label_tag(e.attribute_label, v) %><br>
+                <%= hidden_field_tag(e.name + '[]') %>
+                <%= check_box_tag(e.name + '[]', v) %>
+                <%= label_tag(e.attribute_label, v) %><br>
               <% end %>
           <% end %>
 

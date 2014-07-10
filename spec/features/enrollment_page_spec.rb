@@ -15,7 +15,7 @@ feature 'Enrollment page' do
     visit add_enrollment_path(event.id)
 
     choose 'monivalinta', option: 'ei'
-    check 'valintatieto'
+    check 'valintatieto_'
     fill_in 'tekstikenttä', with: 'testikommentti'
     select 'kolme', from: 'numeron_valinta'
     click_button 'Lähetä ilmoittautuminen eteenpäin'
