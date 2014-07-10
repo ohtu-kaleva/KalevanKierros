@@ -24,7 +24,11 @@ class EventAttributesController < ApplicationController
   # POST /event_attributes
   def create
     @event_attribute = EventAttribute.new(event_attribute_params)
-    @event_attribute.attribute_index = EventAttribute.where(event_id: event_attribute_params[:event_id]).count + 1
+    if event_attribute_params[:attribute_type] == 'plain_text'
+      @event_attribute = nil
+    else
+      @event_attribute.attribute_index = EventAttribute.where(event_id: event_attribute_params[:event_id]).count + 1
+    end
 
     if @event_attribute.save
       redirect_to @event_attribute.event, flash: { success: 'Valinta lisättiin onnistuneesti.' }

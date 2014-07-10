@@ -51,7 +51,7 @@ class Event < ActiveRecord::Base
 
   def spreadsheet_headers
     attr_names = ["Etunimi", "Sukunimi", "Sähköposti", "Kiertäjänumero"]
-    event_attributes.order('attribute_index asc').each do |attr|
+    event_attributes.where.not(attribute_index: nil).order('attribute_index asc').each do |attr|
       attr_names.append attr.name
     end
     attr_names
