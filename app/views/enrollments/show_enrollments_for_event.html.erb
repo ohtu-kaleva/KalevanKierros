@@ -5,7 +5,7 @@
     <thead>
     <th>Osallistujan nimi</th>
     <th>Osallistujan sähköposti</th>
-    <% @event.event_attributes.sort_by {|attribute_index|}.each do |attr| %>
+    <% @event.event_attributes.order('attribute_index asc').each do |attr| %>
         <th><%= attr.name %></th>
     <% end %>
     <th>Näytä</th>
@@ -15,7 +15,7 @@
         <tr>
           <td><%= enrollment.user.first_name %> <%= enrollment.user.last_name %></td>
           <td><%= enrollment.user.email %></td>
-          <% enrollment.user.get_enrollment_data_for_event(@event.id).sort_by {|attribute_index|}.each do |data| %>
+          <% enrollment.user.get_enrollment_data_for_event(@event.id).each do |data| %>
             <td><%= data.value %></td>
           <% end %>
           <td><%= link_to 'Poista', enrollment_path(enrollment.id) %></td>

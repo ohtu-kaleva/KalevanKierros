@@ -51,14 +51,14 @@ class Event < ActiveRecord::Base
 
   def spreadsheet_headers
     attr_names = ["Etunimi", "Sukunimi", "Sähköposti", "Kiertäjänumero"]
-    event_attributes.sort_by{|attribute_index|}.each do |attr|
+    event_attributes.order('attribute_index asc').each do |attr|
       attr_names.append attr.name
     end
     attr_names
   end
 
   def enrollment_data_as_array(p)
-    user_data = p.get_enrollment_data_for_event(id).sort_by { |attribute_index| }
+    user_data = p.get_enrollment_data_for_event(id)
     data_array = [p.first_name, p.last_name, p.email, p.kk_number]
     user_data.each do |piece|
       data_array.append piece.value
