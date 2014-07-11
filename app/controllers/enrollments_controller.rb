@@ -1,8 +1,8 @@
 class EnrollmentsController < ApplicationController
 
   before_action :check_for_existing_enrollment, only:  [:new, :create]
-  before_action :set_enrollment_or_redirect, only: [:show, :destroy]
-  before_action :redirect_if_user_not_admin, only: [:show_enrollments_for_event, :index, :show, :destroy]
+  before_action :set_enrollment_or_redirect, only: [:show, :destroy, :edit]
+  before_action :redirect_if_user_not_admin, only: [:show_enrollments_for_event, :index, :show, :destroy, :update, :edit]
 
   def new
     @event = Event.find_by id: params[:event_id]
@@ -28,6 +28,9 @@ class EnrollmentsController < ApplicationController
 
   def index
     @events = Event.all
+  end
+
+  def edit
   end
 
   def create
@@ -69,6 +72,17 @@ class EnrollmentsController < ApplicationController
     end
 
     redirect_to root_path
+  end
+
+  def update
+    times = params[:times].delete_if {|key, value| value.blank? }
+    times.each do |key, value|
+      enrollment = Enrollment.find_by id:key
+      if not enrollment.nil?
+        enrollment.update_attribute :time, value
+      end
+    end
+    redirect_to :back
   end
 
   def show

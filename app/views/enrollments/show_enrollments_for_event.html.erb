@@ -8,15 +8,22 @@
     <% @event.event_attributes.sort_by {|attribute_index|}.each do |attr| %>
         <th><%= attr.name %></th>
     <% end %>
+    <th>Lisää aika</th>
     <th>Näytä</th>
     </thead>
     <tbody>
+    <%= form_tag('/event_enrollments', method: :put) do %>
     <% @event.enrollments.each do |enrollment| %>
         <tr>
           <td><%= enrollment.user.first_name %> <%= enrollment.user.last_name %></td>
           <td><%= enrollment.user.email %></td>
           <% enrollment.user.get_enrollment_data_for_event(@event.id).sort_by {|attribute_index|}.each do |data| %>
             <td><%= data.value %></td>
+          <% end %>
+          <% if enrollment.time.nil? %>
+            <td><%= text_field_tag "times[#{enrollment.id}]", nil, maxlength: 8 %></td>
+          <% else %>
+            <td><%= enrollment.time %></td>
           <% end %>
           <td><%= link_to 'Poista', enrollment_path(enrollment.id) %></td>
         </tr>
@@ -26,7 +33,9 @@
   <p>
     <%= link_to 'Lataa csv-tiedostona', show_enrollments_path(@event.id, format: :csv) %><br>
     <%= link_to 'Lataa excel-tiedostona (xls)', show_enrollments_path(@event.id, format: :xls) %><br>
-    <%= link_to 'Lataa excel-tiedostona (xlsx)', show_enrollments_path(@event.id, format: :xlsx) %>
+    <%= link_to 'Lataa excel-tiedostona (xlsx)', show_enrollments_path(@event.id, format: :xlsx) %><br>
+    <%= submit_tag %>
+  <% end %>
   </p>
   <script type="text/javascript">
 
