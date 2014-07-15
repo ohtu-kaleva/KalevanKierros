@@ -19,4 +19,8 @@ class User < ActiveRecord::Base
     e = enrollments.find_by event_id: id
     e.enrollment_datas.where.not(attribute_index: nil).order('attribute_index asc')
   end
+
+  def find_enrollment_id_by_event(id)
+    id = enrollments.find_by(event_id: id).id
+  end
  end

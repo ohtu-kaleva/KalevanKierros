@@ -1,8 +1,8 @@
 class EnrollmentsController < ApplicationController
 
   before_action :check_for_existing_enrollment, only:  [:new, :create]
-  before_action :set_enrollment_or_redirect, only: [:show, :destroy]
-  before_action :redirect_if_user_not_admin, only: [:show_enrollments_for_event, :index, :show, :destroy]
+  before_action :set_enrollment_or_redirect, only: [:show, :destroy, :edit]
+  before_action :redirect_if_user_not_admin, only: [:show_enrollments_for_event, :index, :show, :destroy, :update, :edit]
 
   def new
     @event = Event.find_by id: params[:event_id]
@@ -28,6 +28,9 @@ class EnrollmentsController < ApplicationController
 
   def index
     @events = Event.all
+  end
+
+  def edit
   end
 
   def create
@@ -71,11 +74,27 @@ class EnrollmentsController < ApplicationController
     redirect_to root_path
   end
 
+  def update
+    times = params[:times].delete_if {|key, value| value.blank? }
+    times.each do |key, value|
+      enrollment = Enrollment.find_by id:key
+      if not enrollment.nil?
+        if(value.to_s.include? ':')
+        enrollment.update_attribute :time, to_seconds(value)
+        else
+          enrollment.update_attribute :time, value
+        end
+      end
+    end
+    redirect_to :back
+  end
+
   def show
     @data = @enrollment.enrollment_datas
   end
 
   def show_enrollments_for_event
+    puts params
     @event = Event.find_by id: params[:event_id]
     respond_to do |format|
       format.html
@@ -90,7 +109,33 @@ class EnrollmentsController < ApplicationController
     @enrollment.destroy
     redirect_to show_enrollments_path(id), flash: { success: 'Ilmoittautuminen peruttu onnistuneesti' }
   end
+
+  def import_csv
+    event = Event.find_by id: params[:event_id]
+    file = params[:file]
+    if file.nil?
+      redirect_to show_enrollments_path(params[:event_id]), flash: { error: "Ei valittua tiedostoa!" }
+      return
+    end
+    CSV.foreach(file.path, headers: true, header_converters: :symbol) do |row|
+      result_hash = row.to_hash
+      enrollment = Enrollment.find_by id: result_hash[:ilm_nro]
+      if enrollment
+        if result_hash[:aika]
+        enrollment.update_attribute :time, to_seconds(result_hash[:aika])
+        end
+      end
+    end
+    redirect_to show_enrollments_path(params[:event_id])
+  end
+
   private
+
+  def to_seconds(a)
+    format = %w{hours minutes seconds}
+    input = a
+    seconds = input.split(":").map.with_index{|x,i| x.to_i.send(format[i])}.reduce(:+).to_i
+  end
 
   def check_for_existing_enrollment
     if current_user
