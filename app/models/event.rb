@@ -26,10 +26,9 @@ class Event < ActiveRecord::Base
 
   def to_csv(options = {})
     CSV.generate(options) do |csv|
-      csv << [name]
       csv << spreadsheet_headers
-      participants.each do |p|
-        csv << enrollment_data_as_array(p)
+      participants.each do |participant|
+        csv << enrollment_data_as_array(participant)
       end
     end
   end
@@ -50,16 +49,16 @@ class Event < ActiveRecord::Base
   end
 
   def spreadsheet_headers
-    attr_names = ["Etunimi", "Sukunimi", "Sähköposti", "Kiertäjänumero"]
+    attr_names = ["ilm_nro", "Etunimi", "Sukunimi", "Sähköposti", "KK-numero"]
     event_attributes.sort_by{|attribute_index|}.each do |attr|
       attr_names.append attr.name
     end
-    attr_names
+    attr_names.append 'Aika'
   end
 
-  def enrollment_data_as_array(p)
-    user_data = p.get_enrollment_data_for_event(id).sort_by { |attribute_index| }
-    data_array = [p.first_name, p.last_name, p.email, p.kk_number]
+  def enrollment_data_as_array(user)
+    user_data = user.get_enrollment_data_for_event(id).sort_by { |attribute_index| }
+    data_array = [user.find_enrollment_id_by_event(id), user.first_name, user.last_name, user.email, user.kk_number]
     user_data.each do |piece|
       data_array.append piece.value
     end

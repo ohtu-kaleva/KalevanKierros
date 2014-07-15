@@ -36,7 +36,12 @@
     <%= link_to 'Lataa csv-tiedostona', show_enrollments_path(@event.id, format: :csv) %><br>
     <%= link_to 'Lataa excel-tiedostona (xls)', show_enrollments_path(@event.id, format: :xls) %><br>
     <%= link_to 'Lataa excel-tiedostona (xlsx)', show_enrollments_path(@event.id, format: :xlsx) %><br>
-    <%= submit_tag 'Päivitä ajat' %>
+    <%= submit_tag 'Päivitä ajat' %><br>
+  <% end %>
+  <strong>Lisää ajat tiedostosta</strong><br>
+  <%= form_tag import_file_path, multipart:true, method: :put do %>
+    <%= file_field_tag :file %>
+    <%= submit_tag %>
   <% end %>
   </p>
   <script type="text/javascript">

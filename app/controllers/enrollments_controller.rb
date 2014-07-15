@@ -109,6 +109,26 @@ class EnrollmentsController < ApplicationController
     @enrollment.destroy
     redirect_to show_enrollments_path(id), flash: { success: 'Ilmoittautuminen peruttu onnistuneesti' }
   end
+
+  def import_csv
+    event = Event.find_by id: params[:event_id]
+    file = params[:file]
+    if file.nil?
+      redirect_to show_enrollments_path(params[:event_id]), flash: { error: "Ei valittua tiedostoa!" }
+      return
+    end
+    CSV.foreach(file.path, headers: true, header_converters: :symbol) do |row|
+      result_hash = row.to_hash
+      enrollment = Enrollment.find_by id: result_hash[:ilm_nro]
+      if enrollment
+        if result_hash[:aika]
+        enrollment.update_attribute :time, to_seconds(result_hash[:aika])
+        end
+      end
+    end
+    redirect_to show_enrollments_path(params[:event_id])
+  end
+
   private
 
   def to_seconds(a)
