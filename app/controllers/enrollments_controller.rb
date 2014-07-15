@@ -79,7 +79,11 @@ class EnrollmentsController < ApplicationController
     times.each do |key, value|
       enrollment = Enrollment.find_by id:key
       if not enrollment.nil?
-        enrollment.update_attribute :time, value
+        if(value.to_s.include? ':')
+        enrollment.update_attribute :time, to_seconds(value)
+        else
+          enrollment.update_attribute :time, value
+        end
       end
     end
     redirect_to :back
@@ -90,6 +94,7 @@ class EnrollmentsController < ApplicationController
   end
 
   def show_enrollments_for_event
+    puts params
     @event = Event.find_by id: params[:event_id]
     respond_to do |format|
       format.html
@@ -105,6 +110,12 @@ class EnrollmentsController < ApplicationController
     redirect_to show_enrollments_path(id), flash: { success: 'Ilmoittautuminen peruttu onnistuneesti' }
   end
   private
+
+  def to_seconds(a)
+    format = %w{hours minutes seconds}
+    input = a
+    seconds = input.split(":").map.with_index{|x,i| x.to_i.send(format[i])}.reduce(:+).to_i
+  end
 
   def check_for_existing_enrollment
     if current_user
