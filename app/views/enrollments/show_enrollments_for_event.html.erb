@@ -10,6 +10,7 @@
         <th><%= attr.name %></th>
     <% end %>
     <th>Lisää aika</th>
+    <th>Poista aika</th>
     <th>Näytä</th>
     </thead>
     <tbody>
@@ -27,6 +28,7 @@
           <% else %>
             <td><%= enrollment.seconds_to_human_form %></td>
           <% end %>
+          <td><%= link_to 'Poista aika', delete_time_path(enrollment.id), method: :put %></td>
           <td><%= link_to 'Poista', enrollment_path(enrollment.id) %></td>
         </tr>
     <% end %>

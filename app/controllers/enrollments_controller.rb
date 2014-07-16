@@ -75,16 +75,27 @@ class EnrollmentsController < ApplicationController
   end
 
   def update
-    times = params[:times].delete_if {|key, value| value.blank? }
-    times.each do |key, value|
-      enrollment = Enrollment.find_by id:key
-      if not enrollment.nil?
-        if(value.to_s.include? ':')
-        enrollment.update_attribute :time, to_seconds(value)
-        else
-          enrollment.update_attribute :time, value
+    message = {}
+    if params[:times]
+      times = params[:times].delete_if {|key, value| value.blank? }
+      times.each do |key, value|
+        enrollment = Enrollment.find_by id:key
+        if not enrollment.nil?
+          if check_time_format(value)
+            enrollment.update_attribute :time, to_seconds(value)
+          else
+            message[:error] = 'Yksi tai useampi aika syötettiin virheellisessä muodossa.'
+          end
         end
       end
+    end
+    redirect_to :back, flash: message
+  end
+
+  def delete_time
+    enrollment = Enrollment.find_by id: params[:enrollment_id]
+    if enrollment
+      enrollment.update_attribute :time, nil
     end
     redirect_to :back
   end
@@ -127,6 +138,10 @@ class EnrollmentsController < ApplicationController
       end
     end
     redirect_to show_enrollments_path(params[:event_id])
+  end
+
+  def check_time_format(string)
+    /\A\d{1,2}:\d{1,2}:\d{1,2}([,.]\d{1,2}){0,1}\z/ === string
   end
 
   private

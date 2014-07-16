@@ -58,6 +58,7 @@ Rails.application.routes.draw do
   get 'event_enrollments/:event_id/', to: 'enrollments#show_enrollments_for_event', as: 'show_enrollments'
   put 'event_enrollments/', to:'enrollments#update', as: 'add_times'
   put 'event_enrollments/:event_id/import_csv', to: 'enrollments#import_csv', as: 'import_file'
+  put 'enrollments/:enrollment_id', to: 'enrollments#delete_time', as: 'delete_time'
 
  # get '*path' => redirect('/')
 
