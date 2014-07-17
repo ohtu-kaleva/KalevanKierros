@@ -1,0 +1,129 @@
+<%= form_for(@result) do |f| %>
+  <% if @result.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@result.errors.count, "error") %> prohibited this result from being saved:</h2>
+
+      <ul>
+      <% @result.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :city %><br>
+    <%= f.text_field :city %>
+  </div>
+  <div class="field">
+    <%= f.label :group %><br>
+    <%= f.text_field :group %>
+  </div>
+  <div class="field">
+    <%= f.label :year %><br>
+    <%= f.number_field :year %>
+  </div>
+  <div class="field">
+    <%= f.label :series %><br>
+    <%= f.text_field :series %>
+  </div>
+  <div class="field">
+    <%= f.label :orienteering_pts %><br>
+    <%= f.text_field :orienteering_pts %>
+  </div>
+  <div class="field">
+    <%= f.label :skiing_pts %><br>
+    <%= f.text_field :skiing_pts %>
+  </div>
+  <div class="field">
+    <%= f.label :marathon_pts %><br>
+    <%= f.text_field :marathon_pts %>
+  </div>
+  <div class="field">
+    <%= f.label :rowing_pts %><br>
+    <%= f.text_field :rowing_pts %>
+  </div>
+  <div class="field">
+    <%= f.label :cycling_pts %><br>
+    <%= f.text_field :cycling_pts %>
+  </div>
+  <div class="field">
+    <%= f.label :skating_pts %><br>
+    <%= f.text_field :skating_pts %>
+  </div>
+  <div class="field">
+    <%= f.label :orienteering_time %><br>
+    <%= f.text_field :orienteering_time %>
+  </div>
+  <div class="field">
+    <%= f.label :skiing_time %><br>
+    <%= f.text_field :skiing_time %>
+  </div>
+  <div class="field">
+    <%= f.label :marathon_time %><br>
+    <%= f.text_field :marathon_time %>
+  </div>
+  <div class="field">
+    <%= f.label :rowing_time %><br>
+    <%= f.text_field :rowing_time %>
+  </div>
+  <div class="field">
+    <%= f.label :cycling_time %><br>
+    <%= f.text_field :cycling_time %>
+  </div>
+  <div class="field">
+    <%= f.label :skating_time %><br>
+    <%= f.text_field :skating_time %>
+  </div>
+  <div class="field">
+    <%= f.label :orienteering_pos %><br>
+    <%= f.number_field :orienteering_pos %>
+  </div>
+  <div class="field">
+    <%= f.label :skiing_pos %><br>
+    <%= f.number_field :skiing_pos %>
+  </div>
+  <div class="field">
+    <%= f.label :marathon_pos %><br>
+    <%= f.number_field :marathon_pos %>
+  </div>
+  <div class="field">
+    <%= f.label :rowing_pos %><br>
+    <%= f.number_field :rowing_pos %>
+  </div>
+  <div class="field">
+    <%= f.label :cycling_pos %><br>
+    <%= f.number_field :cycling_pos %>
+  </div>
+  <div class="field">
+    <%= f.label :skating_pos %><br>
+    <%= f.number_field :skating_pos %>
+  </div>
+  <div class="field">
+    <%= f.label :skiing_style %><br>
+    <%= f.text_field :skiing_style %><br>
+  </div>
+    <div class="field">
+      <%= f.label :marathon_style %><br>
+      <%= f.text_field :marathon_style %><br>
+    </div>
+    <div class="field">
+      <%= f.label :rowing_style %><br>
+      <%= f.text_field :rowing_style %><br>
+    </div>
+  <div class="field">
+    <%= f.label :pts_sum %><br>
+    <%= f.text_field :pts_sum %>
+  </div>
+  <div class="field">
+    <%= f.label :completed_events %><br>
+    <%= f.number_field :completed_events %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

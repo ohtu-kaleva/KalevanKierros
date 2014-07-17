@@ -1,0 +1,62 @@
+<h1>Vuoden <%= @results.first.year %> tulokset</h1>
+<table class="table">
+  <% @results.each do |result| %>
+      <tr>
+        <td><%= result.name %></td>
+        <td><%= result.group %></td>
+        <td><%= result.completed_events %></td>
+        <td><%= result.pts_sum %></td>
+      </tr>
+      <tr>
+        <td><%= result.series %></td>
+        <th>Suunnistus</th>
+        <td></td>
+        <td><%= result.orienteering_time %></td>
+        <td><%= result.orienteering_pos %></td>
+        <td><%= result.orienteering_pts %></td>
+      </tr>
+      <tr>
+        <td></td>
+        <th>Pyöräily</th>
+        <td></td>
+        <td><%= result.cycling_time %></td>
+        <td><%= result.cycling_pos %></td>
+        <td><%= result.cycling_pts %></td>
+      </tr>
+      <tr>
+        <td></td>
+        <th>Soutu</th>
+        <td><%= result.rowing_style %></td>
+        <td><%= result.rowing_time %></td>
+        <td><%= result.rowing_pos %></td>
+        <td><%= result.rowing_pts %></td>
+      </tr>
+      <tr>
+        <td></td>
+        <th>Maraton</th>
+        <td><%= result.marathon_style %></td>
+        <td><%= result.marathon_time %></td>
+        <td><%= result.marathon_pos %></td>
+        <td><%= result.marathon_pts %></td>
+      </tr>
+      <tr>
+        <td></td>
+        <th>Hiihto</th>
+        <td><%= result.skiing_style %></td>
+        <td><%= result.skiing_time %></td>
+        <td><%= result.skiing_pos %></td>
+        <td><%= result.skiing_pts %></td>
+      </tr>
+      <tr>
+        <td></td>
+        <th>Luistelu</th>
+        <td></td>
+        <td><%= result.skating_time %></td>
+        <td><%= result.skating_pos %></td>
+        <td><%= result.skating_pts %></td>
+  <% end %>
+</table>
+
+<br>
+
+<%= link_to 'New Result', new_result_path %>

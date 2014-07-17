@@ -1,0 +1,73 @@
+<h1>Listing results</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>City</th>
+      <th>Group</th>
+      <th>Year</th>
+      <th>Series</th>
+      <th>Orienteering pts</th>
+      <th>Skiing pts</th>
+      <th>Marathon pts</th>
+      <th>Rowing pts</th>
+      <th>Cycling pts</th>
+      <th>Skating pts</th>
+      <th>Orienteering time</th>
+      <th>Skiing time</th>
+      <th>Marathon time</th>
+      <th>Rowing time</th>
+      <th>Cycling time</th>
+      <th>Skating time</th>
+      <th>Orienteering pos</th>
+      <th>Skiing pos</th>
+      <th>Marathon pos</th>
+      <th>Rowing pos</th>
+      <th>Cycling pos</th>
+      <th>Skating pos</th>
+      <th>Pts sum</th>
+      <th>Completed events</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @results.each do |result| %>
+      <tr>
+        <td><%= result.name %></td>
+        <td><%= result.city %></td>
+        <td><%= result.group %></td>
+        <td><%= result.year %></td>
+        <td><%= result.series %></td>
+        <td><%= result.orienteering_pts %></td>
+        <td><%= result.skiing_pts %></td>
+        <td><%= result.marathon_pts %></td>
+        <td><%= result.rowing_pts %></td>
+        <td><%= result.cycling_pts %></td>
+        <td><%= result.skating_pts %></td>
+        <td><%= result.orienteering_time %></td>
+        <td><%= result.skiing_time %></td>
+        <td><%= result.marathon_time %></td>
+        <td><%= result.rowing_time %></td>
+        <td><%= result.cycling_time %></td>
+        <td><%= result.skating_time %></td>
+        <td><%= result.orienteering_pos %></td>
+        <td><%= result.skiing_pos %></td>
+        <td><%= result.marathon_pos %></td>
+        <td><%= result.rowing_pos %></td>
+        <td><%= result.cycling_pos %></td>
+        <td><%= result.skating_pos %></td>
+        <td><%= result.pts_sum %></td>
+        <td><%= result.completed_events %></td>
+        <td><%= link_to 'Show', result %></td>
+        <td><%= link_to 'Edit', edit_result_path(result) %></td>
+        <td><%= link_to 'Destroy', result, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Result', new_result_path %>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140710130331) do
+ActiveRecord::Schema.define(version: 20140717134631) do
 
   create_table "app_settings", force: true do |t|
     t.string   "name",       null: false
@@ -75,6 +75,39 @@ ActiveRecord::Schema.define(version: 20140710130331) do
   end
 
   add_index "kk_enrollments", ["user_id"], name: "index_kk_enrollments_on_user_id", unique: true
+
+  create_table "results", force: true do |t|
+    t.string   "name"
+    t.string   "city"
+    t.string   "group"
+    t.integer  "year"
+    t.string   "series"
+    t.decimal  "orienteering_pts"
+    t.decimal  "skiing_pts"
+    t.decimal  "marathon_pts"
+    t.decimal  "rowing_pts"
+    t.decimal  "cycling_pts"
+    t.decimal  "skating_pts"
+    t.decimal  "orienteering_time"
+    t.decimal  "skiing_time"
+    t.decimal  "marathon_time"
+    t.decimal  "rowing_time"
+    t.decimal  "cycling_time"
+    t.decimal  "skating_time"
+    t.integer  "orienteering_pos"
+    t.integer  "skiing_pos"
+    t.integer  "marathon_pos"
+    t.integer  "rowing_pos"
+    t.integer  "cycling_pos"
+    t.integer  "skating_pos"
+    t.string   "marathon_style"
+    t.string   "rowing_style"
+    t.string   "skiing_style"
+    t.decimal  "pts_sum"
+    t.integer  "completed_events"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", force: true do |t|
     t.string   "first_name"
