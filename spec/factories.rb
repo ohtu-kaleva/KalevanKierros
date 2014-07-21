@@ -6,7 +6,9 @@ FactoryGirl.define do
     username "Tyhjis"
     email "nonexistant@non.fi"
     phone_number "0000000"
-    address "Teletappikuja 1, 666 Teletappikaupunki"
+    street_address "Teletappikuja 1"
+    postal_code "00666"
+    city "Teletappikaupunki"
     birth_date "27-5-1989"
     gender "M"
     kk_number 12345

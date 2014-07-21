@@ -10,10 +10,12 @@ class User < ActiveRecord::Base
   validates :last_name, presence: true
   validates :email, presence: true
   validates :birth_date, presence: true
-  validates :address, presence: true
   validates :password, presence: true
   validates :password, length: { minimum: 6 },
                        format: { with: /.*(\d.*[A-Z]|[A-Z].*\d).*/}
+  validates :postal_code, format: { with: /\A\d{5}\z/ }
+  validates :street_address, presence: true
+  validates :city, presence: true
 
   def get_enrollment_data_for_event(id)
     e = enrollments.find_by event_id: id
@@ -22,5 +24,9 @@ class User < ActiveRecord::Base
 
   def find_enrollment_id_by_event(id)
     id = enrollments.find_by(event_id: id).id
+  end
+
+  def address
+    street_address + ' ' + postal_code + ', ' + city
   end
  end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140717134631) do
+ActiveRecord::Schema.define(version: 20140721122448) do
 
   create_table "app_settings", force: true do |t|
     t.string   "name",       null: false
@@ -107,6 +107,7 @@ ActiveRecord::Schema.define(version: 20140717134631) do
     t.integer  "completed_events"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "kk_number"
   end
 
   create_table "users", force: true do |t|
@@ -118,12 +119,14 @@ ActiveRecord::Schema.define(version: 20140717134631) do
     t.datetime "updated_at"
     t.string   "password_digest"
     t.string   "phone_number"
-    t.string   "address"
     t.date     "birth_date"
     t.string   "gender"
     t.boolean  "admin",           default: false, null: false
     t.integer  "group_id"
     t.integer  "kk_number"
+    t.string   "city"
+    t.string   "postal_code"
+    t.string   "street_address"
   end
 
   add_index "users", ["kk_number"], name: "index_users_on_kk_number", unique: true
