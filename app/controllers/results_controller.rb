@@ -65,6 +65,40 @@ class ResultsController < ApplicationController
     end
   end
 
+  def scale_times(event)
+    enrollments = event.enrollments
+    temp_times = {}
+    if event.sport_type == 'RunningEvent'
+      enrollments.each do |e|
+        attr = e.event_attributes.find_by name: 'Tyyppi'
+        if attr.value == 'puolimaraton'
+          temp_times[e.user.kk_number] = event.penalty_factor * e.time
+        else
+          temp_times[e.user.kk_number] = e.time
+        end
+      end
+    elsif event.sport_type == 'SkiingEvent'
+      enrollments.each do |e|
+        attr = e.event_attributes.find_by name: 'Tyyli'
+        if attr.value == 'Vapaa'
+          temp_times[e.user.kk_number] = event.penalty_factor * e.time
+        else
+          temp_times[e.user.kk_number] = e.time
+        end
+      end
+    else
+      enrollments.each do |e|
+        temp_times[e.user.kk_number] = e.time
+      end
+    end
+    temp_times
+  end
+
+  def calculate_points(event)
+    times = scale_times event
+    #to do
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_result

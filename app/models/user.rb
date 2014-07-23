@@ -29,4 +29,33 @@ class User < ActiveRecord::Base
   def address
     street_address + ' ' + postal_code + ', ' + city
   end
+
+  def full_name
+    first_name + ' ' + last_name
+  end
+
+  def define_series
+    age = Date.today.year - birth_date.year
+    str = gender
+    if age < 22
+      str += 'AL22'
+    elsif age < 40
+
+    elsif age < 50
+      str += '40'
+    elsif age < 55
+      str += '50'
+    elsif age < 60
+      str += '55'
+    elsif age < 65
+      str += '60'
+    elsif age < 70
+      str += '65'
+    elsif age < 75
+      str += '70'
+    else
+      str += '75'
+    end
+    str
+  end
  end

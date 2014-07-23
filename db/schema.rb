@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140721122448) do
+ActiveRecord::Schema.define(version: 20140723103225) do
 
   create_table "app_settings", force: true do |t|
     t.string   "name",       null: false
@@ -59,6 +59,9 @@ ActiveRecord::Schema.define(version: 20140721122448) do
     t.date     "second_end_date"
     t.integer  "price"
     t.integer  "second_price"
+    t.decimal  "penalty_factor",  default: 1.0
+    t.integer  "factor"
+    t.string   "sport_type"
   end
 
   create_table "groups", force: true do |t|

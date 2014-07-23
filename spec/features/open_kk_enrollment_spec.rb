@@ -43,6 +43,7 @@ feature 'Opening enrollment' do
       click_button 'Ilmoittaudu kierrokselle'
       expect(page).to have_content 'Ilmoittautuminen onnistui'
       expect(page).not_to have_content 'Kierrokselle ei voi ilmoittautua'
+      expect(Result.count).to eq(1)
     end
   end
 end

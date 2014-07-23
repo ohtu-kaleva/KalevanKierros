@@ -22,7 +22,13 @@ class EventsController < ApplicationController
 
   # POST /events
   def create
-    if params[:type].empty?
+    if /\d{1,2},\d{1,2}/ === event_params[:penalty_factor]
+      event_params[:penalty_factor] = (event_params[:penalty_factor].sub! ',', '.').to_f
+    else
+      event_params[:penalty_factor] = 1.0
+    end
+    puts event_params
+    if event_params[:sport_type].empty?
     @event = Event.new(event_params)
 
     if @event.save
@@ -31,16 +37,18 @@ class EventsController < ApplicationController
       render :new
     end
 
-    elsif params[:type] == 'RunningEvent'
+    elsif event_params[:sport_type] == 'RunningEvent'
       @event = Event.new(event_params)
+      @event.factor = 2000
       if @event.save
         EventAttribute.create :name => 'Tyyppi', :attribute_value => 'maraton;puolimaraton', :attribute_label => 'Valitse maraton tai puolimaraton', :attribute_type => 'radio_button', :event_id => @event.id, :attribute_index => 1
-        redirect_to @event, flash: { successs: 'Juoksutapahtuma luotu onnistuneesti.' }
+        redirect_to @event, flash: { success: 'Juoksutapahtuma luotu onnistuneesti.' }
       else
         render :new
       end
-    elsif params[:type] == 'RowingEvent'
+    elsif event_params[:sport_type] == 'RowingEvent'
       @event = Event.new(event_params)
+      @event.factor = 3500
       if @event.save
         EventAttribute.create :name => 'Pari', :attribute_value => 'Jos sinulla on pari, niin hänen täytyy olla rekisteröitynyt käyttäjä.', :attribute_label => 'Pari-informaatio.', :attribute_type => 'plain_text', :event_id => @event.id, :attribute_index => nil
         EventAttribute.create :name => 'Melonta', :attribute_value => 'Soutu;Melonta', :attribute_label => 'Soutu/melonta', :attribute_type => 'select', :event_id => @event.id, :attribute_index => 1
@@ -49,31 +57,35 @@ class EventsController < ApplicationController
       else
         render :new
       end
-    elsif params[:type] == 'SkatingEvent'
+    elsif event_params[:sport_type] == 'SkatingEvent'
       @event = Event.new(event_params)
+      @event.factor = 2800
       if @event.save
         EventAttribute.create :name => 'Kierroslaskija', :attribute_value => 'Kyllä', :attribute_label => 'Onko sinulla kierroslaskija?', :attribute_type => 'check_box', :event_id => @event.id, :attribute_index => 1
         redirect_to @event, flash: { success: 'Luistelutapahtuma luotu onnistuneesti.' }
       else
         render :new
       end
-    elsif params[:type] == 'SkiingEvent'
+    elsif event_params[:sport_type] == 'SkiingEvent'
       @event = Event.new(event_params)
+      @event.factor = 2000
       if @event.save
         EventAttribute.create :name => 'Tyyli', :attribute_value => 'Vapaa;Perinteinen', :attribute_label => 'Valitse vapaa tai perinteinen tyyli.', :attribute_type => 'radio_button', :event_id => @event.id, :attribute_index => 1
         redirect_to @event, flash: { success: 'Hiihtotapahtuma luotu onnistuneesti' }
       else
         render :new
       end
-    elsif params[:type] == 'CyclingEvent'
+    elsif event_params[:sport_type] == 'CyclingEvent'
       @event = Event.new(event_params)
+      @event.factor = 2800
       if @event.save
         redirect_to @event, flash: { success: 'Pyöräilytapahtuma luotu onnistuneesti' }
       else
         render :new
       end
-    elsif params[:type] == 'OrienteeringEvent'
+    elsif event_params[:sport_type] == 'OrienteeringEvent'
       @event = Event.new(event_params)
+      @event.factor = 1300
       if @event.save
         redirect_to @event, flash: { success: 'Suunnistustapahtuma luotu onnistuneesti' }
       else
@@ -110,6 +122,6 @@ class EventsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
-      params.require(:event).permit(:name, :start_date, :end_date, :second_end_date, :price, :second_price, :description, :open)
+      params.require(:event).permit(:name, :start_date, :end_date, :second_end_date, :price, :second_price, :description, :open, :penalty_factor, :sport_type)
     end
 end

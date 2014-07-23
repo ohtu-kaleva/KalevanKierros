@@ -26,7 +26,7 @@
           <% if enrollment.time.nil? %>
             <td><%= text_field_tag "times[#{enrollment.id}]", nil, maxlength: 8 %></td>
           <% else %>
-            <td><%= enrollment.seconds_to_human_form %></td>
+            <td><%= text_field_tag enrollment.seconds_to_human_form %></td>
           <% end %>
           <td><%= link_to 'Poista aika', delete_time_path(enrollment.id), method: :put %></td>
           <td><%= link_to 'Poista', enrollment_path(enrollment.id) %></td>
