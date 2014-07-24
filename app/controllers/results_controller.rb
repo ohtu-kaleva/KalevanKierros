@@ -1,14 +1,18 @@
 class ResultsController < ApplicationController
-  before_action :set_result, only: [:show, :edit, :update, :destroy]
+  before_action :set_result_or_redirect, only: [:show, :edit, :update, :destroy]
+  before_action :redirect_if_user_not_admin, except: [:index, :index_by_year]
 
   # GET /results
   # GET /results.json
   def index
-    @results = Result.all
+    @years = (2011..Time.now.year).to_a
   end
 
   def index_by_year
     @results = Result.where(year: params[:year])
+    if @results.empty?
+      redirect_to :root and return
+    end
   end
 
   # GET /results/1
@@ -94,14 +98,86 @@ class ResultsController < ApplicationController
     temp_times
   end
 
-  def calculate_points(event)
-    times = scale_times event
-    #to do
+  def unscaled_times(event)
+    enrollments = event.enrollments
+    temp_times = {}
+    enrollments.each do |e|
+      temp_times[e.user.kk_number] = e.time
+    end
+  end
+
+  def calculate_points
+    event = Event.find_by id: params[:event_id]
+    times = scale_times(event)
+    normal_times = unscaled_times(event)
+    times_sorted = Hash[times.sort_by { |k, v| v }]
+    winner_time = times_sorted.first.last
+    position = 1
+    year = event.second_end_date.year
+    times_sorted.each do |number, time|
+      if time
+        res = Result.find_by_kk_number_and_year(number, year)
+        points = 1000 - event.factor * Math.log10(time / winner_time)
+        insert_points(event.sport_type, res, points)
+        insert_position(event.sport_type, res, position)
+        position += 1
+        insert_time(event.sport_type, res, normal_times[number])
+      end
+    end
+    redirect_to :root
+  end
+
+  def insert_points(sport_type, result, points)
+    if sport_type == "RunningEvent"
+      result.update_attribute :running_pts, points
+    elsif sport_type == "SkiingEvent"
+      result.update_attribute :skiing_pts, points
+    elsif sport_type == "SkatingEvent"
+      result.update_attribute :skating_pts, points
+    elsif sport_type == "CyclingEvent"
+      result.update_attribute :cycling_pts, points
+    elsif sport_type == "OrienteeringEvent"
+      result.update_attribute :orienteering_pts, points
+    elsif sport_type == "RowingEvent"
+      result.update_attribute :rowing_pts, points
+    end
+  end
+
+  def insert_time(sport_type, result, time)
+    if sport_type == "RunningEvent"
+      result.update_attribute :running_time, time
+    elsif sport_type == "SkiingEvent"
+      result.update_attribute :skiing_time, time
+    elsif sport_type == "SkatingEvent"
+      result.update_attribute :skating_time, time
+    elsif sport_type == "CyclingEvent"
+      result.update_attribute :cycling_time, time
+    elsif sport_type == "OrienteeringEvent"
+      result.update_attribute :orienteering_time, time
+    elsif sport_type == "RowingEvent"
+      result.update_attribute :rowing_time, time
+    end
+  end
+
+  def insert_position(sport_type, result, position)
+    if sport_type == "RunningEvent"
+      result.update_attribute :running_pos, position
+    elsif sport_type == "SkiingEvent"
+      result.update_attribute :skiing_pos, position
+    elsif sport_type == "SkatingEvent"
+      result.update_attribute :skating_pos, position
+    elsif sport_type == "CyclingEvent"
+      result.update_attribute :cycling_pos, position
+    elsif sport_type == "OrienteeringEvent"
+      result.update_attribute :orienteering_pos, position
+    elsif sport_type == "RowingEvent"
+      result.update_attribute :rowing_pos, position
+    end
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_result
+    def set_result_or_redirect
       @result = Result.find(params[:id])
     end
 

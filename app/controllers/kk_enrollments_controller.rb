@@ -36,7 +36,7 @@ class KkEnrollmentsController < ApplicationController
     @kk_enrollment = KkEnrollment.new user_id: @user.id
 
     if @kk_enrollment.save
-      init_results_entry
+      init_results_entry(@user)
       redirect_to @user, flash: { success: 'Ilmoittautuminen onnistui' }
     else
       redirect_to root_path, flash: { error: 'Ilmoittautuminen epäonnistui' }
@@ -83,6 +83,16 @@ class KkEnrollmentsController < ApplicationController
     redirect_to kk_enrollments_url, flash: { success: 'Ilmoittautuminen poistettu' }
   end
 
+  def init_results_entry(user)
+    group_name = nil
+    if user.group
+      group_name = user.group.name
+    end
+    init_params = { name: user.full_name, city: user.city, group: group_name, year: Date.today.year, kk_number: user.kk_number, series: user.define_series, completed_events: 0 }
+    result = Result.new init_params
+    result.save
+  end
+
   private
 
     # Never trust parameters from the scary internet, only allow the white list through.
@@ -102,13 +112,4 @@ class KkEnrollmentsController < ApplicationController
       end
     end
 
-  def init_results_entry
-    group_name = nil
-    if @user.group
-      group_name = @user.group.name
-    end
-    init_params = { name: @user.full_name, city: @user.city, group: group_name, year: Date.today.year, kk_number: @user.kk_number, series: @user.define_series, completed_events: 0 }
-    result = Result.new init_params
-    result.save
-  end
 end

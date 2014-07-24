@@ -27,7 +27,6 @@ class EventsController < ApplicationController
     else
       event_params[:penalty_factor] = 1.0
     end
-    puts event_params
     if event_params[:sport_type].empty?
     @event = Event.new(event_params)
 

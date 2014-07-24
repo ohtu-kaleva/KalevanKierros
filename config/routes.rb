@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :results, only: [:index, :new, :create]
+  resources :results
 
   resources :event_attributes, except: [:index]
 
@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   #resources :skating_events, :controller => 'events', :type => 'SkatingEvent'
   #resources :rowing_events, :controller => 'events', :type => 'RowingEvent'
   #resources :cycling_events, :controller => 'events', :type => 'CyclingEvent'
-  get 'results/:year', to: 'results#index_by_year', as: 'index_by_year'
+  get 'results/year/:year', to: 'results#index_by_year', as: 'index_by_year'
   get 'admin/kk_enrollment', to: 'static_pages#kk_enrollment'
   get 'kk_enrollments', to: 'kk_enrollments#index'
   post 'kk_enrollment/change', to: 'kk_enrollments#change_enrollment_status'
@@ -61,7 +61,7 @@ Rails.application.routes.draw do
   put 'event_enrollments/', to:'enrollments#update', as: 'add_times'
   put 'event_enrollments/:event_id/import_csv', to: 'enrollments#import_csv', as: 'import_file'
   put 'enrollments/:enrollment_id', to: 'enrollments#delete_time', as: 'delete_time'
-
+  put 'results/:event_id', to: 'results#calculate_points', as: 'calculate_points'
  # get '*path' => redirect('/')
 
   # The priority is based upon order of creation: first created -> highest priority.

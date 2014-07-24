@@ -26,7 +26,7 @@
           <% if enrollment.time.nil? %>
             <td><%= text_field_tag "times[#{enrollment.id}]", nil, maxlength: 8 %></td>
           <% else %>
-            <td><%= text_field_tag enrollment.seconds_to_human_form %></td>
+            <td><%= text_field_tag '', enrollment.seconds_to_human_form %></td>
           <% end %>
           <td><%= link_to 'Poista aika', delete_time_path(enrollment.id), method: :put %></td>
           <td><%= link_to 'Poista', enrollment_path(enrollment.id) %></td>
@@ -45,6 +45,7 @@
     <%= file_field_tag :file %>
     <%= submit_tag %>
   <% end %>
+  <%= link_to 'Laske kilpailijoiden pisteet', calculate_points_path(@event.id), method:'put' %>
   </p>
   <script type="text/javascript">
 

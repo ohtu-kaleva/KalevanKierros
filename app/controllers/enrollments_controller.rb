@@ -39,7 +39,6 @@ class EnrollmentsController < ApplicationController
       if event.open || (current_user && current_user.kk_enrollment)
         data_list = []
         attrs = event.event_attributes.select {|a| a.attribute_type != 'plain_text' }
-        puts params
         # loop for creating information for data
         attrs.each do |a|
           if !params.has_key? a.name
@@ -105,7 +104,6 @@ class EnrollmentsController < ApplicationController
   end
 
   def show_enrollments_for_event
-    puts params
     @event = Event.find_by id: params[:event_id]
     respond_to do |format|
       format.html
