@@ -74,27 +74,38 @@ class ResultsController < ApplicationController
     temp_times = {}
     if event.sport_type == 'RunningEvent'
       enrollments.each do |e|
-        attr = e.event_attributes.find_by name: 'Tyyppi'
+        attr = e.enrollment_datas.find_by name: 'Tyyppi'
         if attr.value == 'puolimaraton'
-          temp_times[e.user.kk_number] = event.penalty_factor * e.time
+          temp_times[e.user.kk_number] = {}
+          temp_times[e.user.kk_number][:time] = event.penalty_factor * e.time
+          temp_times[e.user.kk_number][:style] = 'puolimaraton'
         else
-          temp_times[e.user.kk_number] = e.time
+          temp_times[e.user.kk_number] = {}
+          temp_times[e.user.kk_number][:time] = e.time
+          temp_times[e.user.kk_number][:style] = 'maraton'
         end
       end
     elsif event.sport_type == 'SkiingEvent'
       enrollments.each do |e|
-        attr = e.event_attributes.find_by name: 'Tyyli'
+        attr = e.enrollment_datas.find_by name: 'Tyyli'
         if attr.value == 'Vapaa'
-          temp_times[e.user.kk_number] = event.penalty_factor * e.time
+          temp_times[e.user.kk_number] = {}
+          temp_times[e.user.kk_number][:time] = event.penalty_factor * e.time
+          temp_times[e.user.kk_number][:style] = 'Vapaa'
         else
-          temp_times[e.user.kk_number] = e.time
+          temp_times[e.user.kk_number] = {}
+          temp_times[e.user.kk_number][:time] = e.time
+          temp_times[e.user.kk_number][:style] = 'Perinteinen'
         end
       end
     else
       enrollments.each do |e|
-        temp_times[e.user.kk_number] = e.time
+        temp_times[e.user.kk_number] = {}
+        temp_times[e.user.kk_number][:time] = e.time
+        temp_times[e.user.kk_number][:style] = ''
       end
     end
+    puts temp_times
     temp_times
   end
 
@@ -104,75 +115,113 @@ class ResultsController < ApplicationController
     enrollments.each do |e|
       temp_times[e.user.kk_number] = e.time
     end
+    temp_times
   end
 
   def calculate_points
     event = Event.find_by id: params[:event_id]
     times = scale_times(event)
     normal_times = unscaled_times(event)
-    times_sorted = Hash[times.sort_by { |k, v| v }]
-    winner_time = times_sorted.first.last
+    times_sorted = Hash[times.sort_by { |k, v| v[:time] }]
+    winner_time = times_sorted.first.last[:time]
     position = 1
     year = event.second_end_date.year
-    times_sorted.each do |number, time|
-      if time
+    times_sorted.each do |number, time_and_style|
+      puts time_and_style[:time]
+      if time_and_style[:time]
         res = Result.find_by_kk_number_and_year(number, year)
-        points = 1000 - event.factor * Math.log10(time / winner_time)
-        insert_points(event.sport_type, res, points)
-        insert_position(event.sport_type, res, position)
+        points = 1000 - event.factor * Math.log10(time_and_style[:time] / winner_time)
+        insert_result_for_event(event.sport_type, res, points, normal_times[number], position, time_and_style[:style])
         position += 1
-        insert_time(event.sport_type, res, normal_times[number])
       end
     end
-    redirect_to :root
+    redirect_to results_path
   end
 
-  def insert_points(sport_type, result, points)
+  def insert_result_for_event(sport_type, result, points, time, position, style)
     if sport_type == "RunningEvent"
-      result.update_attribute :running_pts, points
+      result.marathon_pts = points
+      result.marathon_time = time
+      result.marathon_pos = position
+      result.marathon_style = style
+      totals = check_total_events(result)
+      result.completed_events = totals[:total_events]
+      result.pts_sum = totals[:total_points]
+      result.save
     elsif sport_type == "SkiingEvent"
-      result.update_attribute :skiing_pts, points
+      result.skiing_pts = points
+      result.skiing_time = time
+      result.skiing_pos = position
+      result.skiing_style = style
+      totals = check_total_events(result)
+      result.completed_events = totals[:total_events]
+      result.pts_sum = totals[:total_points]
+      result.save
     elsif sport_type == "SkatingEvent"
-      result.update_attribute :skating_pts, points
+      result.skating_pts = points
+      result.skating_time = time
+      result.skating_pos = position
+      totals = check_total_events(result)
+      result.completed_events = totals[:total_events]
+      result.pts_sum = totals[:total_points]
+      result.save
     elsif sport_type == "CyclingEvent"
-      result.update_attribute :cycling_pts, points
+      result.cycling_pts = points
+      result.cycling_time = time
+      result.cycling_pos = position
+      totals = check_total_events(result)
+      result.completed_events = totals[:total_events]
+      result.pts_sum = totals[:total_points]
+      result.save
     elsif sport_type == "OrienteeringEvent"
-      result.update_attribute :orienteering_pts, points
+      result.orienteering_pts = points
+      result.orienteering_time = time
+      result.orienteering_pos = position
+      totals = check_total_events(result)
+      result.completed_events = totals[:total_events]
+      result.pts_sum = totals[:total_points]
+      result.save
     elsif sport_type == "RowingEvent"
-      result.update_attribute :rowing_pts, points
+      result.rowing_pts = points
+      result.rowing_time = time
+      result.rowing_pos = position
+      result.rowing_style = style
+      totals = check_total_events(result)
+      result.completed_events = totals[:total_events]
+      result.pts_sum = totals[:total_points]
+      result.save
     end
   end
 
-  def insert_time(sport_type, result, time)
-    if sport_type == "RunningEvent"
-      result.update_attribute :running_time, time
-    elsif sport_type == "SkiingEvent"
-      result.update_attribute :skiing_time, time
-    elsif sport_type == "SkatingEvent"
-      result.update_attribute :skating_time, time
-    elsif sport_type == "CyclingEvent"
-      result.update_attribute :cycling_time, time
-    elsif sport_type == "OrienteeringEvent"
-      result.update_attribute :orienteering_time, time
-    elsif sport_type == "RowingEvent"
-      result.update_attribute :rowing_time, time
+  def check_total_events(result)
+    totals = {}
+    totals[:total_events] = 0
+    totals[:total_points] = 0
+    if result.marathon_pts
+      totals[:total_events] += 1
+      totals[:total_points] += result.marathon_pts
     end
-  end
-
-  def insert_position(sport_type, result, position)
-    if sport_type == "RunningEvent"
-      result.update_attribute :running_pos, position
-    elsif sport_type == "SkiingEvent"
-      result.update_attribute :skiing_pos, position
-    elsif sport_type == "SkatingEvent"
-      result.update_attribute :skating_pos, position
-    elsif sport_type == "CyclingEvent"
-      result.update_attribute :cycling_pos, position
-    elsif sport_type == "OrienteeringEvent"
-      result.update_attribute :orienteering_pos, position
-    elsif sport_type == "RowingEvent"
-      result.update_attribute :rowing_pos, position
+    if result.skiing_pts
+      totals[:total_events] += 1
+      totals[:total_points] += result.skiing_pts
     end
+    if result.skating_pts
+      totals[:total_events] += 1
+      totals[:total_points] += result.skating_pts
+    end
+    if result.cycling_pts
+      totals[:total_events] += 1
+      totals[:total_points] += result.cycling_pts
+    end
+    if result.orienteering_pts
+      totals[:total_events] += 1
+      totals[:total_points] += result.orienteering_pts
+    end
+    if result.rowing_pts
+      totals[:total_events] += 1
+      totals[:total_points] += result.rowing_pts
+    end
+    totals
   end
 
   private

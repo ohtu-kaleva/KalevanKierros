@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   helper_method :current_user, :user_is_admin?, :redirect_if_user_not_admin, :usersearch,
-                :enrollment_open?
+                :enrollment_open?, :seconds_to_human_form
 
   def current_user
     return nil if session[:user_id].nil?
@@ -33,5 +33,13 @@ class ApplicationController < ActionController::Base
   def enrollment_open?
     setting = AppSetting.find_by(name: 'KkEnrollmentStatus')
     return setting && setting.value == 'open'
+  end
+
+  def seconds_to_human_form(time)
+    if time
+      Time.at(time).gmtime.strftime('%R:%S')
+    else
+      'Ei aikaa'
+    end
   end
 end

@@ -1,0 +1,8 @@
+<h1>Muokkaa ilmoittautumisen tietoja</h1>
+<% @enrollment.enrollment_datas.each do |d| %>
+    <%= form_for(d, method: :patch) do |f| %>
+        <%= f.label :name %><br>
+        <%= f.text_field :value %>
+        <%= f.submit %>
+    <% end %>
+<% end %>

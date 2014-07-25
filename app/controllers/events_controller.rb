@@ -51,7 +51,7 @@ class EventsController < ApplicationController
       if @event.save
         EventAttribute.create :name => 'Pari', :attribute_value => 'Jos sinulla on pari, niin hänen täytyy olla rekisteröitynyt käyttäjä.', :attribute_label => 'Pari-informaatio.', :attribute_type => 'plain_text', :event_id => @event.id, :attribute_index => nil
         EventAttribute.create :name => 'Melonta', :attribute_value => 'Soutu;Melonta', :attribute_label => 'Soutu/melonta', :attribute_type => 'select', :event_id => @event.id, :attribute_index => 1
-        EventAttribute.create :name => 'Parin nimi', :attribute_value => 'Parisoudussa parisi nimi.', :attribute_label => 'Jos soudat parin kanssa, kirjoita hänen nimensä tekstikenttään.', :attribute_type => 'text_field', :event_id => @event.id, :attribute_index => 2
+        EventAttribute.create :name => 'Parin nimi', :attribute_value => 'Vuorosoudussa parisi nimi.', :attribute_label => 'Jos soudat parin kanssa, kirjoita hänen nimensä tekstikenttään.', :attribute_type => 'text_field', :event_id => @event.id, :attribute_index => 2
         redirect_to @event, flash: { success: 'Soututapahtuma luotu onnistuneesti.' }
       else
         render :new
@@ -60,7 +60,7 @@ class EventsController < ApplicationController
       @event = Event.new(event_params)
       @event.factor = 2800
       if @event.save
-        EventAttribute.create :name => 'Kierroslaskija', :attribute_value => 'Kyllä', :attribute_label => 'Onko sinulla kierroslaskija?', :attribute_type => 'check_box', :event_id => @event.id, :attribute_index => 1
+        EventAttribute.create :name => 'Kierroslaskija', :attribute_value => 'Kyllä', :attribute_label => 'Tarvitsetko kierroslaskijan järjestäjän puolesta?', :attribute_type => 'check_box', :event_id => @event.id, :attribute_index => 1
         redirect_to @event, flash: { success: 'Luistelutapahtuma luotu onnistuneesti.' }
       else
         render :new
@@ -86,6 +86,7 @@ class EventsController < ApplicationController
       @event = Event.new(event_params)
       @event.factor = 1300
       if @event.save
+        EventAttribute.create :name => 'Emit', :attribute_value => 'Kyllä', :attribute_label => 'Tarvitsetko emit-lähettimen järjestäjän puolesta?', :attribute_type => 'check_box', :event_id => @event.id, :attribute_index => 1
         redirect_to @event, flash: { success: 'Suunnistustapahtuma luotu onnistuneesti' }
       else
         render :new

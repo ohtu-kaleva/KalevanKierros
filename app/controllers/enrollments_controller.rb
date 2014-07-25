@@ -31,6 +31,7 @@ class EnrollmentsController < ApplicationController
   end
 
   def edit
+    @datas = @enrollment.enrollment_datas
   end
 
   def create

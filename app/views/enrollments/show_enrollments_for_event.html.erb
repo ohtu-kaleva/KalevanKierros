@@ -17,7 +17,7 @@
     <%= form_tag('/event_enrollments', method: :put) do %>
     <% @event.enrollments.each do |enrollment| %>
         <tr>
-          <td><%= enrollment.user.first_name %> <%= enrollment.user.last_name %></td>
+          <td><%= enrollment.user.full_name %></td>
           <td><%= enrollment.user.email %></td>
           <td><%= enrollment.user.kk_number %></td>
           <% enrollment.user.get_enrollment_data_for_event(@event.id).each do |data| %>
@@ -26,7 +26,7 @@
           <% if enrollment.time.nil? %>
             <td><%= text_field_tag "times[#{enrollment.id}]", nil, maxlength: 8 %></td>
           <% else %>
-            <td><%= text_field_tag '', enrollment.seconds_to_human_form %></td>
+            <td><%= text_field_tag '', seconds_to_human_form(enrollment.time) %></td>
           <% end %>
           <td><%= link_to 'Poista aika', delete_time_path(enrollment.id), method: :put %></td>
           <td><%= link_to 'Poista', enrollment_path(enrollment.id) %></td>
@@ -45,7 +45,7 @@
     <%= file_field_tag :file %>
     <%= submit_tag %>
   <% end %>
-  <%= link_to 'Laske kilpailijoiden pisteet', calculate_points_path(@event.id), method:'put' %>
+  <%= link_to 'Laske kilpailijoiden pisteet', calculate_points_path(@event.id), method:'post' %>
   </p>
   <script type="text/javascript">
 
