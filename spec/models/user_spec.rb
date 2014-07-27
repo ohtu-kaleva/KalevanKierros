@@ -37,4 +37,20 @@ describe User do
     expect(user.admin).to be(false)
   end
 
+  context 'returns correct enrollment data' do
+    let!(:user) { FactoryGirl.create :user, password:"S4lainen", password_confirmation:"S4lainen" }
+    let!(:data) { FactoryGirl.create(:enrollment_with_data, user_id: user.id) }
+
+    it 'with existing event' do
+      data = user.get_enrollment_data_for_event(1)
+      expect(data.empty?).not_to be(true)
+      expect(data.first.name).to eq('TestName')
+      expect(data.first.value).to eq('TestValue')
+    end
+
+    it 'with nonexisting event' do
+      data = user.get_enrollment_data_for_event(999)
+      expect(data.empty?).to be(true)
+    end
+  end
 end

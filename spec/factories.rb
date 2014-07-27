@@ -89,4 +89,21 @@ FactoryGirl.define do
       attribute_label 'Tekstikenttä'
     end
   end
+
+  factory :enrollment do
+    event_id 1
+    factory :enrollment_with_data do
+      after(:create) do |enrollment|
+        enrollment.enrollment_datas << FactoryGirl.build(:enrollment_data,
+                                                         enrollment: enrollment)
+      end
+    end
+  end
+
+  factory :enrollment_data do
+    enrollment
+    name 'TestName'
+    value 'TestValue'
+    attribute_index 1
+  end
 end
