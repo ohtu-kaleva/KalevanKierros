@@ -153,4 +153,16 @@ describe User do
       expect(id).to eq(nil)
     end
   end
+
+  context 'with valid user' do
+    let!(:user) { FactoryGirl.create :user, password:"S4lainen", password_confirmation:"S4lainen" }
+
+    it 'returns correct address' do
+      expect(user.address).to eq('Teletappikuja 1 00666, Teletappikaupunki')
+    end
+
+    it 'returns correct full name' do
+      expect(user.full_name).to eq('Krisu Hansson')
+    end
+  end
 end
