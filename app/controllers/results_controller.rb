@@ -3,7 +3,6 @@ class ResultsController < ApplicationController
   before_action :redirect_if_user_not_admin, except: [:index, :index_by_year]
 
   # GET /results
-  # GET /results.json
   def index
     @years = (2011..Time.now.year).to_a
   end
@@ -16,7 +15,6 @@ class ResultsController < ApplicationController
   end
 
   # GET /results/1
-  # GET /results/1.json
   def show
   end
 
@@ -30,43 +28,29 @@ class ResultsController < ApplicationController
   end
 
   # POST /results
-  # POST /results.json
   def create
     @result = Result.new(result_params)
 
-    respond_to do |format|
-      if @result.save
-        format.html { redirect_to index_by_year_path @result.year, notice: 'Result was successfully created.' }
-        format.json { render :show, status: :created, location: @result }
-      else
-        format.html { render :new }
-        format.json { render json: @result.errors, status: :unprocessable_entity }
-      end
+    if @result.save
+      redirect_to index_by_year_path @result.year, notice: 'Result was successfully created.'
+    else
+      render :new
     end
   end
 
   # PATCH/PUT /results/1
-  # PATCH/PUT /results/1.json
   def update
-    respond_to do |format|
-      if @result.update(result_params)
-        format.html { redirect_to @result, notice: 'Result was successfully updated.' }
-        format.json { render :show, status: :ok, location: @result }
-      else
-        format.html { render :edit }
-        format.json { render json: @result.errors, status: :unprocessable_entity }
-      end
+    if @result.update(result_params)
+      redirect_to @result, notice: 'Result was successfully updated.'
+    else
+      render :edit
     end
   end
 
   # DELETE /results/1
-  # DELETE /results/1.json
   def destroy
     @result.destroy
-    respond_to do |format|
-      format.html { redirect_to results_url, notice: 'Result was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to results_url, notice: 'Result was successfully destroyed.'
   end
 
   def scale_times(event)
@@ -105,7 +89,6 @@ class ResultsController < ApplicationController
         temp_times[e.user.kk_number][:style] = ''
       end
     end
-    puts temp_times
     temp_times
   end
 
@@ -127,7 +110,6 @@ class ResultsController < ApplicationController
     position = 1
     year = event.second_end_date.year
     times_sorted.each do |number, time_and_style|
-      puts time_and_style[:time]
       if time_and_style[:time]
         res = Result.find_by_kk_number_and_year(number, year)
         points = 1000 - event.factor * Math.log10(time_and_style[:time] / winner_time)
