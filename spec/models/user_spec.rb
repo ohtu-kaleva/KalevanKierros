@@ -137,4 +137,20 @@ describe User do
       expect(serie).to eq('M75')
     end
   end
+
+  context 'returns correct enrollment id' do
+    let!(:user) { FactoryGirl.create :user, password:"S4lainen", password_confirmation:"S4lainen" }
+    let!(:enrollment) { FactoryGirl.create(:enrollment, user_id: user.id) }
+
+    it 'when enrollment exists' do
+      id = user.find_enrollment_id_by_event(1)
+      expect(id).not_to eq(nil)
+      expect(id).to eq(1)
+    end
+
+    it 'when enrollment doesnt exist' do
+      id = user.find_enrollment_id_by_event(999)
+      expect(id).to eq(nil)
+    end
+  end
 end

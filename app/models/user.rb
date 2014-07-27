@@ -27,7 +27,12 @@ class User < ActiveRecord::Base
   end
 
   def find_enrollment_id_by_event(id)
-    id = enrollments.find_by(event_id: id).id
+    id = enrollments.find_by(event_id: id)
+    if id
+      id.id
+    else
+      nil
+    end
   end
 
   def address
