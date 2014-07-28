@@ -24,4 +24,17 @@ feature 'Enrollment page' do
     click_link 'Tarkastele ilmoittautumisiasi'
     expect(page).to have_content event.name
   end
+
+  scenario 'User enrolls in already enrolled event' do
+    sign_in(username: 'Tyhjis', password: 'S4lainen')
+    #user enrolls in event
+    visit add_enrollment_path(event.id)
+    choose 'monivalinta', option: 'ei'
+    fill_in 'tekstikenttä', with: 'testikommentti'
+    select 'kolme', from: 'numeron_valinta'
+    click_button 'Lähetä ilmoittautuminen eteenpäin'
+    #user tries to enroll again
+    visit add_enrollment_path(event.id)
+    expect(page).to have_content 'Olet jo ilmoittautunut tapahtumaan'
+  end
 end
