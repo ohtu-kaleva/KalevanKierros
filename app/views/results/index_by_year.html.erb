@@ -1,19 +1,31 @@
 <h1>Vuoden <%= params[:year] %> tulokset</h1>
-<table class="table">
-  <% @results.each do |result| %>
+<table class="results">
+  <% i = 0
+     @results.each do |result| %>
+      <% i += 1 %>
       <tr>
-        <td><%= result.name %></td>
-        <td><%= result.group %></td>
-        <td><%= result.completed_events %></td>
-        <td><%= result.pts_sum %></td>
+        <td width="20%"><a href="#" onclick="event.preventDefault(); $('#stat<%= i %>').toggle()"><%= result.name %></a></td>
+        <td width="60%"><%= result.group %></td>
+        <td width="10%"><%= result.completed_events %></td>
+        <td colspan="3" width="10%"><%= result.pts_sum %></td>
       </tr>
+      <tr><td colspan="4">
+      <table style="display: none;" class="results child" id="stat<%= i %>">
+        <tr style="border-bottom: 1px solid black;">
+          <td width="50%">Kilpailusarja</td>
+          <th width="15%">Laji</th>
+          <td width="3%"></td>
+          <td width="9%">Loppuaika</td>
+          <td width="9%">Sijoitus</td>
+          <td width="12%">Pistemäärä</td>
+        </tr>
       <tr>
-        <td><%= result.series %></td>
-        <th>Suunnistus</th>
-        <td></td>
-        <td><%= seconds_to_human_form(result.orienteering_time) %></td>
-        <td><%= result.orienteering_pos %></td>
-        <td><%= result.orienteering_pts %></td>
+        <td width="50%"><%= result.series %></td>
+        <th width="15%">Suunnistus</th>
+        <td width="3%"></td>
+        <td width="9%"><%= seconds_to_human_form(result.orienteering_time) %></td>
+        <td width="9%"><%= result.orienteering_pos %></td>
+        <td width="12%"><%= result.orienteering_pts %></td>
       </tr>
       <tr>
         <td></td>
@@ -54,9 +66,19 @@
         <td><%= seconds_to_human_form(result.skating_time) %></td>
         <td><%= result.skating_pos %></td>
         <td><%= result.skating_pts %></td>
+          </tr>
+        </table>
+      </td></tr>
   <% end %>
 </table>
-
+<style type="text/css">
+  table.results {
+      width:100%;max-width:100%;margin-bottom:20px
+  }
+        table.child{
+            margin-top: 5px; margin-bottom: 20px; float: right;
+        }
+</style>
 <br>
 
 <%= link_to 'New Result', new_result_path %>

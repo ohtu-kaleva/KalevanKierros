@@ -64,4 +64,13 @@ class Event < ActiveRecord::Base
     end
     data_array
   end
+
+  def to_autocomplete
+    rtrn = []
+    participants.select("kk_number || ' ' || first_name || ' ' || last_name as label, kk_number as value").each do |p|
+      rtrn.append p
+    end
+    rtrn.to_json(:only => [:label, :value])
+  end
+
 end

@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component name="dataSourceStorage">
-  <data-source source="LOCAL" name="Rails KalevanKierros: development" uuid="541f143f-9a55-46e0-898c-9aa0dbaaeb30">
+  <data-source source="LOCAL" name="Rails KalevanKierros: development" uuid="e9f72a03-fe45-478f-a236-9267da92fe7b">
+    <database-info product="" version="" jdbc-version="" driver-name="" driver-version=""/>
+  </data-source>
+  <data-source source="LOCAL" name="Rails KalevanKierros: test" uuid="1a0540cc-5f82-4a27-b44a-c9365d4fd073">
     <database-info product="" version="" jdbc-version="" driver-name="" driver-version=""/>
   </data-source>
 </component>

@@ -2,7 +2,7 @@ class EnrollmentsController < ApplicationController
 
   before_action :check_for_existing_enrollment, only:  [:new, :create]
   before_action :set_enrollment_or_redirect, only: [:show, :destroy, :edit]
-  before_action :redirect_if_user_not_admin, only: [:show_enrollments_for_event, :index, :show, :destroy, :update, :edit]
+  before_action :redirect_if_user_not_admin, only: [:show_enrollments_for_event, :index, :show, :destroy, :update, :edit, :update_single]
 
   def new
     @event = Event.find_by id: params[:event_id]
@@ -90,6 +90,17 @@ class EnrollmentsController < ApplicationController
       end
     end
     redirect_to :back, flash: message
+  end
+
+  def update_single
+    user = User.find_by kk_number: params[:kk_number]
+    unless !check_time_format(params[:times]) && user.nil?
+      enrollment = Enrollment.find_by user_id: user.id, event_id: params[:event_id]
+      enrollment.update_attribute :time, to_seconds(params[:times])
+      render :nothing => true, status: 200
+      #redirect_to :back
+    end
+
   end
 
   def delete_time

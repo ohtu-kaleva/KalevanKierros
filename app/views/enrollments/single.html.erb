@@ -1,0 +1,99 @@
+<div class="alert alert-success fade in hidden">
+  <button class="close" data-dismiss="alert">×</button>
+  Aika talletettu!
+</div>
+
+<div class="col-lg-6">
+  <h1>Syötä yksittäinen tulos</h1>
+  <%= form_tag({}, :id => 'resultform') do %>
+    <div class="form-group">
+      <div class="form-inline">
+        <div class="form-group">
+          <input placeholder="Kilpailija" class="form-control autocomplete" id="kk_number" name="kk_number" type="text"/>
+        </div>
+        <br>
+
+        <div class="form-group">
+          <input placeholder="Tulos" class="form-control " id="times" name="times" type="text"/>
+        </div>
+        <br>
+      </div>
+    </div>
+
+    <div class="actions">
+      <input class="btn btn-primary" name="commit" id="singleresultform" type="submit" value="Tallenna tulos" onclick="
+//      event.preventDefault();
+  //            alert('Lähetetään tiedot:\n Käyttäjä ' + $('#kk_number').val() + '\n Aika:' + $('#times').val() );
+    //          $('div.alert-success').css('visibility','visible').hide().fadeIn().removeClass('hidden');
+      //        $('#reset').click();
+        //      window.setTimeout(function() { $('div.alert-success').fadeOut('slow'); }, 2000);
+      "/>
+      <input class="btn btn-danger" id="reset" name="reset" type="reset" value="Tyhjennä" onclick="$(form).data('bootstrapValidator').resetForm();"/>
+    </div>
+
+        <% end %>
+    <script type="text/javascript">
+
+        $(function () {
+            $('#singleresultform').click(function (event) {
+                event.preventDefault();
+                var formData = $("#resultform").serializeArray();
+                var URL = $("#resultform").attr("action");
+                $.ajax({
+                    url: URL,
+                    type: 'POST',
+                    data: formData,
+                    success: function () {
+                        $('div.alert-success').css('visibility', 'visible').hide().fadeIn().removeClass('hidden');
+                        $('#reset').click();
+                        window.setTimeout(function () {
+                            $('div.alert-success').fadeOut('slow');
+                        }, 2000);
+                    },
+                    cache: false
+                });
+            });
+        });
+
+        $("input.autocomplete").autocomplete({ delay: 50, minLength: 2, autoFocus: true, source: <%= raw(eventusersearch) %> });
+
+        $(document).ready(function() {
+            $('form').bootstrapValidator({
+                message: 'Virheellinen syöte',
+                feedbackIcons: {
+                    valid: 'glyphicon glyphicon-ok',
+                    invalid: 'glyphicon glyphicon-asterisk',
+                    validating: 'glyphicon glyphicon-refresh'
+                },
+                fields: {
+                    'kk_number': {
+                        message: 'Tunnus ei ole kelvollinen',
+                        validators: {
+                            notEmpty: {
+                                message: 'Tunnus ei voi olla tyhjä'
+                            },
+                            stringLength: {
+                                min: 2,
+                                message: 'Tunnuksessa tulee olla vähintään 2 merkkiä'
+                            }
+                        }
+                    },
+                    'times': {
+                        validators: {
+                            callback: {
+                                message: 'Ajan tulee olla muodossa HH:MM:SS',
+                                callback: function(value, validator){
+                                    var isValid = /^([0-1]?[0-9]|2[0-4]):([0-5][0-9]):([0-5][0-9])$/.test(value);
+
+                                    return isValid;
+
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+    <%= link_to 'Etusivulle', :root   %>
+</div>
