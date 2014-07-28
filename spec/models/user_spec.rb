@@ -141,11 +141,12 @@ describe User do
   context 'returns correct enrollment id' do
     let!(:user) { FactoryGirl.create :user, password:"S4lainen", password_confirmation:"S4lainen" }
     let!(:enrollment) { FactoryGirl.create(:enrollment, user_id: user.id) }
+    let!(:enrollment_id) { enrollment.id }
 
     it 'when enrollment exists' do
       id = user.find_enrollment_id_by_event(1)
       expect(id).not_to eq(nil)
-      expect(id).to eq(1)
+      expect(id).to eq(enrollment_id)
     end
 
     it 'when enrollment doesnt exist' do
