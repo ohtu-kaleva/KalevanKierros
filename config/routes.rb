@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   get 'enrollments/:enrollment_id/edit', to: 'enrollments#edit', as: 'edit_enrollment'
   get 'results/year/:year', to: 'results#index_by_year', as: 'index_by_year'
 
+  get 'results/year/:year/:type', to: 'results#index_by_year_type', as: 'index_by_year_type'
 
   get 'admin/kk_enrollment', to: 'static_pages#kk_enrollment'
   get 'kk_enrollments', to: 'kk_enrollments#index'
