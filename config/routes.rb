@@ -17,6 +17,9 @@ Rails.application.routes.draw do
   #resources :cycling_events, :controller => 'events', :type => 'CyclingEvent'
   get 'enrollments/:enrollment_id/edit', to: 'enrollments#edit', as: 'edit_enrollment'
   get 'results/year/:year', to: 'results#index_by_year', as: 'index_by_year'
+
+  get 'results/year/:year/:type', to: 'results#index_by_year_type', as: 'index_by_year_type'
+
   get 'admin/kk_enrollment', to: 'static_pages#kk_enrollment'
   get 'kk_enrollments', to: 'kk_enrollments#index'
   post 'kk_enrollment/change', to: 'kk_enrollments#change_enrollment_status'
@@ -60,6 +63,8 @@ Rails.application.routes.draw do
   post 'groups/:group_id/add_user', to: 'users#update_user_group_relation'
   get 'event_enrollments/:event_id/', to: 'enrollments#show_enrollments_for_event', as: 'show_enrollments'
   put 'event_enrollments/', to:'enrollments#update', as: 'add_times'
+  get 'event_enrollments/:event_id/single', to: 'enrollments#single'
+  post 'event_enrollments/:event_id/single', to: 'enrollments#update_single'
   put 'event_enrollments/:event_id/import_csv', to: 'enrollments#import_csv', as: 'import_file'
   put 'enrollments/:enrollment_id', to: 'enrollments#delete_time', as: 'delete_time'
   post 'results/:event_id', to: 'results#calculate_points', as: 'calculate_points'

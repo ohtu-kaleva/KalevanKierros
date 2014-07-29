@@ -1,6 +1,6 @@
 class ResultsController < ApplicationController
   before_action :set_result_or_redirect, only: [:show, :edit, :update, :destroy]
-  before_action :redirect_if_user_not_admin, except: [:index, :index_by_year]
+  before_action :redirect_if_user_not_admin, except: [:index, :index_by_year, :index_by_year_type]
 
   # GET /results
   def index
@@ -9,6 +9,31 @@ class ResultsController < ApplicationController
 
   def index_by_year
     @results = Result.where(year: params[:year])
+    if @results.empty?
+      redirect_to :root and return
+    end
+  end
+
+  def index_by_year_type
+    if params[:type] == 'cycling'
+      @laji = "Pyöräily"
+      @results = Result.where(year: params[:year]).pluck('name, cycling_pos as position, cycling_pts as points, cycling_time as time')
+    elsif params[:type] == 'rowing'
+      @laji = "Soutu"
+      @results = Result.where(year: params[:year]).pluck('name, rowing_pos as position, rowing_pts as points, rowing_time as time')
+    elsif params[:type] == 'orienteering'
+      @laji = "Suunnistus"
+      @results = Result.where(year: params[:year]).pluck('name, orienteering_pos as position, orienteering_pts as points, orienteering_time as time')
+    elsif params[:type] == 'skiing'
+      @laji = "Hiihto"
+      @results = Result.where(year: params[:year]).pluck('name, skiing_pos as position, skiing_pts as points, skiing_time as time')
+    elsif params[:type] == 'skating'
+      @laji = "Luistelu"
+      @results = Result.where(year: params[:year]).pluck('name, skating_pos as position, skating_pts as points, skating_time as time')
+    elsif params[:type] == 'marathon'
+      @laji = "Juoksu"
+      @results = Result.where(year: params[:year]).pluck('name, marathon_pos as position, marathon_pts as points, marathon_time as time')
+    end
     if @results.empty?
       redirect_to :root and return
     end
