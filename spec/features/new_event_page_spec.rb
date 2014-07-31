@@ -30,7 +30,7 @@ describe "New Event page" do
     end
 
     it "a new default event correctly" do
-      select "Tyhjä", :from => 'type'
+      select "Tyhjä", :from => 'event_sport_type'
       fill_in "event_name", with: "tyhjatapahtuma"
       fill_in "event_description", with: "Kuvausta"
       click_button "Luo tapahtuma"
@@ -56,7 +56,7 @@ describe "New Event page" do
     end
 
     it "a new skating event correctly" do
-      select "Luistelu", :from => 'type'
+      select "Luistelu", :from => 'event_sport_type'
       fill_in "event_name", with: "Luistelutapahtuma"
       fill_in "event_description", with: "Luistelutapahtuma"
       click_button "Luo tapahtuma"
@@ -65,7 +65,7 @@ describe "New Event page" do
     end
 
     it "a new skiing event correctly" do
-      select "Hiihto", :from => 'type'
+      select "Hiihto", :from => 'event_sport_type'
       fill_in "event_name", with: "Hiihtotapahtuma"
       fill_in "event_description", with: "Hiihtokuvaus"
       click_button "Luo tapahtuma"
@@ -74,7 +74,7 @@ describe "New Event page" do
     end
 
     it "a new orienteering event correctly" do
-      select "Suunnistus", :from => 'type'
+      select "Suunnistus", :from => 'event_sport_type'
       fill_in "event_name", with: "Suunnistustapahtuma"
       fill_in "event_description", with: "Suunnistuskuvaus"
       click_button "Luo tapahtuma"
@@ -83,7 +83,7 @@ describe "New Event page" do
     end
 
     it "a new cycling event correctly" do
-      select "Pyöräily", :from => 'type'
+      select "Pyöräily", :from => 'event_sport_type'
       fill_in "event_name", with: "Pyöräilytapahtuma"
       fill_in "event_description", with: "Pyöräilykuvaus"
       click_button "Luo tapahtuma"
@@ -109,7 +109,7 @@ describe "New Event page" do
 
     it "a new running event without missing name field" do
       make_selects_for_dates
-      select "Juoksu", :from => 'type'
+      select "Juoksu", :from => 'event_sport_type'
       fill_in "event_description", with: "Juostaan"
       click_button "Luo tapahtuma"
       expect(page).to have_content "errors prohibited this event from being saved"
@@ -117,7 +117,7 @@ describe "New Event page" do
 
     it "a new rowing event without missing name field" do
       make_selects_for_dates
-      select "Soutu", :from => 'type'
+      select "Soutu", :from => 'event_sport_type'
       fill_in "event_description", with: "Soudetaan"
       click_button "Luo tapahtuma"
       expect(page).to have_content "errors prohibited this event from being saved"
@@ -125,7 +125,7 @@ describe "New Event page" do
 
     it "a new skating event without missing name field" do
       make_selects_for_dates
-      select "Luistelu", :from => 'type'
+      select "Luistelu", :from => 'event_sport_type'
       fill_in "event_description", with: "Luistellaan"
       click_button "Luo tapahtuma"
       expect(page).to have_content "errors prohibited this event from being saved"
@@ -133,7 +133,7 @@ describe "New Event page" do
 
     it "a new skiing event without missing name field" do
       make_selects_for_dates
-      select "Hiihto", :from => 'type'
+      select "Hiihto", :from => 'event_sport_type'
       fill_in "event_description", with: "Hiihdetään"
       click_button "Luo tapahtuma"
       expect(page).to have_content "errors prohibited this event from being saved"
@@ -141,7 +141,7 @@ describe "New Event page" do
 
     it "a new cycling event without missing name field" do
       make_selects_for_dates
-      select "Pyöräily", :from => 'type'
+      select "Pyöräily", :from => 'event_sport_type'
       fill_in "event_description", with: "Pyöräillään"
       click_button "Luo tapahtuma"
       expect(page).to have_content "errors prohibited this event from being saved"
@@ -149,7 +149,7 @@ describe "New Event page" do
 
     it "a new orienteering event without missing name field" do
       make_selects_for_dates
-      select "Suunnistus", :from => 'type'
+      select "Suunnistus", :from => 'event_sport_type'
       fill_in "event_description", with: "Suunnistetaan"
       click_button "Luo tapahtuma"
       expect(page).to have_content "errors prohibited this event from being saved"
