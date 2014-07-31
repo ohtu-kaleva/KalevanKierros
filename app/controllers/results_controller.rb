@@ -79,19 +79,19 @@ class ResultsController < ApplicationController
   end
 
   def scale_times(event)
-    enrollments = event.enrollments
+    enrollments = event.enrollments.where.not(time: nil)
     temp_times = {}
     if event.sport_type == 'RunningEvent'
       enrollments.each do |e|
         attr = e.enrollment_datas.find_by name: 'Tyyppi'
         if attr.value == 'puolimaraton'
-          temp_times[e.user.kk_number] = {}
-          temp_times[e.user.kk_number][:time] = event.penalty_factor * e.time
-          temp_times[e.user.kk_number][:style] = 'puolimaraton'
+            temp_times[e.user.kk_number] = {}
+            temp_times[e.user.kk_number][:time] = event.penalty_factor * e.time
+            temp_times[e.user.kk_number][:style] = 'puolimaraton'
         else
-          temp_times[e.user.kk_number] = {}
-          temp_times[e.user.kk_number][:time] = e.time
-          temp_times[e.user.kk_number][:style] = 'maraton'
+            temp_times[e.user.kk_number] = {}
+            temp_times[e.user.kk_number][:time] = e.time
+            temp_times[e.user.kk_number][:style] = 'maraton'
         end
       end
     elsif event.sport_type == 'SkiingEvent'
@@ -136,21 +136,26 @@ class ResultsController < ApplicationController
     year = event.second_end_date.year
     times_sorted.each do |number, time_and_style|
       if time_and_style[:time]
-        res = Result.find_by_kk_number_and_year(number, year)
         points = 1000 - event.factor * Math.log10(time_and_style[:time] / winner_time)
-        insert_result_for_event(event.sport_type, res, points, normal_times[number], position, time_and_style[:style])
+        insert_result_for_event(event.sport_type, number, year, points, normal_times[number], position, time_and_style[:style])
+        normal_times.delete number
         position += 1
       end
+    end
+    normal_times.each do |number, time|
+      insert_result_for_event(event.sport_type, number, year, nil, nil, nil, nil)
     end
     redirect_to results_path
   end
 
-  def insert_result_for_event(sport_type, result, points, time, position, style)
+  def insert_result_for_event(sport_type, number, year, points, time, position, style)
+    result = Result.find_by_kk_number_and_year(number, year)
     if sport_type == "RunningEvent"
       result.marathon_pts = points
       result.marathon_time = time
       result.marathon_pos = position
       result.marathon_style = style
+      result.save
       totals = check_total_events(result)
       result.completed_events = totals[:total_events]
       result.pts_sum = totals[:total_points]
@@ -168,6 +173,7 @@ class ResultsController < ApplicationController
       result.skating_pts = points
       result.skating_time = time
       result.skating_pos = position
+      result.save
       totals = check_total_events(result)
       result.completed_events = totals[:total_events]
       result.pts_sum = totals[:total_points]
@@ -176,6 +182,7 @@ class ResultsController < ApplicationController
       result.cycling_pts = points
       result.cycling_time = time
       result.cycling_pos = position
+      result.save
       totals = check_total_events(result)
       result.completed_events = totals[:total_events]
       result.pts_sum = totals[:total_points]
@@ -184,6 +191,7 @@ class ResultsController < ApplicationController
       result.orienteering_pts = points
       result.orienteering_time = time
       result.orienteering_pos = position
+      result.save
       totals = check_total_events(result)
       result.completed_events = totals[:total_events]
       result.pts_sum = totals[:total_points]
@@ -193,6 +201,7 @@ class ResultsController < ApplicationController
       result.rowing_time = time
       result.rowing_pos = position
       result.rowing_style = style
+      result.save
       totals = check_total_events(result)
       result.completed_events = totals[:total_events]
       result.pts_sum = totals[:total_points]

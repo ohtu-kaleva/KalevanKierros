@@ -12,7 +12,6 @@
     <% end %>
     <div class="field">
       <label class="control-label" for="type">Jos haluat valmiin pohjan tapahtumalle, valitse jokin seuraavista:</label>
-      <%= f.select :sport_type, options_for_select([['Tyhjä', ''],['Juoksu', 'RunningEvent'], ['Soutu', 'RowingEvent'], ['Hiihto', 'SkiingEvent'], ['Suunnistus', 'OrienteeringEvent'], ['Luistelu', 'SkatingEvent'], ['Pyöräily', 'CyclingEvent']]), :class => "form-control", label: 'Pohja' %>
       <%= f.text_field :name, label: 'Tapahtuman nimi' %>
       <%= f.date_select :start_date, label: 'Tapahtuman ilmoittautumisen aloituspäivämäärä' %>
       <%= f.date_select :end_date, label: 'Tapahtuman ilmoittautumisen päättymispäivämäärä' %>
@@ -22,6 +21,8 @@
       <%= f.text_area :description, label: 'Tapahtuman kuvaus' %>
       <%= f.text_field :penalty_factor, label: 'Loppuajan pistelaskun rangaistuskerroin, jos sellainen on.' %>
       <%= f.check_box :open, label: 'Avoin ilmoittautuminen' %>
+
+
     </div>
 
     <div class="actions">
@@ -32,9 +33,9 @@
       <% end %>
     </div>
 
-            <style type="text/css">.input-group .form-control {
-                margin: 0px !important;
-            }</style>
+    <style type="text/css">.input-group .form-control {
+        margin: 0px !important;
+    }</style>
     <script type="text/javascript">
         $(document).ready(function() {
             $('form').bootstrapValidator({

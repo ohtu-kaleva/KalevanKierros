@@ -30,11 +30,11 @@ class EventsController < ApplicationController
     if event_params[:sport_type].empty?
     @event = Event.new(event_params)
 
-    if @event.save
-      redirect_to @event, flash: { success: 'Tapahtuma luotu onnistuneesti.' }
-    else
-      render :new
-    end
+      if @event.save
+        redirect_to @event, flash: { success: 'Tapahtuma luotu onnistuneesti.' }
+      else
+        render :new
+      end
 
     elsif event_params[:sport_type] == 'RunningEvent'
       @event = Event.new(event_params)
