@@ -40,10 +40,21 @@ feature 'Opening enrollment' do
       click_link 'Esittely'
       click_link 'Ilmoittautuminen'
       click_link 'Ilmoittaudu kierrokselle'
+      expect(Result.count).to eq(0)
       click_button 'Ilmoittaudu kierrokselle'
       expect(page).to have_content 'Ilmoittautuminen onnistui'
       expect(page).not_to have_content 'Kierrokselle ei voi ilmoittautua'
       expect(Result.count).to eq(1)
+    end
+
+    scenario 'User enrollment creates new result entry' do
+      click_link 'Esittely'
+      click_link 'Ilmoittautuminen'
+      click_link 'Ilmoittaudu kierrokselle'
+      click_button 'Ilmoittaudu kierrokselle'
+      expect(Result.last.name).to eq(user.full_name)
+      expect(Result.last.year).to eq(Date.today.year)
+      expect(Result.last.city).to eq(user.city)
     end
   end
 end
