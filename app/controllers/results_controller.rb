@@ -52,6 +52,14 @@ class ResultsController < ApplicationController
   def edit
   end
 
+  def with_existing_group
+    results = Result.where(year: params[:year]).where.not(group: nil)
+    results.sort_by { ||}
+    if results.empty?
+      redirect_to :root and return
+    end
+  end
+
   # POST /results
   def create
     @result = Result.new(result_params)
