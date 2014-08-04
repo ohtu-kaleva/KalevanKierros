@@ -110,7 +110,7 @@ FactoryGirl.define do
   factory :result do
     name 'Kristian Hansson'
     city 'Helsinki'
-    year 2014
+    year Date.today.year
     series 'M'
     orienteering_pts 1000
     orienteering_pos 1

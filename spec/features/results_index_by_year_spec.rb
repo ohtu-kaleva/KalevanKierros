@@ -11,6 +11,11 @@ feature 'Show results by year' do
       expect(page).to have_content('Vuoden 2014 tulokset')
       expect(page).to have_content('Kristian Hansson')
     end
+    scenario "shows the correct year (2013)" do
+      visit index_by_year_path(2013)
+      expect(page).to have_content('Vuoden 2013 tulokset')
+      expect(page).to have_content('Kristian Hansson')
+    end
   end
 
   context "Selecting nonexisting year" do
