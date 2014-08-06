@@ -4,16 +4,11 @@ rvm:
 
 addons:
     postgresql: "9.3"
-before_install:
+before_script:
   - "export DISPLAY=99.0"
   - "sh -e /etc/init.d/xvfb start"
-before_script:
   - cp config/database.yml.travis config/database.yml
   - psql -c 'create database travis_ci_test;' -U postgres
-script:
-  - RAILS_ENV=test bundle exec rake db:migrate --trace
-  - bundle exec rake db:test:prepare
-  - rake minitest:features
 deploy:
   provider: heroku
   app: kalevankierros
