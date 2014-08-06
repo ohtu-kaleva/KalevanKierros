@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140723103225) do
+ActiveRecord::Schema.define(version: 20140806102118) do
 
   create_table "app_settings", force: true do |t|
     t.string   "name",       null: false
@@ -124,12 +124,14 @@ ActiveRecord::Schema.define(version: 20140723103225) do
     t.string   "phone_number"
     t.date     "birth_date"
     t.string   "gender"
-    t.boolean  "admin",           default: false, null: false
+    t.boolean  "admin",            default: false, null: false
     t.integer  "group_id"
     t.integer  "kk_number"
     t.string   "city"
     t.string   "postal_code"
     t.string   "street_address"
+    t.string   "activation_token"
+    t.boolean  "active",           default: false, null: false
   end
 
   add_index "users", ["kk_number"], name: "index_users_on_kk_number", unique: true

@@ -25,6 +25,7 @@ class UsersController < ApplicationController
   # POST /users
   def create
     @user = User.new(user_params)
+    @user.generate_activation_token
 
     if @user.save
       redirect_to root_url, flash: { success: 'Käyttäjätunnus luotu, kirjaudu sisään oikeasta yläkulmasta.' }
