@@ -25,6 +25,9 @@ Rails.application.configure do
     password: ENV['EMAIL_PASSWORD'],
     authentication: 'plain',
     enable_starttls_auto: true }
+  config.action_mailer.default_url_options = {
+    host: '0.0.0.0',
+    port: 3000 }
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
