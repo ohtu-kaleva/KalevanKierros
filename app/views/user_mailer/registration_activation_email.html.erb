@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Vahvista rekisteröityminen</h1>
+    <p>Käyttäjätunnus: <%= @user.username %></p>
+    <p>Etunimi: <%= @user.first_name %></p>
+    <p>Sukunimi: <%= @user.last_name %></p>
+    <%= link_to 'Kirjadu sisään aktivoidaksesi tunnuksen', activation_url(id: @user.id, activation_token: @user.activation_token) %>
+  </body>
+</html>

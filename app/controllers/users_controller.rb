@@ -28,6 +28,7 @@ class UsersController < ApplicationController
     @user.generate_activation_token
 
     if @user.save
+      UserMailer.registration_activation_email(@user).deliver
       redirect_to root_url, flash: { success: 'Käyttäjätunnus luotu, kirjaudu sisään oikeasta yläkulmasta.' }
     else
       render :new
