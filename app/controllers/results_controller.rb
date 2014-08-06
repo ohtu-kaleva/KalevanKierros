@@ -8,7 +8,7 @@ class ResultsController < ApplicationController
   end
 
   def index_by_year
-    @results = Result.where(year: params[:year])
+    @results = Result.where(year: params[:year]).order('completed_events desc, pts_sum desc')
     if @results.empty?
       redirect_to :root and return
     end
@@ -17,22 +17,22 @@ class ResultsController < ApplicationController
   def index_by_year_type
     if params[:type] == 'cycling'
       @laji = "Pyöräily"
-      @results = Result.where(year: params[:year]).pluck('name, cycling_pos as position, cycling_pts as points, cycling_time as time')
+      @results = Result.where(year: params[:year]).where.not(cycling_time: nil).order('cycling_pos asc').pluck('name, cycling_pos as position, cycling_pts as points, cycling_time as time')
     elsif params[:type] == 'rowing'
       @laji = "Soutu"
-      @results = Result.where(year: params[:year]).pluck('name, rowing_pos as position, rowing_pts as points, rowing_time as time')
+      @results = Result.where(year: params[:year]).where.not(rowing_time: nil).order('rowing_pos asc').pluck('name, rowing_pos as position, rowing_pts as points, rowing_time as time')
     elsif params[:type] == 'orienteering'
       @laji = "Suunnistus"
-      @results = Result.where(year: params[:year]).pluck('name, orienteering_pos as position, orienteering_pts as points, orienteering_time as time')
+      @results = Result.where(year: params[:year]).where.not(orienteering_time: nil).order('orienteering_pos asc').pluck('name, orienteering_pos as position, orienteering_pts as points, orienteering_time as time')
     elsif params[:type] == 'skiing'
       @laji = "Hiihto"
-      @results = Result.where(year: params[:year]).pluck('name, skiing_pos as position, skiing_pts as points, skiing_time as time')
+      @results = Result.where(year: params[:year]).where.not(skiing_time: nil).order('skiing_pos asc').pluck('name, skiing_pos as position, skiing_pts as points, skiing_time as time')
     elsif params[:type] == 'skating'
       @laji = "Luistelu"
-      @results = Result.where(year: params[:year]).pluck('name, skating_pos as position, skating_pts as points, skating_time as time')
+      @results = Result.where(year: params[:year]).where.not(skating_time: nil).order('skating_pos asc').pluck('name, skating_pos as position, skating_pts as points, skating_time as time')
     elsif params[:type] == 'marathon'
       @laji = "Juoksu"
-      @results = Result.where(year: params[:year]).pluck('name, marathon_pos as position, marathon_pts as points, marathon_time as time')
+      @results = Result.where(year: params[:year]).where.not(marathon_time: nil).order('marathon_pos asc').pluck('name, marathon_pos as position, marathon_pts as points, marathon_time as time')
     end
     if @results.empty?
       redirect_to :root and return
