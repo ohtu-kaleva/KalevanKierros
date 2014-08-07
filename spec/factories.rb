@@ -12,6 +12,7 @@ FactoryGirl.define do
     birth_date "27-5-1989"
     gender "M"
     kk_number 12345
+    active true
 
     factory :user_with_kk_enrollment do |user|
       after(:create) do |user|
