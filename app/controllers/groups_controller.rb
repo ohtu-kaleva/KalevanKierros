@@ -1,4 +1,5 @@
 class GroupsController < ApplicationController
+  include InitResultsEntry
   before_action :set_group_or_redirect, only: [:show]
   def new
     if enrollment_open?
@@ -45,6 +46,7 @@ class GroupsController < ApplicationController
       members.uniq.each do |m|
         m.update_column :group_id, @group.id
         KkEnrollment.new(user_id: m.id).save
+        init_results_entry(m)
       end
       redirect_to :root, flash: { success: 'Ryhmä luotu onnistuneesti' }
     else

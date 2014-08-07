@@ -106,4 +106,41 @@ FactoryGirl.define do
     value 'TestValue'
     attribute_index 1
   end
+
+  factory :result do
+    name 'Kristian Hansson'
+    city 'Helsinki'
+    year Date.today.year
+    series 'M'
+    orienteering_pts 1000
+    orienteering_pos 1
+    #1:26:07
+    orienteering_time 5167
+    skiing_pts 817.25
+    skiing_style 'vapaa'
+    skiing_pos 28
+    #2:46:29
+    skiing_time 9989
+    marathon_pos 9
+    marathon_pts 920.75
+    marathon_style 'koko'
+    #3:14:46
+    marathon_time 11686
+    skating_pos 86
+    #1:03:43
+    skating_time 3823
+    skating_pts 735.63
+    cycling_pos 5
+    cycling_pts 938.04
+    #1:50:22
+    cycling_time 6622
+    rowing_pos 25
+    rowing_pts 888.12
+    rowing_style 'yksin'
+    #2:59:41
+    rowing_time 10781
+    kk_number 12345
+    pts_sum 16065.04
+    completed_events 6
+  end
 end

@@ -38,7 +38,7 @@ gem 'bootswatch-rails'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
-gem 'jquery-ui-rails'
+gem 'jquery-ui-rails', '~> 4.2.1'
 gem 'jquery-tablesorter'
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
@@ -74,4 +74,6 @@ group :test do
   gem 'capybara'
   gem 'launchy'
   gem 'factory_girl_rails'
+  gem 'selenium-webdriver'
+  gem 'database_cleaner', '< 1.1.0'
 end
