@@ -53,11 +53,36 @@ class ResultsController < ApplicationController
   end
 
   def with_existing_group
-    results = Result.where(year: params[:year]).where.not(group: nil)
-    results.sort_by { ||}
-    if results.empty?
+    raw_results = Result.where(year: params[:year]).where.not(group: nil).where.not(group: 'nil').order(:group)
+    if raw_results.empty?
       redirect_to :root and return
     end
+    @results = {}
+    raw_results.each do |result|
+      @results[result.group] = []
+    end
+    raw_results.each do |result|
+      if @results.include?(result.group)
+        @results[result.group].append(result)
+        lol = sum_of_four_best_points(result)
+        puts lol.count
+      end
+    end
+    @results
+  end
+
+  def sum_of_four_best_points(result)
+    points_collected = []
+    point_array = ['marathon_pts', 'skiing_pts', 'rowing_pts', 'skating_pts', 'cycling_pts', 'orienteering_pts']
+    result.attributes.each_pair do |name, value|
+      if point_array.include?(name)
+        if value
+          points_collected.append(value)
+        end
+      end
+    end
+    points_collected.sort!.reverse!
+    sum = 0
   end
 
   # POST /results
