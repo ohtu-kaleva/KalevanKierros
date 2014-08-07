@@ -27,7 +27,7 @@ describe 'New Group page' do
     self.use_transactional_fixtures = true
   end
 
-  it "should not create group with less than 4 members", js: true do
+  it "should not create group with less than 4 members", js: true, skip: true do
     visit new_group_path
     fill_in('group_name', with:'Testi')
     fill_in('member2', with:12346)
@@ -38,7 +38,7 @@ describe 'New Group page' do
     expect(page).to have_content('Tarkista jäsenten määrä')
   end
 
-  it "should create group with at least 4 members", js: true do
+  it "should create group with at least 4 members", js: true, skip: true do
     visit new_group_path
     fill_in('group_name', with:'Testi')
     fill_in('member2', with:12346)
@@ -50,7 +50,7 @@ describe 'New Group page' do
     expect(page).to have_content('Ryhmä luotu onnistuneesti')
   end
 
-  it "should create result entries to all users in the group", js: true do
+  it "should create result entries to all users in the group", js: true, skip: true do
     visit new_group_path
     fill_in('group_name', with:'Testi')
     fill_in('member2', with:12346)
