@@ -8,35 +8,90 @@ class ResultsController < ApplicationController
   end
 
   def index_by_year
-    @results = Result.where(year: params[:year]).order('completed_events desc, pts_sum desc')
-    if @results.empty?
+    search_filter = form_gender_age_filter(params[:gender], params[:age_group])
+    @res = {}
+    @res[:results] = Result.where(year: params[:year]).where(series: search_filter).order('completed_events desc, pts_sum desc')
+    @res[:series] = existing_age_series(params[:year])
+    if @res[:results].empty?
       redirect_to :root and return
     end
   end
 
   def index_by_year_type
-    if params[:type] == 'cycling'
+    search_filter = form_gender_age_filter(params[:gender], params[:age_group])
+    @res = {}
+    @res[:series] = existing_age_series(params[:year])
+    if params[:type] == 'all'
+      redirect_to index_by_year_path(params[:year], params[:gender], params[:age_group]) and return
+    elsif params[:type] == 'cycling'
       @laji = "Pyöräily"
-      @results = Result.where(year: params[:year]).where.not(cycling_time: nil).order('cycling_pos asc').pluck('name, cycling_pos as position, cycling_pts as points, cycling_time as time')
+      @res[:results] = Result.where(year: params[:year]).where.not(cycling_time: nil).where(series: search_filter).order('cycling_pos asc').pluck('name, cycling_pos as position, cycling_pts as points, cycling_time as time')
     elsif params[:type] == 'rowing'
       @laji = "Soutu"
-      @results = Result.where(year: params[:year]).where.not(rowing_time: nil).order('rowing_pos asc').pluck('name, rowing_pos as position, rowing_pts as points, rowing_time as time')
+      @res[:results] = Result.where(year: params[:year]).where.not(rowing_time: nil).where(series: search_filter).order('rowing_pos asc').pluck('name, rowing_pos as position, rowing_pts as points, rowing_time as time')
     elsif params[:type] == 'orienteering'
       @laji = "Suunnistus"
-      @results = Result.where(year: params[:year]).where.not(orienteering_time: nil).order('orienteering_pos asc').pluck('name, orienteering_pos as position, orienteering_pts as points, orienteering_time as time')
+      @res[:results] = Result.where(year: params[:year]).where.not(orienteering_time: nil).where(series: search_filter).order('orienteering_pos asc').pluck('name, orienteering_pos as position, orienteering_pts as points, orienteering_time as time')
     elsif params[:type] == 'skiing'
       @laji = "Hiihto"
-      @results = Result.where(year: params[:year]).where.not(skiing_time: nil).order('skiing_pos asc').pluck('name, skiing_pos as position, skiing_pts as points, skiing_time as time')
+      @res[:results] = Result.where(year: params[:year]).where.not(skiing_time: nil).where(series: search_filter).order('skiing_pos asc').pluck('name, skiing_pos as position, skiing_pts as points, skiing_time as time')
     elsif params[:type] == 'skating'
       @laji = "Luistelu"
-      @results = Result.where(year: params[:year]).where.not(skating_time: nil).order('skating_pos asc').pluck('name, skating_pos as position, skating_pts as points, skating_time as time')
+      @res[:results] = Result.where(year: params[:year]).where.not(skating_time: nil).where(series: search_filter).order('skating_pos asc').pluck('name, skating_pos as position, skating_pts as points, skating_time as time')
     elsif params[:type] == 'marathon'
       @laji = "Juoksu"
-      @results = Result.where(year: params[:year]).where.not(marathon_time: nil).order('marathon_pos asc').pluck('name, marathon_pos as position, marathon_pts as points, marathon_time as time')
+      @res[:results] = Result.where(year: params[:year]).where.not(marathon_time: nil).where(series: search_filter).order('marathon_pos asc').pluck('name, marathon_pos as position, marathon_pts as points, marathon_time as time')
     end
-    if @results.empty?
-      redirect_to :root and return
+    if @res[:results].empty?
+      redirect_to index_by_year_path(params[:year], params[:gender], params[:age_group]) and return
     end
+  end
+
+  def form_gender_age_filter(gender, age_series)
+    all_age_series = ["AL22", "", "40", "50", "55", "60", "65", "70", "75", "80", "85"]
+    if age_series == "all"
+      if gender != "all"
+        accepted_series = []
+        all_age_series.each do |a|
+          temp = gender + a
+          accepted_series.append(temp)
+        end
+      else
+        accepted_series = []
+        all_age_series.each do |a|
+          temp = "M" + a
+          accepted_series.append(temp)
+          temp = "N" + a
+          accepted_series.append(temp)
+        end
+      end
+    elsif gender != "all"
+      accepted_series = []
+      temp = gender + age_series
+      accepted_series.append(temp)
+    else
+      accepted_series = []
+      temp = "M" + age_series
+      accepted_series.append(temp)
+      temp = "N" + age_series
+      accepted_series.append(temp)
+    end
+    accepted_series
+  end
+
+  def existing_age_series(year)
+    series = Result.where(year: params[:year]).select('series').uniq
+    age_series = []
+    series.each do |s|
+      series_string = s[:series].to_s
+      if series_string == "N" || series_string == "M"
+        series_string = "yleinen"
+      else
+        series_string = series_string[1,series_string.length]
+      end
+      age_series.append(series_string)
+    end
+    age_series.uniq.sort
   end
 
   # GET /results/1
