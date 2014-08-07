@@ -3,7 +3,7 @@ class KkEnrollmentMailer < ActionMailer::Base
 
   def enrollment_email(user)
     @user = user
-    mail(to: ENV['EMAIL_ADDRESS'],
+    mail(to: @user.email,
          subject: "Ilmoittautuminen Kalevan Kierrokselle #{Date.today.year}")
   end
 end
