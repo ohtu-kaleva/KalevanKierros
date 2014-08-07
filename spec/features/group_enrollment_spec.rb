@@ -32,8 +32,22 @@ describe 'New Group page' do
     fill_in('group_name', with:'Testi')
     fill_in('member2', with:12346)
     fill_in('member3', with:12347)
+    expect {
     click_button 'Luo joukkue'
+    }.to change(Group, :count).by(0)
     expect(page).to have_content('Tarkista jäsenten määrä')
+  end
+
+  it "should create group with at least 4 members", js: true do
+    visit new_group_path
+    fill_in('group_name', with:'Testi')
+    fill_in('member2', with:12346)
+    fill_in('member3', with:12347)
+    fill_in('member4', with:12348)
+    expect {
+    click_button 'Luo joukkue'
+    }.to change(Group, :count).by(1)
+    expect(page).to have_content('Ryhmä luotu onnistuneesti')
   end
 
   it "should create result entries to all users in the group", js: true do
@@ -42,7 +56,9 @@ describe 'New Group page' do
     fill_in('member2', with:12346)
     fill_in('member3', with:12347)
     fill_in('member4', with:12348)
-    click_button 'Luo joukkue'
-    expect(Result.count).to eq(4)
+    expect{
+      click_button 'Luo joukkue'
+    }.to change(Result, :count).by(4)
+    expect(Result.last.group).to eq('Testi')
   end
 end
