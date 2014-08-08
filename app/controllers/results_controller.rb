@@ -41,35 +41,19 @@ class ResultsController < ApplicationController
   end
 
   def form_gender_age_filter(gender, age_series)
-    all_age_series = ["AL22", "", "40", "50", "55", "60", "65", "70", "75", "80", "85"]
     if age_series == "all"
-      if gender != "all"
-        accepted_series = []
-        all_age_series.each do |a|
-          temp = gender + a
-          accepted_series.append(temp)
-        end
-      else
-        accepted_series = []
-        all_age_series.each do |a|
-          temp = "M" + a
-          accepted_series.append(temp)
-          temp = "N" + a
-          accepted_series.append(temp)
-        end
-      end
-    elsif gender != "all"
-      accepted_series = []
-      temp = gender + age_series
-      accepted_series.append(temp)
+      ages = ["AL22", "", "40", "50", "55", "60", "65", "70", "75", "80", "85", "90", "95", "100"]
+    elsif age_series = "yleinen"
+      ages = [""]
     else
-      accepted_series = []
-      temp = "M" + age_series
-      accepted_series.append(temp)
-      temp = "N" + age_series
-      accepted_series.append(temp)
+      ages = [age_series]
     end
-    accepted_series
+    if gender == "all"
+      genders = ["M", "N"]
+    else
+      genders = [gender]
+    end
+    return genders.product(ages).map{|x| x.join}
   end
 
   def existing_age_series(year)
