@@ -2,7 +2,7 @@
 <table class="table table-bordered">
   <% @results.each do |key, value| %>
   <tr>
-    <th colspan="3" style="color:blue"><%= key %></th>
+    <th colspan="3" style="color:blue"><%= key %>: <%= @group_points[key] %></th>
   </tr>
   <tr>
     <th>Nimi</th>
