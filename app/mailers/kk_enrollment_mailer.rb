@@ -1,5 +1,5 @@
 class KkEnrollmentMailer < ActionMailer::Base
-  default from: ENV['EMAIL_ADDRESS']
+  default from: "#{ActionMailer::Base.smtp_settings['user_name']}"
 
   def enrollment_email(user)
     @user = user

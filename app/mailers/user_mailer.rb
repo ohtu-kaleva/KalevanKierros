@@ -1,5 +1,5 @@
 class UserMailer < ActionMailer::Base
-  default from: ENV['EMAIL_ADDRESS']
+  default from: "#{ActionMailer::Base.smtp_settings['user_name']}"
 
   def registration_activation_email(user)
     @user = user
