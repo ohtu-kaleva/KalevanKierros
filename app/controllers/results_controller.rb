@@ -85,11 +85,80 @@ class ResultsController < ApplicationController
   end
 
   def with_existing_group
-    results = Result.where(year: params[:year]).where.not(group: nil)
-    results.sort_by { ||}
-    if results.empty?
+    raw_results = Result.where(year: params[:year]).where.not(group: nil).where.not(group: 'nil').order(:group)
+    if raw_results.empty?
       redirect_to :root and return
     end
+    @results = {}
+    @group_points = {}
+    raw_results.each do |result|
+      @results[result.group] = []
+      @group_points[result.group] = sum_of_four_best_points(result.group, params[:year])
+    end
+    raw_results.each do |result|
+      if @results.include?(result.group)
+        @results[result.group].append(result)
+      end
+    end
+    @results
+  end
+
+  def sum_of_four_best_points(group_name, year)
+    results = Result.where(year: year).where(group: group_name)
+    marathon_points = []
+    skiing_points = []
+    orienteering_points = []
+    skating_points = []
+    cycling_points = []
+    rowing_points = []
+    results.each do |result|
+      if result.marathon_pts
+        marathon_points.append(result.marathon_pts)
+      end
+      if result.skiing_pts
+        skiing_points.append(result.skiing_pts)
+      end
+      if result.orienteering_pts
+        orienteering_points.append(result.orienteering_pts)
+      end
+      if result.skating_pts
+        skating_points.append(result.skating_pts)
+      end
+      if result.cycling_pts
+        cycling_points.append(result.cycling_pts)
+      end
+      if result.rowing_pts
+        rowing_points.append(result.rowing_pts)
+      end
+      #puts result.name
+      #puts result.group
+    end
+    marathon_points.sort!.reverse!
+    skiing_points.sort!.reverse!
+    orienteering_points.sort!.reverse!
+    skating_points.sort!.reverse!
+    cycling_points.sort!.reverse!
+    rowing_points.sort!.reverse!
+    sum = 0
+    if marathon_points.count > 0
+      sum += marathon_points.take(4).inject{ |sum,x| sum + x }
+    end
+    if skiing_points.count > 0
+      sum += skiing_points.take(4).inject{ |sum,x| sum + x }
+    end
+    if orienteering_points.count > 0
+      sum += orienteering_points.take(4).inject{ |sum,x| sum + x }
+    end
+    if skating_points.count > 0
+      sum += skating_points.take(4).inject{ |sum,x| sum + x }
+    end
+    if cycling_points.count > 0
+      sum += cycling_points.take(4).inject{ |sum,x| sum + x }
+    end
+    if rowing_points.count > 0
+      sum += rowing_points.take(4).inject{ |sum,x| sum + x }
+    end
+    sum
   end
 
   # POST /results
@@ -284,6 +353,8 @@ class ResultsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_result_or_redirect
       @result = Result.find(params[:id])
+      return if @result
+      redirect_to :root
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
