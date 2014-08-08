@@ -1,7 +1,7 @@
 <h1>Tulokset vuosittain</h1>
 
 <% @years.each do |year| %>
-    <%= link_to year, index_by_year_path(year, "all", "all") %><br>
+    <%= link_to year, index_by_year_path(year, "all", "all", "all") %><br>
 <% end %>
 
 <%= @time %><br>

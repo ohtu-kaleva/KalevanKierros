@@ -1,21 +1,21 @@
 <h1>Vuoden <%= params[:year] %> tulokset</h1>
-<p>valitse laji:
-  <select id="selector">
-    <option value="all">Kaikki</option>
-    <option value="skating">Luistelu</option>
-    <option value="skiing">Hiihto</option>
-    <option value="marathon">Juoksu</option>
-    <option value="rowing">Soutu</option>
-    <option value="cycling">Pyöräily</option>
-    <option value="orienteering">Suunnistus</option>
+<p>Rajaa tuloksia: valitse laji
+  <select id="selector1">
+    <option value="all" <% if params[:type] == "all" then %> selected <% end %>>Kaikki</option>
+    <option value="skating" <% if params[:type] == "skating" then %> selected <% end %>>Luistelu</option>
+    <option value="skiing" <% if params[:type] == "skiing" then %> selected <% end %>>Hiihto</option>
+    <option value="marathon" <% if params[:type] == "marathon" then %> selected <% end %>>Juoksu</option>
+    <option value="rowing" <% if params[:type] == "rowing" then %> selected <% end %>>Soutu</option>
+    <option value="cycling" <% if params[:type] == "cycling" then %> selected <% end %>>Pyöräily</option>
+    <option value="orienteering" <% if params[:type] == "orienteering" then %> selected <% end %>>Suunnistus</option>
   </select>
-  valitse sukupuoli:
+  valitse sukupuoli
   <select id="selector2">
     <option value="all" <% if params[:gender] == "all" then %> selected <% end %>>Kaikki</option>
     <option value="M" <% if params[:gender] == "M" then %> selected <% end %>>Miehet</option>
     <option value="N" <% if params[:gender] == "N" then %> selected <% end %>>Naiset</option>
   </select>
-  valitse ikäsarja:
+  valitse ikäsarja
   <select id="selector3">
     <option value="all">Kaikki</option>
     <% @res[:series].each do |s| %>
@@ -27,7 +27,7 @@
     <% end %>
   </select>
   <script type="text/javascript">
-      $( "#selector" ).change(function() {
+      $( "#selector1" ).change(function() {
           var url = '/results/year/<%= params[:year]%>/<%= params[:gender]%>/<%= params[:age_group]%>/' + $(this).val();
           if (url) { // require a URL
               window.location = url; // redirect
@@ -35,14 +35,14 @@
           return false;
       });
       $( "#selector2" ).change(function() {
-          var url = '/results/year/<%= params[:year]%>/' + $(this).val() + '/<%= params[:age_group]%>';
+          var url = '/results/year/<%= params[:year]%>/' + $(this).val() + '/<%= params[:age_group]%>/<%= params[:type]%>';
           if (url) { // require a URL
               window.location = url; // redirect
           }
           return false;
       });
       $( "#selector3" ).change(function() {
-          var url = '/results/year/<%= params[:year]%>/<%= params[:gender]%>/' + $(this).val();
+          var url = '/results/year/<%= params[:year]%>/<%= params[:gender]%>/' + $(this).val() + '/<%= params[:type]%>';
           if (url) { // require a URL
               window.location = url; // redirect
           }
@@ -50,6 +50,8 @@
       });
   </script>
 </p>
+
+<% if params[:type] == "all" then %>
 <p>Klikkaamalla kilpailijan nimeä näet tarkemmat suoritustiedot.</p>
 <table class="results">
   <tr style="height: 50px; vertical-align: top;">
@@ -138,6 +140,38 @@
             margin-top: 5px; margin-bottom: 20px; float: right;
         }
 </style>
+
+<% else %>
+    <table class="results" width="80%">
+      <tr style="height: 50px; vertical-align: top;">
+        <td width="20%">Sijoitus / Kilpailija</td>
+        <td width="60%"></td>
+        <td width="10%">Loppuaika</td>
+        <td colspan="3" width="10%">Lajipisteet</td>
+      </tr>
+
+      <% i = 0
+         @res[:results].each do |result| %>
+          <% i += 1 %>
+          <tr>
+            <td width="20%"><%= result[1] %>. <%= result[0] %></td>
+            <td width="60%"></td>
+            <td width="10%"><%= seconds_to_human_form(result[3]) %></td>
+            <td colspan="3" width="10%"><%= result[2] %></td>
+          </tr>
+
+      <% end %>
+    </table>
+    <style type="text/css">
+        table.results {
+            width:100%;max-width:100%;margin-bottom:20px
+        }
+        table.child{
+            margin-top: 5px; margin-bottom: 20px; float: right;
+        }
+    </style>
+<% end %>
+
 <br>
 
 <%= link_to 'New Result', new_result_path %>

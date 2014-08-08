@@ -16,9 +16,7 @@ Rails.application.routes.draw do
   #resources :rowing_events, :controller => 'events', :type => 'RowingEvent'
   #resources :cycling_events, :controller => 'events', :type => 'CyclingEvent'
   get 'enrollments/:enrollment_id/edit', to: 'enrollments#edit', as: 'edit_enrollment'
-  get 'results/year/:year/:gender/:age_group', to: 'results#index_by_year', as: 'index_by_year'
-
-  get 'results/year/:year/:gender/:age_group/:type', to: 'results#index_by_year_type', as: 'index_by_year_type'
+  get 'results/year/:year/:gender/:age_group/:type', to: 'results#index_by_year', as: 'index_by_year'
 
   get 'admin/kk_enrollment', to: 'static_pages#kk_enrollment'
   get 'kk_enrollments', to: 'kk_enrollments#index'

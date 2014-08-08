@@ -1,6 +1,6 @@
 class ResultsController < ApplicationController
   before_action :set_result_or_redirect, only: [:show, :edit, :update, :destroy]
-  before_action :redirect_if_user_not_admin, except: [:index, :index_by_year, :index_by_year_type]
+  before_action :redirect_if_user_not_admin, except: [:index, :index_by_year]
 
   # GET /results
   def index
@@ -10,19 +10,9 @@ class ResultsController < ApplicationController
   def index_by_year
     search_filter = form_gender_age_filter(params[:gender], params[:age_group])
     @res = {}
-    @res[:results] = Result.where(year: params[:year]).where(series: search_filter).order('completed_events desc, pts_sum desc')
-    @res[:series] = existing_age_series(params[:year])
-    if @res[:results].empty?
-      redirect_to :root and return
-    end
-  end
-
-  def index_by_year_type
-    search_filter = form_gender_age_filter(params[:gender], params[:age_group])
-    @res = {}
     @res[:series] = existing_age_series(params[:year])
     if params[:type] == 'all'
-      redirect_to index_by_year_path(params[:year], params[:gender], params[:age_group]) and return
+      @res[:results] = Result.where(year: params[:year]).where(series: search_filter).order('completed_events desc, pts_sum desc')
     elsif params[:type] == 'cycling'
       @laji = "Pyöräily"
       @res[:results] = Result.where(year: params[:year]).where.not(cycling_time: nil).where(series: search_filter).order('cycling_pos asc').pluck('name, cycling_pos as position, cycling_pts as points, cycling_time as time')
@@ -42,9 +32,12 @@ class ResultsController < ApplicationController
       @laji = "Juoksu"
       @res[:results] = Result.where(year: params[:year]).where.not(marathon_time: nil).where(series: search_filter).order('marathon_pos asc').pluck('name, marathon_pos as position, marathon_pts as points, marathon_time as time')
     end
-    if @res[:results].empty?
-      redirect_to index_by_year_path(params[:year], params[:gender], params[:age_group]) and return
+    if @res[:results].empty? && params[:gender] == "all" && params[:age_group] == "all" && params[:type] == "all"
+      redirect_to :results, notice: 'Valitsemallesi vuodelle ei löydy tuloksia' and return
+    elsif @res[:results].empty?
+      redirect_to index_by_year_path(params[:year], "all", "all", "all"), notice: 'Valitsemillasi hakuparametreillä ei löydy tuloksia.' and return
     end
+    @res
   end
 
   def form_gender_age_filter(gender, age_series)
