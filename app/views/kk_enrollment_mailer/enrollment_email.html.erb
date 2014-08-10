@@ -4,6 +4,8 @@
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
   <body>
-    <h1>Tervetuloa kalevan kierrokselle <%= @user.first_name %></h1>
+    <h1>Ilmoittautuminen Kalevan Kierrokselle <%= Date.today.year %></h1>
+    <p>Tervetuloa Kalevan Kierrokselle <%= @user.first_name %>!<p>
+    <p>Kierrosmaksu 50 euroa maksettava viitenumerolla <%= @user.kk_number %> tilille <%= @account_number %></p>
   </body>
 </html>
