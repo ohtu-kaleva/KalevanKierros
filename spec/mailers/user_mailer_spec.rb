@@ -15,7 +15,7 @@ describe UserMailer do
   end
 
   it 'has sender set correctly' do
-    expect(email.from).to eq([ActionMailer::Base.smtp_settings['user_name']])
+    expect(email.from).to eq([ActionMailer::Base.smtp_settings[:user_name]])
   end
 
   it 'has subject set correctly' do
