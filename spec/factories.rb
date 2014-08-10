@@ -52,6 +52,44 @@ FactoryGirl.define do
     end
   end
 
+  factory :complete_event, class: Event do
+    id 1
+    name 'Testievent'
+    start_date Date.today + 3.days
+    end_date Date.today + 1.week
+    second_end_date Date.today + 2.week
+    price 1000
+    second_price 2000
+    description 'Testikuvaus'
+    open false
+    factor 1
+    penalty_factor 1.0
+
+    trait :running do
+      sport_type 'RunningEvent'
+    end
+
+    trait :rowing do
+      sport_type 'RowingEvent'
+    end
+
+    trait :skating do
+      sport_type 'SkatingEvent'
+    end
+
+    trait :skiing do
+      sport_type 'SkiingEvent'
+    end
+
+    trait :orienteering do
+      sport_type 'OrienteeringEvent'
+    end
+
+    trait :cycling do
+      sport_type 'CyclingEvent'
+    end
+  end
+
   factory :event_attribute do
     event
 
@@ -97,6 +135,42 @@ FactoryGirl.define do
       after(:create) do |enrollment|
         enrollment.enrollment_datas << FactoryGirl.build(:enrollment_data,
                                                          enrollment: enrollment)
+      end
+    end
+  end
+
+  factory :complete_enrollment, class: Enrollment do
+    event_id 1
+    time nil
+
+    trait :running do
+      after :create do |enrollment|
+        enrollment.enrollment_datas << EnrollmentData.create(name: 'Tyyppi', value: 'maraton', attribute_index: 1)
+      end
+    end
+
+    trait :rowing do
+      after :create do |enrollment|
+        enrollment.enrollment_datas << EnrollmentData.create(name: 'Melonta', value: 'Soutu', attribute_index: 1)
+        enrollment.enrollment_datas << EnrollmentData.create(name: 'Parin nimi', value: '', attribute_index: 2)
+      end
+    end
+
+    trait :skating do
+      after :create do |enrollment|
+        enrollment.enrollment_datas << EnrollmentData.create(name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1)
+      end
+    end
+
+    trait :skiing do
+      after :create do |enrollment|
+        enrollment.enrollment_datas << EnrollmentData.create(name: 'Tyyli', value: 'Vapaa', attribute_index: 1)
+      end
+    end
+
+    trait :orienteering do
+      after :create do |enrollment|
+        enrollment.enrollment_datas << EnrollmentData.create(name: 'Emit', value: 'Kyllä', attribute_index: 1)
       end
     end
   end
