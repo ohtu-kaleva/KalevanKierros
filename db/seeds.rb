@@ -6,9 +6,9 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 User.new(postal_code: '00666', city: 'Helsinki', first_name: 'admin', last_name: 'admin', username: 'admin',
-         email: 'admin@test.com', phone_number: 12345, street_address: 'AdminAdress',
+         email: 'ohtukaleva@gmail.com', phone_number: 12345, street_address: 'AdminAdress',
          birth_date: Date.today, gender: 'male', admin: true, password: ENV['KK_ADMIN_PASSWD'],
-         password_confirmation: ENV['KK_ADMIN_PASSWD']).save
+         password_confirmation: ENV['KK_ADMIN_PASSWD'], active: true).save
 User.new(postal_code: '00666', city: 'Helsinki', first_name: 'erkki', last_name: 'jaakkola', username: 'testi1',
          email: 'erkki@ahti.com', phone_number: 12345, street_address: 'Osoite1',
          birth_date: Date.today, gender: 'M', admin: false, password: 'Salasana1',
