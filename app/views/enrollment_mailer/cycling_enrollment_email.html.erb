@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <p>Kiitos ilmoittautumisesta Kalevan Kierroksen Pyöräilyyn</p>
+    <p>Ilmoitetut tiedot:</p>
+    <p>Nimi: <%= @user.last_name %> <%= @user.first_name %></p>
+    <p>Sarja: <%= @user.define_series %></p>
+    <% if @user.group %>
+      <p>Seura: <%= @user.group.name %></p>
+    <% end %>
+    <p>Kiertäjänumero: <%= @user.kk_number %></p>
+    <p>Sähköposti: <%= @user.email %></p>
+    -----------------------------------------------------------------
+    <p>Osallistumismaksu <%= @event.price/100.0 %> euroa maksettava viitenumerolla <%= @user.kk_number %> tilille <%= @account_number %></p>
+  </body>
+</html>

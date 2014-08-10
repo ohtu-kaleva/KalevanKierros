@@ -1,0 +1,16 @@
+Kiitos ilmoittautumisesta Kalevan Kierroksen Soutuun
+====================================================
+Ilmoitetut tiedot:
+Nimi: <%= @user.last_name %> <%= @user.first_name %>
+<% if @pair && !@pair.empty? %>
+  Parin nimi: <%= @pair %>
+<% end %>
+Tyyli: <%= @style %>
+Sarja: <%= @user.define_series %>
+<% if @user.group %>
+  Seura: <%= @user.group.name %>
+<% end %>
+Kiertäjänumero: <%= @user.kk_number %>
+Sähköposti: <%= @user.email %>
+-----------------------------------------------------------------
+Osallistumismaksu <%= @event.price/100.0 %> euroa maksettava viitenumerolla <%= @user.kk_number %> tilille <%= @account_number %>
