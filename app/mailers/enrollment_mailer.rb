@@ -3,10 +3,18 @@ class EnrollmentMailer < ActionMailer::Base
 
   def send_enrollment_email(user, event, enrollment)
     @user = user
-    @event = event
     @enrollment = enrollment
+    @price = event.second_price/100.0
 
-    case @event.sport_type
+    # Varmistetaan että päivien vertailussa verrataan tähän päivään evaluoimalla
+    # Date.today aina ajettaessa send_enrollment_email
+    get_this_day = lambda { Date.today }
+
+    if get_this_day.call <= event.end_date
+      @price = event.price/100.0
+    end
+
+    case event.sport_type
     when 'RunningEvent'
       running_enrollment_email
     when 'RowingEvent'
