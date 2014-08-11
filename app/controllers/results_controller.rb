@@ -43,7 +43,7 @@ class ResultsController < ApplicationController
   def form_gender_age_filter(gender, age_series)
     if age_series == "all"
       ages = ["AL22", "", "40", "50", "55", "60", "65", "70", "75", "80", "85", "90", "95", "100"]
-    elsif age_series = "yleinen"
+    elsif age_series == "yleinen"
       ages = [""]
     else
       ages = [age_series]
