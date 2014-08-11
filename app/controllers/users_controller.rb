@@ -29,7 +29,7 @@ class UsersController < ApplicationController
 
     if @user.save
       UserMailer.registration_activation_email(@user).deliver
-      redirect_to root_url, flash: { success: 'Käyttäjätunnus luotu, kirjaudu sisään oikeasta yläkulmasta.' }
+      redirect_to root_url, flash: { success: 'Käyttäjätunnus luotu, aktivoi tunnus sähköpostiin lähetettyjen ohjeiden mukaan.' }
     else
       render :new
     end
@@ -78,7 +78,7 @@ class UsersController < ApplicationController
   def activate
     if !current_user
       @user = User.find params[:id]
-      if @user
+      if @user && !@user.active
         if @user.username == params[:username] && (@user.authenticate params[:password])
           if @user.activation_token == params[:activation_token]
             @user.update_attribute(:active, true)
