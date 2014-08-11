@@ -85,7 +85,7 @@ class ResultsController < ApplicationController
   end
 
   def with_existing_group
-    raw_results = Result.where(year: params[:year]).where.not(group: nil).where.not(group: 'nil').order(:group)
+    raw_results = Result.where(year: params[:year]).where.not(group: nil).order(:group)
     if raw_results.empty?
       redirect_to :root and return
     end
@@ -130,8 +130,6 @@ class ResultsController < ApplicationController
       if result.rowing_pts
         rowing_points.append(result.rowing_pts)
       end
-      #puts result.name
-      #puts result.group
     end
     marathon_points.sort!.reverse!
     skiing_points.sort!.reverse!
