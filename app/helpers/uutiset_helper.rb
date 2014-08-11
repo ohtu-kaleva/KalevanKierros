@@ -1,0 +1,2 @@
+module UutisetHelper
+end

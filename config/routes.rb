@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :uutiset
+
   resources :results
 
   resources :event_attributes, except: [:index]
@@ -19,6 +21,8 @@ Rails.application.routes.draw do
   get 'results/year/:year', to: 'results#index_by_year', as: 'index_by_year'
 
   get 'results/year/:year/:type', to: 'results#index_by_year_type', as: 'index_by_year_type'
+
+  get 'uutiset/arkisto/:year', to: 'uutiset#archive_by_year', as: 'archive_by_year'
 
   get 'admin/kk_enrollment', to: 'static_pages#kk_enrollment'
   get 'kk_enrollments', to: 'kk_enrollments#index'

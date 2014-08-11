@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140723103225) do
+ActiveRecord::Schema.define(version: 20140803080652) do
 
   create_table "app_settings", force: true do |t|
     t.string   "name",       null: false
@@ -133,5 +133,12 @@ ActiveRecord::Schema.define(version: 20140723103225) do
   end
 
   add_index "users", ["kk_number"], name: "index_users_on_kk_number", unique: true
+
+  create_table "uutiset", force: true do |t|
+    t.string   "title"
+    t.text     "body"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
 end
