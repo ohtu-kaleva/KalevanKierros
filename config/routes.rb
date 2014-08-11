@@ -68,6 +68,8 @@ Rails.application.routes.draw do
   post 'results/:event_id', to: 'results#calculate_points', as: 'calculate_points'
   patch 'enrollment_datas/:id', to: 'enrollment_datas#update', as: 'enrollment_datum'
   get 'results/:year/groups', to: 'results#with_existing_group', as: 'results_by_year_and_groups'
+  get 'users/:id/activate', to: 'users#new_activation', as: 'activation'
+  put 'users/:id/activate', to: 'users#activate'
  # get '*path' => redirect('/')
 
   # The priority is based upon order of creation: first created -> highest priority.

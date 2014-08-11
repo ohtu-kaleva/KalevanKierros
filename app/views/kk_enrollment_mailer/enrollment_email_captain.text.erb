@@ -1,0 +1,11 @@
+Joukkueilmoittautuminen Kalevan Kierrokselle <%= Date.today.year %>
+=================================================
+Tervetuloa Kalevan Kierrokselle <%= @user.first_name %>!
+Olet ilmoittanut joukkueen Kalevan kierrokselle.
+Joukkueen tiedot:
+Nimi: <%= @group_name %>
+Jäsenet:
+<% @group_members.each do |m| %>
+  <%= m.kk_number %> <%= m.last_name %> <%= m.first_name %>
+<% end %>
+Kierrosmaksu 200 euroa maksettava viitenumerolla <%= @user.kk_number %> tilille <%= @account_number %>

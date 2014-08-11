@@ -38,6 +38,7 @@ class KkEnrollmentsController < ApplicationController
 
     if @kk_enrollment.save
       init_results_entry(@user)
+      KkEnrollmentMailer.enrollment_email(@user).deliver
       redirect_to @user, flash: { success: 'Ilmoittautuminen onnistui' }
     else
       redirect_to root_path, flash: { error: 'Ilmoittautuminen epäonnistui' }
