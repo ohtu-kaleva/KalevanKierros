@@ -25,9 +25,11 @@ class UsersController < ApplicationController
   # POST /users
   def create
     @user = User.new(user_params)
+    @user.generate_activation_token
 
     if @user.save
-      redirect_to root_url, flash: { success: 'Käyttäjätunnus luotu, kirjaudu sisään oikeasta yläkulmasta.' }
+      UserMailer.registration_activation_email(@user).deliver
+      redirect_to root_url, flash: { success: 'Käyttäjätunnus luotu, aktivoi tunnus sähköpostiin lähetettyjen ohjeiden mukaan.' }
     else
       render :new
     end
@@ -58,6 +60,38 @@ class UsersController < ApplicationController
   def destroy
     @user.destroy
       redirect_to users_url, flash: { success: 'Käyttäjä poistettu onnistuneesti.' }
+  end
+
+  def new_activation
+    if !current_user
+      @user = User.find params[:id]
+      if @user && !@user.active
+        if @user.activation_token == params[:activation_token]
+          render :activate
+          return
+        end
+      end
+    end
+    redirect_to :root
+  end
+
+  def activate
+    if !current_user
+      @user = User.find params[:id]
+      if @user && !@user.active
+        if @user.username == params[:username] && (@user.authenticate params[:password])
+          if @user.activation_token == params[:activation_token]
+            @user.update_attribute(:active, true)
+            session[:user_id] = @user.id
+            flash[:success] = "Tervetuloa " + @user.first_name
+          end
+        else
+          flash[:error] = "Tarkista käyttäjätunnus ja salasana!"
+          redirect_to :back && return
+        end
+      end
+    end
+    redirect_to :root
   end
 
   private

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Joukkueilmoittautuminen Kalevan Kierrokselle <%= Date.today.year %></h1>
+    <p>Tervetuloa Kalevan Kierrokselle <%= @user.first_name %>!<p>
+        <p>Olet ilmoittanut joukkueen Kalevan kierrokselle.</p>
+        <p>Joukkueen tiedot:</p>
+        <p>Nimi: <%= @group_name %></p>
+        <p>Jäsenet:</p>
+        <% @group_members.each do |m| %>
+          <p><%= m.kk_number %> <%= m.last_name %> <%= m.first_name %></p>
+        <% end %>
+    <p>Kierrosmaksu 200 euroa maksettava viitenumerolla <%= @user.kk_number %> tilille <%= @account_number %></p>
+  </body>
+</html>

@@ -61,9 +61,12 @@ class EnrollmentsController < ApplicationController
             d.enrollment_id = @enrollment.id
             d.save
           end
+
           if current_user
             current_user.enrollments << @enrollment
+            EnrollmentMailer.send_enrollment_email(current_user, event, @enrollment)
           end
+
           flash[:success] = "Ilmoittautumisesi tapahtumaan on kirjattu."
         else
           render :new and return

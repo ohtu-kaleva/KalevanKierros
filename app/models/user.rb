@@ -67,4 +67,8 @@ class User < ActiveRecord::Base
     end
     str
   end
+
+  def generate_activation_token
+    self.activation_token = SecureRandom.urlsafe_base64
+  end
  end
