@@ -46,6 +46,9 @@ class GroupsController < ApplicationController
         m.update_column :group_id, @group.id
         KkEnrollment.new(user_id: m.id).save
       end
+
+      KkEnrollmentMailer.enrollment_email_captain(@user, members.uniq, group_params[:name]).deliver
+
       redirect_to :root, flash: { success: 'Ryhmä luotu onnistuneesti' }
     else
       render :new
