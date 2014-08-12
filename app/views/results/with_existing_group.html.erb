@@ -12,17 +12,17 @@
     <% value.each do |v| %>
   <tr>
         <td><%= v.name %></td>
-    <% if v.pts_sum.nil? %>
-    <td>Ei pisteitä</td>
-    <% else %>
+        <% if v.pts_sum.nil? %>
+            <td>Ei pisteitä</td>
+        <% else %>
         <td><%= v.pts_sum %></td>
+        <% end %>
+        <% if v.completed_events.nil? %>
+            <td>Ei suoritettuja osakilpailuja</td>
+        <% else %>
+            <td><%= v.completed_events %></td>
+        <% end %>
     <% end %>
-    <% if v.completed_events.nil? %>
-        <td>Ei suoritettuja osakilpailuja</td>
-    <% else %>
-        <td><%= v.completed_events %></td>
-  <% end %>
-<% end %>
   </tr>
   <% end %>
 </table>

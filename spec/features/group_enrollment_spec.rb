@@ -38,6 +38,17 @@ describe 'New Group page' do
     expect(page).to have_content('Tarkista jäsenten määrä')
   end
 
+  it "should not create group without a name", js: true, skip: true do
+    visit new_group_path
+    fill_in('member2', with:12346)
+    fill_in('member3', with:12347)
+    fill_in('member4', with:12348)
+    expect {
+      click_button 'Luo joukkue'
+    }.to change(Group, :count).by(0)
+    expect(page).to have_content('Joukkueella tulee olla nimi')
+  end
+
   it "should create group with at least 4 members", js: true, skip: true do
     visit new_group_path
     fill_in('group_name', with:'Testi')
@@ -48,6 +59,7 @@ describe 'New Group page' do
     click_button 'Luo joukkue'
     }.to change(Group, :count).by(1)
     expect(page).to have_content('Ryhmä luotu onnistuneesti')
+    expect(Group.last.name).to eq('Testi')
   end
 
   it "should create result entries to all users in the group", js: true, skip: true do
