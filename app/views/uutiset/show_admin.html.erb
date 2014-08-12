@@ -1,0 +1,9 @@
+<div class="col-lg-6">
+
+<h1>  <%= @uutiset.title %></h1>
+
+  <%= @uutiset.body.html_safe %>
+
+<%= link_to 'Edit', edit_uutiset_path(@uutiset) %> |
+<%= link_to 'Back', uutiset_index_path %>
+</div>

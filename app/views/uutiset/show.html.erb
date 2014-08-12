@@ -1,0 +1,15 @@
+<div class="col-lg-6">
+  <p>
+  <p><%= @uutiset.created_at.strftime("%-d.%-m.%Y %H:%M") %></p>
+  <h1><%= @uutiset.title %></h1>
+
+  </p>
+
+  <p>
+    <%= @uutiset.body.html_safe %>
+  </p>
+  <% if user_is_admin? %>
+  <%= link_to 'Muokkaa uutista', edit_uutiset_path(@uutiset), :class => "btn btn-primary" %>
+      <% end %>
+</div>
+<%= render 'latest' %>

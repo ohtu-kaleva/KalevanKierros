@@ -1,0 +1,22 @@
+<%= tinymce_assets %>
+
+<%= bootstrap_form_for(@uutiset) do |f| %>
+    <% if @uutiset.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@uutiset.errors.count, "error") %> prohibited this uutiset from being saved:</h2>
+
+          <ul>
+            <% @uutiset.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+      <%= f.text_field :title, label: "Uutisen otsikko" %>
+      <%= f.text_area :body, :class => "tinymce", :rows => 40, :cols => 120, label: "Uutisen leipäteksti" %>
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+    <%= tinymce %>
+<% end %>

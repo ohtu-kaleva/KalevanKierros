@@ -1,0 +1,11 @@
+<div class="col-lg-6">
+  <h1>Uutisarkisto <%= params[:year] %></h1>
+  <% @uutiset.each do |uutiset| %>
+  <h4><%= link_to uutiset.title, uutiset %> (<%= uutiset.created_at.strftime("%-d.%-m.%-Y %H:%M") %>)
+    <% if user_is_admin? %>
+        <%= link_to 'Muokkaa', edit_uutiset_path(uutiset), :class => 'btn btn-primary' %>
+        <%= link_to 'Poista', uutiset, method: :delete, data: { confirm: 'Oletko varma?' }, :class => 'btn btn-danger' %>
+        <% end %>
+  </h4>
+      <% end %>
+</div>

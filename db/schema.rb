@@ -136,4 +136,11 @@ ActiveRecord::Schema.define(version: 20140806102118) do
 
   add_index "users", ["kk_number"], name: "index_users_on_kk_number", unique: true
 
+  create_table "uutiset", force: true do |t|
+    t.string   "title"
+    t.text     "body"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
 end

@@ -1,0 +1,12 @@
+<div class="col-lg-6">
+  <% show_latest.first(2).each do |uutiset| %>
+      <h2><%= uutiset.title %></h2>
+
+      <p>
+        <%= uutiset.body.html_safe %>
+      </p>
+      <hr />
+  <% end %>
+
+</div>
+<%= render 'latest' %>
