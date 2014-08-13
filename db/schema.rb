@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140806102118) do
+ActiveRecord::Schema.define(version: 20140813193504) do
 
   create_table "app_settings", force: true do |t|
     t.string   "name",       null: false
@@ -111,6 +111,29 @@ ActiveRecord::Schema.define(version: 20140806102118) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "kk_number"
+  end
+
+  create_table "statistics", force: true do |t|
+    t.integer  "kk_number"
+    t.integer  "user_id"
+    t.string   "last_name"
+    t.string   "first_name"
+    t.string   "city"
+    t.integer  "birth_year"
+    t.integer  "six_events_completed_count"
+    t.integer  "five_events_completed_count"
+    t.integer  "four_events_completed_count"
+    t.integer  "total_events_completed"
+    t.decimal  "pts_sum"
+    t.integer  "position"
+    t.string   "p"
+    t.string   "r"
+    t.integer  "a"
+    t.string   "ap"
+    t.integer  "k"
+    t.integer  "v"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "users", force: true do |t|

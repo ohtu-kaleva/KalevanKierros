@@ -81,3 +81,5 @@ group :test do
   gem 'selenium-webdriver'
   gem 'database_cleaner', '< 1.1.0'
 end
+
+gem 'activerecord-import'
