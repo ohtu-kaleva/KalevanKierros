@@ -36,8 +36,8 @@ describe 'Group Results page' do
     end
 
     it 'should show the sum of points correctly' do
-      # This was checked by counting the sum of four best points in FactoryGirl factory :result by hand
-      expect(page).to have_content(21199.16)
+      # This was checked by counting the sum of four best points in FactoryGirl factory :result in spec/factories.rb by hand
+      expect(page).to have_content('Testi: 21199.16')
     end
   end
 
