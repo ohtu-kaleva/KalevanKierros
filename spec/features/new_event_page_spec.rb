@@ -43,7 +43,7 @@ describe "New Event page" do
       fill_in "event_description", with: "Juoksukuvaus"
       click_button "Luo tapahtuma"
       expect(page).to have_content "Juoksutapahtuma luotu onnistuneesti"
-      expect(Event.first.sport_type).to eq("RunningEvent")
+      expect(Event.last.sport_type).to eq("RunningEvent")
     end
 
     it "a new rowing event correctly" do
@@ -52,7 +52,7 @@ describe "New Event page" do
       fill_in "event_description", with: "Soutukuvaus"
       click_button "Luo tapahtuma"
       expect(page).to have_content "Soututapahtuma luotu onnistuneesti"
-      expect(Event.first.sport_type).to eq("RowingEvent")
+      expect(Event.last.sport_type).to eq("RowingEvent")
     end
 
     it "a new skating event correctly" do
@@ -61,7 +61,7 @@ describe "New Event page" do
       fill_in "event_description", with: "Luistelutapahtuma"
       click_button "Luo tapahtuma"
       expect(page).to have_content "Luistelutapahtuma luotu onnistuneesti"
-      expect(Event.first.sport_type).to eq("SkatingEvent")
+      expect(Event.last.sport_type).to eq("SkatingEvent")
     end
 
     it "a new skiing event correctly" do
@@ -70,7 +70,7 @@ describe "New Event page" do
       fill_in "event_description", with: "Hiihtokuvaus"
       click_button "Luo tapahtuma"
       expect(page).to have_content "Hiihtotapahtuma luotu onnistuneesti"
-      expect(Event.first.sport_type).to eq("SkiingEvent")
+      expect(Event.last.sport_type).to eq("SkiingEvent")
     end
 
     it "a new orienteering event correctly" do
@@ -79,7 +79,7 @@ describe "New Event page" do
       fill_in "event_description", with: "Suunnistuskuvaus"
       click_button "Luo tapahtuma"
       expect(page).to have_content "Suunnistustapahtuma luotu onnistuneesti"
-      expect(Event.first.sport_type).to eq("OrienteeringEvent")
+      expect(Event.last.sport_type).to eq("OrienteeringEvent")
     end
 
     it "a new cycling event correctly" do
@@ -88,7 +88,7 @@ describe "New Event page" do
       fill_in "event_description", with: "Pyöräilykuvaus"
       click_button "Luo tapahtuma"
       expect(page).to have_content "Pyöräilytapahtuma luotu onnistuneesti"
-      expect(Event.first.sport_type).to eq("CyclingEvent")
+      expect(Event.last.sport_type).to eq("CyclingEvent")
     end
 
   end
