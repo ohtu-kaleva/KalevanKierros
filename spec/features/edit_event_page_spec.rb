@@ -21,13 +21,10 @@ describe 'Edit event page' do
   end
 
   it 'should not change events sport_type when updated' do
-    event = Event.find_by id:1
-    expect(event.sport_type).to eq('RunningEvent')
     fill_in 'Tapahtuman kuvaus', with:'Uusi kuvaus'
     click_button 'Muokkaa'
     expect(current_path).to eq('/events/1')
-    event = Event.find_by id:1
-    expect(event.sport_type).to eq('RunningEvent')
-    expect(event.description).to eq('Uusi kuvaus')
+    expect(Event.last.sport_type).to eq('RunningEvent')
+    expect(Event.last.description).to eq('Uusi kuvaus')
   end
 end
