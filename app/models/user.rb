@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
   has_many :enrollments, dependent: :destroy
   has_many :events, through: :enrollments
   has_one :kk_enrollment
+  has_one :statistic
   belongs_to :group
 
   validates :username, uniqueness: true, length: { minimum: 3 }
