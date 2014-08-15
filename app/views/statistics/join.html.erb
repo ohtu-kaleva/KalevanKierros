@@ -1,0 +1,96 @@
+<strong>Nykyinen tilasto:</strong>
+
+<% if @current_statistic %>
+<table class="table table-bordered">
+  <tr>
+    <th>Kiertäjänumero</th>
+    <th>Sukunimi</th>
+    <th>Etunimi</th>
+    <th>Kotipaikka</th>
+    <th>Syntymävuosi</th>
+    <th>P</th>
+    <th>6</th>
+    <th>5</th>
+    <th>4</th>
+    <th>Yhteensä</th>
+    <th>Kokonaispisteet</th>
+    <th>Rintamerkki</th>
+    <th>Ansioviiri</th>
+    <th>AP</th>
+    <th>Kunniakiertäjänumero</th>
+    <th>Veljeskunnan jäsennumero</th>
+  </tr>
+  <tr>
+    <td><%= @current_statistic.kk_number %></td>
+    <td><%= @current_statistic.last_name %></td>
+    <td><%= @current_statistic.first_name %></td>
+    <td><%= @current_statistic.city %></td>
+    <td><%= @current_statistic.birth_year %></td>
+    <td><%= @current_statistic.p %></td>
+    <td><%= @current_statistic.six_events_completed_count %></td>
+    <td><%= @current_statistic.five_events_completed_count %></td>
+    <td><%= @current_statistic.four_events_completed_count %></td>
+    <td><%= @current_statistic.total_events_completed %></td>
+    <td><%= @current_statistic.pts_sum %></td>
+    <td><%= @current_statistic.r %></td>
+    <td><%= @current_statistic.a %></td>
+    <td><%= @current_statistic.ap %></td>
+    <td><%= @current_statistic.k %></td>
+    <td><%= @current_statistic.v %></td>
+  </tr>
+</table>
+<% else %>
+  <p>Ei nykyistä tilastoa.</p>
+<% end %>
+
+<% if !@potential_statistics.empty? %>
+<table class="table table-bordered">
+  <strong>Ehdotukset tilastoksi:</strong>
+  <tr>
+    <th>Kiertäjänumero</th>
+    <th>Sukunimi</th>
+    <th>Etunimi</th>
+    <th>Kotipaikka</th>
+    <th>Syntymävuosi</th>
+    <th>P</th>
+    <th>6</th>
+    <th>5</th>
+    <th>4</th>
+    <th>Yhteensä</th>
+    <th>Kokonaispisteet</th>
+    <th>Rintamerkki</th>
+    <th>Ansioviiri</th>
+    <th>AP</th>
+    <th>Kunniakiertäjänumero</th>
+    <th>Veljeskunnan jäsennumero</th>
+  </tr>
+  <% @potential_statistics.each do |statistic| %>
+    <tr>
+      <td><%= link_to "#{statistic.kk_number}", statistic_path(statistic.id) %></td>
+      <td><%= statistic.last_name %></td>
+      <td><%= statistic.first_name %></td>
+      <td><%= statistic.city %></td>
+      <td><%= statistic.birth_year %></td>
+      <td><%= statistic.p %></td>
+      <td><%= statistic.six_events_completed_count %></td>
+      <td><%= statistic.five_events_completed_count %></td>
+      <td><%= statistic.four_events_completed_count %></td>
+      <td><%= statistic.total_events_completed %></td>
+      <td><%= statistic.pts_sum %></td>
+      <td><%= statistic.r %></td>
+      <td><%= statistic.a %></td>
+      <td><%= statistic.ap %></td>
+      <td><%= statistic.k %></td>
+      <td><%= statistic.v %></td>
+    </tr>
+  <% end %>
+<% end %>
+</table>
+
+<%= form_tag join_statistic_path(@user), method: :put do %>
+  Kiertäjänumero:<br>
+  <%= text_field_tag 'kk_number' %><br>
+  <%= submit_tag 'Liitä käyttäjä', data: { confirm: 'Liitettäessä käyttäjä tilastoon käyttäjän nykyinen tilasto poistetaan. Oletko varma?' }, class: "btn btn-primary" %><br>
+<% end %>
+
+<%= link_to 'Palaa takaisin', users_path %>

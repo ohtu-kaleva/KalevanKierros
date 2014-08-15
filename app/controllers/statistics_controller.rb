@@ -13,19 +13,26 @@ class StatisticsController < ApplicationController
     end
   end
 
+  def join
+    @user = User.find_by id: params[:id]
+    if !@user
+      redirect_to :root
+    end
+
+    @current_statistic = @user.statistic
+    @potential_statistics = Statistic.where 'statistics.user_id IS NULL'
+    @potential_statistics = @potential_statistics.select { |u| u.first_name.eql?(@user.first_name) && u.last_name.eql?(@user.last_name) }
+  end
+
   def join_user_to_existing_statistic
-    @user = User.find_by id: params[:user_id]
-    @statistic = Statistic.find_by params[:statistic_id]
+    @user = User.find_by id: params[:id]
+    @statistic = Statistic.find_by kk_number: params[:kk_number]
 
     if @user && @statistic
       @user.statistic.destroy unless @user.statistic.nil?
+      @user.update_attribute :statistic, @statistic
 
-      @user.statistic = @statistic
-      if @user.save
-        redirect_to :index, flash[:success] = 'Käyttäjä liitetty tilastoon'
-      else
-        redirect_to :back, flash[:error] = 'Käyttäjän liittäminen tilastoon ei onnistunut'
-      end
+      redirect_to users_path, flash: { success: 'Käyttäjä liitetty tilastoon.' }
     else
       redirect_to :root
     end
