@@ -64,7 +64,7 @@ class UsersController < ApplicationController
 
   def new_activation
     if !current_user
-      @user = User.find params[:id]
+      @user = User.find_by id: params[:id]
       if @user && !@user.active
         if @user.activation_token == params[:activation_token]
           render :activate
@@ -77,7 +77,7 @@ class UsersController < ApplicationController
 
   def activate
     if !current_user
-      @user = User.find params[:id]
+      @user = User.find_by id: params[:id]
       if @user && !@user.active
         if @user.username == params[:username] && (@user.authenticate params[:password])
           if @user.activation_token == params[:activation_token]
