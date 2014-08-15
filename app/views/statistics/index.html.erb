@@ -18,8 +18,8 @@
     <th>Kunniakiertäjänumero</th>
     <th>Veljeskunnan jäsennumero</th>
   </tr>
-  <tr>
-    <% @statistics.each do |statistic| %>
+  <% @statistics.each do |statistic| %>
+    <tr>
       <td><%= link_to "#{statistic.kk_number}", statistic_path(statistic.id) %></td>
       <td><%= statistic.last_name %></td>
       <td><%= statistic.first_name %></td>
@@ -36,5 +36,6 @@
       <td><%= statistic.ap %></td>
       <td><%= statistic.k %></td>
       <td><%= statistic.v %></td>
-    <% end %>
+    </tr>
+  <% end %>
 </table>
