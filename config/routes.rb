@@ -74,7 +74,7 @@ Rails.application.routes.draw do
   get 'results/year/:year/groups', to: 'results#with_existing_group', as: 'results_by_year_and_groups'
   get 'users/:id/activate', to: 'users#new_activation', as: 'activation'
   put 'users/:id/activate', to: 'users#activate'
- # get '*path' => redirect('/')
+  get '*path' => redirect('/')
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
