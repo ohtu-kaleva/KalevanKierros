@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140813193504) do
+ActiveRecord::Schema.define(version: 20140815202055) do
 
   create_table "app_settings", force: true do |t|
     t.string   "name",       null: false
@@ -29,6 +29,8 @@ ActiveRecord::Schema.define(version: 20140813193504) do
     t.integer  "attribute_index"
   end
 
+  add_index "enrollment_data", ["enrollment_id"], name: "index_enrollment_data_on_enrollment_id"
+
   create_table "enrollments", force: true do |t|
     t.integer  "event_id"
     t.integer  "user_id"
@@ -36,6 +38,9 @@ ActiveRecord::Schema.define(version: 20140813193504) do
     t.datetime "updated_at"
     t.decimal  "time"
   end
+
+  add_index "enrollments", ["event_id"], name: "index_enrollments_on_event_id"
+  add_index "enrollments", ["user_id"], name: "index_enrollments_on_user_id"
 
   create_table "event_attributes", force: true do |t|
     t.integer  "event_id"
@@ -47,6 +52,8 @@ ActiveRecord::Schema.define(version: 20140813193504) do
     t.string   "attribute_label"
     t.integer  "attribute_index"
   end
+
+  add_index "event_attributes", ["event_id"], name: "index_event_attributes_on_event_id"
 
   create_table "events", force: true do |t|
     t.string   "name"
@@ -135,6 +142,9 @@ ActiveRecord::Schema.define(version: 20140813193504) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "statistics", ["kk_number"], name: "index_statistics_on_kk_number"
+  add_index "statistics", ["user_id"], name: "index_statistics_on_user_id"
 
   create_table "users", force: true do |t|
     t.string   "first_name"
