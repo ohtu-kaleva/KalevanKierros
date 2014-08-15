@@ -21,7 +21,12 @@ class StatisticsController < ApplicationController
 
     @current_statistic = @user.statistic
     @potential_statistics = Statistic.where 'statistics.user_id IS NULL'
-    @potential_statistics = @potential_statistics.select { |u| u.first_name.eql?(@user.first_name) && u.last_name.eql?(@user.last_name) }
+
+    first_name = @user.first_name.strip.downcase
+    last_name = @user.last_name.strip.downcase
+    @potential_statistics = @potential_statistics.select do |u|
+      u.first_name.strip.downcase.eql?(first_name) && u.last_name.strip.downcase.eql?(last_name)
+    end
   end
 
   def join_user_to_existing_statistic
