@@ -82,6 +82,7 @@ class UsersController < ApplicationController
         if @user.username == params[:username] && (@user.authenticate params[:password])
           if @user.activation_token == params[:activation_token]
             @user.update_attribute(:active, true)
+            init_statistic_entry @user
             session[:user_id] = @user.id
             flash[:success] = "Tervetuloa " + @user.first_name
           end
@@ -108,5 +109,11 @@ class UsersController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
       params.require(:user).permit(:first_name, :last_name, :username, :email, :phone_number, :city, :street_address, :postal_code, :birth_date, :gender, :password, :password_confirmation)
+    end
+
+    def init_statistic_entry(user)
+      Statistic.create kk_number: user.kk_number, user_id: user.id,
+                       last_name: user.last_name, first_name: user.first_name,
+                       city: user.city, birth_year: user.birth_date.year
     end
 end
