@@ -20,8 +20,10 @@
     <%= @statistic.birth_year %>
   </p>
   <p>
-    <strong>P</strong>
-    <%= @statistic.p %>
+    <% if @statistic.p %>
+      <strong>Puolimatka</strong>
+      <%= @statistic.p %>
+    <% end %>
   </p>
   <p>
     <strong>6</strong>
@@ -45,23 +47,36 @@
   </p>
   <p>
     <strong>Rintamerkki</strong>
-    <%= @statistic.r %>
+    <% if @statistic.r %>
+      Kyllä
+    <% else %>
+      Ei
+    <% end %>
   </p>
   <p>
-    <strong>Ansioviiri</strong>
-    <%= @statistic.a %>
+    <% if @statistic.a > 0 %>
+      <strong>Ansioviiri</strong>
+      <%= @statistic.a %>
+    <% end %>
   </p>
   <p>
-    <strong>AP</strong>
-    <%= @statistic.ap %>
+    <% if @statistic.ap %>
+      <strong>Ansioviiri (puolimatka)</strong>
+      <%= @statistic.ap %>
+    <% end %>
   </p>
   <p>
-    <strong>Kunniakiertäjänumero</strong>
-    <%= @statistic.k %>
+    <% if @statistic.k > 0 %>
+      <strong>Kunniakiertäjänumero</strong>
+      <%= @statistic.k %>
+    <% end %>
   </p>
   <p>
-    <strong>Veljeskunnan jäsennumero</strong>
-    <%= @statistic.v %>
+    <% if @statistic.v > 0 %>
+      <strong>Veljeskunnan jäsennumero</strong>
+      <%= @statistic.v %>
+    <% end %>
   </p>
+  <%= link_to 'Takaisin', :back %>
 
 </div>
