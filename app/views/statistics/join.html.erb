@@ -114,7 +114,7 @@
     <input id="statistic_id" name="statistic_id" type="hidden" value="" \>
   <% end %>
 </table>
-<%= submit_tag 'Liitä käyttäjä', data: { confirm: 'Liitettäessä käyttäjä tilastoon käyttäjän nykyinen tilasto poistetaan. Oletko varma?' } %><br>
+<%= submit_tag 'Liitä tilasto', class: 'btn btn-primary', onClick: "return confirm('Käyttäjän nykyinen tilasto poistetaan. Toimintoa ei voi peruuttaa.')" %><br>
 
 <% end %>
 
