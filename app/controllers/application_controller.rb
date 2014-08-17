@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   helper_method :current_user, :user_is_admin?, :redirect_if_user_not_admin, :usersearch,
-                :enrollment_open?, :seconds_to_human_form, :eventusersearch
+                :enrollment_open?, :seconds_to_human_form, :eventusersearch, :statisticsearch
 
   def current_user
     return nil if session[:user_id].nil?
@@ -34,6 +34,11 @@ class ApplicationController < ActionController::Base
   def usersearch
     usersearch = User.all
     usersearch.map{|user| {:label =>  user.kk_number.to_s << ' ' << user.first_name.capitalize << ' ' << user.last_name.capitalize, :value => user.kk_number } }.to_json
+  end
+
+  def statisticsearch
+    statisticsearch = Statistic.where 'statistics.user_id IS NULL'
+    statisticsearch.map { |statistic| { label: statistic.kk_number.to_s << ' ' << statistic.first_name << ' ' << statistic.last_name, statistic_id: statistic.id } }.to_json
   end
 
   def eventusersearch

@@ -1,0 +1,1 @@
+json.extract! @statistic, :id, :kk_number, :user_id, :last_name, :first_name, :city, :birth_year, :six_events_completed_count, :five_events_completed_count, :four_events_completed_count, :total_events_completed, :pts_sum, :position, :p, :r, :a, :ap, :k, :v
