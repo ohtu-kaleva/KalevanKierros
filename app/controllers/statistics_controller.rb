@@ -2,7 +2,7 @@ class StatisticsController < ApplicationController
 
   # GET /statistics
   def index
-    @statistics = Statistic.all
+    @statistics = Statistic.all.paginate(page: params[:page], per_page: 50)
   end
 
   # GET /statistics/1

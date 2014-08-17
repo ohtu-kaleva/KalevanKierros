@@ -20,7 +20,7 @@
   </tr>
   <% @statistics.each do |statistic| %>
     <tr>
-      <td><%= link_to "#{statistic.kk_number}", statistic_path(statistic.id) %></td>
+      <td><b><%= link_to "#{statistic.kk_number}", statistic_path(statistic.id) %></b></td>
       <td><%= statistic.last_name %></td>
       <td><%= statistic.first_name %></td>
       <td><%= statistic.city %></td>
@@ -39,3 +39,4 @@
     </tr>
   <% end %>
 </table>
+<%= will_paginate @statistics %>
