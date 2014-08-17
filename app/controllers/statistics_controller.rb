@@ -6,17 +6,25 @@ class StatisticsController < ApplicationController
   end
 
   # GET /statistics/1
+  # GET /statistics/1.json
   def show
     @statistic = Statistic.find_by id: params[:id]
-    if !@statistic
-      redirect_to :root
+
+    respond_to do |format|
+      if @statistic
+        format.html { render :show }
+        format.json { render json: @statistic }
+      else
+        format.html { redirect_to :root }
+        format.json { render json: nil}
+      end
     end
   end
 
   def join
     @user = User.find_by id: params[:id]
     if !@user
-      redirect_to :root
+      redirect_to :root && return
     end
 
     @current_statistic = @user.statistic
@@ -27,11 +35,13 @@ class StatisticsController < ApplicationController
     @potential_statistics = @potential_statistics.select do |u|
       u.first_name.strip.downcase.eql?(first_name) && u.last_name.strip.downcase.eql?(last_name)
     end
+
+    @potential_statistic = @potential_statistics.first
   end
 
   def join_user_to_existing_statistic
     @user = User.find_by id: params[:id]
-    @statistic = Statistic.find_by kk_number: params[:kk_number]
+    @statistic = Statistic.find_by id: params[:statistic_id]
 
     if @user && @statistic
       @user.statistic.destroy unless @user.statistic.nil?
@@ -39,7 +49,7 @@ class StatisticsController < ApplicationController
 
       redirect_to users_path, flash: { success: 'Käyttäjä liitetty tilastoon.' }
     else
-      redirect_to :root
+      redirect_to users_path, flash: { error: 'Käyttäjän liittäminen tilastoon ei onnistunut' }
     end
   end
 
