@@ -1,4 +1,5 @@
 <h1>Kierroksen hallinta</h1>
+<p>Voit hallita kierrosilmoittautumista täältä. Mikäli ilmoittautuminen ei ole avoinna, eivät kiertäjät pääse ilmoittautumaan kierrokselle. </p>
 <% if enrollment_open? %>
   <%= button_to('Sulje ilmoittautuminen', kk_enrollment_change_path, :class => "btn btn-danger") %>
 <% else %>

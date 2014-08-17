@@ -58,6 +58,7 @@ gem 'axlsx'
 
 gem 'tinymce-rails'
 gem 'will_paginate'
+gem 'shareable'
 
 # Use unicorn as the app server
 # gem 'unicorn'

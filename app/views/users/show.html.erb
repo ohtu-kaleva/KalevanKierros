@@ -1,29 +1,16 @@
-<p>
-  <strong>Etunimi:</strong>
-  <%= @user.first_name %>
-</p>
-
-<p>
-  <strong>Sukunimi:</strong>
-  <%= @user.last_name %>
-</p>
-
-<p>
-  <strong>Käyttäjätunnus:</strong>
-  <%= @user.username %>
-</p>
-
-<p>
-  <strong>Sähköpostiosoite:</strong>
-  <%= @user.email %>
-</p>
+<h2>
+  <%= link_to edit_user_path(@user) do %>
+  <%= @user.first_name %> <%= @user.last_name %>
+  <% end %>
+</h2>
 
 <% if not current_user.nil? and current_user.id == @user.id %>
 <% if not @enrollments.nil? or @enrollment.count > 0 %>
-<p>
-  <strong>Olet ilmoittautunut seuraaviin tapahtumiin</strong><br>
-  <% @enrollments.each do |enrollment|%>
-    <%= link_to enrollment.event.name, enrollment_path(enrollment.id) %><br>
+
+  <h4>Olet ilmoittautunut seuraaviin tapahtumiin:</h4>
+        <p>
+          <% @enrollments.each do |enrollment|%>
+    <%= link_to enrollment.event.name, enrollment_path(enrollment.id), class: 'label label-primary' %><br>
   <% end %>
 </p>
 <% end %>
@@ -33,6 +20,4 @@
      <%= link_to @group.name, group_path(@group) %>
    </p>
 <% end %>
-<%= link_to 'Muokkaa tietoja', edit_user_path(@user) %>
-<% end %> |
-<%= link_to 'Palaa takaisin', users_path %>
+<% end %>

@@ -33,7 +33,7 @@ class ApplicationController < ActionController::Base
   # käyttäjähaku ryhmälomakkeeseen, TODO haun rajaus
   def usersearch
     usersearch = User.all
-    usersearch.map{|user| {:label =>  user.kk_number.to_s << ' ' << user.first_name.capitalize << ' ' << user.last_name.capitalize, :value => user.kk_number } }.to_json
+    usersearch.map{|user| {:label =>  user.kk_number.to_s << ' ' << user.first_name << ' ' << user.last_name, :value => user.kk_number } }.to_json
   end
 
   def eventusersearch

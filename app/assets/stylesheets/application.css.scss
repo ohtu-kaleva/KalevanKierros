@@ -20,8 +20,8 @@
 // Example using 'Cerulean' bootswatch
 //
 
-$brand-primary: #12377e;
-$navbar-height: 70px;
+$brand-primary:         #002776;
+$navbar-height:         85px;
 //$icon-font-path: '/assets/';
 $screen-sm: 992px;
 
@@ -29,6 +29,7 @@ $link-color:            $brand-primary !default;
 $link-hover-color:      white !default;
 
 $headings-color:        #000;
+$font-family-sans-serif:  Arial, sans-serif;
 
 @import "bootstrap-sprockets";
 // First import journal variables
@@ -41,7 +42,7 @@ $headings-color:        #000;
 @import "bootstrap/mixins";
 
 // Bootstrap body padding for fixed navbar
-body { padding-top: 80px; }
+body { padding-top: 90px; }
 
 // Responsive styles go here in case you want them
 //@import "bootstrap-responsive";
@@ -59,7 +60,24 @@ body { padding-top: 80px; }
 @viewport           { width: device-width; }
 
 html {
+  position: relative;
+  min-height: 100%;
   overflow-y: scroll;
+}
+
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 55px;
+}
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 55px;
+  @include btn-shadow($navbar-default-bg);
+  filter: none;
+  @include box-shadow(0 1px 10px rgba(0, 0, 0, 0.1));
 }
 p {
   font-size: 15px;
@@ -74,4 +92,9 @@ a.btn:visited {
 }
 a.btn:hover {
   color: #f0f0f0;
+}
+.kk-footer{
+  color: #fff;
+  text-align: center;
+  padding-top: 4px;
 }
