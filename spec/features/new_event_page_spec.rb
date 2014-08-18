@@ -35,6 +35,7 @@ describe "New Event page" do
       fill_in "event_description", with: "Kuvausta"
       click_button "Luo tapahtuma"
       expect(page).to have_content "Tapahtuma luotu onnistuneesti"
+      expect(Event.last.sport_type).to eq('')
     end
 
     it "a new running event correctly" do
