@@ -1,4 +1,5 @@
 class StatisticsController < ApplicationController
+  before_action :redirect_if_user_not_admin, only: [:join, :join_user_to_existing_statistic]
 
   # GET /statistics
   def index
