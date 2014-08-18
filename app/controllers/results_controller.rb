@@ -12,7 +12,7 @@ class ResultsController < ApplicationController
     @res = {}
     @res[:series] = existing_age_series(params[:year])
     if params[:type] == 'all'
-      @res[:results] = Result.where(year: params[:year]).where(series: search_filter).order('completed_events desc, pts_sum desc')
+      @res[:results] = Result.where(year: params[:year]).where(series: search_filter).order('completed_events is null, completed_events desc, pts_sum desc')
     elsif params[:type] == 'cycling'
       @laji = "Pyöräily"
       @res[:results] = Result.where(year: params[:year]).where.not(cycling_time: nil).where(series: search_filter).order('cycling_pos asc').pluck('name, cycling_pos as position, cycling_pts as points, cycling_time as time')
