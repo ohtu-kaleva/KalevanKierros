@@ -75,7 +75,9 @@
               <ul class="dropdown-menu" aria-labelledby="omat tiedot">
                 <li><%= link_to 'Listaa tapahtumat', events_path %></li>
                 <li><%= link_to 'Tarkastele ilmoittautumisiasi', user_path(current_user) %></li>
-                <li><%= link_to 'Näytä tilasto', statistic_path(current_user) %></li>
+                <% if current_user.statistic %>
+                  <li><%= link_to 'Näytä tilasto', statistic_path(current_user.statistic.id) %></li>
+                <% end %>
                 <li class="divider"></li>
                 <li><%= link_to 'Muuta tietojasi', edit_user_path(current_user) %></li>
                 <li><%= link_to 'Kirjaudu ulos', signout_path, :method => 'delete' %></li>
