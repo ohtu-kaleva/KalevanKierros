@@ -49,9 +49,10 @@ class EventsController < ApplicationController
       @event = Event.new(event_params)
       @event.factor = 3500
       if @event.save
-        EventAttribute.create :name => 'Pari', :attribute_value => 'Jos sinulla on pari, niin hänen täytyy olla rekisteröitynyt käyttäjä.', :attribute_label => 'Pari-informaatio.', :attribute_type => 'plain_text', :event_id => @event.id, :attribute_index => nil
         EventAttribute.create :name => 'Melonta', :attribute_value => 'Soutu;Melonta', :attribute_label => 'Soutu/melonta', :attribute_type => 'select', :event_id => @event.id, :attribute_index => 1
         EventAttribute.create :name => 'Parin nimi', :attribute_value => '', :attribute_label => 'Jos soudat parin kanssa, kirjoita hänen nimensä tekstikenttään.', :attribute_type => 'text_field', :event_id => @event.id, :attribute_index => 2
+        EventAttribute.create :name => 'Parin sukupuoli', :attribute_value => 'M;N', :attribute_label => 'Parisi sukupuoli.', :attribute_type => 'select', :event_id => @event.id, :attribute_index => 3
+        EventAttribute.create :name => 'Parin syntymävuosi', :attribute_value => '', :attribute_label => 'Parisi syntymävuosi', :attribute_type => 'text_field', :event_id => @event.id, :attribute_index => 4
         redirect_to @event, flash: { success: 'Soututapahtuma luotu onnistuneesti.' }
       else
         render :new

@@ -127,18 +127,18 @@ ActiveRecord::Schema.define(version: 20140815202055) do
     t.string   "first_name"
     t.string   "city"
     t.integer  "birth_year"
-    t.integer  "six_events_completed_count"
-    t.integer  "five_events_completed_count"
-    t.integer  "four_events_completed_count"
-    t.integer  "total_events_completed"
-    t.decimal  "pts_sum"
-    t.integer  "position"
+    t.integer  "six_events_completed_count",  default: 0
+    t.integer  "five_events_completed_count", default: 0
+    t.integer  "four_events_completed_count", default: 0
+    t.integer  "total_events_completed",      default: 0
+    t.decimal  "pts_sum",                     default: 0.0
+    t.integer  "position",                    default: 0
     t.string   "p"
     t.string   "r"
-    t.integer  "a"
+    t.integer  "a",                           default: 0
     t.string   "ap"
-    t.integer  "k"
-    t.integer  "v"
+    t.integer  "k",                           default: 0
+    t.integer  "v",                           default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end

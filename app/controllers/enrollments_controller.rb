@@ -46,7 +46,7 @@ class EnrollmentsController < ApplicationController
             redirect_to root_path and return
           end
           if params[a.name].kind_of?(Array)
-            value = params[a.name].join(' ')
+            value = params[a.name].join(str)
             attribute_index = EventAttribute.where(event_id: event.id).where(name: a.name).first.attribute_index
             data_list.append(EnrollmentData.new(name:a.name, value:value, attribute_index: attribute_index))
           else
