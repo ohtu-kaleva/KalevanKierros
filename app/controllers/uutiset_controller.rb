@@ -6,7 +6,6 @@ class UutisetController < ApplicationController
   # GET /uutiset
   # GET /uutiset.json
   def index
-#    @uutiset = Uutiset.all
     @uutiset = Uutiset.all.paginate(page: params[:page], per_page: 10)
     if user_is_admin?
       render :action => 'index_admin'
@@ -41,49 +40,38 @@ class UutisetController < ApplicationController
   end
 
   # POST /uutiset
-  # POST /uutiset.json
   def create
     @uutiset = Uutiset.new(uutiset_params)
 
-    respond_to do |format|
-      if @uutiset.save
-        format.html { redirect_to @uutiset, notice: 'Uutiset was successfully created.' }
-        format.json { render :show, status: :created, location: @uutiset }
-      else
-        format.html { render :new }
-        format.json { render json: @uutiset.errors, status: :unprocessable_entity }
-      end
+    if @uutiset.save
+      redirect_to @uutiset, flash: { success: 'Uutinen luotu.' }
+    else
+      render :new
     end
   end
 
   # PATCH/PUT /uutiset/1
-  # PATCH/PUT /uutiset/1.json
   def update
-    respond_to do |format|
-      if @uutiset.update(uutiset_params)
-        format.html { redirect_to @uutiset, notice: 'Uutiset was successfully updated.' }
-        format.json { render :show, status: :ok, location: @uutiset }
-      else
-        format.html { render :edit }
-        format.json { render json: @uutiset.errors, status: :unprocessable_entity }
-      end
+    if @uutiset.update(uutiset_params)
+      redirect_to @uutiset, flash: { success: 'Uutinen päivitetty.' }
+    else
+      render :edit
     end
   end
 
   # DELETE /uutiset/1
-  # DELETE /uutiset/1.json
   def destroy
     @uutiset.destroy
-    respond_to do |format|
-      format.html { redirect_to uutiset_index_url, notice: 'Uutiset was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to uutiset_index_url, flash: { success: 'Uutinen poistettu.' }
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_uutiset
-      @uutiset = Uutiset.find(params[:id])
+      @uutiset = Uutiset.find_by id: params[:id]
+      return if @uutiset
+
+      redirect_to :root, flash: { alert: 'Uutista ei löytynyt' }
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

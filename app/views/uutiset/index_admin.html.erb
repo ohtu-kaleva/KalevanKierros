@@ -1,8 +1,9 @@
 <h1>Luodut uutiset</h1>
 
+<% if !@uutiset.empty? %>
 <%= will_paginate @news %>
 
-<table>
+<table id="news" class="table table-striped tablesorter-blue">
   <thead>
     <tr>
       <th>Otsikko</th>
@@ -16,14 +17,26 @@
       <tr>
         <td><%= uutiset.title %></td>
         <td><%= uutiset.created_at.strftime("%-d.%-m.%-Y %H:%M") %><!--<%= uutiset.body.html_safe %>--></td>
-        <td><%= link_to 'Näytä', uutiset %></td>
-        <td><%= link_to 'Muokkaa', edit_uutiset_path(uutiset) %></td>
-        <td><%= link_to 'Poista', uutiset, method: :delete, data: { confirm: 'Oletko varma?' } %></td>
+        <td><%= link_to 'Näytä', uutiset, class: "label label-primary" %></td>
+        <td><%= link_to 'Muokkaa', edit_uutiset_path(uutiset), class: "label label-primary" %></td>
+        <td><%= link_to 'Poista', uutiset, class: "label label-danger", method: :delete, data: { confirm: 'Oletko varma?' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
+    <script type="text/javascript">
 
+        $(document).ready(function () {
+                    $("#news").tablesorter( {headers: {2: {sorter:false}}});
+
+                }
+        );
+    </script>
+<style type="text/css">
+  table#news td, th { padding: 5px;}
+</style>
 <br>
-
-<%= link_to 'Luo uusi uutinen', new_uutiset_path %>
+    <% else %>
+    <p>Ei luotuja uutisia</p>
+<% end %>
+<%= link_to 'Luo uusi uutinen', new_uutiset_path, :class => "btn btn-primary" %>

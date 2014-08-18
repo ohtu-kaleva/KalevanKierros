@@ -1,0 +1,6 @@
+default:
+  plugins:
+    - image
+    - link
+    - table
+    - fullscreen

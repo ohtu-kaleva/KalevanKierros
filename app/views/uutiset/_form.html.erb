@@ -14,9 +14,18 @@
     <% end %>
 
       <%= f.text_field :title, label: "Uutisen otsikko" %>
-      <%= f.text_area :body, :class => "tinymce", :rows => 40, :cols => 120, label: "Uutisen leipäteksti" %>
+      <%= f.text_area :body, :class => "tinymce", :rows => 20, :cols => 120, label: "Uutisen leipäteksti" %>
     <div class="actions">
-      <%= f.submit %>
+      <%= f.submit 'Tallenna', :class => "btn btn-primary"  %>
     </div>
     <%= tinymce %>
+    <script type="text/javascript">
+    $(document).ready(function () {
+        $(function() {
+            $('textarea.tinymce').tinymce({
+       g });
+    });
+    }
+    );
+    </script>
 <% end %>
