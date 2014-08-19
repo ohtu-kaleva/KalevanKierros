@@ -17,11 +17,11 @@
     <% @events.each do |event| %>
       <tr>
         <td><%= event.name %></td>
-        <td><%= event.start_date %></td>
-        <td><%= event.end_date %></td>
-        <td><%= link_to 'Näytä tapahtuman tiedot', event %></td>
-        <td><% if user_is_admin? %><%= link_to 'Muokkaa tapahtumaa', edit_event_path(event)  %> <% end %></td>
-        <td><% if user_is_admin? %><%= link_to 'Poista tapahtuma', event, method: :delete, data: { confirm: 'Oletko varma että haluat poistaa tapahtuman?' } %><% end %></td>
+        <td><%= event.start_date.strftime("%-d.%-m.%-Y") %></td>
+        <td><%= event.end_date.strftime("%-d.%-m.%-Y") %></td>
+        <td><%= link_to 'Näytä tapahtuman tiedot', event, class: "btn btn-primary btn-sm"%></td>
+        <td><% if user_is_admin? %><%= link_to 'Muokkaa tapahtumaa', edit_event_path(event), class: "btn btn-warning btn-sm"  %> <% end %></td>
+        <td><% if user_is_admin? %><%= link_to 'Poista tapahtuma', event, method: :delete, data: { confirm: 'Oletko varma että haluat poistaa tapahtuman?' }, class: "btn btn-danger btn-sm" %><% end %></td>
       </tr>
     <% end %>
   </tbody>
@@ -29,13 +29,13 @@
   <script type="text/javascript">
 
       $(document).ready(function () {
-                  $("#events").tablesorter( {headers: {2: {sorter:false}, 3: {sorter:false}, 4: {sorter:false}}});
+                  $("#events").tablesorter( {headers: {3: {sorter:false}, 4: {sorter:false}, 5: {sorter:false}}});
               }
       );
   </script>
-<br>
+
 <% if user_is_admin? %>
-     <%= link_to 'Luo uusi tapahtuma', new_event_path %>
+     <%= link_to 'Luo uusi tapahtuma', new_event_path, class: "btn btn-primary" %>
 
 <% end %>
 </div>

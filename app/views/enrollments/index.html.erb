@@ -1,7 +1,7 @@
 <div class="col-lg-6">
 
   <h1>Ilmoittautumiset tapahtumittain</h1>
-
+<p>Valitse tapahtuma alta: </p>
   <table id="eventenrollments" class="table table-striped tablesorter-blue">
     <thead>
     <tr>
@@ -13,7 +13,7 @@
   <% @events.each do |event| %>
         <tr>
           <td><%= link_to event.name, show_enrollments_path(event.id) %></td>
-          <td><%=event.start_date %></td>
+          <td><%=event.start_date.strftime("%-d.%-m.%-Y") %></td>
     </tr>
   <% end %>
 

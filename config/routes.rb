@@ -34,17 +34,10 @@ Rails.application.routes.draw do
 
   get 'esittely/kalevankierros', to: 'static_pages#kalevankierros'
   get 'esittely/lajikuvaukset', to: 'static_pages#lajikuvaukset'
-  get 'esittely/ilmoittautuminen', to: 'static_pages#ilmoittautuminen'
+  get '/ilmoittautuminen', to: 'static_pages#ilmoittautuminen'
   get 'esittely/pistelasku', to: 'static_pages#pistelasku'
   get 'esittely/saannot', to: 'static_pages#saannot'
   get 'esittely/hallituksen-kokoukset', to: 'static_pages#hallituksen-kokoukset'
-
-  get 'osalajit/luistelu', to: 'static_pages#luistelu'
-  get 'osalajit/hiihto', to: 'static_pages#hiihto'
-  get 'osalajit/juoksu', to: 'static_pages#juoksu'
-  get 'osalajit/soutu', to: 'static_pages#soutu'
-  get 'osalajit/pyoraily', to: 'static_pages#pyoraily'
-  get 'osalajit/suunnistus', to: 'static_pages#suunnistus'
 
   get 'yhteystiedot', to: 'static_pages#yhteystiedot'
   get 'yhteystiedot/palaute', to: 'static_pages#palaute'

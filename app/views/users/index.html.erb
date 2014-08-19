@@ -19,14 +19,15 @@
           <td><%= user.first_name %></td>
           <td><%= user.username %></td>
           <td><%= user.email %></td>
-          <td><%= link_to 'Näytä', user %></td>
-          <td><%= link_to 'Liitä tilastoon', join_statistic_path(user), :'data-no-turbolink' => true %></td>
-          <td><%= link_to 'Muokkaa', edit_user_path(user) %></td>
-          <td><%= link_to 'Poista', user, method: :delete, data: {confirm: 'Are you sure?' } %></td>
+          <td><%= link_to 'Näytä', user, class: "btn btn-primary btn-sm" %></td>
+          <td><%= link_to 'Liitä tilastoon', join_statistic_path(user), :'data-no-turbolink' => true, class: "btn btn-primary btn-sm" %></td>
+          <td><%= link_to 'Muokkaa', edit_user_path(user), class: "btn btn-warning btn-sm" %></td>
+          <td><%= link_to 'Poista', user, method: :delete, data: {confirm: 'Are you sure?' }, class: "btn btn-danger btn-sm" %></td>
         </tr>
     <% end %>
     </tbody>
   </table>
+
   <script type="text/javascript">
 
       $(document).ready(function () {
@@ -36,5 +37,5 @@
   </script>
   <br>
 
-  <%= link_to 'Luo uusi käyttäjä', new_user_path %>
+  <%= link_to 'Luo uusi käyttäjä', new_user_path, class: "btn btn-primary" %>
 </div>
