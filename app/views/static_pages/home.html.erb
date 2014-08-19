@@ -13,4 +13,27 @@
 </div>
 <div class="col-lg-3" >
   <%= render :partial => '/uutiset/latest', locals: {show_latest: Uutiset.order('created_at desc').limit(10)} %>
+
+  <hr style="border-top: 1px dotted black;" />
+  <p style="text-align: left;">
+    &nbsp;&nbsp;&nbsp; &nbsp; &nbsp;
+    <a href="http://www.kalevankierros.fi/phpbb" class=""><%= image_tag 'forum.png', style: ''  %></a>
+    <br/>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <strong><a href="http://www.kalevankierros.fi/phpbb" target="_blank">KK-Forum</a></strong></p>
+
+  <p style="text-align: left;">
+    <br/>
+    <br/>
+    &nbsp;
+    <a href="http://www.facebook.com/KalevanKierros"><%= image_tag 'fb-kk_p2.jpg', style: 'border-width: 0px; border-style: solid; width: 130px; height: 107px;'  %> </a><br/>
+    <br/>
+    &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
+    <iframe allowtransparency="true" frameborder="0" scrolling="no" src="//www.facebook.com/plugins/like.php?href=http%3A%2F%2Fwww.facebook.com%2FKalevanKierros&amp;send=false&amp;layout=standard&amp;width=65&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font=lucida+grande&amp;height=25" style="border:none; overflow:hidden; width:65px; height:25px;"></iframe>
+  </p>
+  <p style="text-align: left;">
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    &nbsp;</p>
 </div>

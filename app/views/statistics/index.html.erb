@@ -1,21 +1,23 @@
 <div class="col-lg-6">
-<table class="table table-bordered">
+  <%= will_paginate @statistics %>
+
+  <table class="table table-bordered" width="100%">
   <tr>
     <th>Kiertäjänumero</th>
     <th>Sukunimi</th>
     <th>Etunimi</th>
     <th>Kotipaikka</th>
-    <th>Syntymävuosi</th>
+    <th>Vuosi</th>
     <th>P</th>
     <th>6</th>
     <th>5</th>
     <th>4</th>
-    <th>Yhteensä</th>
-    <th>Kokonaispisteet</th>
-    <th>Rintamerkki</th>
-    <th>Ansioviiri</th>
+    <th>Yht.</th>
+    <th>Pisteet</th>
+    <th>RM</th>
+    <th>A.viiri</th>
     <th>AP</th>
-    <th>Kunniakiertäjänumero</th>
+    <th>Kunniak.nro</th>
     <th>Veljeskunnan jäsennumero</th>
   </tr>
   <% @statistics.each do |statistic| %>
@@ -40,3 +42,4 @@
   <% end %>
 </table>
 <%= will_paginate @statistics %>
+    </div>
