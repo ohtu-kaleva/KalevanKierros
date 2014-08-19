@@ -8,6 +8,8 @@
   <p>
     <%= @uutiset.body.html_safe %>
   </p>
+  <p><%= render_shareable :buttons=> ['twitter', 'facebook'] %>
+  </p>
   <% if user_is_admin? %>
   <%= link_to 'Muokkaa uutista', edit_uutiset_path(@uutiset), :class => "btn btn-primary" %>
       <% end %>

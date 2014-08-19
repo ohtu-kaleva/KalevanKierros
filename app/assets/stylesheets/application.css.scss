@@ -97,6 +97,10 @@ a.btn:hover {
 a.label{ color: white;}
 a.label:visited{ color: white;}
 
+a.nohover:hover {
+  background-color: #fff;
+  color: #000;
+}
 
 .kk-footer{
   color: #fff;
