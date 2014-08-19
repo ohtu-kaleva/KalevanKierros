@@ -57,7 +57,7 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'axlsx'
 
 gem 'tinymce-rails'
-gem 'will_paginate'
+gem 'will_paginate-bootstrap'
 gem 'shareable'
 
 # Use unicorn as the app server

@@ -1,7 +1,7 @@
 <h1>Luodut uutiset</h1>
 
 <% if !@uutiset.empty? %>
-<%= will_paginate @news %>
+<%= will_paginate @news, renderer: BootstrapPagination::Rails %>
 
 <table id="news" class="table table-striped tablesorter-blue">
   <thead>
@@ -24,7 +24,10 @@
     <% end %>
   </tbody>
 </table>
-    <script type="text/javascript">
+
+          <%= will_paginate @news, renderer: BootstrapPagination::Rails %>
+
+          <script type="text/javascript">
 
         $(document).ready(function () {
                     $("#news").tablesorter( {headers: {2: {sorter:false}}});

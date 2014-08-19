@@ -1,5 +1,5 @@
-<div class="col-lg-6">
-  <%= will_paginate @statistics %>
+<div class="col-lg-12">
+  <%= will_paginate @statistics, renderer: BootstrapPagination::Rails %>
 
   <table class="table table-bordered" width="100%">
   <tr>
@@ -41,5 +41,5 @@
     </tr>
   <% end %>
 </table>
-<%= will_paginate @statistics %>
+<%= will_paginate @statistics, renderer: BootstrapPagination::Rails %>
     </div>
