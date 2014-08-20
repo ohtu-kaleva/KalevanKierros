@@ -7,7 +7,7 @@ describe EnrollmentMailer do
 
   it 'sends correct running enrollment confirmation' do
     event = FactoryGirl.create :complete_event, :running
-    enrollment = FactoryGirl.create :complete_enrollment, :running, user_id: user.id
+    enrollment = FactoryGirl.create :complete_enrollment, :running_marathon, user_id: user.id
     type = enrollment.enrollment_datas.find_by(name:'Tyyppi').value
 
     email = EnrollmentMailer.send_enrollment_email(user, event, enrollment)
@@ -44,7 +44,7 @@ describe EnrollmentMailer do
 
   it 'sends correct skiing enrollment confirmation' do
     event = FactoryGirl.create :complete_event, :skiing
-    enrollment = FactoryGirl.create :complete_enrollment, :skiing, user_id: user.id
+    enrollment = FactoryGirl.create :complete_enrollment, :skiing_freestyle, user_id: user.id
     style = enrollment.enrollment_datas.find_by(name: 'Tyyli').value
 
     email = EnrollmentMailer.send_enrollment_email(user, event, enrollment)

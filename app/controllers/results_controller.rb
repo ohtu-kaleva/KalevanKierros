@@ -217,25 +217,26 @@ class ResultsController < ApplicationController
       end
     elsif event.sport_type == 'RowingEvent'
       enrollments.each do |e|
+        temp_times[e.user.kk_number] = {}
         paddle = e.enrollment_datas.find_by name: 'Melonta'
         style = e.enrollment_datas.find_by name: 'Tyyli'
         if paddle.value == 'Melonta'
           # add 0 to temp_times[:time]
           temp_times[e.user.kk_number][:time] = 0
           temp_times[e.user.kk_number][:style] = 'Melonta'
+        else
+          temp_times[e.user.kk_number][:time] = e.time
         end
         if style.value == 'Vuoro'
-          temp_times[e.user.kk_number][:time] = e.time
           if female_penalty_applied?(e)
             # add female penalty to temp_times
             temp_times[e.user.kk_number][:time] += (60 * event.penalty_factor)
           end
           temp_times[e.user.kk_number][:time] += (60 * event.rowing_penalty)
           temp_times[e.user.kk_number][:style] = 'Vuoro'
-        else
+        elsif paddle.value != 'Melonta'
           temp_times[e.user.kk_number][:style] = 'Yksin'
         end
-
       end
     else
       enrollments.each do |e|

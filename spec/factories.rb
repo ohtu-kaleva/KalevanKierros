@@ -12,6 +12,8 @@ FactoryGirl.define do
     birth_date "27-5-1989"
     gender "M"
     kk_number 12345
+    password "Salainen1"
+    password_confirmation "Salainen1"
     active true
 
     factory :user_with_kk_enrollment do |user|
@@ -143,16 +145,59 @@ FactoryGirl.define do
     event_id 1
     time nil
 
-    trait :running do
+    trait :running_marathon do
       after :create do |enrollment|
         enrollment.enrollment_datas << EnrollmentData.create(name: 'Tyyppi', value: 'maraton', attribute_index: 1)
+      end
+    end
+
+    trait :running_half_marathon do
+      after :create do |enrollment|
+        enrollment.enrollment_datas << EnrollmentData.create(name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1)
       end
     end
 
     trait :rowing do
       after :create do |enrollment|
         enrollment.enrollment_datas << EnrollmentData.create(name: 'Melonta', value: 'Soutu', attribute_index: 1)
-        enrollment.enrollment_datas << EnrollmentData.create(name: 'Parin nimi', value: '', attribute_index: 2)
+        enrollment.enrollment_datas << EnrollmentData.create(name: 'Tyyli', value: 'Yksin', attribute_index: 2)
+        enrollment.enrollment_datas << EnrollmentData.create(name: 'Parin nimi', value: nil, attribute_index: 3)
+        enrollment.enrollment_datas << EnrollmentData.create(name: 'Parin sukupuoli', value: nil, attribute_index: 4)
+        enrollment.enrollment_datas << EnrollmentData.create(name: 'Parin syntymävuosi', value: nil, attribute_index: 5)
+        enrollment.enrollment_datas << EnrollmentData.create(name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6)
+      end
+    end
+
+    trait :rowing_with_male do
+      after :create do |enrollment|
+        enrollment.enrollment_datas << EnrollmentData.create(name: 'Melonta', value: 'Soutu', attribute_index: 1)
+        enrollment.enrollment_datas << EnrollmentData.create(name: 'Tyyli', value: 'Vuoro', attribute_index: 2)
+        enrollment.enrollment_datas << EnrollmentData.create(name: 'Parin nimi', value: 'Testi', attribute_index: 3)
+        enrollment.enrollment_datas << EnrollmentData.create(name: 'Parin sukupuoli', value: 'M', attribute_index: 4)
+        enrollment.enrollment_datas << EnrollmentData.create(name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5)
+        enrollment.enrollment_datas << EnrollmentData.create(name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6)
+      end
+    end
+
+    trait :rowing_with_female do
+      after :create do |enrollment|
+        enrollment.enrollment_datas << EnrollmentData.create(name: 'Melonta', value: 'Soutu', attribute_index: 1)
+        enrollment.enrollment_datas << EnrollmentData.create(name: 'Tyyli', value: 'Vuoro', attribute_index: 2)
+        enrollment.enrollment_datas << EnrollmentData.create(name: 'Parin nimi', value: 'Testi', attribute_index: 3)
+        enrollment.enrollment_datas << EnrollmentData.create(name: 'Parin sukupuoli', value: 'F', attribute_index: 4)
+        enrollment.enrollment_datas << EnrollmentData.create(name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5)
+        enrollment.enrollment_datas << EnrollmentData.create(name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6)
+      end
+    end
+
+    trait :paddling do
+      after :create do |enrollment|
+        enrollment.enrollment_datas << EnrollmentData.create(name: 'Melonta', value: 'Melonta', attribute_index: 1)
+        enrollment.enrollment_datas << EnrollmentData.create(name: 'Tyyli', value: 'Yksin', attribute_index: 2)
+        enrollment.enrollment_datas << EnrollmentData.create(name: 'Parin nimi', value: nil, attribute_index: 3)
+        enrollment.enrollment_datas << EnrollmentData.create(name: 'Parin sukupuoli', value: nil, attribute_index: 4)
+        enrollment.enrollment_datas << EnrollmentData.create(name: 'Parin syntymävuosi', value: nil, attribute_index: 5)
+        enrollment.enrollment_datas << EnrollmentData.create(name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6)
       end
     end
 
@@ -162,9 +207,15 @@ FactoryGirl.define do
       end
     end
 
-    trait :skiing do
+    trait :skiing_freestyle do
       after :create do |enrollment|
         enrollment.enrollment_datas << EnrollmentData.create(name: 'Tyyli', value: 'Vapaa', attribute_index: 1)
+      end
+    end
+
+    trait :skiing_traditional do
+      after :create do |enrollment|
+        enrollment.enrollment_datas << EnrollmentData.create(name: 'Tyyli', value: 'Perinteinen', attribute_index: 1)
       end
     end
 

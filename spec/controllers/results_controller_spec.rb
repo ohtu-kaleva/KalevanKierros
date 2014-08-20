@@ -133,4 +133,224 @@ describe ResultsController do
     expect(result.completed_events).to eq(6)
     expect(result.pts_sum).to be_within(0.1).of(3911.01)
   end
+
+  it "should not apply rowing penalty if male rowing with male" do
+    user = FactoryGirl.create(:user, gender: 'M')
+    enrollment = FactoryGirl.create(:complete_enrollment, :rowing_with_male)
+    enrollment.user_id = user.id
+    enrollment.save
+    enrollment = Enrollment.last
+    value = controller.female_penalty_applied?(enrollment)
+    expect(value).to be_false
+  end
+
+  it "should not apply rowing penalty if male rowing with female" do
+    user = FactoryGirl.create(:user, gender: 'M')
+    enrollment = FactoryGirl.create(:complete_enrollment, :rowing_with_female)
+    enrollment.user_id = user.id
+    enrollment.save
+    enrollment = Enrollment.last
+    value = controller.female_penalty_applied?(enrollment)
+    expect(value).to be_false
+  end
+
+  it "should not apply rowing penalty if female rowing with female" do
+    user = FactoryGirl.create(:user, gender: 'F')
+    enrollment = FactoryGirl.create(:complete_enrollment, :rowing_with_female)
+    enrollment.user_id = user.id
+    enrollment.save
+    enrollment = Enrollment.last
+    value = controller.female_penalty_applied?(enrollment)
+    expect(value).to be_false
+  end
+
+  it "should apply rowing penalty if female rowing with male" do
+    user = FactoryGirl.create(:user, gender: 'F')
+    enrollment = FactoryGirl.create(:complete_enrollment, :rowing_with_male)
+    enrollment.user_id = user.id
+    enrollment.save
+    enrollment = Enrollment.last
+    value = controller.female_penalty_applied?(enrollment)
+    expect(value).to be_true
+  end
+
+  it "should return unscaled times correctly" do
+    event = FactoryGirl.create(:complete_event, :skating)
+    user1 = FactoryGirl.create(:user, kk_number: '2001', username: 'lol1')
+    user2 = FactoryGirl.create(:user, kk_number: '2002', username: 'lol2')
+    user3 = FactoryGirl.create(:user, kk_number: '2003', username: 'lol3')
+    user4 = FactoryGirl.create(:user, kk_number: '2004', username: 'lol4')
+    enrollment1 = FactoryGirl.create(:complete_enrollment, :skating)
+    enrollment1.user_id = user1.id
+    enrollment1.event_id = event.id
+    enrollment1.time = 4432.53
+    enrollment1.save
+    enrollment2 = FactoryGirl.create(:complete_enrollment, :skating)
+    enrollment2.user_id = user2.id
+    enrollment2.event_id = event.id
+    enrollment2.time = 53256.4
+    enrollment2.save
+    enrollment3 = FactoryGirl.create(:complete_enrollment, :skating)
+    enrollment3.user_id = user3.id
+    enrollment3.event_id = event.id
+    enrollment3.time = 42552.65
+    enrollment3.save
+    enrollment4 = FactoryGirl.create(:complete_enrollment, :skating)
+    enrollment4.user_id = user4.id
+    enrollment4.event_id = event.id
+    enrollment4.time = nil
+    enrollment4.save
+    times = controller.unscaled_times(event)
+    expect(times.count).to eq(4)
+    expect(times[2001]).to eq(4432.53)
+    expect(times[2002]).to eq(53256.4)
+    expect(times[2003]).to eq(42552.65)
+    expect(times[2004]).to be nil
+  end
+
+  it "should scale times correctly for running event" do
+    event = FactoryGirl.create(:complete_event, :running, penalty_factor: 2.3)
+    user1 = FactoryGirl.create(:user, kk_number: '2001', username: 'lol1')
+    user2 = FactoryGirl.create(:user, kk_number: '2002', username: 'lol2')
+    user3 = FactoryGirl.create(:user, kk_number: '2003', username: 'lol3')
+    user4 = FactoryGirl.create(:user, kk_number: '2004', username: 'lol4')
+    enrollment1 = FactoryGirl.create(:complete_enrollment, :running_half_marathon)
+    enrollment1.user_id = user1.id
+    enrollment1.event_id = event.id
+    enrollment1.time = 2232.32
+    enrollment1.save
+    enrollment2 = FactoryGirl.create(:complete_enrollment, :running_marathon)
+    enrollment2.user_id = user2.id
+    enrollment2.event_id = event.id
+    enrollment2.time = 3256.63
+    enrollment2.save
+    enrollment3 = FactoryGirl.create(:complete_enrollment, :running_half_marathon)
+    enrollment3.user_id = user3.id
+    enrollment3.event_id = event.id
+    enrollment3.time = 42552.65
+    enrollment3.save
+    enrollment4 = FactoryGirl.create(:complete_enrollment, :running_marathon)
+    enrollment4.user_id = user4.id
+    enrollment4.event_id = event.id
+    enrollment4.time = nil
+    enrollment4.save
+    scaled_times = controller.scale_times(event)
+    expect(scaled_times.count).to eq(3)
+    expect(scaled_times[2001][:time]).to be_within(0.1).of(5134.336)
+    expect(scaled_times[2001][:style]).to eq('puolimaraton')
+    expect(scaled_times[2002][:time]).to be_within(0.1).of(3256.63)
+    expect(scaled_times[2002][:style]).to eq('maraton')
+    expect(scaled_times[2003][:time]).to be_within(0.1).of(97871.095)
+    expect(scaled_times[2003][:style]).to eq('puolimaraton')
+  end
+
+  it "should scale times correctly for skiing event" do
+    event = FactoryGirl.create(:complete_event, :skiing, penalty_factor: 1.06)
+    user1 = FactoryGirl.create(:user, kk_number: '2001', username: 'lol1')
+    user2 = FactoryGirl.create(:user, kk_number: '2002', username: 'lol2')
+    user3 = FactoryGirl.create(:user, kk_number: '2003', username: 'lol3')
+    user4 = FactoryGirl.create(:user, kk_number: '2004', username: 'lol4')
+    enrollment1 = FactoryGirl.create(:complete_enrollment, :skiing_freestyle)
+    enrollment1.user_id = user1.id
+    enrollment1.event_id = event.id
+    enrollment1.time = 6436.76
+    enrollment1.save
+    enrollment2 = FactoryGirl.create(:complete_enrollment, :skiing_traditional)
+    enrollment2.user_id = user2.id
+    enrollment2.event_id = event.id
+    enrollment2.time = 7575.33
+    enrollment2.save
+    enrollment3 = FactoryGirl.create(:complete_enrollment, :skiing_freestyle)
+    enrollment3.user_id = user3.id
+    enrollment3.event_id = event.id
+    enrollment3.time = 1313.23
+    enrollment3.save
+    enrollment4 = FactoryGirl.create(:complete_enrollment, :skiing_freestyle)
+    enrollment4.user_id = user4.id
+    enrollment4.event_id = event.id
+    enrollment4.time = 4233.355
+    enrollment4.save
+    scaled_times = controller.scale_times(event)
+    expect(scaled_times.count).to eq(4)
+    expect(scaled_times[2001][:time]).to be_within(0.1).of(6822.9656)
+    expect(scaled_times[2001][:style]).to eq('Vapaa')
+    expect(scaled_times[2002][:time]).to be_within(0.1).of(7575.33)
+    expect(scaled_times[2002][:style]).to eq('Perinteinen')
+    expect(scaled_times[2003][:time]).to be_within(0.1).of(1392.0238)
+    expect(scaled_times[2003][:style]).to eq('Vapaa')
+    expect(scaled_times[2004][:time]).to be_within(0.1).of(4487.3563)
+    expect(scaled_times[2004][:style]).to eq('Vapaa')
+  end
+
+  it "should scale times correctly for rowing event" do
+    event = FactoryGirl.create(:complete_event, :rowing, penalty_factor: 20.0, rowing_penalty: 12.0)
+    user1 = FactoryGirl.create(:user, gender: 'M', kk_number: '2001', username: 'lol1')
+    user2 = FactoryGirl.create(:user, gender: 'F', kk_number: '2002', username: 'lol2')
+    user3 = FactoryGirl.create(:user, gender: 'F', kk_number: '2003', username: 'lol3')
+    user4 = FactoryGirl.create(:user, gender: 'M', kk_number: '2004', username: 'lol4')
+    enrollment1 = FactoryGirl.create(:complete_enrollment, :rowing_with_female)
+    enrollment1.user_id = user1.id
+    enrollment1.event_id = event.id
+    enrollment1.time = 2144.66
+    enrollment1.save
+    enrollment2 = FactoryGirl.create(:complete_enrollment, :rowing_with_male)
+    enrollment2.user_id = user2.id
+    enrollment2.event_id = event.id
+    enrollment2.time = 1243.35
+    enrollment2.save
+    enrollment3 = FactoryGirl.create(:complete_enrollment, :rowing)
+    enrollment3.user_id = user3.id
+    enrollment3.event_id = event.id
+    enrollment3.time = 2523.63
+    enrollment3.save
+    enrollment4 = FactoryGirl.create(:complete_enrollment, :paddling)
+    enrollment4.user_id = user4.id
+    enrollment4.event_id = event.id
+    enrollment4.time = 3533.54
+    enrollment4.save
+    scaled_times = controller.scale_times(event)
+    expect(scaled_times.count).to eq(4)
+    expect(scaled_times[2001][:time]).to be_within(0.1).of(2864.66)
+    expect(scaled_times[2001][:style]).to eq('Vuoro')
+    expect(scaled_times[2002][:time]).to be_within(0.1).of(3163.35)
+    expect(scaled_times[2002][:style]).to eq('Vuoro')
+    expect(scaled_times[2003][:time]).to be_within(0.1).of(2523.63)
+    expect(scaled_times[2003][:style]).to eq('Yksin')
+    expect(scaled_times[2004][:time]).to be_within(0.1).of(0)
+    expect(scaled_times[2004][:style]).to eq('Melonta')
+  end
+
+  it "should not scale times for other events" do
+    event = FactoryGirl.create(:complete_event, :orienteering)
+    user1 = FactoryGirl.create(:user, gender: 'M', kk_number: '2001', username: 'lol1')
+    user2 = FactoryGirl.create(:user, gender: 'F', kk_number: '2002', username: 'lol2')
+    user3 = FactoryGirl.create(:user, gender: 'F', kk_number: '2003', username: 'lol3')
+    user4 = FactoryGirl.create(:user, gender: 'M', kk_number: '2004', username: 'lol4')
+    enrollment1 = FactoryGirl.create(:complete_enrollment, :orienteering)
+    enrollment1.user_id = user1.id
+    enrollment1.event_id = event.id
+    enrollment1.time = 2144.66
+    enrollment1.save
+    enrollment2 = FactoryGirl.create(:complete_enrollment, :orienteering)
+    enrollment2.user_id = user2.id
+    enrollment2.event_id = event.id
+    enrollment2.time = 1243.35
+    enrollment2.save
+    enrollment3 = FactoryGirl.create(:complete_enrollment, :orienteering)
+    enrollment3.user_id = user3.id
+    enrollment3.event_id = event.id
+    enrollment3.time = 2523.63
+    enrollment3.save
+    enrollment4 = FactoryGirl.create(:complete_enrollment, :orienteering)
+    enrollment4.user_id = user4.id
+    enrollment4.event_id = event.id
+    enrollment4.time = 3533.54
+    enrollment4.save
+    scaled_times = controller.scale_times(event)
+    expect(scaled_times.count).to eq(4)
+    expect(scaled_times[2001][:time]).to be_within(0.1).of(2144.66)
+    expect(scaled_times[2002][:time]).to be_within(0.1).of(1243.35)
+    expect(scaled_times[2003][:time]).to be_within(0.1).of(2523.63)
+    expect(scaled_times[2004][:time]).to be_within(0.1).of(3533.54)
+  end
 end
