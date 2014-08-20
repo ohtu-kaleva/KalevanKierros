@@ -1,28 +1,53 @@
 <h1>Vuoden <%= params[:year] %> joukkuetulokset</h1>
-<table class="table table-bordered">
-  <% @results.each do |key, value| %>
-  <tr>
-    <th colspan="3" style="color:blue"><%= key %>: <%= @group_points[key] %></th>
-  </tr>
-  <tr>
-    <th>Nimi</th>
-    <th>Kokonaispisteet</th>
-    <th>Suoritetut lajit</th>
-  </tr>
-    <% value.each do |v| %>
-  <tr>
-        <td><%= v.name %></td>
-        <% if v.pts_sum.nil? %>
-            <td>Ei pisteitä</td>
-        <% else %>
-        <td><%= v.pts_sum %></td>
-        <% end %>
-        <% if v.completed_events.nil? %>
-            <td>Ei suoritettuja osakilpailuja</td>
-        <% else %>
-            <td><%= v.completed_events %></td>
-        <% end %>
-    <% end %>
+<p>Klikkaamalla joukkueen nimeä näet joukkuejäsenten pisteet.</p>
+<table class="results" >
+  <% i = 0 %>
+  <% @group_points.sort_by { |k, v| v }.reverse.each do |key, value| %>
+      <% i += 1 %>
+      <tr>
+        <td style="font-size: larger; width: 350px;">
+          <a href="#" onclick="event.preventDefault(); $('#stat<%= i %>').toggle()"><%= i %>. <%= key %></a>
+        </td>
+        <td style="color: black; font-size: larger;"><%= value.round(2) %></td>
+        <td>&nbsp;</td>                                       </tr>
+      <tr>
+        <td colspan="3">
+          <table style="display: none;" class="table" id="stat<%= i %>">
+            <tr>
+              <th>Nimi</th>
+              <th>Kokonaispisteet</th>
+              <th>Suoritetut lajit</th>
+            </tr>
+            <% @results[key].each do |v| %>
+                <tr>
+                  <td><%= v.name %></td>
+                  <% if v.pts_sum.nil? %>
+                      <td>Ei pisteitä</td>
+                  <% else %>
+                      <td><%= v.pts_sum.round(2) %></td>
+                  <% end %>
+                  <% if v.completed_events.nil? %>
+                      <td>Ei suoritettuja osakilpailuja</td>
+                  <% else %>
+                      <td><%= v.completed_events %></td>
+                  <% end %>
+            <% end %>
+  </td></tr>
+  </td>
+  </table>
   </tr>
   <% end %>
 </table>
+<style type="text/css">
+    table.results {
+        width: 100%;
+        max-width: 100%;
+        margin-bottom: 20px
+    }
+
+    table.child {
+        margin-top: 5px;
+        margin-bottom: 20px;
+        float: right;
+    }
+</style>

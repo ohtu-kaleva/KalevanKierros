@@ -15,25 +15,7 @@
   <%= render :partial => '/uutiset/latest', locals: {show_latest: Uutiset.order('created_at desc').limit(10)} %>
 
   <hr style="border-top: 1px dotted black;" />
-  <p style="text-align: left;">
-    &nbsp;&nbsp;&nbsp; &nbsp; &nbsp;
-    <a class="nohover" href="http://www.kalevankierros.fi/phpbb" class=""><%= image_tag 'forum.png', style: ''  %></a>
-    <br/>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <strong><a class="nohover" href="http://www.kalevankierros.fi/phpbb" target="_blank">KK-Forum</a></strong></p>
 
-  <p style="text-align: left;">
-    <br/>
-    <br/>
-    &nbsp;
-    <a class="nohover" href="http://www.facebook.com/KalevanKierros"><%= image_tag 'fb-kk_p2.jpg', style: 'border-width: 0px; border-style: solid; width: 130px; height: 107px;'  %> </a><br/>
-    <br/>
-  </p>
-  <p style="text-align: left;">
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    &nbsp;</p>
 </div>
 <div class="col-lg-12">
 <%= render_shareable :buttons=> ['twitter', 'facebook'] %>

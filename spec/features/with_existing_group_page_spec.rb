@@ -26,18 +26,18 @@ describe 'Group Results page' do
       expect(page).to have_content('Testi')
     end
 
-    it 'should show the names of the participants in group' do
-      expect(page).to have_content('Kristian Hansson')
-      expect(page).to have_content('Erkki Hervanta')
-      expect(page).to have_content('Veikko Vanaja')
-      expect(page).to have_content('Jaakko Janakkala')
-      expect(page).to have_content('Aapo Akaa')
-      expect(page).to have_content('Heikki Hattula')
-    end
+#    it 'should show the names of the participants in group' do
+#      expect(page).to have_content('Kristian Hansson')
+#      expect(page).to have_content('Erkki Hervanta')
+#      expect(page).to have_content('Veikko Vanaja')
+#      expect(page).to have_content('Jaakko Janakkala')
+#      expect(page).to have_content('Aapo Akaa')
+#      expect(page).to have_content('Heikki Hattula')
+#    end
 
     it 'should show the sum of points correctly' do
       # This was checked by counting the sum of four best points in FactoryGirl factory :result in spec/factories.rb by hand
-      expect(page).to have_content('Testi: 21199.16')
+      expect(page).to have_content('Testi 21199.16')
     end
   end
 

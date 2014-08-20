@@ -33,9 +33,9 @@ class ResultsController < ApplicationController
       @res[:results] = Result.where(year: params[:year]).where.not(marathon_time: nil).where(series: search_filter).order('marathon_pos asc').pluck('name, marathon_pos as position, marathon_pts as points, marathon_time as time')
     end
     if @res[:results].empty? && params[:gender] == "all" && params[:age_group] == "all" && params[:type] == "all"
-      redirect_to :results, notice: 'Valitsemallesi vuodelle ei löydy tuloksia' and return
+      redirect_to :results, flash: {error: 'Valitsemallesi vuodelle ei löydy tuloksia'} and return
     elsif @res[:results].empty?
-      redirect_to index_by_year_path(params[:year], "all", "all", "all"), notice: 'Valitsemillasi hakuparametreillä ei löydy tuloksia.' and return
+      redirect_to index_by_year_path(params[:year], "all", "all", "all"), flash: {error: 'Valitsemillasi hakuparametreillä ei löydy tuloksia.' } and return
     end
     @res
   end
@@ -100,6 +100,7 @@ class ResultsController < ApplicationController
         @results[result.group].append(result)
       end
     end
+    @group_points
     @results
   end
 

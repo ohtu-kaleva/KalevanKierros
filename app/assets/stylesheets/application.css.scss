@@ -67,14 +67,14 @@ html {
 
 body {
   /* Margin bottom by footer height */
-  margin-bottom: 90px;
+  margin-bottom: 110px;
 }
 footer {
   position: absolute;
   bottom: 0;
   width: 100%;
   /* Set the fixed height of the footer here */
-  height: 90px;
+  height: 110px;
   @include btn-shadow(#002776);
   filter: none;
   @include box-shadow(0 1px 10px rgba(0, 0, 0, 0.1));
