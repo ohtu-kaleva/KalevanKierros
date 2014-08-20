@@ -57,7 +57,7 @@ class ResultsController < ApplicationController
   end
 
   def existing_age_series(year)
-    series = Result.where(year: params[:year]).select('series').uniq
+    series = Result.where(year: year).select('series').uniq
     age_series = []
     series.each do |s|
       series_string = s[:series].to_s
