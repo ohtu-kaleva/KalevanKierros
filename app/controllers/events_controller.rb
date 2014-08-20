@@ -22,10 +22,15 @@ class EventsController < ApplicationController
 
   # POST /events
   def create
-    if /\d{1,2},\d{1,2}/ === event_params[:penalty_factor]
+    if check_for_valid_decimal(event_params[:penalty_factor])
       event_params[:penalty_factor] = (event_params[:penalty_factor].sub! ',', '.').to_f
     else
       event_params[:penalty_factor] = 1.0
+    end
+    if check_for_valid_decimal(event_params[:rowing_penalty])
+      event_params[:rowing_penalty] = (event_params[:rowing_penalty].sub! ',', '.').to_f
+    else
+      event_params[:rowing_penalty] = 12.0
     end
     if event_params[:sport_type].empty?
     @event = Event.new(event_params)
@@ -50,9 +55,11 @@ class EventsController < ApplicationController
       @event.factor = 3500
       if @event.save
         EventAttribute.create :name => 'Melonta', :attribute_value => 'Soutu;Melonta', :attribute_label => 'Soutu/melonta', :attribute_type => 'select', :event_id => @event.id, :attribute_index => 1
-        EventAttribute.create :name => 'Parin nimi', :attribute_value => '', :attribute_label => 'Jos soudat parin kanssa, kirjoita hänen nimensä tekstikenttään.', :attribute_type => 'text_field', :event_id => @event.id, :attribute_index => 2
-        EventAttribute.create :name => 'Parin sukupuoli', :attribute_value => 'M;N', :attribute_label => 'Parisi sukupuoli.', :attribute_type => 'select', :event_id => @event.id, :attribute_index => 3
-        EventAttribute.create :name => 'Parin syntymävuosi', :attribute_value => '', :attribute_label => 'Parisi syntymävuosi', :attribute_type => 'text_field', :event_id => @event.id, :attribute_index => 4
+        EventAttribute.create :name => 'Tyyli', :attribute_value => 'Yksin;Vuoro', :attribute_label => 'Valitse soudatko yksin- tai vuorosoudun.', :attribute_type => 'select', :event_id => @event.id, :attribute_index => 2
+        EventAttribute.create :name => 'Parin nimi', :attribute_value => '', :attribute_label => 'Jos soudat parin kanssa, kirjoita hänen nimensä tekstikenttään.', :attribute_type => 'text_field', :event_id => @event.id, :attribute_index => 3
+        EventAttribute.create :name => 'Parin sukupuoli', :attribute_value => 'M;F', :attribute_label => 'Parisi sukupuoli.', :attribute_type => 'select', :event_id => @event.id, :attribute_index => 4
+        EventAttribute.create :name => 'Parin syntymävuosi', :attribute_value => '', :attribute_label => 'Parisi syntymävuosi', :attribute_type => 'text_field', :event_id => @event.id, :attribute_index => 5
+        EventAttribute.create :name => 'Onko pari kiertäjä', :attribute_value => 'Ei;Kyllä', :attribute_label => 'Onko parisi kiertäjä?', :attribute_type => 'select', :event_id => @event.id, :attribute_index => 6
         redirect_to @event, flash: { success: 'Soututapahtuma luotu onnistuneesti.' }
       else
         render :new
@@ -114,6 +121,10 @@ class EventsController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
+  def check_for_valid_decimal(decimal_param)
+    /\d{1,2},\d{1,2}/ === decimal_param
+  end
+
     def set_event_or_redirect
       @event = Event.find_by id: params[:id]
       return if @event
@@ -123,6 +134,6 @@ class EventsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
-      params.require(:event).permit(:name, :start_date, :end_date, :second_end_date, :price, :second_price, :description, :open, :penalty_factor, :sport_type)
+      params.require(:event).permit(:name, :start_date, :end_date, :second_end_date, :price, :second_price, :description, :open, :penalty_factor, :sport_type, :rowing_penalty)
     end
 end

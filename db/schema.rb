@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140815202055) do
+ActiveRecord::Schema.define(version: 20140820121905) do
 
   create_table "app_settings", force: true do |t|
     t.string   "name",       null: false
@@ -69,6 +69,7 @@ ActiveRecord::Schema.define(version: 20140815202055) do
     t.decimal  "penalty_factor",  default: 1.0
     t.integer  "factor"
     t.string   "sport_type"
+    t.decimal  "rowing_penalty",  default: 12.0
   end
 
   create_table "groups", force: true do |t|

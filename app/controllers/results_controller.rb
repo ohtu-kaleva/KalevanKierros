@@ -214,6 +214,28 @@ class ResultsController < ApplicationController
           temp_times[e.user.kk_number][:style] = 'Perinteinen'
         end
       end
+    elsif event.sport_type == 'RowingEvent'
+      enrollments.each do |e|
+        paddle = e.enrollment_datas.find_by name: 'Melonta'
+        style = e.enrollment_datas.find_by name: 'Tyyli'
+        if paddle.value == 'Melonta'
+          # add 0 to temp_times[:time]
+          temp_times[e.user.kk_number][:time] = 0
+          temp_times[e.user.kk_number][:style] = 'Melonta'
+        end
+        if style.value == 'Vuoro'
+          temp_times[e.user.kk_number][:time] = e.time
+          if female_penalty_applied?(e)
+            # add female penalty to temp_times
+            temp_times[e.user.kk_number][:time] += (60 * event.penalty_factor)
+          end
+          temp_times[e.user.kk_number][:time] += (60 * event.rowing_penalty)
+          temp_times[e.user.kk_number][:style] = 'Vuoro'
+        else
+          temp_times[e.user.kk_number][:style] = 'Yksin'
+        end
+
+      end
     else
       enrollments.each do |e|
         temp_times[e.user.kk_number] = {}
@@ -222,6 +244,17 @@ class ResultsController < ApplicationController
       end
     end
     temp_times
+  end
+
+  def female_penalty_applied?(enrollment)
+    user = enrollment.user
+    attr = enrollment.enrollment_datas.find_by name: 'Parin sukupuoli'
+    if user.gender == 'F'
+      if attr.value == 'M'
+        return true
+      end
+    end
+    false
   end
 
   def unscaled_times(event)
@@ -243,14 +276,20 @@ class ResultsController < ApplicationController
     year = event.second_end_date.year
     times_sorted.each do |number, time_and_style|
       if time_and_style[:time]
-        points = 1000 - event.factor * Math.log10(time_and_style[:time] / winner_time)
-        insert_result_for_event(event.sport_type, number, year, points, normal_times[number], position, time_and_style[:style])
-        normal_times.delete number
-        position += 1
+        if time_and_style[:time] != 0
+          points = 1000 - event.factor * Math.log10(time_and_style[:time] / winner_time)
+          insert_result_for_event(event.sport_type, number, year, points, normal_times[number], position, time_and_style[:style])
+          normal_times.delete number
+          position += 1
+        end
       end
     end
     normal_times.each do |number, time|
-      insert_result_for_event(event.sport_type, number, year, nil, nil, nil, nil)
+      if event.sport_type == 'RowingEvent'
+        insert_result_for_event(event.sport_type, number, year, nil, time, nil, 'Melonta')
+      else
+        insert_result_for_event(event.sport_type, number, year, nil, nil, nil, nil)
+      end
     end
     redirect_to results_path
   end
