@@ -72,4 +72,65 @@ describe ResultsController do
     sum_pts_test_group = controller.sum_of_four_best_points("testi", 2014)
     expect(sum_pts_test_group).to be_within(0.1).of(19337.73)
   end
+
+  it "should check total events correctly" do
+    result = FactoryGirl.create(:result, series: "MAL22", group: "testi", marathon_pts: 900.11, rowing_pts: nil, skiing_pts: 880.44, orienteering_pts: nil, cycling_pts: 921.81, skating_pts: 953.46)
+    totals = controller.check_total_events(result)
+    expect(totals[:total_events]).to eq(4)
+    expect(totals[:total_points]).to be_within(0.1).of(3655.82)
+  end
+
+  it "should insert results correctly for event" do
+    result = Result.new
+    result.kk_number = 10000
+    result.year = 2014
+    result.city = "Helsinki"
+    result.name = "testi"
+    result.save
+    controller.insert_result_for_event("SkatingEvent", 10000, 2014, 1000, 3647.43, 1, nil)
+    result = Result.last
+    expect(result.skating_pts).to be_within(0.1).of(1000)
+    expect(result.skating_time).to be_within(0.1).of(3647.43)
+    expect(result.skating_pos).to eq(1)
+    expect(result.completed_events).to eq(1)
+    expect(result.pts_sum).to be_within(0.1).of(1000)
+    controller.insert_result_for_event("SkiingEvent", 10000, 2014, 244.42, 6657.86, 75, "Vapaa")
+    result = Result.last
+    expect(result.skiing_pts).to be_within(0.1).of(244.42)
+    expect(result.skiing_time).to be_within(0.1).of(6657.86)
+    expect(result.skiing_pos).to eq(75)
+    expect(result.skiing_style).to eq("Vapaa")
+    expect(result.completed_events).to eq(2)
+    expect(result.pts_sum).to be_within(0.1).of(1244.42)
+    controller.insert_result_for_event("RunningEvent", 10000, 2014, 865.53, 9654.43, 34, "Maraton")
+    result = Result.last
+    expect(result.marathon_pts).to be_within(0.1).of(865.53)
+    expect(result.marathon_time).to be_within(0.1).of(9654.43)
+    expect(result.marathon_pos).to eq(34)
+    expect(result.marathon_style).to eq("Maraton")
+    expect(result.completed_events).to eq(3)
+    expect(result.pts_sum).to be_within(0.1).of(2109.95)
+    controller.insert_result_for_event("RowingEvent", 10000, 2014, 933.33, 1647.43, 11, "Yksin")
+    result = Result.last
+    expect(result.rowing_pts).to be_within(0.1).of(933.33)
+    expect(result.rowing_time).to be_within(0.1).of(1647.43)
+    expect(result.rowing_pos).to eq(11)
+    expect(result.rowing_style).to eq("Yksin")
+    expect(result.completed_events).to eq(4)
+    expect(result.pts_sum).to be_within(0.1).of(3043.28)
+    controller.insert_result_for_event("CyclingEvent", 10000, 2014, 654.3, 4547.36, 65, nil)
+    result = Result.last
+    expect(result.cycling_pts).to be_within(0.1).of(654.3)
+    expect(result.cycling_time).to be_within(0.1).of(4547.36)
+    expect(result.cycling_pos).to eq(65)
+    expect(result.completed_events).to eq(5)
+    expect(result.pts_sum).to be_within(0.1).of(3697.58)
+    controller.insert_result_for_event("OrienteeringEvent", 10000, 2014, 213.43, 8255.76, 214, nil)
+    result = Result.last
+    expect(result.orienteering_pts).to be_within(0.1).of(213.43)
+    expect(result.orienteering_time).to be_within(0.1).of(8255.76)
+    expect(result.orienteering_pos).to eq(214)
+    expect(result.completed_events).to eq(6)
+    expect(result.pts_sum).to be_within(0.1).of(3911.01)
+  end
 end
