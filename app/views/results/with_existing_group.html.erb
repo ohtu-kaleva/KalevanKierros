@@ -1,15 +1,31 @@
 <h1>Vuoden <%= params[:year] %> joukkuetulokset</h1>
-<p>Klikkaamalla joukkueen nimeä näet joukkuejäsenten pisteet.</p>
-<table class="results" >
-  <% i = 0 %>
-  <% @group_points.sort_by { |k, v| v }.reverse.each do |key, value| %>
+<p>Klikkaamalla joukkueen nimeä näet joukkueen jäsenten pisteet. Voit järjestää joukkueet aakkosjärjestykseen tai pistejärjestykseen alla olevilla napeilla.</p>
+<% i = 0 %>
+<% if params[:sort] == "joukkueet" %>
+    <% @groups = @group_points %>
+    <a href="?" class="btn btn-default btn-sm">Näytä pistejärjestyksessä</a>&nbsp;
+    <a href="?sort=joukkueet" class="btn btn-primary btn-sm">Näytä aakkosjärjestyksessä</a>
+<% else %>
+    <% @groups = @group_points.sort_by { |k, v| v }.reverse %>
+    <a href="?" class="btn btn-primary btn-sm">Näytä pistejärjestyksessä</a>&nbsp;
+    <a href="?sort=joukkueet" class="btn btn-default btn-sm">Näytä aakkosjärjestyksessä</a>
+<% end %>
+<br />
+<br />
+<table class="results">
+  <% @groups.each do |key, value| %>
       <% i += 1 %>
       <tr>
         <td style="font-size: larger; width: 350px;">
-          <a href="#" onclick="event.preventDefault(); $('#stat<%= i %>').toggle()"><%= i %>. <%= key %></a>
+          <a href="#" onclick="event.preventDefault(); $('#stat<%= i %>').toggle()">
+            <% if params[:sort] != "joukkueet" %>
+            <%= i %>.
+                <% end %>
+            <%= key %></a>
         </td>
         <td style="color: black; font-size: larger;"><%= value.round(2) %></td>
-        <td>&nbsp;</td>                                       </tr>
+        <td>&nbsp;</td>
+      </tr>
       <tr>
         <td colspan="3">
           <table style="display: none;" class="table" id="stat<%= i %>">
@@ -32,10 +48,10 @@
                       <td><%= v.completed_events %></td>
                   <% end %>
             <% end %>
-  </td></tr>
-  </td>
-  </table>
-  </tr>
+            </td></tr>
+            </td>
+          </table>
+      </tr>
   <% end %>
 </table>
 <style type="text/css">

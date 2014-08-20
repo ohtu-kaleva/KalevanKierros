@@ -2,7 +2,8 @@
 
   <h3>Viimeisimmät uutiset</h3>
   <% show_latest.each do |uutiset| %>
-      <p><%= link_to '' << uutiset.title << ' ' << uutiset.created_at.strftime("%-d.%-m %H:%M"), uutiset_path(uutiset) %></p>
+      <p><%= link_to raw('<span class="newstime">' << uutiset.created_at.strftime("%-d.%-m. %H:%M") << '</span>' << uutiset.title ), uutiset_path(uutiset) %></p>
   <% end %>
 
   </div>
+  <style type="text/css">.newstime{font-size: small; display: block; clear: both;}</style>
