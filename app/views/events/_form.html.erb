@@ -21,7 +21,8 @@
       <%= f.text_field :price, label: 'Osallistumismaksu sentteinä' %>
       <%= f.text_field :second_price, label: 'Jälki-ilmoittautumismaksu sentteinä' %>
       <%= f.text_area :description, label: 'Tapahtuman kuvaus' %>
-      <%= f.text_field :penalty_factor, label: 'Loppuajan pistelaskun rangaistuskerroin, jos sellainen on.' %>
+      <%= f.text_field :penalty_factor, label: 'Loppuajan pistelaskun rangaistuskerroin, jos sellainen on. Soudussa tätä käytetään mahdollisessa naisten sekasarjan rangaistuslisäyksenä aikaan minuutteina.' %>
+      <%= f.text_field :rowing_penalty, label: 'Vuorosoudun rangaistuslisä. Käytetään vain soudussa. Jos valitset tapahtuman pohjaksi soudun muista lisätä tämä! Oletuksena arvo on 12 minuuttia.' %>
       <%= f.check_box :open, label: 'Avoin ilmoittautuminen' %>
     </div>
 

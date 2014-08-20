@@ -73,7 +73,6 @@ class EnrollmentsController < ApplicationController
         end
       end
     end
-
     redirect_to root_path
   end
 

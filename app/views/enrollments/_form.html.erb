@@ -43,6 +43,10 @@
           <% if e.attribute_type == "plain_text" %>
             <%= e.attribute_value %>
           <% end %>
+
+          <% if e.attribute_type == "date" %>
+            <%= date_select(e.name, nil) %>
+          <% end %>
     <% end %>
  <%= f.hidden_field :event_id, :value => params[:event_id] %>
 </div>

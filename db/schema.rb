@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140815202055) do
+ActiveRecord::Schema.define(version: 20140820121905) do
 
   create_table "app_settings", force: true do |t|
     t.string   "name",       null: false
@@ -69,6 +69,7 @@ ActiveRecord::Schema.define(version: 20140815202055) do
     t.decimal  "penalty_factor",  default: 1.0
     t.integer  "factor"
     t.string   "sport_type"
+    t.decimal  "rowing_penalty",  default: 12.0
   end
 
   create_table "groups", force: true do |t|
@@ -127,18 +128,18 @@ ActiveRecord::Schema.define(version: 20140815202055) do
     t.string   "first_name"
     t.string   "city"
     t.integer  "birth_year"
-    t.integer  "six_events_completed_count"
-    t.integer  "five_events_completed_count"
-    t.integer  "four_events_completed_count"
-    t.integer  "total_events_completed"
-    t.decimal  "pts_sum"
-    t.integer  "position"
+    t.integer  "six_events_completed_count",  default: 0
+    t.integer  "five_events_completed_count", default: 0
+    t.integer  "four_events_completed_count", default: 0
+    t.integer  "total_events_completed",      default: 0
+    t.decimal  "pts_sum",                     default: 0.0
+    t.integer  "position",                    default: 0
     t.string   "p"
     t.string   "r"
-    t.integer  "a"
+    t.integer  "a",                           default: 0
     t.string   "ap"
-    t.integer  "k"
-    t.integer  "v"
+    t.integer  "k",                           default: 0
+    t.integer  "v",                           default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end
