@@ -7,20 +7,23 @@ EventAttribute.new(name: 'Tyyli', attribute_value: 'Vapaa;Perinteinen', attribut
 @Event3 = Event.new(name: 'Juoksu', factor: 2000, penalty_factor: 2.3, sport_type: 'RunningEvent', start_date: Date.today + 1.month, end_date: Date.today + 2.month, second_end_date: Date.today + 3.month, price: 2000, second_price: 3000, description: 'Pistelaskun testaukseen')
 @Event3.save
 EventAttribute.new(name: 'Tyyppi', attribute_value: 'maraton;puolimaraton', attribute_label: 'Valitse maraton tai puolimaraton', attribute_type: 'radio_button', event_id: @Event3.id, attribute_index: 1).save
-@Event4 = Event.new(name: 'Soutu', factor: 3500, penalty_factor: 1.0, sport_type: 'RowingEvent', start_date: Date.today + 1.month, end_date: Date.today + 2.month, second_end_date: Date.today + 3.month, price: 2000, second_price: 3000, description: 'Pistelaskun testaukseen')
+@Event4 = Event.new(name: 'Soutu', factor: 3500, penalty_factor: 20.0, rowing_penalty: 12.0, sport_type: 'RowingEvent', start_date: Date.today + 1.month, end_date: Date.today + 2.month, second_end_date: Date.today + 3.month, price: 2000, second_price: 3000, description: 'Pistelaskun testaukseen')
 @Event4.save
-EventAttribute.new(name: 'Pari', attribute_value: 'Jos sinulla on pari, niin hänen täytyy olla rekisteröitynyt käyttäjä.', attribute_label: 'Pari-informaatio.', attribute_type: 'plain_text', event_id: @Event4.id, attribute_index: nil).save
 EventAttribute.new(name: 'Melonta', attribute_value: 'Soutu;Melonta', attribute_label: 'Soutu/melonta', attribute_type: 'select', event_id: @Event4.id, attribute_index: 1).save
-EventAttribute.new(name: 'Parin nimi', attribute_value: 'Vuorosoudussa parisi nimi.', attribute_label: 'Jos soudat parin kanssa, kirjoita hänen nimensä tekstikenttään.', attribute_type: 'text_field', event_id: @Event4.id, attribute_index: 2).save
+EventAttribute.new(name: 'Tyyli', attribute_value: 'Yksin;Vuoro', attribute_label: 'Valitse soudatko yksin- tai vuorosoudun.', attribute_type: 'select', event_id: @Event4.id, attribute_index: 2).save
+EventAttribute.new(name: 'Parin nimi', attribute_value: '', attribute_label: 'Jos soudat parin kanssa, kirjoita hänen nimensä tekstikenttään.', attribute_type: 'text_field', event_id: @Event4.id, attribute_index: 3).save
+EventAttribute.new(name: 'Parin sukupuoli', attribute_value: 'M;F', attribute_label: 'Parisi sukupuoli.', attribute_type: 'select', event_id: @Event4.id, attribute_index: 4).save
+EventAttribute.new(name: 'Parin syntymävuosi', attribute_value: '', attribute_label: 'Parisi syntymävuosi', attribute_type: 'text_field', event_id: @Event4.id, attribute_index: 5).save
+EventAttribute.new(name: 'Onko pari kiertäjä', attribute_value: 'Ei;Kyllä', attribute_label: 'Onko parisi kiertäjä?', attribute_type: 'select', event_id: @Event4.id, attribute_index: 6).save
 @Event5 = Event.new(name: 'Pyöräily', factor: 2800, penalty_factor: 1.0, sport_type: 'CyclingEvent', start_date: Date.today + 1.month, end_date: Date.today + 2.month, second_end_date: Date.today + 3.month, price: 2000, second_price: 3000, description: 'Pistelaskun testaukseen')
 @Event5.save
 @Event6 = Event.new(name: 'Suunnistus', factor: 1300, penalty_factor: 1.0, sport_type: 'OrienteeringEvent', start_date: Date.today + 1.month, end_date: Date.today + 2.month, second_end_date: Date.today + 3.month, price: 2000, second_price: 3000, description: 'Pistelaskun testaukseen')
 @Event6.save
 EventAttribute.new(name: 'Emit', attribute_value: 'Kyllä', attribute_label: 'Tarvitsetko emit-lähettimen järjestäjän puolesta?', attribute_type: 'check_box', event_id: @Event6.id, attribute_index: 1).save
-User.new(postal_code: '00100', city: 'Helsinki', first_name: 'Admin', last_name: 'von Admin', username: 'admin', email: 'admin@test.com', phone_number: 12345, street_address: 'Katuosoite', kk_number: 10000, birth_date: Date.today, gender: 'M', admin: true, password: 'Salasana1', password_confirmation: 'Salasana1', active: true).save
+User.new(postal_code: '00100', city: 'Helsinki', first_name: 'Admin', last_name: 'von Admin', username: 'admin', email: 'admin@test.com', phone_number: 12345, street_address: 'Katuosoite', kk_number: 10000, birth_date: Date.today, gender: 'M', admin: true, password: 'Salasana1', password_confirmation: 'Salasana1').save
 @User10001 = User.new(postal_code: '00100', city: 'Helsinki', first_name: 'Juha', last_name: 'Prittinen', username: 'user10001', email: 'user10001@test.com', phone_number: 12345, street_address: 'Katuosoite', kk_number: 10001, birth_date: Date.today, gender: 'M', admin: false, password: 'Salasana1', password_confirmation: 'Salasana1', active: true)
 @User10001.save
-Result.new(name: 'Juha Prittinen', city: 'Helsinki', group: 'Hitaat 1', year: 2014, series: 'M40', kk_number: '10001').save
+Result.new(name: 'Juha Prittinen', city: 'Helsinki', group: 'Hitaat 1', year: 2014, series: 'M45', kk_number: '10001').save
 @Enrollment100011 = Enrollment.new(user_id: @User10001.id, event_id: @Event1.id, time:3076)
 @Enrollment100011.save
 @Enrollment100012 = Enrollment.new(user_id: @User10001.id, event_id: @Event2.id, time:9012)
@@ -34,7 +37,11 @@ Result.new(name: 'Juha Prittinen', city: 'Helsinki', group: 'Hitaat 1', year: 20
 @Enrollment100016 = Enrollment.new(user_id: @User10001.id, event_id: @Event6.id, time:6123)
 @Enrollment100016.save
 EnrollmentData.new(enrollment_id: @Enrollment100014.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment100014.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100014.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100014.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment100014.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment100014.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment100014.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment100012.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100013.id, name: 'Tyyppi', value: 'maraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100011.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -55,7 +62,11 @@ Result.new(name: 'Toni Pikkarainen', city: 'Helsinki', group: 'Kuntokonnat 1.', 
 @Enrollment100026 = Enrollment.new(user_id: @User10002.id, event_id: @Event6.id, time:5352)
 @Enrollment100026.save
 EnrollmentData.new(enrollment_id: @Enrollment100024.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment100024.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100024.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100024.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment100024.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment100024.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment100024.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment100022.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100023.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100021.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -76,7 +87,11 @@ Result.new(name: 'Markus Välimäki', city: 'Helsinki', group: 'Viialan Viri', y
 @Enrollment100036 = Enrollment.new(user_id: @User10003.id, event_id: @Event6.id, time:7957)
 @Enrollment100036.save
 EnrollmentData.new(enrollment_id: @Enrollment100034.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment100034.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100034.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100034.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment100034.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment100034.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment100034.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment100032.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100033.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100031.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -97,14 +112,14 @@ Result.new(name: 'Juha Lehtonen', city: 'Helsinki', group: 'Tuusulan Tallaajat I
 @Enrollment100046 = Enrollment.new(user_id: @User10004.id, event_id: @Event6.id, time:6373)
 @Enrollment100046.save
 EnrollmentData.new(enrollment_id: @Enrollment100044.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment100044.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100044.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment100042.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100043.id, name: 'Tyyppi', value: 'maraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100041.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100046.id, name: 'Emit', value: 'Kyllä', attribute_index: 1).save
 @User10005 = User.new(postal_code: '00100', city: 'Helsinki', first_name: 'Rauno', last_name: 'Hakala', username: 'user10005', email: 'user10005@test.com', phone_number: 12345, street_address: 'Katuosoite', kk_number: 10005, birth_date: Date.today, gender: 'M', admin: false, password: 'Salasana1', password_confirmation: 'Salasana1', active: true)
 @User10005.save
-Result.new(name: 'Rauno Hakala', city: 'Helsinki', group: 'Uskelan Urhot I', year: 2014, series: 'M40', kk_number: '10005').save
+Result.new(name: 'Rauno Hakala', city: 'Helsinki', group: 'Uskelan Urhot I', year: 2014, series: 'M45', kk_number: '10005').save
 @Enrollment100051 = Enrollment.new(user_id: @User10005.id, event_id: @Event1.id, time:3196)
 @Enrollment100051.save
 @Enrollment100052 = Enrollment.new(user_id: @User10005.id, event_id: @Event2.id, time:9288)
@@ -118,7 +133,11 @@ Result.new(name: 'Rauno Hakala', city: 'Helsinki', group: 'Uskelan Urhot I', yea
 @Enrollment100056 = Enrollment.new(user_id: @User10005.id, event_id: @Event6.id, time:5820)
 @Enrollment100056.save
 EnrollmentData.new(enrollment_id: @Enrollment100054.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment100054.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100054.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100054.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment100054.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment100054.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment100054.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment100052.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100053.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100051.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -139,7 +158,7 @@ Result.new(name: 'Sami-Jukka Hämäläinen', city: 'Helsinki', group: nil, year:
 @Enrollment100066 = Enrollment.new(user_id: @User10006.id, event_id: @Event6.id, time:6408)
 @Enrollment100066.save
 EnrollmentData.new(enrollment_id: @Enrollment100064.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment100064.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100064.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment100062.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100063.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100061.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -160,7 +179,7 @@ Result.new(name: 'Pentti Vepsäläinen', city: 'Helsinki', group: 'Reilut Miehet
 @Enrollment100076 = Enrollment.new(user_id: @User10007.id, event_id: @Event6.id, time:6768)
 @Enrollment100076.save
 EnrollmentData.new(enrollment_id: @Enrollment100074.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment100074.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100074.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment100072.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100073.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100071.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -181,7 +200,7 @@ Result.new(name: 'Jouni Miettinen', city: 'Helsinki', group: 'Kuntokonnat 1.', y
 @Enrollment100086 = Enrollment.new(user_id: @User10008.id, event_id: @Event6.id, time:7544)
 @Enrollment100086.save
 EnrollmentData.new(enrollment_id: @Enrollment100084.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment100084.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100084.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment100082.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100083.id, name: 'Tyyppi', value: 'maraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100081.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -202,7 +221,7 @@ Result.new(name: 'Antti Korkeakangas', city: 'Helsinki', group: 'Reilut Miehet H
 @Enrollment100096 = Enrollment.new(user_id: @User10009.id, event_id: @Event6.id, time:5977)
 @Enrollment100096.save
 EnrollmentData.new(enrollment_id: @Enrollment100094.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment100094.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100094.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment100092.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100093.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100091.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -223,7 +242,11 @@ Result.new(name: 'Ossi Sippu', city: 'Helsinki', group: 'Kuntokonnat 1.', year: 
 @Enrollment100106 = Enrollment.new(user_id: @User10010.id, event_id: @Event6.id, time:6228)
 @Enrollment100106.save
 EnrollmentData.new(enrollment_id: @Enrollment100104.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment100104.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100104.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100104.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment100104.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment100104.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment100104.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment100102.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100103.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100101.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -244,7 +267,11 @@ Result.new(name: 'Anders Åkerman', city: 'Helsinki', group: 'Korvenpojat', year
 @Enrollment100116 = Enrollment.new(user_id: @User10011.id, event_id: @Event6.id, time:5167)
 @Enrollment100116.save
 EnrollmentData.new(enrollment_id: @Enrollment100114.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment100114.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100114.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100114.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment100114.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment100114.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment100114.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment100112.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100113.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100111.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -265,7 +292,7 @@ Result.new(name: 'Markus Ilmarinen', city: 'Helsinki', group: nil, year: 2014, s
 @Enrollment100126 = Enrollment.new(user_id: @User10012.id, event_id: @Event6.id, time:6245)
 @Enrollment100126.save
 EnrollmentData.new(enrollment_id: @Enrollment100124.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment100124.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100124.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment100122.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100123.id, name: 'Tyyppi', value: 'maraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100121.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -286,7 +313,11 @@ Result.new(name: 'Jani Hevonoja', city: 'Helsinki', group: 'Viialan Viri', year:
 @Enrollment100136 = Enrollment.new(user_id: @User10013.id, event_id: @Event6.id, time:7224)
 @Enrollment100136.save
 EnrollmentData.new(enrollment_id: @Enrollment100134.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment100134.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100134.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100134.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment100134.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment100134.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment100134.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment100132.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100133.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100131.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -307,7 +338,7 @@ Result.new(name: 'Vesa Ruuska', city: 'Helsinki', group: 'KENSU-KK', year: 2014,
 @Enrollment100146 = Enrollment.new(user_id: @User10014.id, event_id: @Event6.id, time:6067)
 @Enrollment100146.save
 EnrollmentData.new(enrollment_id: @Enrollment100144.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment100144.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100144.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment100142.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100143.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100141.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -328,7 +359,11 @@ Result.new(name: 'Antti Pasanen', city: 'Helsinki', group: nil, year: 2014, seri
 @Enrollment100156 = Enrollment.new(user_id: @User10015.id, event_id: @Event6.id, time:6113)
 @Enrollment100156.save
 EnrollmentData.new(enrollment_id: @Enrollment100154.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment100154.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100154.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100154.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment100154.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment100154.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment100154.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment100152.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100153.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100151.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -349,14 +384,14 @@ Result.new(name: 'Olli-Pekka Pohjola', city: 'Helsinki', group: 'CCRT', year: 20
 @Enrollment100166 = Enrollment.new(user_id: @User10016.id, event_id: @Event6.id, time:6804)
 @Enrollment100166.save
 EnrollmentData.new(enrollment_id: @Enrollment100164.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment100164.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100164.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment100162.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100163.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100161.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100166.id, name: 'Emit', value: 'Kyllä', attribute_index: 1).save
 @User10017 = User.new(postal_code: '00100', city: 'Helsinki', first_name: 'Juha', last_name: 'Karhima', username: 'user10017', email: 'user10017@test.com', phone_number: 12345, street_address: 'Katuosoite', kk_number: 10017, birth_date: Date.today, gender: 'M', admin: false, password: 'Salasana1', password_confirmation: 'Salasana1', active: true)
 @User10017.save
-Result.new(name: 'Juha Karhima', city: 'Helsinki', group: 'Sportia KT-SPORT', year: 2014, series: 'M40', kk_number: '10017').save
+Result.new(name: 'Juha Karhima', city: 'Helsinki', group: 'Sportia KT-SPORT', year: 2014, series: 'M45', kk_number: '10017').save
 @Enrollment100171 = Enrollment.new(user_id: @User10017.id, event_id: @Event1.id, time:3757)
 @Enrollment100171.save
 @Enrollment100172 = Enrollment.new(user_id: @User10017.id, event_id: @Event2.id, time:22539)
@@ -370,7 +405,7 @@ Result.new(name: 'Juha Karhima', city: 'Helsinki', group: 'Sportia KT-SPORT', ye
 @Enrollment100176 = Enrollment.new(user_id: @User10017.id, event_id: @Event6.id, time:8718)
 @Enrollment100176.save
 EnrollmentData.new(enrollment_id: @Enrollment100174.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment100174.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100174.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment100172.id, name: 'Tyyli', value: 'Perinteinen', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100173.id, name: 'Tyyppi', value: 'maraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100171.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -391,7 +426,7 @@ Result.new(name: 'Kari Huovila', city: 'Helsinki', group: 'Otaniemen Jyllääjä
 @Enrollment100186 = Enrollment.new(user_id: @User10018.id, event_id: @Event6.id, time:9247)
 @Enrollment100186.save
 EnrollmentData.new(enrollment_id: @Enrollment100184.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment100184.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100184.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment100182.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100183.id, name: 'Tyyppi', value: 'maraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100181.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -412,7 +447,7 @@ Result.new(name: 'Kari Köninki', city: 'Helsinki', group: 'KENSU-KK', year: 201
 @Enrollment100196 = Enrollment.new(user_id: @User10019.id, event_id: @Event6.id, time:7715)
 @Enrollment100196.save
 EnrollmentData.new(enrollment_id: @Enrollment100194.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment100194.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100194.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment100192.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100193.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100191.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -433,7 +468,11 @@ Result.new(name: 'Juha-Pekka Keränen', city: 'Helsinki', group: nil, year: 2014
 @Enrollment100206 = Enrollment.new(user_id: @User10020.id, event_id: @Event6.id, time:7210)
 @Enrollment100206.save
 EnrollmentData.new(enrollment_id: @Enrollment100204.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment100204.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100204.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100204.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment100204.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment100204.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment100204.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment100202.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100203.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100201.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -454,7 +493,11 @@ Result.new(name: 'Topi Salminen', city: 'Helsinki', group: nil, year: 2014, seri
 @Enrollment100216 = Enrollment.new(user_id: @User10021.id, event_id: @Event6.id, time:8670)
 @Enrollment100216.save
 EnrollmentData.new(enrollment_id: @Enrollment100214.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment100214.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100214.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100214.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment100214.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment100214.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment100214.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment100212.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100213.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100211.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -475,7 +518,7 @@ Result.new(name: 'Ville Eskelinen', city: 'Helsinki', group: 'Uskelan Urhot II',
 @Enrollment100226 = Enrollment.new(user_id: @User10022.id, event_id: @Event6.id, time:7600)
 @Enrollment100226.save
 EnrollmentData.new(enrollment_id: @Enrollment100224.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment100224.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100224.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment100222.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100223.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100221.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -496,7 +539,7 @@ Result.new(name: 'Mika Kortesmaa', city: 'Helsinki', group: 'Uskelan Urhot I', y
 @Enrollment100236 = Enrollment.new(user_id: @User10023.id, event_id: @Event6.id, time:7590)
 @Enrollment100236.save
 EnrollmentData.new(enrollment_id: @Enrollment100234.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment100234.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100234.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment100232.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100233.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100231.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -517,7 +560,11 @@ Result.new(name: 'Harri Lehtimäki', city: 'Helsinki', group: 'Reilut Miehet Hav
 @Enrollment100246 = Enrollment.new(user_id: @User10024.id, event_id: @Event6.id, time:6238)
 @Enrollment100246.save
 EnrollmentData.new(enrollment_id: @Enrollment100244.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment100244.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100244.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100244.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment100244.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment100244.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment100244.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment100242.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100243.id, name: 'Tyyppi', value: 'maraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100241.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -538,14 +585,18 @@ Result.new(name: 'Teuvo Lehtinen', city: 'Helsinki', group: 'Selän Sitkeät 1.'
 @Enrollment100256 = Enrollment.new(user_id: @User10025.id, event_id: @Event6.id, time:7763)
 @Enrollment100256.save
 EnrollmentData.new(enrollment_id: @Enrollment100254.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment100254.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100254.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100254.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment100254.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment100254.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment100254.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment100252.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100253.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100251.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100256.id, name: 'Emit', value: 'Kyllä', attribute_index: 1).save
 @User10026 = User.new(postal_code: '00100', city: 'Helsinki', first_name: 'Ari', last_name: 'Ilola', username: 'user10026', email: 'user10026@test.com', phone_number: 12345, street_address: 'Katuosoite', kk_number: 10026, birth_date: Date.today, gender: 'M', admin: false, password: 'Salasana1', password_confirmation: 'Salasana1', active: true)
 @User10026.save
-Result.new(name: 'Ari Ilola', city: 'Helsinki', group: 'Tammelan Ryske', year: 2014, series: 'M40', kk_number: '10026').save
+Result.new(name: 'Ari Ilola', city: 'Helsinki', group: 'Tammelan Ryske', year: 2014, series: 'M45', kk_number: '10026').save
 @Enrollment100261 = Enrollment.new(user_id: @User10026.id, event_id: @Event1.id, time:3808)
 @Enrollment100261.save
 @Enrollment100262 = Enrollment.new(user_id: @User10026.id, event_id: @Event2.id, time:10758)
@@ -559,7 +610,11 @@ Result.new(name: 'Ari Ilola', city: 'Helsinki', group: 'Tammelan Ryske', year: 2
 @Enrollment100266 = Enrollment.new(user_id: @User10026.id, event_id: @Event6.id, time:7636)
 @Enrollment100266.save
 EnrollmentData.new(enrollment_id: @Enrollment100264.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment100264.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100264.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100264.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment100264.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment100264.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment100264.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment100262.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100263.id, name: 'Tyyppi', value: 'maraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100261.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -580,14 +635,18 @@ Result.new(name: 'Juhana Pakkasmaa', city: 'Helsinki', group: 'Otaniemen Jyllä�
 @Enrollment100276 = Enrollment.new(user_id: @User10027.id, event_id: @Event6.id, time:7252)
 @Enrollment100276.save
 EnrollmentData.new(enrollment_id: @Enrollment100274.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment100274.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100274.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100274.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment100274.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment100274.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment100274.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment100272.id, name: 'Tyyli', value: 'Perinteinen', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100273.id, name: 'Tyyppi', value: 'maraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100271.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100276.id, name: 'Emit', value: 'Kyllä', attribute_index: 1).save
 @User10028 = User.new(postal_code: '00100', city: 'Helsinki', first_name: 'Mikko', last_name: 'Ylönen', username: 'user10028', email: 'user10028@test.com', phone_number: 12345, street_address: 'Katuosoite', kk_number: 10028, birth_date: Date.today, gender: 'M', admin: false, password: 'Salasana1', password_confirmation: 'Salasana1', active: true)
 @User10028.save
-Result.new(name: 'Mikko Ylönen', city: 'Helsinki', group: 'Tuusulan Tallaajat I', year: 2014, series: 'M40', kk_number: '10028').save
+Result.new(name: 'Mikko Ylönen', city: 'Helsinki', group: 'Tuusulan Tallaajat I', year: 2014, series: 'M45', kk_number: '10028').save
 @Enrollment100281 = Enrollment.new(user_id: @User10028.id, event_id: @Event1.id, time:3632)
 @Enrollment100281.save
 @Enrollment100282 = Enrollment.new(user_id: @User10028.id, event_id: @Event2.id, time:11729)
@@ -601,7 +660,11 @@ Result.new(name: 'Mikko Ylönen', city: 'Helsinki', group: 'Tuusulan Tallaajat I
 @Enrollment100286 = Enrollment.new(user_id: @User10028.id, event_id: @Event6.id, time:7501)
 @Enrollment100286.save
 EnrollmentData.new(enrollment_id: @Enrollment100284.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment100284.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100284.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100284.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment100284.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment100284.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment100284.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment100282.id, name: 'Tyyli', value: 'Perinteinen', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100283.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100281.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -622,14 +685,18 @@ Result.new(name: 'Lasse Kääpä', city: 'Helsinki', group: nil, year: 2014, ser
 @Enrollment100296 = Enrollment.new(user_id: @User10029.id, event_id: @Event6.id, time:8683)
 @Enrollment100296.save
 EnrollmentData.new(enrollment_id: @Enrollment100294.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment100294.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100294.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100294.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment100294.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment100294.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment100294.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment100292.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100293.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100291.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100296.id, name: 'Emit', value: 'Kyllä', attribute_index: 1).save
 @User10030 = User.new(postal_code: '00100', city: 'Helsinki', first_name: 'Erkki', last_name: 'Tuovila', username: 'user10030', email: 'user10030@test.com', phone_number: 12345, street_address: 'Katuosoite', kk_number: 10030, birth_date: Date.today, gender: 'M', admin: false, password: 'Salasana1', password_confirmation: 'Salasana1', active: true)
 @User10030.save
-Result.new(name: 'Erkki Tuovila', city: 'Helsinki', group: 'Kankaanpään Kalevankiertäjät 1', year: 2014, series: 'M40', kk_number: '10030').save
+Result.new(name: 'Erkki Tuovila', city: 'Helsinki', group: 'Kankaanpään Kalevankiertäjät 1', year: 2014, series: 'M45', kk_number: '10030').save
 @Enrollment100301 = Enrollment.new(user_id: @User10030.id, event_id: @Event1.id, time:3268)
 @Enrollment100301.save
 @Enrollment100302 = Enrollment.new(user_id: @User10030.id, event_id: @Event2.id, time:10363)
@@ -643,7 +710,11 @@ Result.new(name: 'Erkki Tuovila', city: 'Helsinki', group: 'Kankaanpään Kaleva
 @Enrollment100306 = Enrollment.new(user_id: @User10030.id, event_id: @Event6.id, time:6981)
 @Enrollment100306.save
 EnrollmentData.new(enrollment_id: @Enrollment100304.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment100304.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100304.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100304.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment100304.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment100304.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment100304.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment100302.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100303.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100301.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -664,7 +735,11 @@ Result.new(name: 'Osmo Ojala', city: 'Helsinki', group: 'CCRT', year: 2014, seri
 @Enrollment100316 = Enrollment.new(user_id: @User10031.id, event_id: @Event6.id, time:8165)
 @Enrollment100316.save
 EnrollmentData.new(enrollment_id: @Enrollment100314.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment100314.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100314.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100314.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment100314.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment100314.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment100314.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment100312.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100313.id, name: 'Tyyppi', value: 'maraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100311.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -685,7 +760,7 @@ Result.new(name: 'Klaus Kuusi', city: 'Helsinki', group: 'Espoon Etanat', year: 
 @Enrollment100326 = Enrollment.new(user_id: @User10032.id, event_id: @Event6.id, time:8205)
 @Enrollment100326.save
 EnrollmentData.new(enrollment_id: @Enrollment100324.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment100324.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100324.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment100322.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100323.id, name: 'Tyyppi', value: 'maraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100321.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -706,7 +781,11 @@ Result.new(name: 'Eero Mäkipelto', city: 'Helsinki', group: 'KENSU-KK', year: 2
 @Enrollment100336 = Enrollment.new(user_id: @User10033.id, event_id: @Event6.id, time:10682)
 @Enrollment100336.save
 EnrollmentData.new(enrollment_id: @Enrollment100334.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment100334.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100334.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100334.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment100334.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment100334.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment100334.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment100332.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100333.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100331.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -727,7 +806,7 @@ Result.new(name: 'Juha Alhonnoro', city: 'Helsinki', group: 'Sportia KT-SPORT', 
 @Enrollment100346 = Enrollment.new(user_id: @User10034.id, event_id: @Event6.id, time:8441)
 @Enrollment100346.save
 EnrollmentData.new(enrollment_id: @Enrollment100344.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment100344.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100344.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment100342.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100343.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100341.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -748,7 +827,7 @@ Result.new(name: 'Jaakko Pärssinen', city: 'Helsinki', group: 'Tervakosken Pato
 @Enrollment100356 = Enrollment.new(user_id: @User10035.id, event_id: @Event6.id, time:8494)
 @Enrollment100356.save
 EnrollmentData.new(enrollment_id: @Enrollment100354.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment100354.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100354.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment100352.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100353.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100351.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -769,7 +848,7 @@ Result.new(name: 'Kari Nieminen', city: 'Helsinki', group: 'Tervakosken Pato 1.'
 @Enrollment100366 = Enrollment.new(user_id: @User10036.id, event_id: @Event6.id, time:9055)
 @Enrollment100366.save
 EnrollmentData.new(enrollment_id: @Enrollment100364.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment100364.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100364.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment100362.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100363.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100361.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -790,14 +869,18 @@ Result.new(name: 'Seppo Kuoppala', city: 'Helsinki', group: 'Selän Sitkeät 1.'
 @Enrollment100376 = Enrollment.new(user_id: @User10037.id, event_id: @Event6.id, time:9217)
 @Enrollment100376.save
 EnrollmentData.new(enrollment_id: @Enrollment100374.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment100374.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100374.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100374.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment100374.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment100374.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment100374.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment100372.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100373.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100371.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100376.id, name: 'Emit', value: 'Kyllä', attribute_index: 1).save
 @User10038 = User.new(postal_code: '00100', city: 'Helsinki', first_name: 'Jukka', last_name: 'Iitti', username: 'user10038', email: 'user10038@test.com', phone_number: 12345, street_address: 'Katuosoite', kk_number: 10038, birth_date: Date.today, gender: 'M', admin: false, password: 'Salasana1', password_confirmation: 'Salasana1', active: true)
 @User10038.save
-Result.new(name: 'Jukka Iitti', city: 'Helsinki', group: 'KENSU-KK', year: 2014, series: 'M40', kk_number: '10038').save
+Result.new(name: 'Jukka Iitti', city: 'Helsinki', group: 'KENSU-KK', year: 2014, series: 'M45', kk_number: '10038').save
 @Enrollment100381 = Enrollment.new(user_id: @User10038.id, event_id: @Event1.id, time:3354)
 @Enrollment100381.save
 @Enrollment100382 = Enrollment.new(user_id: @User10038.id, event_id: @Event2.id, time:10827)
@@ -811,7 +894,7 @@ Result.new(name: 'Jukka Iitti', city: 'Helsinki', group: 'KENSU-KK', year: 2014,
 @Enrollment100386 = Enrollment.new(user_id: @User10038.id, event_id: @Event6.id, time:7171)
 @Enrollment100386.save
 EnrollmentData.new(enrollment_id: @Enrollment100384.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment100384.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100384.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment100382.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100383.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100381.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -832,7 +915,7 @@ Result.new(name: 'Tapio Yli-Karro', city: 'Helsinki', group: 'Rauman Kalevankier
 @Enrollment100396 = Enrollment.new(user_id: @User10039.id, event_id: @Event6.id, time:8563)
 @Enrollment100396.save
 EnrollmentData.new(enrollment_id: @Enrollment100394.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment100394.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100394.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment100392.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100393.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100391.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -853,7 +936,11 @@ Result.new(name: 'Pekka Pakkanen', city: 'Helsinki', group: 'Pajulahti', year: 2
 @Enrollment100406 = Enrollment.new(user_id: @User10040.id, event_id: @Event6.id, time:8165)
 @Enrollment100406.save
 EnrollmentData.new(enrollment_id: @Enrollment100404.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment100404.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100404.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100404.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment100404.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment100404.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment100404.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment100402.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100403.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100401.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -874,7 +961,7 @@ Result.new(name: 'Juha Kokko', city: 'Helsinki', group: nil, year: 2014, series:
 @Enrollment100416 = Enrollment.new(user_id: @User10041.id, event_id: @Event6.id, time:9938)
 @Enrollment100416.save
 EnrollmentData.new(enrollment_id: @Enrollment100414.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment100414.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100414.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment100412.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100413.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100411.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -895,14 +982,18 @@ Result.new(name: 'Erkki Lehtonen', city: 'Helsinki', group: 'Hitaat 2', year: 20
 @Enrollment100426 = Enrollment.new(user_id: @User10042.id, event_id: @Event6.id, time:9076)
 @Enrollment100426.save
 EnrollmentData.new(enrollment_id: @Enrollment100424.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment100424.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100424.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100424.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment100424.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment100424.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment100424.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment100422.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100423.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100421.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100426.id, name: 'Emit', value: 'Kyllä', attribute_index: 1).save
 @User10043 = User.new(postal_code: '00100', city: 'Helsinki', first_name: 'Tuomas', last_name: 'Seppälä', username: 'user10043', email: 'user10043@test.com', phone_number: 12345, street_address: 'Katuosoite', kk_number: 10043, birth_date: Date.today, gender: 'M', admin: false, password: 'Salasana1', password_confirmation: 'Salasana1', active: true)
 @User10043.save
-Result.new(name: 'Tuomas Seppälä', city: 'Helsinki', group: nil, year: 2014, series: 'M40', kk_number: '10043').save
+Result.new(name: 'Tuomas Seppälä', city: 'Helsinki', group: nil, year: 2014, series: 'M45', kk_number: '10043').save
 @Enrollment100431 = Enrollment.new(user_id: @User10043.id, event_id: @Event1.id, time:3820)
 @Enrollment100431.save
 @Enrollment100432 = Enrollment.new(user_id: @User10043.id, event_id: @Event2.id, time:11032)
@@ -916,7 +1007,11 @@ Result.new(name: 'Tuomas Seppälä', city: 'Helsinki', group: nil, year: 2014, s
 @Enrollment100436 = Enrollment.new(user_id: @User10043.id, event_id: @Event6.id, time:8017)
 @Enrollment100436.save
 EnrollmentData.new(enrollment_id: @Enrollment100434.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment100434.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100434.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100434.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment100434.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment100434.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment100434.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment100432.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100433.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100431.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -937,7 +1032,11 @@ Result.new(name: 'Arto Korpinen', city: 'Helsinki', group: 'Uskelan Urhot II', y
 @Enrollment100446 = Enrollment.new(user_id: @User10044.id, event_id: @Event6.id, time:7125)
 @Enrollment100446.save
 EnrollmentData.new(enrollment_id: @Enrollment100444.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment100444.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100444.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100444.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment100444.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment100444.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment100444.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment100442.id, name: 'Tyyli', value: 'Perinteinen', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100443.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100441.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -958,7 +1057,11 @@ Result.new(name: 'Mikko Tenho', city: 'Helsinki', group: 'Turun NMKY', year: 201
 @Enrollment100456 = Enrollment.new(user_id: @User10045.id, event_id: @Event6.id, time:6859)
 @Enrollment100456.save
 EnrollmentData.new(enrollment_id: @Enrollment100454.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment100454.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100454.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100454.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment100454.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment100454.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment100454.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment100452.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100453.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100451.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -979,7 +1082,7 @@ Result.new(name: 'Jari Ylänne', city: 'Helsinki', group: nil, year: 2014, serie
 @Enrollment100466 = Enrollment.new(user_id: @User10046.id, event_id: @Event6.id, time:8187)
 @Enrollment100466.save
 EnrollmentData.new(enrollment_id: @Enrollment100464.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment100464.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100464.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment100462.id, name: 'Tyyli', value: 'Perinteinen', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100463.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100461.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -1000,14 +1103,14 @@ Result.new(name: 'Raine Lehto', city: 'Helsinki', group: 'Pajulahti', year: 2014
 @Enrollment100476 = Enrollment.new(user_id: @User10047.id, event_id: @Event6.id, time:11872)
 @Enrollment100476.save
 EnrollmentData.new(enrollment_id: @Enrollment100474.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment100474.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100474.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment100472.id, name: 'Tyyli', value: 'Perinteinen', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100473.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100471.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100476.id, name: 'Emit', value: 'Kyllä', attribute_index: 1).save
 @User10048 = User.new(postal_code: '00100', city: 'Helsinki', first_name: 'Hannu', last_name: 'Anttila', username: 'user10048', email: 'user10048@test.com', phone_number: 12345, street_address: 'Katuosoite', kk_number: 10048, birth_date: Date.today, gender: 'M', admin: false, password: 'Salasana1', password_confirmation: 'Salasana1', active: true)
 @User10048.save
-Result.new(name: 'Hannu Anttila', city: 'Helsinki', group: 'Kankaanpään Kalevankiertäjät 1', year: 2014, series: 'M40', kk_number: '10048').save
+Result.new(name: 'Hannu Anttila', city: 'Helsinki', group: 'Kankaanpään Kalevankiertäjät 1', year: 2014, series: 'M45', kk_number: '10048').save
 @Enrollment100481 = Enrollment.new(user_id: @User10048.id, event_id: @Event1.id, time:3719)
 @Enrollment100481.save
 @Enrollment100482 = Enrollment.new(user_id: @User10048.id, event_id: @Event2.id, time:10014)
@@ -1021,14 +1124,18 @@ Result.new(name: 'Hannu Anttila', city: 'Helsinki', group: 'Kankaanpään Kaleva
 @Enrollment100486 = Enrollment.new(user_id: @User10048.id, event_id: @Event6.id, time:9155)
 @Enrollment100486.save
 EnrollmentData.new(enrollment_id: @Enrollment100484.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment100484.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100484.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100484.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment100484.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment100484.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment100484.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment100482.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100483.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100481.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100486.id, name: 'Emit', value: 'Kyllä', attribute_index: 1).save
 @User10049 = User.new(postal_code: '00100', city: 'Helsinki', first_name: 'Martti', last_name: 'Kuitunen', username: 'user10049', email: 'user10049@test.com', phone_number: 12345, street_address: 'Katuosoite', kk_number: 10049, birth_date: Date.today, gender: 'M', admin: false, password: 'Salasana1', password_confirmation: 'Salasana1', active: true)
 @User10049.save
-Result.new(name: 'Martti Kuitunen', city: 'Helsinki', group: 'Selän Sitkeät 1.', year: 2014, series: 'M40', kk_number: '10049').save
+Result.new(name: 'Martti Kuitunen', city: 'Helsinki', group: 'Selän Sitkeät 1.', year: 2014, series: 'M45', kk_number: '10049').save
 @Enrollment100491 = Enrollment.new(user_id: @User10049.id, event_id: @Event1.id, time:3866)
 @Enrollment100491.save
 @Enrollment100492 = Enrollment.new(user_id: @User10049.id, event_id: @Event2.id, time:20953)
@@ -1042,7 +1149,7 @@ Result.new(name: 'Martti Kuitunen', city: 'Helsinki', group: 'Selän Sitkeät 1.
 @Enrollment100496 = Enrollment.new(user_id: @User10049.id, event_id: @Event6.id, time:8335)
 @Enrollment100496.save
 EnrollmentData.new(enrollment_id: @Enrollment100494.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment100494.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100494.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment100492.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100493.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100491.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -1063,7 +1170,11 @@ Result.new(name: 'Eero Savonen', city: 'Helsinki', group: 'Tuusulan Tallaajat II
 @Enrollment100506 = Enrollment.new(user_id: @User10050.id, event_id: @Event6.id, time:9767)
 @Enrollment100506.save
 EnrollmentData.new(enrollment_id: @Enrollment100504.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment100504.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100504.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100504.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment100504.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment100504.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment100504.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment100502.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100503.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100501.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -1084,7 +1195,11 @@ Result.new(name: 'Pasi Kyheröinen', city: 'Helsinki', group: 'Korvenpojat', yea
 @Enrollment100516 = Enrollment.new(user_id: @User10051.id, event_id: @Event6.id, time:7450)
 @Enrollment100516.save
 EnrollmentData.new(enrollment_id: @Enrollment100514.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment100514.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100514.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100514.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment100514.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment100514.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment100514.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment100512.id, name: 'Tyyli', value: 'Perinteinen', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100513.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100511.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -1105,7 +1220,11 @@ Result.new(name: 'Oliver Ojala', city: 'Helsinki', group: 'CCRT', year: 2014, se
 @Enrollment100526 = Enrollment.new(user_id: @User10052.id, event_id: @Event6.id, time:7269)
 @Enrollment100526.save
 EnrollmentData.new(enrollment_id: @Enrollment100524.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment100524.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100524.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100524.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment100524.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment100524.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment100524.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment100522.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100523.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100521.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -1126,7 +1245,11 @@ Result.new(name: 'Jussi Pirinen', city: 'Helsinki', group: 'Tuusulan Tallaajat I
 @Enrollment100536 = Enrollment.new(user_id: @User10053.id, event_id: @Event6.id, time:7873)
 @Enrollment100536.save
 EnrollmentData.new(enrollment_id: @Enrollment100534.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment100534.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100534.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100534.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment100534.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment100534.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment100534.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment100532.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100533.id, name: 'Tyyppi', value: 'maraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100531.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -1147,7 +1270,11 @@ Result.new(name: 'Ari Tolvanen', city: 'Helsinki', group: 'Kuntokonnat 1.', year
 @Enrollment100546 = Enrollment.new(user_id: @User10054.id, event_id: @Event6.id, time:11130)
 @Enrollment100546.save
 EnrollmentData.new(enrollment_id: @Enrollment100544.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment100544.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100544.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100544.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment100544.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment100544.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment100544.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment100542.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100543.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100541.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -1168,7 +1295,7 @@ Result.new(name: 'Petteri Hannula', city: 'Helsinki', group: nil, year: 2014, se
 @Enrollment100556 = Enrollment.new(user_id: @User10055.id, event_id: @Event6.id, time:9182)
 @Enrollment100556.save
 EnrollmentData.new(enrollment_id: @Enrollment100554.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment100554.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100554.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment100552.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100553.id, name: 'Tyyppi', value: 'maraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100551.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -1189,7 +1316,11 @@ Result.new(name: 'Juho Tuominen', city: 'Helsinki', group: 'Kankaanpään Kaleva
 @Enrollment100566 = Enrollment.new(user_id: @User10056.id, event_id: @Event6.id, time:7538)
 @Enrollment100566.save
 EnrollmentData.new(enrollment_id: @Enrollment100564.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment100564.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100564.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100564.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment100564.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment100564.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment100564.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment100562.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100563.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100561.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -1210,7 +1341,7 @@ Result.new(name: 'Erkki Moilanen', city: 'Helsinki', group: nil, year: 2014, ser
 @Enrollment100576 = Enrollment.new(user_id: @User10057.id, event_id: @Event6.id, time:10698)
 @Enrollment100576.save
 EnrollmentData.new(enrollment_id: @Enrollment100574.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment100574.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100574.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment100572.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100573.id, name: 'Tyyppi', value: 'maraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100571.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -1231,7 +1362,11 @@ Result.new(name: 'Pasi Kontkanen', city: 'Helsinki', group: 'CCRT', year: 2014, 
 @Enrollment100586 = Enrollment.new(user_id: @User10058.id, event_id: @Event6.id, time:12427)
 @Enrollment100586.save
 EnrollmentData.new(enrollment_id: @Enrollment100584.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment100584.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100584.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100584.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment100584.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment100584.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment100584.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment100582.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100583.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100581.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -1252,14 +1387,18 @@ Result.new(name: 'Katja Koivulahti', city: 'Helsinki', group: 'Hitaat Neidot', y
 @Enrollment100596 = Enrollment.new(user_id: @User10059.id, event_id: @Event6.id, time:9762)
 @Enrollment100596.save
 EnrollmentData.new(enrollment_id: @Enrollment100594.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment100594.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100594.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100594.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment100594.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment100594.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment100594.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment100592.id, name: 'Tyyli', value: 'Perinteinen', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100593.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100591.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100596.id, name: 'Emit', value: 'Kyllä', attribute_index: 1).save
 @User10060 = User.new(postal_code: '00100', city: 'Helsinki', first_name: 'Hannu', last_name: 'Kröger', username: 'user10060', email: 'user10060@test.com', phone_number: 12345, street_address: 'Katuosoite', kk_number: 10060, birth_date: Date.today, gender: 'M', admin: false, password: 'Salasana1', password_confirmation: 'Salasana1', active: true)
 @User10060.save
-Result.new(name: 'Hannu Kröger', city: 'Helsinki', group: 'KK Länsi-Uusimaa 1', year: 2014, series: 'M40', kk_number: '10060').save
+Result.new(name: 'Hannu Kröger', city: 'Helsinki', group: 'KK Länsi-Uusimaa 1', year: 2014, series: 'M45', kk_number: '10060').save
 @Enrollment100601 = Enrollment.new(user_id: @User10060.id, event_id: @Event1.id, time:4104)
 @Enrollment100601.save
 @Enrollment100602 = Enrollment.new(user_id: @User10060.id, event_id: @Event2.id, time:11947)
@@ -1273,7 +1412,7 @@ Result.new(name: 'Hannu Kröger', city: 'Helsinki', group: 'KK Länsi-Uusimaa 1'
 @Enrollment100606 = Enrollment.new(user_id: @User10060.id, event_id: @Event6.id, time:8168)
 @Enrollment100606.save
 EnrollmentData.new(enrollment_id: @Enrollment100604.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment100604.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100604.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment100602.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100603.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100601.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -1294,7 +1433,7 @@ Result.new(name: 'Mikko Mäenpää', city: 'Helsinki', group: nil, year: 2014, s
 @Enrollment100616 = Enrollment.new(user_id: @User10061.id, event_id: @Event6.id, time:10452)
 @Enrollment100616.save
 EnrollmentData.new(enrollment_id: @Enrollment100614.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment100614.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100614.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment100612.id, name: 'Tyyli', value: 'Perinteinen', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100613.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100611.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -1315,7 +1454,7 @@ Result.new(name: 'Ossi Vilhu', city: 'Helsinki', group: nil, year: 2014, series:
 @Enrollment100626 = Enrollment.new(user_id: @User10062.id, event_id: @Event6.id, time:10181)
 @Enrollment100626.save
 EnrollmentData.new(enrollment_id: @Enrollment100624.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment100624.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100624.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment100622.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100623.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100621.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -1336,7 +1475,7 @@ Result.new(name: 'Jouko Tyrkäs', city: 'Helsinki', group: 'Tuusulan Tallaajat I
 @Enrollment100636 = Enrollment.new(user_id: @User10063.id, event_id: @Event6.id, time:10636)
 @Enrollment100636.save
 EnrollmentData.new(enrollment_id: @Enrollment100634.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment100634.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100634.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment100632.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100633.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100631.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -1357,14 +1496,18 @@ Result.new(name: 'Alpo Kumpula', city: 'Helsinki', group: 'Tuusulan Tallaajat II
 @Enrollment100646 = Enrollment.new(user_id: @User10064.id, event_id: @Event6.id, time:10042)
 @Enrollment100646.save
 EnrollmentData.new(enrollment_id: @Enrollment100644.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment100644.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100644.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100644.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment100644.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment100644.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment100644.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment100642.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100643.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100641.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100646.id, name: 'Emit', value: 'Kyllä', attribute_index: 1).save
 @User10065 = User.new(postal_code: '00100', city: 'Helsinki', first_name: 'Anne', last_name: 'Rasku', username: 'user10065', email: 'user10065@test.com', phone_number: 12345, street_address: 'Katuosoite', kk_number: 10065, birth_date: Date.today, gender: 'N', admin: false, password: 'Salasana1', password_confirmation: 'Salasana1', active: true)
 @User10065.save
-Result.new(name: 'Anne Rasku', city: 'Helsinki', group: 'OJy Justiinat', year: 2014, series: 'N40', kk_number: '10065').save
+Result.new(name: 'Anne Rasku', city: 'Helsinki', group: 'OJy Justiinat', year: 2014, series: 'N45', kk_number: '10065').save
 @Enrollment100651 = Enrollment.new(user_id: @User10065.id, event_id: @Event1.id, time:3900)
 @Enrollment100651.save
 @Enrollment100652 = Enrollment.new(user_id: @User10065.id, event_id: @Event2.id, time:12701)
@@ -1378,14 +1521,18 @@ Result.new(name: 'Anne Rasku', city: 'Helsinki', group: 'OJy Justiinat', year: 2
 @Enrollment100656 = Enrollment.new(user_id: @User10065.id, event_id: @Event6.id, time:9940)
 @Enrollment100656.save
 EnrollmentData.new(enrollment_id: @Enrollment100654.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment100654.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100654.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100654.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment100654.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment100654.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment100654.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment100652.id, name: 'Tyyli', value: 'Perinteinen', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100653.id, name: 'Tyyppi', value: 'maraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100651.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100656.id, name: 'Emit', value: 'Kyllä', attribute_index: 1).save
 @User10066 = User.new(postal_code: '00100', city: 'Helsinki', first_name: 'Ari', last_name: 'Pukki', username: 'user10066', email: 'user10066@test.com', phone_number: 12345, street_address: 'Katuosoite', kk_number: 10066, birth_date: Date.today, gender: 'M', admin: false, password: 'Salasana1', password_confirmation: 'Salasana1', active: true)
 @User10066.save
-Result.new(name: 'Ari Pukki', city: 'Helsinki', group: 'Uskelan Urhot III', year: 2014, series: 'M40', kk_number: '10066').save
+Result.new(name: 'Ari Pukki', city: 'Helsinki', group: 'Uskelan Urhot III', year: 2014, series: 'M45', kk_number: '10066').save
 @Enrollment100661 = Enrollment.new(user_id: @User10066.id, event_id: @Event1.id, time:4028)
 @Enrollment100661.save
 @Enrollment100662 = Enrollment.new(user_id: @User10066.id, event_id: @Event2.id, time:12184)
@@ -1399,7 +1546,11 @@ Result.new(name: 'Ari Pukki', city: 'Helsinki', group: 'Uskelan Urhot III', year
 @Enrollment100666 = Enrollment.new(user_id: @User10066.id, event_id: @Event6.id, time:8274)
 @Enrollment100666.save
 EnrollmentData.new(enrollment_id: @Enrollment100664.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment100664.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100664.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100664.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment100664.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment100664.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment100664.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment100662.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100663.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100661.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -1420,7 +1571,11 @@ Result.new(name: 'Harri Kuusniemi', city: 'Helsinki', group: nil, year: 2014, se
 @Enrollment100676 = Enrollment.new(user_id: @User10067.id, event_id: @Event6.id, time:8548)
 @Enrollment100676.save
 EnrollmentData.new(enrollment_id: @Enrollment100674.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment100674.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100674.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100674.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment100674.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment100674.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment100674.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment100672.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100673.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100671.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -1441,7 +1596,11 @@ Result.new(name: 'Veli-Matti Tiitinen', city: 'Helsinki', group: 'Kuntokonnat 2.
 @Enrollment100686 = Enrollment.new(user_id: @User10068.id, event_id: @Event6.id, time:8980)
 @Enrollment100686.save
 EnrollmentData.new(enrollment_id: @Enrollment100684.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment100684.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100684.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100684.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment100684.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment100684.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment100684.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment100682.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100683.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100681.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -1462,7 +1621,11 @@ Result.new(name: 'Markku Tunturi', city: 'Helsinki', group: nil, year: 2014, ser
 @Enrollment100696 = Enrollment.new(user_id: @User10069.id, event_id: @Event6.id, time:9666)
 @Enrollment100696.save
 EnrollmentData.new(enrollment_id: @Enrollment100694.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment100694.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100694.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100694.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment100694.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment100694.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment100694.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment100692.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100693.id, name: 'Tyyppi', value: 'maraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100691.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -1483,7 +1646,11 @@ Result.new(name: 'Hannu Lappalainen', city: 'Helsinki', group: nil, year: 2014, 
 @Enrollment100706 = Enrollment.new(user_id: @User10070.id, event_id: @Event6.id, time:10123)
 @Enrollment100706.save
 EnrollmentData.new(enrollment_id: @Enrollment100704.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment100704.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100704.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100704.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment100704.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment100704.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment100704.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment100702.id, name: 'Tyyli', value: 'Perinteinen', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100703.id, name: 'Tyyppi', value: 'maraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100701.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -1504,7 +1671,11 @@ Result.new(name: 'Olli Kujansuu', city: 'Helsinki', group: 'Kankaanpään Kaleva
 @Enrollment100716 = Enrollment.new(user_id: @User10071.id, event_id: @Event6.id, time:8805)
 @Enrollment100716.save
 EnrollmentData.new(enrollment_id: @Enrollment100714.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment100714.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100714.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100714.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment100714.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment100714.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment100714.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment100712.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100713.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100711.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -1525,7 +1696,7 @@ Result.new(name: 'Päivi Särmäntö', city: 'Helsinki', group: 'Uskelan Urhotta
 @Enrollment100726 = Enrollment.new(user_id: @User10072.id, event_id: @Event6.id, time:9027)
 @Enrollment100726.save
 EnrollmentData.new(enrollment_id: @Enrollment100724.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment100724.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100724.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment100722.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100723.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100721.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -1546,7 +1717,11 @@ Result.new(name: 'Raimo Hämäläinen', city: 'Helsinki', group: 'Uskelan Urhot 
 @Enrollment100736 = Enrollment.new(user_id: @User10073.id, event_id: @Event6.id, time:16530)
 @Enrollment100736.save
 EnrollmentData.new(enrollment_id: @Enrollment100734.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment100734.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100734.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100734.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment100734.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment100734.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment100734.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment100732.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100733.id, name: 'Tyyppi', value: 'maraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100731.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -1567,7 +1742,7 @@ Result.new(name: 'Antti Rytkönen', city: 'Helsinki', group: nil, year: 2014, se
 @Enrollment100746 = Enrollment.new(user_id: @User10074.id, event_id: @Event6.id, time:10194)
 @Enrollment100746.save
 EnrollmentData.new(enrollment_id: @Enrollment100744.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment100744.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100744.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment100742.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100743.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100741.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -1588,7 +1763,11 @@ Result.new(name: 'Jyrki Laurikainen', city: 'Helsinki', group: 'ERRY', year: 201
 @Enrollment100756 = Enrollment.new(user_id: @User10075.id, event_id: @Event6.id, time:8816)
 @Enrollment100756.save
 EnrollmentData.new(enrollment_id: @Enrollment100754.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment100754.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100754.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100754.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment100754.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment100754.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment100754.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment100752.id, name: 'Tyyli', value: 'Perinteinen', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100753.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100751.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -1609,7 +1788,11 @@ Result.new(name: 'Jaakko Helminen', city: 'Helsinki', group: 'Tuusulan Tallaajat
 @Enrollment100766 = Enrollment.new(user_id: @User10076.id, event_id: @Event6.id, time:10264)
 @Enrollment100766.save
 EnrollmentData.new(enrollment_id: @Enrollment100764.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment100764.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100764.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100764.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment100764.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment100764.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment100764.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment100762.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100763.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100761.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -1630,7 +1813,7 @@ Result.new(name: 'Raimo Liukkonen', city: 'Helsinki', group: nil, year: 2014, se
 @Enrollment100776 = Enrollment.new(user_id: @User10077.id, event_id: @Event6.id, time:8590)
 @Enrollment100776.save
 EnrollmentData.new(enrollment_id: @Enrollment100774.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment100774.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100774.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment100772.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100773.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100771.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -1651,7 +1834,7 @@ Result.new(name: 'Ilkka Kivi', city: 'Helsinki', group: nil, year: 2014, series:
 @Enrollment100786 = Enrollment.new(user_id: @User10078.id, event_id: @Event6.id, time:9608)
 @Enrollment100786.save
 EnrollmentData.new(enrollment_id: @Enrollment100784.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment100784.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100784.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment100782.id, name: 'Tyyli', value: 'Perinteinen', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100783.id, name: 'Tyyppi', value: 'maraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100781.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -1672,7 +1855,11 @@ Result.new(name: 'Katja Huotari', city: 'Helsinki', group: nil, year: 2014, seri
 @Enrollment100796 = Enrollment.new(user_id: @User10079.id, event_id: @Event6.id, time:11158)
 @Enrollment100796.save
 EnrollmentData.new(enrollment_id: @Enrollment100794.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment100794.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100794.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100794.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment100794.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment100794.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment100794.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment100792.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100793.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100791.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -1693,7 +1880,11 @@ Result.new(name: 'Riitta Ynnilä', city: 'Helsinki', group: 'Uskelan Urhottaret'
 @Enrollment100806 = Enrollment.new(user_id: @User10080.id, event_id: @Event6.id, time:8894)
 @Enrollment100806.save
 EnrollmentData.new(enrollment_id: @Enrollment100804.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment100804.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100804.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100804.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment100804.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment100804.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment100804.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment100802.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100803.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100801.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -1714,7 +1905,11 @@ Result.new(name: 'Matti Teittinen', city: 'Helsinki', group: 'Uskelan Urhot II',
 @Enrollment100816 = Enrollment.new(user_id: @User10081.id, event_id: @Event6.id, time:7536)
 @Enrollment100816.save
 EnrollmentData.new(enrollment_id: @Enrollment100814.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment100814.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100814.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100814.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment100814.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment100814.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment100814.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment100812.id, name: 'Tyyli', value: 'Perinteinen', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100813.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100811.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -1735,7 +1930,7 @@ Result.new(name: 'Heikki Husu', city: 'Helsinki', group: 'Uskelan Urhot I', year
 @Enrollment100826 = Enrollment.new(user_id: @User10082.id, event_id: @Event6.id, time:9393)
 @Enrollment100826.save
 EnrollmentData.new(enrollment_id: @Enrollment100824.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment100824.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100824.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment100822.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100823.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100821.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -1756,14 +1951,14 @@ Result.new(name: 'Anna Keskisaari', city: 'Helsinki', group: nil, year: 2014, se
 @Enrollment100836 = Enrollment.new(user_id: @User10083.id, event_id: @Event6.id, time:10483)
 @Enrollment100836.save
 EnrollmentData.new(enrollment_id: @Enrollment100834.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment100834.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100834.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment100832.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100833.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100831.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100836.id, name: 'Emit', value: 'Kyllä', attribute_index: 1).save
 @User10084 = User.new(postal_code: '00100', city: 'Helsinki', first_name: 'Juha', last_name: 'Nappu', username: 'user10084', email: 'user10084@test.com', phone_number: 12345, street_address: 'Katuosoite', kk_number: 10084, birth_date: Date.today, gender: 'M', admin: false, password: 'Salasana1', password_confirmation: 'Salasana1', active: true)
 @User10084.save
-Result.new(name: 'Juha Nappu', city: 'Helsinki', group: 'Turun NMKY', year: 2014, series: 'M40', kk_number: '10084').save
+Result.new(name: 'Juha Nappu', city: 'Helsinki', group: 'Turun NMKY', year: 2014, series: 'M45', kk_number: '10084').save
 @Enrollment100841 = Enrollment.new(user_id: @User10084.id, event_id: @Event1.id, time:4089)
 @Enrollment100841.save
 @Enrollment100842 = Enrollment.new(user_id: @User10084.id, event_id: @Event2.id, time:14133)
@@ -1777,14 +1972,18 @@ Result.new(name: 'Juha Nappu', city: 'Helsinki', group: 'Turun NMKY', year: 2014
 @Enrollment100846 = Enrollment.new(user_id: @User10084.id, event_id: @Event6.id, time:6921)
 @Enrollment100846.save
 EnrollmentData.new(enrollment_id: @Enrollment100844.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment100844.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100844.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100844.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment100844.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment100844.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment100844.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment100842.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100843.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100841.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100846.id, name: 'Emit', value: 'Kyllä', attribute_index: 1).save
 @User10085 = User.new(postal_code: '00100', city: 'Helsinki', first_name: 'Sirpa', last_name: 'Översti', username: 'user10085', email: 'user10085@test.com', phone_number: 12345, street_address: 'Katuosoite', kk_number: 10085, birth_date: Date.today, gender: 'N', admin: false, password: 'Salasana1', password_confirmation: 'Salasana1', active: true)
 @User10085.save
-Result.new(name: 'Sirpa Översti', city: 'Helsinki', group: 'Selän Sitkeät Seireenit', year: 2014, series: 'N40', kk_number: '10085').save
+Result.new(name: 'Sirpa Översti', city: 'Helsinki', group: 'Selän Sitkeät Seireenit', year: 2014, series: 'N45', kk_number: '10085').save
 @Enrollment100851 = Enrollment.new(user_id: @User10085.id, event_id: @Event1.id, time:3950)
 @Enrollment100851.save
 @Enrollment100852 = Enrollment.new(user_id: @User10085.id, event_id: @Event2.id, time:11628)
@@ -1798,7 +1997,11 @@ Result.new(name: 'Sirpa Översti', city: 'Helsinki', group: 'Selän Sitkeät Sei
 @Enrollment100856 = Enrollment.new(user_id: @User10085.id, event_id: @Event6.id, time:10805)
 @Enrollment100856.save
 EnrollmentData.new(enrollment_id: @Enrollment100854.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment100854.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100854.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100854.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment100854.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment100854.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment100854.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment100852.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100853.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100851.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -1819,7 +2022,11 @@ Result.new(name: 'Antti Piesanen', city: 'Helsinki', group: nil, year: 2014, ser
 @Enrollment100866 = Enrollment.new(user_id: @User10086.id, event_id: @Event6.id, time:9442)
 @Enrollment100866.save
 EnrollmentData.new(enrollment_id: @Enrollment100864.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment100864.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100864.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100864.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment100864.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment100864.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment100864.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment100862.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100863.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100861.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -1840,7 +2047,11 @@ Result.new(name: 'Marja-Liisa Salonen', city: 'Helsinki', group: 'Hitaat Neidot'
 @Enrollment100876 = Enrollment.new(user_id: @User10087.id, event_id: @Event6.id, time:9342)
 @Enrollment100876.save
 EnrollmentData.new(enrollment_id: @Enrollment100874.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment100874.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100874.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100874.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment100874.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment100874.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment100874.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment100872.id, name: 'Tyyli', value: 'Perinteinen', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100873.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100871.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -1861,7 +2072,11 @@ Result.new(name: 'Kimmo Behm', city: 'Helsinki', group: 'Tuusulan Tallaajat II',
 @Enrollment100886 = Enrollment.new(user_id: @User10088.id, event_id: @Event6.id, time:10021)
 @Enrollment100886.save
 EnrollmentData.new(enrollment_id: @Enrollment100884.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment100884.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100884.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100884.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment100884.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment100884.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment100884.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment100882.id, name: 'Tyyli', value: 'Perinteinen', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100883.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100881.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -1882,7 +2097,11 @@ Result.new(name: 'Veikko Långström', city: 'Helsinki', group: 'Hitaat 2', year
 @Enrollment100896 = Enrollment.new(user_id: @User10089.id, event_id: @Event6.id, time:9298)
 @Enrollment100896.save
 EnrollmentData.new(enrollment_id: @Enrollment100894.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment100894.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100894.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100894.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment100894.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment100894.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment100894.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment100892.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100893.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100891.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -1903,7 +2122,11 @@ Result.new(name: 'Milla Seppä', city: 'Helsinki', group: 'Uskelan Urhottaret', 
 @Enrollment100906 = Enrollment.new(user_id: @User10090.id, event_id: @Event6.id, time:10089)
 @Enrollment100906.save
 EnrollmentData.new(enrollment_id: @Enrollment100904.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment100904.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100904.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100904.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment100904.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment100904.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment100904.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment100902.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100903.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100901.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -1924,7 +2147,11 @@ Result.new(name: 'Arto Jokela', city: 'Helsinki', group: 'Uskelan Urhot III', ye
 @Enrollment100916 = Enrollment.new(user_id: @User10091.id, event_id: @Event6.id, time:7193)
 @Enrollment100916.save
 EnrollmentData.new(enrollment_id: @Enrollment100914.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment100914.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100914.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100914.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment100914.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment100914.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment100914.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment100912.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100913.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100911.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -1945,7 +2172,7 @@ Result.new(name: 'Kari Hyrkäs', city: 'Helsinki', group: nil, year: 2014, serie
 @Enrollment100926 = Enrollment.new(user_id: @User10092.id, event_id: @Event6.id, time:9626)
 @Enrollment100926.save
 EnrollmentData.new(enrollment_id: @Enrollment100924.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment100924.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100924.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment100922.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100923.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100921.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -1966,7 +2193,7 @@ Result.new(name: 'Juha Nurmela', city: 'Helsinki', group: nil, year: 2014, serie
 @Enrollment100936 = Enrollment.new(user_id: @User10093.id, event_id: @Event6.id, time:9634)
 @Enrollment100936.save
 EnrollmentData.new(enrollment_id: @Enrollment100934.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment100934.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100934.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment100932.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100933.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100931.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -1987,7 +2214,11 @@ Result.new(name: 'Jouni Partanen', city: 'Helsinki', group: nil, year: 2014, ser
 @Enrollment100946 = Enrollment.new(user_id: @User10094.id, event_id: @Event6.id, time:9825)
 @Enrollment100946.save
 EnrollmentData.new(enrollment_id: @Enrollment100944.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment100944.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100944.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100944.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment100944.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment100944.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment100944.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment100942.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100943.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100941.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -2008,7 +2239,11 @@ Result.new(name: 'Leo Lehtimäki', city: 'Helsinki', group: nil, year: 2014, ser
 @Enrollment100956 = Enrollment.new(user_id: @User10095.id, event_id: @Event6.id, time:9091)
 @Enrollment100956.save
 EnrollmentData.new(enrollment_id: @Enrollment100954.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment100954.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100954.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100954.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment100954.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment100954.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment100954.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment100952.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100953.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100951.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -2029,14 +2264,18 @@ Result.new(name: 'Petteri Pirinen', city: 'Helsinki', group: 'Tuusulan Tallaajat
 @Enrollment100966 = Enrollment.new(user_id: @User10096.id, event_id: @Event6.id, time:10890)
 @Enrollment100966.save
 EnrollmentData.new(enrollment_id: @Enrollment100964.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment100964.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100964.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100964.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment100964.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment100964.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment100964.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment100962.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100963.id, name: 'Tyyppi', value: 'maraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100961.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100966.id, name: 'Emit', value: 'Kyllä', attribute_index: 1).save
 @User10097 = User.new(postal_code: '00100', city: 'Helsinki', first_name: 'Jarmo', last_name: 'Huttunen', username: 'user10097', email: 'user10097@test.com', phone_number: 12345, street_address: 'Katuosoite', kk_number: 10097, birth_date: Date.today, gender: 'M', admin: false, password: 'Salasana1', password_confirmation: 'Salasana1', active: true)
 @User10097.save
-Result.new(name: 'Jarmo Huttunen', city: 'Helsinki', group: 'Kankaanpään Kalevankiertäjät 1', year: 2014, series: 'M40', kk_number: '10097').save
+Result.new(name: 'Jarmo Huttunen', city: 'Helsinki', group: 'Kankaanpään Kalevankiertäjät 1', year: 2014, series: 'M45', kk_number: '10097').save
 @Enrollment100971 = Enrollment.new(user_id: @User10097.id, event_id: @Event1.id, time:4562)
 @Enrollment100971.save
 @Enrollment100972 = Enrollment.new(user_id: @User10097.id, event_id: @Event2.id, time:25758)
@@ -2050,7 +2289,11 @@ Result.new(name: 'Jarmo Huttunen', city: 'Helsinki', group: 'Kankaanpään Kalev
 @Enrollment100976 = Enrollment.new(user_id: @User10097.id, event_id: @Event6.id, time:9640)
 @Enrollment100976.save
 EnrollmentData.new(enrollment_id: @Enrollment100974.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment100974.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100974.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100974.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment100974.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment100974.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment100974.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment100972.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100973.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100971.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -2071,7 +2314,7 @@ Result.new(name: 'Martin Löfström', city: 'Helsinki', group: nil, year: 2014, 
 @Enrollment100986 = Enrollment.new(user_id: @User10098.id, event_id: @Event6.id, time:12427)
 @Enrollment100986.save
 EnrollmentData.new(enrollment_id: @Enrollment100984.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment100984.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100984.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment100982.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100983.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100981.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -2092,7 +2335,11 @@ Result.new(name: 'Juha Meronen', city: 'Helsinki', group: nil, year: 2014, serie
 @Enrollment100996 = Enrollment.new(user_id: @User10099.id, event_id: @Event6.id, time:6962)
 @Enrollment100996.save
 EnrollmentData.new(enrollment_id: @Enrollment100994.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment100994.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100994.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment100994.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment100994.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment100994.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment100994.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment100992.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100993.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100991.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -2113,7 +2360,7 @@ Result.new(name: 'jari tiimo', city: 'Helsinki', group: nil, year: 2014, series:
 @Enrollment101006 = Enrollment.new(user_id: @User10100.id, event_id: @Event6.id, time:10190)
 @Enrollment101006.save
 EnrollmentData.new(enrollment_id: @Enrollment101004.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment101004.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101004.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment101002.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101003.id, name: 'Tyyppi', value: 'maraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101001.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -2134,14 +2381,14 @@ Result.new(name: 'Jani Lehmuskoski', city: 'Helsinki', group: nil, year: 2014, s
 @Enrollment101016 = Enrollment.new(user_id: @User10101.id, event_id: @Event6.id, time:8558)
 @Enrollment101016.save
 EnrollmentData.new(enrollment_id: @Enrollment101014.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment101014.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101014.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment101012.id, name: 'Tyyli', value: 'Perinteinen', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101013.id, name: 'Tyyppi', value: 'maraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101011.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101016.id, name: 'Emit', value: 'Kyllä', attribute_index: 1).save
 @User10102 = User.new(postal_code: '00100', city: 'Helsinki', first_name: 'Antti', last_name: 'Mäntynen', username: 'user10102', email: 'user10102@test.com', phone_number: 12345, street_address: 'Katuosoite', kk_number: 10102, birth_date: Date.today, gender: 'M', admin: false, password: 'Salasana1', password_confirmation: 'Salasana1', active: true)
 @User10102.save
-Result.new(name: 'Antti Mäntynen', city: 'Helsinki', group: 'Otaniemen Jyllääjät II', year: 2014, series: 'M40', kk_number: '10102').save
+Result.new(name: 'Antti Mäntynen', city: 'Helsinki', group: 'Otaniemen Jyllääjät II', year: 2014, series: 'M45', kk_number: '10102').save
 @Enrollment101021 = Enrollment.new(user_id: @User10102.id, event_id: @Event1.id, time:4057)
 @Enrollment101021.save
 @Enrollment101022 = Enrollment.new(user_id: @User10102.id, event_id: @Event2.id, time:11858)
@@ -2155,7 +2402,11 @@ Result.new(name: 'Antti Mäntynen', city: 'Helsinki', group: 'Otaniemen Jyllää
 @Enrollment101026 = Enrollment.new(user_id: @User10102.id, event_id: @Event6.id, time:16803)
 @Enrollment101026.save
 EnrollmentData.new(enrollment_id: @Enrollment101024.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment101024.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101024.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101024.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment101024.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment101024.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment101024.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment101022.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101023.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101021.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -2176,7 +2427,7 @@ Result.new(name: 'Juhani Joutsenniemi', city: 'Helsinki', group: 'Tuusulan Talla
 @Enrollment101036 = Enrollment.new(user_id: @User10103.id, event_id: @Event6.id, time:13983)
 @Enrollment101036.save
 EnrollmentData.new(enrollment_id: @Enrollment101034.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment101034.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101034.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment101032.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101033.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101031.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -2197,7 +2448,11 @@ Result.new(name: 'Timo Lappi', city: 'Helsinki', group: nil, year: 2014, series:
 @Enrollment101046 = Enrollment.new(user_id: @User10104.id, event_id: @Event6.id, time:11552)
 @Enrollment101046.save
 EnrollmentData.new(enrollment_id: @Enrollment101044.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment101044.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101044.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101044.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment101044.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment101044.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment101044.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment101042.id, name: 'Tyyli', value: 'Perinteinen', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101043.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101041.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -2218,7 +2473,11 @@ Result.new(name: 'Petri Hammar', city: 'Helsinki', group: nil, year: 2014, serie
 @Enrollment101056 = Enrollment.new(user_id: @User10105.id, event_id: @Event6.id, time:11482)
 @Enrollment101056.save
 EnrollmentData.new(enrollment_id: @Enrollment101054.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment101054.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101054.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101054.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment101054.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment101054.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment101054.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment101052.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101053.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101051.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -2239,7 +2498,11 @@ Result.new(name: 'Heikki Aurasmaa', city: 'Helsinki', group: 'Korvenpojat', year
 @Enrollment101066 = Enrollment.new(user_id: @User10106.id, event_id: @Event6.id, time:11188)
 @Enrollment101066.save
 EnrollmentData.new(enrollment_id: @Enrollment101064.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment101064.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101064.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101064.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment101064.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment101064.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment101064.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment101062.id, name: 'Tyyli', value: 'Perinteinen', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101063.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101061.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -2260,7 +2523,11 @@ Result.new(name: 'Hannu Saarinen', city: 'Helsinki', group: 'Sveitsiläiset', ye
 @Enrollment101076 = Enrollment.new(user_id: @User10107.id, event_id: @Event6.id, time:10989)
 @Enrollment101076.save
 EnrollmentData.new(enrollment_id: @Enrollment101074.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment101074.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101074.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101074.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment101074.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment101074.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment101074.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment101072.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101073.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101071.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -2281,7 +2548,11 @@ Result.new(name: 'Etti Kantola', city: 'Helsinki', group: 'Hitaat Neidot', year:
 @Enrollment101086 = Enrollment.new(user_id: @User10108.id, event_id: @Event6.id, time:10140)
 @Enrollment101086.save
 EnrollmentData.new(enrollment_id: @Enrollment101084.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment101084.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101084.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101084.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment101084.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment101084.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment101084.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment101082.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101083.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101081.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -2302,7 +2573,7 @@ Result.new(name: 'Pekka Ahlqvist', city: 'Helsinki', group: nil, year: 2014, ser
 @Enrollment101096 = Enrollment.new(user_id: @User10109.id, event_id: @Event6.id, time:9340)
 @Enrollment101096.save
 EnrollmentData.new(enrollment_id: @Enrollment101094.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment101094.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101094.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment101092.id, name: 'Tyyli', value: 'Perinteinen', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101093.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101091.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -2323,7 +2594,11 @@ Result.new(name: 'Liisa Särmäntö', city: 'Helsinki', group: 'Uskelan Urhot IV
 @Enrollment101106 = Enrollment.new(user_id: @User10110.id, event_id: @Event6.id, time:10877)
 @Enrollment101106.save
 EnrollmentData.new(enrollment_id: @Enrollment101104.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment101104.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101104.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101104.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment101104.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment101104.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment101104.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment101102.id, name: 'Tyyli', value: 'Perinteinen', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101103.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101101.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -2344,7 +2619,11 @@ Result.new(name: 'Väinö Kärsämä', city: 'Helsinki', group: 'SM MAANPÄÄ ',
 @Enrollment101116 = Enrollment.new(user_id: @User10111.id, event_id: @Event6.id, time:12770)
 @Enrollment101116.save
 EnrollmentData.new(enrollment_id: @Enrollment101114.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment101114.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101114.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101114.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment101114.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment101114.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment101114.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment101112.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101113.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101111.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -2365,14 +2644,18 @@ Result.new(name: 'Eero Aalto', city: 'Helsinki', group: 'KK Länsi-Uusimaa 1', y
 @Enrollment101126 = Enrollment.new(user_id: @User10112.id, event_id: @Event6.id, time:12786)
 @Enrollment101126.save
 EnrollmentData.new(enrollment_id: @Enrollment101124.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment101124.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101124.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101124.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment101124.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment101124.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment101124.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment101122.id, name: 'Tyyli', value: 'Perinteinen', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101123.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101121.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101126.id, name: 'Emit', value: 'Kyllä', attribute_index: 1).save
 @User10113 = User.new(postal_code: '00100', city: 'Helsinki', first_name: 'Pirjo', last_name: 'Peltomaa', username: 'user10113', email: 'user10113@test.com', phone_number: 12345, street_address: 'Katuosoite', kk_number: 10113, birth_date: Date.today, gender: 'N', admin: false, password: 'Salasana1', password_confirmation: 'Salasana1', active: true)
 @User10113.save
-Result.new(name: 'Pirjo Peltomaa', city: 'Helsinki', group: 'Selän Sitkeät Seireenit', year: 2014, series: 'N40', kk_number: '10113').save
+Result.new(name: 'Pirjo Peltomaa', city: 'Helsinki', group: 'Selän Sitkeät Seireenit', year: 2014, series: 'N45', kk_number: '10113').save
 @Enrollment101131 = Enrollment.new(user_id: @User10113.id, event_id: @Event1.id, time:4611)
 @Enrollment101131.save
 @Enrollment101132 = Enrollment.new(user_id: @User10113.id, event_id: @Event2.id, time:12568)
@@ -2386,7 +2669,7 @@ Result.new(name: 'Pirjo Peltomaa', city: 'Helsinki', group: 'Selän Sitkeät Sei
 @Enrollment101136 = Enrollment.new(user_id: @User10113.id, event_id: @Event6.id, time:10565)
 @Enrollment101136.save
 EnrollmentData.new(enrollment_id: @Enrollment101134.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment101134.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101134.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment101132.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101133.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101131.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -2407,7 +2690,11 @@ Result.new(name: 'Ida Kujansuu', city: 'Helsinki', group: 'Kankaanpään Kalevan
 @Enrollment101146 = Enrollment.new(user_id: @User10114.id, event_id: @Event6.id, time:8751)
 @Enrollment101146.save
 EnrollmentData.new(enrollment_id: @Enrollment101144.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment101144.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101144.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101144.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment101144.id, name: 'Parin sukupuoli', value: 'M', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment101144.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment101144.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment101142.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101143.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101141.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -2428,14 +2715,18 @@ Result.new(name: 'Hannu Haimi', city: 'Helsinki', group: nil, year: 2014, series
 @Enrollment101156 = Enrollment.new(user_id: @User10115.id, event_id: @Event6.id, time:11668)
 @Enrollment101156.save
 EnrollmentData.new(enrollment_id: @Enrollment101154.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment101154.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101154.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101154.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment101154.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment101154.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment101154.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment101152.id, name: 'Tyyli', value: 'Perinteinen', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101153.id, name: 'Tyyppi', value: 'maraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101151.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101156.id, name: 'Emit', value: 'Kyllä', attribute_index: 1).save
 @User10116 = User.new(postal_code: '00100', city: 'Helsinki', first_name: 'Heidi', last_name: 'Korventausta', username: 'user10116', email: 'user10116@test.com', phone_number: 12345, street_address: 'Katuosoite', kk_number: 10116, birth_date: Date.today, gender: 'N', admin: false, password: 'Salasana1', password_confirmation: 'Salasana1', active: true)
 @User10116.save
-Result.new(name: 'Heidi Korventausta', city: 'Helsinki', group: 'KK Länsi-Uusimaa 2', year: 2014, series: 'N40', kk_number: '10116').save
+Result.new(name: 'Heidi Korventausta', city: 'Helsinki', group: 'KK Länsi-Uusimaa 2', year: 2014, series: 'N45', kk_number: '10116').save
 @Enrollment101161 = Enrollment.new(user_id: @User10116.id, event_id: @Event1.id, time:4957)
 @Enrollment101161.save
 @Enrollment101162 = Enrollment.new(user_id: @User10116.id, event_id: @Event2.id, time:13403)
@@ -2449,7 +2740,7 @@ Result.new(name: 'Heidi Korventausta', city: 'Helsinki', group: 'KK Länsi-Uusim
 @Enrollment101166 = Enrollment.new(user_id: @User10116.id, event_id: @Event6.id, time:12679)
 @Enrollment101166.save
 EnrollmentData.new(enrollment_id: @Enrollment101164.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment101164.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101164.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment101162.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101163.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101161.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -2470,7 +2761,11 @@ Result.new(name: 'Jukka Yli-Viikari', city: 'Helsinki', group: nil, year: 2014, 
 @Enrollment101176 = Enrollment.new(user_id: @User10117.id, event_id: @Event6.id, time:13152)
 @Enrollment101176.save
 EnrollmentData.new(enrollment_id: @Enrollment101174.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment101174.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101174.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101174.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment101174.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment101174.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment101174.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment101172.id, name: 'Tyyli', value: 'Perinteinen', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101173.id, name: 'Tyyppi', value: 'maraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101171.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -2491,14 +2786,14 @@ Result.new(name: 'Juha Sameri', city: 'Helsinki', group: 'Espoon Etanat', year: 
 @Enrollment101186 = Enrollment.new(user_id: @User10118.id, event_id: @Event6.id, time:16379)
 @Enrollment101186.save
 EnrollmentData.new(enrollment_id: @Enrollment101184.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment101184.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101184.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment101182.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101183.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101181.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101186.id, name: 'Emit', value: 'Kyllä', attribute_index: 1).save
 @User10119 = User.new(postal_code: '00100', city: 'Helsinki', first_name: 'Kari', last_name: 'Mamia', username: 'user10119', email: 'user10119@test.com', phone_number: 12345, street_address: 'Katuosoite', kk_number: 10119, birth_date: Date.today, gender: 'M', admin: false, password: 'Salasana1', password_confirmation: 'Salasana1', active: true)
 @User10119.save
-Result.new(name: 'Kari Mamia', city: 'Helsinki', group: 'KK Länsi-Uusimaa 1', year: 2014, series: 'M40', kk_number: '10119').save
+Result.new(name: 'Kari Mamia', city: 'Helsinki', group: 'KK Länsi-Uusimaa 1', year: 2014, series: 'M45', kk_number: '10119').save
 @Enrollment101191 = Enrollment.new(user_id: @User10119.id, event_id: @Event1.id, time:4731)
 @Enrollment101191.save
 @Enrollment101192 = Enrollment.new(user_id: @User10119.id, event_id: @Event2.id, time:15578)
@@ -2512,7 +2807,11 @@ Result.new(name: 'Kari Mamia', city: 'Helsinki', group: 'KK Länsi-Uusimaa 1', y
 @Enrollment101196 = Enrollment.new(user_id: @User10119.id, event_id: @Event6.id, time:7715)
 @Enrollment101196.save
 EnrollmentData.new(enrollment_id: @Enrollment101194.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment101194.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101194.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101194.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment101194.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment101194.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment101194.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment101192.id, name: 'Tyyli', value: 'Perinteinen', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101193.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101191.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -2533,7 +2832,11 @@ Result.new(name: 'Juhani Sillanpää', city: 'Helsinki', group: 'Espoon Etanat',
 @Enrollment101206 = Enrollment.new(user_id: @User10120.id, event_id: @Event6.id, time:11604)
 @Enrollment101206.save
 EnrollmentData.new(enrollment_id: @Enrollment101204.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment101204.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101204.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101204.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment101204.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment101204.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment101204.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment101202.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101203.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101201.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -2554,7 +2857,11 @@ Result.new(name: 'Erkki Marila', city: 'Helsinki', group: nil, year: 2014, serie
 @Enrollment101216 = Enrollment.new(user_id: @User10121.id, event_id: @Event6.id, time:11643)
 @Enrollment101216.save
 EnrollmentData.new(enrollment_id: @Enrollment101214.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment101214.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101214.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101214.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment101214.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment101214.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment101214.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment101212.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101213.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101211.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -2575,7 +2882,11 @@ Result.new(name: 'Esa Ojanen', city: 'Helsinki', group: 'Sveitsiläiset', year: 
 @Enrollment101226 = Enrollment.new(user_id: @User10122.id, event_id: @Event6.id, time:13766)
 @Enrollment101226.save
 EnrollmentData.new(enrollment_id: @Enrollment101224.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment101224.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101224.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101224.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment101224.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment101224.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment101224.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment101222.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101223.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101221.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -2596,14 +2907,18 @@ Result.new(name: 'Tarmo Pietilä', city: 'Helsinki', group: 'Tammelan Ryske', ye
 @Enrollment101236 = Enrollment.new(user_id: @User10123.id, event_id: @Event6.id, time:10178)
 @Enrollment101236.save
 EnrollmentData.new(enrollment_id: @Enrollment101234.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment101234.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101234.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101234.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment101234.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment101234.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment101234.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment101232.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101233.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101231.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101236.id, name: 'Emit', value: 'Kyllä', attribute_index: 1).save
 @User10124 = User.new(postal_code: '00100', city: 'Helsinki', first_name: 'Kaisa', last_name: 'Reunanen', username: 'user10124', email: 'user10124@test.com', phone_number: 12345, street_address: 'Katuosoite', kk_number: 10124, birth_date: Date.today, gender: 'N', admin: false, password: 'Salasana1', password_confirmation: 'Salasana1', active: true)
 @User10124.save
-Result.new(name: 'Kaisa Reunanen', city: 'Helsinki', group: nil, year: 2014, series: 'N40', kk_number: '10124').save
+Result.new(name: 'Kaisa Reunanen', city: 'Helsinki', group: nil, year: 2014, series: 'N45', kk_number: '10124').save
 @Enrollment101241 = Enrollment.new(user_id: @User10124.id, event_id: @Event1.id, time:4500)
 @Enrollment101241.save
 @Enrollment101242 = Enrollment.new(user_id: @User10124.id, event_id: @Event2.id, time:13714)
@@ -2617,7 +2932,7 @@ Result.new(name: 'Kaisa Reunanen', city: 'Helsinki', group: nil, year: 2014, ser
 @Enrollment101246 = Enrollment.new(user_id: @User10124.id, event_id: @Event6.id, time:13506)
 @Enrollment101246.save
 EnrollmentData.new(enrollment_id: @Enrollment101244.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment101244.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101244.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment101242.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101243.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101241.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -2638,14 +2953,18 @@ Result.new(name: 'Markku Luoto', city: 'Helsinki', group: nil, year: 2014, serie
 @Enrollment101256 = Enrollment.new(user_id: @User10125.id, event_id: @Event6.id, time:13122)
 @Enrollment101256.save
 EnrollmentData.new(enrollment_id: @Enrollment101254.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment101254.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101254.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101254.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment101254.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment101254.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment101254.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment101252.id, name: 'Tyyli', value: 'Perinteinen', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101253.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101251.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101256.id, name: 'Emit', value: 'Kyllä', attribute_index: 1).save
 @User10126 = User.new(postal_code: '00100', city: 'Helsinki', first_name: 'Marjut', last_name: 'Kujansuu', username: 'user10126', email: 'user10126@test.com', phone_number: 12345, street_address: 'Katuosoite', kk_number: 10126, birth_date: Date.today, gender: 'N', admin: false, password: 'Salasana1', password_confirmation: 'Salasana1', active: true)
 @User10126.save
-Result.new(name: 'Marjut Kujansuu', city: 'Helsinki', group: 'Kankaanpään Kalevankiertäjät 2', year: 2014, series: 'N40', kk_number: '10126').save
+Result.new(name: 'Marjut Kujansuu', city: 'Helsinki', group: 'Kankaanpään Kalevankiertäjät 2', year: 2014, series: 'N45', kk_number: '10126').save
 @Enrollment101261 = Enrollment.new(user_id: @User10126.id, event_id: @Event1.id, time:4921)
 @Enrollment101261.save
 @Enrollment101262 = Enrollment.new(user_id: @User10126.id, event_id: @Event2.id, time:17879)
@@ -2659,7 +2978,7 @@ Result.new(name: 'Marjut Kujansuu', city: 'Helsinki', group: 'Kankaanpään Kale
 @Enrollment101266 = Enrollment.new(user_id: @User10126.id, event_id: @Event6.id, time:10507)
 @Enrollment101266.save
 EnrollmentData.new(enrollment_id: @Enrollment101264.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment101264.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101264.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment101262.id, name: 'Tyyli', value: 'Perinteinen', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101263.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101261.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -2680,7 +2999,11 @@ Result.new(name: 'Esa Salonen', city: 'Helsinki', group: nil, year: 2014, series
 @Enrollment101276 = Enrollment.new(user_id: @User10127.id, event_id: @Event6.id, time:14312)
 @Enrollment101276.save
 EnrollmentData.new(enrollment_id: @Enrollment101274.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment101274.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101274.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101274.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment101274.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment101274.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment101274.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment101272.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101273.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101271.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -2701,14 +3024,18 @@ Result.new(name: 'Mikael Lindström', city: 'Helsinki', group: nil, year: 2014, 
 @Enrollment101286 = Enrollment.new(user_id: @User10128.id, event_id: @Event6.id, time:11862)
 @Enrollment101286.save
 EnrollmentData.new(enrollment_id: @Enrollment101284.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment101284.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101284.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101284.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment101284.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment101284.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment101284.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment101282.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101283.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101281.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101286.id, name: 'Emit', value: 'Kyllä', attribute_index: 1).save
-@User10129 = User.new(postal_code: '00100', city: 'Helsinki', first_name: 'Pertti', last_name: 'Mannevuo', username: 'user10129', email: 'user10129@test.com', phone_number: 12345, street_address: 'Katuosoite', kk_number: 10129, birth_date: Date.today, gender: 'M', admin: false, password: 'Salasana1', password_confirmation: 'Salasana1', active: true)
+@User10129 = User.new(postal_code: '00100', city: 'Helsinki', first_name: 'Pertti', last_name: 'ManneVuoro', username: 'user10129', email: 'user10129@test.com', phone_number: 12345, street_address: 'Katuosoite', kk_number: 10129, birth_date: Date.today, gender: 'M', admin: false, password: 'Salasana1', password_confirmation: 'Salasana1', active: true)
 @User10129.save
-Result.new(name: 'Pertti Mannevuo', city: 'Helsinki', group: nil, year: 2014, series: 'M65', kk_number: '10129').save
+Result.new(name: 'Pertti ManneVuoro', city: 'Helsinki', group: nil, year: 2014, series: 'M65', kk_number: '10129').save
 @Enrollment101291 = Enrollment.new(user_id: @User10129.id, event_id: @Event1.id, time:4196)
 @Enrollment101291.save
 @Enrollment101292 = Enrollment.new(user_id: @User10129.id, event_id: @Event2.id, time:15541)
@@ -2722,7 +3049,11 @@ Result.new(name: 'Pertti Mannevuo', city: 'Helsinki', group: nil, year: 2014, se
 @Enrollment101296 = Enrollment.new(user_id: @User10129.id, event_id: @Event6.id, time:12035)
 @Enrollment101296.save
 EnrollmentData.new(enrollment_id: @Enrollment101294.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment101294.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101294.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101294.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment101294.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment101294.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment101294.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment101292.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101293.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101291.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -2743,7 +3074,7 @@ Result.new(name: 'Esa Rantala', city: 'Helsinki', group: 'Tervakosken Pato 2.', 
 @Enrollment101306 = Enrollment.new(user_id: @User10130.id, event_id: @Event6.id, time:16835)
 @Enrollment101306.save
 EnrollmentData.new(enrollment_id: @Enrollment101304.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment101304.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101304.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment101302.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101303.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101301.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -2764,7 +3095,11 @@ Result.new(name: 'Pekka Ropponen', city: 'Helsinki', group: 'Espoon Etanat', yea
 @Enrollment101316 = Enrollment.new(user_id: @User10131.id, event_id: @Event6.id, time:16566)
 @Enrollment101316.save
 EnrollmentData.new(enrollment_id: @Enrollment101314.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment101314.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101314.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101314.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment101314.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment101314.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment101314.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment101312.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101313.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101311.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -2785,7 +3120,11 @@ Result.new(name: 'Taisto Jurvanen', city: 'Helsinki', group: 'Hitaat 2', year: 2
 @Enrollment101326 = Enrollment.new(user_id: @User10132.id, event_id: @Event6.id, time:11881)
 @Enrollment101326.save
 EnrollmentData.new(enrollment_id: @Enrollment101324.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment101324.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101324.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101324.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment101324.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment101324.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment101324.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment101322.id, name: 'Tyyli', value: 'Perinteinen', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101323.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101321.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -2806,7 +3145,11 @@ Result.new(name: 'Merja Sundman', city: 'Helsinki', group: 'Rauman Kalevankiert�
 @Enrollment101336 = Enrollment.new(user_id: @User10133.id, event_id: @Event6.id, time:11452)
 @Enrollment101336.save
 EnrollmentData.new(enrollment_id: @Enrollment101334.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment101334.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101334.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101334.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment101334.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment101334.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment101334.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment101332.id, name: 'Tyyli', value: 'Perinteinen', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101333.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101331.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -2827,7 +3170,11 @@ Result.new(name: 'Onni Siltala', city: 'Helsinki', group: nil, year: 2014, serie
 @Enrollment101346 = Enrollment.new(user_id: @User10134.id, event_id: @Event6.id, time:11598)
 @Enrollment101346.save
 EnrollmentData.new(enrollment_id: @Enrollment101344.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment101344.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101344.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101344.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment101344.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment101344.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment101344.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment101342.id, name: 'Tyyli', value: 'Perinteinen', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101343.id, name: 'Tyyppi', value: 'maraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101341.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -2848,14 +3195,14 @@ Result.new(name: 'Matti Supponen', city: 'Helsinki', group: nil, year: 2014, ser
 @Enrollment101356 = Enrollment.new(user_id: @User10135.id, event_id: @Event6.id, time:10147)
 @Enrollment101356.save
 EnrollmentData.new(enrollment_id: @Enrollment101354.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment101354.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101354.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment101352.id, name: 'Tyyli', value: 'Perinteinen', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101353.id, name: 'Tyyppi', value: 'maraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101351.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101356.id, name: 'Emit', value: 'Kyllä', attribute_index: 1).save
 @User10136 = User.new(postal_code: '00100', city: 'Helsinki', first_name: 'tuula', last_name: 'Viheroja', username: 'user10136', email: 'user10136@test.com', phone_number: 12345, street_address: 'Katuosoite', kk_number: 10136, birth_date: Date.today, gender: 'N', admin: false, password: 'Salasana1', password_confirmation: 'Salasana1', active: true)
 @User10136.save
-Result.new(name: 'tuula Viheroja', city: 'Helsinki', group: 'Rauman Kalevankiertäjät', year: 2014, series: 'N40', kk_number: '10136').save
+Result.new(name: 'tuula Viheroja', city: 'Helsinki', group: 'Rauman Kalevankiertäjät', year: 2014, series: 'N45', kk_number: '10136').save
 @Enrollment101361 = Enrollment.new(user_id: @User10136.id, event_id: @Event1.id, time:4753)
 @Enrollment101361.save
 @Enrollment101362 = Enrollment.new(user_id: @User10136.id, event_id: @Event2.id, time:32469)
@@ -2869,7 +3216,11 @@ Result.new(name: 'tuula Viheroja', city: 'Helsinki', group: 'Rauman Kalevankiert
 @Enrollment101366 = Enrollment.new(user_id: @User10136.id, event_id: @Event6.id, time:13530)
 @Enrollment101366.save
 EnrollmentData.new(enrollment_id: @Enrollment101364.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment101364.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101364.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101364.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment101364.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment101364.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment101364.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment101362.id, name: 'Tyyli', value: 'Perinteinen', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101363.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101361.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -2890,7 +3241,11 @@ Result.new(name: 'Hannu Kutvonen', city: 'Helsinki', group: 'Kuntokonnat 2.', ye
 @Enrollment101376 = Enrollment.new(user_id: @User10137.id, event_id: @Event6.id, time:15313)
 @Enrollment101376.save
 EnrollmentData.new(enrollment_id: @Enrollment101374.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment101374.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101374.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101374.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment101374.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment101374.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment101374.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment101372.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101373.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101371.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -2911,7 +3266,7 @@ Result.new(name: 'Jorma Löyttyniemi', city: 'Helsinki', group: 'Tervakosken Pat
 @Enrollment101386 = Enrollment.new(user_id: @User10138.id, event_id: @Event6.id, time:11952)
 @Enrollment101386.save
 EnrollmentData.new(enrollment_id: @Enrollment101384.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment101384.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101384.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment101382.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101383.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101381.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -2932,7 +3287,11 @@ Result.new(name: 'Raili Tonteri', city: 'Helsinki', group: 'Selän Sitkeät Seir
 @Enrollment101396 = Enrollment.new(user_id: @User10139.id, event_id: @Event6.id, time:15076)
 @Enrollment101396.save
 EnrollmentData.new(enrollment_id: @Enrollment101394.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment101394.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101394.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101394.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment101394.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment101394.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment101394.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment101392.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101393.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101391.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -2953,7 +3312,7 @@ Result.new(name: 'Osmo Perkamo', city: 'Helsinki', group: 'Tuusulan Tallaajat II
 @Enrollment101406 = Enrollment.new(user_id: @User10140.id, event_id: @Event6.id, time:11943)
 @Enrollment101406.save
 EnrollmentData.new(enrollment_id: @Enrollment101404.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment101404.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101404.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment101402.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101403.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101401.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -2974,7 +3333,7 @@ Result.new(name: 'Bagh Riitta von', city: 'Helsinki', group: nil, year: 2014, se
 @Enrollment101416 = Enrollment.new(user_id: @User10141.id, event_id: @Event6.id, time:16084)
 @Enrollment101416.save
 EnrollmentData.new(enrollment_id: @Enrollment101414.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment101414.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101414.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment101412.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101413.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101411.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -2995,7 +3354,11 @@ Result.new(name: 'Airi Mäkinen', city: 'Helsinki', group: 'Uskelan Urhottaret',
 @Enrollment101426 = Enrollment.new(user_id: @User10142.id, event_id: @Event6.id, time:13149)
 @Enrollment101426.save
 EnrollmentData.new(enrollment_id: @Enrollment101424.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment101424.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101424.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101424.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment101424.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment101424.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment101424.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment101422.id, name: 'Tyyli', value: 'Perinteinen', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101423.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101421.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -3016,7 +3379,11 @@ Result.new(name: 'Raija Uurtio-Keränen', city: 'Helsinki', group: nil, year: 20
 @Enrollment101436 = Enrollment.new(user_id: @User10143.id, event_id: @Event6.id, time:20417)
 @Enrollment101436.save
 EnrollmentData.new(enrollment_id: @Enrollment101434.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment101434.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101434.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101434.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment101434.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment101434.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment101434.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment101432.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101433.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101431.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -3037,7 +3404,11 @@ Result.new(name: 'Piia Uotinen', city: 'Helsinki', group: 'Selän sitkeät sivis
 @Enrollment101446 = Enrollment.new(user_id: @User10144.id, event_id: @Event6.id, time:15558)
 @Enrollment101446.save
 EnrollmentData.new(enrollment_id: @Enrollment101444.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment101444.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101444.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101444.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment101444.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment101444.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment101444.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment101442.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101443.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101441.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -3058,7 +3429,11 @@ Result.new(name: 'Soile Sillanpää', city: 'Helsinki', group: 'Espoon Etanat', 
 @Enrollment101456 = Enrollment.new(user_id: @User10145.id, event_id: @Event6.id, time:15057)
 @Enrollment101456.save
 EnrollmentData.new(enrollment_id: @Enrollment101454.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment101454.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101454.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101454.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment101454.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment101454.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment101454.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment101452.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101453.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101451.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -3079,7 +3454,11 @@ Result.new(name: 'Raine Jaakkola', city: 'Helsinki', group: 'Otaniemen Jyllääj
 @Enrollment101466 = Enrollment.new(user_id: @User10146.id, event_id: @Event6.id, time:18100)
 @Enrollment101466.save
 EnrollmentData.new(enrollment_id: @Enrollment101464.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment101464.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101464.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101464.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment101464.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment101464.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment101464.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment101462.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101463.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101461.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -3100,7 +3479,11 @@ Result.new(name: 'Armi Yli-Karro', city: 'Helsinki', group: 'Rauman Kalevankiert
 @Enrollment101476 = Enrollment.new(user_id: @User10147.id, event_id: @Event6.id, time:12890)
 @Enrollment101476.save
 EnrollmentData.new(enrollment_id: @Enrollment101474.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment101474.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101474.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101474.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment101474.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment101474.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment101474.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment101472.id, name: 'Tyyli', value: 'Perinteinen', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101473.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101471.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -3121,7 +3504,11 @@ Result.new(name: 'Rainer Blomster', city: 'Helsinki', group: 'Tuusulan Tallaajat
 @Enrollment101486 = Enrollment.new(user_id: @User10148.id, event_id: @Event6.id, time:16530)
 @Enrollment101486.save
 EnrollmentData.new(enrollment_id: @Enrollment101484.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment101484.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101484.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101484.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment101484.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment101484.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment101484.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment101482.id, name: 'Tyyli', value: 'Perinteinen', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101483.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101481.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -3142,7 +3529,11 @@ Result.new(name: 'Elina Tuomisto', city: 'Helsinki', group: 'Rauman Kalevankiert
 @Enrollment101496 = Enrollment.new(user_id: @User10149.id, event_id: @Event6.id, time:13284)
 @Enrollment101496.save
 EnrollmentData.new(enrollment_id: @Enrollment101494.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment101494.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101494.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101494.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment101494.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment101494.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment101494.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment101492.id, name: 'Tyyli', value: 'Perinteinen', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101493.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101491.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -3163,7 +3554,11 @@ Result.new(name: 'Anne-Mari Kuoppala', city: 'Helsinki', group: 'Selän Sitkeät
 @Enrollment101506 = Enrollment.new(user_id: @User10150.id, event_id: @Event6.id, time:15856)
 @Enrollment101506.save
 EnrollmentData.new(enrollment_id: @Enrollment101504.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment101504.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101504.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101504.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment101504.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment101504.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment101504.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment101502.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101503.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101501.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -3184,7 +3579,11 @@ Result.new(name: 'Henri Korhonen', city: 'Helsinki', group: 'Uskelan Urhot IV', 
 @Enrollment101516 = Enrollment.new(user_id: @User10151.id, event_id: @Event6.id, time:16051)
 @Enrollment101516.save
 EnrollmentData.new(enrollment_id: @Enrollment101514.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment101514.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101514.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101514.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment101514.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment101514.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment101514.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment101512.id, name: 'Tyyli', value: 'Perinteinen', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101513.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101511.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -3205,7 +3604,11 @@ Result.new(name: 'Pertti Palo', city: 'Helsinki', group: nil, year: 2014, series
 @Enrollment101526 = Enrollment.new(user_id: @User10152.id, event_id: @Event6.id, time:18778)
 @Enrollment101526.save
 EnrollmentData.new(enrollment_id: @Enrollment101524.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment101524.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101524.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101524.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment101524.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment101524.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment101524.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment101522.id, name: 'Tyyli', value: 'Perinteinen', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101523.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101521.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -3226,7 +3629,11 @@ Result.new(name: 'Veikko Seppä', city: 'Helsinki', group: nil, year: 2014, seri
 @Enrollment101536 = Enrollment.new(user_id: @User10153.id, event_id: @Event6.id, time:16707)
 @Enrollment101536.save
 EnrollmentData.new(enrollment_id: @Enrollment101534.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment101534.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101534.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101534.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment101534.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment101534.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment101534.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment101532.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101533.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101531.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -3247,14 +3654,18 @@ Result.new(name: 'Terttu Salonen', city: 'Helsinki', group: 'Sveitsiläiset', ye
 @Enrollment101546 = Enrollment.new(user_id: @User10154.id, event_id: @Event6.id, time:20658)
 @Enrollment101546.save
 EnrollmentData.new(enrollment_id: @Enrollment101544.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment101544.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101544.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101544.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment101544.id, name: 'Parin sukupuoli', value: 'M', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment101544.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment101544.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment101542.id, name: 'Tyyli', value: 'Perinteinen', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101543.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101541.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101546.id, name: 'Emit', value: 'Kyllä', attribute_index: 1).save
 @User10155 = User.new(postal_code: '00100', city: 'Helsinki', first_name: 'Ari-Pekka', last_name: 'Ojala', username: 'user10155', email: 'user10155@test.com', phone_number: 12345, street_address: 'Katuosoite', kk_number: 10155, birth_date: Date.today, gender: 'M', admin: false, password: 'Salasana1', password_confirmation: 'Salasana1', active: true)
 @User10155.save
-Result.new(name: 'Ari-Pekka Ojala', city: 'Helsinki', group: 'Tervakosken Pato 1.', year: 2014, series: 'M40', kk_number: '10155').save
+Result.new(name: 'Ari-Pekka Ojala', city: 'Helsinki', group: 'Tervakosken Pato 1.', year: 2014, series: 'M45', kk_number: '10155').save
 @Enrollment101551 = Enrollment.new(user_id: @User10155.id, event_id: @Event1.id, time:3389)
 @Enrollment101551.save
 @Enrollment101552 = Enrollment.new(user_id: @User10155.id, event_id: @Event2.id, time:10252)
@@ -3266,7 +3677,7 @@ Result.new(name: 'Ari-Pekka Ojala', city: 'Helsinki', group: 'Tervakosken Pato 1
 @Enrollment101556 = Enrollment.new(user_id: @User10155.id, event_id: @Event6.id, time:6467)
 @Enrollment101556.save
 EnrollmentData.new(enrollment_id: @Enrollment101554.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment101554.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101554.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment101552.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101551.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101556.id, name: 'Emit', value: 'Kyllä', attribute_index: 1).save
@@ -3284,7 +3695,7 @@ Result.new(name: 'Mika Lehtonen', city: 'Helsinki', group: 'Tuusulan Tallaajat I
 @Enrollment101566 = Enrollment.new(user_id: @User10156.id, event_id: @Event6.id, time:6310)
 @Enrollment101566.save
 EnrollmentData.new(enrollment_id: @Enrollment101564.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment101564.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101564.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment101562.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101563.id, name: 'Tyyppi', value: 'maraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101566.id, name: 'Emit', value: 'Kyllä', attribute_index: 1).save
@@ -3302,7 +3713,11 @@ Result.new(name: 'Samuli Rantala', city: 'Helsinki', group: 'Tervakosken Pato 1.
 @Enrollment101575 = Enrollment.new(user_id: @User10157.id, event_id: @Event5.id, time:7429)
 @Enrollment101575.save
 EnrollmentData.new(enrollment_id: @Enrollment101574.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment101574.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101574.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101574.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment101574.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment101574.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment101574.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment101572.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101573.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101571.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -3320,7 +3735,11 @@ Result.new(name: 'Arttu Salminen', city: 'Helsinki', group: 'Viialan Viri', year
 @Enrollment101586 = Enrollment.new(user_id: @User10158.id, event_id: @Event6.id, time:7185)
 @Enrollment101586.save
 EnrollmentData.new(enrollment_id: @Enrollment101584.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment101584.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101584.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101584.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment101584.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment101584.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment101584.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment101582.id, name: 'Tyyli', value: 'Perinteinen', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101583.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101586.id, name: 'Emit', value: 'Kyllä', attribute_index: 1).save
@@ -3338,7 +3757,7 @@ Result.new(name: 'Jorma Närhi', city: 'Helsinki', group: 'Sportia KT-SPORT', ye
 @Enrollment101595 = Enrollment.new(user_id: @User10159.id, event_id: @Event5.id, time:7162)
 @Enrollment101595.save
 EnrollmentData.new(enrollment_id: @Enrollment101594.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment101594.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101594.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment101592.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101593.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101591.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -3356,7 +3775,11 @@ Result.new(name: 'matti vaaja', city: 'Helsinki', group: 'Otaniemen Jyllääjät
 @Enrollment101606 = Enrollment.new(user_id: @User10160.id, event_id: @Event6.id, time:7429)
 @Enrollment101606.save
 EnrollmentData.new(enrollment_id: @Enrollment101604.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment101604.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101604.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101604.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment101604.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment101604.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment101604.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment101602.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101603.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101606.id, name: 'Emit', value: 'Kyllä', attribute_index: 1).save
@@ -3374,7 +3797,11 @@ Result.new(name: 'Timo Hellberg', city: 'Helsinki', group: 'Uskelan Urhot I', ye
 @Enrollment101616 = Enrollment.new(user_id: @User10161.id, event_id: @Event6.id, time:7508)
 @Enrollment101616.save
 EnrollmentData.new(enrollment_id: @Enrollment101614.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment101614.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101614.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101614.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment101614.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment101614.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment101614.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment101613.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101611.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101616.id, name: 'Emit', value: 'Kyllä', attribute_index: 1).save
@@ -3392,14 +3819,18 @@ Result.new(name: 'Pekka Valjakka', city: 'Helsinki', group: 'Tuusulan Tallaajat 
 @Enrollment101626 = Enrollment.new(user_id: @User10162.id, event_id: @Event6.id, time:7339)
 @Enrollment101626.save
 EnrollmentData.new(enrollment_id: @Enrollment101624.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment101624.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101624.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101624.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment101624.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment101624.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment101624.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment101622.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101623.id, name: 'Tyyppi', value: 'maraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101621.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101626.id, name: 'Emit', value: 'Kyllä', attribute_index: 1).save
 @User10163 = User.new(postal_code: '00100', city: 'Helsinki', first_name: 'Eero', last_name: 'Kujansuu', username: 'user10163', email: 'user10163@test.com', phone_number: 12345, street_address: 'Katuosoite', kk_number: 10163, birth_date: Date.today, gender: 'M', admin: false, password: 'Salasana1', password_confirmation: 'Salasana1', active: true)
 @User10163.save
-Result.new(name: 'Eero Kujansuu', city: 'Helsinki', group: 'Kankaanpään Kalevankiertäjät 1', year: 2014, series: 'M40', kk_number: '10163').save
+Result.new(name: 'Eero Kujansuu', city: 'Helsinki', group: 'Kankaanpään Kalevankiertäjät 1', year: 2014, series: 'M45', kk_number: '10163').save
 @Enrollment101631 = Enrollment.new(user_id: @User10163.id, event_id: @Event1.id, time:3702)
 @Enrollment101631.save
 @Enrollment101632 = Enrollment.new(user_id: @User10163.id, event_id: @Event2.id, time:11030)
@@ -3411,7 +3842,11 @@ Result.new(name: 'Eero Kujansuu', city: 'Helsinki', group: 'Kankaanpään Kaleva
 @Enrollment101636 = Enrollment.new(user_id: @User10163.id, event_id: @Event6.id, time:6774)
 @Enrollment101636.save
 EnrollmentData.new(enrollment_id: @Enrollment101634.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment101634.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101634.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101634.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment101634.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment101634.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment101634.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment101632.id, name: 'Tyyli', value: 'Perinteinen', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101633.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101631.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -3430,7 +3865,7 @@ Result.new(name: 'Antero Korpela', city: 'Helsinki', group: 'Hitaat 1', year: 20
 @Enrollment101646 = Enrollment.new(user_id: @User10164.id, event_id: @Event6.id, time:7732)
 @Enrollment101646.save
 EnrollmentData.new(enrollment_id: @Enrollment101644.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment101644.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101644.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment101643.id, name: 'Tyyppi', value: 'maraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101641.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101646.id, name: 'Emit', value: 'Kyllä', attribute_index: 1).save
@@ -3448,7 +3883,11 @@ Result.new(name: 'Jouko Peipinen', city: 'Helsinki', group: 'Tammelan Ryske', ye
 @Enrollment101655 = Enrollment.new(user_id: @User10165.id, event_id: @Event5.id, time:7916)
 @Enrollment101655.save
 EnrollmentData.new(enrollment_id: @Enrollment101654.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment101654.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101654.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101654.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment101654.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment101654.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment101654.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment101652.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101653.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101651.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -3466,7 +3905,11 @@ Result.new(name: 'Eero Pasanen', city: 'Helsinki', group: nil, year: 2014, serie
 @Enrollment101665 = Enrollment.new(user_id: @User10166.id, event_id: @Event5.id, time:7737)
 @Enrollment101665.save
 EnrollmentData.new(enrollment_id: @Enrollment101664.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment101664.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101664.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101664.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment101664.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment101664.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment101664.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment101662.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101663.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101661.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -3484,7 +3927,11 @@ Result.new(name: 'Jorma Pöyry', city: 'Helsinki', group: 'Selän Sitkeät 1.', 
 @Enrollment101676 = Enrollment.new(user_id: @User10167.id, event_id: @Event6.id, time:10724)
 @Enrollment101676.save
 EnrollmentData.new(enrollment_id: @Enrollment101674.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment101674.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101674.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101674.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment101674.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment101674.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment101674.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment101672.id, name: 'Tyyli', value: 'Perinteinen', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101671.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101676.id, name: 'Emit', value: 'Kyllä', attribute_index: 1).save
@@ -3502,14 +3949,14 @@ Result.new(name: 'Jyrki Määttä', city: 'Helsinki', group: nil, year: 2014, se
 @Enrollment101686 = Enrollment.new(user_id: @User10168.id, event_id: @Event6.id, time:8696)
 @Enrollment101686.save
 EnrollmentData.new(enrollment_id: @Enrollment101684.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment101684.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101684.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment101682.id, name: 'Tyyli', value: 'Perinteinen', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101683.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101681.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101686.id, name: 'Emit', value: 'Kyllä', attribute_index: 1).save
 @User10169 = User.new(postal_code: '00100', city: 'Helsinki', first_name: 'Markus', last_name: 'Kantola', username: 'user10169', email: 'user10169@test.com', phone_number: 12345, street_address: 'Katuosoite', kk_number: 10169, birth_date: Date.today, gender: 'M', admin: false, password: 'Salasana1', password_confirmation: 'Salasana1', active: true)
 @User10169.save
-Result.new(name: 'Markus Kantola', city: 'Helsinki', group: 'CCRT', year: 2014, series: 'M40', kk_number: '10169').save
+Result.new(name: 'Markus Kantola', city: 'Helsinki', group: 'CCRT', year: 2014, series: 'M45', kk_number: '10169').save
 @Enrollment101691 = Enrollment.new(user_id: @User10169.id, event_id: @Event1.id, time:3646)
 @Enrollment101691.save
 @Enrollment101692 = Enrollment.new(user_id: @User10169.id, event_id: @Event2.id, time:10527)
@@ -3538,7 +3985,11 @@ Result.new(name: 'Juha Rantanen', city: 'Helsinki', group: 'Hitaat 1', year: 201
 @Enrollment101706 = Enrollment.new(user_id: @User10170.id, event_id: @Event6.id, time:13103)
 @Enrollment101706.save
 EnrollmentData.new(enrollment_id: @Enrollment101704.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment101704.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101704.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101704.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment101704.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment101704.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment101704.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment101702.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101701.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101706.id, name: 'Emit', value: 'Kyllä', attribute_index: 1).save
@@ -3573,7 +4024,11 @@ Result.new(name: 'Markku Vilén', city: 'Helsinki', group: 'Uskelan Urhot III', 
 @Enrollment101725 = Enrollment.new(user_id: @User10172.id, event_id: @Event5.id, time:8143)
 @Enrollment101725.save
 EnrollmentData.new(enrollment_id: @Enrollment101724.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment101724.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101724.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101724.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment101724.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment101724.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment101724.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment101722.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101723.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101721.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -3591,7 +4046,11 @@ Result.new(name: 'Lasse Mikkelsson', city: 'Helsinki', group: 'Pajulahti', year:
 @Enrollment101736 = Enrollment.new(user_id: @User10173.id, event_id: @Event6.id, time:11138)
 @Enrollment101736.save
 EnrollmentData.new(enrollment_id: @Enrollment101734.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment101734.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101734.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101734.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment101734.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment101734.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment101734.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment101733.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101731.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101736.id, name: 'Emit', value: 'Kyllä', attribute_index: 1).save
@@ -3609,7 +4068,7 @@ Result.new(name: 'Lars Svenskberg', city: 'Helsinki', group: 'KK Länsi-Uusimaa 
 @Enrollment101746 = Enrollment.new(user_id: @User10174.id, event_id: @Event6.id, time:13126)
 @Enrollment101746.save
 EnrollmentData.new(enrollment_id: @Enrollment101744.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment101744.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101744.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment101742.id, name: 'Tyyli', value: 'Perinteinen', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101743.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101741.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -3626,7 +4085,11 @@ Result.new(name: 'Jarmo Valli', city: 'Helsinki', group: 'Uskelan Urhot I', year
 @Enrollment101756 = Enrollment.new(user_id: @User10175.id, event_id: @Event6.id, time:6674)
 @Enrollment101756.save
 EnrollmentData.new(enrollment_id: @Enrollment101754.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment101754.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101754.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101754.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment101754.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment101754.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment101754.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment101753.id, name: 'Tyyppi', value: 'maraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101756.id, name: 'Emit', value: 'Kyllä', attribute_index: 1).save
 @User10176 = User.new(postal_code: '00100', city: 'Helsinki', first_name: 'Sami', last_name: 'Sipilä', username: 'user10176', email: 'user10176@test.com', phone_number: 12345, street_address: 'Katuosoite', kk_number: 10176, birth_date: Date.today, gender: 'M', admin: false, password: 'Salasana1', password_confirmation: 'Salasana1', active: true)
@@ -3660,7 +4123,11 @@ Result.new(name: 'Erkki Helminen', city: 'Helsinki', group: 'Tuusulan Tallaajat 
 @Enrollment101775 = Enrollment.new(user_id: @User10177.id, event_id: @Event5.id, time:8178)
 @Enrollment101775.save
 EnrollmentData.new(enrollment_id: @Enrollment101774.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment101774.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101774.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101774.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment101774.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment101774.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment101774.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment101772.id, name: 'Tyyli', value: 'Perinteinen', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101773.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101771.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -3678,7 +4145,11 @@ Result.new(name: 'Teemu Tukiainen', city: 'Helsinki', group: nil, year: 2014, se
 @Enrollment101786 = Enrollment.new(user_id: @User10178.id, event_id: @Event6.id, time:7580)
 @Enrollment101786.save
 EnrollmentData.new(enrollment_id: @Enrollment101784.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment101784.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101784.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101784.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment101784.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment101784.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment101784.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment101782.id, name: 'Tyyli', value: 'Perinteinen', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101783.id, name: 'Tyyppi', value: 'maraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101781.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -3714,7 +4185,7 @@ Result.new(name: 'Pasi Uotinen', city: 'Helsinki', group: 'Selän sitkeät ruost
 @Enrollment101806 = Enrollment.new(user_id: @User10180.id, event_id: @Event6.id, time:9070)
 @Enrollment101806.save
 EnrollmentData.new(enrollment_id: @Enrollment101804.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment101804.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101804.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment101803.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101801.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101806.id, name: 'Emit', value: 'Kyllä', attribute_index: 1).save
@@ -3732,7 +4203,11 @@ Result.new(name: 'Ossi Karjalainen', city: 'Helsinki', group: 'GSK', year: 2014,
 @Enrollment101816 = Enrollment.new(user_id: @User10181.id, event_id: @Event6.id, time:10810)
 @Enrollment101816.save
 EnrollmentData.new(enrollment_id: @Enrollment101814.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment101814.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101814.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101814.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment101814.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment101814.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment101814.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment101812.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101811.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101816.id, name: 'Emit', value: 'Kyllä', attribute_index: 1).save
@@ -3750,7 +4225,7 @@ Result.new(name: 'Rauno Lahti', city: 'Helsinki', group: 'Reilut Miehet Havumets
 @Enrollment101825 = Enrollment.new(user_id: @User10182.id, event_id: @Event5.id, time:8491)
 @Enrollment101825.save
 EnrollmentData.new(enrollment_id: @Enrollment101824.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment101824.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101824.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment101822.id, name: 'Tyyli', value: 'Perinteinen', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101823.id, name: 'Tyyppi', value: 'maraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101821.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -3768,7 +4243,11 @@ Result.new(name: 'Pauli Rantanen', city: 'Helsinki', group: 'Hitaat 2', year: 20
 @Enrollment101836 = Enrollment.new(user_id: @User10183.id, event_id: @Event6.id, time:10411)
 @Enrollment101836.save
 EnrollmentData.new(enrollment_id: @Enrollment101834.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment101834.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101834.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101834.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment101834.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment101834.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment101834.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment101832.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101831.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101836.id, name: 'Emit', value: 'Kyllä', attribute_index: 1).save
@@ -3803,7 +4282,11 @@ Result.new(name: 'Lauri Österman', city: 'Helsinki', group: nil, year: 2014, se
 @Enrollment101856 = Enrollment.new(user_id: @User10185.id, event_id: @Event6.id, time:7723)
 @Enrollment101856.save
 EnrollmentData.new(enrollment_id: @Enrollment101854.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment101854.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101854.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101854.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment101854.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment101854.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment101854.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment101852.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101851.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101856.id, name: 'Emit', value: 'Kyllä', attribute_index: 1).save
@@ -3821,7 +4304,11 @@ Result.new(name: 'Jussi Johansson', city: 'Helsinki', group: 'Viialan Viri', yea
 @Enrollment101865 = Enrollment.new(user_id: @User10186.id, event_id: @Event5.id, time:9495)
 @Enrollment101865.save
 EnrollmentData.new(enrollment_id: @Enrollment101864.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment101864.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101864.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101864.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment101864.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment101864.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment101864.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment101862.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101863.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101861.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -3839,7 +4326,7 @@ Result.new(name: 'Osmo Kiiski', city: 'Helsinki', group: nil, year: 2014, series
 @Enrollment101876 = Enrollment.new(user_id: @User10187.id, event_id: @Event6.id, time:8937)
 @Enrollment101876.save
 EnrollmentData.new(enrollment_id: @Enrollment101874.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment101874.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101874.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment101873.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101871.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101876.id, name: 'Emit', value: 'Kyllä', attribute_index: 1).save
@@ -3874,7 +4361,11 @@ Result.new(name: 'Eero Särkilahti', city: 'Helsinki', group: 'ERRY', year: 2014
 @Enrollment101896 = Enrollment.new(user_id: @User10189.id, event_id: @Event6.id, time:8591)
 @Enrollment101896.save
 EnrollmentData.new(enrollment_id: @Enrollment101894.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment101894.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101894.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101894.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment101894.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment101894.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment101894.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment101892.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101893.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101891.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -3893,7 +4384,11 @@ Result.new(name: 'Jari Johansson', city: 'Helsinki', group: nil, year: 2014, ser
 @Enrollment101905 = Enrollment.new(user_id: @User10190.id, event_id: @Event5.id, time:9044)
 @Enrollment101905.save
 EnrollmentData.new(enrollment_id: @Enrollment101904.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment101904.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101904.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101904.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment101904.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment101904.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment101904.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment101902.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101903.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101901.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -3911,13 +4406,13 @@ Result.new(name: 'Tapio Heikkilä', city: 'Helsinki', group: 'Hitaat 1', year: 2
 @Enrollment101916 = Enrollment.new(user_id: @User10191.id, event_id: @Event6.id, time:10317)
 @Enrollment101916.save
 EnrollmentData.new(enrollment_id: @Enrollment101914.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment101914.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101914.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment101913.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101911.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101916.id, name: 'Emit', value: 'Kyllä', attribute_index: 1).save
 @User10192 = User.new(postal_code: '00100', city: 'Helsinki', first_name: 'Tuomas', last_name: 'Särkilahti', username: 'user10192', email: 'user10192@test.com', phone_number: 12345, street_address: 'Katuosoite', kk_number: 10192, birth_date: Date.today, gender: 'M', admin: false, password: 'Salasana1', password_confirmation: 'Salasana1', active: true)
 @User10192.save
-Result.new(name: 'Tuomas Särkilahti', city: 'Helsinki', group: 'ERRY', year: 2014, series: 'M40', kk_number: '10192').save
+Result.new(name: 'Tuomas Särkilahti', city: 'Helsinki', group: 'ERRY', year: 2014, series: 'M45', kk_number: '10192').save
 @Enrollment101921 = Enrollment.new(user_id: @User10192.id, event_id: @Event1.id, time:4280)
 @Enrollment101921.save
 @Enrollment101922 = Enrollment.new(user_id: @User10192.id, event_id: @Event2.id, time:12660)
@@ -3929,7 +4424,11 @@ Result.new(name: 'Tuomas Särkilahti', city: 'Helsinki', group: 'ERRY', year: 20
 @Enrollment101926 = Enrollment.new(user_id: @User10192.id, event_id: @Event6.id, time:12625)
 @Enrollment101926.save
 EnrollmentData.new(enrollment_id: @Enrollment101924.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment101924.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101924.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101924.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment101924.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment101924.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment101924.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment101922.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101923.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101921.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -3965,7 +4464,11 @@ Result.new(name: 'Jouni Heliste', city: 'Helsinki', group: nil, year: 2014, seri
 @Enrollment101945 = Enrollment.new(user_id: @User10194.id, event_id: @Event5.id, time:9148)
 @Enrollment101945.save
 EnrollmentData.new(enrollment_id: @Enrollment101944.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment101944.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101944.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101944.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment101944.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment101944.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment101944.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment101942.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101943.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101941.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -3983,7 +4486,11 @@ Result.new(name: 'Tom Vihonen', city: 'Helsinki', group: nil, year: 2014, series
 @Enrollment101955 = Enrollment.new(user_id: @User10195.id, event_id: @Event5.id, time:9915)
 @Enrollment101955.save
 EnrollmentData.new(enrollment_id: @Enrollment101954.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment101954.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101954.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101954.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment101954.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment101954.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment101954.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment101952.id, name: 'Tyyli', value: 'Perinteinen', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101953.id, name: 'Tyyppi', value: 'maraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101951.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -4001,7 +4508,7 @@ Result.new(name: 'Heli Hakala', city: 'Helsinki', group: 'KK Länsi-Uusimaa 2', 
 @Enrollment101966 = Enrollment.new(user_id: @User10196.id, event_id: @Event6.id, time:15471)
 @Enrollment101966.save
 EnrollmentData.new(enrollment_id: @Enrollment101964.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment101964.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101964.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment101963.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101961.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101966.id, name: 'Emit', value: 'Kyllä', attribute_index: 1).save
@@ -4019,7 +4526,11 @@ Result.new(name: 'Kalevi Vikman', city: 'Helsinki', group: 'Tuusulan Tallaajat I
 @Enrollment101975 = Enrollment.new(user_id: @User10197.id, event_id: @Event5.id, time:9535)
 @Enrollment101975.save
 EnrollmentData.new(enrollment_id: @Enrollment101974.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment101974.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101974.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101974.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment101974.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment101974.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment101974.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment101972.id, name: 'Tyyli', value: 'Perinteinen', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101973.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101971.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -4037,7 +4548,11 @@ Result.new(name: 'Ilmo Liukko', city: 'Helsinki', group: 'Kuntokonnat 2.', year:
 @Enrollment101986 = Enrollment.new(user_id: @User10198.id, event_id: @Event6.id, time:15951)
 @Enrollment101986.save
 EnrollmentData.new(enrollment_id: @Enrollment101984.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment101984.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101984.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101984.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment101984.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment101984.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment101984.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment101983.id, name: 'Tyyppi', value: 'maraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101981.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101986.id, name: 'Emit', value: 'Kyllä', attribute_index: 1).save
@@ -4055,7 +4570,11 @@ Result.new(name: 'Reino Uusitalo', city: 'Helsinki', group: nil, year: 2014, ser
 @Enrollment101996 = Enrollment.new(user_id: @User10199.id, event_id: @Event6.id, time:11993)
 @Enrollment101996.save
 EnrollmentData.new(enrollment_id: @Enrollment101994.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment101994.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101994.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment101994.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment101994.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment101994.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment101994.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment101993.id, name: 'Tyyppi', value: 'maraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101991.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101996.id, name: 'Emit', value: 'Kyllä', attribute_index: 1).save
@@ -4073,7 +4592,11 @@ Result.new(name: 'Jani Kaljunen', city: 'Helsinki', group: nil, year: 2014, seri
 @Enrollment102005 = Enrollment.new(user_id: @User10200.id, event_id: @Event5.id, time:8618)
 @Enrollment102005.save
 EnrollmentData.new(enrollment_id: @Enrollment102004.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment102004.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment102004.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment102004.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment102004.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment102004.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment102004.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment102002.id, name: 'Tyyli', value: 'Perinteinen', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment102003.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment102001.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -4091,7 +4614,11 @@ Result.new(name: 'Matti Laitsaari', city: 'Helsinki', group: nil, year: 2014, se
 @Enrollment102016 = Enrollment.new(user_id: @User10201.id, event_id: @Event6.id, time:11954)
 @Enrollment102016.save
 EnrollmentData.new(enrollment_id: @Enrollment102014.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment102014.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment102014.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment102014.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment102014.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment102014.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment102014.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment102013.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment102011.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment102016.id, name: 'Emit', value: 'Kyllä', attribute_index: 1).save
@@ -4143,7 +4670,11 @@ Result.new(name: 'Mailiina Turanlahti', city: 'Helsinki', group: 'OJy Justiinat'
 @Enrollment102046 = Enrollment.new(user_id: @User10204.id, event_id: @Event6.id, time:11922)
 @Enrollment102046.save
 EnrollmentData.new(enrollment_id: @Enrollment102044.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment102044.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment102044.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment102044.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment102044.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment102044.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment102044.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment102042.id, name: 'Tyyli', value: 'Perinteinen', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment102041.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment102046.id, name: 'Emit', value: 'Kyllä', attribute_index: 1).save
@@ -4161,7 +4692,11 @@ Result.new(name: 'Heidi Räihä', city: 'Helsinki', group: nil, year: 2014, seri
 @Enrollment102056 = Enrollment.new(user_id: @User10205.id, event_id: @Event6.id, time:18003)
 @Enrollment102056.save
 EnrollmentData.new(enrollment_id: @Enrollment102054.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment102054.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment102054.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment102054.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment102054.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment102054.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment102054.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment102052.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment102051.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment102056.id, name: 'Emit', value: 'Kyllä', attribute_index: 1).save
@@ -4196,7 +4731,11 @@ Result.new(name: 'Tiina Koski-Laulaja', city: 'Helsinki', group: 'Selän sitkeä
 @Enrollment102076 = Enrollment.new(user_id: @User10207.id, event_id: @Event6.id, time:16700)
 @Enrollment102076.save
 EnrollmentData.new(enrollment_id: @Enrollment102074.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment102074.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment102074.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment102074.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment102074.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment102074.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment102074.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment102073.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment102071.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment102076.id, name: 'Emit', value: 'Kyllä', attribute_index: 1).save
@@ -4231,7 +4770,11 @@ Result.new(name: 'Ritva Suominen', city: 'Helsinki', group: 'Selän sitkeät siv
 @Enrollment102096 = Enrollment.new(user_id: @User10209.id, event_id: @Event6.id, time:19814)
 @Enrollment102096.save
 EnrollmentData.new(enrollment_id: @Enrollment102094.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment102094.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment102094.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment102094.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment102094.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment102094.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment102094.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment102093.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment102091.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment102096.id, name: 'Emit', value: 'Kyllä', attribute_index: 1).save
@@ -4249,7 +4792,11 @@ Result.new(name: 'Veera Kalla', city: 'Helsinki', group: 'Selän sitkeät sivist
 @Enrollment102105 = Enrollment.new(user_id: @User10210.id, event_id: @Event5.id, time:12484)
 @Enrollment102105.save
 EnrollmentData.new(enrollment_id: @Enrollment102104.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment102104.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment102104.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment102104.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment102104.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment102104.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment102104.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment102102.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment102103.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment102101.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -4267,7 +4814,11 @@ Result.new(name: 'Raimo Stenvall', city: 'Helsinki', group: 'Tuusulan Tallaajat 
 @Enrollment102115 = Enrollment.new(user_id: @User10211.id, event_id: @Event5.id, time:12180)
 @Enrollment102115.save
 EnrollmentData.new(enrollment_id: @Enrollment102114.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment102114.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment102114.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment102114.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment102114.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment102114.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment102114.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment102112.id, name: 'Tyyli', value: 'Perinteinen', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment102113.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment102111.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -4285,7 +4836,7 @@ Result.new(name: 'Minna Kantsila', city: 'Helsinki', group: nil, year: 2014, ser
 @Enrollment102126 = Enrollment.new(user_id: @User10212.id, event_id: @Event6.id, time:13101)
 @Enrollment102126.save
 EnrollmentData.new(enrollment_id: @Enrollment102124.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment102124.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment102124.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment102122.id, name: 'Tyyli', value: 'Perinteinen', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment102123.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment102126.id, name: 'Emit', value: 'Kyllä', attribute_index: 1).save
@@ -4320,7 +4871,7 @@ Result.new(name: 'Tapani Havia', city: 'Helsinki', group: 'Uskelan Urhot III', y
 @Enrollment102146 = Enrollment.new(user_id: @User10214.id, event_id: @Event6.id, time:17750)
 @Enrollment102146.save
 EnrollmentData.new(enrollment_id: @Enrollment102144.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment102144.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment102144.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment102143.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment102141.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment102146.id, name: 'Emit', value: 'Kyllä', attribute_index: 1).save
@@ -4338,7 +4889,11 @@ Result.new(name: 'Laila Patronen-Jurvanen', city: 'Helsinki', group: nil, year: 
 @Enrollment102155 = Enrollment.new(user_id: @User10215.id, event_id: @Event5.id, time:11826)
 @Enrollment102155.save
 EnrollmentData.new(enrollment_id: @Enrollment102154.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment102154.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment102154.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment102154.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment102154.id, name: 'Parin sukupuoli', value: 'M', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment102154.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment102154.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment102152.id, name: 'Tyyli', value: 'Perinteinen', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment102153.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment102151.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -4356,7 +4911,11 @@ Result.new(name: 'Jari Pihlajamäki', city: 'Helsinki', group: nil, year: 2014, 
 @Enrollment102166 = Enrollment.new(user_id: @User10216.id, event_id: @Event6.id, time:17170)
 @Enrollment102166.save
 EnrollmentData.new(enrollment_id: @Enrollment102164.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment102164.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment102164.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment102164.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment102164.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment102164.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment102164.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment102162.id, name: 'Tyyli', value: 'Perinteinen', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment102161.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment102166.id, name: 'Emit', value: 'Kyllä', attribute_index: 1).save
@@ -4376,7 +4935,7 @@ EnrollmentData.new(enrollment_id: @Enrollment102171.id, name: 'Kierroslaskija', 
 EnrollmentData.new(enrollment_id: @Enrollment102176.id, name: 'Emit', value: 'Kyllä', attribute_index: 1).save
 @User10218 = User.new(postal_code: '00100', city: 'Helsinki', first_name: 'Mikko', last_name: 'Isokangas', username: 'user10218', email: 'user10218@test.com', phone_number: 12345, street_address: 'Katuosoite', kk_number: 10218, birth_date: Date.today, gender: 'M', admin: false, password: 'Salasana1', password_confirmation: 'Salasana1', active: true)
 @User10218.save
-Result.new(name: 'Mikko Isokangas', city: 'Helsinki', group: nil, year: 2014, series: 'M40', kk_number: '10218').save
+Result.new(name: 'Mikko Isokangas', city: 'Helsinki', group: nil, year: 2014, series: 'M45', kk_number: '10218').save
 @Enrollment102181 = Enrollment.new(user_id: @User10218.id, event_id: @Event1.id, time:3614)
 @Enrollment102181.save
 @Enrollment102182 = Enrollment.new(user_id: @User10218.id, event_id: @Event2.id, time:9003)
@@ -4386,7 +4945,7 @@ Result.new(name: 'Mikko Isokangas', city: 'Helsinki', group: nil, year: 2014, se
 @Enrollment102185 = Enrollment.new(user_id: @User10218.id, event_id: @Event5.id, time:7170)
 @Enrollment102185.save
 EnrollmentData.new(enrollment_id: @Enrollment102184.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment102184.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment102184.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment102182.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment102181.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
 @User10219 = User.new(postal_code: '00100', city: 'Helsinki', first_name: 'Jouni', last_name: 'Siitonen', username: 'user10219', email: 'user10219@test.com', phone_number: 12345, street_address: 'Katuosoite', kk_number: 10219, birth_date: Date.today, gender: 'M', admin: false, password: 'Salasana1', password_confirmation: 'Salasana1', active: true)
@@ -4401,7 +4960,7 @@ Result.new(name: 'Jouni Siitonen', city: 'Helsinki', group: nil, year: 2014, ser
 @Enrollment102195 = Enrollment.new(user_id: @User10219.id, event_id: @Event5.id, time:7825)
 @Enrollment102195.save
 EnrollmentData.new(enrollment_id: @Enrollment102194.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment102194.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment102194.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment102192.id, name: 'Tyyli', value: 'Perinteinen', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment102191.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
 @User10220 = User.new(postal_code: '00100', city: 'Helsinki', first_name: 'Pasi', last_name: 'Lehtimäki', username: 'user10220', email: 'user10220@test.com', phone_number: 12345, street_address: 'Katuosoite', kk_number: 10220, birth_date: Date.today, gender: 'M', admin: false, password: 'Salasana1', password_confirmation: 'Salasana1', active: true)
@@ -4430,12 +4989,12 @@ Result.new(name: 'Kyösti Halonen', city: 'Helsinki', group: 'Hitaat 1', year: 2
 @Enrollment102216 = Enrollment.new(user_id: @User10221.id, event_id: @Event6.id, time:8287)
 @Enrollment102216.save
 EnrollmentData.new(enrollment_id: @Enrollment102214.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment102214.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment102214.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment102212.id, name: 'Tyyli', value: 'Perinteinen', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment102216.id, name: 'Emit', value: 'Kyllä', attribute_index: 1).save
 @User10222 = User.new(postal_code: '00100', city: 'Helsinki', first_name: 'Ari-Pekka', last_name: 'Rouvali', username: 'user10222', email: 'user10222@test.com', phone_number: 12345, street_address: 'Katuosoite', kk_number: 10222, birth_date: Date.today, gender: 'M', admin: false, password: 'Salasana1', password_confirmation: 'Salasana1', active: true)
 @User10222.save
-Result.new(name: 'Ari-Pekka Rouvali', city: 'Helsinki', group: 'KK Länsi-Uusimaa 3', year: 2014, series: 'M40', kk_number: '10222').save
+Result.new(name: 'Ari-Pekka Rouvali', city: 'Helsinki', group: 'KK Länsi-Uusimaa 3', year: 2014, series: 'M45', kk_number: '10222').save
 @Enrollment102221 = Enrollment.new(user_id: @User10222.id, event_id: @Event1.id, time:3391)
 @Enrollment102221.save
 @Enrollment102222 = Enrollment.new(user_id: @User10222.id, event_id: @Event2.id, time:12080)
@@ -4445,12 +5004,12 @@ Result.new(name: 'Ari-Pekka Rouvali', city: 'Helsinki', group: 'KK Länsi-Uusima
 @Enrollment102225 = Enrollment.new(user_id: @User10222.id, event_id: @Event5.id, time:7738)
 @Enrollment102225.save
 EnrollmentData.new(enrollment_id: @Enrollment102224.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment102224.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment102224.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment102222.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment102221.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
 @User10223 = User.new(postal_code: '00100', city: 'Helsinki', first_name: 'Mika', last_name: 'Niinimaa', username: 'user10223', email: 'user10223@test.com', phone_number: 12345, street_address: 'Katuosoite', kk_number: 10223, birth_date: Date.today, gender: 'M', admin: false, password: 'Salasana1', password_confirmation: 'Salasana1', active: true)
 @User10223.save
-Result.new(name: 'Mika Niinimaa', city: 'Helsinki', group: 'Turun NMKY', year: 2014, series: 'M40', kk_number: '10223').save
+Result.new(name: 'Mika Niinimaa', city: 'Helsinki', group: 'Turun NMKY', year: 2014, series: 'M45', kk_number: '10223').save
 @Enrollment102231 = Enrollment.new(user_id: @User10223.id, event_id: @Event1.id, time:3825)
 @Enrollment102231.save
 @Enrollment102232 = Enrollment.new(user_id: @User10223.id, event_id: @Event2.id, time:10815)
@@ -4474,7 +5033,7 @@ Result.new(name: 'Timo Seppänen', city: 'Helsinki', group: 'Otaniemen Jyllääj
 @Enrollment102245 = Enrollment.new(user_id: @User10224.id, event_id: @Event5.id, time:7508)
 @Enrollment102245.save
 EnrollmentData.new(enrollment_id: @Enrollment102244.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment102244.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment102244.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment102243.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment102241.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
 @User10225 = User.new(postal_code: '00100', city: 'Helsinki', first_name: 'Juho', last_name: 'Koskinen', username: 'user10225', email: 'user10225@test.com', phone_number: 12345, street_address: 'Katuosoite', kk_number: 10225, birth_date: Date.today, gender: 'M', admin: false, password: 'Salasana1', password_confirmation: 'Salasana1', active: true)
@@ -4489,7 +5048,7 @@ Result.new(name: 'Juho Koskinen', city: 'Helsinki', group: 'Tervakosken Pato 1.'
 @Enrollment102255 = Enrollment.new(user_id: @User10225.id, event_id: @Event5.id, time:7795)
 @Enrollment102255.save
 EnrollmentData.new(enrollment_id: @Enrollment102254.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment102254.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment102254.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment102252.id, name: 'Tyyli', value: 'Perinteinen', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment102253.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 @User10226 = User.new(postal_code: '00100', city: 'Helsinki', first_name: 'Jaakko', last_name: 'Penttinen', username: 'user10226', email: 'user10226@test.com', phone_number: 12345, street_address: 'Katuosoite', kk_number: 10226, birth_date: Date.today, gender: 'M', admin: false, password: 'Salasana1', password_confirmation: 'Salasana1', active: true)
@@ -4518,7 +5077,11 @@ Result.new(name: 'Anja Halonen', city: 'Helsinki', group: 'OJy Justiinat', year:
 @Enrollment102274 = Enrollment.new(user_id: @User10227.id, event_id: @Event4.id, time:12732)
 @Enrollment102274.save
 EnrollmentData.new(enrollment_id: @Enrollment102274.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment102274.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment102274.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment102274.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment102274.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment102274.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment102274.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment102272.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment102273.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment102271.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -4534,7 +5097,11 @@ Result.new(name: 'Heikki Lehtonen', city: 'Helsinki', group: 'Hitaat 2', year: 2
 @Enrollment102286 = Enrollment.new(user_id: @User10228.id, event_id: @Event6.id, time:9295)
 @Enrollment102286.save
 EnrollmentData.new(enrollment_id: @Enrollment102284.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment102284.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment102284.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment102284.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment102284.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment102284.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment102284.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment102282.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment102286.id, name: 'Emit', value: 'Kyllä', attribute_index: 1).save
 @User10229 = User.new(postal_code: '00100', city: 'Helsinki', first_name: 'Erkki', last_name: 'Valtonen', username: 'user10229', email: 'user10229@test.com', phone_number: 12345, street_address: 'Katuosoite', kk_number: 10229, birth_date: Date.today, gender: 'M', admin: false, password: 'Salasana1', password_confirmation: 'Salasana1', active: true)
@@ -4577,7 +5144,11 @@ Result.new(name: 'Erkka Karjalainen', city: 'Helsinki', group: nil, year: 2014, 
 @Enrollment102314 = Enrollment.new(user_id: @User10231.id, event_id: @Event4.id, time:10872)
 @Enrollment102314.save
 EnrollmentData.new(enrollment_id: @Enrollment102314.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment102314.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment102314.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment102314.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment102314.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment102314.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment102314.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment102312.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment102313.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment102311.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -4593,7 +5164,11 @@ Result.new(name: 'Jukka Lehtonen', city: 'Helsinki', group: 'Turun NMKY', year: 
 @Enrollment102326 = Enrollment.new(user_id: @User10232.id, event_id: @Event6.id, time:7282)
 @Enrollment102326.save
 EnrollmentData.new(enrollment_id: @Enrollment102324.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment102324.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment102324.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment102324.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment102324.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment102324.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment102324.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment102321.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment102326.id, name: 'Emit', value: 'Kyllä', attribute_index: 1).save
 @User10233 = User.new(postal_code: '00100', city: 'Helsinki', first_name: 'Olli', last_name: 'Lehtonen', username: 'user10233', email: 'user10233@test.com', phone_number: 12345, street_address: 'Katuosoite', kk_number: 10233, birth_date: Date.today, gender: 'M', admin: false, password: 'Salasana1', password_confirmation: 'Salasana1', active: true)
@@ -4608,7 +5183,11 @@ Result.new(name: 'Olli Lehtonen', city: 'Helsinki', group: nil, year: 2014, seri
 @Enrollment102336 = Enrollment.new(user_id: @User10233.id, event_id: @Event6.id, time:7475)
 @Enrollment102336.save
 EnrollmentData.new(enrollment_id: @Enrollment102334.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment102334.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment102334.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment102334.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment102334.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment102334.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment102334.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment102332.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment102331.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment102336.id, name: 'Emit', value: 'Kyllä', attribute_index: 1).save
@@ -4652,13 +5231,17 @@ Result.new(name: 'Matti Sajomaa', city: 'Helsinki', group: 'Tuusulan Tallaajat I
 @Enrollment102364 = Enrollment.new(user_id: @User10236.id, event_id: @Event4.id, time:10694)
 @Enrollment102364.save
 EnrollmentData.new(enrollment_id: @Enrollment102364.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment102364.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment102364.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment102364.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment102364.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment102364.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment102364.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment102362.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment102363.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment102361.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
 @User10237 = User.new(postal_code: '00100', city: 'Helsinki', first_name: 'Patric', last_name: 'Granholm', username: 'user10237', email: 'user10237@test.com', phone_number: 12345, street_address: 'Katuosoite', kk_number: 10237, birth_date: Date.today, gender: 'M', admin: false, password: 'Salasana1', password_confirmation: 'Salasana1', active: true)
 @User10237.save
-Result.new(name: 'Patric Granholm', city: 'Helsinki', group: 'Uskelan Urhot IV', year: 2014, series: 'M40', kk_number: '10237').save
+Result.new(name: 'Patric Granholm', city: 'Helsinki', group: 'Uskelan Urhot IV', year: 2014, series: 'M45', kk_number: '10237').save
 @Enrollment102371 = Enrollment.new(user_id: @User10237.id, event_id: @Event1.id, time:4388)
 @Enrollment102371.save
 @Enrollment102373 = Enrollment.new(user_id: @User10237.id, event_id: @Event3.id, time:6234)
@@ -4668,7 +5251,11 @@ Result.new(name: 'Patric Granholm', city: 'Helsinki', group: 'Uskelan Urhot IV',
 @Enrollment102376 = Enrollment.new(user_id: @User10237.id, event_id: @Event6.id, time:10290)
 @Enrollment102376.save
 EnrollmentData.new(enrollment_id: @Enrollment102374.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment102374.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment102374.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment102374.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment102374.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment102374.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment102374.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment102373.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment102371.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment102376.id, name: 'Emit', value: 'Kyllä', attribute_index: 1).save
@@ -4684,7 +5271,11 @@ Result.new(name: 'Arto Remes', city: 'Helsinki', group: nil, year: 2014, series:
 @Enrollment102386 = Enrollment.new(user_id: @User10238.id, event_id: @Event6.id, time:11398)
 @Enrollment102386.save
 EnrollmentData.new(enrollment_id: @Enrollment102384.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment102384.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment102384.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment102384.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment102384.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment102384.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment102384.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment102382.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment102386.id, name: 'Emit', value: 'Kyllä', attribute_index: 1).save
 @User10239 = User.new(postal_code: '00100', city: 'Helsinki', first_name: 'Jarmo', last_name: 'Savela', username: 'user10239', email: 'user10239@test.com', phone_number: 12345, street_address: 'Katuosoite', kk_number: 10239, birth_date: Date.today, gender: 'M', admin: false, password: 'Salasana1', password_confirmation: 'Salasana1', active: true)
@@ -4699,7 +5290,11 @@ Result.new(name: 'Jarmo Savela', city: 'Helsinki', group: 'KK Länsi-Uusimaa 1',
 @Enrollment102396 = Enrollment.new(user_id: @User10239.id, event_id: @Event6.id, time:9642)
 @Enrollment102396.save
 EnrollmentData.new(enrollment_id: @Enrollment102394.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment102394.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment102394.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment102394.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment102394.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment102394.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment102394.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment102391.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment102396.id, name: 'Emit', value: 'Kyllä', attribute_index: 1).save
 @User10240 = User.new(postal_code: '00100', city: 'Helsinki', first_name: 'Arto', last_name: 'Saviranta', username: 'user10240', email: 'user10240@test.com', phone_number: 12345, street_address: 'Katuosoite', kk_number: 10240, birth_date: Date.today, gender: 'M', admin: false, password: 'Salasana1', password_confirmation: 'Salasana1', active: true)
@@ -4714,7 +5309,11 @@ Result.new(name: 'Arto Saviranta', city: 'Helsinki', group: 'Uskelan Urhot IV', 
 @Enrollment102405 = Enrollment.new(user_id: @User10240.id, event_id: @Event5.id, time:9345)
 @Enrollment102405.save
 EnrollmentData.new(enrollment_id: @Enrollment102404.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment102404.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment102404.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment102404.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment102404.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment102404.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment102404.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment102403.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment102401.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
 @User10241 = User.new(postal_code: '00100', city: 'Helsinki', first_name: 'Juuso', last_name: 'Högblom', username: 'user10241', email: 'user10241@test.com', phone_number: 12345, street_address: 'Katuosoite', kk_number: 10241, birth_date: Date.today, gender: 'M', admin: false, password: 'Salasana1', password_confirmation: 'Salasana1', active: true)
@@ -4729,7 +5328,11 @@ Result.new(name: 'Juuso Högblom', city: 'Helsinki', group: 'Kankaanpään Kalev
 @Enrollment102414 = Enrollment.new(user_id: @User10241.id, event_id: @Event4.id, time:12059)
 @Enrollment102414.save
 EnrollmentData.new(enrollment_id: @Enrollment102414.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment102414.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment102414.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment102414.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment102414.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment102414.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment102414.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment102412.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment102413.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment102411.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -4745,7 +5348,11 @@ Result.new(name: 'Ari Tolmunen', city: 'Helsinki', group: nil, year: 2014, serie
 @Enrollment102425 = Enrollment.new(user_id: @User10242.id, event_id: @Event5.id, time:9056)
 @Enrollment102425.save
 EnrollmentData.new(enrollment_id: @Enrollment102424.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment102424.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment102424.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment102424.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment102424.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment102424.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment102424.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment102422.id, name: 'Tyyli', value: 'Perinteinen', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment102423.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 @User10243 = User.new(postal_code: '00100', city: 'Helsinki', first_name: 'Raimo', last_name: 'Korpela', username: 'user10243', email: 'user10243@test.com', phone_number: 12345, street_address: 'Katuosoite', kk_number: 10243, birth_date: Date.today, gender: 'M', admin: false, password: 'Salasana1', password_confirmation: 'Salasana1', active: true)
@@ -4760,7 +5367,11 @@ Result.new(name: 'Raimo Korpela', city: 'Helsinki', group: nil, year: 2014, seri
 @Enrollment102435 = Enrollment.new(user_id: @User10243.id, event_id: @Event5.id, time:8643)
 @Enrollment102435.save
 EnrollmentData.new(enrollment_id: @Enrollment102434.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment102434.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment102434.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment102434.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment102434.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment102434.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment102434.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment102433.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment102431.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
 @User10244 = User.new(postal_code: '00100', city: 'Helsinki', first_name: 'Mikko', last_name: 'Fagerström', username: 'user10244', email: 'user10244@test.com', phone_number: 12345, street_address: 'Katuosoite', kk_number: 10244, birth_date: Date.today, gender: 'M', admin: false, password: 'Salasana1', password_confirmation: 'Salasana1', active: true)
@@ -4775,7 +5386,7 @@ Result.new(name: 'Mikko Fagerström', city: 'Helsinki', group: 'Espoon Etanat', 
 @Enrollment102444 = Enrollment.new(user_id: @User10244.id, event_id: @Event4.id, time:11572)
 @Enrollment102444.save
 EnrollmentData.new(enrollment_id: @Enrollment102444.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment102444.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment102444.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment102442.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment102443.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment102441.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -4819,7 +5430,11 @@ Result.new(name: 'Ari Venäläinen', city: 'Helsinki', group: 'CCRT', year: 2014
 @Enrollment102474 = Enrollment.new(user_id: @User10247.id, event_id: @Event4.id, time:11269)
 @Enrollment102474.save
 EnrollmentData.new(enrollment_id: @Enrollment102474.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment102474.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment102474.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment102474.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment102474.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment102474.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment102474.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment102472.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment102473.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment102471.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -4839,7 +5454,7 @@ EnrollmentData.new(enrollment_id: @Enrollment102481.id, name: 'Kierroslaskija', 
 EnrollmentData.new(enrollment_id: @Enrollment102486.id, name: 'Emit', value: 'Kyllä', attribute_index: 1).save
 @User10249 = User.new(postal_code: '00100', city: 'Helsinki', first_name: 'Mikko', last_name: 'Sirkiä', username: 'user10249', email: 'user10249@test.com', phone_number: 12345, street_address: 'Katuosoite', kk_number: 10249, birth_date: Date.today, gender: 'M', admin: false, password: 'Salasana1', password_confirmation: 'Salasana1', active: true)
 @User10249.save
-Result.new(name: 'Mikko Sirkiä', city: 'Helsinki', group: 'Espoon Kepardit', year: 2014, series: 'M40', kk_number: '10249').save
+Result.new(name: 'Mikko Sirkiä', city: 'Helsinki', group: 'Espoon Kepardit', year: 2014, series: 'M45', kk_number: '10249').save
 @Enrollment102491 = Enrollment.new(user_id: @User10249.id, event_id: @Event1.id, time:4678)
 @Enrollment102491.save
 @Enrollment102493 = Enrollment.new(user_id: @User10249.id, event_id: @Event3.id, time:7351)
@@ -4863,7 +5478,7 @@ Result.new(name: 'Antti Ojala', city: 'Helsinki', group: 'Tervakosken Pato 2.', 
 @Enrollment102505 = Enrollment.new(user_id: @User10250.id, event_id: @Event5.id, time:7922)
 @Enrollment102505.save
 EnrollmentData.new(enrollment_id: @Enrollment102504.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment102504.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment102504.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment102502.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment102501.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
 @User10251 = User.new(postal_code: '00100', city: 'Helsinki', first_name: 'Kari', last_name: 'Sumiala', username: 'user10251', email: 'user10251@test.com', phone_number: 12345, street_address: 'Katuosoite', kk_number: 10251, birth_date: Date.today, gender: 'M', admin: false, password: 'Salasana1', password_confirmation: 'Salasana1', active: true)
@@ -4906,7 +5521,11 @@ Result.new(name: 'Aulis Nikkanen', city: 'Helsinki', group: 'Uskelan Urhot III',
 @Enrollment102536 = Enrollment.new(user_id: @User10253.id, event_id: @Event6.id, time:12430)
 @Enrollment102536.save
 EnrollmentData.new(enrollment_id: @Enrollment102534.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment102534.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment102534.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment102534.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment102534.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment102534.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment102534.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment102531.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment102536.id, name: 'Emit', value: 'Kyllä', attribute_index: 1).save
 @User10254 = User.new(postal_code: '00100', city: 'Helsinki', first_name: 'Pertti', last_name: 'Keski-Honkola', username: 'user10254', email: 'user10254@test.com', phone_number: 12345, street_address: 'Katuosoite', kk_number: 10254, birth_date: Date.today, gender: 'M', admin: false, password: 'Salasana1', password_confirmation: 'Salasana1', active: true)
@@ -4925,7 +5544,7 @@ EnrollmentData.new(enrollment_id: @Enrollment102543.id, name: 'Tyyppi', value: '
 EnrollmentData.new(enrollment_id: @Enrollment102546.id, name: 'Emit', value: 'Kyllä', attribute_index: 1).save
 @User10255 = User.new(postal_code: '00100', city: 'Helsinki', first_name: 'Jouni', last_name: 'Monto', username: 'user10255', email: 'user10255@test.com', phone_number: 12345, street_address: 'Katuosoite', kk_number: 10255, birth_date: Date.today, gender: 'M', admin: false, password: 'Salasana1', password_confirmation: 'Salasana1', active: true)
 @User10255.save
-Result.new(name: 'Jouni Monto', city: 'Helsinki', group: 'KK Länsi-Uusimaa 2', year: 2014, series: 'M40', kk_number: '10255').save
+Result.new(name: 'Jouni Monto', city: 'Helsinki', group: 'KK Länsi-Uusimaa 2', year: 2014, series: 'M45', kk_number: '10255').save
 @Enrollment102553 = Enrollment.new(user_id: @User10255.id, event_id: @Event3.id, time:7391)
 @Enrollment102553.save
 @Enrollment102554 = Enrollment.new(user_id: @User10255.id, event_id: @Event4.id, time:12067)
@@ -4935,7 +5554,11 @@ Result.new(name: 'Jouni Monto', city: 'Helsinki', group: 'KK Länsi-Uusimaa 2', 
 @Enrollment102556 = Enrollment.new(user_id: @User10255.id, event_id: @Event6.id, time:14231)
 @Enrollment102556.save
 EnrollmentData.new(enrollment_id: @Enrollment102554.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment102554.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment102554.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment102554.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment102554.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment102554.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment102554.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment102553.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment102556.id, name: 'Emit', value: 'Kyllä', attribute_index: 1).save
 @User10256 = User.new(postal_code: '00100', city: 'Helsinki', first_name: 'Ville', last_name: 'Melkko', username: 'user10256', email: 'user10256@test.com', phone_number: 12345, street_address: 'Katuosoite', kk_number: 10256, birth_date: Date.today, gender: 'M', admin: false, password: 'Salasana1', password_confirmation: 'Salasana1', active: true)
@@ -4978,7 +5601,11 @@ Result.new(name: 'Tuula Ruotsalainen-Piippo', city: 'Helsinki', group: nil, year
 @Enrollment102584 = Enrollment.new(user_id: @User10258.id, event_id: @Event4.id, time:12649)
 @Enrollment102584.save
 EnrollmentData.new(enrollment_id: @Enrollment102584.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment102584.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment102584.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment102584.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment102584.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment102584.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment102584.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment102582.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment102583.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment102581.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -4994,13 +5621,17 @@ Result.new(name: 'Rita Stubb', city: 'Helsinki', group: 'Hitaat Neidot', year: 2
 @Enrollment102596 = Enrollment.new(user_id: @User10259.id, event_id: @Event6.id, time:11600)
 @Enrollment102596.save
 EnrollmentData.new(enrollment_id: @Enrollment102594.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment102594.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment102594.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment102594.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment102594.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment102594.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment102594.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment102592.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment102593.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment102596.id, name: 'Emit', value: 'Kyllä', attribute_index: 1).save
 @User10260 = User.new(postal_code: '00100', city: 'Helsinki', first_name: 'Kirsti', last_name: 'Siikamäki', username: 'user10260', email: 'user10260@test.com', phone_number: 12345, street_address: 'Katuosoite', kk_number: 10260, birth_date: Date.today, gender: 'N', admin: false, password: 'Salasana1', password_confirmation: 'Salasana1', active: true)
 @User10260.save
-Result.new(name: 'Kirsti Siikamäki', city: 'Helsinki', group: nil, year: 2014, series: 'N40', kk_number: '10260').save
+Result.new(name: 'Kirsti Siikamäki', city: 'Helsinki', group: nil, year: 2014, series: 'N45', kk_number: '10260').save
 @Enrollment102601 = Enrollment.new(user_id: @User10260.id, event_id: @Event1.id, time:4694)
 @Enrollment102601.save
 @Enrollment102602 = Enrollment.new(user_id: @User10260.id, event_id: @Event2.id, time:14647)
@@ -5039,7 +5670,11 @@ Result.new(name: 'Sirkku Paukkunen', city: 'Helsinki', group: nil, year: 2014, s
 @Enrollment102625 = Enrollment.new(user_id: @User10262.id, event_id: @Event5.id, time:9670)
 @Enrollment102625.save
 EnrollmentData.new(enrollment_id: @Enrollment102624.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment102624.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment102624.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment102624.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment102624.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment102624.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment102624.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment102622.id, name: 'Tyyli', value: 'Perinteinen', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment102623.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 @User10263 = User.new(postal_code: '00100', city: 'Helsinki', first_name: 'Marjut', last_name: 'Vainio', username: 'user10263', email: 'user10263@test.com', phone_number: 12345, street_address: 'Katuosoite', kk_number: 10263, birth_date: Date.today, gender: 'N', admin: false, password: 'Salasana1', password_confirmation: 'Salasana1', active: true)
@@ -5054,12 +5689,16 @@ Result.new(name: 'Marjut Vainio', city: 'Helsinki', group: 'KK Länsi-Uusimaa 2'
 @Enrollment102636 = Enrollment.new(user_id: @User10263.id, event_id: @Event6.id, time:14991)
 @Enrollment102636.save
 EnrollmentData.new(enrollment_id: @Enrollment102634.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment102634.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment102634.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment102634.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment102634.id, name: 'Parin sukupuoli', value: 'M', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment102634.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment102634.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment102633.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment102636.id, name: 'Emit', value: 'Kyllä', attribute_index: 1).save
 @User10264 = User.new(postal_code: '00100', city: 'Helsinki', first_name: 'Tapio', last_name: 'Moisio', username: 'user10264', email: 'user10264@test.com', phone_number: 12345, street_address: 'Katuosoite', kk_number: 10264, birth_date: Date.today, gender: 'M', admin: false, password: 'Salasana1', password_confirmation: 'Salasana1', active: true)
 @User10264.save
-Result.new(name: 'Tapio Moisio', city: 'Helsinki', group: 'ERRY', year: 2014, series: 'M40', kk_number: '10264').save
+Result.new(name: 'Tapio Moisio', city: 'Helsinki', group: 'ERRY', year: 2014, series: 'M45', kk_number: '10264').save
 @Enrollment102641 = Enrollment.new(user_id: @User10264.id, event_id: @Event1.id, time:5252)
 @Enrollment102641.save
 @Enrollment102643 = Enrollment.new(user_id: @User10264.id, event_id: @Event3.id, time:7887)
@@ -5069,7 +5708,11 @@ Result.new(name: 'Tapio Moisio', city: 'Helsinki', group: 'ERRY', year: 2014, se
 @Enrollment102645 = Enrollment.new(user_id: @User10264.id, event_id: @Event5.id, time:10662)
 @Enrollment102645.save
 EnrollmentData.new(enrollment_id: @Enrollment102644.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment102644.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment102644.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment102644.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment102644.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment102644.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment102644.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment102643.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment102641.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
 @User10265 = User.new(postal_code: '00100', city: 'Helsinki', first_name: 'Anna', last_name: 'Kumpulainen', username: 'user10265', email: 'user10265@test.com', phone_number: 12345, street_address: 'Katuosoite', kk_number: 10265, birth_date: Date.today, gender: 'N', admin: false, password: 'Salasana1', password_confirmation: 'Salasana1', active: true)
@@ -5102,7 +5745,7 @@ EnrollmentData.new(enrollment_id: @Enrollment102663.id, name: 'Tyyppi', value: '
 EnrollmentData.new(enrollment_id: @Enrollment102661.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
 @User10267 = User.new(postal_code: '00100', city: 'Helsinki', first_name: 'Olli', last_name: 'Hyppänen', username: 'user10267', email: 'user10267@test.com', phone_number: 12345, street_address: 'Katuosoite', kk_number: 10267, birth_date: Date.today, gender: 'M', admin: false, password: 'Salasana1', password_confirmation: 'Salasana1', active: true)
 @User10267.save
-Result.new(name: 'Olli Hyppänen', city: 'Helsinki', group: 'ERRY', year: 2014, series: 'M40', kk_number: '10267').save
+Result.new(name: 'Olli Hyppänen', city: 'Helsinki', group: 'ERRY', year: 2014, series: 'M45', kk_number: '10267').save
 @Enrollment102671 = Enrollment.new(user_id: @User10267.id, event_id: @Event1.id, time:4931)
 @Enrollment102671.save
 @Enrollment102674 = Enrollment.new(user_id: @User10267.id, event_id: @Event4.id, time:13351)
@@ -5112,7 +5755,11 @@ Result.new(name: 'Olli Hyppänen', city: 'Helsinki', group: 'ERRY', year: 2014, 
 @Enrollment102676 = Enrollment.new(user_id: @User10267.id, event_id: @Event6.id, time:10957)
 @Enrollment102676.save
 EnrollmentData.new(enrollment_id: @Enrollment102674.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment102674.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment102674.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment102674.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment102674.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment102674.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment102674.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment102671.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment102676.id, name: 'Emit', value: 'Kyllä', attribute_index: 1).save
 @User10268 = User.new(postal_code: '00100', city: 'Helsinki', first_name: 'Jorma', last_name: 'Niskanen', username: 'user10268', email: 'user10268@test.com', phone_number: 12345, street_address: 'Katuosoite', kk_number: 10268, birth_date: Date.today, gender: 'M', admin: false, password: 'Salasana1', password_confirmation: 'Salasana1', active: true)
@@ -5125,7 +5772,11 @@ Result.new(name: 'Jorma Niskanen', city: 'Helsinki', group: 'Tuusulan Tallaajat 
 @Enrollment102684 = Enrollment.new(user_id: @User10268.id, event_id: @Event4.id, time:11585)
 @Enrollment102684.save
 EnrollmentData.new(enrollment_id: @Enrollment102684.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment102684.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment102684.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment102684.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment102684.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment102684.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment102684.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment102683.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment102681.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
 @User10269 = User.new(postal_code: '00100', city: 'Helsinki', first_name: 'Esa', last_name: 'Vainikainen', username: 'user10269', email: 'user10269@test.com', phone_number: 12345, street_address: 'Katuosoite', kk_number: 10269, birth_date: Date.today, gender: 'M', admin: false, password: 'Salasana1', password_confirmation: 'Salasana1', active: true)
@@ -5154,7 +5805,11 @@ Result.new(name: 'Pirjo Leskinen', city: 'Helsinki', group: nil, year: 2014, ser
 @Enrollment102705 = Enrollment.new(user_id: @User10270.id, event_id: @Event5.id, time:11466)
 @Enrollment102705.save
 EnrollmentData.new(enrollment_id: @Enrollment102704.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment102704.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment102704.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment102704.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment102704.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment102704.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment102704.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment102702.id, name: 'Tyyli', value: 'Perinteinen', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment102703.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 @User10271 = User.new(postal_code: '00100', city: 'Helsinki', first_name: 'Maritta', last_name: 'Maanpää', username: 'user10271', email: 'user10271@test.com', phone_number: 12345, street_address: 'Katuosoite', kk_number: 10271, birth_date: Date.today, gender: 'N', admin: false, password: 'Salasana1', password_confirmation: 'Salasana1', active: true)
@@ -5173,7 +5828,7 @@ EnrollmentData.new(enrollment_id: @Enrollment102711.id, name: 'Kierroslaskija', 
 EnrollmentData.new(enrollment_id: @Enrollment102716.id, name: 'Emit', value: 'Kyllä', attribute_index: 1).save
 @User10272 = User.new(postal_code: '00100', city: 'Helsinki', first_name: 'Petri', last_name: 'Uusiheimala', username: 'user10272', email: 'user10272@test.com', phone_number: 12345, street_address: 'Katuosoite', kk_number: 10272, birth_date: Date.today, gender: 'M', admin: false, password: 'Salasana1', password_confirmation: 'Salasana1', active: true)
 @User10272.save
-Result.new(name: 'Petri Uusiheimala', city: 'Helsinki', group: nil, year: 2014, series: 'M40', kk_number: '10272').save
+Result.new(name: 'Petri Uusiheimala', city: 'Helsinki', group: nil, year: 2014, series: 'M45', kk_number: '10272').save
 @Enrollment102721 = Enrollment.new(user_id: @User10272.id, event_id: @Event1.id, time:5723)
 @Enrollment102721.save
 @Enrollment102723 = Enrollment.new(user_id: @User10272.id, event_id: @Event3.id, time:8967)
@@ -5197,7 +5852,11 @@ Result.new(name: 'Tauno Hyppönen', city: 'Helsinki', group: 'Tuusulan Tallaajat
 @Enrollment102735 = Enrollment.new(user_id: @User10273.id, event_id: @Event5.id, time:10478)
 @Enrollment102735.save
 EnrollmentData.new(enrollment_id: @Enrollment102734.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment102734.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment102734.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment102734.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment102734.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment102734.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment102734.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment102732.id, name: 'Tyyli', value: 'Perinteinen', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment102731.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
 @User10274 = User.new(postal_code: '00100', city: 'Helsinki', first_name: 'Helena', last_name: 'Lappala', username: 'user10274', email: 'user10274@test.com', phone_number: 12345, street_address: 'Katuosoite', kk_number: 10274, birth_date: Date.today, gender: 'N', admin: false, password: 'Salasana1', password_confirmation: 'Salasana1', active: true)
@@ -5240,7 +5899,11 @@ Result.new(name: 'Kauko Vähä', city: 'Helsinki', group: nil, year: 2014, serie
 @Enrollment102766 = Enrollment.new(user_id: @User10276.id, event_id: @Event6.id, time:22723)
 @Enrollment102766.save
 EnrollmentData.new(enrollment_id: @Enrollment102764.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment102764.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment102764.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment102764.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment102764.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment102764.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment102764.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment102761.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment102766.id, name: 'Emit', value: 'Kyllä', attribute_index: 1).save
 @User10277 = User.new(postal_code: '00100', city: 'Helsinki', first_name: 'Juha', last_name: 'Mäenpää', username: 'user10277', email: 'user10277@test.com', phone_number: 12345, street_address: 'Katuosoite', kk_number: 10277, birth_date: Date.today, gender: 'M', admin: false, password: 'Salasana1', password_confirmation: 'Salasana1', active: true)
@@ -5269,12 +5932,16 @@ Result.new(name: 'Minna Kotila', city: 'Helsinki', group: nil, year: 2014, serie
 @Enrollment102786 = Enrollment.new(user_id: @User10278.id, event_id: @Event6.id, time:19920)
 @Enrollment102786.save
 EnrollmentData.new(enrollment_id: @Enrollment102784.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment102784.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment102784.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment102784.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment102784.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment102784.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment102784.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment102783.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment102786.id, name: 'Emit', value: 'Kyllä', attribute_index: 1).save
 @User10279 = User.new(postal_code: '00100', city: 'Helsinki', first_name: 'Hannu', last_name: 'Liekola', username: 'user10279', email: 'user10279@test.com', phone_number: 12345, street_address: 'Katuosoite', kk_number: 10279, birth_date: Date.today, gender: 'M', admin: false, password: 'Salasana1', password_confirmation: 'Salasana1', active: true)
 @User10279.save
-Result.new(name: 'Hannu Liekola', city: 'Helsinki', group: 'Sportia KT-SPORT', year: 2014, series: 'M40', kk_number: '10279').save
+Result.new(name: 'Hannu Liekola', city: 'Helsinki', group: 'Sportia KT-SPORT', year: 2014, series: 'M45', kk_number: '10279').save
 @Enrollment102792 = Enrollment.new(user_id: @User10279.id, event_id: @Event2.id, time:9400)
 @Enrollment102792.save
 @Enrollment102794 = Enrollment.new(user_id: @User10279.id, event_id: @Event4.id, time:10044)
@@ -5282,7 +5949,7 @@ Result.new(name: 'Hannu Liekola', city: 'Helsinki', group: 'Sportia KT-SPORT', y
 @Enrollment102795 = Enrollment.new(user_id: @User10279.id, event_id: @Event5.id, time:6349)
 @Enrollment102795.save
 EnrollmentData.new(enrollment_id: @Enrollment102794.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment102794.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment102794.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment102792.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 @User10280 = User.new(postal_code: '00100', city: 'Helsinki', first_name: 'Kari', last_name: 'Kinnunen', username: 'user10280', email: 'user10280@test.com', phone_number: 12345, street_address: 'Katuosoite', kk_number: 10280, birth_date: Date.today, gender: 'M', admin: false, password: 'Salasana1', password_confirmation: 'Salasana1', active: true)
 @User10280.save
@@ -5308,7 +5975,7 @@ EnrollmentData.new(enrollment_id: @Enrollment102812.id, name: 'Tyyli', value: 'V
 EnrollmentData.new(enrollment_id: @Enrollment102811.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
 @User10282 = User.new(postal_code: '00100', city: 'Helsinki', first_name: 'Asko', last_name: 'Lautamäki', username: 'user10282', email: 'user10282@test.com', phone_number: 12345, street_address: 'Katuosoite', kk_number: 10282, birth_date: Date.today, gender: 'M', admin: false, password: 'Salasana1', password_confirmation: 'Salasana1', active: true)
 @User10282.save
-Result.new(name: 'Asko Lautamäki', city: 'Helsinki', group: 'Tervakosken Pato 1.', year: 2014, series: 'M40', kk_number: '10282').save
+Result.new(name: 'Asko Lautamäki', city: 'Helsinki', group: 'Tervakosken Pato 1.', year: 2014, series: 'M45', kk_number: '10282').save
 @Enrollment102821 = Enrollment.new(user_id: @User10282.id, event_id: @Event1.id, time:3618)
 @Enrollment102821.save
 @Enrollment102823 = Enrollment.new(user_id: @User10282.id, event_id: @Event3.id, time:5669)
@@ -5328,7 +5995,11 @@ Result.new(name: 'Turo Väätäinen', city: 'Helsinki', group: 'Korvenpojat', ye
 @Enrollment102834 = Enrollment.new(user_id: @User10283.id, event_id: @Event4.id, time:10648)
 @Enrollment102834.save
 EnrollmentData.new(enrollment_id: @Enrollment102834.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment102834.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment102834.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment102834.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment102834.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment102834.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment102834.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment102833.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment102831.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
 @User10284 = User.new(postal_code: '00100', city: 'Helsinki', first_name: 'Pauli', last_name: 'Uitto', username: 'user10284', email: 'user10284@test.com', phone_number: 12345, street_address: 'Katuosoite', kk_number: 10284, birth_date: Date.today, gender: 'M', admin: false, password: 'Salasana1', password_confirmation: 'Salasana1', active: true)
@@ -5344,7 +6015,7 @@ EnrollmentData.new(enrollment_id: @Enrollment102842.id, name: 'Tyyli', value: 'V
 EnrollmentData.new(enrollment_id: @Enrollment102841.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
 @User10285 = User.new(postal_code: '00100', city: 'Helsinki', first_name: 'Pekka', last_name: 'Aho', username: 'user10285', email: 'user10285@test.com', phone_number: 12345, street_address: 'Katuosoite', kk_number: 10285, birth_date: Date.today, gender: 'M', admin: false, password: 'Salasana1', password_confirmation: 'Salasana1', active: true)
 @User10285.save
-Result.new(name: 'Pekka Aho', city: 'Helsinki', group: 'KENSU-KK', year: 2014, series: 'M40', kk_number: '10285').save
+Result.new(name: 'Pekka Aho', city: 'Helsinki', group: 'KENSU-KK', year: 2014, series: 'M45', kk_number: '10285').save
 @Enrollment102851 = Enrollment.new(user_id: @User10285.id, event_id: @Event1.id, time:3804)
 @Enrollment102851.save
 @Enrollment102852 = Enrollment.new(user_id: @User10285.id, event_id: @Event2.id, time:10498)
@@ -5374,7 +6045,11 @@ Result.new(name: 'Aimo Väisänen', city: 'Helsinki', group: 'KENSU-KK', year: 2
 @Enrollment102874 = Enrollment.new(user_id: @User10287.id, event_id: @Event4.id, time:10251)
 @Enrollment102874.save
 EnrollmentData.new(enrollment_id: @Enrollment102874.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment102874.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment102874.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment102874.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment102874.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment102874.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment102874.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment102872.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment102873.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 @User10288 = User.new(postal_code: '00100', city: 'Helsinki', first_name: 'Sanna', last_name: 'Karjalainen', username: 'user10288', email: 'user10288@test.com', phone_number: 12345, street_address: 'Katuosoite', kk_number: 10288, birth_date: Date.today, gender: 'N', admin: false, password: 'Salasana1', password_confirmation: 'Salasana1', active: true)
@@ -5421,7 +6096,7 @@ Result.new(name: 'Aarno Tiirikainen', city: 'Helsinki', group: nil, year: 2014, 
 @Enrollment102916 = Enrollment.new(user_id: @User10291.id, event_id: @Event6.id, time:10872)
 @Enrollment102916.save
 EnrollmentData.new(enrollment_id: @Enrollment102914.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment102914.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment102914.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment102913.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment102916.id, name: 'Emit', value: 'Kyllä', attribute_index: 1).save
 @User10292 = User.new(postal_code: '00100', city: 'Helsinki', first_name: 'Olli-Pekka', last_name: 'Hakala', username: 'user10292', email: 'user10292@test.com', phone_number: 12345, street_address: 'Katuosoite', kk_number: 10292, birth_date: Date.today, gender: 'M', admin: false, password: 'Salasana1', password_confirmation: 'Salasana1', active: true)
@@ -5450,7 +6125,7 @@ EnrollmentData.new(enrollment_id: @Enrollment102933.id, name: 'Tyyppi', value: '
 EnrollmentData.new(enrollment_id: @Enrollment102936.id, name: 'Emit', value: 'Kyllä', attribute_index: 1).save
 @User10294 = User.new(postal_code: '00100', city: 'Helsinki', first_name: 'Kristiina', last_name: 'Sirviö', username: 'user10294', email: 'user10294@test.com', phone_number: 12345, street_address: 'Katuosoite', kk_number: 10294, birth_date: Date.today, gender: 'N', admin: false, password: 'Salasana1', password_confirmation: 'Salasana1', active: true)
 @User10294.save
-Result.new(name: 'Kristiina Sirviö', city: 'Helsinki', group: nil, year: 2014, series: 'N40', kk_number: '10294').save
+Result.new(name: 'Kristiina Sirviö', city: 'Helsinki', group: nil, year: 2014, series: 'N45', kk_number: '10294').save
 @Enrollment102941 = Enrollment.new(user_id: @User10294.id, event_id: @Event1.id, time:4269)
 @Enrollment102941.save
 @Enrollment102942 = Enrollment.new(user_id: @User10294.id, event_id: @Event2.id, time:11843)
@@ -5462,7 +6137,7 @@ EnrollmentData.new(enrollment_id: @Enrollment102943.id, name: 'Tyyppi', value: '
 EnrollmentData.new(enrollment_id: @Enrollment102941.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
 @User10295 = User.new(postal_code: '00100', city: 'Helsinki', first_name: 'Markku', last_name: 'Paija', username: 'user10295', email: 'user10295@test.com', phone_number: 12345, street_address: 'Katuosoite', kk_number: 10295, birth_date: Date.today, gender: 'M', admin: false, password: 'Salasana1', password_confirmation: 'Salasana1', active: true)
 @User10295.save
-Result.new(name: 'Markku Paija', city: 'Helsinki', group: 'Tammelan Ryske', year: 2014, series: 'M40', kk_number: '10295').save
+Result.new(name: 'Markku Paija', city: 'Helsinki', group: 'Tammelan Ryske', year: 2014, series: 'M45', kk_number: '10295').save
 @Enrollment102951 = Enrollment.new(user_id: @User10295.id, event_id: @Event1.id, time:4360)
 @Enrollment102951.save
 @Enrollment102952 = Enrollment.new(user_id: @User10295.id, event_id: @Event2.id, time:16060)
@@ -5506,7 +6181,11 @@ Result.new(name: 'Petteri Hyppänen', city: 'Helsinki', group: 'ERRY', year: 201
 @Enrollment102984 = Enrollment.new(user_id: @User10298.id, event_id: @Event4.id, time:13351)
 @Enrollment102984.save
 EnrollmentData.new(enrollment_id: @Enrollment102984.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment102984.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment102984.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment102984.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment102984.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment102984.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment102984.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment102983.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment102981.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
 @User10299 = User.new(postal_code: '00100', city: 'Helsinki', first_name: 'Vilma', last_name: 'Maanpää', username: 'user10299', email: 'user10299@test.com', phone_number: 12345, street_address: 'Katuosoite', kk_number: 10299, birth_date: Date.today, gender: 'N', admin: false, password: 'Salasana1', password_confirmation: 'Salasana1', active: true)
@@ -5551,7 +6230,7 @@ Result.new(name: 'Henri Nieminen', city: 'Helsinki', group: 'Tervakosken Pato 2.
 @Enrollment103024 = Enrollment.new(user_id: @User10302.id, event_id: @Event4.id, time:10479)
 @Enrollment103024.save
 EnrollmentData.new(enrollment_id: @Enrollment103024.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment103024.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment103024.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment103022.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 @User10303 = User.new(postal_code: '00100', city: 'Helsinki', first_name: 'Rainer', last_name: 'Mäkelä', username: 'user10303', email: 'user10303@test.com', phone_number: 12345, street_address: 'Katuosoite', kk_number: 10303, birth_date: Date.today, gender: 'M', admin: false, password: 'Salasana1', password_confirmation: 'Salasana1', active: true)
 @User10303.save
@@ -5561,7 +6240,7 @@ Result.new(name: 'Rainer Mäkelä', city: 'Helsinki', group: 'Reilut Miehet Havu
 @Enrollment103034 = Enrollment.new(user_id: @User10303.id, event_id: @Event4.id, time:11225)
 @Enrollment103034.save
 EnrollmentData.new(enrollment_id: @Enrollment103034.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment103034.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment103034.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment103032.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 @User10304 = User.new(postal_code: '00100', city: 'Helsinki', first_name: 'Mikko', last_name: 'Lappi', username: 'user10304', email: 'user10304@test.com', phone_number: 12345, street_address: 'Katuosoite', kk_number: 10304, birth_date: Date.today, gender: 'M', admin: false, password: 'Salasana1', password_confirmation: 'Salasana1', active: true)
 @User10304.save
@@ -5588,7 +6267,11 @@ Result.new(name: 'Markku Pulkkinen', city: 'Helsinki', group: 'GSK', year: 2014,
 @Enrollment103065 = Enrollment.new(user_id: @User10306.id, event_id: @Event5.id, time:8554)
 @Enrollment103065.save
 EnrollmentData.new(enrollment_id: @Enrollment103064.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment103064.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment103064.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment103064.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment103064.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment103064.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment103064.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 @User10307 = User.new(postal_code: '00100', city: 'Helsinki', first_name: 'Suvi', last_name: 'Tiainen', username: 'user10307', email: 'user10307@test.com', phone_number: 12345, street_address: 'Katuosoite', kk_number: 10307, birth_date: Date.today, gender: 'N', admin: false, password: 'Salasana1', password_confirmation: 'Salasana1', active: true)
 @User10307.save
 Result.new(name: 'Suvi Tiainen', city: 'Helsinki', group: nil, year: 2014, series: 'N', kk_number: '10307').save
@@ -5632,7 +6315,11 @@ Result.new(name: 'antti laitsaari', city: 'Helsinki', group: nil, year: 2014, se
 @Enrollment103114 = Enrollment.new(user_id: @User10311.id, event_id: @Event4.id, time:11498)
 @Enrollment103114.save
 EnrollmentData.new(enrollment_id: @Enrollment103114.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment103114.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment103114.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment103114.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment103114.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment103114.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment103114.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment103111.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
 @User10312 = User.new(postal_code: '00100', city: 'Helsinki', first_name: 'Kirsi', last_name: 'Palohonka', username: 'user10312', email: 'user10312@test.com', phone_number: 12345, street_address: 'Katuosoite', kk_number: 10312, birth_date: Date.today, gender: 'N', admin: false, password: 'Salasana1', password_confirmation: 'Salasana1', active: true)
 @User10312.save
@@ -5690,7 +6377,7 @@ EnrollmentData.new(enrollment_id: @Enrollment103173.id, name: 'Tyyppi', value: '
 EnrollmentData.new(enrollment_id: @Enrollment103171.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
 @User10318 = User.new(postal_code: '00100', city: 'Helsinki', first_name: 'Jerry', last_name: 'Kettunen', username: 'user10318', email: 'user10318@test.com', phone_number: 12345, street_address: 'Katuosoite', kk_number: 10318, birth_date: Date.today, gender: 'M', admin: false, password: 'Salasana1', password_confirmation: 'Salasana1', active: true)
 @User10318.save
-Result.new(name: 'Jerry Kettunen', city: 'Helsinki', group: 'Pajulahti', year: 2014, series: 'M40', kk_number: '10318').save
+Result.new(name: 'Jerry Kettunen', city: 'Helsinki', group: 'Pajulahti', year: 2014, series: 'M45', kk_number: '10318').save
 @Enrollment103181 = Enrollment.new(user_id: @User10318.id, event_id: @Event1.id, time:4526)
 @Enrollment103181.save
 @Enrollment103183 = Enrollment.new(user_id: @User10318.id, event_id: @Event3.id, time:8523)
@@ -5705,11 +6392,15 @@ Result.new(name: 'Tapani Laaksonen', city: 'Helsinki', group: nil, year: 2014, s
 @Enrollment103194 = Enrollment.new(user_id: @User10319.id, event_id: @Event4.id, time:13305)
 @Enrollment103194.save
 EnrollmentData.new(enrollment_id: @Enrollment103194.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment103194.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment103194.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment103194.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment103194.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment103194.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment103194.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment103191.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
 @User10320 = User.new(postal_code: '00100', city: 'Helsinki', first_name: 'Sami', last_name: 'Kaijanen', username: 'user10320', email: 'user10320@test.com', phone_number: 12345, street_address: 'Katuosoite', kk_number: 10320, birth_date: Date.today, gender: 'M', admin: false, password: 'Salasana1', password_confirmation: 'Salasana1', active: true)
 @User10320.save
-Result.new(name: 'Sami Kaijanen', city: 'Helsinki', group: 'Selän sitkeät ruostumattomat', year: 2014, series: 'M40', kk_number: '10320').save
+Result.new(name: 'Sami Kaijanen', city: 'Helsinki', group: 'Selän sitkeät ruostumattomat', year: 2014, series: 'M45', kk_number: '10320').save
 @Enrollment103201 = Enrollment.new(user_id: @User10320.id, event_id: @Event1.id, time:5172)
 @Enrollment103201.save
 @Enrollment103202 = Enrollment.new(user_id: @User10320.id, event_id: @Event2.id, time:15426)
@@ -5727,13 +6418,17 @@ EnrollmentData.new(enrollment_id: @Enrollment103212.id, name: 'Tyyli', value: 'P
 EnrollmentData.new(enrollment_id: @Enrollment103211.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
 @User10322 = User.new(postal_code: '00100', city: 'Helsinki', first_name: 'Petri', last_name: 'Falck', username: 'user10322', email: 'user10322@test.com', phone_number: 12345, street_address: 'Katuosoite', kk_number: 10322, birth_date: Date.today, gender: 'M', admin: false, password: 'Salasana1', password_confirmation: 'Salasana1', active: true)
 @User10322.save
-Result.new(name: 'Petri Falck', city: 'Helsinki', group: nil, year: 2014, series: 'M40', kk_number: '10322').save
+Result.new(name: 'Petri Falck', city: 'Helsinki', group: nil, year: 2014, series: 'M45', kk_number: '10322').save
 @Enrollment103221 = Enrollment.new(user_id: @User10322.id, event_id: @Event1.id, time:6677)
 @Enrollment103221.save
 @Enrollment103224 = Enrollment.new(user_id: @User10322.id, event_id: @Event4.id, time:11228)
 @Enrollment103224.save
 EnrollmentData.new(enrollment_id: @Enrollment103224.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment103224.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment103224.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment103224.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment103224.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment103224.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment103224.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment103221.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
 @User10323 = User.new(postal_code: '00100', city: 'Helsinki', first_name: 'Kalevi', last_name: 'Selander', username: 'user10323', email: 'user10323@test.com', phone_number: 12345, street_address: 'Katuosoite', kk_number: 10323, birth_date: Date.today, gender: 'M', admin: false, password: 'Salasana1', password_confirmation: 'Salasana1', active: true)
 @User10323.save
@@ -5763,7 +6458,7 @@ EnrollmentData.new(enrollment_id: @Enrollment103252.id, name: 'Tyyli', value: 'P
 EnrollmentData.new(enrollment_id: @Enrollment103253.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 @User10326 = User.new(postal_code: '00100', city: 'Helsinki', first_name: 'Timo', last_name: 'Simell', username: 'user10326', email: 'user10326@test.com', phone_number: 12345, street_address: 'Katuosoite', kk_number: 10326, birth_date: Date.today, gender: 'M', admin: false, password: 'Salasana1', password_confirmation: 'Salasana1', active: true)
 @User10326.save
-Result.new(name: 'Timo Simell', city: 'Helsinki', group: nil, year: 2014, series: 'M40', kk_number: '10326').save
+Result.new(name: 'Timo Simell', city: 'Helsinki', group: nil, year: 2014, series: 'M45', kk_number: '10326').save
 @Enrollment103261 = Enrollment.new(user_id: @User10326.id, event_id: @Event1.id, time:5986)
 @Enrollment103261.save
 @Enrollment103262 = Enrollment.new(user_id: @User10326.id, event_id: @Event2.id, time:18093)
@@ -5776,14 +6471,14 @@ Result.new(name: 'Tomi Silvonen', city: 'Helsinki', group: 'Selän Sitkeät 1.',
 @Enrollment103274 = Enrollment.new(user_id: @User10327.id, event_id: @Event4.id, time:10016)
 @Enrollment103274.save
 EnrollmentData.new(enrollment_id: @Enrollment103274.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment103274.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment103274.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 @User10328 = User.new(postal_code: '00100', city: 'Helsinki', first_name: 'Jari', last_name: 'Haverinen', username: 'user10328', email: 'user10328@test.com', phone_number: 12345, street_address: 'Katuosoite', kk_number: 10328, birth_date: Date.today, gender: 'M', admin: false, password: 'Salasana1', password_confirmation: 'Salasana1', active: true)
 @User10328.save
 Result.new(name: 'Jari Haverinen', city: 'Helsinki', group: nil, year: 2014, series: 'M40', kk_number: '10328').save
 @Enrollment103284 = Enrollment.new(user_id: @User10328.id, event_id: @Event4.id, time:10226)
 @Enrollment103284.save
 EnrollmentData.new(enrollment_id: @Enrollment103284.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment103284.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment103284.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 @User10329 = User.new(postal_code: '00100', city: 'Helsinki', first_name: 'Pekka', last_name: 'Niemi', username: 'user10329', email: 'user10329@test.com', phone_number: 12345, street_address: 'Katuosoite', kk_number: 10329, birth_date: Date.today, gender: 'M', admin: false, password: 'Salasana1', password_confirmation: 'Salasana1', active: true)
 @User10329.save
 Result.new(name: 'Pekka Niemi', city: 'Helsinki', group: 'Kankaanpään Kalevankiertäjät 1', year: 2014, series: 'M70', kk_number: '10329').save
@@ -5802,14 +6497,22 @@ Result.new(name: 'Jaakko Nurminen', city: 'Helsinki', group: nil, year: 2014, se
 @Enrollment103314 = Enrollment.new(user_id: @User10331.id, event_id: @Event4.id, time:9921)
 @Enrollment103314.save
 EnrollmentData.new(enrollment_id: @Enrollment103314.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment103314.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment103314.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment103314.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment103314.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment103314.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment103314.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 @User10332 = User.new(postal_code: '00100', city: 'Helsinki', first_name: 'Pentti', last_name: 'Satama', username: 'user10332', email: 'user10332@test.com', phone_number: 12345, street_address: 'Katuosoite', kk_number: 10332, birth_date: Date.today, gender: 'M', admin: false, password: 'Salasana1', password_confirmation: 'Salasana1', active: true)
 @User10332.save
 Result.new(name: 'Pentti Satama', city: 'Helsinki', group: nil, year: 2014, series: 'M', kk_number: '10332').save
 @Enrollment103324 = Enrollment.new(user_id: @User10332.id, event_id: @Event4.id, time:9937)
 @Enrollment103324.save
 EnrollmentData.new(enrollment_id: @Enrollment103324.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment103324.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment103324.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment103324.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment103324.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment103324.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment103324.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 @User10333 = User.new(postal_code: '00100', city: 'Helsinki', first_name: 'Niklas', last_name: 'Nyman', username: 'user10333', email: 'user10333@test.com', phone_number: 12345, street_address: 'Katuosoite', kk_number: 10333, birth_date: Date.today, gender: 'M', admin: false, password: 'Salasana1', password_confirmation: 'Salasana1', active: true)
 @User10333.save
 Result.new(name: 'Niklas Nyman', city: 'Helsinki', group: 'KK Länsi-Uusimaa 3', year: 2014, series: 'M', kk_number: '10333').save
@@ -5822,7 +6525,11 @@ Result.new(name: 'Vesa Vainio', city: 'Helsinki', group: nil, year: 2014, series
 @Enrollment103344 = Enrollment.new(user_id: @User10334.id, event_id: @Event4.id, time:10111)
 @Enrollment103344.save
 EnrollmentData.new(enrollment_id: @Enrollment103344.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment103344.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment103344.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment103344.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment103344.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment103344.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment103344.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 @User10335 = User.new(postal_code: '00100', city: 'Helsinki', first_name: 'Magnus', last_name: 'Hellström', username: 'user10335', email: 'user10335@test.com', phone_number: 12345, street_address: 'Katuosoite', kk_number: 10335, birth_date: Date.today, gender: 'M', admin: false, password: 'Salasana1', password_confirmation: 'Salasana1', active: true)
 @User10335.save
 Result.new(name: 'Magnus Hellström', city: 'Helsinki', group: 'KK Länsi-Uusimaa 3', year: 2014, series: 'M', kk_number: '10335').save
@@ -5835,7 +6542,11 @@ Result.new(name: 'Marko Ollikainen', city: 'Helsinki', group: nil, year: 2014, s
 @Enrollment103364 = Enrollment.new(user_id: @User10336.id, event_id: @Event4.id, time:10563)
 @Enrollment103364.save
 EnrollmentData.new(enrollment_id: @Enrollment103364.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment103364.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment103364.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment103364.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment103364.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment103364.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment103364.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 @User10337 = User.new(postal_code: '00100', city: 'Helsinki', first_name: 'Tuomas', last_name: 'Hakkarainen', username: 'user10337', email: 'user10337@test.com', phone_number: 12345, street_address: 'Katuosoite', kk_number: 10337, birth_date: Date.today, gender: 'M', admin: false, password: 'Salasana1', password_confirmation: 'Salasana1', active: true)
 @User10337.save
 Result.new(name: 'Tuomas Hakkarainen', city: 'Helsinki', group: nil, year: 2014, series: 'M', kk_number: '10337').save
@@ -5848,10 +6559,14 @@ Result.new(name: 'Voitto Jetsonen', city: 'Helsinki', group: nil, year: 2014, se
 @Enrollment103384 = Enrollment.new(user_id: @User10338.id, event_id: @Event4.id, time:10799)
 @Enrollment103384.save
 EnrollmentData.new(enrollment_id: @Enrollment103384.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment103384.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment103384.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment103384.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment103384.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment103384.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment103384.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 @User10339 = User.new(postal_code: '00100', city: 'Helsinki', first_name: 'Jari', last_name: 'Mäkinen', username: 'user10339', email: 'user10339@test.com', phone_number: 12345, street_address: 'Katuosoite', kk_number: 10339, birth_date: Date.today, gender: 'M', admin: false, password: 'Salasana1', password_confirmation: 'Salasana1', active: true)
 @User10339.save
-Result.new(name: 'Jari Mäkinen', city: 'Helsinki', group: 'Hitaat 1', year: 2014, series: 'M40', kk_number: '10339').save
+Result.new(name: 'Jari Mäkinen', city: 'Helsinki', group: 'Hitaat 1', year: 2014, series: 'M45', kk_number: '10339').save
 @Enrollment103391 = Enrollment.new(user_id: @User10339.id, event_id: @Event1.id, time:3664)
 @Enrollment103391.save
 EnrollmentData.new(enrollment_id: @Enrollment103391.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -5861,14 +6576,22 @@ Result.new(name: 'Tuija Kilpeläinen', city: 'Helsinki', group: nil, year: 2014,
 @Enrollment103404 = Enrollment.new(user_id: @User10340.id, event_id: @Event4.id, time:10982)
 @Enrollment103404.save
 EnrollmentData.new(enrollment_id: @Enrollment103404.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment103404.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment103404.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment103404.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment103404.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment103404.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment103404.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 @User10341 = User.new(postal_code: '00100', city: 'Helsinki', first_name: 'Ulla', last_name: 'Yrjölä', username: 'user10341', email: 'user10341@test.com', phone_number: 12345, street_address: 'Katuosoite', kk_number: 10341, birth_date: Date.today, gender: 'N', admin: false, password: 'Salasana1', password_confirmation: 'Salasana1', active: true)
 @User10341.save
 Result.new(name: 'Ulla Yrjölä', city: 'Helsinki', group: nil, year: 2014, series: 'N', kk_number: '10341').save
 @Enrollment103414 = Enrollment.new(user_id: @User10341.id, event_id: @Event4.id, time:10982)
 @Enrollment103414.save
 EnrollmentData.new(enrollment_id: @Enrollment103414.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment103414.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment103414.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment103414.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment103414.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment103414.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment103414.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 @User10342 = User.new(postal_code: '00100', city: 'Helsinki', first_name: 'Petri', last_name: 'Koponen', username: 'user10342', email: 'user10342@test.com', phone_number: 12345, street_address: 'Katuosoite', kk_number: 10342, birth_date: Date.today, gender: 'M', admin: false, password: 'Salasana1', password_confirmation: 'Salasana1', active: true)
 @User10342.save
 Result.new(name: 'Petri Koponen', city: 'Helsinki', group: 'GSK', year: 2014, series: 'M', kk_number: '10342').save
@@ -5905,7 +6628,11 @@ Result.new(name: 'Kirsi Hiljanen', city: 'Helsinki', group: nil, year: 2014, ser
 @Enrollment103474 = Enrollment.new(user_id: @User10347.id, event_id: @Event4.id, time:10241)
 @Enrollment103474.save
 EnrollmentData.new(enrollment_id: @Enrollment103474.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment103474.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment103474.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment103474.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment103474.id, name: 'Parin sukupuoli', value: 'M', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment103474.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment103474.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 @User10348 = User.new(postal_code: '00100', city: 'Helsinki', first_name: 'Markku', last_name: 'Huotari', username: 'user10348', email: 'user10348@test.com', phone_number: 12345, street_address: 'Katuosoite', kk_number: 10348, birth_date: Date.today, gender: 'M', admin: false, password: 'Salasana1', password_confirmation: 'Salasana1', active: true)
 @User10348.save
 Result.new(name: 'Markku Huotari', city: 'Helsinki', group: 'Otaniemen Jyllääjät II', year: 2014, series: 'M40', kk_number: '10348').save
@@ -5930,13 +6657,17 @@ Result.new(name: 'Mauri Saarinen', city: 'Helsinki', group: nil, year: 2014, ser
 @Enrollment103511 = Enrollment.new(user_id: @User10351.id, event_id: @Event1.id, time:4079)
 @Enrollment103511.save
 EnrollmentData.new(enrollment_id: @Enrollment103511.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
-@User10352 = User.new(postal_code: '00100', city: 'Helsinki', first_name: 'Lasse', last_name: 'Lastuvuori', username: 'user10352', email: 'user10352@test.com', phone_number: 12345, street_address: 'Katuosoite', kk_number: 10352, birth_date: Date.today, gender: 'M', admin: false, password: 'Salasana1', password_confirmation: 'Salasana1', active: true)
+@User10352 = User.new(postal_code: '00100', city: 'Helsinki', first_name: 'Lasse', last_name: 'LastuVuorori', username: 'user10352', email: 'user10352@test.com', phone_number: 12345, street_address: 'Katuosoite', kk_number: 10352, birth_date: Date.today, gender: 'M', admin: false, password: 'Salasana1', password_confirmation: 'Salasana1', active: true)
 @User10352.save
-Result.new(name: 'Lasse Lastuvuori', city: 'Helsinki', group: nil, year: 2014, series: 'M65', kk_number: '10352').save
+Result.new(name: 'Lasse LastuVuorori', city: 'Helsinki', group: nil, year: 2014, series: 'M65', kk_number: '10352').save
 @Enrollment103524 = Enrollment.new(user_id: @User10352.id, event_id: @Event4.id, time:11864)
 @Enrollment103524.save
 EnrollmentData.new(enrollment_id: @Enrollment103524.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment103524.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment103524.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment103524.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment103524.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment103524.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment103524.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 @User10353 = User.new(postal_code: '00100', city: 'Helsinki', first_name: 'Mika', last_name: 'Nieminen', username: 'user10353', email: 'user10353@test.com', phone_number: 12345, street_address: 'Katuosoite', kk_number: 10353, birth_date: Date.today, gender: 'M', admin: false, password: 'Salasana1', password_confirmation: 'Salasana1', active: true)
 @User10353.save
 Result.new(name: 'Mika Nieminen', city: 'Helsinki', group: 'KK Länsi-Uusimaa 3', year: 2014, series: 'M', kk_number: '10353').save
@@ -5949,7 +6680,11 @@ Result.new(name: 'Kirsi Ruohtula', city: 'Helsinki', group: nil, year: 2014, ser
 @Enrollment103544 = Enrollment.new(user_id: @User10354.id, event_id: @Event4.id, time:12117)
 @Enrollment103544.save
 EnrollmentData.new(enrollment_id: @Enrollment103544.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment103544.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment103544.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment103544.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment103544.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment103544.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment103544.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 @User10355 = User.new(postal_code: '00100', city: 'Helsinki', first_name: 'Petteri', last_name: 'Sandell', username: 'user10355', email: 'user10355@test.com', phone_number: 12345, street_address: 'Katuosoite', kk_number: 10355, birth_date: Date.today, gender: 'M', admin: false, password: 'Salasana1', password_confirmation: 'Salasana1', active: true)
 @User10355.save
 Result.new(name: 'Petteri Sandell', city: 'Helsinki', group: 'Pajulahti', year: 2014, series: 'M40', kk_number: '10355').save
@@ -5958,7 +6693,7 @@ Result.new(name: 'Petteri Sandell', city: 'Helsinki', group: 'Pajulahti', year: 
 EnrollmentData.new(enrollment_id: @Enrollment103551.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
 @User10356 = User.new(postal_code: '00100', city: 'Helsinki', first_name: 'Maria', last_name: 'Sovasto', username: 'user10356', email: 'user10356@test.com', phone_number: 12345, street_address: 'Katuosoite', kk_number: 10356, birth_date: Date.today, gender: 'N', admin: false, password: 'Salasana1', password_confirmation: 'Salasana1', active: true)
 @User10356.save
-Result.new(name: 'Maria Sovasto', city: 'Helsinki', group: 'Selän Sitkeät Seireenit', year: 2014, series: 'N40', kk_number: '10356').save
+Result.new(name: 'Maria Sovasto', city: 'Helsinki', group: 'Selän Sitkeät Seireenit', year: 2014, series: 'N45', kk_number: '10356').save
 @Enrollment103561 = Enrollment.new(user_id: @User10356.id, event_id: @Event1.id, time:4237)
 @Enrollment103561.save
 EnrollmentData.new(enrollment_id: @Enrollment103561.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -5986,7 +6721,11 @@ Result.new(name: 'Petri Meronen', city: 'Helsinki', group: nil, year: 2014, seri
 @Enrollment103604 = Enrollment.new(user_id: @User10360.id, event_id: @Event4.id, time:12310)
 @Enrollment103604.save
 EnrollmentData.new(enrollment_id: @Enrollment103604.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment103604.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment103604.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment103604.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment103604.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment103604.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment103604.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 @User10361 = User.new(postal_code: '00100', city: 'Helsinki', first_name: 'Jaana', last_name: 'Kukkonen-Niinistö', username: 'user10361', email: 'user10361@test.com', phone_number: 12345, street_address: 'Katuosoite', kk_number: 10361, birth_date: Date.today, gender: 'N', admin: false, password: 'Salasana1', password_confirmation: 'Salasana1', active: true)
 @User10361.save
 Result.new(name: 'Jaana Kukkonen-Niinistö', city: 'Helsinki', group: nil, year: 2014, series: 'N50', kk_number: '10361').save
@@ -6017,7 +6756,11 @@ Result.new(name: 'Päivi Puntila', city: 'Helsinki', group: nil, year: 2014, ser
 @Enrollment103654 = Enrollment.new(user_id: @User10365.id, event_id: @Event4.id, time:12649)
 @Enrollment103654.save
 EnrollmentData.new(enrollment_id: @Enrollment103654.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment103654.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment103654.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment103654.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment103654.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment103654.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment103654.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 @User10366 = User.new(postal_code: '00100', city: 'Helsinki', first_name: 'Lassi', last_name: 'Johansson', username: 'user10366', email: 'user10366@test.com', phone_number: 12345, street_address: 'Katuosoite', kk_number: 10366, birth_date: Date.today, gender: 'M', admin: false, password: 'Salasana1', password_confirmation: 'Salasana1', active: true)
 @User10366.save
 Result.new(name: 'Lassi Johansson', city: 'Helsinki', group: nil, year: 2014, series: 'M', kk_number: '10366').save
@@ -6066,7 +6809,11 @@ Result.new(name: 'Matti Nieminen', city: 'Helsinki', group: nil, year: 2014, ser
 @Enrollment103734 = Enrollment.new(user_id: @User10373.id, event_id: @Event4.id, time:13932)
 @Enrollment103734.save
 EnrollmentData.new(enrollment_id: @Enrollment103734.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment103734.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment103734.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment103734.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment103734.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment103734.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment103734.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 @User10374 = User.new(postal_code: '00100', city: 'Helsinki', first_name: 'Mari', last_name: 'Hjelt', username: 'user10374', email: 'user10374@test.com', phone_number: 12345, street_address: 'Katuosoite', kk_number: 10374, birth_date: Date.today, gender: 'N', admin: false, password: 'Salasana1', password_confirmation: 'Salasana1', active: true)
 @User10374.save
 Result.new(name: 'Mari Hjelt', city: 'Helsinki', group: nil, year: 2014, series: 'N40', kk_number: '10374').save
@@ -6087,7 +6834,7 @@ Result.new(name: 'Markku Kouhia', city: 'Helsinki', group: 'Hitaat 2', year: 201
 EnrollmentData.new(enrollment_id: @Enrollment103761.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
 @User10377 = User.new(postal_code: '00100', city: 'Helsinki', first_name: 'Ville', last_name: 'Syrjänen', username: 'user10377', email: 'user10377@test.com', phone_number: 12345, street_address: 'Katuosoite', kk_number: 10377, birth_date: Date.today, gender: 'M', admin: false, password: 'Salasana1', password_confirmation: 'Salasana1', active: true)
 @User10377.save
-Result.new(name: 'Ville Syrjänen', city: 'Helsinki', group: nil, year: 2014, series: 'M40', kk_number: '10377').save
+Result.new(name: 'Ville Syrjänen', city: 'Helsinki', group: nil, year: 2014, series: 'M45', kk_number: '10377').save
 @Enrollment103772 = Enrollment.new(user_id: @User10377.id, event_id: @Event2.id, time:17372)
 @Enrollment103772.save
 EnrollmentData.new(enrollment_id: @Enrollment103772.id, name: 'Tyyli', value: 'Perinteinen', attribute_index: 1).save
@@ -6109,14 +6856,18 @@ Result.new(name: 'Risto Viitanen', city: 'Helsinki', group: 'Tuusulan Tallaajat 
 @Enrollment103804 = Enrollment.new(user_id: @User10380.id, event_id: @Event4.id, time:14544)
 @Enrollment103804.save
 EnrollmentData.new(enrollment_id: @Enrollment103804.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment103804.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment103804.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment103804.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
+EnrollmentData.new(enrollment_id: @Enrollment103804.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment103804.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment103804.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 @User10381 = User.new(postal_code: '00100', city: 'Helsinki', first_name: 'Katri', last_name: 'Suppula', username: 'user10381', email: 'user10381@test.com', phone_number: 12345, street_address: 'Katuosoite', kk_number: 10381, birth_date: Date.today, gender: 'N', admin: false, password: 'Salasana1', password_confirmation: 'Salasana1', active: true)
 @User10381.save
-Result.new(name: 'Katri Suppula', city: 'Helsinki', group: 'Selän sitkeät ruostumattomat', year: 2014, series: 'N40', kk_number: '10381').save
+Result.new(name: 'Katri Suppula', city: 'Helsinki', group: 'Selän sitkeät ruostumattomat', year: 2014, series: 'N45', kk_number: '10381').save
 @Enrollment103814 = Enrollment.new(user_id: @User10381.id, event_id: @Event4.id, time:15297)
 @Enrollment103814.save
 EnrollmentData.new(enrollment_id: @Enrollment103814.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
-EnrollmentData.new(enrollment_id: @Enrollment103814.id, name: 'Parin nimi', value: '', attribute_index: 2).save
+EnrollmentData.new(enrollment_id: @Enrollment103814.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 @User10382 = User.new(postal_code: '00100', city: 'Helsinki', first_name: 'Matti', last_name: 'Vesala', username: 'user10382', email: 'user10382@test.com', phone_number: 12345, street_address: 'Katuosoite', kk_number: 10382, birth_date: Date.today, gender: 'M', admin: false, password: 'Salasana1', password_confirmation: 'Salasana1', active: true)
 @User10382.save
 Result.new(name: 'Matti Vesala', city: 'Helsinki', group: nil, year: 2014, series: 'M', kk_number: '10382').save
