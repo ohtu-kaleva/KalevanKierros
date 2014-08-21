@@ -39,6 +39,8 @@ $font-family-sans-serif:  Arial, sans-serif;
 
 @import "bootstrap-sprockets";
 @import "bootstrap";
+@import "bootstrap/theme";
+
 @import "bootstrap/mixins";
 
 // Bootstrap body padding for fixed navbar
@@ -95,4 +97,13 @@ a:hover{
   color: #fff;
   text-align: center;
   padding-top: 4px;
+}
+
+@font-face {
+  font-family: 'Glyphicons Halflings';
+  src: font-path('glyphicons-halflings-regular.eot');
+  src: font-path('glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'),
+  font-path('glyphicons-halflings-regular.woff') format('woff'),
+  font-path('glyphicons-halflings-regular.ttf') format('truetype'),
+  font-path('glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
 }
