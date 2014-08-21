@@ -34,4 +34,9 @@ describe StatisticsController do
     post :update_statistics, year: '2014'
     expect(Statistic.first.pts_sum).to eq 200
   end
+
+  it 'With non-existing user aborts joinining statistic' do
+    post :join, id: 74538
+    response.should_not redirect_to root_path
+  end
 end
