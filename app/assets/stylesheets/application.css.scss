@@ -31,13 +31,13 @@ $link-hover-color:      white !default;
 $headings-color:        #000;
 $font-family-sans-serif:  Arial, sans-serif;
 
-@import "bootstrap-sprockets";
 // First import journal variables
 @import "bootswatch/cerulean/variables";
 
 // Then bootstrap itself
 //#@import 'bootstrap/glyphicons';
 
+@import "bootstrap-sprockets";
 @import "bootstrap";
 @import "bootstrap/mixins";
 
