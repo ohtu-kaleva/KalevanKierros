@@ -1,5 +1,6 @@
 require 'spec_helper'
 
 describe Uutiset do
-  pending "add some examples to (or delete) #{__FILE__}"
+  uutinen = Uutiset.create!(:title => "test attr")
+  uutinen.to_param.should == [uutinen.id,"test-attr"].join("-")
 end
