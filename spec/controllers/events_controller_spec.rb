@@ -1,46 +1,62 @@
 require 'spec_helper'
 
-include SigninHelper
-
 describe EventsController do
+  def valid_session
+    controller.stub(:authorize).and_return(User)
+  end
 
-  describe "GET #index" do
-    let!(:event) { FactoryGirl.create :event_with_attributes, name: 'Joku muu' }
+  describe "GET index" do
 
-    it "should render index page events" do
+    it "populates an array of events" do
+      event = FactoryGirl.create(:event_with_attributes)
       get :index
-      expect(response).to render_template('index')
+      expect(assigns(:events)).to eq([event])
     end
 
-    it "should populate an array of events" do
+    it "renders the correct template" do
       get :index
-      assigns(:events).should eq([event])
+      expect(response).to render_template(:index)
     end
+  end
+
+  describe "GET show" do
+
+    it "assigns the requested event" do
+      event = FactoryGirl.create(:event_with_attributes)
+      get :show, id: event
+      expect(assigns(:event)).to eq(event)
+    end
+
+    it "renders the correct template" do
+      get :show, id: FactoryGirl.create(:event_with_attributes)
+      expect(response).to render_template(:show)
+    end
+  end
+
+  describe "GET new" do
+
+    it "assings new event" do
+      get :new
+      expect(assigns(:event))
+    end
+
   end
 
   describe "POST #create" do
-
-    describe "with correct parameters" do
-      let!(:user) { FactoryGirl.create :user, username:'Tyhjis', password:"S4lainen", password_confirmation:"S4lainen", admin:true}
-
-      it "should redirect to created event" do
-        sign_in(username:"Tyhjis", password:"S4lainen")
-        post :create, event: correct_event_params
-
+      it "creates a new default event" do
+        post :create, event: { name: 'Default',
+                               sport_type: '',
+                               start_date: Date.today,
+                               end_date: Date.today + 1.week,
+                               second_end_date: Date.today + 2.weeks,
+                               description: 'Default test',
+                               open: true,
+                               price: 1000,
+                               second_price: 2000,
+                               penalty_factor: 1.0,
+                               rowing_penalty: 12.0,
+                               factor: 3500 }
       end
-
-      it "should create a new RunningEvent" do
-        sign_in(username:"Tyhjis", password:"S4lainen")
-        #puts Event.count
-        post :create, event: FactoryGirl.attributes_for(:event, name:'Maraton', sport_type:'RunningEvent', penalty_factor:2.3)
-        #puts Event.count
-      end
-
-    end
-
   end
 
-  def correct_event_params
-    params = {:name => 'testinimi', :start_date => Date.today + 3.days, :end_date => Date.today + 1.week, :second_end_date => Date.today + 2.week, :price => 1000, :second_price => 2000, :description => 'Kuvaus', :penalty_factor => 1.0, open:true}
-  end
 end
