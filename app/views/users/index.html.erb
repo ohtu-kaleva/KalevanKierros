@@ -1,6 +1,19 @@
 <div class="col-lg-12">
   <h1>Rekisteröityneet käyttäjät</h1>
 
+      <div class="ts-pager form-horizontal">
+        <button type="button" class="btn first"><i class="icon-step-backward glyphicon glyphicon-step-backward"></i></button>
+        <button type="button" class="btn prev"><i class="icon-arrow-left glyphicon glyphicon-backward"></i></button>
+        <span class="pagedisplay"></span> <!-- this can be any element, including an input -->
+        <button type="button" class="btn next"><i class="icon-arrow-right glyphicon glyphicon-forward"></i></button>
+        <button type="button" class="btn last"><i class="icon-step-forward glyphicon glyphicon-step-forward"></i></button>
+        Näytä: <select class="pagesize input-mini form-control" title="Select page size">
+        <option selected="selected" value="50">50</option>
+        <option value="100">100</option>
+      </select>
+        Sivu: <select class="pagenum input-mini form-control " title="Select page number"></select>
+</div>
+  <br/>
   <table id="users" class="table table-striped tablesorter-blue">
     <thead>
     <tr>
@@ -8,9 +21,16 @@
       <th>Etunimi</th>
       <th>Käyttäjänimi</th>
       <th>Sähköposti</th>
-      <th colspan="4"></th>
+      <th></th>
     </tr>
     </thead>
+    <tfoot>
+    <th>Sukunimi</th>
+    <th>Etunimi</th>
+    <th>Käyttäjänimi</th>
+    <th>Sähköposti</th>
+    <th></th>
+    </tfoot>
 
     <tbody>
     <% @users.each do |user| %>
@@ -19,22 +39,77 @@
           <td><%= user.first_name %></td>
           <td><%= user.username %></td>
           <td><%= user.email %></td>
-          <td><%= link_to 'Näytä', user, class: "btn btn-primary btn-sm" %></td>
-          <td><%= link_to 'Liitä tilastoon', join_statistic_path(user), :'data-no-turbolink' => true, class: "btn btn-primary btn-sm" %></td>
-          <td><%= link_to 'Muokkaa', edit_user_path(user), class: "btn btn-warning btn-sm" %></td>
-          <td><%= link_to 'Poista', user, method: :delete, data: {confirm: 'Are you sure?' }, class: "btn btn-danger btn-sm" %></td>
+          <td style="min-width: 350px; text-align: center;"><%= link_to 'Näytä', user, class: "btn btn-primary btn-sm" %>
+          <%= link_to 'Liitä tilastoon', join_statistic_path(user), :'data-no-turbolink' => true, class: "btn btn-primary btn-sm" %>
+          <%= link_to 'Muokkaa', edit_user_path(user), class: "btn btn-warning btn-sm" %>
+          <%= link_to 'Poista', user, method: :delete, data: {confirm: 'Are you sure?' }, class: "btn btn-danger btn-sm" %></td>
         </tr>
     <% end %>
     </tbody>
   </table>
+<br/>
+                        <div class="ts-pager form-horizontal">
+                          <button type="button" class="btn first"><i class="icon-step-backward glyphicon glyphicon-step-backward"></i></button>
+                          <button type="button" class="btn prev"><i class="icon-arrow-left glyphicon glyphicon-backward"></i></button>
+                          <span class="pagedisplay"></span> <!-- this can be any element, including an input -->
+                          <button type="button" class="btn next"><i class="icon-arrow-right glyphicon glyphicon-forward"></i></button>
+                          <button type="button" class="btn last"><i class="icon-step-forward glyphicon glyphicon-step-forward"></i></button>
+                          Näytä: <select class="pagesize input-mini form-control" title="Select page size">
+                          <option selected="selected" value="50">50</option>
+                          <option value="100">100</option>
+                        </select>
+                          Sivu: <select class="pagenum input-mini form-control " title="Select page number"></select>
+                        </div>
+                        <style type="text/css">select.form-control{max-width: 70px; display: inline;}</style>
 
-  <script type="text/javascript">
+            <script type="text/javascript">
 
-      $(document).ready(function () {
-                  $("#users").tablesorter( {headers: {4: {sorter:false}}});
-              }
-      );
-  </script>
+                $(document).ready(function () {
+                            $.extend($.tablesorter.themes.bootstrap, {
+                                // these classes are added to the table. To see other table classes available,
+                                // look here: http://twitter.github.com/bootstrap/base-css.html#tables
+                                table      : 'table table-bordered',
+                                caption    : 'caption',
+                                header     : 'bootstrap-header', // give the header a gradient background
+                                footerRow  : '',
+                                footerCells: '',
+                                icons      : '', // add "icon-white" to make them white; this icon class is added to the <i> in the header
+                                sortNone   : 'bootstrap-icon-unsorted',
+                                sortAsc    : 'icon-chevron-up glyphicon glyphicon-chevron-up',     // includes classes for Bootstrap v2 & v3
+                                sortDesc   : 'icon-chevron-down glyphicon glyphicon-chevron-down', // includes classes for Bootstrap v2 & v3
+                                active     : '', // applied when column is sorted
+                                hover      : '', // use custom css here - bootstrap class may not override it
+                                filterRow  : '', // filter row class
+                                even       : '', // odd row zebra striping
+                                odd        : ''  // even row zebra striping
+                            });
+
+                            $("#users").tablesorter({
+                                headers: {4: {sorter:false, filter:false} },
+                                theme : "bootstrap",
+                                headerTemplate : '{content} {icon}',
+                                widgets : [ "uitheme", "filter" ]
+                            })
+                                    .tablesorterPager({
+
+                                        // target the pager markup - see the HTML block below
+                                        container: $(".ts-pager"),
+
+                                        // target the pager page select dropdown - choose a page
+                                        cssGoto: ".pagenum",
+
+                                        // remove rows from the table to speed up the sort of large tables.
+                                        // setting this to false, only hides the non-visible rows; needed if you plan to add/remove rows with the pager enabled.
+                                        removeRows: false,
+
+                                        // output string - default is '{page}/{totalPages}';
+                                        // possible variables: {page}, {totalPages}, {filteredPages}, {startRow}, {endRow}, {filteredRows} and {totalRows}
+                                        output: '{startRow} - {endRow} / {filteredRows} ({totalRows})'
+
+                                    });
+                        }
+                );
+            </script>
   <br>
 
   <%= link_to 'Luo uusi käyttäjä', new_user_path, class: "btn btn-primary" %>

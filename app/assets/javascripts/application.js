@@ -16,5 +16,6 @@
 // require turbolinks
 //= require bootstrap
 //= require jquery-tablesorter
+//= require jquery-tablesorter/addons/pager/jquery.tablesorter.pager
 //= require_tree .
 
