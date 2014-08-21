@@ -115,7 +115,7 @@ EnrollmentData.new(enrollment_id: @Enrollment100044.id, name: 'Melonta', value: 
 EnrollmentData.new(enrollment_id: @Enrollment100044.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment100044.id, name: 'Parin nimi', value: '', attribute_index: 3).save
 EnrollmentData.new(enrollment_id: @Enrollment100044.id, name: 'Parin sukupuoli', value: '', attribute_index: 4).save
-EnrollmentData.new(enrollment_id: @Enrollment100044.id, name: 'Parin syntymävuosi', value: '', attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment100044.id, name: 'Parin syntymävuosi', value: 0, attribute_index: 5).save
 EnrollmentData.new(enrollment_id: @Enrollment100044.id, name: 'Onko pari kiertäjä', value: '', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment100042.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100043.id, name: 'Tyyppi', value: 'maraton', attribute_index: 1).save
@@ -165,7 +165,7 @@ EnrollmentData.new(enrollment_id: @Enrollment100064.id, name: 'Melonta', value: 
 EnrollmentData.new(enrollment_id: @Enrollment100064.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment100064.id, name: 'Parin nimi', value: '', attribute_index: 3).save
 EnrollmentData.new(enrollment_id: @Enrollment100064.id, name: 'Parin sukupuoli', value: '', attribute_index: 4).save
-EnrollmentData.new(enrollment_id: @Enrollment100064.id, name: 'Parin syntymävuosi', value: '', attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment100064.id, name: 'Parin syntymävuosi', value: 0, attribute_index: 5).save
 EnrollmentData.new(enrollment_id: @Enrollment100064.id, name: 'Onko pari kiertäjä', value: '', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment100062.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100063.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
@@ -190,7 +190,7 @@ EnrollmentData.new(enrollment_id: @Enrollment100074.id, name: 'Melonta', value: 
 EnrollmentData.new(enrollment_id: @Enrollment100074.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment100074.id, name: 'Parin nimi', value: '', attribute_index: 3).save
 EnrollmentData.new(enrollment_id: @Enrollment100074.id, name: 'Parin sukupuoli', value: '', attribute_index: 4).save
-EnrollmentData.new(enrollment_id: @Enrollment100074.id, name: 'Parin syntymävuosi', value: '', attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment100074.id, name: 'Parin syntymävuosi', value: 0, attribute_index: 5).save
 EnrollmentData.new(enrollment_id: @Enrollment100074.id, name: 'Onko pari kiertäjä', value: '', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment100072.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100073.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
@@ -215,7 +215,7 @@ EnrollmentData.new(enrollment_id: @Enrollment100084.id, name: 'Melonta', value: 
 EnrollmentData.new(enrollment_id: @Enrollment100084.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment100084.id, name: 'Parin nimi', value: '', attribute_index: 3).save
 EnrollmentData.new(enrollment_id: @Enrollment100084.id, name: 'Parin sukupuoli', value: '', attribute_index: 4).save
-EnrollmentData.new(enrollment_id: @Enrollment100084.id, name: 'Parin syntymävuosi', value: '', attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment100084.id, name: 'Parin syntymävuosi', value: 0, attribute_index: 5).save
 EnrollmentData.new(enrollment_id: @Enrollment100084.id, name: 'Onko pari kiertäjä', value: '', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment100082.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100083.id, name: 'Tyyppi', value: 'maraton', attribute_index: 1).save
@@ -240,7 +240,7 @@ EnrollmentData.new(enrollment_id: @Enrollment100094.id, name: 'Melonta', value: 
 EnrollmentData.new(enrollment_id: @Enrollment100094.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment100094.id, name: 'Parin nimi', value: '', attribute_index: 3).save
 EnrollmentData.new(enrollment_id: @Enrollment100094.id, name: 'Parin sukupuoli', value: '', attribute_index: 4).save
-EnrollmentData.new(enrollment_id: @Enrollment100094.id, name: 'Parin syntymävuosi', value: '', attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment100094.id, name: 'Parin syntymävuosi', value: 0, attribute_index: 5).save
 EnrollmentData.new(enrollment_id: @Enrollment100094.id, name: 'Onko pari kiertäjä', value: '', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment100092.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100093.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
@@ -315,7 +315,7 @@ EnrollmentData.new(enrollment_id: @Enrollment100124.id, name: 'Melonta', value: 
 EnrollmentData.new(enrollment_id: @Enrollment100124.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment100124.id, name: 'Parin nimi', value: '', attribute_index: 3).save
 EnrollmentData.new(enrollment_id: @Enrollment100124.id, name: 'Parin sukupuoli', value: '', attribute_index: 4).save
-EnrollmentData.new(enrollment_id: @Enrollment100124.id, name: 'Parin syntymävuosi', value: '', attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment100124.id, name: 'Parin syntymävuosi', value: 0, attribute_index: 5).save
 EnrollmentData.new(enrollment_id: @Enrollment100124.id, name: 'Onko pari kiertäjä', value: '', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment100122.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100123.id, name: 'Tyyppi', value: 'maraton', attribute_index: 1).save
@@ -365,7 +365,7 @@ EnrollmentData.new(enrollment_id: @Enrollment100144.id, name: 'Melonta', value: 
 EnrollmentData.new(enrollment_id: @Enrollment100144.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment100144.id, name: 'Parin nimi', value: '', attribute_index: 3).save
 EnrollmentData.new(enrollment_id: @Enrollment100144.id, name: 'Parin sukupuoli', value: '', attribute_index: 4).save
-EnrollmentData.new(enrollment_id: @Enrollment100144.id, name: 'Parin syntymävuosi', value: '', attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment100144.id, name: 'Parin syntymävuosi', value: 0, attribute_index: 5).save
 EnrollmentData.new(enrollment_id: @Enrollment100144.id, name: 'Onko pari kiertäjä', value: '', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment100142.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100143.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
@@ -415,7 +415,7 @@ EnrollmentData.new(enrollment_id: @Enrollment100164.id, name: 'Melonta', value: 
 EnrollmentData.new(enrollment_id: @Enrollment100164.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment100164.id, name: 'Parin nimi', value: '', attribute_index: 3).save
 EnrollmentData.new(enrollment_id: @Enrollment100164.id, name: 'Parin sukupuoli', value: '', attribute_index: 4).save
-EnrollmentData.new(enrollment_id: @Enrollment100164.id, name: 'Parin syntymävuosi', value: '', attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment100164.id, name: 'Parin syntymävuosi', value: 0, attribute_index: 5).save
 EnrollmentData.new(enrollment_id: @Enrollment100164.id, name: 'Onko pari kiertäjä', value: '', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment100162.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100163.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
@@ -440,7 +440,7 @@ EnrollmentData.new(enrollment_id: @Enrollment100174.id, name: 'Melonta', value: 
 EnrollmentData.new(enrollment_id: @Enrollment100174.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment100174.id, name: 'Parin nimi', value: '', attribute_index: 3).save
 EnrollmentData.new(enrollment_id: @Enrollment100174.id, name: 'Parin sukupuoli', value: '', attribute_index: 4).save
-EnrollmentData.new(enrollment_id: @Enrollment100174.id, name: 'Parin syntymävuosi', value: '', attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment100174.id, name: 'Parin syntymävuosi', value: 0, attribute_index: 5).save
 EnrollmentData.new(enrollment_id: @Enrollment100174.id, name: 'Onko pari kiertäjä', value: '', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment100172.id, name: 'Tyyli', value: 'Perinteinen', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100173.id, name: 'Tyyppi', value: 'maraton', attribute_index: 1).save
@@ -465,7 +465,7 @@ EnrollmentData.new(enrollment_id: @Enrollment100184.id, name: 'Melonta', value: 
 EnrollmentData.new(enrollment_id: @Enrollment100184.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment100184.id, name: 'Parin nimi', value: '', attribute_index: 3).save
 EnrollmentData.new(enrollment_id: @Enrollment100184.id, name: 'Parin sukupuoli', value: '', attribute_index: 4).save
-EnrollmentData.new(enrollment_id: @Enrollment100184.id, name: 'Parin syntymävuosi', value: '', attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment100184.id, name: 'Parin syntymävuosi', value: 0, attribute_index: 5).save
 EnrollmentData.new(enrollment_id: @Enrollment100184.id, name: 'Onko pari kiertäjä', value: '', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment100182.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100183.id, name: 'Tyyppi', value: 'maraton', attribute_index: 1).save
@@ -490,7 +490,7 @@ EnrollmentData.new(enrollment_id: @Enrollment100194.id, name: 'Melonta', value: 
 EnrollmentData.new(enrollment_id: @Enrollment100194.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment100194.id, name: 'Parin nimi', value: '', attribute_index: 3).save
 EnrollmentData.new(enrollment_id: @Enrollment100194.id, name: 'Parin sukupuoli', value: '', attribute_index: 4).save
-EnrollmentData.new(enrollment_id: @Enrollment100194.id, name: 'Parin syntymävuosi', value: '', attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment100194.id, name: 'Parin syntymävuosi', value: 0, attribute_index: 5).save
 EnrollmentData.new(enrollment_id: @Enrollment100194.id, name: 'Onko pari kiertäjä', value: '', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment100192.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100193.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
@@ -565,7 +565,7 @@ EnrollmentData.new(enrollment_id: @Enrollment100224.id, name: 'Melonta', value: 
 EnrollmentData.new(enrollment_id: @Enrollment100224.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment100224.id, name: 'Parin nimi', value: '', attribute_index: 3).save
 EnrollmentData.new(enrollment_id: @Enrollment100224.id, name: 'Parin sukupuoli', value: '', attribute_index: 4).save
-EnrollmentData.new(enrollment_id: @Enrollment100224.id, name: 'Parin syntymävuosi', value: '', attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment100224.id, name: 'Parin syntymävuosi', value: 0, attribute_index: 5).save
 EnrollmentData.new(enrollment_id: @Enrollment100224.id, name: 'Onko pari kiertäjä', value: '', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment100222.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100223.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
@@ -590,7 +590,7 @@ EnrollmentData.new(enrollment_id: @Enrollment100234.id, name: 'Melonta', value: 
 EnrollmentData.new(enrollment_id: @Enrollment100234.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment100234.id, name: 'Parin nimi', value: '', attribute_index: 3).save
 EnrollmentData.new(enrollment_id: @Enrollment100234.id, name: 'Parin sukupuoli', value: '', attribute_index: 4).save
-EnrollmentData.new(enrollment_id: @Enrollment100234.id, name: 'Parin syntymävuosi', value: '', attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment100234.id, name: 'Parin syntymävuosi', value: 0, attribute_index: 5).save
 EnrollmentData.new(enrollment_id: @Enrollment100234.id, name: 'Onko pari kiertäjä', value: '', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment100232.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100233.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
@@ -815,7 +815,7 @@ EnrollmentData.new(enrollment_id: @Enrollment100324.id, name: 'Melonta', value: 
 EnrollmentData.new(enrollment_id: @Enrollment100324.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment100324.id, name: 'Parin nimi', value: '', attribute_index: 3).save
 EnrollmentData.new(enrollment_id: @Enrollment100324.id, name: 'Parin sukupuoli', value: '', attribute_index: 4).save
-EnrollmentData.new(enrollment_id: @Enrollment100324.id, name: 'Parin syntymävuosi', value: '', attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment100324.id, name: 'Parin syntymävuosi', value: 0, attribute_index: 5).save
 EnrollmentData.new(enrollment_id: @Enrollment100324.id, name: 'Onko pari kiertäjä', value: '', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment100322.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100323.id, name: 'Tyyppi', value: 'maraton', attribute_index: 1).save
@@ -865,7 +865,7 @@ EnrollmentData.new(enrollment_id: @Enrollment100344.id, name: 'Melonta', value: 
 EnrollmentData.new(enrollment_id: @Enrollment100344.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment100344.id, name: 'Parin nimi', value: '', attribute_index: 3).save
 EnrollmentData.new(enrollment_id: @Enrollment100344.id, name: 'Parin sukupuoli', value: '', attribute_index: 4).save
-EnrollmentData.new(enrollment_id: @Enrollment100344.id, name: 'Parin syntymävuosi', value: '', attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment100344.id, name: 'Parin syntymävuosi', value: 0, attribute_index: 5).save
 EnrollmentData.new(enrollment_id: @Enrollment100344.id, name: 'Onko pari kiertäjä', value: '', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment100342.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100343.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
@@ -890,7 +890,7 @@ EnrollmentData.new(enrollment_id: @Enrollment100354.id, name: 'Melonta', value: 
 EnrollmentData.new(enrollment_id: @Enrollment100354.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment100354.id, name: 'Parin nimi', value: '', attribute_index: 3).save
 EnrollmentData.new(enrollment_id: @Enrollment100354.id, name: 'Parin sukupuoli', value: '', attribute_index: 4).save
-EnrollmentData.new(enrollment_id: @Enrollment100354.id, name: 'Parin syntymävuosi', value: '', attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment100354.id, name: 'Parin syntymävuosi', value: 0, attribute_index: 5).save
 EnrollmentData.new(enrollment_id: @Enrollment100354.id, name: 'Onko pari kiertäjä', value: '', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment100352.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100353.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
@@ -915,7 +915,7 @@ EnrollmentData.new(enrollment_id: @Enrollment100364.id, name: 'Melonta', value: 
 EnrollmentData.new(enrollment_id: @Enrollment100364.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment100364.id, name: 'Parin nimi', value: '', attribute_index: 3).save
 EnrollmentData.new(enrollment_id: @Enrollment100364.id, name: 'Parin sukupuoli', value: '', attribute_index: 4).save
-EnrollmentData.new(enrollment_id: @Enrollment100364.id, name: 'Parin syntymävuosi', value: '', attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment100364.id, name: 'Parin syntymävuosi', value: 0, attribute_index: 5).save
 EnrollmentData.new(enrollment_id: @Enrollment100364.id, name: 'Onko pari kiertäjä', value: '', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment100362.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100363.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
@@ -965,7 +965,7 @@ EnrollmentData.new(enrollment_id: @Enrollment100384.id, name: 'Melonta', value: 
 EnrollmentData.new(enrollment_id: @Enrollment100384.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment100384.id, name: 'Parin nimi', value: '', attribute_index: 3).save
 EnrollmentData.new(enrollment_id: @Enrollment100384.id, name: 'Parin sukupuoli', value: '', attribute_index: 4).save
-EnrollmentData.new(enrollment_id: @Enrollment100384.id, name: 'Parin syntymävuosi', value: '', attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment100384.id, name: 'Parin syntymävuosi', value: 0, attribute_index: 5).save
 EnrollmentData.new(enrollment_id: @Enrollment100384.id, name: 'Onko pari kiertäjä', value: '', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment100382.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100383.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
@@ -990,7 +990,7 @@ EnrollmentData.new(enrollment_id: @Enrollment100394.id, name: 'Melonta', value: 
 EnrollmentData.new(enrollment_id: @Enrollment100394.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment100394.id, name: 'Parin nimi', value: '', attribute_index: 3).save
 EnrollmentData.new(enrollment_id: @Enrollment100394.id, name: 'Parin sukupuoli', value: '', attribute_index: 4).save
-EnrollmentData.new(enrollment_id: @Enrollment100394.id, name: 'Parin syntymävuosi', value: '', attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment100394.id, name: 'Parin syntymävuosi', value: 0, attribute_index: 5).save
 EnrollmentData.new(enrollment_id: @Enrollment100394.id, name: 'Onko pari kiertäjä', value: '', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment100392.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100393.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
@@ -1040,7 +1040,7 @@ EnrollmentData.new(enrollment_id: @Enrollment100414.id, name: 'Melonta', value: 
 EnrollmentData.new(enrollment_id: @Enrollment100414.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment100414.id, name: 'Parin nimi', value: '', attribute_index: 3).save
 EnrollmentData.new(enrollment_id: @Enrollment100414.id, name: 'Parin sukupuoli', value: '', attribute_index: 4).save
-EnrollmentData.new(enrollment_id: @Enrollment100414.id, name: 'Parin syntymävuosi', value: '', attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment100414.id, name: 'Parin syntymävuosi', value: 0, attribute_index: 5).save
 EnrollmentData.new(enrollment_id: @Enrollment100414.id, name: 'Onko pari kiertäjä', value: '', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment100412.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100413.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
@@ -1165,7 +1165,7 @@ EnrollmentData.new(enrollment_id: @Enrollment100464.id, name: 'Melonta', value: 
 EnrollmentData.new(enrollment_id: @Enrollment100464.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment100464.id, name: 'Parin nimi', value: '', attribute_index: 3).save
 EnrollmentData.new(enrollment_id: @Enrollment100464.id, name: 'Parin sukupuoli', value: '', attribute_index: 4).save
-EnrollmentData.new(enrollment_id: @Enrollment100464.id, name: 'Parin syntymävuosi', value: '', attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment100464.id, name: 'Parin syntymävuosi', value: 0, attribute_index: 5).save
 EnrollmentData.new(enrollment_id: @Enrollment100464.id, name: 'Onko pari kiertäjä', value: '', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment100462.id, name: 'Tyyli', value: 'Perinteinen', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100463.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
@@ -1190,7 +1190,7 @@ EnrollmentData.new(enrollment_id: @Enrollment100474.id, name: 'Melonta', value: 
 EnrollmentData.new(enrollment_id: @Enrollment100474.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment100474.id, name: 'Parin nimi', value: '', attribute_index: 3).save
 EnrollmentData.new(enrollment_id: @Enrollment100474.id, name: 'Parin sukupuoli', value: '', attribute_index: 4).save
-EnrollmentData.new(enrollment_id: @Enrollment100474.id, name: 'Parin syntymävuosi', value: '', attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment100474.id, name: 'Parin syntymävuosi', value: 0, attribute_index: 5).save
 EnrollmentData.new(enrollment_id: @Enrollment100474.id, name: 'Onko pari kiertäjä', value: '', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment100472.id, name: 'Tyyli', value: 'Perinteinen', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100473.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
@@ -1240,7 +1240,7 @@ EnrollmentData.new(enrollment_id: @Enrollment100494.id, name: 'Melonta', value: 
 EnrollmentData.new(enrollment_id: @Enrollment100494.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment100494.id, name: 'Parin nimi', value: '', attribute_index: 3).save
 EnrollmentData.new(enrollment_id: @Enrollment100494.id, name: 'Parin sukupuoli', value: '', attribute_index: 4).save
-EnrollmentData.new(enrollment_id: @Enrollment100494.id, name: 'Parin syntymävuosi', value: '', attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment100494.id, name: 'Parin syntymävuosi', value: 0, attribute_index: 5).save
 EnrollmentData.new(enrollment_id: @Enrollment100494.id, name: 'Onko pari kiertäjä', value: '', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment100492.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100493.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
@@ -1390,7 +1390,7 @@ EnrollmentData.new(enrollment_id: @Enrollment100554.id, name: 'Melonta', value: 
 EnrollmentData.new(enrollment_id: @Enrollment100554.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment100554.id, name: 'Parin nimi', value: '', attribute_index: 3).save
 EnrollmentData.new(enrollment_id: @Enrollment100554.id, name: 'Parin sukupuoli', value: '', attribute_index: 4).save
-EnrollmentData.new(enrollment_id: @Enrollment100554.id, name: 'Parin syntymävuosi', value: '', attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment100554.id, name: 'Parin syntymävuosi', value: 0, attribute_index: 5).save
 EnrollmentData.new(enrollment_id: @Enrollment100554.id, name: 'Onko pari kiertäjä', value: '', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment100552.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100553.id, name: 'Tyyppi', value: 'maraton', attribute_index: 1).save
@@ -1440,7 +1440,7 @@ EnrollmentData.new(enrollment_id: @Enrollment100574.id, name: 'Melonta', value: 
 EnrollmentData.new(enrollment_id: @Enrollment100574.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment100574.id, name: 'Parin nimi', value: '', attribute_index: 3).save
 EnrollmentData.new(enrollment_id: @Enrollment100574.id, name: 'Parin sukupuoli', value: '', attribute_index: 4).save
-EnrollmentData.new(enrollment_id: @Enrollment100574.id, name: 'Parin syntymävuosi', value: '', attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment100574.id, name: 'Parin syntymävuosi', value: 0, attribute_index: 5).save
 EnrollmentData.new(enrollment_id: @Enrollment100574.id, name: 'Onko pari kiertäjä', value: '', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment100572.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100573.id, name: 'Tyyppi', value: 'maraton', attribute_index: 1).save
@@ -1515,7 +1515,7 @@ EnrollmentData.new(enrollment_id: @Enrollment100604.id, name: 'Melonta', value: 
 EnrollmentData.new(enrollment_id: @Enrollment100604.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment100604.id, name: 'Parin nimi', value: '', attribute_index: 3).save
 EnrollmentData.new(enrollment_id: @Enrollment100604.id, name: 'Parin sukupuoli', value: '', attribute_index: 4).save
-EnrollmentData.new(enrollment_id: @Enrollment100604.id, name: 'Parin syntymävuosi', value: '', attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment100604.id, name: 'Parin syntymävuosi', value: 0, attribute_index: 5).save
 EnrollmentData.new(enrollment_id: @Enrollment100604.id, name: 'Onko pari kiertäjä', value: '', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment100602.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100603.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
@@ -1540,7 +1540,7 @@ EnrollmentData.new(enrollment_id: @Enrollment100614.id, name: 'Melonta', value: 
 EnrollmentData.new(enrollment_id: @Enrollment100614.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment100614.id, name: 'Parin nimi', value: '', attribute_index: 3).save
 EnrollmentData.new(enrollment_id: @Enrollment100614.id, name: 'Parin sukupuoli', value: '', attribute_index: 4).save
-EnrollmentData.new(enrollment_id: @Enrollment100614.id, name: 'Parin syntymävuosi', value: '', attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment100614.id, name: 'Parin syntymävuosi', value: 0, attribute_index: 5).save
 EnrollmentData.new(enrollment_id: @Enrollment100614.id, name: 'Onko pari kiertäjä', value: '', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment100612.id, name: 'Tyyli', value: 'Perinteinen', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100613.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
@@ -1565,7 +1565,7 @@ EnrollmentData.new(enrollment_id: @Enrollment100624.id, name: 'Melonta', value: 
 EnrollmentData.new(enrollment_id: @Enrollment100624.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment100624.id, name: 'Parin nimi', value: '', attribute_index: 3).save
 EnrollmentData.new(enrollment_id: @Enrollment100624.id, name: 'Parin sukupuoli', value: '', attribute_index: 4).save
-EnrollmentData.new(enrollment_id: @Enrollment100624.id, name: 'Parin syntymävuosi', value: '', attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment100624.id, name: 'Parin syntymävuosi', value: 0, attribute_index: 5).save
 EnrollmentData.new(enrollment_id: @Enrollment100624.id, name: 'Onko pari kiertäjä', value: '', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment100622.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100623.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
@@ -1590,7 +1590,7 @@ EnrollmentData.new(enrollment_id: @Enrollment100634.id, name: 'Melonta', value: 
 EnrollmentData.new(enrollment_id: @Enrollment100634.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment100634.id, name: 'Parin nimi', value: '', attribute_index: 3).save
 EnrollmentData.new(enrollment_id: @Enrollment100634.id, name: 'Parin sukupuoli', value: '', attribute_index: 4).save
-EnrollmentData.new(enrollment_id: @Enrollment100634.id, name: 'Parin syntymävuosi', value: '', attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment100634.id, name: 'Parin syntymävuosi', value: 0, attribute_index: 5).save
 EnrollmentData.new(enrollment_id: @Enrollment100634.id, name: 'Onko pari kiertäjä', value: '', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment100632.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100633.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
@@ -1815,7 +1815,7 @@ EnrollmentData.new(enrollment_id: @Enrollment100724.id, name: 'Melonta', value: 
 EnrollmentData.new(enrollment_id: @Enrollment100724.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment100724.id, name: 'Parin nimi', value: '', attribute_index: 3).save
 EnrollmentData.new(enrollment_id: @Enrollment100724.id, name: 'Parin sukupuoli', value: '', attribute_index: 4).save
-EnrollmentData.new(enrollment_id: @Enrollment100724.id, name: 'Parin syntymävuosi', value: '', attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment100724.id, name: 'Parin syntymävuosi', value: 0, attribute_index: 5).save
 EnrollmentData.new(enrollment_id: @Enrollment100724.id, name: 'Onko pari kiertäjä', value: '', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment100722.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100723.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
@@ -1865,7 +1865,7 @@ EnrollmentData.new(enrollment_id: @Enrollment100744.id, name: 'Melonta', value: 
 EnrollmentData.new(enrollment_id: @Enrollment100744.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment100744.id, name: 'Parin nimi', value: '', attribute_index: 3).save
 EnrollmentData.new(enrollment_id: @Enrollment100744.id, name: 'Parin sukupuoli', value: '', attribute_index: 4).save
-EnrollmentData.new(enrollment_id: @Enrollment100744.id, name: 'Parin syntymävuosi', value: '', attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment100744.id, name: 'Parin syntymävuosi', value: 0, attribute_index: 5).save
 EnrollmentData.new(enrollment_id: @Enrollment100744.id, name: 'Onko pari kiertäjä', value: '', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment100742.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100743.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
@@ -1940,7 +1940,7 @@ EnrollmentData.new(enrollment_id: @Enrollment100774.id, name: 'Melonta', value: 
 EnrollmentData.new(enrollment_id: @Enrollment100774.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment100774.id, name: 'Parin nimi', value: '', attribute_index: 3).save
 EnrollmentData.new(enrollment_id: @Enrollment100774.id, name: 'Parin sukupuoli', value: '', attribute_index: 4).save
-EnrollmentData.new(enrollment_id: @Enrollment100774.id, name: 'Parin syntymävuosi', value: '', attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment100774.id, name: 'Parin syntymävuosi', value: 0, attribute_index: 5).save
 EnrollmentData.new(enrollment_id: @Enrollment100774.id, name: 'Onko pari kiertäjä', value: '', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment100772.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100773.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
@@ -1965,7 +1965,7 @@ EnrollmentData.new(enrollment_id: @Enrollment100784.id, name: 'Melonta', value: 
 EnrollmentData.new(enrollment_id: @Enrollment100784.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment100784.id, name: 'Parin nimi', value: '', attribute_index: 3).save
 EnrollmentData.new(enrollment_id: @Enrollment100784.id, name: 'Parin sukupuoli', value: '', attribute_index: 4).save
-EnrollmentData.new(enrollment_id: @Enrollment100784.id, name: 'Parin syntymävuosi', value: '', attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment100784.id, name: 'Parin syntymävuosi', value: 0, attribute_index: 5).save
 EnrollmentData.new(enrollment_id: @Enrollment100784.id, name: 'Onko pari kiertäjä', value: '', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment100782.id, name: 'Tyyli', value: 'Perinteinen', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100783.id, name: 'Tyyppi', value: 'maraton', attribute_index: 1).save
@@ -2065,7 +2065,7 @@ EnrollmentData.new(enrollment_id: @Enrollment100824.id, name: 'Melonta', value: 
 EnrollmentData.new(enrollment_id: @Enrollment100824.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment100824.id, name: 'Parin nimi', value: '', attribute_index: 3).save
 EnrollmentData.new(enrollment_id: @Enrollment100824.id, name: 'Parin sukupuoli', value: '', attribute_index: 4).save
-EnrollmentData.new(enrollment_id: @Enrollment100824.id, name: 'Parin syntymävuosi', value: '', attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment100824.id, name: 'Parin syntymävuosi', value: 0, attribute_index: 5).save
 EnrollmentData.new(enrollment_id: @Enrollment100824.id, name: 'Onko pari kiertäjä', value: '', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment100822.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100823.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
@@ -2090,7 +2090,7 @@ EnrollmentData.new(enrollment_id: @Enrollment100834.id, name: 'Melonta', value: 
 EnrollmentData.new(enrollment_id: @Enrollment100834.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment100834.id, name: 'Parin nimi', value: '', attribute_index: 3).save
 EnrollmentData.new(enrollment_id: @Enrollment100834.id, name: 'Parin sukupuoli', value: '', attribute_index: 4).save
-EnrollmentData.new(enrollment_id: @Enrollment100834.id, name: 'Parin syntymävuosi', value: '', attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment100834.id, name: 'Parin syntymävuosi', value: 0, attribute_index: 5).save
 EnrollmentData.new(enrollment_id: @Enrollment100834.id, name: 'Onko pari kiertäjä', value: '', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment100832.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100833.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
@@ -2315,7 +2315,7 @@ EnrollmentData.new(enrollment_id: @Enrollment100924.id, name: 'Melonta', value: 
 EnrollmentData.new(enrollment_id: @Enrollment100924.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment100924.id, name: 'Parin nimi', value: '', attribute_index: 3).save
 EnrollmentData.new(enrollment_id: @Enrollment100924.id, name: 'Parin sukupuoli', value: '', attribute_index: 4).save
-EnrollmentData.new(enrollment_id: @Enrollment100924.id, name: 'Parin syntymävuosi', value: '', attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment100924.id, name: 'Parin syntymävuosi', value: 0, attribute_index: 5).save
 EnrollmentData.new(enrollment_id: @Enrollment100924.id, name: 'Onko pari kiertäjä', value: '', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment100922.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100923.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
@@ -2340,7 +2340,7 @@ EnrollmentData.new(enrollment_id: @Enrollment100934.id, name: 'Melonta', value: 
 EnrollmentData.new(enrollment_id: @Enrollment100934.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment100934.id, name: 'Parin nimi', value: '', attribute_index: 3).save
 EnrollmentData.new(enrollment_id: @Enrollment100934.id, name: 'Parin sukupuoli', value: '', attribute_index: 4).save
-EnrollmentData.new(enrollment_id: @Enrollment100934.id, name: 'Parin syntymävuosi', value: '', attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment100934.id, name: 'Parin syntymävuosi', value: 0, attribute_index: 5).save
 EnrollmentData.new(enrollment_id: @Enrollment100934.id, name: 'Onko pari kiertäjä', value: '', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment100932.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100933.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
@@ -2465,7 +2465,7 @@ EnrollmentData.new(enrollment_id: @Enrollment100984.id, name: 'Melonta', value: 
 EnrollmentData.new(enrollment_id: @Enrollment100984.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment100984.id, name: 'Parin nimi', value: '', attribute_index: 3).save
 EnrollmentData.new(enrollment_id: @Enrollment100984.id, name: 'Parin sukupuoli', value: '', attribute_index: 4).save
-EnrollmentData.new(enrollment_id: @Enrollment100984.id, name: 'Parin syntymävuosi', value: '', attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment100984.id, name: 'Parin syntymävuosi', value: 0, attribute_index: 5).save
 EnrollmentData.new(enrollment_id: @Enrollment100984.id, name: 'Onko pari kiertäjä', value: '', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment100982.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment100983.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
@@ -2515,7 +2515,7 @@ EnrollmentData.new(enrollment_id: @Enrollment101004.id, name: 'Melonta', value: 
 EnrollmentData.new(enrollment_id: @Enrollment101004.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment101004.id, name: 'Parin nimi', value: '', attribute_index: 3).save
 EnrollmentData.new(enrollment_id: @Enrollment101004.id, name: 'Parin sukupuoli', value: '', attribute_index: 4).save
-EnrollmentData.new(enrollment_id: @Enrollment101004.id, name: 'Parin syntymävuosi', value: '', attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment101004.id, name: 'Parin syntymävuosi', value: 0, attribute_index: 5).save
 EnrollmentData.new(enrollment_id: @Enrollment101004.id, name: 'Onko pari kiertäjä', value: '', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment101002.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101003.id, name: 'Tyyppi', value: 'maraton', attribute_index: 1).save
@@ -2540,7 +2540,7 @@ EnrollmentData.new(enrollment_id: @Enrollment101014.id, name: 'Melonta', value: 
 EnrollmentData.new(enrollment_id: @Enrollment101014.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment101014.id, name: 'Parin nimi', value: '', attribute_index: 3).save
 EnrollmentData.new(enrollment_id: @Enrollment101014.id, name: 'Parin sukupuoli', value: '', attribute_index: 4).save
-EnrollmentData.new(enrollment_id: @Enrollment101014.id, name: 'Parin syntymävuosi', value: '', attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment101014.id, name: 'Parin syntymävuosi', value: 0, attribute_index: 5).save
 EnrollmentData.new(enrollment_id: @Enrollment101014.id, name: 'Onko pari kiertäjä', value: '', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment101012.id, name: 'Tyyli', value: 'Perinteinen', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101013.id, name: 'Tyyppi', value: 'maraton', attribute_index: 1).save
@@ -2590,7 +2590,7 @@ EnrollmentData.new(enrollment_id: @Enrollment101034.id, name: 'Melonta', value: 
 EnrollmentData.new(enrollment_id: @Enrollment101034.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment101034.id, name: 'Parin nimi', value: '', attribute_index: 3).save
 EnrollmentData.new(enrollment_id: @Enrollment101034.id, name: 'Parin sukupuoli', value: '', attribute_index: 4).save
-EnrollmentData.new(enrollment_id: @Enrollment101034.id, name: 'Parin syntymävuosi', value: '', attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment101034.id, name: 'Parin syntymävuosi', value: 0, attribute_index: 5).save
 EnrollmentData.new(enrollment_id: @Enrollment101034.id, name: 'Onko pari kiertäjä', value: '', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment101032.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101033.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
@@ -2740,7 +2740,7 @@ EnrollmentData.new(enrollment_id: @Enrollment101094.id, name: 'Melonta', value: 
 EnrollmentData.new(enrollment_id: @Enrollment101094.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment101094.id, name: 'Parin nimi', value: '', attribute_index: 3).save
 EnrollmentData.new(enrollment_id: @Enrollment101094.id, name: 'Parin sukupuoli', value: '', attribute_index: 4).save
-EnrollmentData.new(enrollment_id: @Enrollment101094.id, name: 'Parin syntymävuosi', value: '', attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment101094.id, name: 'Parin syntymävuosi', value: 0, attribute_index: 5).save
 EnrollmentData.new(enrollment_id: @Enrollment101094.id, name: 'Onko pari kiertäjä', value: '', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment101092.id, name: 'Tyyli', value: 'Perinteinen', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101093.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
@@ -2840,7 +2840,7 @@ EnrollmentData.new(enrollment_id: @Enrollment101134.id, name: 'Melonta', value: 
 EnrollmentData.new(enrollment_id: @Enrollment101134.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment101134.id, name: 'Parin nimi', value: '', attribute_index: 3).save
 EnrollmentData.new(enrollment_id: @Enrollment101134.id, name: 'Parin sukupuoli', value: '', attribute_index: 4).save
-EnrollmentData.new(enrollment_id: @Enrollment101134.id, name: 'Parin syntymävuosi', value: '', attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment101134.id, name: 'Parin syntymävuosi', value: 0, attribute_index: 5).save
 EnrollmentData.new(enrollment_id: @Enrollment101134.id, name: 'Onko pari kiertäjä', value: '', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment101132.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101133.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
@@ -2864,7 +2864,7 @@ Result.new(name: 'Ida Kujansuu', city: 'Helsinki', group: 'Kankaanpään Kalevan
 EnrollmentData.new(enrollment_id: @Enrollment101144.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101144.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment101144.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
-EnrollmentData.new(enrollment_id: @Enrollment101144.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment101144.id, name: 'Parin sukupuoli', value: 'M', attribute_index: 4).save
 EnrollmentData.new(enrollment_id: @Enrollment101144.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
 EnrollmentData.new(enrollment_id: @Enrollment101144.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment101142.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
@@ -2915,7 +2915,7 @@ EnrollmentData.new(enrollment_id: @Enrollment101164.id, name: 'Melonta', value: 
 EnrollmentData.new(enrollment_id: @Enrollment101164.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment101164.id, name: 'Parin nimi', value: '', attribute_index: 3).save
 EnrollmentData.new(enrollment_id: @Enrollment101164.id, name: 'Parin sukupuoli', value: '', attribute_index: 4).save
-EnrollmentData.new(enrollment_id: @Enrollment101164.id, name: 'Parin syntymävuosi', value: '', attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment101164.id, name: 'Parin syntymävuosi', value: 0, attribute_index: 5).save
 EnrollmentData.new(enrollment_id: @Enrollment101164.id, name: 'Onko pari kiertäjä', value: '', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment101162.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101163.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
@@ -2965,7 +2965,7 @@ EnrollmentData.new(enrollment_id: @Enrollment101184.id, name: 'Melonta', value: 
 EnrollmentData.new(enrollment_id: @Enrollment101184.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment101184.id, name: 'Parin nimi', value: '', attribute_index: 3).save
 EnrollmentData.new(enrollment_id: @Enrollment101184.id, name: 'Parin sukupuoli', value: '', attribute_index: 4).save
-EnrollmentData.new(enrollment_id: @Enrollment101184.id, name: 'Parin syntymävuosi', value: '', attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment101184.id, name: 'Parin syntymävuosi', value: 0, attribute_index: 5).save
 EnrollmentData.new(enrollment_id: @Enrollment101184.id, name: 'Onko pari kiertäjä', value: '', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment101182.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101183.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
@@ -3115,7 +3115,7 @@ EnrollmentData.new(enrollment_id: @Enrollment101244.id, name: 'Melonta', value: 
 EnrollmentData.new(enrollment_id: @Enrollment101244.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment101244.id, name: 'Parin nimi', value: '', attribute_index: 3).save
 EnrollmentData.new(enrollment_id: @Enrollment101244.id, name: 'Parin sukupuoli', value: '', attribute_index: 4).save
-EnrollmentData.new(enrollment_id: @Enrollment101244.id, name: 'Parin syntymävuosi', value: '', attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment101244.id, name: 'Parin syntymävuosi', value: 0, attribute_index: 5).save
 EnrollmentData.new(enrollment_id: @Enrollment101244.id, name: 'Onko pari kiertäjä', value: '', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment101242.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101243.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
@@ -3165,7 +3165,7 @@ EnrollmentData.new(enrollment_id: @Enrollment101264.id, name: 'Melonta', value: 
 EnrollmentData.new(enrollment_id: @Enrollment101264.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment101264.id, name: 'Parin nimi', value: '', attribute_index: 3).save
 EnrollmentData.new(enrollment_id: @Enrollment101264.id, name: 'Parin sukupuoli', value: '', attribute_index: 4).save
-EnrollmentData.new(enrollment_id: @Enrollment101264.id, name: 'Parin syntymävuosi', value: '', attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment101264.id, name: 'Parin syntymävuosi', value: 0, attribute_index: 5).save
 EnrollmentData.new(enrollment_id: @Enrollment101264.id, name: 'Onko pari kiertäjä', value: '', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment101262.id, name: 'Tyyli', value: 'Perinteinen', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101263.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
@@ -3265,7 +3265,7 @@ EnrollmentData.new(enrollment_id: @Enrollment101304.id, name: 'Melonta', value: 
 EnrollmentData.new(enrollment_id: @Enrollment101304.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment101304.id, name: 'Parin nimi', value: '', attribute_index: 3).save
 EnrollmentData.new(enrollment_id: @Enrollment101304.id, name: 'Parin sukupuoli', value: '', attribute_index: 4).save
-EnrollmentData.new(enrollment_id: @Enrollment101304.id, name: 'Parin syntymävuosi', value: '', attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment101304.id, name: 'Parin syntymävuosi', value: 0, attribute_index: 5).save
 EnrollmentData.new(enrollment_id: @Enrollment101304.id, name: 'Onko pari kiertäjä', value: '', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment101302.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101303.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
@@ -3390,7 +3390,7 @@ EnrollmentData.new(enrollment_id: @Enrollment101354.id, name: 'Melonta', value: 
 EnrollmentData.new(enrollment_id: @Enrollment101354.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment101354.id, name: 'Parin nimi', value: '', attribute_index: 3).save
 EnrollmentData.new(enrollment_id: @Enrollment101354.id, name: 'Parin sukupuoli', value: '', attribute_index: 4).save
-EnrollmentData.new(enrollment_id: @Enrollment101354.id, name: 'Parin syntymävuosi', value: '', attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment101354.id, name: 'Parin syntymävuosi', value: 0, attribute_index: 5).save
 EnrollmentData.new(enrollment_id: @Enrollment101354.id, name: 'Onko pari kiertäjä', value: '', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment101352.id, name: 'Tyyli', value: 'Perinteinen', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101353.id, name: 'Tyyppi', value: 'maraton', attribute_index: 1).save
@@ -3465,7 +3465,7 @@ EnrollmentData.new(enrollment_id: @Enrollment101384.id, name: 'Melonta', value: 
 EnrollmentData.new(enrollment_id: @Enrollment101384.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment101384.id, name: 'Parin nimi', value: '', attribute_index: 3).save
 EnrollmentData.new(enrollment_id: @Enrollment101384.id, name: 'Parin sukupuoli', value: '', attribute_index: 4).save
-EnrollmentData.new(enrollment_id: @Enrollment101384.id, name: 'Parin syntymävuosi', value: '', attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment101384.id, name: 'Parin syntymävuosi', value: 0, attribute_index: 5).save
 EnrollmentData.new(enrollment_id: @Enrollment101384.id, name: 'Onko pari kiertäjä', value: '', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment101382.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101383.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
@@ -3515,7 +3515,7 @@ EnrollmentData.new(enrollment_id: @Enrollment101404.id, name: 'Melonta', value: 
 EnrollmentData.new(enrollment_id: @Enrollment101404.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment101404.id, name: 'Parin nimi', value: '', attribute_index: 3).save
 EnrollmentData.new(enrollment_id: @Enrollment101404.id, name: 'Parin sukupuoli', value: '', attribute_index: 4).save
-EnrollmentData.new(enrollment_id: @Enrollment101404.id, name: 'Parin syntymävuosi', value: '', attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment101404.id, name: 'Parin syntymävuosi', value: 0, attribute_index: 5).save
 EnrollmentData.new(enrollment_id: @Enrollment101404.id, name: 'Onko pari kiertäjä', value: '', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment101402.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101403.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
@@ -3540,7 +3540,7 @@ EnrollmentData.new(enrollment_id: @Enrollment101414.id, name: 'Melonta', value: 
 EnrollmentData.new(enrollment_id: @Enrollment101414.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment101414.id, name: 'Parin nimi', value: '', attribute_index: 3).save
 EnrollmentData.new(enrollment_id: @Enrollment101414.id, name: 'Parin sukupuoli', value: '', attribute_index: 4).save
-EnrollmentData.new(enrollment_id: @Enrollment101414.id, name: 'Parin syntymävuosi', value: '', attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment101414.id, name: 'Parin syntymävuosi', value: 0, attribute_index: 5).save
 EnrollmentData.new(enrollment_id: @Enrollment101414.id, name: 'Onko pari kiertäjä', value: '', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment101412.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101413.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
@@ -3864,7 +3864,7 @@ Result.new(name: 'Terttu Salonen', city: 'Helsinki', group: 'Sveitsiläiset', ye
 EnrollmentData.new(enrollment_id: @Enrollment101544.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101544.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment101544.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
-EnrollmentData.new(enrollment_id: @Enrollment101544.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment101544.id, name: 'Parin sukupuoli', value: 'M', attribute_index: 4).save
 EnrollmentData.new(enrollment_id: @Enrollment101544.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
 EnrollmentData.new(enrollment_id: @Enrollment101544.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment101542.id, name: 'Tyyli', value: 'Perinteinen', attribute_index: 1).save
@@ -3888,7 +3888,7 @@ EnrollmentData.new(enrollment_id: @Enrollment101554.id, name: 'Melonta', value: 
 EnrollmentData.new(enrollment_id: @Enrollment101554.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment101554.id, name: 'Parin nimi', value: '', attribute_index: 3).save
 EnrollmentData.new(enrollment_id: @Enrollment101554.id, name: 'Parin sukupuoli', value: '', attribute_index: 4).save
-EnrollmentData.new(enrollment_id: @Enrollment101554.id, name: 'Parin syntymävuosi', value: '', attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment101554.id, name: 'Parin syntymävuosi', value: 0, attribute_index: 5).save
 EnrollmentData.new(enrollment_id: @Enrollment101554.id, name: 'Onko pari kiertäjä', value: '', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment101552.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101551.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -3910,7 +3910,7 @@ EnrollmentData.new(enrollment_id: @Enrollment101564.id, name: 'Melonta', value: 
 EnrollmentData.new(enrollment_id: @Enrollment101564.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment101564.id, name: 'Parin nimi', value: '', attribute_index: 3).save
 EnrollmentData.new(enrollment_id: @Enrollment101564.id, name: 'Parin sukupuoli', value: '', attribute_index: 4).save
-EnrollmentData.new(enrollment_id: @Enrollment101564.id, name: 'Parin syntymävuosi', value: '', attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment101564.id, name: 'Parin syntymävuosi', value: 0, attribute_index: 5).save
 EnrollmentData.new(enrollment_id: @Enrollment101564.id, name: 'Onko pari kiertäjä', value: '', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment101562.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101563.id, name: 'Tyyppi', value: 'maraton', attribute_index: 1).save
@@ -3976,7 +3976,7 @@ EnrollmentData.new(enrollment_id: @Enrollment101594.id, name: 'Melonta', value: 
 EnrollmentData.new(enrollment_id: @Enrollment101594.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment101594.id, name: 'Parin nimi', value: '', attribute_index: 3).save
 EnrollmentData.new(enrollment_id: @Enrollment101594.id, name: 'Parin sukupuoli', value: '', attribute_index: 4).save
-EnrollmentData.new(enrollment_id: @Enrollment101594.id, name: 'Parin syntymävuosi', value: '', attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment101594.id, name: 'Parin syntymävuosi', value: 0, attribute_index: 5).save
 EnrollmentData.new(enrollment_id: @Enrollment101594.id, name: 'Onko pari kiertäjä', value: '', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment101592.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101593.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
@@ -4088,7 +4088,7 @@ EnrollmentData.new(enrollment_id: @Enrollment101644.id, name: 'Melonta', value: 
 EnrollmentData.new(enrollment_id: @Enrollment101644.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment101644.id, name: 'Parin nimi', value: '', attribute_index: 3).save
 EnrollmentData.new(enrollment_id: @Enrollment101644.id, name: 'Parin sukupuoli', value: '', attribute_index: 4).save
-EnrollmentData.new(enrollment_id: @Enrollment101644.id, name: 'Parin syntymävuosi', value: '', attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment101644.id, name: 'Parin syntymävuosi', value: 0, attribute_index: 5).save
 EnrollmentData.new(enrollment_id: @Enrollment101644.id, name: 'Onko pari kiertäjä', value: '', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment101643.id, name: 'Tyyppi', value: 'maraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101641.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -4176,7 +4176,7 @@ EnrollmentData.new(enrollment_id: @Enrollment101684.id, name: 'Melonta', value: 
 EnrollmentData.new(enrollment_id: @Enrollment101684.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment101684.id, name: 'Parin nimi', value: '', attribute_index: 3).save
 EnrollmentData.new(enrollment_id: @Enrollment101684.id, name: 'Parin sukupuoli', value: '', attribute_index: 4).save
-EnrollmentData.new(enrollment_id: @Enrollment101684.id, name: 'Parin syntymävuosi', value: '', attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment101684.id, name: 'Parin syntymävuosi', value: 0, attribute_index: 5).save
 EnrollmentData.new(enrollment_id: @Enrollment101684.id, name: 'Onko pari kiertäjä', value: '', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment101682.id, name: 'Tyyli', value: 'Perinteinen', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101683.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
@@ -4299,7 +4299,7 @@ EnrollmentData.new(enrollment_id: @Enrollment101744.id, name: 'Melonta', value: 
 EnrollmentData.new(enrollment_id: @Enrollment101744.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment101744.id, name: 'Parin nimi', value: '', attribute_index: 3).save
 EnrollmentData.new(enrollment_id: @Enrollment101744.id, name: 'Parin sukupuoli', value: '', attribute_index: 4).save
-EnrollmentData.new(enrollment_id: @Enrollment101744.id, name: 'Parin syntymävuosi', value: '', attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment101744.id, name: 'Parin syntymävuosi', value: 0, attribute_index: 5).save
 EnrollmentData.new(enrollment_id: @Enrollment101744.id, name: 'Onko pari kiertäjä', value: '', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment101742.id, name: 'Tyyli', value: 'Perinteinen', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101743.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
@@ -4420,7 +4420,7 @@ EnrollmentData.new(enrollment_id: @Enrollment101804.id, name: 'Melonta', value: 
 EnrollmentData.new(enrollment_id: @Enrollment101804.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment101804.id, name: 'Parin nimi', value: '', attribute_index: 3).save
 EnrollmentData.new(enrollment_id: @Enrollment101804.id, name: 'Parin sukupuoli', value: '', attribute_index: 4).save
-EnrollmentData.new(enrollment_id: @Enrollment101804.id, name: 'Parin syntymävuosi', value: '', attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment101804.id, name: 'Parin syntymävuosi', value: 0, attribute_index: 5).save
 EnrollmentData.new(enrollment_id: @Enrollment101804.id, name: 'Onko pari kiertäjä', value: '', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment101803.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101801.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -4464,7 +4464,7 @@ EnrollmentData.new(enrollment_id: @Enrollment101824.id, name: 'Melonta', value: 
 EnrollmentData.new(enrollment_id: @Enrollment101824.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment101824.id, name: 'Parin nimi', value: '', attribute_index: 3).save
 EnrollmentData.new(enrollment_id: @Enrollment101824.id, name: 'Parin sukupuoli', value: '', attribute_index: 4).save
-EnrollmentData.new(enrollment_id: @Enrollment101824.id, name: 'Parin syntymävuosi', value: '', attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment101824.id, name: 'Parin syntymävuosi', value: 0, attribute_index: 5).save
 EnrollmentData.new(enrollment_id: @Enrollment101824.id, name: 'Onko pari kiertäjä', value: '', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment101822.id, name: 'Tyyli', value: 'Perinteinen', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101823.id, name: 'Tyyppi', value: 'maraton', attribute_index: 1).save
@@ -4569,7 +4569,7 @@ EnrollmentData.new(enrollment_id: @Enrollment101874.id, name: 'Melonta', value: 
 EnrollmentData.new(enrollment_id: @Enrollment101874.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment101874.id, name: 'Parin nimi', value: '', attribute_index: 3).save
 EnrollmentData.new(enrollment_id: @Enrollment101874.id, name: 'Parin sukupuoli', value: '', attribute_index: 4).save
-EnrollmentData.new(enrollment_id: @Enrollment101874.id, name: 'Parin syntymävuosi', value: '', attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment101874.id, name: 'Parin syntymävuosi', value: 0, attribute_index: 5).save
 EnrollmentData.new(enrollment_id: @Enrollment101874.id, name: 'Onko pari kiertäjä', value: '', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment101873.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101871.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -4653,7 +4653,7 @@ EnrollmentData.new(enrollment_id: @Enrollment101914.id, name: 'Melonta', value: 
 EnrollmentData.new(enrollment_id: @Enrollment101914.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment101914.id, name: 'Parin nimi', value: '', attribute_index: 3).save
 EnrollmentData.new(enrollment_id: @Enrollment101914.id, name: 'Parin sukupuoli', value: '', attribute_index: 4).save
-EnrollmentData.new(enrollment_id: @Enrollment101914.id, name: 'Parin syntymävuosi', value: '', attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment101914.id, name: 'Parin syntymävuosi', value: 0, attribute_index: 5).save
 EnrollmentData.new(enrollment_id: @Enrollment101914.id, name: 'Onko pari kiertäjä', value: '', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment101913.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101911.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -4759,7 +4759,7 @@ EnrollmentData.new(enrollment_id: @Enrollment101964.id, name: 'Melonta', value: 
 EnrollmentData.new(enrollment_id: @Enrollment101964.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment101964.id, name: 'Parin nimi', value: '', attribute_index: 3).save
 EnrollmentData.new(enrollment_id: @Enrollment101964.id, name: 'Parin sukupuoli', value: '', attribute_index: 4).save
-EnrollmentData.new(enrollment_id: @Enrollment101964.id, name: 'Parin syntymävuosi', value: '', attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment101964.id, name: 'Parin syntymävuosi', value: 0, attribute_index: 5).save
 EnrollmentData.new(enrollment_id: @Enrollment101964.id, name: 'Onko pari kiertäjä', value: '', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment101963.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment101961.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -5091,7 +5091,7 @@ EnrollmentData.new(enrollment_id: @Enrollment102124.id, name: 'Melonta', value: 
 EnrollmentData.new(enrollment_id: @Enrollment102124.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment102124.id, name: 'Parin nimi', value: '', attribute_index: 3).save
 EnrollmentData.new(enrollment_id: @Enrollment102124.id, name: 'Parin sukupuoli', value: '', attribute_index: 4).save
-EnrollmentData.new(enrollment_id: @Enrollment102124.id, name: 'Parin syntymävuosi', value: '', attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment102124.id, name: 'Parin syntymävuosi', value: 0, attribute_index: 5).save
 EnrollmentData.new(enrollment_id: @Enrollment102124.id, name: 'Onko pari kiertäjä', value: '', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment102122.id, name: 'Tyyli', value: 'Perinteinen', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment102123.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
@@ -5130,7 +5130,7 @@ EnrollmentData.new(enrollment_id: @Enrollment102144.id, name: 'Melonta', value: 
 EnrollmentData.new(enrollment_id: @Enrollment102144.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment102144.id, name: 'Parin nimi', value: '', attribute_index: 3).save
 EnrollmentData.new(enrollment_id: @Enrollment102144.id, name: 'Parin sukupuoli', value: '', attribute_index: 4).save
-EnrollmentData.new(enrollment_id: @Enrollment102144.id, name: 'Parin syntymävuosi', value: '', attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment102144.id, name: 'Parin syntymävuosi', value: 0, attribute_index: 5).save
 EnrollmentData.new(enrollment_id: @Enrollment102144.id, name: 'Onko pari kiertäjä', value: '', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment102143.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment102141.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -5151,7 +5151,7 @@ Result.new(name: 'Laila Patronen-Jurvanen', city: 'Helsinki', group: nil, year: 
 EnrollmentData.new(enrollment_id: @Enrollment102154.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment102154.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment102154.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
-EnrollmentData.new(enrollment_id: @Enrollment102154.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment102154.id, name: 'Parin sukupuoli', value: 'M', attribute_index: 4).save
 EnrollmentData.new(enrollment_id: @Enrollment102154.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
 EnrollmentData.new(enrollment_id: @Enrollment102154.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment102152.id, name: 'Tyyli', value: 'Perinteinen', attribute_index: 1).save
@@ -5208,7 +5208,7 @@ EnrollmentData.new(enrollment_id: @Enrollment102184.id, name: 'Melonta', value: 
 EnrollmentData.new(enrollment_id: @Enrollment102184.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment102184.id, name: 'Parin nimi', value: '', attribute_index: 3).save
 EnrollmentData.new(enrollment_id: @Enrollment102184.id, name: 'Parin sukupuoli', value: '', attribute_index: 4).save
-EnrollmentData.new(enrollment_id: @Enrollment102184.id, name: 'Parin syntymävuosi', value: '', attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment102184.id, name: 'Parin syntymävuosi', value: 0, attribute_index: 5).save
 EnrollmentData.new(enrollment_id: @Enrollment102184.id, name: 'Onko pari kiertäjä', value: '', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment102182.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment102181.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -5227,7 +5227,7 @@ EnrollmentData.new(enrollment_id: @Enrollment102194.id, name: 'Melonta', value: 
 EnrollmentData.new(enrollment_id: @Enrollment102194.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment102194.id, name: 'Parin nimi', value: '', attribute_index: 3).save
 EnrollmentData.new(enrollment_id: @Enrollment102194.id, name: 'Parin sukupuoli', value: '', attribute_index: 4).save
-EnrollmentData.new(enrollment_id: @Enrollment102194.id, name: 'Parin syntymävuosi', value: '', attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment102194.id, name: 'Parin syntymävuosi', value: 0, attribute_index: 5).save
 EnrollmentData.new(enrollment_id: @Enrollment102194.id, name: 'Onko pari kiertäjä', value: '', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment102192.id, name: 'Tyyli', value: 'Perinteinen', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment102191.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -5260,7 +5260,7 @@ EnrollmentData.new(enrollment_id: @Enrollment102214.id, name: 'Melonta', value: 
 EnrollmentData.new(enrollment_id: @Enrollment102214.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment102214.id, name: 'Parin nimi', value: '', attribute_index: 3).save
 EnrollmentData.new(enrollment_id: @Enrollment102214.id, name: 'Parin sukupuoli', value: '', attribute_index: 4).save
-EnrollmentData.new(enrollment_id: @Enrollment102214.id, name: 'Parin syntymävuosi', value: '', attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment102214.id, name: 'Parin syntymävuosi', value: 0, attribute_index: 5).save
 EnrollmentData.new(enrollment_id: @Enrollment102214.id, name: 'Onko pari kiertäjä', value: '', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment102212.id, name: 'Tyyli', value: 'Perinteinen', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment102216.id, name: 'Emit', value: 'Kyllä', attribute_index: 1).save
@@ -5279,7 +5279,7 @@ EnrollmentData.new(enrollment_id: @Enrollment102224.id, name: 'Melonta', value: 
 EnrollmentData.new(enrollment_id: @Enrollment102224.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment102224.id, name: 'Parin nimi', value: '', attribute_index: 3).save
 EnrollmentData.new(enrollment_id: @Enrollment102224.id, name: 'Parin sukupuoli', value: '', attribute_index: 4).save
-EnrollmentData.new(enrollment_id: @Enrollment102224.id, name: 'Parin syntymävuosi', value: '', attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment102224.id, name: 'Parin syntymävuosi', value: 0, attribute_index: 5).save
 EnrollmentData.new(enrollment_id: @Enrollment102224.id, name: 'Onko pari kiertäjä', value: '', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment102222.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment102221.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -5312,7 +5312,7 @@ EnrollmentData.new(enrollment_id: @Enrollment102244.id, name: 'Melonta', value: 
 EnrollmentData.new(enrollment_id: @Enrollment102244.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment102244.id, name: 'Parin nimi', value: '', attribute_index: 3).save
 EnrollmentData.new(enrollment_id: @Enrollment102244.id, name: 'Parin sukupuoli', value: '', attribute_index: 4).save
-EnrollmentData.new(enrollment_id: @Enrollment102244.id, name: 'Parin syntymävuosi', value: '', attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment102244.id, name: 'Parin syntymävuosi', value: 0, attribute_index: 5).save
 EnrollmentData.new(enrollment_id: @Enrollment102244.id, name: 'Onko pari kiertäjä', value: '', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment102243.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment102241.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -5331,7 +5331,7 @@ EnrollmentData.new(enrollment_id: @Enrollment102254.id, name: 'Melonta', value: 
 EnrollmentData.new(enrollment_id: @Enrollment102254.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment102254.id, name: 'Parin nimi', value: '', attribute_index: 3).save
 EnrollmentData.new(enrollment_id: @Enrollment102254.id, name: 'Parin sukupuoli', value: '', attribute_index: 4).save
-EnrollmentData.new(enrollment_id: @Enrollment102254.id, name: 'Parin syntymävuosi', value: '', attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment102254.id, name: 'Parin syntymävuosi', value: 0, attribute_index: 5).save
 EnrollmentData.new(enrollment_id: @Enrollment102254.id, name: 'Onko pari kiertäjä', value: '', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment102252.id, name: 'Tyyli', value: 'Perinteinen', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment102253.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
@@ -5673,7 +5673,7 @@ EnrollmentData.new(enrollment_id: @Enrollment102444.id, name: 'Melonta', value: 
 EnrollmentData.new(enrollment_id: @Enrollment102444.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment102444.id, name: 'Parin nimi', value: '', attribute_index: 3).save
 EnrollmentData.new(enrollment_id: @Enrollment102444.id, name: 'Parin sukupuoli', value: '', attribute_index: 4).save
-EnrollmentData.new(enrollment_id: @Enrollment102444.id, name: 'Parin syntymävuosi', value: '', attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment102444.id, name: 'Parin syntymävuosi', value: 0, attribute_index: 5).save
 EnrollmentData.new(enrollment_id: @Enrollment102444.id, name: 'Onko pari kiertäjä', value: '', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment102442.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment102443.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
@@ -5769,7 +5769,7 @@ EnrollmentData.new(enrollment_id: @Enrollment102504.id, name: 'Melonta', value: 
 EnrollmentData.new(enrollment_id: @Enrollment102504.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment102504.id, name: 'Parin nimi', value: '', attribute_index: 3).save
 EnrollmentData.new(enrollment_id: @Enrollment102504.id, name: 'Parin sukupuoli', value: '', attribute_index: 4).save
-EnrollmentData.new(enrollment_id: @Enrollment102504.id, name: 'Parin syntymävuosi', value: '', attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment102504.id, name: 'Parin syntymävuosi', value: 0, attribute_index: 5).save
 EnrollmentData.new(enrollment_id: @Enrollment102504.id, name: 'Onko pari kiertäjä', value: '', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment102502.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment102501.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
@@ -5983,7 +5983,7 @@ Result.new(name: 'Marjut Vainio', city: 'Helsinki', group: 'KK Länsi-Uusimaa 2'
 EnrollmentData.new(enrollment_id: @Enrollment102634.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment102634.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment102634.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
-EnrollmentData.new(enrollment_id: @Enrollment102634.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment102634.id, name: 'Parin sukupuoli', value: 'M', attribute_index: 4).save
 EnrollmentData.new(enrollment_id: @Enrollment102634.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
 EnrollmentData.new(enrollment_id: @Enrollment102634.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment102633.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
@@ -6244,7 +6244,7 @@ EnrollmentData.new(enrollment_id: @Enrollment102794.id, name: 'Melonta', value: 
 EnrollmentData.new(enrollment_id: @Enrollment102794.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment102794.id, name: 'Parin nimi', value: '', attribute_index: 3).save
 EnrollmentData.new(enrollment_id: @Enrollment102794.id, name: 'Parin sukupuoli', value: '', attribute_index: 4).save
-EnrollmentData.new(enrollment_id: @Enrollment102794.id, name: 'Parin syntymävuosi', value: '', attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment102794.id, name: 'Parin syntymävuosi', value: 0, attribute_index: 5).save
 EnrollmentData.new(enrollment_id: @Enrollment102794.id, name: 'Onko pari kiertäjä', value: '', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment102792.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 @User10280 = User.new(postal_code: '00100', city: 'Helsinki', first_name: 'Kari', last_name: 'Kinnunen', username: 'user10280', email: 'user10280@test.com', phone_number: 12345, street_address: 'Katuosoite', kk_number: 10280, birth_date: Date.today, gender: 'M', admin: false, password: 'Salasana1', password_confirmation: 'Salasana1', active: true)
@@ -6395,7 +6395,7 @@ EnrollmentData.new(enrollment_id: @Enrollment102914.id, name: 'Melonta', value: 
 EnrollmentData.new(enrollment_id: @Enrollment102914.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment102914.id, name: 'Parin nimi', value: '', attribute_index: 3).save
 EnrollmentData.new(enrollment_id: @Enrollment102914.id, name: 'Parin sukupuoli', value: '', attribute_index: 4).save
-EnrollmentData.new(enrollment_id: @Enrollment102914.id, name: 'Parin syntymävuosi', value: '', attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment102914.id, name: 'Parin syntymävuosi', value: 0, attribute_index: 5).save
 EnrollmentData.new(enrollment_id: @Enrollment102914.id, name: 'Onko pari kiertäjä', value: '', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment102913.id, name: 'Tyyppi', value: 'puolimaraton', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment102916.id, name: 'Emit', value: 'Kyllä', attribute_index: 1).save
@@ -6533,7 +6533,7 @@ EnrollmentData.new(enrollment_id: @Enrollment103024.id, name: 'Melonta', value: 
 EnrollmentData.new(enrollment_id: @Enrollment103024.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment103024.id, name: 'Parin nimi', value: '', attribute_index: 3).save
 EnrollmentData.new(enrollment_id: @Enrollment103024.id, name: 'Parin sukupuoli', value: '', attribute_index: 4).save
-EnrollmentData.new(enrollment_id: @Enrollment103024.id, name: 'Parin syntymävuosi', value: '', attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment103024.id, name: 'Parin syntymävuosi', value: 0, attribute_index: 5).save
 EnrollmentData.new(enrollment_id: @Enrollment103024.id, name: 'Onko pari kiertäjä', value: '', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment103022.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 @User10303 = User.new(postal_code: '00100', city: 'Helsinki', first_name: 'Rainer', last_name: 'Mäkelä', username: 'user10303', email: 'user10303@test.com', phone_number: 12345, street_address: 'Katuosoite', kk_number: 10303, birth_date: Date.today, gender: 'M', admin: false, password: 'Salasana1', password_confirmation: 'Salasana1', active: true)
@@ -6547,7 +6547,7 @@ EnrollmentData.new(enrollment_id: @Enrollment103034.id, name: 'Melonta', value: 
 EnrollmentData.new(enrollment_id: @Enrollment103034.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment103034.id, name: 'Parin nimi', value: '', attribute_index: 3).save
 EnrollmentData.new(enrollment_id: @Enrollment103034.id, name: 'Parin sukupuoli', value: '', attribute_index: 4).save
-EnrollmentData.new(enrollment_id: @Enrollment103034.id, name: 'Parin syntymävuosi', value: '', attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment103034.id, name: 'Parin syntymävuosi', value: 0, attribute_index: 5).save
 EnrollmentData.new(enrollment_id: @Enrollment103034.id, name: 'Onko pari kiertäjä', value: '', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment103032.id, name: 'Tyyli', value: 'Vapaa', attribute_index: 1).save
 @User10304 = User.new(postal_code: '00100', city: 'Helsinki', first_name: 'Mikko', last_name: 'Lappi', username: 'user10304', email: 'user10304@test.com', phone_number: 12345, street_address: 'Katuosoite', kk_number: 10304, birth_date: Date.today, gender: 'M', admin: false, password: 'Salasana1', password_confirmation: 'Salasana1', active: true)
@@ -6782,7 +6782,7 @@ EnrollmentData.new(enrollment_id: @Enrollment103274.id, name: 'Melonta', value: 
 EnrollmentData.new(enrollment_id: @Enrollment103274.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment103274.id, name: 'Parin nimi', value: '', attribute_index: 3).save
 EnrollmentData.new(enrollment_id: @Enrollment103274.id, name: 'Parin sukupuoli', value: '', attribute_index: 4).save
-EnrollmentData.new(enrollment_id: @Enrollment103274.id, name: 'Parin syntymävuosi', value: '', attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment103274.id, name: 'Parin syntymävuosi', value: 0, attribute_index: 5).save
 EnrollmentData.new(enrollment_id: @Enrollment103274.id, name: 'Onko pari kiertäjä', value: '', attribute_index: 6).save
 @User10328 = User.new(postal_code: '00100', city: 'Helsinki', first_name: 'Jari', last_name: 'Haverinen', username: 'user10328', email: 'user10328@test.com', phone_number: 12345, street_address: 'Katuosoite', kk_number: 10328, birth_date: Date.today, gender: 'M', admin: false, password: 'Salasana1', password_confirmation: 'Salasana1', active: true)
 @User10328.save
@@ -6793,7 +6793,7 @@ EnrollmentData.new(enrollment_id: @Enrollment103284.id, name: 'Melonta', value: 
 EnrollmentData.new(enrollment_id: @Enrollment103284.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment103284.id, name: 'Parin nimi', value: '', attribute_index: 3).save
 EnrollmentData.new(enrollment_id: @Enrollment103284.id, name: 'Parin sukupuoli', value: '', attribute_index: 4).save
-EnrollmentData.new(enrollment_id: @Enrollment103284.id, name: 'Parin syntymävuosi', value: '', attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment103284.id, name: 'Parin syntymävuosi', value: 0, attribute_index: 5).save
 EnrollmentData.new(enrollment_id: @Enrollment103284.id, name: 'Onko pari kiertäjä', value: '', attribute_index: 6).save
 @User10329 = User.new(postal_code: '00100', city: 'Helsinki', first_name: 'Pekka', last_name: 'Niemi', username: 'user10329', email: 'user10329@test.com', phone_number: 12345, street_address: 'Katuosoite', kk_number: 10329, birth_date: Date.today, gender: 'M', admin: false, password: 'Salasana1', password_confirmation: 'Salasana1', active: true)
 @User10329.save
@@ -6946,7 +6946,7 @@ Result.new(name: 'Kirsi Hiljanen', city: 'Helsinki', group: nil, year: 2014, ser
 EnrollmentData.new(enrollment_id: @Enrollment103474.id, name: 'Melonta', value: 'Soutu', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment103474.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment103474.id, name: 'Parin nimi', value: 'tuntematon', attribute_index: 3).save
-EnrollmentData.new(enrollment_id: @Enrollment103474.id, name: 'Parin sukupuoli', value: 'F', attribute_index: 4).save
+EnrollmentData.new(enrollment_id: @Enrollment103474.id, name: 'Parin sukupuoli', value: 'M', attribute_index: 4).save
 EnrollmentData.new(enrollment_id: @Enrollment103474.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
 EnrollmentData.new(enrollment_id: @Enrollment103474.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 @User10348 = User.new(postal_code: '00100', city: 'Helsinki', first_name: 'Markku', last_name: 'Huotari', username: 'user10348', email: 'user10348@test.com', phone_number: 12345, street_address: 'Katuosoite', kk_number: 10348, birth_date: Date.today, gender: 'M', admin: false, password: 'Salasana1', password_confirmation: 'Salasana1', active: true)
@@ -7186,7 +7186,7 @@ EnrollmentData.new(enrollment_id: @Enrollment103814.id, name: 'Melonta', value: 
 EnrollmentData.new(enrollment_id: @Enrollment103814.id, name: 'Tyyli', value: 'Yksin', attribute_index: 2).save
 EnrollmentData.new(enrollment_id: @Enrollment103814.id, name: 'Parin nimi', value: '', attribute_index: 3).save
 EnrollmentData.new(enrollment_id: @Enrollment103814.id, name: 'Parin sukupuoli', value: '', attribute_index: 4).save
-EnrollmentData.new(enrollment_id: @Enrollment103814.id, name: 'Parin syntymävuosi', value: '', attribute_index: 5).save
+EnrollmentData.new(enrollment_id: @Enrollment103814.id, name: 'Parin syntymävuosi', value: 0, attribute_index: 5).save
 EnrollmentData.new(enrollment_id: @Enrollment103814.id, name: 'Onko pari kiertäjä', value: '', attribute_index: 6).save
 @User10382 = User.new(postal_code: '00100', city: 'Helsinki', first_name: 'Matti', last_name: 'Vesala', username: 'user10382', email: 'user10382@test.com', phone_number: 12345, street_address: 'Katuosoite', kk_number: 10382, birth_date: Date.today, gender: 'M', admin: false, password: 'Salasana1', password_confirmation: 'Salasana1', active: true)
 @User10382.save
