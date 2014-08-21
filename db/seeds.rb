@@ -20,7 +20,7 @@ EventAttribute.new(name: 'Onko pari kiertäjä', attribute_value: 'Ei;Kyllä', a
 @Event6 = Event.new(name: 'Suunnistus', factor: 1300, penalty_factor: 1.0, sport_type: 'OrienteeringEvent', start_date: Date.today + 1.month, end_date: Date.today + 2.month, second_end_date: Date.today + 3.month, price: 2000, second_price: 3000, description: 'Pistelaskun testaukseen')
 @Event6.save
 EventAttribute.new(name: 'Emit', attribute_value: 'Kyllä', attribute_label: 'Tarvitsetko emit-lähettimen järjestäjän puolesta?', attribute_type: 'check_box', event_id: @Event6.id, attribute_index: 1).save
-User.new(postal_code: '00100', city: 'Helsinki', first_name: 'Admin', last_name: 'von Admin', username: 'admin', email: 'admin@test.com', phone_number: 12345, street_address: 'Katuosoite', kk_number: 10000, birth_date: Date.today, gender: 'M', admin: true, password: 'Salasana1', password_confirmation: 'Salasana1').save
+User.new(postal_code: '00100', city: 'Helsinki', first_name: 'Admin', last_name: 'von Admin', username: 'admin', email: 'admin@test.com', phone_number: 12345, street_address: 'Katuosoite', kk_number: 10000, birth_date: Date.today, gender: 'M', admin: true, password: 'Salasana1', password_confirmation: 'Salasana1', active: true).save
 @User10001 = User.new(postal_code: '00100', city: 'Helsinki', first_name: 'Juha', last_name: 'Prittinen', username: 'user10001', email: 'user10001@test.com', phone_number: 12345, street_address: 'Katuosoite', kk_number: 10001, birth_date: Date.today, gender: 'M', admin: false, password: 'Salasana1', password_confirmation: 'Salasana1', active: true)
 @User10001.save
 Result.new(name: 'Juha Prittinen', city: 'Helsinki', group: 'Hitaat 1', year: 2014, series: 'M45', kk_number: '10001').save
