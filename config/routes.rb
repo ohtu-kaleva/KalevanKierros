@@ -73,6 +73,7 @@ Rails.application.routes.draw do
   get 'statistics/:id', to: 'statistics#show', as: 'statistic'
   get 'users/:id/statistic', to: 'statistics#join', as: 'join_statistic'
   put 'users/:id/statistic', to: 'statistics#join_user_to_existing_statistic'
+  post 'statistics/update/:year', to: 'statistics#update_statistics', as: 'update_statistics'
   get '*path' => redirect('/')
 
   # The priority is based upon order of creation: first created -> highest priority.

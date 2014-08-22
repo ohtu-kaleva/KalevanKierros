@@ -1,5 +1,6 @@
 class StatisticsController < ApplicationController
-  before_action :redirect_if_user_not_admin, only: [:join, :join_user_to_existing_statistic]
+  before_action :redirect_if_user_not_admin, only: [:join, :join_user_to_existing_statistic,
+                                                    :update_statistics]
 
   # GET /statistics
   def index
@@ -69,5 +70,36 @@ class StatisticsController < ApplicationController
 
   # GET /statistics/1/edit
   def edit
+  end
+
+  def update_statistics
+    message = {}
+    if params[:year]
+      @results = Result.where(year: params[:year])
+
+      @results.each do |result|
+        @statistic = Statistic.find_by_kk_number result.kk_number
+
+        if @statistic
+          if result.completed_events == 4
+            @statistic.four_events_completed_count += 1
+          elsif result.completed_events == 5
+            @statistic.five_events_completed_count += 1
+          elsif result.completed_events == 6
+            @statistic.six_events_completed_count += 1
+          end
+
+          @statistic.total_events_completed += result.completed_events
+          @statistic.pts_sum += result.pts_sum
+          @statistic.save
+        end
+      end
+
+      message[:success] = 'Tilastot päivitetty onnistuneesti'
+    else
+      message[:error] = 'Tilastojen päivitys ei onnistunut'
+    end
+
+    redirect_to results_path, flash: message
   end
 end
