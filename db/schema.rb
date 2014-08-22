@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140820121905) do
+ActiveRecord::Schema.define(version: 20140822145855) do
 
   create_table "app_settings", force: true do |t|
     t.string   "name",       null: false
@@ -114,11 +114,11 @@ ActiveRecord::Schema.define(version: 20140820121905) do
     t.string   "marathon_style"
     t.string   "rowing_style"
     t.string   "skiing_style"
-    t.decimal  "pts_sum"
-    t.integer  "completed_events"
+    t.decimal  "pts_sum",           default: 0.0, null: false
+    t.integer  "completed_events",  default: 0,   null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "kk_number"
+    t.integer  "kk_number",                       null: false
   end
 
   create_table "statistics", force: true do |t|
