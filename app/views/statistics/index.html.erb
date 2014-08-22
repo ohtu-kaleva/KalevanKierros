@@ -12,7 +12,9 @@
     height: 100%;
     z-index: 9999;
     background: url('<%= asset_path 'page-loader.gif' %>') 50% 50% no-repeat rgb(255,255,255);
-}</style>
+}
+.ts-pager{ display: none;}
+</style>
 <div class="loader"></div>
 <div class="col-lg-12" id="statscontainer" style="display:none;">
   <br/>
@@ -138,7 +140,8 @@
                     theme : "bootstrap",
                     headerTemplate : '{content} {icon}',
                     widgets : [ "uitheme", "filter" ]
-                })
+                });
+                   /*
                         .tablesorterPager({
 
                             // target the pager markup - see the HTML block below
@@ -156,6 +159,7 @@
                             output: '{startRow} - {endRow} / {filteredRows} ({totalRows})'
 
                         });
+                        */
             }
     );
 </script>
