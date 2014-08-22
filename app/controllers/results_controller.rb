@@ -221,8 +221,7 @@ class ResultsController < ApplicationController
         paddle = e.enrollment_datas.find_by name: 'Melonta'
         style = e.enrollment_datas.find_by name: 'Tyyli'
         if paddle.value == 'Melonta'
-          # add 0 to temp_times[:time]
-          temp_times[e.user.kk_number][:time] = 0
+          temp_times[e.user.kk_number][:time] = e.time
           temp_times[e.user.kk_number][:style] = 'Melonta'
         else
           temp_times[e.user.kk_number][:time] = e.time
@@ -273,12 +272,18 @@ class ResultsController < ApplicationController
     times = scale_times(event)
     normal_times = unscaled_times(event)
     times_sorted = Hash[times.sort_by { |k, v| v[:time] }]
-    winner_time = times_sorted.first.last[:time]
+    winner_time = nil
+    times_sorted.each do |k, v|
+      if v[:style] != 'Melonta'
+        winner_time = v[:time]
+        break
+      end
+    end
     position = 1
     year = event.second_end_date.year
     times_sorted.each do |number, time_and_style|
       if time_and_style[:time]
-        if time_and_style[:time] != 0
+        if time_and_style[:style] != 'Melonta'
           points = 1000 - event.factor * Math.log10(time_and_style[:time] / winner_time)
           insert_result_for_event(event.sport_type, number, year, points, normal_times[number], position, time_and_style[:style])
           normal_times.delete number

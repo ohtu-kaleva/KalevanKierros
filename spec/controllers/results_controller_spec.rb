@@ -316,7 +316,7 @@ describe ResultsController do
     expect(scaled_times[2002][:style]).to eq('Vuoro')
     expect(scaled_times[2003][:time]).to be_within(0.1).of(2523.63)
     expect(scaled_times[2003][:style]).to eq('Yksin')
-    expect(scaled_times[2004][:time]).to be_within(0.1).of(0)
+    expect(scaled_times[2004][:time]).to be_within(0.1).of(3533.54)
     expect(scaled_times[2004][:style]).to eq('Melonta')
   end
 

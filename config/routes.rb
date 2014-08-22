@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   resources :results
 
-  resources :event_attributes, except: [:index]
+  resources :event_attributes, except: [:index, :show, :new]
 
   resources :events
 
@@ -11,12 +11,6 @@ Rails.application.routes.draw do
   resources :sessions, only: [:new, :create]
   resources :enrollments, only: [:create, :index]
   resources :groups, only: [:new, :create, :show]
-  #resources :running_events, :controller => 'events', :type => 'RunningEvent', except: [:new, :create]
-  #resources :orienteering_events, :controller => 'events', :type => 'OrienteeringEvent'
-  #resources :skiing_events, :controller => 'events', :type => 'SkiingEvent'
-  #resources :skating_events, :controller => 'events', :type => 'SkatingEvent'
-  #resources :rowing_events, :controller => 'events', :type => 'RowingEvent'
-  #resources :cycling_events, :controller => 'events', :type => 'CyclingEvent'
   get 'enrollments/:enrollment_id/edit', to: 'enrollments#edit', as: 'edit_enrollment'
   get 'results/year/:year/:gender/:age_group/:type', to: 'results#index_by_year', as: 'index_by_year'
 
