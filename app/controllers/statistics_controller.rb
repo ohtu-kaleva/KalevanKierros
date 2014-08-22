@@ -76,26 +76,29 @@ class StatisticsController < ApplicationController
     message = {}
     if params[:year]
       @results = Result.where(year: params[:year])
+      if @results.any? { |r| r.orienteering_pts }
+        @results.each do |result|
+          @statistic = Statistic.find_by_kk_number result.kk_number
 
-      @results.each do |result|
-        @statistic = Statistic.find_by_kk_number result.kk_number
+          if @statistic
+            if result.completed_events == 4
+              @statistic.four_events_completed_count += 1
+            elsif result.completed_events == 5
+              @statistic.five_events_completed_count += 1
+            elsif result.completed_events == 6
+              @statistic.six_events_completed_count += 1
+            end
 
-        if @statistic
-          if result.completed_events == 4
-            @statistic.four_events_completed_count += 1
-          elsif result.completed_events == 5
-            @statistic.five_events_completed_count += 1
-          elsif result.completed_events == 6
-            @statistic.six_events_completed_count += 1
+            @statistic.total_events_completed += result.completed_events
+            @statistic.pts_sum += result.pts_sum
+            @statistic.save
           end
-
-          @statistic.total_events_completed += result.completed_events
-          @statistic.pts_sum += result.pts_sum
-          @statistic.save
         end
-      end
 
-      message[:success] = 'Tilastot päivitetty onnistuneesti'
+        message[:success] = 'Tilastot päivitetty onnistuneesti'
+      else
+        message[:error] = 'Suunnistuksen pisteitä ei ole vielä laskettu'
+      end
     else
       message[:error] = 'Tilastojen päivitys ei onnistunut'
     end
