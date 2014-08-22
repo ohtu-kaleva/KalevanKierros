@@ -97,10 +97,10 @@ class StatisticsController < ApplicationController
 
         message[:success] = 'Tilastot päivitetty onnistuneesti'
       else
-        message[:error] = 'Suunnistuksen pisteitä ei ole vielä laskettu'
+        message[:error] = 'Suunnistuksen pisteitä ei ole vielä laskettu.'
       end
     else
-      message[:error] = 'Tilastojen päivitys ei onnistunut'
+      message[:error] = 'Tilastojen päivitys ei onnistunut.'
     end
 
     redirect_to results_path, flash: message

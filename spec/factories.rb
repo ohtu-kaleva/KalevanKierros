@@ -269,4 +269,35 @@ FactoryGirl.define do
     pts_sum 16065.04
     completed_events 6
   end
+
+  factory :statistic do
+    city 'Helsinki'
+    birth_year 1998
+    six_events_completed_count 0
+    five_events_completed_count 0
+    four_events_completed_count 0
+    total_events_completed 0
+    pts_sum 0.0
+    position 0
+    p nil
+    r nil
+    a 0
+    ap nil
+    k 0
+    v 0
+  end
+
+  factory :empty_result, class: Result do
+    city 'Helsinki'
+    group nil
+    year 2014
+    series 'M'
+    skiing_pts 0.0
+    marathon_pts 0.0
+    rowing_pts 0.0
+    cycling_pts 0.0
+    skating_pts 0.0
+    orienteering_pts nil
+    completed_events 0
+  end
 end
