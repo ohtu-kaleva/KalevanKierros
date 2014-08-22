@@ -14,7 +14,7 @@ describe "Result page" do
   end
 
   it "should have links that direct to correct results" do
-    click_link Date.today.year.to_s
+    click_link "Henkilökohtaiset tulokset " << Date.today.year.to_s
     expect(page).to have_content "Vuoden #{Date.today.year.to_s} tulokset"
   end
 end

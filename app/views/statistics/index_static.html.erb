@@ -1,0 +1,54 @@
+<div class="col-lg-12">
+  <div style="float: left; clear: both; margin-top: 5px; width: 100%;">
+  <% if params[:sort] == "points" %>
+        <a href="?" class="btn btn-default btn-sm">Näytä aakkosjärjestyksessä</a>
+      <a href="?sort=points" class="btn btn-primary btn-sm">Näytä pistejärjestyksessä</a>&nbsp;
+  <% else %>
+      <a href="?" class="btn btn-primary btn-sm">Näytä aakkosjärjestyksessä</a>
+        <a href="?sort=points" class="btn btn-default btn-sm">Näytä pistejärjestyksessä</a>&nbsp;
+  <% end %>
+  </div>
+
+  <%= will_paginate @statistics, renderer: BootstrapPagination::Rails %>
+  <table class="table table-bordered" width="100%">
+    <tr>
+      <th>Kiertäjänumero</th>
+      <th>Sukunimi</th>
+      <th>Etunimi</th>
+      <th>Kotipaikka</th>
+      <th>Vuosi</th>
+      <th>P</th>
+      <th>6</th>
+      <th>5</th>
+      <th>4</th>
+      <th>Yht.</th>
+      <th>Pisteet</th>
+      <th>RM</th>
+      <th>A.viiri</th>
+      <th>AP</th>
+      <th>Kunniak.nro</th>
+      <th>Veljeskunnan jäsennumero</th>
+    </tr>
+    <% @statistics.each do |statistic| %>
+        <tr>
+          <td><b><%= link_to "#{statistic.kk_number}", statistic_path(statistic.id) %></b></td>
+          <td><%= statistic.last_name %></td>
+          <td><%= statistic.first_name %></td>
+          <td><%= statistic.city %></td>
+          <td><%= statistic.birth_year %></td>
+          <td><%= statistic.p %></td>
+          <td><%= statistic.six_events_completed_count %></td>
+          <td><%= statistic.five_events_completed_count %></td>
+          <td><%= statistic.four_events_completed_count %></td>
+          <td><%= statistic.total_events_completed %></td>
+          <td><%= statistic.pts_sum %></td>
+          <td><%= statistic.r %></td>
+          <td><%= statistic.a %></td>
+          <td><%= statistic.ap %></td>
+          <td><%= statistic.k %></td>
+          <td><%= statistic.v %></td>
+        </tr>
+    <% end %>
+  </table>
+  <%= will_paginate @statistics, renderer: BootstrapPagination::Rails %>
+</div>

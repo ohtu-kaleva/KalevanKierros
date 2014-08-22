@@ -3,10 +3,22 @@ class StatisticsController < ApplicationController
 
   # GET /statistics
   def index
-#    @statistics = Statistic.all.paginate(page: params[:page], per_page: 50)
-    @statistics = Statistic.all
+
   end
 
+  # GET /statistics/static
+  def index_static
+    if params[:sort] == 'points'
+      @statistics = Statistic.all.order('total_events_completed desc').paginate(page: params[:page], per_page: 100)
+    else
+      @statistics = Statistic.all.paginate(page: params[:page], per_page: 100)
+    end
+  end
+
+  # GET /statistics/search
+  def index_filterable
+    @statistics = Statistic.all
+  end
   # GET /statistics/1
   # GET /statistics/1.json
   def show

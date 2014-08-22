@@ -1,7 +1,6 @@
-<h1>Tulokset vuosittain</h1>
-
+<h1>Kalevan kierroksen tulokset vuosittain</h1>
 <% @years.each do |year| %>
-    <%= link_to year, index_by_year_path(year, "all", "all", "all") %><br>
+    <p style="font-size: larger;"><span style="font-weight: bold;"><%= year %></span>: <%= link_to "Henkilökohtaiset tulokset "<< year.to_s, index_by_year_path(year, "all", "all", "all") %>&nbsp;|&nbsp;<%= link_to "Joukkuetulokset " << year.to_s, results_path << '/year/' << year.to_s << '/groups' %></p>
 <% end %>
 
 <%= @time %><br>

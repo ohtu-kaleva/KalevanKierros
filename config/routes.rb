@@ -68,6 +68,8 @@ Rails.application.routes.draw do
   get 'users/:id/activate', to: 'users#new_activation', as: 'activation'
   put 'users/:id/activate', to: 'users#activate'
   get 'statistics', to: 'statistics#index', as: 'statistics'
+  get 'statistics/search', to: 'statistics#index_filterable'
+  get 'statistics/static', to: 'statistics#index_static'
   get 'statistics/:id', to: 'statistics#show', as: 'statistic'
   get 'users/:id/statistic', to: 'statistics#join', as: 'join_statistic'
   put 'users/:id/statistic', to: 'statistics#join_user_to_existing_statistic'
