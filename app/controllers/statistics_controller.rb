@@ -10,9 +10,9 @@ class StatisticsController < ApplicationController
   # GET /statistics/static
   def index_static
     if params[:sort] == 'points'
-      @statistics = Statistic.all.order('total_events_completed desc').paginate(page: params[:page], per_page: 100)
+      @statistics = Statistic.all.order('total_events_completed desc').paginate(page: statistic_params[:page], per_page: 100)
     else
-      @statistics = Statistic.all.paginate(page: params[:page], per_page: 100)
+      @statistics = Statistic.all.paginate(page: statistic_params[:page], per_page: 100)
     end
   end
 
@@ -23,7 +23,7 @@ class StatisticsController < ApplicationController
   # GET /statistics/1
   # GET /statistics/1.json
   def show
-    @statistic = Statistic.find_by id: params[:id]
+    @statistic = Statistic.find_by id: statistic_params[:id]
 
     respond_to do |format|
       if @statistic
@@ -37,7 +37,7 @@ class StatisticsController < ApplicationController
   end
 
   def join
-    @user = User.find_by id: params[:id]
+    @user = User.find_by id: statistic_params[:id]
     if !@user
       redirect_to :root && return
     end
@@ -55,8 +55,8 @@ class StatisticsController < ApplicationController
   end
 
   def join_user_to_existing_statistic
-    @user = User.find_by id: params[:id]
-    @statistic = Statistic.find_by id: params[:statistic_id]
+    @user = User.find_by id: statistic_params[:id]
+    @statistic = Statistic.find_by id: statistic_params[:statistic_id]
 
     if @user && @statistic
       @user.statistic.destroy unless @user.statistic.nil?
@@ -74,8 +74,9 @@ class StatisticsController < ApplicationController
 
   def update_statistics
     message = {}
-    if params[:year]
-      @results = Result.where(year: params[:year])
+    @results = Result.where(year: statistic_params[:year])
+
+    if !@results.empty?
       if @results.any? { |r| r.orienteering_pts }
         @results.each do |result|
           @statistic = Statistic.find_by_kk_number result.kk_number
@@ -104,5 +105,11 @@ class StatisticsController < ApplicationController
     end
 
     redirect_to results_path, flash: message
+  end
+
+  private
+
+  def statistic_params
+    params.permit(:year, :page, :id, :statistic_id, :year)
   end
 end
