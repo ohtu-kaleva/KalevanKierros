@@ -96,7 +96,7 @@ class StatisticsController < ApplicationController
           end
         end
 
-        message[:success] = 'Tilastot päivitetty onnistuneesti'
+        message[:success] = 'Tilastot päivitetty onnistuneesti.'
       else
         message[:error] = 'Suunnistuksen pisteitä ei ole vielä laskettu.'
       end
@@ -104,7 +104,7 @@ class StatisticsController < ApplicationController
       message[:error] = 'Tilastojen päivitys ei onnistunut.'
     end
 
-    redirect_to results_path, flash: message
+    redirect_to statistics_static_path, flash: message
   end
 
   private

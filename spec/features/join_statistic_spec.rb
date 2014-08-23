@@ -42,7 +42,7 @@ feature 'Joining statistic' do
                 3300000, password: 'Salasana1', password_confirmation: 'Salasana1' }
 
     before 'with regular user' do
-      1.upto 52 do |i|
+      1.upto 102 do |i|
         FactoryGirl.create(:statistic, kk_number: 3300000+i, last_name:
                            "User#{i}", first_name: "User#{i}")
         FactoryGirl.create(:empty_result, kk_number: 3300000+i, name: "User#{i} \
@@ -79,8 +79,11 @@ feature 'Joining statistic' do
     end
 
     scenario 'User views all statistics' do
-      click_link 'Tilastot'
+      visit statistics_static_path
       expect(page).to have_content '3300001 User1 User1'
+
+      first(:link, 'Seuraava').click
+      expect(page).to have_content '3300101 User101 User101'
     end
   end
 end
