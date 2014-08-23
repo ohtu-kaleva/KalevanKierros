@@ -20,7 +20,7 @@ feature 'Statistics' do
       end
     end
 
-    scenario 'Page lists statistics correctly' do
+    scenario 'index page lists statistics correctly' do
       visit statistics_path
       expect(page).to have_content 'Kiertäjänumero'
       expect(page).to have_content '3300001 User1 User1'
@@ -34,7 +34,7 @@ feature 'Statistics' do
       expect(page).not_to have_content '3300050'
     end
 
-    scenario 'Admin cannot update statistics' do
+    scenario 'admin cannot update statistics' do
       visit results_path
       click_link '2014'
       expect(page).to have_content 'Vuoden 2014 tulokset'
@@ -62,9 +62,17 @@ feature 'Statistics' do
                            User#{i}", completed_events: 6, orienteering_pts: 5*i,
                            pts_sum: 25*i)
       end
+      FactoryGirl.create(:statistic, kk_number: 3300053, last_name:
+                         "User53", first_name: "User53")
+      FactoryGirl.create(:empty_result, kk_number: 3300053, name: 'User53 User53',
+                         completed_events: 5, orienteering_pts: 500, pts_sum: 500)
+      FactoryGirl.create(:statistic, kk_number: 3300054, last_name:
+                         "User54", first_name: "User54")
+      FactoryGirl.create(:empty_result, kk_number: 3300054, name: 'User54 User54',
+                         completed_events: 4, orienteering_pts: 500, pts_sum: 400)
     end
 
-    scenario 'Admin updates statistics' do
+    scenario 'admin updates statistics' do
       visit results_path
       click_link '2014'
       expect(page).to have_content 'Vuoden 2014 tulokset'
@@ -75,6 +83,10 @@ feature 'Statistics' do
 
       expect(page).to have_content '3300001 User1 User1 Helsinki 1998 1 0 0 6 25.0 0 0 0'
       expect(page).to have_content '3300006 User6 User6 Helsinki 1998 1 0 0 6 150.0 0 0 0'
+
+      first(:link, 'Seuraava').click
+      expect(page).to have_content '3300053 User53 User53 Helsinki 1998 0 1 0 5 500.0 0 0 0'
+      expect(page).to have_content '3300054 User54 User54 Helsinki 1998 0 0 1 4 400.0 0 0 0'
     end
   end
 end
