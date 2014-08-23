@@ -34,4 +34,30 @@ feature 'Joining statistic' do
     expect(Statistic.count).to eq(1)
     expect(Statistic.last.user_id).to eq(user.id)
   end
+
+  scenario 'User views his own result' do
+    non_admin = FactoryGirl.create :user, username: 'Testi', kk_number:\
+                3300000, password: 'Salasana1', password_confirmation: 'Salasana1'
+    UsersController.new.send(:init_statistic_entry, non_admin)
+    sign_in username: 'Testi', password: 'Salasana1'
+    click_link 'Omat tiedot'
+    click_link 'Näytä tilasto'
+
+    expect(page).to have_content "Kiertäjänumero #{non_admin.kk_number}"
+    expect(page).to have_content "Sukunimi #{non_admin.last_name}"
+    expect(page).to have_content "Etunimi #{non_admin.first_name}"
+    expect(page).to have_content "Kotipaikka #{non_admin.city}"
+    expect(page).to have_content "Syntymävuosi #{non_admin.birth_date.year}"
+    expect(page).to have_content "6 0"
+    expect(page).to have_content "5 0"
+    expect(page).to have_content "4 0"
+    expect(page).to have_content "Yhteensä 0"
+    expect(page).to have_content "Kokonaispisteet 0.0"
+    expect(page).to have_content 'Rintamerkki Ei'
+  end
+
+  scenario 'User tries to view non-existing statistic' do
+    visit statistic_path '3985'
+    current_path.should == '/'
+  end
 end
