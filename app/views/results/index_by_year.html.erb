@@ -179,5 +179,5 @@
 <%= link_to 'Joukkuetulokset', results_by_year_and_groups_path(params[:year]), class: "btn btn-primary" %>&nbsp;
     <% if user_is_admin? %>
 <%= link_to 'Syötä uusi tulos', new_result_path, class: "btn btn-default" %>
-<%= link_to 'Päivitä tilastot', update_statistics_path(params[:year]), method: :post, class: "btn btn-default" %>
+<%= link_to 'Päivitä tilastot', update_statistics_path(params[:year]), data: { confirm: "Päivitetäänkö tilastot?" }, method: :post, class: "btn btn-default" %>
 <% end %>
