@@ -80,20 +80,23 @@ class StatisticsController < ApplicationController
     if !@results.empty?
       if @results.any? { |r| r.orienteering_pts }
         @results.each do |result|
-          @statistic = Statistic.find_by_kk_number result.kk_number
+          if !result.updated_to_statistics
+            @statistic = Statistic.find_by_kk_number result.kk_number
 
-          if @statistic
-            if result.completed_events == 4
-              @statistic.four_events_completed_count += 1
-            elsif result.completed_events == 5
-              @statistic.five_events_completed_count += 1
-            elsif result.completed_events == 6
-              @statistic.six_events_completed_count += 1
+            if @statistic
+              if result.completed_events == 4
+                @statistic.four_events_completed_count += 1
+              elsif result.completed_events == 5
+                @statistic.five_events_completed_count += 1
+              elsif result.completed_events == 6
+                @statistic.six_events_completed_count += 1
+              end
+
+              @statistic.total_events_completed += result.completed_events
+              @statistic.pts_sum += result.pts_sum
+              @statistic.save
+              result.update_attribute :updated_to_statistics, true
             end
-
-            @statistic.total_events_completed += result.completed_events
-            @statistic.pts_sum += result.pts_sum
-            @statistic.save
           end
         end
 
