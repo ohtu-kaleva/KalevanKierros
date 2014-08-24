@@ -61,6 +61,7 @@ class StatisticsController < ApplicationController
     if @user && @statistic
       @user.statistic.destroy unless @user.statistic.nil?
       @user.update_attribute :statistic, @statistic
+      @statistic.update_attribute :kk_number, @user.kk_number
 
       redirect_to users_path, flash: { success: 'Käyttäjä liitetty tilastoon.' }
     else
