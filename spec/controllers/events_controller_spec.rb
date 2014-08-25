@@ -42,21 +42,14 @@ describe EventsController do
 
   end
 
-  describe "POST #create" do
-      it "creates a new default event" do
-        post :create, event: { name: 'Default',
-                               sport_type: '',
-                               start_date: Date.today,
-                               end_date: Date.today + 1.week,
-                               second_end_date: Date.today + 2.weeks,
-                               description: 'Default test',
-                               open: true,
-                               price: 1000,
-                               second_price: 2000,
-                               penalty_factor: 1.0,
-                               rowing_penalty: 12.0,
-                               factor: 3500 }
-      end
+  describe "GET edit" do
+
+    it "assigns correct event" do
+      event = FactoryGirl.create(:event)
+      get :edit, id: event
+      expect(assigns(event))
+    end
+
   end
 
 end
