@@ -279,6 +279,9 @@ class ResultsController < ApplicationController
       if time_and_style[:time]
         if time_and_style[:style] != 'Melonta'
           points = 1000 - event.factor * Math.log10(time_and_style[:time] / winner_time)
+          if points < 0
+            points = 0
+          end
           insert_result_for_event(event.sport_type, number, year, points, normal_times[number], position, time_and_style[:style])
           normal_times.delete number
           position += 1
