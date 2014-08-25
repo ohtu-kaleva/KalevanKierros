@@ -272,13 +272,7 @@ class ResultsController < ApplicationController
     times = scale_times(event)
     normal_times = unscaled_times(event)
     times_sorted = Hash[times.sort_by { |k, v| v[:time] }]
-    winner_time = nil
-    times_sorted.each do |k, v|
-      if v[:style] != 'Melonta'
-        winner_time = v[:time]
-        break
-      end
-    end
+    winner_time = get_winner_time(times_sorted)
     position = 1
     year = event.second_end_date.year
     times_sorted.each do |number, time_and_style|
@@ -299,6 +293,17 @@ class ResultsController < ApplicationController
       end
     end
     redirect_to results_path
+  end
+
+  def get_winner_time(times)
+    winner_time = nil
+    times.each do |k, v|
+      if v[:style] != 'Melonta'
+        winner_time = v[:time]
+        break
+      end
+    end
+    winner_time
   end
 
   def insert_result_for_event(sport_type, number, year, points, time, position, style)
