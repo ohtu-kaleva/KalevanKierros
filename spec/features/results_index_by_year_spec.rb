@@ -1,9 +1,9 @@
 require 'spec_helper'
 
 feature 'Show results by year' do
-  let!(:result) { FactoryGirl.create :result }
-  let!(:result2) { FactoryGirl.create :result, year:2013 }
-  let!(:result3) { FactoryGirl.create :result, year:2012 }
+  let!(:result) { FactoryGirl.create :result, :with_times_and_points }
+  let!(:result2) { FactoryGirl.create :result, :with_times_and_points, year:2013 }
+  let!(:result3) { FactoryGirl.create :result, :with_times_and_points, year:2012 }
 
   context "Selecting existing year" do
     scenario "shows the correct year (2014)" do

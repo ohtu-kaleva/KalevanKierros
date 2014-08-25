@@ -12,12 +12,12 @@ describe 'Group Results page' do
 
   describe 'with a group in database' do
     before :each do
-      result1 = FactoryGirl.create :result, group:'Testi', year:Date.today.year
-      result2 = FactoryGirl.create :result, group:'Testi', name:'Erkki Hervanta', year:Date.today.year
-      result3 = FactoryGirl.create :result, group:'Testi', name:'Heikki Hattula', year:Date.today.year
-      result4 = FactoryGirl.create :result, group:'Testi', name:'Veikko Vanaja', year:Date.today.year
-      result5 = FactoryGirl.create :result, group:'Testi', name:'Jaakko Janakkala', year:Date.today.year
-      result6 = FactoryGirl.create :result, group:'Testi', name:'Aapo Akaa', year:Date.today.year
+      result1 = FactoryGirl.create :result, :with_times_and_points, group:'Testi', year:Date.today.year
+      result2 = FactoryGirl.create :result, :with_times_and_points, group:'Testi', name:'Erkki Hervanta', year:Date.today.year
+      result3 = FactoryGirl.create :result, :with_times_and_points, group:'Testi', name:'Heikki Hattula', year:Date.today.year
+      result4 = FactoryGirl.create :result, :with_times_and_points, group:'Testi', name:'Veikko Vanaja', year:Date.today.year
+      result5 = FactoryGirl.create :result, :with_times_and_points, group:'Testi', name:'Jaakko Janakkala', year:Date.today.year
+      result6 = FactoryGirl.create :result, :with_times_and_points, group:'Testi', name:'Aapo Akaa', year:Date.today.year
       visit results_by_year_and_groups_path(Date.today.year)
     end
 
