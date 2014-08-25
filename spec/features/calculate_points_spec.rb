@@ -6,7 +6,7 @@ feature 'calculate points' do
     let!(:user) { FactoryGirl.create :user, :admin }
     let!(:orienteering_event) { FactoryGirl.create :complete_event, :orienteering, name: 'Suunnistus', factor: 1300, id: 1 }
     let!(:skiing_event) { FactoryGirl.create :complete_event, :skiing, name: 'Hiihto', penalty_factor: 1.06, factor: 2000, id: 2 }
-    let!(:rowing_event) { FactoryGirl.create :complete_event, :rowing, name: 'Soutu', penalty_factor: 12.0, rowing_penalty: 20.0, factor: 3500, id: 3 }
+    let!(:rowing_event) { FactoryGirl.create :complete_event, :rowing, name: 'Soutu', penalty_factor: 20.0, rowing_penalty: 12.0, factor: 3500, id: 3 }
     let!(:cycling_event) { FactoryGirl.create :complete_event, :cycling, name: 'Pyöräily', factor: 2800, id: 4 }
     let!(:skating_event) { FactoryGirl.create :complete_event, :skating, name: 'Luistelu', factor: 2800, id: 5 }
     let!(:running_event) { FactoryGirl.create :complete_event, :running, name: 'Juoksu', penalty_factor: 2.3, factor: 2000, id: 6 }
@@ -374,7 +374,7 @@ feature 'calculate points' do
         expect(result4.pts_sum).to be_within(0.1).of(3839.159)
         expect(result4.completed_events).to eq(6)
         expect(result5.pts_sum).to be_within(0.1).of(2537.027)
-        expect(result5.completed_events).to eq(6)
+        expect(result5.completed_events).to eq(5)
         expect(result6.pts_sum).to be_within(0.1).of(2958.766)
         expect(result6.completed_events).to eq(5)
         expect(result7.pts_sum).to be_within(0.1).of(1584.348)
