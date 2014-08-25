@@ -7,3 +7,10 @@
 <% end %>
 <br>
 <%= button_to('Näytä ilmoittautumiset', kk_enrollments_path, method: :get, :class => "btn btn-primary") %>
+
+<br>
+<b>Päivitä tulosten tiedot tilastoihin</b>
+<%= bootstrap_form_tag url: statistics_update_path, method: :post do |f| %>
+  <%= f.select :year, options_for_select(@years), label: 'Vuosi' %>
+  <%= f.submit 'Päivitä tilastot', onclick: "return confirm('Päivitetäänkö tilastot?')" %>
+<% end %>

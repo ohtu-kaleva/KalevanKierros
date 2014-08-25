@@ -82,6 +82,7 @@ class UsersController < ApplicationController
         if @user.username == params[:username] && (@user.authenticate params[:password])
           if @user.activation_token == params[:activation_token]
             @user.update_attribute(:active, true)
+            @user.update_attribute :kk_number, generate_kk_number(@user)
             init_statistic_entry @user
             session[:user_id] = @user.id
             flash[:success] = "Tervetuloa " + @user.first_name
@@ -118,5 +119,9 @@ class UsersController < ApplicationController
                        six_events_completed_count: 0, five_events_completed_count: 0,
                        four_events_completed_count: 0, total_events_completed: 0,
                        pts_sum: 0, position: 0, p: nil, r: nil, a: 0, ap: nil, k: 0, v: 0
+    end
+
+    def generate_kk_number(user)
+      3300000+user.id
     end
 end

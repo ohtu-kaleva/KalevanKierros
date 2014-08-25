@@ -3,4 +3,8 @@ class StaticPagesController < ApplicationController
 
   def home
   end
+
+  def kk_enrollment
+    @years = Result.uniq.pluck :year
+  end
 end

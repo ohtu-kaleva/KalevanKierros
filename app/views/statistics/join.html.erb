@@ -31,7 +31,7 @@
       <td><%= @current_statistic.five_events_completed_count %></td>
       <td><%= @current_statistic.four_events_completed_count %></td>
       <td><%= @current_statistic.total_events_completed %></td>
-      <td><%= @current_statistic.pts_sum %></td>
+      <td><%= @current_statistic.pts_sum.round(2) %></td>
       <td><%= @current_statistic.r %></td>
       <td><%= @current_statistic.a %></td>
       <td><%= @current_statistic.ap %></td>
@@ -85,7 +85,7 @@
         <td><%= @potential_statistic.five_events_completed_count %></td>
         <td><%= @potential_statistic.four_events_completed_count %></td>
         <td><%= @potential_statistic.total_events_completed %></td>
-        <td><%= @potential_statistic.pts_sum %></td>
+        <td><%= @potential_statistic.pts_sum.round(2) %></td>
         <td><%= @potential_statistic.r %></td>
         <td><%= @potential_statistic.a %></td>
         <td><%= @potential_statistic.ap %></td>
