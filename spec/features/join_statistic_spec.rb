@@ -83,7 +83,7 @@ feature 'Joining statistic' do
       expect(page).to have_content '3300001 User1 User1'
 
       first(:link, 'Seuraava').click
-      expect(page).to have_content '3300101 User101 User101'
+      expect(page).to have_content '3300096 User96 User96'
     end
   end
 end
