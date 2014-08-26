@@ -1,16 +1,9 @@
 class EventAttributesController < ApplicationController
   before_action :redirect_if_user_not_admin
-  before_action :set_event_attribute_or_redirect, only: [:show, :edit, :update, :destroy]
+  before_action :set_event_attribute_or_redirect, only: [:edit, :update, :destroy]
   before_action :set_attribute_types, only: [:new, :edit]
 
-  # GET /event_attributes
-  def index
-    @event_attributes = EventAttribute.all
-  end
-
   # GET /event_attributes/1
-  def show
-  end
 
   # GET /event_attributes/new
   def new
