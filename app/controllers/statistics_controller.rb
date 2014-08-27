@@ -75,6 +75,9 @@ class StatisticsController < ApplicationController
 
   def update_statistics
     message = {}
+    unless params[:year] =~ /\A\d{4}\z/
+      redirect_to :root and return
+    end
     @results = Result.where(year: statistic_params[:year])
 
     if !@results.empty?

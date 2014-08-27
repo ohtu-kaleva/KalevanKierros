@@ -8,6 +8,9 @@ class ResultsController < ApplicationController
   end
 
   def index_by_year
+    unless params[:year] =~ /\A\d{4}\z/ and valid_gender_and_age_series(params[:gender], params[:age_group])
+      redirect_to :root and return
+    end
     search_filter = form_gender_age_filter(params[:gender], params[:age_group])
     @res = {}
     @res[:series] = existing_age_series(params[:year])
@@ -31,6 +34,8 @@ class ResultsController < ApplicationController
     elsif params[:type] == 'marathon'
       @laji = "Juoksu"
       @res[:results] = Result.where(year: params[:year]).where.not(marathon_time: nil).where(series: search_filter).order('marathon_pos asc').pluck('name, marathon_pos as position, marathon_pts as points, marathon_time as time')
+    else
+      redirect_to :root and return
     end
     if @res[:results].empty? && params[:gender] == "all" && params[:age_group] == "all" && params[:type] == "all"
       redirect_to :results, flash: {error: 'Valitsemallesi vuodelle ei löydy tuloksia'} and return
@@ -38,6 +43,14 @@ class ResultsController < ApplicationController
       redirect_to index_by_year_path(params[:year], "all", "all", "all"), flash: {error: 'Valitsemillasi hakuparametreillä ei löydy tuloksia.' } and return
     end
     @res
+  end
+
+  def valid_gender_and_age_series(gender, age_series)
+    if gender.in? ["all", "M", "N"] and age_series.in? ["all", "AL22", "yleinen", "40", "50", "55", "60", "65", "70", "75", "80", "85", "90", "95", "100"]
+      true
+    else
+      false
+    end
   end
 
   def form_gender_age_filter(gender, age_series)
@@ -85,6 +98,9 @@ class ResultsController < ApplicationController
   end
 
   def with_existing_group
+    if not params[:year] =~ /\A\d{4}\z/
+      redirect_to :root and return
+    end
     raw_results = Result.where(year: params[:year]).where.not(group: nil).order(:group)
     if raw_results.empty?
       redirect_to :root and return

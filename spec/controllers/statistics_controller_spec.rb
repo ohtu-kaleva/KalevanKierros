@@ -19,7 +19,6 @@ describe StatisticsController do
   context 'Does not update statistics' do
     it 'without year' do
       post :update_statistics, year: ''
-      expect(flash[:error]).to eq 'Tilastojen päivitys ei onnistunut.'
       expect(Statistic.first.pts_sum).to eq 0.0
     end
 

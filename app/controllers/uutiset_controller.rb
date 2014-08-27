@@ -21,6 +21,9 @@ class UutisetController < ApplicationController
   end
 
   def archive_by_year
+    unless params[:year] =~ /\A\d{4}\z/
+      redirect_to :root and return
+    end
     startdate = DateTime.new(params[:year].to_i)
     enddate = DateTime.new(params[:year].to_i,12,31,23,59,59)
     @uutiset = Uutiset.where(:created_at => startdate..enddate)
