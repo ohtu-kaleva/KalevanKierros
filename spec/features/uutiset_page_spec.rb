@@ -50,8 +50,60 @@ feature 'News page' do
       expect(page).to have_content 'testbody2'
     end
 
-    scenario 'Admin tries to browse with incorrect year' do
+    scenario 'Admin edits news item' do
+      click_link 'Hallinnoi uutisia'
+      first(:link, 'Muokkaa').click
+
+      fill_in 'Uutisen otsikko', with: 'Muutettu otsikko'
+      fill_in 'Uutisen leipäteksti', with: 'Muutettu teksti'
+      click_button 'Tallenna'
+      expect(page).to have_content 'Uutinen päivitetty.'
+      expect(page).to have_content 'Muutettu otsikko'
+      expect(page).to have_content 'Muutettu teksti'
+      expect(page).not_to have_content 'title1'
+      expect(page).not_to have_content 'testbody1'
+    end
+
+    scenario 'Admin deletes news item', js: true, skip: true do
+      click_link 'Ylläpito'
+      click_link 'Hallinnoi uutisia'
+      expect(page).to have_link 'Poista'
+
+      page.first(:link, 'Poista').click
+      page.driver.browser.switch_to.alert.accept
+
+      expect(page).to have_content 'Uutinen poistettu.'
+      expect(page).not_to have_content 'title1'
+    end
+  end
+
+  context 'It is not possible to' do
+    before :each do
+      Uutiset.create title: 'title1', body: 'testbody1', created_at: DateTime.new(2013, 12, 31, 23, 59, 59)
+      click_link 'Hallinnoi uutisia'
+    end
+
+    scenario 'add news item with empty title' do
+      click_link 'Luo uusi uutinen'
+      click_button 'Tallenna'
+      expect(page).not_to have_content 'Uutinen luotu.'
+    end
+
+    scenario 'edit empty title to news item' do
+      click_link 'Muokkaa'
+
+      fill_in 'Uutisen otsikko', with: ''
+      click_button 'Tallenna'
+      expect(page).not_to have_content 'Uutinen päivitetty onnistuneesti.'
+    end
+
+    scenario 'browse archives with incorrect year' do
       visit archive_by_year_path('123d')
+      current_path.should == '/'
+    end
+
+    scenario 'browse unexisting news item' do
+      visit uutiset_path(234)
       current_path.should == '/'
     end
   end
