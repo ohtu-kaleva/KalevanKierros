@@ -305,7 +305,7 @@ class ResultsController < ApplicationController
       end
     end
     normal_times.each do |number, time|
-      if event.sport_type == 'RowingEvent'
+      if event.sport_type == 'RowingEvent' and not time.nil?
         insert_result_for_event(event.sport_type, number, year, nil, time, nil, 'Melonta')
       else
         insert_result_for_event(event.sport_type, number, year, nil, nil, nil, nil)
