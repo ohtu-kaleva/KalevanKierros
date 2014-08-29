@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :redirect_if_user_not_admin, only: [:index]
+  before_action :redirect_if_user_not_admin, only: [:index, :destroy]
   before_action :set_user_or_redirect, only:  [:show, :edit, :update, :destroy]
 
   # GET /users
@@ -59,7 +59,7 @@ class UsersController < ApplicationController
   # DELETE /users/1
   def destroy
     @user.destroy
-      redirect_to users_url, flash: { success: 'Käyttäjä poistettu onnistuneesti.' }
+    redirect_to users_url, flash: { success: 'Käyttäjä poistettu onnistuneesti.' }
   end
 
   def new_activation
