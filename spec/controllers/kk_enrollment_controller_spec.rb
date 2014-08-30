@@ -65,13 +65,13 @@ describe KkEnrollmentsController do
 
     context 'updating enrollment' do
       it 'with correct info succeeds' do
-        expect(KkEnrollment.find_by_id(user.id).paid).to eq(false)
+        expect(user.kk_enrollment.paid).to eq(false)
 
         put :update, id: user.kk_enrollment.id, kk_enrollment: { paid: true }
 
         response.should_not redirect_to root_path
         expect(flash[:success]).to eq 'Ilmoittautuminen päivitettiin onnistuneesti'
-        expect(KkEnrollment.find_by_id(user.id).paid).to eq(true)
+        expect(user.reload.kk_enrollment.paid).to eq(true)
         expect(response).to redirect_to kk_enrollments_path
       end
 
