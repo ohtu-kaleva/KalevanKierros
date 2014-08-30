@@ -1,6 +1,8 @@
 class KkEnrollmentsController < ApplicationController
   include InitResultsEntry
   before_action :redirect_if_user_not_admin, except: [:new, :create]
+  before_action :set_user, only: [:new, :create]
+  before_action :check_enrollment, only: [:new, :create]
 
   # GET /kk_enrollments
   def index
@@ -14,7 +16,6 @@ class KkEnrollmentsController < ApplicationController
   # GET /kk_enrollments/new
   def new
     if enrollment_open?
-      set_user_and_check_enrollment
       @kk_enrollment = KkEnrollment.new
     else
       redirect_to root_path, flash: { error: 'Kierrokselle ei voi ilmoittautua' }
@@ -32,17 +33,15 @@ class KkEnrollmentsController < ApplicationController
       return
     end
 
-    set_user_and_check_enrollment
-
     @kk_enrollment = KkEnrollment.new user_id: @user.id
 
     if @kk_enrollment.save
       init_results_entry(@user)
       KkEnrollmentMailer.enrollment_email(@user).deliver
-      redirect_to @user, flash: { success: 'Ilmoittautuminen onnistui' }
-    else
-      redirect_to root_path, flash: { error: 'Ilmoittautuminen epäonnistui' }
+      redirect_to(@user, flash: { success: 'Ilmoittautuminen onnistui' }) && return
     end
+
+    redirect_to root_path, flash: { error: 'Ilmoittautuminen epäonnistui' }
   end
 
   def change_enrollment_status
@@ -70,38 +69,43 @@ class KkEnrollmentsController < ApplicationController
 
   # PATCH/PUT /kk_enrollments/1
   def update
+    @kk_enrollment = KkEnrollment.find_by id: params[:id]
 
-    if @kk_enrollment.update(kk_enrollment_params)
-      redirect_to @kk_enrollment, flash: { success: 'Ilmoittautuminen päivitettiin onnistuneesti' }
-    else
-      render :edit
+    if @kk_enrollment && @kk_enrollment.update(paid: true)
+      flash[:success] = 'Ilmoittautuminen päivitettiin onnistuneesti'
     end
+
+    redirect_to kk_enrollments_path
   end
 
   # DELETE /kk_enrollments/1
   def destroy
+    @kk_enrollment = KkEnrollment.find_by id: params[:id]
 
-    @kk_enrollment.destroy
-    redirect_to kk_enrollments_url, flash: { success: 'Ilmoittautuminen poistettu' }
+    if @kk_enrollment
+      @kk_enrollment.destroy
+      redirect_to kk_enrollments_path, flash: { success: 'Ilmoittautuminen poistettu' }
+    else
+      redirect_to root_path
+    end
   end
 
   private
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def kk_enrollment_params
-      params.require(:kk_enrollment).permit(:user_id, :paid)
+      params.require(:kk_enrollment).permit(:id, :paid)
     end
 
-    def set_user_and_check_enrollment
+    def set_user
       @user = current_user
-      if !@user
-        redirect_to signin_path and return
-      end
+      return if @user
+      redirect_to signin_path
+    end
 
-      if @user.kk_enrollment
-        redirect_to root_path, flash: { error: 'Olet jo ilmoittautunut kierrokselle' }
-        return
-      end
+    def check_enrollment
+      return if !@user.kk_enrollment
+      redirect_to root_path, flash: { error: 'Olet jo ilmoittautunut kierrokselle' }
     end
 
 end

@@ -55,6 +55,19 @@ feature 'Opening enrollment' do
       expect(Result.last.name).to eq(user.full_name)
       expect(Result.last.year).to eq(Date.today.year)
       expect(Result.last.city).to eq(user.city)
+      click_link 'Ylläpito'
+      click_link 'Kierroksen hallinta'
+      click_button 'Näytä ilmoittautumiset'
+      expect(page).to have_content user.kk_number
+      expect(page).to have_content user.first_name
+      expect(page).to have_content user.last_name
+    end
+
+    scenario 'Admin closes enrollment' do
+      click_link 'Ylläpito'
+      click_link 'Kierroksen hallinta'
+      click_button 'Sulje ilmoittautuminen'
+      expect(page).to have_content 'Kierrosilmoittautuminen suljettu'
     end
   end
 end
