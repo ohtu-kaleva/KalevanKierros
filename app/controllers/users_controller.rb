@@ -43,7 +43,7 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1
   def update
     if @user.update(user_params)
-      redirect_to @user, success: 'Käyttäjätiedot päivitetty onnistuneesti.'
+      redirect_to @user, flash: { success: 'Käyttäjätiedot päivitetty onnistuneesti.' }
     else
       render :edit
     end
@@ -58,8 +58,14 @@ class UsersController < ApplicationController
 
   # DELETE /users/1
   def destroy
-    @user.destroy
-    redirect_to users_url, flash: { success: 'Käyttäjä poistettu onnistuneesti.' }
+    message = {}
+
+    if @user != current_user
+      @user.destroy
+      message = { success: 'Käyttäjä poistettu onnistuneesti.' }
+    end
+
+    redirect_to users_url, flash: message
   end
 
   def new_activation
