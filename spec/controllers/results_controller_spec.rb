@@ -59,17 +59,31 @@ describe ResultsController do
   end
 
   it "should calculate the sum of four best points correctly" do
-    FactoryGirl.create(:result, series: "MAL22", group: "testi", marathon_pts: 900.11, rowing_pts: 922.06, skiing_pts: 880.44, orienteering_pts: 932.81, cycling_pts: 921.81, skating_pts: 953.46)
-    FactoryGirl.create(:result, series: "N", group: "testi", marathon_pts: 767.56, rowing_pts: 907.99, skiing_pts: nil, orienteering_pts: 789.03, cycling_pts: 826.54, skating_pts: 791.61)
-    FactoryGirl.create(:result, series: "M", group: "testi", marathon_pts: 755.43, rowing_pts: nil, skiing_pts: nil, orienteering_pts: 855.51, cycling_pts: 886.63, skating_pts: 34.32)
-    FactoryGirl.create(:result, series: "N40", group: "testi", marathon_pts: 835.44, rowing_pts: 823.40, skiing_pts: 738.48, orienteering_pts: nil, cycling_pts: 231.42, skating_pts: 886.83)
-    FactoryGirl.create(:result, series: "M55", group: "testi", marathon_pts: 500.43, rowing_pts: nil, skiing_pts: 598.46, orienteering_pts: 782.90, cycling_pts: nil, skating_pts: 643.6)
-    FactoryGirl.create(:result, series: "M65", group: "testi", marathon_pts: 654.43, rowing_pts: nil, skiing_pts: 827.81, orienteering_pts: 782.12, cycling_pts: 870.55, skating_pts: 882.88)
-    FactoryGirl.create(:result, series: "M55", group: "joku muu", marathon_pts: 155.33, rowing_pts: 0, skiing_pts: 883.88, orienteering_pts: nil, cycling_pts: 424.11, skating_pts: 723.2)
-    FactoryGirl.create(:result, series: "M40", group: "joku muu", marathon_pts: 1000, rowing_pts: 342.43, skiing_pts: 353.34, orienteering_pts: 745.43, cycling_pts: 543.76, skating_pts: 655.98)
-    FactoryGirl.create(:result, series: "N", group: nil, marathon_pts: nil, rowing_pts: 1000, skiing_pts: 200.12, orienteering_pts: 654.00, cycling_pts: 454.22, skating_pts: 353.76)
-    FactoryGirl.create(:result, series: "N80", group: "kolmas", marathon_pts: 354.43, rowing_pts: 533.0, skiing_pts: nil, orienteering_pts: nil, cycling_pts: nil, skating_pts: 923.22)
-    sum_pts_test_group = controller.sum_of_four_best_points("testi", 2014)
+    individual_results = {}
+    result_noted_at_group_points = {}
+    res = FactoryGirl.create(:result, series: "MAL22", group: "testi", marathon_pts: 900.11, rowing_pts: 922.06, skiing_pts: 880.44, orienteering_pts: 932.81, cycling_pts: 921.81, skating_pts: 953.46)
+    individual_results[res.id] = res
+    result_noted_at_group_points[res.id] = {:marathon => false, :skiing => false, :orienteering => false, :skating => false, :cycling => false, :rowing => false}
+    res = FactoryGirl.create(:result, series: "N", group: "testi", marathon_pts: 767.56, rowing_pts: 907.99, skiing_pts: nil, orienteering_pts: 789.03, cycling_pts: 826.54, skating_pts: 791.61)
+    individual_results[res.id] = res
+    result_noted_at_group_points[res.id] = {:marathon => false, :skiing => false, :orienteering => false, :skating => false, :cycling => false, :rowing => false} 
+    res = FactoryGirl.create(:result, series: "M", group: "testi", marathon_pts: 755.43, rowing_pts: nil, skiing_pts: nil, orienteering_pts: 855.51, cycling_pts: 886.63, skating_pts: 34.32)
+    individual_results[res.id] = res
+    result_noted_at_group_points[res.id] = {:marathon => false, :skiing => false, :orienteering => false, :skating => false, :cycling => false, :rowing => false} 
+    res = FactoryGirl.create(:result, series: "N40", group: "testi", marathon_pts: 835.44, rowing_pts: 823.40, skiing_pts: 738.48, orienteering_pts: nil, cycling_pts: 231.42, skating_pts: 886.83)
+    individual_results[res.id] = res
+    result_noted_at_group_points[res.id] = {:marathon => false, :skiing => false, :orienteering => false, :skating => false, :cycling => false, :rowing => false}   
+    res = FactoryGirl.create(:result, series: "M55", group: "testi", marathon_pts: 500.43, rowing_pts: nil, skiing_pts: 598.46, orienteering_pts: 782.90, cycling_pts: nil, skating_pts: 643.6)
+    individual_results[res.id] = res
+    result_noted_at_group_points[res.id] = {:marathon => false, :skiing => false, :orienteering => false, :skating => false, :cycling => false, :rowing => false}
+    res = FactoryGirl.create(:result, series: "M65", group: "testi", marathon_pts: 654.43, rowing_pts: nil, skiing_pts: 827.81, orienteering_pts: 782.12, cycling_pts: 870.55, skating_pts: 882.88)
+    individual_results[res.id] = res
+    result_noted_at_group_points[res.id] = {:marathon => false, :skiing => false, :orienteering => false, :skating => false, :cycling => false, :rowing => false}
+    res = FactoryGirl.create(:result, series: "M55", group: "joku muu", marathon_pts: 155.33, rowing_pts: 0, skiing_pts: 883.88, orienteering_pts: nil, cycling_pts: 424.11, skating_pts: 723.2)
+    res = FactoryGirl.create(:result, series: "M40", group: "joku muu", marathon_pts: 1000, rowing_pts: 342.43, skiing_pts: 353.34, orienteering_pts: 745.43, cycling_pts: 543.76, skating_pts: 655.98)
+    res = FactoryGirl.create(:result, series: "N", group: nil, marathon_pts: nil, rowing_pts: 1000, skiing_pts: 200.12, orienteering_pts: 654.00, cycling_pts: 454.22, skating_pts: 353.76)
+    res = FactoryGirl.create(:result, series: "N80", group: "kolmas", marathon_pts: 354.43, rowing_pts: 533.0, skiing_pts: nil, orienteering_pts: nil, cycling_pts: nil, skating_pts: 923.22)
+    sum_pts_test_group = controller.sum_of_four_best_points(individual_results, result_noted_at_group_points)
     expect(sum_pts_test_group).to be_within(0.1).of(19337.73)
   end
 

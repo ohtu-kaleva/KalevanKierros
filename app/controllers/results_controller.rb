@@ -101,77 +101,105 @@ class ResultsController < ApplicationController
     if not params[:year] =~ /\A\d{4}\z/
       redirect_to :root and return
     end
-    raw_results = Result.where(year: params[:year]).where.not(group: nil).order(:group)
-    if raw_results.empty?
+    groups = Result.where(year: params[:year]).where.not(group: nil).order(:group).uniq.pluck(:group)
+    if groups.empty?
       redirect_to :root and return
     end
-    @results = {}
+    @group_results = {}
     @group_points = {}
-    raw_results.each do |result|
-      @results[result.group] = []
-      @group_points[result.group] = sum_of_four_best_points(result.group, params[:year])
-    end
-    raw_results.each do |result|
-      if @results.include?(result.group)
-        @results[result.group].append(result)
+    @result_noted_at_group_points = {}
+    groups.each do |group|
+      @group_points[group] = 0
+      @group_results[group] = {}
+      raw_results = Result.where(year: params[:year]).where(group: group).order(:name)
+      raw_results.each do |individual_result|
+        @group_results[group][individual_result.id] = individual_result
+        @result_noted_at_group_points[individual_result.id] = {:marathon => false, :skiing => false, :orienteering => false, :skating => false, :cycling => false, :rowing => false}
       end
     end
+    @group_results.each do |group_name, individual_results|
+      @group_points[group_name] = sum_of_four_best_points(individual_results, @result_noted_at_group_points)
+    end
+    @result_noted_at_group_points
     @group_points
-    @results
+    @group_results
   end
 
-  def sum_of_four_best_points(group_name, year)
-    results = Result.where(year: year).where(group: group_name)
-    marathon_points = []
-    skiing_points = []
-    orienteering_points = []
-    skating_points = []
-    cycling_points = []
-    rowing_points = []
-    results.each do |result|
+  def sum_of_four_best_points(individual_results, result_noted_at_group_points)
+    marathon_points = {}
+    skiing_points = {}
+    orienteering_points = {}
+    skating_points = {}
+    cycling_points = {}
+    rowing_points = {}
+    individual_results.each do |id, result|
       if result.marathon_pts
-        marathon_points.append(result.marathon_pts)
+        marathon_points[id] = result.marathon_pts
       end
       if result.skiing_pts
-        skiing_points.append(result.skiing_pts)
+        skiing_points[id] = result.skiing_pts
       end
       if result.orienteering_pts
-        orienteering_points.append(result.orienteering_pts)
+        orienteering_points[id] = result.orienteering_pts
       end
       if result.skating_pts
-        skating_points.append(result.skating_pts)
+        skating_points[id] = result.skating_pts
       end
       if result.cycling_pts
-        cycling_points.append(result.cycling_pts)
+        cycling_points[id] = result.cycling_pts
       end
       if result.rowing_pts
-        rowing_points.append(result.rowing_pts)
+        rowing_points[id] = result.rowing_pts
       end
     end
-    marathon_points.sort!.reverse!
-    skiing_points.sort!.reverse!
-    orienteering_points.sort!.reverse!
-    skating_points.sort!.reverse!
-    cycling_points.sort!.reverse!
-    rowing_points.sort!.reverse!
+    marathon_points = marathon_points.sort_by { |k, v| v }.reverse!
+    skiing_points = skiing_points.sort_by { |k, v| v }.reverse!
+    orienteering_points = orienteering_points.sort_by { |k, v| v }.reverse!
+    skating_points = skating_points.sort_by { |k, v| v }.reverse!
+    cycling_points = cycling_points.sort_by { |k, v| v }.reverse!
+    rowing_points = rowing_points.sort_by { |k, v| v }.reverse!
     sum = 0
     if marathon_points.count > 0
-      sum += marathon_points.take(4).inject{ |sum,x| sum + x }
+      marathon_points = Hash[marathon_points.take(4)]
+      marathon_points.each do |id, points|
+        sum += points
+        result_noted_at_group_points[id][:marathon] = true
+      end
     end
     if skiing_points.count > 0
-      sum += skiing_points.take(4).inject{ |sum,x| sum + x }
+      skiing_points = Hash[skiing_points.take(4)]
+      skiing_points.each do |id, points|
+        sum += points
+        result_noted_at_group_points[id][:skiing] = true
+      end
     end
     if orienteering_points.count > 0
-      sum += orienteering_points.take(4).inject{ |sum,x| sum + x }
+      orienteering_points = Hash[orienteering_points.take(4)]
+      orienteering_points.each do |id, points|
+        sum += points
+        result_noted_at_group_points[id][:orienteering] = true
+      end
     end
     if skating_points.count > 0
-      sum += skating_points.take(4).inject{ |sum,x| sum + x }
+      skating_points = Hash[skating_points.take(4)]
+      skating_points.each do |id, points|
+        sum += points
+        result_noted_at_group_points[id][:skating] = true
+      end
     end
     if cycling_points.count > 0
-      sum += cycling_points.take(4).inject{ |sum,x| sum + x }
+      cycling_points = Hash[cycling_points.take(4)]
+      cycling_points.each do |id, points|
+        sum += points
+        result_noted_at_group_points[id][:cycling] = true
+      end
     end
     if rowing_points.count > 0
-      sum += rowing_points.take(4).inject{ |sum,x| sum + x }
+      rowing_points = Hash[rowing_points.take(4)]
+      rowing_points.each do |id, points|
+        sum += points
+        result_noted_at_group_points[id][:rowing] = true
+      end
     end
     sum
   end

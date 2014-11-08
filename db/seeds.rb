@@ -1,13 +1,13 @@
-@Event1 = Event.new(name: 'Luistelu', factor: 2800, penalty_factor: 1.0, sport_type: 'SkatingEvent', start_date: Date.today + 1.month, end_date: Date.today + 2.month, second_end_date: Date.today + 3.month, price: 2000, second_price: 3000, description: 'Pistelaskun testaukseen')
+@Event1 = Event.new(name: 'Luistelu', factor: 2800, penalty_factor: 1.0, sport_type: 'SkatingEvent', start_date: Date.today + 1.day, end_date: Date.today + 2.day, second_end_date: Date.today + 3.day, price: 2000, second_price: 3000, description: 'Pistelaskun testaukseen')
 @Event1.save
 EventAttribute.new(name: 'Kierroslaskija', attribute_value: 'Kyllä', attribute_label: 'Tarvitsetko kierroslaskijan järjestäjän puolesta?', attribute_type: 'check_box', event_id: @Event1.id, attribute_index: 1).save
-@Event2 = Event.new(name: 'Hiihto', factor: 2000, penalty_factor: 1.18, sport_type: 'SkiingEvent', start_date: Date.today + 1.month, end_date: Date.today + 2.month, second_end_date: Date.today + 3.month, price: 2000, second_price: 3000, description: 'Pistelaskun testaukseen')
+@Event2 = Event.new(name: 'Hiihto', factor: 2000, penalty_factor: 1.18, sport_type: 'SkiingEvent', start_date: Date.today + 1.day, end_date: Date.today + 2.day, second_end_date: Date.today + 3.day, price: 2000, second_price: 3000, description: 'Pistelaskun testaukseen')
 @Event2.save
 EventAttribute.new(name: 'Tyyli', attribute_value: 'Vapaa;Perinteinen', attribute_label: 'Valitse vapaa tai perinteinen tyyli.', attribute_type: 'radio_button', event_id: @Event2.id, attribute_index: 1).save
-@Event3 = Event.new(name: 'Juoksu', factor: 2000, penalty_factor: 2.3, sport_type: 'RunningEvent', start_date: Date.today + 1.month, end_date: Date.today + 2.month, second_end_date: Date.today + 3.month, price: 2000, second_price: 3000, description: 'Pistelaskun testaukseen')
+@Event3 = Event.new(name: 'Juoksu', factor: 2000, penalty_factor: 2.3, sport_type: 'RunningEvent', start_date: Date.today + 1.day, end_date: Date.today + 2.day, second_end_date: Date.today + 3.day, price: 2000, second_price: 3000, description: 'Pistelaskun testaukseen')
 @Event3.save
 EventAttribute.new(name: 'Tyyppi', attribute_value: 'maraton;puolimaraton', attribute_label: 'Valitse maraton tai puolimaraton', attribute_type: 'radio_button', event_id: @Event3.id, attribute_index: 1).save
-@Event4 = Event.new(name: 'Soutu', factor: 3500, penalty_factor: 20.0, rowing_penalty: 12.0, sport_type: 'RowingEvent', start_date: Date.today + 1.month, end_date: Date.today + 2.month, second_end_date: Date.today + 3.month, price: 2000, second_price: 3000, description: 'Pistelaskun testaukseen')
+@Event4 = Event.new(name: 'Soutu', factor: 3500, penalty_factor: 20.0, rowing_penalty: 12.0, sport_type: 'RowingEvent', start_date: Date.today + 1.day, end_date: Date.today + 2.day, second_end_date: Date.today + 3.day, price: 2000, second_price: 3000, description: 'Pistelaskun testaukseen')
 @Event4.save
 EventAttribute.new(name: 'Melonta', attribute_value: 'Soutu;Melonta', attribute_label: 'Soutu/melonta', attribute_type: 'select', event_id: @Event4.id, attribute_index: 1).save
 EventAttribute.new(name: 'Tyyli', attribute_value: 'Yksin;Vuoro', attribute_label: 'Valitse soudatko yksin- tai vuorosoudun.', attribute_type: 'select', event_id: @Event4.id, attribute_index: 2).save
@@ -15,9 +15,9 @@ EventAttribute.new(name: 'Parin nimi', attribute_value: '', attribute_label: 'Jo
 EventAttribute.new(name: 'Parin sukupuoli', attribute_value: 'M;F', attribute_label: 'Parisi sukupuoli.', attribute_type: 'select', event_id: @Event4.id, attribute_index: 4).save
 EventAttribute.new(name: 'Parin syntymävuosi', attribute_value: '', attribute_label: 'Parisi syntymävuosi', attribute_type: 'text_field', event_id: @Event4.id, attribute_index: 5).save
 EventAttribute.new(name: 'Onko pari kiertäjä', attribute_value: 'Ei;Kyllä', attribute_label: 'Onko parisi kiertäjä?', attribute_type: 'select', event_id: @Event4.id, attribute_index: 6).save
-@Event5 = Event.new(name: 'Pyöräily', factor: 2800, penalty_factor: 1.0, sport_type: 'CyclingEvent', start_date: Date.today + 1.month, end_date: Date.today + 2.month, second_end_date: Date.today + 3.month, price: 2000, second_price: 3000, description: 'Pistelaskun testaukseen')
+@Event5 = Event.new(name: 'Pyöräily', factor: 2800, penalty_factor: 1.0, sport_type: 'CyclingEvent', start_date: Date.today + 1.day, end_date: Date.today + 2.day, second_end_date: Date.today + 3.day, price: 2000, second_price: 3000, description: 'Pistelaskun testaukseen')
 @Event5.save
-@Event6 = Event.new(name: 'Suunnistus', factor: 1300, penalty_factor: 1.0, sport_type: 'OrienteeringEvent', start_date: Date.today + 1.month, end_date: Date.today + 2.month, second_end_date: Date.today + 3.month, price: 2000, second_price: 3000, description: 'Pistelaskun testaukseen')
+@Event6 = Event.new(name: 'Suunnistus', factor: 1300, penalty_factor: 1.0, sport_type: 'OrienteeringEvent', start_date: Date.today + 1.day, end_date: Date.today + 2.day, second_end_date: Date.today + 3.day, price: 2000, second_price: 3000, description: 'Pistelaskun testaukseen')
 @Event6.save
 EventAttribute.new(name: 'Emit', attribute_value: 'Kyllä', attribute_label: 'Tarvitsetko emit-lähettimen järjestäjän puolesta?', attribute_type: 'check_box', event_id: @Event6.id, attribute_index: 1).save
 User.new(postal_code: '00100', city: 'Helsinki', first_name: 'Admin', last_name: 'von Admin', username: 'admin', email: 'admin@test.com', phone_number: 12345, street_address: 'Katuosoite', kk_number: 10000, birth_date: Date.today, gender: 'M', admin: true, password: 'Salasana1', password_confirmation: 'Salasana1', active: true).save

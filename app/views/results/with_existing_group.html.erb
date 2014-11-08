@@ -27,25 +27,55 @@
         <td>&nbsp;</td>
       </tr>
       <tr>
-        <td colspan="3">
+        <td colspan="8">
           <table style="display: none;" class="table" id="stat<%= i %>">
             <tr>
               <th>Nimi</th>
-              <th>Kokonaispisteet</th>
-              <th>Suoritetut lajit</th>
+              <th>Yhteensä</th>
+              <th>Luistelu</th>
+              <th>Hiihto</th>
+              <th>Juoksu</th>
+              <th>Soutu</th>
+              <th>Pyöräily</th>
+              <th>Suunnistus</th>
             </tr>
-            <% @results[key].each do |v| %>
+            <% @group_results[key].each do |id, result| %>
                 <tr>
-                  <td><%= v.name %></td>
-                  <% if v.pts_sum.nil? %>
+                  <td><%= result[:name] %></td>
+                  <% if result[:pts_sum].nil? %>
                       <td>Ei pisteitä</td>
                   <% else %>
-                      <td><%= v.pts_sum.round(2) %></td>
+                      <td><%= result[:pts_sum].round(2) %></td>
                   <% end %>
-                  <% if v.completed_events.nil? %>
-                      <td>Ei suoritettuja osakilpailuja</td>
+                  <% if result[:skating_pts].nil? %>
+                      <td>Ei tulosta</td>
                   <% else %>
-                      <td><%= v.completed_events %></td>
+                      <td noted="<%= @result_noted_at_group_points[id][:skating] %>"><%= result[:skating_pts].round(2) %></td>
+                  <% end %>
+                  <% if result[:skiing_pts].nil? %>
+                      <td>Ei tulosta</td>
+                  <% else %>
+                      <td noted="<%= @result_noted_at_group_points[id][:skiing] %>"><%= result[:skiing_pts].round(2) %></td>
+                  <% end %>
+                  <% if result[:marathon_pts].nil? %>
+                      <td>Ei tulosta</td>
+                  <% else %>
+                      <td noted="<%= @result_noted_at_group_points[id][:marathon] %>"><%= result[:marathon_pts].round(2) %></td>
+                  <% end %>
+                  <% if result[:rowing_pts].nil? %>
+                      <td>Ei tulosta</td>
+                  <% else %>
+                      <td noted="<%= @result_noted_at_group_points[id][:rowing] %>"><%= result[:rowing_pts].round(2) %></td>
+                  <% end %>
+                  <% if result[:cycling_pts].nil? %>
+                      <td>Ei tulosta</td>
+                  <% else %>
+                      <td noted="<%= @result_noted_at_group_points[id][:cycling] %>"><%= result[:cycling_pts].round(2) %></td>
+                  <% end %>
+                  <% if result[:orienteering_pts].nil? %>
+                      <td>Ei tulosta</td>
+                  <% else %>
+                      <td noted="<%= @result_noted_at_group_points[id][:orienteering] %>"><%= result[:orienteering_pts].round(2) %></td>
                   <% end %>
             <% end %>
             </td></tr>
@@ -65,5 +95,8 @@
         margin-top: 5px;
         margin-bottom: 20px;
         float: right;
+    }
+    td[noted="true"] {
+        background-color: red;
     }
 </style>
