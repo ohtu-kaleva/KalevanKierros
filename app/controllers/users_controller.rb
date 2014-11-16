@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :redirect_if_user_not_admin, only: [:index, :destroy]
+  before_action :redirect_if_user_not_admin, only: [:index, :destroy, :new_dummy_user, :show_dummy_users]
   before_action :set_user_or_redirect, only:  [:show, :edit, :update, :destroy]
 
   # GET /users
@@ -18,6 +18,14 @@ class UsersController < ApplicationController
     @user = User.new
   end
 
+  def new_dummy_user
+    @user = User.new
+  end
+
+  def show_dummy_users
+    @users = User.where dummy: true
+  end
+
   # GET /users/1/edit
   def edit
   end
@@ -28,10 +36,18 @@ class UsersController < ApplicationController
     @user.generate_activation_token
 
     if @user.save
-      UserMailer.registration_activation_email(@user).deliver
-      redirect_to root_url, flash: { success: 'Käyttäjätunnus luotu, aktivoi tunnus sähköpostiin lähetettyjen ohjeiden mukaan.' }
+      if !@user.dummy
+        UserMailer.registration_activation_email(@user).deliver
+        redirect_to root_url, flash: { success: 'Käyttäjätunnus luotu, aktivoi tunnus sähköpostiin lähetettyjen ohjeiden mukaan.' }
+      else
+        redirect_to root_url, flash: { success: 'Sähköpostiton käyttäjä luotu.' }
+      end
     else
-      render :new
+      if !@user.dummy
+        render :new
+      else
+        render :new_dummy_user
+      end
     end
   end
 
@@ -115,7 +131,7 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:first_name, :last_name, :username, :email, :phone_number, :city, :street_address, :postal_code, :birth_date, :gender, :password, :password_confirmation)
+      params.require(:user).permit(:first_name, :last_name, :username, :email, :phone_number, :city, :street_address, :postal_code, :birth_date, :gender, :password, :password_confirmation, :dummy)
     end
 
     def init_statistic_entry(user)

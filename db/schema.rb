@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140824185427) do
+ActiveRecord::Schema.define(version: 20141116132632) do
 
   create_table "app_settings", force: true do |t|
     t.string   "name",       null: false
@@ -167,6 +167,7 @@ ActiveRecord::Schema.define(version: 20140824185427) do
     t.string   "street_address"
     t.string   "activation_token"
     t.boolean  "active",           default: false, null: false
+    t.boolean  "dummy",            default: false, null: false
   end
 
   add_index "users", ["kk_number"], name: "index_users_on_kk_number", unique: true

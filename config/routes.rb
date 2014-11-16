@@ -45,6 +45,8 @@ Rails.application.routes.draw do
 
   get 'signup', to: 'users#new'
   get 'signin', to: 'sessions#new'
+  get 'new_dummy_user', to: 'users#new_dummy_user'
+  get 'dummy_users', to: 'users#show_dummy_users'
   delete 'signout', to: 'sessions#destroy'
   get 'events/:event_id/event_attributes/new', to: 'event_attributes#new', as: 'add_event_attribute'
   get 'events/:event_id/enrollments/new', to: 'enrollments#new', as: 'add_enrollment'

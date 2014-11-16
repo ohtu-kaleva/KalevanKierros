@@ -1,0 +1,81 @@
+<%= bootstrap_form_for(@user) do |f| %>
+    <% if @user.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+          <ul>
+            <% @user.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <%= f.text_field :first_name, label: "Etunimi: " %>
+    <%= f.text_field :last_name, label: "Sukunimi: " %>
+
+    <%= f.text_field :username, label: "Käyttäjätunnus: " %>
+    <%= f.hidden_field :email, :value => 'ei_sahkopostia' %>
+
+    <%= f.text_field :phone_number, label: "Puhelinnumero: " %>
+    <%= f.date_select(:birth_date, :default => {day: 1, month: 1, year: 1980}, start_year: Time.now.year - 100, end_year: Time.now.year, order: [:day, :month, :year], label: 'Syntymäpäivä' ) %>
+    <%= f.select :gender, [['Mies', 'M'], ['Nainen', 'F']], label: "Sukupuoli: " %>
+    <%= f.text_field :street_address, label: "Katuosoite: " %>
+    <%= f.text_field :postal_code, label: "Postinumero: " %>
+    <%= f.text_field :city, label: "Postitoimipaikka: " %>
+
+    <%= f.hidden_field :password, :value => 'Salasana1' %>
+    <%= f.hidden_field :password_confirmation, :value => 'Salasana1' %>
+    <%= f.hidden_field :dummy, :value => true %>
+    <%= f.submit "Luo sähköpostiton käyttäjä", :class => "btn btn-primary" %>
+<% end %>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('form').bootstrapValidator({
+            message: 'Virheellinen syöte',
+            feedbackIcons: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-asterisk',
+                validating: 'glyphicon glyphicon-refresh'
+            },
+            fields: {
+                'user[first_name]': {
+                    validators: {
+                        notEmpty: {
+                            message: 'Etunimi ei voi olla tyhjä'
+                        }
+                    }
+                },
+                'user[last_name]': {
+                    validators: {
+                        notEmpty: {
+                            message: 'Sukunimi ei voi olla tyhjä'
+                        }
+                    }
+                },
+                'user[username]': {
+                    validators: {
+                        notEmpty: {
+                            message: 'Käyttäjänimi ei voi olla tyhjä'
+                        },
+                        stringLength: {
+                            min: 3,
+                            message: 'Käyttäjänimessä tulee olla vähintään 3 merkkiä'
+                        }
+                    }
+                },
+                'user[address]': {
+                    validators: {
+                        notEmpty: {
+                            message: 'Osoite ei voi olla tyhjä'
+                        },
+                        stringLength: {
+                            min: 5,
+                            message: 'Osoitteessa tulee olla vähintään 5 merkkiä'
+                        }
+                    }
+                }
+            }
+        });
+    });
+</script>
