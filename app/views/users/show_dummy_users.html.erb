@@ -26,6 +26,9 @@
         <td style="min-width: 350px; text-align: center;"><%= link_to 'Näytä', user, class: "btn btn-primary btn-sm" %>
           <%= link_to 'Liitä tilastoon', join_statistic_path(user), :'data-no-turbolink' => true, class: "btn btn-primary btn-sm" %>
           <%= link_to 'Muokkaa', edit_user_path(user), class: "btn btn-warning btn-sm" %>
+          <% if user.kk_enrollment == nil %>
+            <%= link_to 'Ilmoita kierrokselle', enroll_dummy_user_path(user), class: 'btn btn-primary btn-sm' %>
+          <% end %>
           <% if current_user != user %>
               <%= link_to 'Poista', user, method: :delete, data: {confirm: 'Are you sure?' }, id: "delete#{user.id}", class: "btn btn-danger btn-sm" %></td>
           <% end %>

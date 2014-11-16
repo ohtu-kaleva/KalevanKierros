@@ -3,6 +3,7 @@ class KkEnrollmentsController < ApplicationController
   before_action :redirect_if_user_not_admin, except: [:new, :create]
   before_action :set_user, only: [:new, :create]
   before_action :check_enrollment, only: [:new, :create]
+  before_action :set_dummy_user, only: [:enroll_dummy, :create_dummy_user_enrollment]
 
   # GET /kk_enrollments
   def index
@@ -26,6 +27,9 @@ class KkEnrollmentsController < ApplicationController
   def edit
   end
 
+  def enroll_dummy
+  end
+
   # POST /kk_enrollments
   def create
     if !enrollment_open?
@@ -41,6 +45,20 @@ class KkEnrollmentsController < ApplicationController
       redirect_to(@user, flash: { success: 'Ilmoittautuminen onnistui' }) && return
     end
 
+    redirect_to root_path, flash: { error: 'Ilmoittautuminen epäonnistui' }
+  end
+
+  def create_dummy_user_enrollment
+    if !enrollment_open?
+      redirect_to root_path, flash: { error: 'Kierrokselle ei voi ilmoittautua' }
+      return
+    end
+    @kk_enrollment = KkEnrollment.new user_id: @user.id
+
+    if @kk_enrollment.save
+      init_results_entry(@user)
+      redirect_to(@user, flash: { success: 'Ilmoittautuminen onnistui' }) && return
+    end
     redirect_to root_path, flash: { error: 'Ilmoittautuminen epäonnistui' }
   end
 
@@ -101,6 +119,10 @@ class KkEnrollmentsController < ApplicationController
       @user = current_user
       return if @user
       redirect_to signin_path
+    end
+
+    def set_dummy_user
+      @user = User.find_by id: params[:id]
     end
 
     def check_enrollment

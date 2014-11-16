@@ -40,6 +40,7 @@ class UsersController < ApplicationController
         UserMailer.registration_activation_email(@user).deliver
         redirect_to root_url, flash: { success: 'Käyttäjätunnus luotu, aktivoi tunnus sähköpostiin lähetettyjen ohjeiden mukaan.' }
       else
+        @user.update_attribute :kk_number, generate_kk_number(@user)
         redirect_to root_url, flash: { success: 'Sähköpostiton käyttäjä luotu.' }
       end
     else
