@@ -59,12 +59,12 @@ describe ResultsController do
   end
 
   it "should calculate group results correctly" do
-    FactoryGirl.create(:result, name: "a", series: "MAL22", group: "testi", marathon_pts: 900.11, rowing_pts: 922.06, skiing_pts: 880.44, orienteering_pts: 932.81, cycling_pts: 921.81, skating_pts: 953.46)
-    FactoryGirl.create(:result, name: "b", series: "N", group: "testi", marathon_pts: 767.56, rowing_pts: 907.99, skiing_pts: nil, orienteering_pts: 789.03, cycling_pts: 826.54, skating_pts: 791.61)   
-    FactoryGirl.create(:result, name: "c", series: "M", group: "testi", marathon_pts: 755.43, rowing_pts: nil, skiing_pts: nil, orienteering_pts: 855.51, cycling_pts: 886.63, skating_pts: 34.32)    
-    FactoryGirl.create(:result, name: "d", series: "N40", group: "testi", marathon_pts: 835.44, rowing_pts: 823.40, skiing_pts: 738.48, orienteering_pts: nil, cycling_pts: 231.42, skating_pts: 886.83)  
-    FactoryGirl.create(:result, name: "e", series: "M55", group: "testi", marathon_pts: 500.43, rowing_pts: nil, skiing_pts: 598.46, orienteering_pts: 782.90, cycling_pts: nil, skating_pts: 643.6)
-    FactoryGirl.create(:result, name: "f", series: "M65", group: "testi", marathon_pts: 654.43, rowing_pts: nil, skiing_pts: 827.81, orienteering_pts: 782.12, cycling_pts: 870.55, skating_pts: 882.88)
+    res1 = FactoryGirl.create(:result, name: "a", series: "MAL22", group: "testi", marathon_pts: 900.11, rowing_pts: 922.06, skiing_pts: 880.44, orienteering_pts: 932.81, cycling_pts: 921.81, skating_pts: 953.46)
+    res2 = FactoryGirl.create(:result, name: "b", series: "N", group: "testi", marathon_pts: 767.56, rowing_pts: 907.99, skiing_pts: nil, orienteering_pts: 789.03, cycling_pts: 826.54, skating_pts: 791.61)   
+    res3 = FactoryGirl.create(:result, name: "c", series: "M", group: "testi", marathon_pts: 755.43, rowing_pts: nil, skiing_pts: nil, orienteering_pts: 855.51, cycling_pts: 886.63, skating_pts: 34.32)    
+    res4 = FactoryGirl.create(:result, name: "d", series: "N40", group: "testi", marathon_pts: 835.44, rowing_pts: 823.40, skiing_pts: 738.48, orienteering_pts: nil, cycling_pts: 231.42, skating_pts: 886.83)  
+    res5 = FactoryGirl.create(:result, name: "e", series: "M55", group: "testi", marathon_pts: 500.43, rowing_pts: nil, skiing_pts: 598.46, orienteering_pts: 782.90, cycling_pts: nil, skating_pts: 643.6)
+    res6 = FactoryGirl.create(:result, name: "f", series: "M65", group: "testi", marathon_pts: 654.43, rowing_pts: nil, skiing_pts: 827.81, orienteering_pts: 782.12, cycling_pts: 870.55, skating_pts: 882.88)
     FactoryGirl.create(:result, name: "g", series: "M55", group: "joku muu", marathon_pts: 155.33, rowing_pts: 0, skiing_pts: 883.88, orienteering_pts: nil, cycling_pts: 424.11, skating_pts: 723.2)
     FactoryGirl.create(:result, name: "h", series: "M40", group: "joku muu", marathon_pts: 1000, rowing_pts: 342.43, skiing_pts: 353.34, orienteering_pts: 745.43, cycling_pts: 543.76, skating_pts: 655.98)
     FactoryGirl.create(:result, name: "i", series: "N", group: nil, marathon_pts: nil, rowing_pts: 1000, skiing_pts: 200.12, orienteering_pts: 654.00, cycling_pts: 454.22, skating_pts: 353.76)
@@ -77,48 +77,48 @@ describe ResultsController do
     expect(group_results[:orienteering_sum]).to be_within(0.1).of(3360.25)
     expect(group_results[:cycling_sum]).to be_within(0.1).of(3505.53)
     expect(group_results[:skating_sum]).to be_within(0.1).of(3514.78)
-    expect(group_results[:individual_results][1][:sum_of_noted_results]).to be_within(0.1).of(5510.69)
-    expect(group_results[:individual_results][2][:sum_of_noted_results]).to be_within(0.1).of(4082.73)
-    expect(group_results[:individual_results][3][:sum_of_noted_results]).to be_within(0.1).of(2497.57)
-    expect(group_results[:individual_results][4][:sum_of_noted_results]).to be_within(0.1).of(3284.15)
-    expect(group_results[:individual_results][5][:sum_of_noted_results]).to be_within(0.1).of(1381.36)
-    expect(group_results[:individual_results][6][:sum_of_noted_results]).to be_within(0.1).of(2581.24)
-    expect(group_results[:individual_results][1][:result_noted][:marathon]).to be true
-    expect(group_results[:individual_results][2][:result_noted][:marathon]).to be true
-    expect(group_results[:individual_results][3][:result_noted][:marathon]).to be true
-    expect(group_results[:individual_results][4][:result_noted][:marathon]).to be true
-    expect(group_results[:individual_results][5][:result_noted][:marathon]).to be false
-    expect(group_results[:individual_results][6][:result_noted][:marathon]).to be false
-    expect(group_results[:individual_results][1][:result_noted][:rowing]).to be true
-    expect(group_results[:individual_results][2][:result_noted][:rowing]).to be true
-    expect(group_results[:individual_results][3][:result_noted][:rowing]).to be false
-    expect(group_results[:individual_results][4][:result_noted][:rowing]).to be true
-    expect(group_results[:individual_results][5][:result_noted][:rowing]).to be false
-    expect(group_results[:individual_results][6][:result_noted][:rowing]).to be false
-    expect(group_results[:individual_results][1][:result_noted][:skiing]).to be true
-    expect(group_results[:individual_results][2][:result_noted][:skiing]).to be false
-    expect(group_results[:individual_results][3][:result_noted][:skiing]).to be false
-    expect(group_results[:individual_results][4][:result_noted][:skiing]).to be true
-    expect(group_results[:individual_results][5][:result_noted][:skiing]).to be true
-    expect(group_results[:individual_results][6][:result_noted][:skiing]).to be true
-    expect(group_results[:individual_results][1][:result_noted][:orienteering]).to be true
-    expect(group_results[:individual_results][2][:result_noted][:orienteering]).to be true
-    expect(group_results[:individual_results][3][:result_noted][:orienteering]).to be true
-    expect(group_results[:individual_results][4][:result_noted][:orienteering]).to be false
-    expect(group_results[:individual_results][5][:result_noted][:orienteering]).to be true
-    expect(group_results[:individual_results][6][:result_noted][:orienteering]).to be false
-    expect(group_results[:individual_results][1][:result_noted][:cycling]).to be true
-    expect(group_results[:individual_results][2][:result_noted][:cycling]).to be true
-    expect(group_results[:individual_results][3][:result_noted][:cycling]).to be true
-    expect(group_results[:individual_results][4][:result_noted][:cycling]).to be false
-    expect(group_results[:individual_results][5][:result_noted][:cycling]).to be false
-    expect(group_results[:individual_results][6][:result_noted][:cycling]).to be true
-    expect(group_results[:individual_results][1][:result_noted][:skating]).to be true
-    expect(group_results[:individual_results][2][:result_noted][:skating]).to be true
-    expect(group_results[:individual_results][3][:result_noted][:skating]).to be false
-    expect(group_results[:individual_results][4][:result_noted][:skating]).to be true
-    expect(group_results[:individual_results][5][:result_noted][:skating]).to be false
-    expect(group_results[:individual_results][6][:result_noted][:skating]).to be true
+    expect(group_results[:individual_results][res1.id][:sum_of_noted_results]).to be_within(0.1).of(5510.69)
+    expect(group_results[:individual_results][res2.id][:sum_of_noted_results]).to be_within(0.1).of(4082.73)
+    expect(group_results[:individual_results][res3.id][:sum_of_noted_results]).to be_within(0.1).of(2497.57)
+    expect(group_results[:individual_results][res4.id][:sum_of_noted_results]).to be_within(0.1).of(3284.15)
+    expect(group_results[:individual_results][res5.id][:sum_of_noted_results]).to be_within(0.1).of(1381.36)
+    expect(group_results[:individual_results][res6.id][:sum_of_noted_results]).to be_within(0.1).of(2581.24)
+    expect(group_results[:individual_results][res1.id][:result_noted][:marathon]).to be true
+    expect(group_results[:individual_results][res2.id][:result_noted][:marathon]).to be true
+    expect(group_results[:individual_results][res3.id][:result_noted][:marathon]).to be true
+    expect(group_results[:individual_results][res4.id][:result_noted][:marathon]).to be true
+    expect(group_results[:individual_results][res5.id][:result_noted][:marathon]).to be false
+    expect(group_results[:individual_results][res6.id][:result_noted][:marathon]).to be false
+    expect(group_results[:individual_results][res1.id][:result_noted][:rowing]).to be true
+    expect(group_results[:individual_results][res2.id][:result_noted][:rowing]).to be true
+    expect(group_results[:individual_results][res3.id][:result_noted][:rowing]).to be false
+    expect(group_results[:individual_results][res4.id][:result_noted][:rowing]).to be true
+    expect(group_results[:individual_results][res5.id][:result_noted][:rowing]).to be false
+    expect(group_results[:individual_results][res6.id][:result_noted][:rowing]).to be false
+    expect(group_results[:individual_results][res1.id][:result_noted][:skiing]).to be true
+    expect(group_results[:individual_results][res2.id][:result_noted][:skiing]).to be false
+    expect(group_results[:individual_results][res3.id][:result_noted][:skiing]).to be false
+    expect(group_results[:individual_results][res4.id][:result_noted][:skiing]).to be true
+    expect(group_results[:individual_results][res5.id][:result_noted][:skiing]).to be true
+    expect(group_results[:individual_results][res6.id][:result_noted][:skiing]).to be true
+    expect(group_results[:individual_results][res1.id][:result_noted][:orienteering]).to be true
+    expect(group_results[:individual_results][res2.id][:result_noted][:orienteering]).to be true
+    expect(group_results[:individual_results][res3.id][:result_noted][:orienteering]).to be true
+    expect(group_results[:individual_results][res4.id][:result_noted][:orienteering]).to be false
+    expect(group_results[:individual_results][res5.id][:result_noted][:orienteering]).to be true
+    expect(group_results[:individual_results][res6.id][:result_noted][:orienteering]).to be false
+    expect(group_results[:individual_results][res1.id][:result_noted][:cycling]).to be true
+    expect(group_results[:individual_results][res2.id][:result_noted][:cycling]).to be true
+    expect(group_results[:individual_results][res3.id][:result_noted][:cycling]).to be true
+    expect(group_results[:individual_results][res4.id][:result_noted][:cycling]).to be false
+    expect(group_results[:individual_results][res5.id][:result_noted][:cycling]).to be false
+    expect(group_results[:individual_results][res6.id][:result_noted][:cycling]).to be true
+    expect(group_results[:individual_results][res1.id][:result_noted][:skating]).to be true
+    expect(group_results[:individual_results][res2.id][:result_noted][:skating]).to be true
+    expect(group_results[:individual_results][res3.id][:result_noted][:skating]).to be false
+    expect(group_results[:individual_results][res4.id][:result_noted][:skating]).to be true
+    expect(group_results[:individual_results][res5.id][:result_noted][:skating]).to be false
+    expect(group_results[:individual_results][res6.id][:result_noted][:skating]).to be true
   end
 
   it "should check total events correctly" do
