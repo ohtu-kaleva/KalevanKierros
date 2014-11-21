@@ -106,50 +106,42 @@ class ResultsController < ApplicationController
       redirect_to :root and return
     end
     @group_results = {}
-    @group_points = {}
-    @result_noted_at_group_points = {}
     groups.each do |group|
-      @group_points[group] = 0
-      @group_results[group] = {}
-      raw_results = Result.where(year: params[:year]).where(group: group).order(:name)
-      raw_results.each do |individual_result|
-        @group_results[group][individual_result.id] = individual_result
-        @result_noted_at_group_points[individual_result.id] = {:marathon => false, :skiing => false, :orienteering => false, :skating => false, :cycling => false, :rowing => false}
-      end
+      @group_results[group] = calculate_group_results(group, params[:year])
     end
-    @group_results.each do |group_name, individual_results|
-      @group_points[group_name] = sum_of_four_best_points(individual_results, @result_noted_at_group_points)
-    end
-    @result_noted_at_group_points
-    @group_points
-    @group_results
   end
 
-  def sum_of_four_best_points(individual_results, result_noted_at_group_points)
+  def calculate_group_results(group, year)
+    individual_results = Result.where(year: year).where(group: group).order(:name)
+    group_results = {:total => 0, :individual_results => {}}
     marathon_points = {}
     skiing_points = {}
     orienteering_points = {}
     skating_points = {}
     cycling_points = {}
     rowing_points = {}
-    individual_results.each do |id, result|
+    individual_results.each do |result|
+      group_results[:individual_results][result.id] = {}
+      group_results[:individual_results][result.id][:result] = result
+      group_results[:individual_results][result.id][:result_noted] = {:marathon => false, :skiing => false, :orienteering => false, :skating => false, :cycling => false, :rowing => false}
+      group_results[:individual_results][result.id][:sum_of_noted_results] = 0
       if result.marathon_pts
-        marathon_points[id] = result.marathon_pts
+        marathon_points[result.id] = result.marathon_pts
       end
       if result.skiing_pts
-        skiing_points[id] = result.skiing_pts
+        skiing_points[result.id] = result.skiing_pts
       end
       if result.orienteering_pts
-        orienteering_points[id] = result.orienteering_pts
+        orienteering_points[result.id] = result.orienteering_pts
       end
       if result.skating_pts
-        skating_points[id] = result.skating_pts
+        skating_points[result.id] = result.skating_pts
       end
       if result.cycling_pts
-        cycling_points[id] = result.cycling_pts
+        cycling_points[result.id] = result.cycling_pts
       end
       if result.rowing_pts
-        rowing_points[id] = result.rowing_pts
+        rowing_points[result.id] = result.rowing_pts
       end
     end
     marathon_points = marathon_points.sort_by { |k, v| v }.reverse!
@@ -158,50 +150,73 @@ class ResultsController < ApplicationController
     skating_points = skating_points.sort_by { |k, v| v }.reverse!
     cycling_points = cycling_points.sort_by { |k, v| v }.reverse!
     rowing_points = rowing_points.sort_by { |k, v| v }.reverse!
-    sum = 0
+    sport_sum = 0
     if marathon_points.count > 0
       marathon_points = Hash[marathon_points.take(4)]
       marathon_points.each do |id, points|
-        sum += points
-        result_noted_at_group_points[id][:marathon] = true
+        sport_sum += points
+        group_results[:individual_results][id][:result_noted][:marathon] = true
+        group_results[:individual_results][id][:sum_of_noted_results] += points
       end
     end
+    group_results[:total] += sport_sum
+    group_results[:marathon_sum] = sport_sum
+    sport_sum = 0
     if skiing_points.count > 0
       skiing_points = Hash[skiing_points.take(4)]
       skiing_points.each do |id, points|
-        sum += points
-        result_noted_at_group_points[id][:skiing] = true
+        sport_sum += points
+        group_results[:individual_results][id][:result_noted][:skiing] = true
+        group_results[:individual_results][id][:sum_of_noted_results] += points
       end
     end
+    group_results[:total] += sport_sum
+    group_results[:skiing_sum] = sport_sum
+    sport_sum = 0
     if orienteering_points.count > 0
       orienteering_points = Hash[orienteering_points.take(4)]
       orienteering_points.each do |id, points|
-        sum += points
-        result_noted_at_group_points[id][:orienteering] = true
+        sport_sum += points
+        group_results[:individual_results][id][:result_noted][:orienteering] = true
+        group_results[:individual_results][id][:sum_of_noted_results] += points
       end
     end
+    group_results[:total] += sport_sum
+    group_results[:orienteering_sum] = sport_sum
+    sport_sum = 0
     if skating_points.count > 0
       skating_points = Hash[skating_points.take(4)]
       skating_points.each do |id, points|
-        sum += points
-        result_noted_at_group_points[id][:skating] = true
+        sport_sum += points
+        group_results[:individual_results][id][:result_noted][:skating] = true
+        group_results[:individual_results][id][:sum_of_noted_results] += points
       end
     end
+    group_results[:total] += sport_sum
+    group_results[:skating_sum] = sport_sum
+    sport_sum = 0
     if cycling_points.count > 0
       cycling_points = Hash[cycling_points.take(4)]
       cycling_points.each do |id, points|
-        sum += points
-        result_noted_at_group_points[id][:cycling] = true
+        sport_sum += points
+        group_results[:individual_results][id][:result_noted][:cycling] = true
+        group_results[:individual_results][id][:sum_of_noted_results] += points
       end
     end
+    group_results[:total] += sport_sum
+    group_results[:cycling_sum] = sport_sum
+    sport_sum = 0
     if rowing_points.count > 0
       rowing_points = Hash[rowing_points.take(4)]
       rowing_points.each do |id, points|
-        sum += points
-        result_noted_at_group_points[id][:rowing] = true
+        sport_sum += points
+        group_results[:individual_results][id][:result_noted][:rowing] = true
+        group_results[:individual_results][id][:sum_of_noted_results] += points
       end
     end
-    sum
+    group_results[:total] += sport_sum
+    group_results[:rowing_sum] = sport_sum
+    group_results
   end
 
   # POST /results

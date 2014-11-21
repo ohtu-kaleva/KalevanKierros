@@ -2,18 +2,18 @@
 <p>Klikkaamalla joukkueen nimeä näet joukkueen jäsenten pisteet. Voit järjestää joukkueet aakkosjärjestykseen tai pistejärjestykseen alla olevilla napeilla.</p>
 <% i = 0 %>
 <% if params[:sort] == "joukkueet" %>
-    <% @groups = @group_points %>
+    <% @groups = @group_results %>
     <a href="?" class="btn btn-default btn-sm">Näytä pistejärjestyksessä</a>&nbsp;
     <a href="?sort=joukkueet" class="btn btn-primary btn-sm">Näytä aakkosjärjestyksessä</a>
 <% else %>
-    <% @groups = @group_points.sort_by { |k, v| v }.reverse %>
+    <% @groups = @group_results.sort_by { |k, v| v[:total] }.reverse %>
     <a href="?" class="btn btn-primary btn-sm">Näytä pistejärjestyksessä</a>&nbsp;
     <a href="?sort=joukkueet" class="btn btn-default btn-sm">Näytä aakkosjärjestyksessä</a>
 <% end %>
 <br />
 <br />
 <table class="results">
-  <% @groups.each do |key, value| %>
+  <% @groups.each do |name, group_results| %>
       <% i += 1 %>
       <tr>
         <td style="font-size: larger; width: 350px;">
@@ -21,9 +21,9 @@
             <% if params[:sort] != "joukkueet" %>
             <%= i %>.
                 <% end %>
-            <%= key %></a>
+            <%= name %></a>
         </td>
-        <td style="color: black; font-size: larger;"><%= value.round(2) %></td>
+        <td style="color: black; font-size: larger;"><%= group_results[:total].round(2) %></td>
         <td>&nbsp;</td>
       </tr>
       <tr>
@@ -39,46 +39,56 @@
               <th>Pyöräily</th>
               <th>Suunnistus</th>
             </tr>
-            <% @group_results[key].each do |id, result| %>
+            <% group_results[:individual_results].each do |id, individual_result| %>
                 <tr>
-                  <td><%= result[:name] %></td>
-                  <% if result[:pts_sum].nil? %>
+                  <td><%= individual_result[:result][:name] %></td>
+                  <% if individual_result[:sum_of_noted_results].nil? %>
                       <td>Ei pisteitä</td>
                   <% else %>
-                      <td><%= result[:pts_sum].round(2) %></td>
+                      <td><%= individual_result[:sum_of_noted_results].round(2) %></td>
                   <% end %>
-                  <% if result[:skating_pts].nil? %>
+                  <% if individual_result[:result][:skating_pts].nil? %>
                       <td>Ei tulosta</td>
                   <% else %>
-                      <td noted="<%= @result_noted_at_group_points[id][:skating] %>"><%= result[:skating_pts].round(2) %></td>
+                      <td noted="<%= individual_result[:result_noted][:skating] %>"><%= individual_result[:result][:skating_pts].round(2) %></td>
                   <% end %>
-                  <% if result[:skiing_pts].nil? %>
+                  <% if individual_result[:result][:skiing_pts].nil? %>
                       <td>Ei tulosta</td>
                   <% else %>
-                      <td noted="<%= @result_noted_at_group_points[id][:skiing] %>"><%= result[:skiing_pts].round(2) %></td>
+                      <td noted="<%= individual_result[:result_noted][:skiing] %>"><%= individual_result[:result][:skiing_pts].round(2) %></td>
                   <% end %>
-                  <% if result[:marathon_pts].nil? %>
+                  <% if individual_result[:result][:marathon_pts].nil? %>
                       <td>Ei tulosta</td>
                   <% else %>
-                      <td noted="<%= @result_noted_at_group_points[id][:marathon] %>"><%= result[:marathon_pts].round(2) %></td>
+                      <td noted="<%= individual_result[:result_noted][:marathon] %>"><%= individual_result[:result][:marathon_pts].round(2) %></td>
                   <% end %>
-                  <% if result[:rowing_pts].nil? %>
+                  <% if individual_result[:result][:rowing_pts].nil? %>
                       <td>Ei tulosta</td>
                   <% else %>
-                      <td noted="<%= @result_noted_at_group_points[id][:rowing] %>"><%= result[:rowing_pts].round(2) %></td>
+                      <td noted="<%= individual_result[:result_noted][:rowing] %>"><%= individual_result[:result][:rowing_pts].round(2) %></td>
                   <% end %>
-                  <% if result[:cycling_pts].nil? %>
+                  <% if individual_result[:result][:cycling_pts].nil? %>
                       <td>Ei tulosta</td>
                   <% else %>
-                      <td noted="<%= @result_noted_at_group_points[id][:cycling] %>"><%= result[:cycling_pts].round(2) %></td>
+                      <td noted="<%= individual_result[:result_noted][:cycling] %>"><%= individual_result[:result][:cycling_pts].round(2) %></td>
                   <% end %>
-                  <% if result[:orienteering_pts].nil? %>
+                  <% if individual_result[:result][:orienteering_pts].nil? %>
                       <td>Ei tulosta</td>
                   <% else %>
-                      <td noted="<%= @result_noted_at_group_points[id][:orienteering] %>"><%= result[:orienteering_pts].round(2) %></td>
+                      <td noted="<%= individual_result[:result_noted][:orienteering] %>"><%= individual_result[:result][:orienteering_pts].round(2) %></td>
                   <% end %>
             <% end %>
             </td></tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td><%= group_results[:skating_sum].round(2) %></td>
+              <td><%= group_results[:skiing_sum].round(2) %></td>
+              <td><%= group_results[:marathon_sum].round(2) %></td>
+              <td><%= group_results[:rowing_sum].round(2) %></td>
+              <td><%= group_results[:cycling_sum].round(2) %></td>
+              <td><%= group_results[:orienteering_sum].round(2) %></td>
+            </tr>
             </td>
           </table>
       </tr>
