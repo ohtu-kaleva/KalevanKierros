@@ -1923,7 +1923,7 @@ EnrollmentData.new(enrollment_id: @Enrollment100761.id, name: 'Kierroslaskija', 
 EnrollmentData.new(enrollment_id: @Enrollment100766.id, name: 'Emit', value: 'Kyllä', attribute_index: 1).save
 @User10077 = User.new(postal_code: '00100', city: 'Helsinki', first_name: 'Jarmo', last_name: 'Huttunen', username: 'user10077', email: 'user10077@test.com', phone_number: 12345, street_address: 'Katuosoite', kk_number: 10077, birth_date: Date.today, gender: 'M', admin: false, password: 'Salasana1', password_confirmation: 'Salasana1', active: true)
 @User10077.save
-Result.new(name: 'Jarmo Huttunen', city: 'Helsinki', group: 'Kankaanpään Kalevank', year: 2014, series: 'M40', kk_number: '10077').save
+Result.new(name: 'Jarmo Huttunen', city: 'Helsinki', group: 'Kankaanpään Kalevank II', year: 2014, series: 'M40', kk_number: '10077').save
 @Enrollment100771 = Enrollment.new(user_id: @User10077.id, event_id: @Event1.id, time:4944)
 @Enrollment100771.save
 @Enrollment100772 = Enrollment.new(user_id: @User10077.id, event_id: @Event2.id, time:10495)
@@ -4279,7 +4279,7 @@ EnrollmentData.new(enrollment_id: @Enrollment101773.id, name: 'Tyyppi', value: '
 EnrollmentData.new(enrollment_id: @Enrollment101771.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
 @User10178 = User.new(postal_code: '00100', city: 'Helsinki', first_name: 'Ida', last_name: 'Kujansuu', username: 'user10178', email: 'user10178@test.com', phone_number: 12345, street_address: 'Katuosoite', kk_number: 10178, birth_date: Date.today, gender: 'N', admin: false, password: 'Salasana1', password_confirmation: 'Salasana1', active: true)
 @User10178.save
-Result.new(name: 'Ida Kujansuu', city: 'Helsinki', group: 'Kankaanpään Kalevank', year: 2014, series: 'NAL22', kk_number: '10178').save
+Result.new(name: 'Ida Kujansuu', city: 'Helsinki', group: 'Kankaanpään Kalevank II', year: 2014, series: 'NAL22', kk_number: '10178').save
 @Enrollment101781 = Enrollment.new(user_id: @User10178.id, event_id: @Event1.id, time:5353)
 @Enrollment101781.save
 @Enrollment101782 = Enrollment.new(user_id: @User10178.id, event_id: @Event2.id, time:11367)
@@ -5485,7 +5485,7 @@ EnrollmentData.new(enrollment_id: @Enrollment102421.id, name: 'Kierroslaskija', 
 EnrollmentData.new(enrollment_id: @Enrollment102426.id, name: 'Emit', value: 'Kyllä', attribute_index: 1).save
 @User10243 = User.new(postal_code: '00100', city: 'Helsinki', first_name: 'Marjut', last_name: 'Kujansuu', username: 'user10243', email: 'user10243@test.com', phone_number: 12345, street_address: 'Katuosoite', kk_number: 10243, birth_date: Date.today, gender: 'N', admin: false, password: 'Salasana1', password_confirmation: 'Salasana1', active: true)
 @User10243.save
-Result.new(name: 'Marjut Kujansuu', city: 'Helsinki', group: 'Kankaanpään Kalevank', year: 2014, series: 'N40', kk_number: '10243').save
+Result.new(name: 'Marjut Kujansuu', city: 'Helsinki', group: 'Kankaanpään Kalevank II', year: 2014, series: 'N40', kk_number: '10243').save
 @Enrollment102432 = Enrollment.new(user_id: @User10243.id, event_id: @Event2.id, time:14071)
 @Enrollment102432.save
 @Enrollment102433 = Enrollment.new(user_id: @User10243.id, event_id: @Event3.id, time:9452)
@@ -5815,7 +5815,7 @@ EnrollmentData.new(enrollment_id: @Enrollment102611.id, name: 'Kierroslaskija', 
 EnrollmentData.new(enrollment_id: @Enrollment102616.id, name: 'Emit', value: 'Kyllä', attribute_index: 1).save
 @User10262 = User.new(postal_code: '00100', city: 'Helsinki', first_name: 'Kalevi', last_name: 'Selander', username: 'user10262', email: 'user10262@test.com', phone_number: 12345, street_address: 'Katuosoite', kk_number: 10262, birth_date: Date.today, gender: 'M', admin: false, password: 'Salasana1', password_confirmation: 'Salasana1', active: true)
 @User10262.save
-Result.new(name: 'Kalevi Selander', city: 'Helsinki', group: 'Kankaanpään Kalevank', year: 2014, series: 'M65', kk_number: '10262').save
+Result.new(name: 'Kalevi Selander', city: 'Helsinki', group: 'Kankaanpään Kalevank II', year: 2014, series: 'M65', kk_number: '10262').save
 @Enrollment102621 = Enrollment.new(user_id: @User10262.id, event_id: @Event1.id, time:7311)
 @Enrollment102621.save
 @Enrollment102623 = Enrollment.new(user_id: @User10262.id, event_id: @Event3.id, time:10616)
@@ -6453,22 +6453,6 @@ Result.new(name: 'Janne Haataja', city: 'Helsinki', group: nil, year: 2014, seri
 @Enrollment103092.save
 EnrollmentData.new(enrollment_id: @Enrollment103092.id, name: 'Tyyli', value: 'Perinteinen', attribute_index: 1).save
 EnrollmentData.new(enrollment_id: @Enrollment103091.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
-@User10310 = User.new(postal_code: '00100', city: 'Helsinki', first_name: 'Erkki', last_name: 'Lehtonen', username: 'user10310', email: 'user10310@test.com', phone_number: 12345, street_address: 'Katuosoite', kk_number: 10310, birth_date: Date.today, gender: 'M', admin: false, password: 'Salasana1', password_confirmation: 'Salasana1', active: true)
-@User10310.save
-Result.new(name: 'Erkki Lehtonen', city: 'Helsinki', group: 'Hitaat 1', year: 2014, series: 'M70', kk_number: '10310').save
-@Enrollment103105 = Enrollment.new(user_id: @User10310.id, event_id: @Event5.id, time:8181)
-@Enrollment103105.save
-@Enrollment103106 = Enrollment.new(user_id: @User10310.id, event_id: @Event6.id, time:8924)
-@Enrollment103106.save
-EnrollmentData.new(enrollment_id: @Enrollment103106.id, name: 'Emit', value: 'Kyllä', attribute_index: 1).save
-@User10311 = User.new(postal_code: '00100', city: 'Helsinki', first_name: 'Kari', last_name: 'Nieminen', username: 'user10311', email: 'user10311@test.com', phone_number: 12345, street_address: 'Katuosoite', kk_number: 10311, birth_date: Date.today, gender: 'M', admin: false, password: 'Salasana1', password_confirmation: 'Salasana1', active: true)
-@User10311.save
-Result.new(name: 'Kari Nieminen', city: 'Helsinki', group: 'Tervakosken Pato 1.', year: 2014, series: 'M55', kk_number: '10311').save
-@Enrollment103115 = Enrollment.new(user_id: @User10311.id, event_id: @Event5.id, time:8318)
-@Enrollment103115.save
-@Enrollment103116 = Enrollment.new(user_id: @User10311.id, event_id: @Event6.id, time:9191)
-@Enrollment103116.save
-EnrollmentData.new(enrollment_id: @Enrollment103116.id, name: 'Emit', value: 'Kyllä', attribute_index: 1).save
 @User10312 = User.new(postal_code: '00100', city: 'Helsinki', first_name: 'Timo', last_name: 'Hellberg', username: 'user10312', email: 'user10312@test.com', phone_number: 12345, street_address: 'Katuosoite', kk_number: 10312, birth_date: Date.today, gender: 'M', admin: false, password: 'Salasana1', password_confirmation: 'Salasana1', active: true)
 @User10312.save
 Result.new(name: 'Timo Hellberg', city: 'Helsinki', group: 'Uskelan Urhot II', year: 2014, series: 'M50', kk_number: '10312').save
@@ -6483,14 +6467,6 @@ EnrollmentData.new(enrollment_id: @Enrollment103124.id, name: 'Parin sukupuoli',
 EnrollmentData.new(enrollment_id: @Enrollment103124.id, name: 'Parin syntymävuosi', value: Date.today.year, attribute_index: 5).save
 EnrollmentData.new(enrollment_id: @Enrollment103124.id, name: 'Onko pari kiertäjä', value: 'Ei', attribute_index: 6).save
 EnrollmentData.new(enrollment_id: @Enrollment103121.id, name: 'Kierroslaskija', value: 'Kyllä', attribute_index: 1).save
-@User10313 = User.new(postal_code: '00100', city: 'Helsinki', first_name: 'Matti', last_name: 'Teittinen', username: 'user10313', email: 'user10313@test.com', phone_number: 12345, street_address: 'Katuosoite', kk_number: 10313, birth_date: Date.today, gender: 'M', admin: false, password: 'Salasana1', password_confirmation: 'Salasana1', active: true)
-@User10313.save
-Result.new(name: 'Matti Teittinen', city: 'Helsinki', group: 'Uskelan Urhot II', year: 2014, series: 'M75', kk_number: '10313').save
-@Enrollment103135 = Enrollment.new(user_id: @User10313.id, event_id: @Event5.id, time:8612)
-@Enrollment103135.save
-@Enrollment103136 = Enrollment.new(user_id: @User10313.id, event_id: @Event6.id, time:8717)
-@Enrollment103136.save
-EnrollmentData.new(enrollment_id: @Enrollment103136.id, name: 'Emit', value: 'Kyllä', attribute_index: 1).save
 @User10314 = User.new(postal_code: '00100', city: 'Helsinki', first_name: 'Hannu', last_name: 'Antikainen', username: 'user10314', email: 'user10314@test.com', phone_number: 12345, street_address: 'Katuosoite', kk_number: 10314, birth_date: Date.today, gender: 'M', admin: false, password: 'Salasana1', password_confirmation: 'Salasana1', active: true)
 @User10314.save
 Result.new(name: 'Hannu Antikainen', city: 'Helsinki', group: nil, year: 2014, series: 'M55', kk_number: '10314').save
