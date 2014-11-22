@@ -42,11 +42,7 @@
             <% group_results[:individual_results].each do |id, individual_result| %>
                 <tr>
                   <td><%= individual_result[:result][:name] %></td>
-                  <% if individual_result[:sum_of_noted_results].nil? %>
-                      <td>Ei pisteitä</td>
-                  <% else %>
-                      <td><%= individual_result[:sum_of_noted_results].round(2) %></td>
-                  <% end %>
+                  <td><%= individual_result[:sum_of_noted_results].round(2) %></td>
                   <% if individual_result[:result][:skating_pts].nil? %>
                       <td>Ei tulosta</td>
                   <% else %>
@@ -82,36 +78,12 @@
             <tr>
               <td></td>
               <td></td>
-              <% if group_results[:skating_sum].nil? %>
-                  <td>Ei pisteitä</td>
-              <% else %>
-                  <td><%= group_results[:skating_sum].round(2) %></td>
-              <% end %>
-              <% if group_results[:skiing_sum].nil? %>
-                  <td>Ei pisteitä</td>
-              <% else %>
-                  <td><%= group_results[:skiing_sum].round(2) %></td>
-              <% end %>
-              <% if group_results[:marathon_sum].nil? %>
-                  <td>Ei pisteitä</td>
-              <% else %>
-                  <td><%= group_results[:marathon_sum].round(2) %></td>
-              <% end %>
-              <% if group_results[:rowing_sum].nil? %>
-                  <td>Ei pisteitä</td>
-              <% else %>
-                  <td><%= group_results[:rowing_sum].round(2) %></td>
-              <% end %>
-              <% if group_results[:cycling_sum].nil? %>
-                  <td>Ei pisteitä</td>
-              <% else %>
-                  <td><%= group_results[:cycling_sum].round(2) %></td>
-              <% end %>
-              <% if group_results[:orienteering_sum].nil? %>
-                  <td>Ei pisteitä</td>
-              <% else %>
-                  <td><%= group_results[:orienteering_sum].round(2) %></td>
-              <% end %>
+              <td><%= group_results[:skating_sum].round(2) %></td>
+              <td><%= group_results[:skiing_sum].round(2) %></td>
+              <td><%= group_results[:marathon_sum].round(2) %></td>
+              <td><%= group_results[:rowing_sum].round(2) %></td>
+              <td><%= group_results[:cycling_sum].round(2) %></td>
+              <td><%= group_results[:orienteering_sum].round(2) %></td>
             </tr>
             </td>
           </table>
