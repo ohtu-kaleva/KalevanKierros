@@ -41,14 +41,13 @@ class GroupsController < ApplicationController
     end
 
     @group = Group.new(group_params)
-
+    @group.user_id = @user.id
     if @group.save
       members.uniq.each do |m|
         m.update_column :group_id, @group.id
         KkEnrollment.new(user_id: m.id).save
         init_results_entry(m)
       end
-
       KkEnrollmentMailer.enrollment_email_captain(@user, members.uniq, group_params[:name]).deliver
 
       redirect_to :root, flash: { success: 'Ryhmä luotu onnistuneesti' }
@@ -59,6 +58,10 @@ class GroupsController < ApplicationController
 
   def show
     @users = @group.users
+    @captain = @group.user
+    if !(@users && @captain)
+      redirect_to root_path
+    end
   end
 
   def update

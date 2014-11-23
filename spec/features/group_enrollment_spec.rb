@@ -73,4 +73,15 @@ describe 'New Group page' do
     }.to change(Result, :count).by(4)
     expect(Result.last.group).to eq('Testi')
   end
+
+  it "should have placed current user as groups captain", js: true, skip: true do
+    visit new_group_path
+    fill_in('group_name', with:'Testi')
+    fill_in('member2', with:12346)
+    fill_in('member3', with:12347)
+    fill_in('member4', with:12348)
+    click_button 'Luo joukkue'
+    g = Group.last
+    expect(g.user_id).to eq(1)
+  end
 end

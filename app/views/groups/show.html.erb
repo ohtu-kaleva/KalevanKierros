@@ -1,4 +1,5 @@
 <h1><%= @group.name %></h1>
+<strong>Kapteeni: <%= @captain.full_name %></strong>
 <table class="table table-bordered">
 <thead>
 <tr>
@@ -9,7 +10,7 @@
 <tbody>
   <% @users.each do |u| %>
 <tr>
-  <td><%= u.first_name %> <%= u.last_name %></td>
+  <td><%= u.full_name %></td>
   <td><%= u.email %></td>
 </tr>
 <% end %>
