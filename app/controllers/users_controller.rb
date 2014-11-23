@@ -24,6 +24,7 @@ class UsersController < ApplicationController
 
   def show_dummy_users
     @users = User.where dummy: true
+    @events = Event.all
   end
 
   # GET /users/1/edit

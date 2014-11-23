@@ -1,6 +1,6 @@
 class KkEnrollmentsController < ApplicationController
   include InitResultsEntry
-  before_action :redirect_if_user_not_admin, except: [:new, :create]
+  before_action :redirect_if_user_not_admin, except: [:new, :create, :create_dummy_user_enrollment]
   before_action :set_user, only: [:new, :create]
   before_action :check_enrollment, only: [:new, :create]
   before_action :set_dummy_user, only: [:enroll_dummy, :create_dummy_user_enrollment]
