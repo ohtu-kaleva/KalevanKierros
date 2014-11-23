@@ -17,6 +17,14 @@ class EnrollmentsController < ApplicationController
           redirect_to root_path, flash: { notice: 'Ilmoittaudu ensin kalevan kierrokselle' }
           return
         end
+        if Date.today < @event.start_date
+          redirect_to root_path, flash: { notice: 'Tapahtumaan ei voi vielä ilmoittautua' }
+          return
+        end
+        if Date.today > @event.second_end_date
+          redirect_to root_path, flash: { notice: 'Tapahtumaan ei voi enää ilmoittautua' }
+          return
+        end
       end
 
       @enrollment = Enrollment.new

@@ -55,10 +55,10 @@
 <%= link_to 'Lisää kenttä', add_event_attribute_path({:event_id => @event.id}) %> |
 <%= link_to 'Muokkaa tapahtumaa', edit_event_path(@event) %> |
 <% end %>
-<% if Date.today <= @event.second_end_date %>
+<% if Date.today <= @event.second_end_date && Date.today >= @event.start_date %>
 <%= link_to 'Ilmoittaudu tapahtumaan', add_enrollment_path({:event_id => @event.id}) %> |
 <% else %>
-<strong>Tapahtumaan ei voi enää ilmoittautua. Ilmoittautuminen päättyi <%= @event.end_date %></strong>
+<strong>Tapahtumaan ei voi ilmoittautua. |</strong>
 <% end %>
 <%= link_to 'Palaa takaisin', events_path %>
 </div>

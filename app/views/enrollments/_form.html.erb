@@ -11,7 +11,8 @@
         </div>
     <% end %>
     <p>Olet ilmoittautumassa tapahtumaan: <%= @event.name %><br>
-    Täytä seuraavat asiat oikein.
+    <strong>Tapahtuman kuvaus:</strong><br>
+      <%= @event.description %><br>
     </p>
 <div class="field">
     <% @event.event_attributes.each do |e| %>

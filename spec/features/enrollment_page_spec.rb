@@ -4,6 +4,7 @@ include SigninHelper
 
 feature 'Enrollment page' do
   let!(:event) { FactoryGirl.create :event_with_attributes }
+  let!(:event2) { FactoryGirl.create :event_with_attributes, start_date: Date.today + 3.days, name: "Ei viela" }
   let!(:user) do
     FactoryGirl.create :user_with_kk_enrollment, password: 'S4lainen',
       password_confirmation: 'S4lainen'
@@ -36,5 +37,11 @@ feature 'Enrollment page' do
     #user tries to enroll again
     visit add_enrollment_path(event.id)
     expect(page).to have_content 'Olet jo ilmoittautunut tapahtumaan'
+  end
+
+  scenario 'User tries to enroll event which has not opened yet' do
+    sign_in(username: 'Tyhjis', password: 'S4lainen')
+    visit add_enrollment_path(event2.id)
+    expect(page).to have_content 'Tapahtumaan ei voi vielä ilmoittautua'
   end
 end

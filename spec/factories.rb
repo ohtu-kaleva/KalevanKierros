@@ -33,7 +33,7 @@ FactoryGirl.define do
 
   factory :event do
     name 'Testievent'
-    start_date Date.today + 3.days
+    start_date Date.today
     end_date Date.today + 1.week
     second_end_date Date.today + 2.week
     price 1000
