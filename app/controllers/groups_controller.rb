@@ -1,6 +1,8 @@
 class GroupsController < ApplicationController
   include InitResultsEntry
-  before_action :set_group_or_redirect, only: [:show]
+  before_action :set_group_or_redirect, only: [:show, :add_user_to_group]
+  before_action :redirect_if_user_not_captain_or_admin, only: [:add_user_to_group, :update_user_group_relation]
+
   def new
     if enrollment_open?
       set_user_and_check_enrollment
@@ -60,7 +62,35 @@ class GroupsController < ApplicationController
     @users = @group.users
     @captain = @group.user
     if !(@users && @captain)
-      redirect_to root_path
+      redirect_to root_path and return
+    end
+    @count = @group.users.count
+  end
+
+  def add_user_to_group
+  end
+
+  def delete_user_from_group
+    redirect_to :back
+  end
+
+  def update_user_group_relation
+    group = Group.find_by id: params[:id]
+    user = User.find_by kk_number: params[:kk_number]
+    if not group.nil? and not user.nil? and group.users.count < 6
+      if not user.group.nil?
+        redirect_to :back, flash: { error: 'Jäsenen lisääminen ei onnistunut. Jäsen kuuluu jo johonkin ryhmään.'} and return
+      end
+      user.update_column :group_id, group.id
+      if !user.kk_enrollment
+        init_results_entry(user)
+      else
+        result = Result.find_by kk_number: user.kk_number, year: Date.today.year
+        result.update_column :group, group.name
+      end
+      redirect_to group_path(params[:id]), flash: { success: 'Jäsen lisätty ryhmään.' } and return
+    else
+      redirect_to :back, flash: { error: 'Jäsenen lisääminen ei onnistunut.' }
     end
   end
 
@@ -85,6 +115,18 @@ class GroupsController < ApplicationController
       redirect_to root_path, flash: { error: 'Olet jo ilmoittautunut kierrokselle' }
       return
     end
+  end
+
+  def redirect_if_user_not_captain_or_admin
+    if user_is_admin? || user_is_captain?
+      return
+    else
+      redirect_to :root
+    end
+  end
+
+  def user_is_captain?
+    @group.user == current_user
   end
 
   def group_params

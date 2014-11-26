@@ -5,6 +5,7 @@
 <tr>
     <th>Jäsenen nimi</th>
     <th>Jäsenen sähköposti</th>
+    <th>Poista jäsen ryhmästä</th>
 </tr>
 </thead>
 <tbody>
@@ -12,11 +13,16 @@
 <tr>
   <td><%= u.full_name %></td>
   <td><%= u.email %></td>
+  <% if not current_user.nil? and @captain == current_user and u != @captain %>
+  <td><%= link_to 'Poista', delete_user_from_group_path(@group.id) %></td>
+  <% else %>
+  <td>Poistoa ei voi tehdä</td>
+  <% end %>
 </tr>
 <% end %>
 </tbody>
 </table>
 <%= link_to 'Etusivu', root_path %> |
-<% if not current_user.nil? and @group.id == current_user.group_id %>
+<% if not current_user.nil? and @captain == current_user and @count < 6 %>
     <%= link_to 'Lisää henkilö joukkueeseen', add_user_to_group_path(@group.id) %>
 <% end %>
