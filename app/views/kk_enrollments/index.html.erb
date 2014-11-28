@@ -1,23 +1,35 @@
 <div class="col-lg-12">
   <h1>Kierrosilmoittautumiset</h1>
-
+<p>Kierrokselle ilmoittautuneiden lista. Tällä sivulla voit päivittää henkilön maksutilanteen. Jos henkilö on joukkueen kapteeni, myös muiden joukkueen jäsenten maksutilanne päivitetään.</p>
 <table id="kk_enrollments" class="table table-striped tablesorter-bootstrap">
   <thead>
     <tr>
-      <th>Kiertäjänumero</th>
+      <th>Viitenumero</th>
       <th>Etunimi</th>
       <th>Sukunimi</th>
+      <th>Joukkue</th>
       <th>Maksettu</th>
+      <th>Päivitä maksutilanne</th>
     </tr>
   </thead>
 
   <tbody>
     <% @kk_enrollments.each do |enrollment| %>
       <tr>
-        <td><%= enrollment.user.kk_number %></td>
+        <td><%= enrollment.user.construct_reference_number %></td>
         <td><%= enrollment.user.first_name %></td>
         <td><%= enrollment.user.last_name %></td>
+        <% if enrollment.user.group.nil? %>
+            <td>Ei joukkuetta</td>
+        <% else %>
+            <td><%= enrollment.user.group.name %></td>
+        <% end %>
         <td><%= enrollment.paid == true ? 'Kyllä' : 'Ei' %></td>
+        <% if enrollment.paid %>
+            <td>Maksettu</td>
+        <% else %>
+            <td><%= link_to 'Päivitä maksu', edit_kk_enrollment_path(enrollment) %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>

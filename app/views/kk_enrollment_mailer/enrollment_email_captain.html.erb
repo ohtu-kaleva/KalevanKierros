@@ -13,6 +13,6 @@
         <% @group_members.each do |m| %>
           <p><%= m.kk_number %> <%= m.last_name %> <%= m.first_name %></p>
         <% end %>
-    <p>Kierrosmaksu 200 euroa maksettava viitenumerolla <%= @user.kk_number %> tilille <%= @account_number %></p>
+    <p>Kierrosmaksu 200 euroa maksettava viitenumerolla <%= @user.construct_reference_number %> tilille <%= @account_number %></p>
   </body>
 </html>

@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   resources :sessions, only: [:new, :create]
   resources :enrollments, only: [:create, :index]
   resources :groups, only: [:new, :create, :show]
+  resources :kk_enrollments, only: [:show, :update, :edit]
   get 'enrollments/:enrollment_id/edit', to: 'enrollments#edit', as: 'edit_enrollment'
   get 'results/year/:year/:gender/:age_group/:type', to: 'results#index_by_year', as: 'index_by_year'
 
@@ -18,7 +19,8 @@ Rails.application.routes.draw do
 
   get 'admin/kk_enrollment', to: 'static_pages#kk_enrollment'
   get 'kk_enrollments', to: 'kk_enrollments#index'
-  put 'kk_enrollments/:id', to: 'kk_enrollments#update'
+  #get 'kk_enrollments/:id', to: 'kk_enrollments#edit', as: 'edit_kk_enrollment'
+  #put 'kk_enrollments/:id', to: 'kk_enrollments#update'
   delete 'kk_enrollments/:id', to: 'kk_enrollments#destroy'
   post 'kk_enrollment/change', to: 'kk_enrollments#change_enrollment_status'
   get 'users/:id/kk_enrollments/new', to: 'kk_enrollments#new', as: 'new_kk_enrollment'

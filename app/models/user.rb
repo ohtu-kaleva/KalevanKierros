@@ -72,4 +72,26 @@ class User < ActiveRecord::Base
   def generate_activation_token
     self.activation_token = SecureRandom.urlsafe_base64
   end
+
+  def construct_reference_number
+    number = (kk_number.to_s).split ''
+    if number.count < 7 || number.count > 7
+      return 'virhe viitenumerossa'
+    end
+    number.reverse!
+    sum = 0
+    sum = sum + number[0].to_i * 7
+    sum = sum + number[1].to_i * 3
+    sum = sum + number[2].to_i * 1
+    sum = sum + number[3].to_i * 7
+    sum = sum + number[4].to_i * 3
+    sum = sum + number[5].to_i * 1
+    sum = sum + number[6].to_i * 7
+    next_ten = (sum / 10).round * 10 + 10
+    check_sum = next_ten - sum
+    if check_sum == 10
+      check_sum = 0
+    end
+    return kk_number.to_s.concat(check_sum.to_s)
+  end
  end

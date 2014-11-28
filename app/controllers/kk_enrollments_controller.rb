@@ -3,6 +3,7 @@ class KkEnrollmentsController < ApplicationController
   before_action :redirect_if_user_not_admin, except: [:new, :create]
   before_action :set_user, only: [:new, :create]
   before_action :check_enrollment, only: [:new, :create]
+  before_action :set_kk_enrollment_or_redirect, only: [:edit]
 
   # GET /kk_enrollments
   def index
@@ -24,6 +25,8 @@ class KkEnrollmentsController < ApplicationController
 
   # GET /kk_enrollments/1/edit
   def edit
+    @user = @kk_enrollment.user
+    @group = @user.group
   end
 
   # POST /kk_enrollments
@@ -71,7 +74,17 @@ class KkEnrollmentsController < ApplicationController
   def update
     @kk_enrollment = KkEnrollment.find_by id: params[:id]
 
-    if @kk_enrollment && @kk_enrollment.update(paid: true)
+    if @kk_enrollment
+      if @kk_enrollment.user.group
+        group = @kk_enrollment.user.group
+        users = group.users
+        users.each do |u|
+          enr = u.kk_enrollment
+          enr.update_attribute(:paid, true)
+        end
+      else
+        @kk_enrollment.update_attribute(:paid, true)
+      end
       flash[:success] = 'Ilmoittautuminen päivitettiin onnistuneesti'
     end
 
@@ -101,6 +114,12 @@ class KkEnrollmentsController < ApplicationController
       @user = current_user
       return if @user
       redirect_to signin_path
+    end
+
+    def set_kk_enrollment_or_redirect
+      @kk_enrollment = KkEnrollment.find_by id: params[:id]
+        return if @kk_enrollment
+        redirect_to :root
     end
 
     def check_enrollment

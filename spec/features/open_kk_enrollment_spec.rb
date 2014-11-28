@@ -58,7 +58,7 @@ feature 'Opening enrollment' do
       click_link 'Ylläpito'
       click_link 'Kierroksen hallinta'
       click_button 'Näytä ilmoittautumiset'
-      expect(page).to have_content user.kk_number
+      expect(page).to have_content 'virhe viitenumerossa'
       expect(page).to have_content user.first_name
       expect(page).to have_content user.last_name
     end

@@ -83,6 +83,7 @@ class GroupsController < ApplicationController
       end
       user.update_column :group_id, group.id
       if !user.kk_enrollment
+        KkEnrollment.new(user_id: user.id).save
         init_results_entry(user)
       else
         result = Result.find_by kk_number: user.kk_number, year: Date.today.year

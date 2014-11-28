@@ -6,6 +6,6 @@
   <body>
     <h1>Ilmoittautuminen Kalevan Kierrokselle <%= Date.today.year %></h1>
     <p>Tervetuloa Kalevan Kierrokselle <%= @user.first_name %>!<p>
-    <p>Kierrosmaksu 50 euroa maksettava viitenumerolla <%= @user.kk_number %> tilille <%= @account_number %></p>
+    <p>Kierrosmaksu 50 euroa maksettava viitenumerolla <%= @user.construct_reference_number %> tilille <%= @account_number %></p>
   </body>
 </html>

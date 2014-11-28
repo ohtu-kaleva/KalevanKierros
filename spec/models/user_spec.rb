@@ -166,4 +166,25 @@ describe User do
       expect(user.full_name).to eq('Krisu Hansson')
     end
   end
+
+  context 'constructing kk-number reference' do
+    let!(:user1) { FactoryGirl.create :user, password:"S4lainen", password_confirmation:"S4lainen", kk_number:3300002}
+    let!(:user2) { FactoryGirl.create :user, username:'Nasse', password:'S4lainen', password_confirmation:'S4lainen', kk_number:3300032}
+    let!(:user3) { FactoryGirl.create :user, username:'Kisse', password:'S4lainen', password_confirmation:'S4lainen', kk_number:3300235}
+
+    it 'constructs correct reference number' do
+      str = user1.construct_reference_number
+      expect(str).to eq('33000022')
+    end
+
+    it 'constructs correct reference number 2' do
+      str = user2.construct_reference_number
+      expect(str).to eq('33000323')
+    end
+
+    it 'constructs correct reference number 3' do
+      str = user3.construct_reference_number
+      expect(str).to eq('33002350')
+    end
+  end
 end

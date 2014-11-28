@@ -1,0 +1,14 @@
+<h1>Maksutiedon päivitys</h1>
+<p>Tarkista tiedot oikeiksi</p>
+<ul>
+<li>Ilmoittautujan nimi: <strong><%= @user.full_name %></strong></li>
+<li>Viitenumero: <strong><%= @user.construct_reference_number %></strong></li>
+<li>Sähköposti: <strong><%= @user.email %></strong></li>
+<% if @group %>
+<li>Joukkue: <strong><%= @group.name %></strong></li>
+<% end %>
+<%= form_for @kk_enrollment do |f| %>
+  <%= f.hidden_field :id %>
+  <%= f.submit 'Päivitä' %>
+<% end %>
+</ul>
