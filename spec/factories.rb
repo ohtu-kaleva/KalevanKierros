@@ -303,4 +303,5 @@ FactoryGirl.define do
     orienteering_pts nil
     completed_events 0
   end
+
 end

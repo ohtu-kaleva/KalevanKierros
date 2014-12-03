@@ -6,5 +6,6 @@ class StaticPagesController < ApplicationController
 
   def kk_enrollment
     @years = Result.uniq.pluck :year
+    @account_number = AppSetting.find_by name: 'KkAccountNumber'
   end
 end

@@ -3,9 +3,14 @@
 <h1>Kierroksen hallinta</h1>
 <p>Voit hallita kierrosilmoittautumista täältä. Mikäli ilmoittautuminen ei ole avoinna, eivät kiertäjät pääse ilmoittautumaan kierrokselle. </p>
 <% if enrollment_open? %>
+  Kierroksen tilinumero: <%= @account_number.value %>
   <%= button_to('Sulje ilmoittautuminen', kk_enrollment_change_path, :class => "btn btn-danger") %>
 <% else %>
-  <%= button_to('Avaa ilmoittautuminen', kk_enrollment_change_path, :class => "btn btn-success") %>
+  <%= form_tag kk_enrollment_change_path do%>
+  <%= label_tag :account_number, 'Kierroksen tilinumero IBAN-muodossa (vaaditaan)' %>
+  <%= text_field_tag :account_number %><br>
+  <%= submit_tag 'Avaa ilmoittautuminen', :class => 'btn btn-success' %>
+  <% end %>
 <% end %>
 <br>
 <%= button_to('Näytä ilmoittautumiset', kk_enrollments_path, method: :get, :class => "btn btn-primary") %>

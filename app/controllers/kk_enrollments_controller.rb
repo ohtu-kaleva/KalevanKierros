@@ -56,9 +56,23 @@ class KkEnrollmentsController < ApplicationController
 
     message = ''
     if status.value.eql?('closed')
+      if params[:account_number].empty?
+        redirect_to admin_kk_enrollment_path, flash: { error: 'Tilinumero puuttuu' } and return
+      else
+        if check_account_number(params[:account_number])
+          account_number = AppSetting.new name: 'KkAccountNumber', value: params[:account_number]
+          account_number.save
+        else
+          redirect_to admin_kk_enrollment_path, flash: { error: 'Tilinumero ei ollut hyväksyttävä' } and return
+        end
+      end
       status.value = 'open'
       message = 'Kierrosilmoittautuminen avattu'
     else
+      account_number = AppSetting.find_by name: 'KkAccountNumber'
+      if account_number
+        account_number.destroy
+      end
       status.value = 'closed'
       message = 'Kierrosilmoittautuminen suljettu'
     end
@@ -120,6 +134,10 @@ class KkEnrollmentsController < ApplicationController
       @kk_enrollment = KkEnrollment.find_by id: params[:id]
         return if @kk_enrollment
         redirect_to :root
+    end
+
+    def check_account_number(string)
+      /[a-zA-Z]{2}[0-9]{2}[a-zA-Z0-9]{4}[0-9]{7}([a-zA-Z0-9]?){0,16}/ === string.gsub(/\s+/,'')
     end
 
     def check_enrollment

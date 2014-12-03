@@ -16,6 +16,7 @@ describe 'New Group page' do
     sign_in username:'Tyhjis', password:'Salainen1'
     click_link 'Ylläpito'
     click_link 'Kierroksen hallinta'
+    fill_in 'account_number', with: 'FI12 1234 123456789'
     click_button 'Avaa ilmoittautuminen'
   end
 

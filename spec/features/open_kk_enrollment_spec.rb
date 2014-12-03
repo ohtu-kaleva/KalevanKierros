@@ -21,18 +21,37 @@ feature 'Opening enrollment' do
 
     scenario 'Admin opens enrollment' do
       click_link 'Kierroksen hallinta'
+      fill_in('account_number', with: 'FI12 1234 123456789')
       click_button 'Avaa ilmoittautuminen'
       expect(current_url).to eq(admin_kk_enrollment_url)
       expect(page).to have_content 'Kierrosilmoittautuminen avattu'
+      ac_number = AppSetting.find_by name: 'KkAccountNumber'
+      expect(ac_number.value).to eq('FI12 1234 123456789')
 
       visit new_kk_enrollment_path(user.id)
       expect(page).to have_content 'Ilmoittautuminen Kalevan Kierrokselle'
+    end
+
+    scenario 'Admin tries to open enrollment without account_number' do
+      click_link 'Kierroksen hallinta'
+      click_button 'Avaa ilmoittautuminen'
+      expect(current_url).to eq(admin_kk_enrollment_url)
+      expect(page).to have_content 'Tilinumero puuttuu'
+    end
+
+    scenario 'Admin tries to open enrollment with incorrect account number' do
+      click_link 'Kierroksen hallinta'
+      fill_in 'account_number', with: '1234567899'
+      click_button 'Avaa ilmoittautuminen'
+      expect(current_url).to eq(admin_kk_enrollment_url)
+      expect(page).to have_content 'Tilinumero ei ollut hyväksyttävä'
     end
   end
 
   context 'Open enrollment' do
     before :each do
       click_link 'Kierroksen hallinta'
+      fill_in('account_number', with: 'FI12 1234 123456789')
       click_button 'Avaa ilmoittautuminen'
     end
 
@@ -66,7 +85,10 @@ feature 'Opening enrollment' do
     scenario 'Admin closes enrollment' do
       click_link 'Ylläpito'
       click_link 'Kierroksen hallinta'
-      click_button 'Sulje ilmoittautuminen'
+      expect{
+        click_button 'Sulje ilmoittautuminen'
+      }.to change(AppSetting, :count).by(-1)
+
       expect(page).to have_content 'Kierrosilmoittautuminen suljettu'
     end
   end
