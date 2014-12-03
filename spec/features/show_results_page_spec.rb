@@ -19,7 +19,7 @@ describe 'Show results page' do
   describe 'when finding data' do
 
 
-    it 'should show all results by default' do
+    it 'should show all results by default', skip: true do
       visit index_by_year_path(Date.today.year, "all", "all", "all")
       expect(page).to have_content("Vuoden #{Date.today.year.to_s} tulokset")
       find('table').find('tr:nth-child(2)').should have_content('Kristian Hansson')
