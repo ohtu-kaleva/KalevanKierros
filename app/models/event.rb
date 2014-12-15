@@ -7,6 +7,7 @@ class Event < ActiveRecord::Base
   validates :name, uniqueness: true
   validate :validate_end_date
   validate :validate_second_end_date
+  validate :validate_account_number
 
   def validate_end_date
     if start_date && end_date
@@ -14,6 +15,13 @@ class Event < ActiveRecord::Base
     end
 
     errors.add(:end_date, 'is invalid')
+  end
+
+  def validate_account_number
+    if account_number
+      return if /[a-zA-Z]{2}[0-9]{2}[a-zA-Z0-9]{4}[0-9]{7}([a-zA-Z0-9]?){0,16}/ === account_number.gsub(/\s+/,'') || account_number.empty?
+    end
+    errors.add(:account_number, 'is invalid')
   end
 
   def validate_second_end_date

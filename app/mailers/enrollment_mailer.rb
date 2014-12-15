@@ -5,7 +5,7 @@ class EnrollmentMailer < ActionMailer::Base
     @user = user
     @enrollment = enrollment
     @price = event.second_price/100.0
-
+    @account_number = event.account_number
     # Varmistetaan että päivien vertailussa verrataan tähän päivään evaluoimalla
     # Date.today aina ajettaessa send_enrollment_email
     get_this_day = lambda { Date.today }

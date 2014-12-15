@@ -39,6 +39,7 @@ FactoryGirl.define do
     price 1000
     second_price 2000
     description 'Testikuvaus'
+    account_number ''
 
     factory :event_with_attributes do
       after(:create) do |event|
@@ -66,6 +67,7 @@ FactoryGirl.define do
     open false
     factor 1
     penalty_factor 1.0
+    account_number ''
 
     trait :running do
       sport_type 'RunningEvent'
