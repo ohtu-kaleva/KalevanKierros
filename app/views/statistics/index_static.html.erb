@@ -18,12 +18,13 @@
       <th>Kotipaikka</th>
       <th>Vuosi</th>
       <th>P</th>
+      <th>Edel. vuonna yht.</th>
+      <th>Edel. vuonna pisteitä</th>
       <th>6</th>
       <th>5</th>
       <th>4</th>
       <th>Yht.</th>
       <th>Pisteet</th>
-      <th>RM</th>
       <th>A.viiri</th>
       <th>AP</th>
       <th>Kunniak.nro</th>
@@ -37,12 +38,13 @@
           <td><%= statistic.city %></td>
           <td><%= statistic.birth_year %></td>
           <td><%= statistic.p %></td>
+          <td><%= statistic.prev_year_event_sum %></td>
+          <td><%= statistic.prev_year_pts_sum %></td>
           <td><%= statistic.six_events_completed_count %></td>
           <td><%= statistic.five_events_completed_count %></td>
           <td><%= statistic.four_events_completed_count %></td>
           <td><%= statistic.total_events_completed %></td>
           <td><%= statistic.pts_sum.round(2) %></td>
-          <td><%= statistic.r %></td>
           <td><%= statistic.a %></td>
           <td><%= statistic.ap %></td>
           <td><%= statistic.k %></td>

@@ -9,12 +9,13 @@
       <th>Kotipaikka</th>
       <th>Syntymävuosi</th>
       <th>P</th>
+      <th>Edel. vuonna yht.</th>
+      <th>Edel. vuonna pisteitä.</th>
       <th>6</th>
       <th>5</th>
       <th>4</th>
       <th>Yhteensä</th>
       <th>Kokonaispisteet</th>
-      <th>Rintamerkki</th>
       <th>Ansioviiri</th>
       <th>AP</th>
       <th>Kunniakiertäjänumero</th>
@@ -27,12 +28,13 @@
       <td><%= @current_statistic.city %></td>
       <td><%= @current_statistic.birth_year %></td>
       <td><%= @current_statistic.p %></td>
+      <td><%= @current_statistic.prev_year_event_sum %></td>
+      <td><%= @current_statistic.prev_year_pts_sum %></td>
       <td><%= @current_statistic.six_events_completed_count %></td>
       <td><%= @current_statistic.five_events_completed_count %></td>
       <td><%= @current_statistic.four_events_completed_count %></td>
       <td><%= @current_statistic.total_events_completed %></td>
       <td><%= @current_statistic.pts_sum.round(2) %></td>
-      <td><%= @current_statistic.r %></td>
       <td><%= @current_statistic.a %></td>
       <td><%= @current_statistic.ap %></td>
       <td><%= @current_statistic.k %></td>
@@ -60,12 +62,13 @@
     <th>Kotipaikka</th>
     <th>Syntymävuosi</th>
     <th>P</th>
+    <th>Edel. vuonna yht.</th>
+    <th>Edel. vuonna pisteitä.</th>
     <th>6</th>
     <th>5</th>
     <th>4</th>
     <th>Yhteensä</th>
     <th>Kokonaispisteet</th>
-    <th>Rintamerkki</th>
     <th>Ansioviiri</th>
     <th>AP</th>
     <th>Kunniakiertäjänumero</th>
@@ -81,12 +84,13 @@
         <td><%= @potential_statistic.city %></td>
         <td><%= @potential_statistic.birth_year %></td>
         <td><%= @potential_statistic.p %></td>
+        <td><%= @potential_statistic.prev_year_event_sum %></td>
+        <td><%= @potential_statistic.prev_year_pts_sum %></td>
         <td><%= @potential_statistic.six_events_completed_count %></td>
         <td><%= @potential_statistic.five_events_completed_count %></td>
         <td><%= @potential_statistic.four_events_completed_count %></td>
         <td><%= @potential_statistic.total_events_completed %></td>
         <td><%= @potential_statistic.pts_sum.round(2) %></td>
-        <td><%= @potential_statistic.r %></td>
         <td><%= @potential_statistic.a %></td>
         <td><%= @potential_statistic.ap %></td>
         <td><%= @potential_statistic.k %></td>
@@ -94,6 +98,7 @@
       </tr>
       <input id="statistic_id" name="statistic_id" type="hidden" value="<%= @potential_statistic.id %>" \>
   <% else %>
+      <td></td>
       <td></td>
       <td></td>
       <td></td>
@@ -136,12 +141,13 @@
                  <td>" + response['city'] + "</td>\
                  <td>" + response['birth_year'] + "</td>\
                  <td>" + response['p'] + "</td>\
+                 <td>" + response['prev_year_event_sum'] + "</td>\
+                 <td>" + response['prev_year_pts_sum'] + "</td>\
                  <td>" + response['six_events_completed_count'] + "</td>\
                  <td>" + response['five_events_completed_count'] + "</td>\
                  <td>" + response['four_events_completed_count'] + "</td>\
                  <td>" + response['total_events_completed'] + "</td>\
                  <td>" + response['pts_sum'] + "</td>\
-                 <td>" + response['r'] + "</td>\
                  <td>" + response['a'] + "</td>\
                  <td>" + response['ap'] + "</td>\
                  <td>" + response['k'] + "</td>\

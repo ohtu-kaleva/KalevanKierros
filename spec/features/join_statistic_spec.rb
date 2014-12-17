@@ -70,7 +70,6 @@ feature 'Joining statistic' do
       expect(page).to have_content "4 0"
       expect(page).to have_content "Yhteensä 0"
       expect(page).to have_content "Kokonaispisteet 0.0"
-      expect(page).to have_content 'Rintamerkki Ei'
     end
 
     scenario 'User tries to view non-existing statistic' do

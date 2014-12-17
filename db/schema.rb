@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141215202729) do
+ActiveRecord::Schema.define(version: 20141217095211) do
 
   create_table "app_settings", force: true do |t|
     t.string   "name",       null: false
@@ -138,13 +138,14 @@ ActiveRecord::Schema.define(version: 20141215202729) do
     t.decimal  "pts_sum",                     default: 0.0
     t.integer  "position",                    default: 0
     t.string   "p"
-    t.string   "r"
     t.integer  "a",                           default: 0
     t.string   "ap"
     t.integer  "k",                           default: 0
     t.integer  "v",                           default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.decimal  "prev_year_pts_sum",           default: 0.0
+    t.integer  "prev_year_event_sum",         default: 0
   end
 
   add_index "statistics", ["kk_number"], name: "index_statistics_on_kk_number"

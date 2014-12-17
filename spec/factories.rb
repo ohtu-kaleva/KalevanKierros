@@ -278,6 +278,8 @@ FactoryGirl.define do
   factory :statistic do
     city 'Helsinki'
     birth_year 1998
+    prev_year_pts_sum 0.0
+    prev_year_event_sum 0
     six_events_completed_count 0
     five_events_completed_count 0
     four_events_completed_count 0
@@ -285,7 +287,6 @@ FactoryGirl.define do
     pts_sum 0.0
     position 0
     p nil
-    r nil
     a 0
     ap nil
     k 0

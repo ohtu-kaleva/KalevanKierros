@@ -26,6 +26,14 @@
     <% end %>
   </p>
   <p>
+    <strong>Edel. vuonna yht.</strong>
+    <%= @statistic.prev_year_event_sum %>
+  </p>
+  <p>
+    <strong>Edel. vuonna pisteitä</strong>
+    <%= @statistic.prev_year_pts_sum.round(2) %>
+  </p>
+  <p>
     <strong>6</strong>
     <%= @statistic.six_events_completed_count %>
   </p>
@@ -44,14 +52,6 @@
   <p>
     <strong>Kokonaispisteet</strong>
     <%= @statistic.pts_sum.round(2) %>
-  </p>
-  <p>
-    <strong>Rintamerkki</strong>
-    <% if @statistic.r %>
-      Kyllä
-    <% else %>
-      Ei
-    <% end %>
   </p>
   <p>
     <% if @statistic.a > 0 %>

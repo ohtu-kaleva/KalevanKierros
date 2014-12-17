@@ -89,14 +89,18 @@ class StatisticsController < ApplicationController
             if @statistic
               if result.completed_events == 4
                 @statistic.four_events_completed_count += 1
+                @statistic.prev_year_event_sum = 4
               elsif result.completed_events == 5
                 @statistic.five_events_completed_count += 1
+                @statistic.prev_year_event_sum = 5
               elsif result.completed_events == 6
                 @statistic.six_events_completed_count += 1
+                @statistic.prev_year_event_sum = 6
               end
 
               @statistic.total_events_completed += result.completed_events
               @statistic.pts_sum += result.pts_sum
+              @statistic.prev_year_pts_sum = result.pts_sum
               @statistic.save
               result.update_attribute :updated_to_statistics, true
             end

@@ -110,9 +110,10 @@ class UsersController < ApplicationController
       Statistic.create kk_number: user.kk_number, user_id: user.id,
                        last_name: user.last_name, first_name: user.first_name,
                        city: user.city, birth_year: user.birth_date.year,
+                       prev_year_pts_sum: 0.0, prev_year_event_sum: 0,
                        six_events_completed_count: 0, five_events_completed_count: 0,
                        four_events_completed_count: 0, total_events_completed: 0,
-                       pts_sum: 0, position: 0, p: nil, r: nil, a: 0, ap: nil, k: 0, v: 0
+                       pts_sum: 0, position: 0, p: nil, a: 0, ap: nil, k: 0, v: 0
     end
 
     def generate_kk_number(user)
