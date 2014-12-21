@@ -34,8 +34,8 @@ FactoryGirl.define do
   factory :event do
     name 'Testievent'
     start_date Date.today
-    end_date Date.today + 1.week
-    second_end_date Date.today + 2.week
+    end_date Date.today + 7.day
+    second_end_date Date.today + 8.day
     price 1000
     second_price 2000
     description 'Testikuvaus'
@@ -58,9 +58,9 @@ FactoryGirl.define do
   factory :complete_event, class: Event do
     id 1
     name 'Testievent'
-    start_date Date.today + 3.days
-    end_date Date.today + 1.week
-    second_end_date Date.today + 2.week
+    start_date Date.today
+    end_date Date.today + 7.day
+    second_end_date Date.today + 8.day
     price 1000
     second_price 2000
     description 'Testikuvaus'

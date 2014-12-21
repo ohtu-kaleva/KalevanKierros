@@ -22,11 +22,14 @@ feature 'Opening enrollment' do
     scenario 'Admin opens enrollment' do
       click_link 'Kierroksen hallinta'
       fill_in('account_number', with: 'FI12 1234 123456789')
+      fill_in('kk_year', with: Date.today.year)
       click_button 'Avaa ilmoittautuminen'
       expect(current_url).to eq(admin_kk_enrollment_url)
       expect(page).to have_content 'Kierrosilmoittautuminen avattu'
       ac_number = AppSetting.find_by name: 'KkAccountNumber'
       expect(ac_number.value).to eq('FI12 1234 123456789')
+      kk_year = AppSetting.find_by name: 'KkYear'
+      expect(kk_year.value).to eq(Date.today.year.to_s)
 
       visit new_kk_enrollment_path(user.id)
       expect(page).to have_content 'Ilmoittautuminen Kalevan Kierrokselle'
@@ -52,6 +55,7 @@ feature 'Opening enrollment' do
     before :each do
       click_link 'Kierroksen hallinta'
       fill_in('account_number', with: 'FI12 1234 123456789')
+      fill_in('kk_year', with: Date.today.year)
       click_button 'Avaa ilmoittautuminen'
     end
 
@@ -87,7 +91,7 @@ feature 'Opening enrollment' do
       click_link 'Kierroksen hallinta'
       expect{
         click_button 'Sulje ilmoittautuminen'
-      }.to change(AppSetting, :count).by(-1)
+      }.to change(AppSetting, :count).by(-2)
 
       expect(page).to have_content 'Kierrosilmoittautuminen suljettu'
     end

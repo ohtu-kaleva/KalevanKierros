@@ -4,6 +4,7 @@ describe KkEnrollmentMailer do
   let!(:user) { FactoryGirl.create :user, :admin, password: 'Salainen1',
                                    email: 'testmail@test.com',
                                    password_confirmation: 'Salainen1' }
+  let!(:year) { AppSetting.create name: 'KkYear', value: Date.today.year }
   let!(:email) { KkEnrollmentMailer.enrollment_email(user).deliver }
 
   it 'sends mail' do
