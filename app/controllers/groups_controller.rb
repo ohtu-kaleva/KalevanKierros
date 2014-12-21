@@ -81,14 +81,15 @@ class GroupsController < ApplicationController
       if not user.group.nil?
         redirect_to :back, flash: { error: 'Jäsenen lisääminen ei onnistunut. Jäsen kuuluu jo johonkin ryhmään.'} and return
       end
-      user.update_column :group_id, group.id
-      if !user.kk_enrollment
+      if user.kk_enrollment
+        redirect_to :back, flash: { error: 'Käyttäjä on jo ilmoittautunut kierrokselle!' } and return
+      else
+        user.update_column :group_id, group.id
         KkEnrollment.new(user_id: user.id).save
         init_results_entry(user)
-      else
-        year = AppSetting.find_by name: 'KkYear'
-        result = Result.find_by kk_number: user.kk_number, year: year.value
-        result.update_column :group, group.name
+        #year = AppSetting.find_by name: 'KkYear'
+        #result = Result.find_by kk_number: user.kk_number, year: year.value
+        #result.update_column :group, group.name
       end
       redirect_to group_path(params[:id]), flash: { success: 'Jäsen lisätty ryhmään.' } and return
     else
