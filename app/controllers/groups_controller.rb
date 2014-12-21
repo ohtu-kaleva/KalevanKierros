@@ -86,7 +86,8 @@ class GroupsController < ApplicationController
         KkEnrollment.new(user_id: user.id).save
         init_results_entry(user)
       else
-        result = Result.find_by kk_number: user.kk_number, year: Date.today.year
+        year = AppSetting.find_by name: 'KkYear'
+        result = Result.find_by kk_number: user.kk_number, year: year.value
         result.update_column :group, group.name
       end
       redirect_to group_path(params[:id]), flash: { success: 'Jäsen lisätty ryhmään.' } and return

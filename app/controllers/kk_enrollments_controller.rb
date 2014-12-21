@@ -58,6 +58,8 @@ class KkEnrollmentsController < ApplicationController
     if status.value.eql?('closed')
       if params[:account_number].empty?
         redirect_to admin_kk_enrollment_path, flash: { error: 'Tilinumero puuttuu' } and return
+      elsif params[:kk_year].empty? or params[:kk_year].to_i < Date.today.year
+        redirect_to admin_kk_enrollment_path, flash: { error: 'Virheellinen vuosi' } and return
       else
         if check_account_number(params[:account_number])
           account_number = AppSetting.new name: 'KkAccountNumber', value: params[:account_number]
@@ -65,6 +67,8 @@ class KkEnrollmentsController < ApplicationController
         else
           redirect_to admin_kk_enrollment_path, flash: { error: 'Tilinumero ei ollut hyväksyttävä' } and return
         end
+        kk_year = AppSetting.new name: 'KkYear', value: params[:kk_year]
+        kk_year.save
       end
       status.value = 'open'
       message = 'Kierrosilmoittautuminen avattu'
@@ -72,6 +76,10 @@ class KkEnrollmentsController < ApplicationController
       account_number = AppSetting.find_by name: 'KkAccountNumber'
       if account_number
         account_number.destroy
+      end
+      kk_year = AppSetting.find_by name: 'KkYear'
+      if kk_year
+        kk_year.destroy
       end
       status.value = 'closed'
       message = 'Kierrosilmoittautuminen suljettu'
