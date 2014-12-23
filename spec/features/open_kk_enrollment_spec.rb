@@ -14,7 +14,6 @@ feature 'Opening enrollment' do
       click_link 'Esittely'
       click_link 'Ilmoittautuminen'
       expect(page).not_to have_link 'Ilmoittaudu kierrokselle'
-
       visit new_kk_enrollment_path(user.id)
       expect(page).to have_content 'Kierrokselle ei voi ilmoittautua'
     end
@@ -23,6 +22,7 @@ feature 'Opening enrollment' do
       click_link 'Kierroksen hallinta'
       fill_in('account_number', with: 'FI12 1234 123456789')
       fill_in('kk_year', with: Date.today.year)
+      select '2015', from: 'deadline[year]'
       click_button 'Avaa ilmoittautuminen'
       expect(current_url).to eq(admin_kk_enrollment_url)
       expect(page).to have_content 'Kierrosilmoittautuminen avattu'
@@ -37,6 +37,7 @@ feature 'Opening enrollment' do
 
     scenario 'Admin tries to open enrollment without account_number' do
       click_link 'Kierroksen hallinta'
+      select '2015', from: 'deadline[year]'
       click_button 'Avaa ilmoittautuminen'
       expect(current_url).to eq(admin_kk_enrollment_url)
       expect(page).to have_content 'Tilinumero puuttuu'
@@ -45,6 +46,7 @@ feature 'Opening enrollment' do
     scenario 'Admin tries to open enrollment with incorrect account number' do
       click_link 'Kierroksen hallinta'
       fill_in 'account_number', with: '1234567899'
+      select '2015', from: 'deadline[year]'
       click_button 'Avaa ilmoittautuminen'
       expect(current_url).to eq(admin_kk_enrollment_url)
       expect(page).to have_content 'Tilinumero ei ollut hyväksyttävä'
@@ -56,6 +58,7 @@ feature 'Opening enrollment' do
       click_link 'Kierroksen hallinta'
       fill_in('account_number', with: 'FI12 1234 123456789')
       fill_in('kk_year', with: Date.today.year)
+      select '2015', from: 'deadline[year]'
       click_button 'Avaa ilmoittautuminen'
     end
 
@@ -91,7 +94,7 @@ feature 'Opening enrollment' do
       click_link 'Kierroksen hallinta'
       expect{
         click_button 'Sulje ilmoittautuminen'
-      }.to change(AppSetting, :count).by(-2)
+      }.to change(AppSetting, :count).by(-3)
 
       expect(page).to have_content 'Kierrosilmoittautuminen suljettu'
     end

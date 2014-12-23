@@ -49,17 +49,19 @@ class KkEnrollmentsController < ApplicationController
 
   def change_enrollment_status
     status = AppSetting.find_by name: 'KkEnrollmentStatus'
-
     if !status
       status = AppSetting.new name: 'KkEnrollmentStatus', value: 'closed'
     end
 
     message = ''
     if status.value.eql?('closed')
+      deadline = Date.civil(params[:deadline][:year].to_i, params[:deadline][:month].to_i, params[:deadline][:day].to_i)
       if params[:account_number].empty?
         redirect_to admin_kk_enrollment_path, flash: { error: 'Tilinumero puuttuu' } and return
       elsif params[:kk_year].empty? or params[:kk_year].to_i < Date.today.year
         redirect_to admin_kk_enrollment_path, flash: { error: 'Virheellinen vuosi' } and return
+      elsif deadline <= Date.today
+        redirect_to admin_kk_enrollment_path, flash: { error: 'Virheellinen ilmoittautumisen deadline'} and return
       else
         if check_account_number(params[:account_number])
           account_number = AppSetting.new name: 'KkAccountNumber', value: params[:account_number]
@@ -69,6 +71,8 @@ class KkEnrollmentsController < ApplicationController
         end
         kk_year = AppSetting.new name: 'KkYear', value: params[:kk_year]
         kk_year.save
+        dl = AppSetting.new name: 'Enrollment_Deadline', value: deadline.to_s
+        dl.save
       end
       status.value = 'open'
       message = 'Kierrosilmoittautuminen avattu'
@@ -80,6 +84,10 @@ class KkEnrollmentsController < ApplicationController
       kk_year = AppSetting.find_by name: 'KkYear'
       if kk_year
         kk_year.destroy
+      end
+      deadline = AppSetting.find_by name: 'Enrollment_Deadline'
+      if deadline
+        deadline.destroy
       end
       status.value = 'closed'
       message = 'Kierrosilmoittautuminen suljettu'

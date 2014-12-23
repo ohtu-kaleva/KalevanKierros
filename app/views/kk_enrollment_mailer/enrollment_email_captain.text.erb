@@ -8,4 +8,4 @@ Jäsenet:
 <% @group_members.each do |m| %>
   <%= m.kk_number %> <%= m.last_name %> <%= m.first_name %>
 <% end %>
-Kierrosmaksu 200 euroa maksettava viitenumerolla <%= @user.kk_number %> tilille <%= @account_number %>
+Kierrosmaksu 200 euroa maksettava viitenumerolla <%= @user.construct_reference_number %> tilille <%= @account_number %>

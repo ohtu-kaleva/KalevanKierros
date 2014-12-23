@@ -15,7 +15,7 @@ class GroupsController < ApplicationController
   end
 
   def create
-    if !enrollment_open?
+    if enrollment_deadline_gone? or !enrollment_open?
       redirect_to root_path, flash: { error: 'Kierrokselle ei voi ilmoittautua' }
       return
     end
@@ -77,7 +77,7 @@ class GroupsController < ApplicationController
   def update_user_group_relation
     group = Group.find_by id: params[:id]
     user = User.find_by kk_number: params[:kk_number]
-    if not group.nil? and not user.nil? and group.users.count < 6
+    if not group.nil? and not user.nil? and group.users.count < 6 and not enrollment_deadline_gone?
       if not user.group.nil?
         redirect_to :back, flash: { error: 'Jäsenen lisääminen ei onnistunut. Jäsen kuuluu jo johonkin ryhmään.'} and return
       end

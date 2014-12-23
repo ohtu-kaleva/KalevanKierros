@@ -52,6 +52,16 @@ class ApplicationController < ActionController::Base
     return setting && setting.value == 'open'
   end
 
+  def enrollment_deadline_gone?
+    setting = AppSetting.find_by(name: 'Enrollment_Deadline')
+    if setting
+      date = Date.parse(setting.value)
+      return Date.today >= date
+    else
+      return true
+    end
+  end
+
   def seconds_to_human_form(time)
     if time
       Time.at(time).gmtime.strftime('%R:%S')

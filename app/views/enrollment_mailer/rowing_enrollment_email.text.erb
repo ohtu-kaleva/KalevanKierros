@@ -13,4 +13,6 @@ Sarja: <%= @user.define_series %>
 Kiertäjänumero: <%= @user.kk_number %>
 Sähköposti: <%= @user.email %>
 -----------------------------------------------------------------
-Osallistumismaksu <%= @price %> euroa maksettava viitenumerolla <%= @user.kk_number %> tilille <%= @account_number %>
+<% if !@account_number.empty? %>
+    Osallistumismaksu <%= @price %> euroa maksettava viitenumerolla <%= @user.generate_reference_number %> tilille <%= @account_number %>
+<% end %>

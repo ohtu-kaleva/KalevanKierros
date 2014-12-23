@@ -5,6 +5,7 @@
 <% if enrollment_open? %>
   Vuosi: <%= @kk_year.value %><br>
   Kierroksen tilinumero: <%= @account_number.value %>
+  Jäsenen joukkueen lisäämisen deadline: <%= Date.parse(@deadline.value).to_s %>
   <%= button_to('Sulje ilmoittautuminen', kk_enrollment_change_path, :class => "btn btn-danger") %>
 <% else %>
   <%= form_tag kk_enrollment_change_path do%>
@@ -12,6 +13,8 @@
   <%= number_field_tag :kk_year, Date.today.year %><br>
   <%= label_tag :account_number, 'Kierroksen tilinumero IBAN-muodossa (vaaditaan)' %>
   <%= text_field_tag :account_number %><br>
+  <%= label_tag :group_deadline, 'Jäsenen lisääminen joukkueeseen deadline. (vaaditaan)' %>
+  <%= select_date Date.today, prefix: :deadline %><br>
   <%= submit_tag 'Avaa ilmoittautuminen', :class => 'btn btn-success' %>
   <% end %>
 <% end %>

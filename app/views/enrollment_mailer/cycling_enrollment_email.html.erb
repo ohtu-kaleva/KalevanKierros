@@ -14,6 +14,8 @@
     <p>Kiertäjänumero: <%= @user.kk_number %></p>
     <p>Sähköposti: <%= @user.email %></p>
     -----------------------------------------------------------------
-    <p>Osallistumismaksu <%= @price %> euroa maksettava viitenumerolla <%= @user.kk_number %> tilille <%= @account_number %></p>
+    <% if !@account_number.empty? %>
+    <p>Osallistumismaksu <%= @price %> euroa maksettava viitenumerolla <%= @user.construct_reference_number %> tilille <%= @account_number %></p>
+    <% end %>
   </body>
 </html>

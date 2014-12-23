@@ -17,6 +17,8 @@ describe 'New Group page' do
     click_link 'Ylläpito'
     click_link 'Kierroksen hallinta'
     fill_in 'account_number', with: 'FI12 1234 123456789'
+    fill_in 'kk_year', with: Date.today.year + 1
+    select '2015', from: 'deadline[year]'
     click_button 'Avaa ilmoittautuminen'
   end
 
