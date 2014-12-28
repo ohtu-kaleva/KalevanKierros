@@ -62,6 +62,9 @@
     <td width="60%">Joukkue</td>
     <td width="10%">Suoritettuja lajeja</td>
     <td colspan="3" width="10%">Yhteispisteet</td>
+    <% if user_is_admin? %>
+    <td width="10%">Muokkaa</td>
+    <% end %>
   </tr>
 
   <% i = 0
@@ -72,6 +75,9 @@
         <td width="60%"><%= result.group %></td>
         <td width="10%"><%= result.completed_events %></td>
         <td colspan="3" width="10%"><% unless result.pts_sum.nil? then %><%= result.pts_sum.round(2) %> <% end %></td>
+        <% if user_is_admin? %>
+        <td width="10%"><%= link_to 'Muokkaa', edit_result_path(result) %></td>
+        <% end %>
       </tr>
       <tr><td colspan="4">
       <table style="display: none; background-color: #f0f0f0;" class="results child" id="stat<%= i %>">
