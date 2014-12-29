@@ -3,6 +3,7 @@ class KkEnrollmentMailer < ActionMailer::Base
 
   def enrollment_email(user)
     @user = user
+    @date = Date.today + 2.weeks
     account = AppSetting.find_by name:'KkAccountNumber'
     @year = AppSetting.find_by name: 'KkYear'
     @account_number = ''
@@ -18,8 +19,10 @@ class KkEnrollmentMailer < ActionMailer::Base
 
   def enrollment_email_captain(user, group_members, group_name)
     @user = user
+    @date = Date.today + 2.weeks
     account = AppSetting.find_by name:'KkAccountNumber'
     @year = AppSetting.find_by name: 'KkYear'
+    @account_number = ''
     if account
       @account_number = account.value
     end
