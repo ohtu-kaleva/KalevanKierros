@@ -12,7 +12,7 @@ class StatisticsController < ApplicationController
     if params[:sort] == 'points'
       @statistics = Statistic.all.order('total_events_completed desc').paginate(page: statistic_params[:page], per_page: 100)
     else
-      @statistics = Statistic.all.order('last_name').paginate(page: statistic_params[:page], per_page: 100)
+      @statistics = Statistic.all.order('last_name', 'first_name').paginate(page: statistic_params[:page], per_page: 100)
     end
   end
 
