@@ -3,11 +3,15 @@
   <%= @user.first_name %> <%= @user.last_name %>
   <% end %>
 </h2>
+<h3>Kiertäjänumerosi on: <%= @user.kk_number %></h3>
 
 <% if not current_user.nil? and current_user.id == @user.id %>
 <% if not @enrollments.nil? or @enrollment.count > 0 %>
 
   <h4>Olet ilmoittautunut seuraaviin tapahtumiin:</h4>
+        <% if @kk_enrollment %>
+            <p>Kalevan Kierros. Vuosi: <%= @year %></p>
+        <% end %>
         <p>
           <% @enrollments.each do |enrollment|%>
     <%= link_to enrollment.event.name, enrollment_path(enrollment.id), class: 'label label-primary' %><br>

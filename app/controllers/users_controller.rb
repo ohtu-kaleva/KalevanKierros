@@ -11,6 +11,12 @@ class UsersController < ApplicationController
   def show
     @enrollments = @user.enrollments
     @group = @user.group
+    @kk_enrollment = @user.kk_enrollment
+    year = AppSetting.find_by name: 'KkYear'
+    @year = ''
+    if year
+      @year = year.value
+    end
   end
 
   # GET /users/new
