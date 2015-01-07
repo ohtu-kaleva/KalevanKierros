@@ -90,6 +90,19 @@ describe 'New Group page' do
     expect(g.user_id).to eq(1)
   end
 
+  it "should display error if non-existant kk-number is entered", js: true, skip: true do
+    visit new_group_path
+    fill_in('group_name', with:'Testi')
+    fill_in('member2', with:12346)
+    fill_in('member3', with:12347)
+    fill_in('member4', with:12348)
+    fill_in('member5', with:1)
+    expect{
+      click_button 'Luo joukkue'
+    }.to change(Group, :count).by(0)
+    expect(page).to have_content('Käyttäjää 1 ei löydy')
+  end
+
   it "should allow adding new members", js: true, skip: true do
     visit new_group_path
     fill_in('group_name', with:'Testi')
@@ -124,5 +137,66 @@ describe 'New Group page' do
     fill_in('kk_number', with:12349)
     click_button 'Lisää jäsen'
     expect(page).to have_content('Jäsenen lisääminen ei onnistunut. Jäsen kuuluu jo johonkin ryhmään.')
+  end
+
+  it "should not allow adding a member who has already enrolled", js: true, skip: true do
+    visit new_group_path
+    fill_in('group_name', with:'Testi')
+    fill_in('member2', with:12346)
+    fill_in('member3', with:12347)
+    fill_in('member4', with:12348)
+    fill_in('member5', with:12349)
+    click_button 'Luo joukkue'
+    click_link 'Omat tiedot'
+    click_link 'Kirjaudu ulos'
+
+    visit signin_path
+    fill_in('username', with:'Mursu')
+    fill_in('password', with:'Salainen6')
+    click_button 'Kirjaudu sisään'
+    click_link 'Ilmoittautuminen'
+    click_link 'Ilmoittaudu kierrokselle'
+    click_button 'Ilmoittaudu kierrokselle'
+    click_link 'Omat tiedot'
+    click_link 'Kirjaudu ulos'
+
+    sign_in username:'Tyhjis', password:'Salainen1'
+    click_link 'Omat tiedot'
+    click_link 'Joukkueesi tiedot'
+    click_link 'Lisää henkilö joukkueeseen'
+    fill_in('kk_number', with:12350)
+    click_button 'Lisää jäsen'
+    expect(page).to have_content('Käyttäjä on jo ilmoittautunut kierrokselle')
+  end
+
+  it "should display error if trying to add a member without writing kk-number", js: true, skip: true do
+    visit new_group_path
+    fill_in('group_name', with:'Testi')
+    fill_in('member2', with:12346)
+    fill_in('member3', with:12347)
+    fill_in('member4', with:12348)
+    fill_in('member5', with:12349)
+    click_button 'Luo joukkue'
+    click_link 'Omat tiedot'
+    click_link 'Joukkueesi tiedot'
+    click_link 'Lisää henkilö joukkueeseen'
+    click_button 'Lisää jäsen'
+    expect(page).to have_content('Jäsenen lisääminen ei onnistunut')
+  end
+
+  it "should display error if trying to enter non-existant kk-number", js: true, skip: true do
+    visit new_group_path
+    fill_in('group_name', with:'Testi')
+    fill_in('member2', with:12346)
+    fill_in('member3', with:12347)
+    fill_in('member4', with:12348)
+    fill_in('member5', with:12349)
+    click_button 'Luo joukkue'
+    click_link 'Omat tiedot'
+    click_link 'Joukkueesi tiedot'
+    click_link 'Lisää henkilö joukkueeseen'
+    fill_in('kk_number', with:1)
+    click_button 'Lisää jäsen'
+    expect(page).to have_content('Jäsenen lisääminen ei onnistunut')
   end
 end
