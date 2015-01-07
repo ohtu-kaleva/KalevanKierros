@@ -233,7 +233,7 @@ class ResultsController < ApplicationController
   # PATCH/PUT /results/1
   def update
     if @result.update(result_params)
-      redirect_to @result, notice: 'Result was successfully updated.'
+      redirect_to edit_result_path(@result), notice: 'Result was successfully updated.'
     else
       render :edit
     end
