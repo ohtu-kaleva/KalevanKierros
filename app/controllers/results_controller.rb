@@ -309,7 +309,7 @@ class ResultsController < ApplicationController
   def female_penalty_applied?(enrollment)
     user = enrollment.user
     attr = enrollment.enrollment_datas.find_by name: 'Parin sukupuoli'
-    if user.gender == 'F'
+    if user.gender == 'N'
       if attr.value == 'M'
         return true
       end
