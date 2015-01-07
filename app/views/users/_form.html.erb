@@ -19,7 +19,7 @@
 
         <%= f.text_field :phone_number, label: "Puhelinnumero: " %>
         <%= f.date_select(:birth_date, :default => {day: 1, month: 1, year: 1980}, start_year: Time.now.year - 100, end_year: Time.now.year, order: [:day, :month, :year], label: 'Syntymäpäivä' ) %>
-        <%= f.select :gender, [['Mies', 'M'], ['Nainen', 'F']], label: "Sukupuoli: " %>
+        <%= f.select :gender, [['Mies', 'M'], ['Nainen', 'N']], label: "Sukupuoli: " %>
         <%= f.text_field :street_address, label: "Katuosoite: " %>
         <%= f.text_field :postal_code, label: "Postinumero: " %>
         <%= f.text_field :city, label: "Postitoimipaikka: " %>
