@@ -56,7 +56,8 @@ class ApplicationController < ActionController::Base
     setting = AppSetting.find_by(name: 'Enrollment_Deadline')
     if setting
       date = Date.parse(setting.value)
-      return Date.today >= date
+      gone = Date.today > date
+      return gone
     else
       return true
     end

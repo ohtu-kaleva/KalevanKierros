@@ -67,7 +67,7 @@ FactoryGirl.define do
     open false
     factor 1
     penalty_factor 1.0
-    account_number ''
+    account_number 'FI12 1234 12345678'
 
     trait :running do
       sport_type 'RunningEvent'

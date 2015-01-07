@@ -12,13 +12,15 @@ describe 'New Group page' do
     user2 = FactoryGirl.create :user, username: 'Arska', password:'Salainen2', password_confirmation:'Salainen2', kk_number:12346
     user3 = FactoryGirl.create :user, username: 'Erkki', password:'Salainen3', password_confirmation:'Salainen3', kk_number:12347
     user4 = FactoryGirl.create :user, username: 'Pekka', password:'Salainen4', password_confirmation:'Salainen4', kk_number:12348
+    user5 = FactoryGirl.create :user, username: 'Ari', password:'Salainen5', password_confirmation:'Salainen5', kk_number:12349
+    user6 = FactoryGirl.create :user, username: 'Mursu', password:'Salainen6', password_confirmation:'Salainen6', kk_number:12350
 
     sign_in username:'Tyhjis', password:'Salainen1'
     click_link 'Ylläpito'
     click_link 'Kierroksen hallinta'
     fill_in 'account_number', with: 'FI12 1234 123456789'
     fill_in 'kk_year', with: Date.today.year + 1
-    select '2015', from: 'deadline[year]'
+    select '2016', from: 'deadline[year]'
     click_button 'Avaa ilmoittautuminen'
   end
 
@@ -86,5 +88,41 @@ describe 'New Group page' do
     click_button 'Luo joukkue'
     g = Group.last
     expect(g.user_id).to eq(1)
+  end
+
+  it "should allow adding new members", js: true, skip: true do
+    visit new_group_path
+    fill_in('group_name', with:'Testi')
+    fill_in('member2', with:12346)
+    fill_in('member3', with:12347)
+    fill_in('member4', with:12348)
+    click_button 'Luo joukkue'
+    click_link 'Omat tiedot'
+    click_link 'Joukkueesi tiedot'
+    expect(page).to have_content 'Testi'
+    click_link 'Lisää henkilö joukkueeseen'
+    fill_in('kk_number', with:12349)
+    expect{
+      click_button 'Lisää jäsen'
+    }.to change(Result, :count).by(1)
+    group = Group.last
+    expect(group.users.count).to eq(5)
+    expect(Result.last.group).to eq('Testi')
+  end
+
+  it "should not allow adding already added member", js: true, skip: true do
+    visit new_group_path
+    fill_in('group_name', with:'Testi')
+    fill_in('member2', with:12346)
+    fill_in('member3', with:12347)
+    fill_in('member4', with:12348)
+    fill_in('member5', with:12349)
+    click_button 'Luo joukkue'
+    click_link 'Omat tiedot'
+    click_link 'Joukkueesi tiedot'
+    click_link 'Lisää henkilö joukkueeseen'
+    fill_in('kk_number', with:12349)
+    click_button 'Lisää jäsen'
+    expect(page).to have_content('Jäsenen lisääminen ei onnistunut. Jäsen kuuluu jo johonkin ryhmään.')
   end
 end
