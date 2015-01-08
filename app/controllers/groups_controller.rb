@@ -124,15 +124,15 @@ class GroupsController < ApplicationController
   end
 
   def redirect_if_user_not_captain_or_admin
-    if user_is_admin? || user_is_captain?
-      return
-    else
-      redirect_to :root
+    group = Group.find_by id: params[:id]
+    if group
+      if user_is_admin? or current_user == group.user
+        return
+      else
+        redirect_to :root and return
+      end
     end
-  end
-
-  def user_is_captain?
-    @group.user == current_user
+    redirect_to :root and return
   end
 
   def group_params

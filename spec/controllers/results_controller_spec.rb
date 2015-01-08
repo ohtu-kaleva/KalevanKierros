@@ -203,7 +203,7 @@ describe ResultsController do
   end
 
   it "should not apply rowing penalty if female rowing with female" do
-    user = FactoryGirl.create(:user, gender: 'F')
+    user = FactoryGirl.create(:user, gender: 'N')
     enrollment = FactoryGirl.create(:complete_enrollment, :rowing_with_female)
     enrollment.user_id = user.id
     enrollment.save
@@ -213,7 +213,7 @@ describe ResultsController do
   end
 
   it "should apply rowing penalty if female rowing with male" do
-    user = FactoryGirl.create(:user, gender: 'F')
+    user = FactoryGirl.create(:user, gender: 'N')
     enrollment = FactoryGirl.create(:complete_enrollment, :rowing_with_male)
     enrollment.user_id = user.id
     enrollment.save
@@ -333,8 +333,8 @@ describe ResultsController do
   it "should scale times correctly for rowing event" do
     event = FactoryGirl.create(:complete_event, :rowing, penalty_factor: 20.0, rowing_penalty: 12.0)
     user1 = FactoryGirl.create(:user, gender: 'M', kk_number: '2001', username: 'lol1')
-    user2 = FactoryGirl.create(:user, gender: 'F', kk_number: '2002', username: 'lol2')
-    user3 = FactoryGirl.create(:user, gender: 'F', kk_number: '2003', username: 'lol3')
+    user2 = FactoryGirl.create(:user, gender: 'N', kk_number: '2002', username: 'lol2')
+    user3 = FactoryGirl.create(:user, gender: 'N', kk_number: '2003', username: 'lol3')
     user4 = FactoryGirl.create(:user, gender: 'M', kk_number: '2004', username: 'lol4')
     enrollment1 = FactoryGirl.create(:complete_enrollment, :rowing_with_female)
     enrollment1.user_id = user1.id
@@ -371,8 +371,8 @@ describe ResultsController do
   it "should not scale times for other events" do
     event = FactoryGirl.create(:complete_event, :orienteering)
     user1 = FactoryGirl.create(:user, gender: 'M', kk_number: '2001', username: 'lol1')
-    user2 = FactoryGirl.create(:user, gender: 'F', kk_number: '2002', username: 'lol2')
-    user3 = FactoryGirl.create(:user, gender: 'F', kk_number: '2003', username: 'lol3')
+    user2 = FactoryGirl.create(:user, gender: 'N', kk_number: '2002', username: 'lol2')
+    user3 = FactoryGirl.create(:user, gender: 'N', kk_number: '2003', username: 'lol3')
     user4 = FactoryGirl.create(:user, gender: 'M', kk_number: '2004', username: 'lol4')
     enrollment1 = FactoryGirl.create(:complete_enrollment, :orienteering)
     enrollment1.user_id = user1.id
@@ -405,8 +405,8 @@ describe ResultsController do
   it "should not take paddler as a winner time" do
     event = FactoryGirl.create(:complete_event, :rowing, penalty_factor: 20.0, rowing_penalty: 12.0)
     user1 = FactoryGirl.create(:user, gender: 'M', kk_number: '2001', username: 'lol1')
-    user2 = FactoryGirl.create(:user, gender: 'F', kk_number: '2002', username: 'lol2')
-    user3 = FactoryGirl.create(:user, gender: 'F', kk_number: '2003', username: 'lol3')
+    user2 = FactoryGirl.create(:user, gender: 'N', kk_number: '2002', username: 'lol2')
+    user3 = FactoryGirl.create(:user, gender: 'N', kk_number: '2003', username: 'lol3')
     user4 = FactoryGirl.create(:user, gender: 'M', kk_number: '2004', username: 'lol4')
     enrollment1 = FactoryGirl.create(:complete_enrollment, :rowing_with_female)
     enrollment1.user_id = user1.id

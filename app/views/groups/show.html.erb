@@ -19,6 +19,8 @@
 </tbody>
 </table>
 <%= link_to 'Etusivu', root_path %> |
-<% if not current_user.nil? and @captain == current_user and @count < 6 %>
+<% if not current_user.nil? and @captain == current_user or user_is_admin? and @count < 6 %>
     <%= link_to 'Lisää henkilö joukkueeseen', add_user_to_group_path(@group.id) %>
+<% else %>
+    Et voi lisätä joukkueeseen henkilöitä.
 <% end %>

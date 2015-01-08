@@ -184,6 +184,22 @@ describe 'New Group page' do
     expect(page).to have_content('Jäsenen lisääminen ei onnistunut')
   end
 
+  it "should display error if trying to write a string instead of number", js: true, skip: true do
+    visit new_group_path
+    fill_in('group_name', with:'Testi')
+    fill_in('member2', with:12346)
+    fill_in('member3', with:12347)
+    fill_in('member4', with:12348)
+    fill_in('member5', with:12349)
+    click_button 'Luo joukkue'
+    click_link 'Omat tiedot'
+    click_link 'Joukkueesi tiedot'
+    click_link 'Lisää henkilö joukkueeseen'
+    fill_in('kk_number', with:'Pekka')
+    click_button 'Lisää jäsen'
+    expect(page).to have_content('Jäsenen lisääminen ei onnistunut')
+  end
+
   it "should display error if trying to enter non-existant kk-number", js: true, skip: true do
     visit new_group_path
     fill_in('group_name', with:'Testi')
@@ -198,5 +214,80 @@ describe 'New Group page' do
     fill_in('kk_number', with:1)
     click_button 'Lisää jäsen'
     expect(page).to have_content('Jäsenen lisääminen ei onnistunut')
+  end
+
+  it "testing with normal account as captain", js: true, skip: true do
+    click_link 'Omat tiedot'
+    click_link 'Kirjaudu ulos'
+    click_link 'Kirjaudu sisään'
+    fill_in 'username', with:'Arska'
+    fill_in 'password', with:'Salainen2'
+    click_button 'Kirjaudu sisään'
+    visit new_group_path
+    fill_in('group_name', with:'Testi')
+    fill_in('member2', with:12347)
+    fill_in('member3', with:12348)
+    fill_in('member4', with:12349)
+    click_button 'Luo joukkue'
+    click_link 'Omat tiedot'
+    click_link 'Joukkueesi tiedot'
+    click_link 'Lisää henkilö joukkueeseen'
+    fill_in('kk_number', with:12350)
+    expect{
+      click_button 'Lisää jäsen'
+    }.to change(Result, :count).by(1)
+    expect(page).to have_content('Jäsen lisätty ryhmään.')
+    group = Group.last
+    expect(group.users.count).to eq(5)
+  end
+
+  it "only captain has the option to add members", js: true, skip: true do
+    click_link 'Omat tiedot'
+    click_link 'Kirjaudu ulos'
+    click_link 'Kirjaudu sisään'
+    fill_in 'username', with:'Arska'
+    fill_in 'password', with:'Salainen2'
+    click_button 'Kirjaudu sisään'
+    visit new_group_path
+    fill_in('group_name', with:'Testi')
+    fill_in('member2', with:12347)
+    fill_in('member3', with:12348)
+    fill_in('member4', with:12349)
+    click_button 'Luo joukkue'
+    click_link 'Omat tiedot'
+    click_link 'Kirjaudu ulos'
+    click_link 'Kirjaudu sisään'
+    fill_in 'username', with: 'Erkki'
+    fill_in 'password', with: 'Salainen3'
+    click_button 'Kirjaudu sisään'
+
+    click_link 'Omat tiedot'
+    click_link 'Joukkueesi tiedot'
+    expect(page).to have_content('Et voi lisätä joukkueeseen henkilöitä.')
+  end
+
+  it "admin also has the option to add members", js: true, skip: true do
+    click_link 'Omat tiedot'
+    click_link 'Kirjaudu ulos'
+    click_link 'Kirjaudu sisään'
+    fill_in 'username', with:'Arska'
+    fill_in 'password', with:'Salainen2'
+    click_button 'Kirjaudu sisään'
+    visit new_group_path
+    fill_in('group_name', with:'Testi')
+    fill_in('member2', with:12347)
+    fill_in('member3', with:12348)
+    fill_in('member4', with:12349)
+    click_button 'Luo joukkue'
+
+    click_link 'Omat tiedot'
+    click_link 'Kirjaudu ulos'
+    click_link 'Kirjaudu sisään'
+
+    fill_in 'username', with: 'Tyhjis'
+    fill_in 'password', with: 'Salainen1'
+    click_button 'Kirjaudu sisään'
+    visit group_path(1)
+    expect(page).to have_content('Lisää henkilö joukkueeseen')
   end
 end
