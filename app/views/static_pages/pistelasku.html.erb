@@ -22,3 +22,126 @@
     Maratonilla saavutettu aika on vertailuaika. Puolimaratonin vertailuaika saadaan kertomalla suoritusaika 2,3:lla. Molempien matkojen vertailuajat yhdistet&auml;&auml;n ja paras saa 1000 pistett&auml;, johon muita aikoja verrataan.</p>
 
 </div>
+<div class="col-lg-4">
+  <h4>Pistelaskuri</h4>
+  <p>Tällä toiminnolla voit laskea pisteesi. Huomioi, että pisteet voivat olla vain suuntaa-antavat.
+     Esimerkiksi pistelaskuri ei automaattisesti ota huomioon jos voittaja on juossut puolimaratonin tai hiihtänyt vapaalla tyylillä.</p>
+  <form class="form-horizontal">
+  <div class="form-group">
+    <label for="sport" class="control-label">Valitse kilpailu: </label>
+    <select id="sport" class="form-control">
+        <option value="skating">Luistelu</option>
+        <option value="cycling">Pyöräily</option>
+        <option value="skiing">Hiihto</option>
+        <option value="rowing">Soutu</option>
+        <option value="orienteering">Suunnistus</option>
+        <option value="running">Juoksu</option>
+    </select>
+  </div>
+
+  <div id="running_options" class="form-group">
+    <label for="running_option" class="control-label">Puolimaraton tai maraton</label>
+    <select id="running_option" class="form-control">
+      <option value="1">Maraton</option>
+      <option value="2.3">Puolimaraton</option>
+    </select>
+  </div>
+
+  <div id="skiing_options" class="form-group">
+    <label for="skiing_option" class="control-label">Hiihdon tyyli: </label>
+    <select id="skiing_option" class="form-control">
+      <option value="freestyle">Vapaa</option>
+      <option value="traditional">Perinteinen</option>
+    </select><br>
+    <label>Hiihdon vuosi:</label>
+    <input type="number" id="skiing_year">
+  </div>
+
+  <div id="times">
+    <label for="winner_time">Voittajan aika</label>
+    <div id="winner_time" class="form-group">
+        <label for="winner_hours" class="control-label">Tunnit:</label>
+        <input type="number" id="winner_hours" class="form-control">
+        <label for="winner_minutes" class="control-label">Minuutit:</label>
+        <input type="number" id="winner_minutes" class="form-control">
+        <label for="winner_seconds" class="control-label">Sekunnit:</label>
+        <input type="number" id="winner_seconds" class="form-control">
+    </div>
+    <br>
+    <label>Sinun aikasi:</label><br>
+    <div id="your_time" class="form-group">
+        <label for="your_hours" class="control-label">Tunnit:</label>
+        <input type="number" id="your_hours" class="form-control">
+        <label for="your_minutes" class="control-label">Minuutit:</label>
+        <input type="number" id="your_minutes" class="form-control">
+        <label for="your_seconds" class="control-label">Sekunnit:</label>
+        <input type="number" id="your_seconds" class="form-control">
+    </div>
+  </div>
+  <div class="form-group">
+    <input type="button" class="btn btn-primary" id="calculate" value="Laske pisteet">
+  </div>
+  </form>
+  <div id="pts_display">Pisteet: </div>
+</div>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+      $("#skiing_options").hide();
+      $("#running_options").hide();
+
+      $("#sport").change(function() {
+          var sport = $("#sport").val();
+          if(sport === "running") {
+              $("#running_options").show();
+              $("#skiing_options").hide();
+          } else if(sport === "skiing") {
+              $("#skiing_options").show();
+              $("#running_options").hide();
+          } else {
+              $("#skiing_options").hide();
+              $("#running_options").hide();
+          }
+      });
+
+      $("#calculate").click(function() {
+          var winnertotal = getWinnerTime();
+          var yourtotal = getYourTime();
+          var pts = 0;
+          var sport = $("#sport").val();
+          if(sport === "running") {
+              var factor = parseDouble($("#running_option").val());
+              pts = 1000 - 2000 * Math.log10(yourtotal * factor / winnertotal);
+          } else if(sport === "skiing") {
+              var year = parseInt($("#skiing_year").val());
+              var factor = 1.06;
+              if(year % 2 == 0) {
+                  factor = 1.18;
+              }
+              pts = 1000 - 2000 * Math.log10(yourtotal * factor / winnertotal);
+          } else if(sport === "skating" || sport === "cycling") {
+              pts = 1000 - 2800 * Math.log10(yourtotal / winnertotal);
+          } else if(sport === "orienteering") {
+              pts = 1000 - 1300 * Math.log10(yourtotal / winnertotal);
+          } else if(sport === "rowing") {
+              pts = 1000 - 3500 * Math.log10(yourtotal / winnertotal);
+          }
+
+          $("#pts_display").text("Pisteet: " + pts.toFixed(2));
+
+          function getWinnerTime() {
+              var hours = parseInt($("#winner_hours").val()) * 3600;
+              var mins = parseInt($("#winner_minutes").val()) * 60;
+              var secs = parseInt($("#winner_seconds").val());
+              return hours + mins + secs;
+          }
+
+          function getYourTime() {
+              var hours = parseInt($("#your_hours").val()) * 3600;
+              var mins = parseInt($("#your_minutes").val()) * 60;
+              var secs = parseInt($("#your_seconds").val());
+              return hours + mins + secs;
+          }
+      });
+  });
+</script>
