@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   helper_method :current_user, :user_is_admin?, :redirect_if_user_not_admin, :usersearch,
-                :enrollment_open?, :seconds_to_human_form, :eventusersearch, :statisticsearch
+                :enrollment_open?, :seconds_to_human_form, :eventusersearch, :statisticsearch, :enrollment_deadline_gone?
 
   def current_user
     return nil if session[:user_id].nil?
