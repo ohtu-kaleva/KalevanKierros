@@ -111,7 +111,7 @@
           var sport = $("#sport").val();
           if(sport === "running") {
               var factor = parseDouble($("#running_option").val());
-              pts = 1000 - 2000 * Math.log10(yourtotal * factor / winnertotal);
+              pts = 1000 - 2000 * baseTenLogarithm(yourtotal * factor / winnertotal);
           } else if(sport === "skiing") {
               var year = parseInt($("#skiing_year").val());
               var ski_style = $("#skiing_option").val();
@@ -123,13 +123,13 @@
                       factor = 1.06;
                   }
               }
-              pts = 1000 - 2000 * Math.log10(yourtotal * factor / winnertotal);
+              pts = 1000 - 2000 * baseTenLogarithm(yourtotal * factor / winnertotal);
           } else if(sport === "skating" || sport === "cycling") {
-              pts = 1000 - 2800 * Math.log10(yourtotal / winnertotal);
+              pts = 1000 - 2800 * baseTenLogarithm(yourtotal / winnertotal);
           } else if(sport === "orienteering") {
-              pts = 1000 - 1300 * Math.log10(yourtotal / winnertotal);
+              pts = 1000 - 1300 * baseTenLogarithm(yourtotal / winnertotal);
           } else if(sport === "rowing") {
-              pts = 1000 - 3500 * Math.log10(yourtotal / winnertotal);
+              pts = 1000 - 3500 * baseTenLogarithm(yourtotal / winnertotal);
           }
 
           $("#pts_display").text("Pisteet: " + pts.toFixed(2));
@@ -146,6 +146,10 @@
               var mins = parseInt($("#your_minutes").val()) * 60;
               var secs = parseInt($("#your_seconds").val());
               return hours + mins + secs;
+          }
+
+          function baseTenLogarithm(x) {
+              return Math.log(x) / Math.log(10);
           }
       });
   });
