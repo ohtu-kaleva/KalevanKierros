@@ -5,28 +5,28 @@ describe Event do
     it 'with proper parameters' do
       event = Event.new name: 'TestiEvent', start_date: Date.today,
                         end_date: Date.today + 2.days, second_end_date: Date.today + 4.days,
-                        price: 1000, second_price: 2000, account_number: ''
+                        price: 1000, second_price: 2000, account_number: '', payment_receiver: 'Kalevan Kierros RY'
       expect(event).to be_valid
     end
 
     it 'with present dates' do
       event = Event.new name: 'TestiEvent', start_date: Date.today,
                         end_date: Date.today, second_end_date: Date.today + 4.days,
-                        price: 1000, second_price: 2000, account_number: ''
+                        price: 1000, second_price: 2000, account_number: '', payment_receiver: 'Kalevan Kierros RY'
       expect(event).to be_valid
     end
 
     it 'with future dates' do
       event = Event.new name: 'TestiEvent', start_date: Date.today + 1.day,
                         end_date: Date.today + 3.days, second_end_date: Date.today + 4.days,
-                        price: 1000, second_price: 2000, account_number: ''
+                        price: 1000, second_price: 2000, account_number: '', payment_receiver: 'Kalevan Kierros RY'
       expect(event).to be_valid
     end
 
     it 'with correct account number' do
       event = Event.new name: 'TestiEvent', start_date: Date.today + 1.day,
                         end_date: Date.today + 3.days, second_end_date: Date.today + 4.days,
-                        price: 1000, second_price: 2000, account_number: 'FI12 1234 12345678'
+                        price: 1000, second_price: 2000, account_number: 'FI12 1234 12345678', payment_receiver: 'Kalevan Kierros RY'
       expect(event).to be_valid
     end
   end
@@ -64,11 +64,11 @@ describe Event do
     it 'if name is not unique' do
       first_event = Event.new name: 'TestiEvent', start_date: Date.today,
                               end_date: Date.today + 2.days, second_end_date: Date.today + 4.days,
-                              price: 1000, second_price: 2000, account_number: ''
+                              price: 1000, second_price: 2000, account_number: '', payment_receiver: 'Kalevan Kierros RY'
       first_event.save
       second_event = Event.new name: 'TestiEvent', start_date: Date.today + 5.days,
                         end_date: Date.today + 7.days, second_end_date: Date.today + 4.days,
-                        price: 1000, second_price: 2000, account_number: ''
+                        price: 1000, second_price: 2000, account_number: '', payment_receiver: 'Kalevan Kierros RY'
 
       expect(first_event).to be_valid
       expect(second_event).to be_invalid

@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 feature 'Show results by year' do
-  let!(:result) { FactoryGirl.create :result, :with_times_and_points }
+  let!(:result) { FactoryGirl.create :result, :with_times_and_points, year:2014 }
   let!(:result2) { FactoryGirl.create :result, :with_times_and_points, year:2013 }
   let!(:result3) { FactoryGirl.create :result, :with_times_and_points, year:2012 }
 

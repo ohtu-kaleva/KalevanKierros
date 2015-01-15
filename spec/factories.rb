@@ -40,6 +40,7 @@ FactoryGirl.define do
     second_price 2000
     description 'Testikuvaus'
     account_number ''
+    payment_receiver 'Kalevan Kierros ry'
 
     factory :event_with_attributes do
       after(:create) do |event|
@@ -68,6 +69,7 @@ FactoryGirl.define do
     factor 1
     penalty_factor 1.0
     account_number 'FI12 1234 12345678'
+    payment_receiver 'Kalevan kierros ry'
 
     trait :running do
       sport_type 'RunningEvent'

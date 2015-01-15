@@ -3,7 +3,7 @@ class Event < ActiveRecord::Base
   has_many :enrollments, dependent: :destroy
   has_many :participants, through: :enrollments, source: :user
 
-  validates :name, :start_date, :end_date, :second_end_date, :price, :second_price, presence: true
+  validates :name, :start_date, :end_date, :second_end_date, :price, :second_price, :payment_receiver, presence: true
   validates :name, uniqueness: true
   validate :validate_end_date
   validate :validate_second_end_date

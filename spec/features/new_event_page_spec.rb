@@ -25,6 +25,8 @@ describe "New Event page" do
       select '1', :from => 'event_second_end_date_3i'
       select 'helmikuu', :from => 'event_second_end_date_2i'
       select '2015', :from => 'event_second_end_date_1i'
+      fill_in "event_payment_receiver", with: 'Kalevan Kierros Ry'
+      fill_in 'event_account_number', with: 'FI12 1234 123456789'
       fill_in "event_price", with: "1000"
       fill_in "event_second_price", with: "2000"
     end

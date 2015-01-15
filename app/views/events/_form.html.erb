@@ -24,6 +24,7 @@
       <%= f.text_field :penalty_factor, label: 'Loppuajan pistelaskun rangaistuskerroin, jos sellainen on. Soudussa tätä käytetään mahdollisessa naisten sekasarjan rangaistuslisäyksenä aikaan minuutteina.' %>
       <%= f.text_field :rowing_penalty, label: 'Vuorosoudun rangaistuslisä. Käytetään vain soudussa. Jos valitset tapahtuman pohjaksi soudun muista lisätä tämä! Oletuksena arvo on 12 minuuttia.' %>
       <%= f.text_field :account_number, label: 'Tapahtumakohtainen tilinumero. Lähetetään ilmoittautujalle sähköpostilla. Syötä IBAN-muodossa. Jos maksua ei ole, voit jättää tämän kentän tyhjäksi.' %>
+      <%= f.text_field :payment_receiver, label: 'Tapahtuman maksun saaja.' %>
       <%= f.check_box :open, label: 'Avoin ilmoittautuminen' %>
     </div>
 
