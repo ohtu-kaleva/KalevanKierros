@@ -34,6 +34,12 @@ class EnrollmentsController < ApplicationController
     end
   end
 
+  def new_outsider_enrollment
+    @event = Event.find_by id: params[:event_id]
+    @user = User.new
+    @attributes = @event.event_attributes
+  end
+
   def index
     @events = Event.all
   end
@@ -82,6 +88,52 @@ class EnrollmentsController < ApplicationController
       end
     end
     redirect_to root_path
+  end
+
+  def create_outsider_enrollment
+    latest = User.last.id + 1
+    name = "outsider#{latest}"
+    params[:user][:username] = name
+    params[:user][:password] = 'X92fueslwR'
+    params[:user][:password_confirmation] = 'X92fueslwR'
+    user_params = params.require(:user).permit(:first_name, :last_name, :username, :email, :phone_number, :city, :street_address, :postal_code, :birth_date, :gender, :password, :password_confirmation)
+
+    user = User.new(user_params)
+
+    if user.save
+      event = Event.find_by id: params[:event_id]
+      if event
+        data_list = []
+        attrs = event.event_attributes.select {|a| a.attribute_type != 'plain_text' }
+        attrs.each do |a|
+          if !params[:enrollment].has_key? a.name
+            redirect_to root_path and return
+          end
+          if params[:enrollment][a.name].kind_of?(Array)
+            value = params[a.name].join(' ')
+            attribute_index = EventAttribute.where(event_id: event.id).where(name: a.name).first.attribute_index
+            data_list.append(EnrollmentData.new(name:a.name, value:value, attribute_index: attribute_index))
+          else
+            attribute_index = EventAttribute.where(event_id: event.id).where(name: a.name).first.attribute_index
+            data_list.append(EnrollmentData.new(name:a.name, value:params[:enrollment][a.name], attribute_index: attribute_index))
+          end
+        end
+
+        @enrollment = Enrollment.new(event_id: event.id)
+        if @enrollment.save
+          data_list.each do |d|
+            d.enrollment_id = @enrollment.id
+            d.save
+          end
+
+          user.enrollments << @enrollment
+          EnrollmentMailer.send_enrollment_email(user, event, @enrollment)
+        end
+      end
+    else
+      redirect_to :back, flash: { error: 'Et antanut kaikkia tietoja' }
+    end
+    redirect_to :root, flash: { success: 'Ilmoittautumisesi tapahtumaan on kirjattu.' }
   end
 
   def update

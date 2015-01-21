@@ -10,4 +10,8 @@ class StaticPagesController < ApplicationController
     @kk_year = AppSetting.find_by name: 'KkYear'
     @deadline = AppSetting.find_by name: 'Enrollment_Deadline'
   end
+
+  def ilmoittautuminen
+    @events = Event.where(open: true)
+  end
 end
