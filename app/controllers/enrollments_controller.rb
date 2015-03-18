@@ -91,7 +91,12 @@ class EnrollmentsController < ApplicationController
   end
 
   def create_outsider_enrollment
-    latest = User.last.id + 1
+    puts params[:enrollment]
+    if User.last
+        latest = User.last.id + 1
+    else
+        latest = 1
+    end
     name = "outsider#{latest}"
     params[:user][:username] = name
     params[:user][:password] = 'X92fueslwR'
@@ -110,7 +115,7 @@ class EnrollmentsController < ApplicationController
             redirect_to root_path and return
           end
           if params[:enrollment][a.name].kind_of?(Array)
-            value = params[a.name].join(' ')
+            value = params[:enrollment][a.name].join(' ')
             attribute_index = EventAttribute.where(event_id: event.id).where(name: a.name).first.attribute_index
             data_list.append(EnrollmentData.new(name:a.name, value:value, attribute_index: attribute_index))
           else
@@ -125,15 +130,16 @@ class EnrollmentsController < ApplicationController
             d.enrollment_id = @enrollment.id
             d.save
           end
-
           user.enrollments << @enrollment
           EnrollmentMailer.send_enrollment_email(user, event, @enrollment)
+        else
+          redirect_to :back, flash: { error: 'Jotain meni pieleen' } and return
         end
       end
     else
-      redirect_to :back, flash: { error: 'Et antanut kaikkia tietoja' }
+      redirect_to :back, flash: { error: 'Et antanut kaikkia tietoja' } and return
     end
-    redirect_to :root, flash: { success: 'Ilmoittautumisesi tapahtumaan on kirjattu.' }
+    redirect_to :root, flash: { success: 'Ilmoittautumisesi tapahtumaan on kirjattu.' } and return
   end
 
   def update

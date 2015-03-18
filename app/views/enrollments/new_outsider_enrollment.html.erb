@@ -28,14 +28,13 @@
 
             <% if a.attribute_type == "check_box" %>
                 <% a.get_options_to_form.each do |v| %>
-                    <%= enr.hidden_field(a.name + '[]') %>
-                    <%= enr.check_box(a.name + '[]', v) %>
-                    <%= label_tag(a.attribute_label, v) %><br>
+                  <%= check_box_tag("enrollment[#{a.name}]" + '[]', v) %>
+                  <%= label_tag(a.attribute_label, v) %><br>
                 <% end %>
             <% end %>
 
             <% if a.attribute_type == "text_field" %>
-                <%= enr.text_field(a.name, a.attribute_value) %><br>
+                <%= text_field_tag("enrollment[#{a.name}]", a.attribute_value) %><br>
             <% end %>
 
             <% if a.attribute_type == "plain_text" %>
