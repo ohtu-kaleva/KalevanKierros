@@ -51,7 +51,7 @@ class EnrollmentsController < ApplicationController
   def create
     event = Event.find_by id: params[:enrollment][:event_id]
     if event
-      if event.open || (current_user && current_user.kk_enrollment)
+      if current_user && current_user.kk_enrollment
         data_list = []
         attrs = event.event_attributes.select {|a| a.attribute_type != 'plain_text' }
         # loop for creating information for data
@@ -107,7 +107,7 @@ class EnrollmentsController < ApplicationController
 
     if user.save
       event = Event.find_by id: params[:event_id]
-      if event
+      if event && event.open
         data_list = []
         attrs = event.event_attributes.select {|a| a.attribute_type != 'plain_text' }
         attrs.each do |a|

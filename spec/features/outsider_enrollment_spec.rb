@@ -6,7 +6,7 @@ describe 'Outsider enrollment' do
     before :each do
       DatabaseCleaner.strategy = :truncation
       DatabaseCleaner.start
-      event = FactoryGirl.create :event_with_attributes
+      event = FactoryGirl.create :event_with_attributes, :open => true
     end
 
     after :each do
