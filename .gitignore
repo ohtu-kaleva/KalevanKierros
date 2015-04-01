@@ -32,4 +32,4 @@ pickle-email-*.html
 /.idea/tasks.xml
 /.idea
 .idea/
-
+.DS_Store
