@@ -1,7 +1,7 @@
 class GroupsController < ApplicationController
   include InitResultsEntry
-  before_action :set_group_or_redirect, only: [:show, :add_user_to_group]
-  before_action :redirect_if_user_not_captain_or_admin, only: [:add_user_to_group, :update_user_group_relation]
+  before_action :set_group_or_redirect, only: [:show, :add_user_to_group, :delete_user_from_group]
+  before_action :redirect_if_user_not_captain_or_admin, only: [:add_user_to_group, :update_user_group_relation, :delete_user_from_group]
 
   def new
     if enrollment_open?
@@ -71,6 +71,20 @@ class GroupsController < ApplicationController
   end
 
   def delete_user_from_group
+    user = User.find_by id: params[:user_id]
+    if user
+      if @group.user == user
+        redirect_to :back, flash: { error: 'Joukkueen kapteenia ei voi poistaa' } and return
+      end
+      res = Result.find_by kk_number: user.kk_number
+      if res
+        res.update_column :group, nil
+      end
+      user.update_column :group_id, nil
+      enrollment = user.kk_enrollment
+      enrollment.destroy
+      redirect_to :back and return
+    end
     redirect_to :back
   end
 
@@ -89,7 +103,12 @@ class GroupsController < ApplicationController
       else
         user.update_column :group_id, group.id
         KkEnrollment.new(user_id: user.id).save
-        init_results_entry(user)
+        res = Result.find_by kk_number: user.kk_number
+        if res
+          res.update_column :group, group.name
+        else
+          init_results_entry(user)
+        end
         #year = AppSetting.find_by name: 'KkYear'
         #result = Result.find_by kk_number: user.kk_number, year: year.value
         #result.update_column :group, group.name

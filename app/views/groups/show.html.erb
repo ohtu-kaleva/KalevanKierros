@@ -6,6 +6,7 @@
     <th>Jäsenen nimi</th>
     <th>Jäsenen sähköposti</th>
     <th>Jäsenen kiertäjänumero</th>
+    <th>Poista henkilö</th>
 </tr>
 </thead>
 <tbody>
@@ -14,6 +15,7 @@
   <td><%= u.full_name %></td>
   <td><%= u.email %></td>
   <td><%= u.kk_number %></td>
+  <td><%= link_to 'Poista henkilö joukkueesta', delete_user_from_group_path(@group.id, user_id: u.id), method:'PUT' %></td>
 </tr>
 <% end %>
 </tbody>

@@ -56,7 +56,7 @@ Rails.application.routes.draw do
   delete 'enrollments/:enrollment_id', to: 'enrollments#destroy', as: 'delete_enrollment'
   get 'groups/:id/add_user', to: 'groups#add_user_to_group', as: 'add_user_to_group'
   post 'groups/:id/add_user', to: 'groups#update_user_group_relation'
-  put 'groups/:group_id', to: 'groups#delete_user_from_group', as: 'delete_user_from_group'
+  put 'groups/:id', to: 'groups#delete_user_from_group', as: 'delete_user_from_group'
   get 'event_enrollments/:event_id/', to: 'enrollments#show_enrollments_for_event', as: 'show_enrollments'
   put 'event_enrollments/', to:'enrollments#update', as: 'add_times'
   get 'event_enrollments/:event_id/single', to: 'enrollments#single'
