@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   resources :enrollments, only: [:create, :index]
   resources :groups, only: [:new, :create, :show]
   resources :kk_enrollments, only: [:show, :update, :edit]
+  resources :password_resets, only: [:new, :create, :edit, :update]
   get 'enrollments/:enrollment_id/edit', to: 'enrollments#edit', as: 'edit_enrollment'
   get 'enrollments/outsider/:event_id', to:'enrollments#new_outsider_enrollment', as: 'outsider_enrollment'
   post 'enrollments/outsider/:event_id', to: 'enrollments#create_outsider_enrollment', as: 'create_outsider_enrollment'

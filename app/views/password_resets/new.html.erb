@@ -1,0 +1,16 @@
+<h1>Uusi salasana</h1>
+<p>Jos olet unohtanut salasanasi, voimme auttaa sinua luomaan uuden. Kirjoita alla oleviin kenttiin
+käyttäjätunnuksesi ja sähköpostiosoitteesi. Lähetämme sinulle viestin, jonka avulla voit määritellä
+käyttäjätunnuksellesi uuden salasanan.</p>
+
+<div class="col-lg-5">
+<%= form_tag('/password_resets') do %>
+  <div class="form-group">
+    <%= label_tag 'Käyttäjätunnus' %>
+    <%= text_field_tag :username %><br>
+    <%= label_tag 'Sähköposti' %>
+    <%= text_field_tag :email %><br>
+    <%= submit_tag 'Lähetä uusi salasana' %>
+  </div>
+<% end %>
+</div>
