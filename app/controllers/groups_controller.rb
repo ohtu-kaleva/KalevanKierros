@@ -103,7 +103,8 @@ class GroupsController < ApplicationController
       else
         user.update_column :group_id, group.id
         KkEnrollment.new(user_id: user.id).save
-        res = Result.find_by kk_number: user.kk_number
+        year = AppSetting.find_by name: 'KkYear'
+        res = Result.find_by kk_number: user.kk_number, year: year.value
         if res
           res.update_column :group, group.name
         else
