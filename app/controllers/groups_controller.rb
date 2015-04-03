@@ -92,7 +92,7 @@ class GroupsController < ApplicationController
     group = Group.find_by id: params[:id]
     user = User.find_by kk_number: params[:kk_number]
     if not group.nil? and not user.nil? and group.users.count < 6
-      if enrollment_deadline_gone?
+      if enrollment_deadline_gone? and not user_is_admin?
         redirect_to :back, flash: { error: 'Joukkueeseen ei voi enää lisätä henkilöitä.' } and return
       end
       if not user.group.nil?
