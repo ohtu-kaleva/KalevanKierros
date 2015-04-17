@@ -21,7 +21,12 @@ class PasswordResetsController < ApplicationController
   end
 
   def update
-    redirect_to :back, flash: { success: 'Haista paska!' } and return
+    if @user.update password_reset_params
+      @user.update_column :reset_token, nil
+      @user.update_column :reset_sent_at, nil
+      redirect_to :root, flash: { success: 'Salasanasi on vaihdettu. Voit nyt kirjautua sisään uuden salasanan avulla' } and return
+    end
+    redirect_to :back, flash: { error: 'Uusi salasanasi ei ollut tarpeeksi vahva.' }  and return
   end
 
   private
@@ -34,6 +39,10 @@ class PasswordResetsController < ApplicationController
     if @user.reset_sent_at < 2.hours.ago
       redirect_to :root and return
     end
+  end
+
+  def password_reset_params
+    params.require(:user).permit(:password, :password_confirmation)
   end
 
 end
