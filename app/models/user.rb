@@ -73,6 +73,14 @@ class User < ActiveRecord::Base
     self.activation_token = SecureRandom.urlsafe_base64
   end
 
+  def generate_reset_token
+    self.update_attribute :reset_token, SecureRandom.urlsafe_base64
+  end
+
+  def set_reset_time
+    self.update_attribute :reset_sent_at, DateTime.now
+  end
+
   def construct_reference_number
     number = (kk_number.to_s).split ''
     if number.count < 7 || number.count > 7

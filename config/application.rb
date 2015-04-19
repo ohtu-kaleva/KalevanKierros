@@ -26,5 +26,6 @@ module OhtuKaleva
     config.assets.paths << Rails.root.join("app", "assets", "fonts")
     config.assets.precompile += %w(*.png *.jpg *.jpeg *.gif *.eot *.svg *.ttf *.woff)
     config.serve_static_assets = true
+    config.time_zone = "Helsinki"
   end
 end
