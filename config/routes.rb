@@ -21,6 +21,8 @@ Rails.application.routes.draw do
   get 'uutiset/arkisto/:year', to: 'uutiset#archive_by_year', as: 'archive_by_year'
 
   get 'admin/kk_enrollment', to: 'static_pages#kk_enrollment'
+  get 'admin/cover_image', to: 'static_pages#cover_image'
+  post 'admin/change_cover_image', to: 'static_pages#change_cover_image'
   get 'kk_enrollments', to: 'kk_enrollments#index'
   #get 'kk_enrollments/:id', to: 'kk_enrollments#edit', as: 'edit_kk_enrollment'
   #put 'kk_enrollments/:id', to: 'kk_enrollments#update'

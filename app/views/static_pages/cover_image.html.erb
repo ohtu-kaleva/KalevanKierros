@@ -1,0 +1,9 @@
+<div class="col-lg-4">
+
+<h1>Kansikuvan vaihto</h1>
+<p>Vaihda etusivun kuva valitsemalla kuva valikosta</p>
+
+<%= bootstrap_form_tag url: admin_change_cover_image_path, method: :post do |f| %>
+  <%= f.select :image_path, options_for_select(@images), label: 'Kansikuva' %>
+  <%= f.submit 'Vaihda kuva' %>
+<% end %>
