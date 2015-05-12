@@ -106,6 +106,8 @@ class EnrollmentsController < ApplicationController
     user = User.new(user_params)
 
     if user.save
+      outsider_number = 1100000+user.id
+      user.update_attribute :kk_number, outsider_number 
       event = Event.find_by id: params[:event_id]
       if event && event.open
         data_list = []
