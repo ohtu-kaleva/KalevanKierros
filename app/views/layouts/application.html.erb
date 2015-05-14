@@ -40,7 +40,7 @@
         </li>
 
         <li >
-          <a href="/ilmoittautuminen" id="themes">Ilmoittautuminen</a>
+          <a href="/ilmoittautuminen" id="themes">Ilmoittautuminen kierrokselle</a>
         </li>
 
         <li class="dropdown">
@@ -67,11 +67,11 @@
       </ul>
 
       <ul class="nav navbar-nav navbar-right">
+        <li><%= link_to 'Tapahtumat ja osakilpailut', events_path %></li>
         <% if current_user.nil? %>
             <li><%= link_to 'Kirjaudu sisään', signin_path %></li>
             <li><%= link_to 'Rekisteröidy', signup_path %></li>
         <% else %>
-            <li><%= link_to 'Ilmoittaudu tapahtumiin', events_path %></li>
             <li class="dropdown">
               <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="adminmenu">Omat tiedot <span class="caret"></span></a>
               <ul class="dropdown-menu" aria-labelledby="omat tiedot">

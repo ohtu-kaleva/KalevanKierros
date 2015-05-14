@@ -7,24 +7,22 @@ class EnrollmentsController < ApplicationController
   def new
     @event = Event.find_by id: params[:event_id]
     if @event
-      if !@event.open
-        @user = current_user
-        if !@user
-          redirect_to signin_path and return
-        end
+      @user = current_user
+      if !@user
+        redirect_to signin_path and return
+      end
 
-        if !@user.kk_enrollment
-          redirect_to root_path, flash: { notice: 'Ilmoittaudu ensin kalevan kierrokselle' }
-          return
-        end
-        if Date.today < @event.start_date
-          redirect_to root_path, flash: { notice: 'Tapahtumaan ei voi vielä ilmoittautua' }
-          return
-        end
-        if Date.today > @event.second_end_date
-          redirect_to root_path, flash: { notice: 'Tapahtumaan ei voi enää ilmoittautua' }
-          return
-        end
+      if !@user.kk_enrollment
+        redirect_to root_path, flash: { notice: 'Ilmoittaudu ensin kalevan kierrokselle' }
+        return
+      end
+      if Date.today < @event.start_date
+        redirect_to root_path, flash: { notice: 'Tapahtumaan ei voi vielä ilmoittautua' }
+        return
+      end
+      if Date.today > @event.second_end_date
+        redirect_to root_path, flash: { notice: 'Tapahtumaan ei voi enää ilmoittautua' }
+        return
       end
 
       @enrollment = Enrollment.new
@@ -36,6 +34,12 @@ class EnrollmentsController < ApplicationController
 
   def new_outsider_enrollment
     @event = Event.find_by id: params[:event_id]
+    if not @event or not @event.open
+      redirect_to :root and return
+    end
+    if Date.today > @event.second_end_date
+      redirect_to root_path, flash: { notice: 'Tapahtumaan ei voi enää ilmoittautua' } and return
+    end
     @user = User.new
     @attributes = @event.event_attributes
   end
@@ -91,7 +95,6 @@ class EnrollmentsController < ApplicationController
   end
 
   def create_outsider_enrollment
-    puts params[:enrollment]
     if User.last
         latest = User.last.id + 1
     else
@@ -107,7 +110,7 @@ class EnrollmentsController < ApplicationController
 
     if user.save
       outsider_number = 1100000+user.id
-      user.update_attribute :kk_number, outsider_number 
+      user.update_attribute :kk_number, outsider_number
       event = Event.find_by id: params[:event_id]
       if event && event.open
         data_list = []
