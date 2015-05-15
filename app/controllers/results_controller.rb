@@ -4,7 +4,7 @@ class ResultsController < ApplicationController
 
   # GET /results
   def index
-    @years = (2011..Time.now.year).to_a
+    @years = (2015..Time.now.year).to_a
   end
 
   def index_by_year
