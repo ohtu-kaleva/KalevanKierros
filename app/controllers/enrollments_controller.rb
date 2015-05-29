@@ -81,6 +81,15 @@ class EnrollmentsController < ApplicationController
           end
 
           if current_user
+            if event.sport_type == 'RowingEvent'
+              other_rower = @enrollment.enrollment_datas.find_by name:'kk_numero'
+              if other_rower.value != ''
+                if not enroll_other_rower_to_event(other_rower.value, current_user, @enrollment, event)
+                  @enrollment.destroy
+                  redirect_to :back, flash: { error: 'Toista henkilöä ei löytynyt kannasta. Jos hän ei ole kiertäjä, jätä kk-numeron kenttä tyhjäksi.' } and return
+                end
+              end
+            end
             current_user.enrollments << @enrollment
             EnrollmentMailer.send_enrollment_email(current_user, event, @enrollment)
           end
@@ -145,6 +154,28 @@ class EnrollmentsController < ApplicationController
       redirect_to :back, flash: { error: 'Et antanut kaikkia tietoja' } and return
     end
     redirect_to :root, flash: { success: 'Ilmoittautumisesi tapahtumaan on kirjattu.' } and return
+  end
+
+  def enroll_other_rower_to_event(kk_number, enroller, other_enrollment, event)
+    user = User.find_by kk_number: kk_number
+    if user
+      enrollment = Enrollment.new user_id: user.id, event_id: event.id
+      if enrollment.save
+        paddle = other_enrollment.enrollment_datas.find_by name:'Melonta'
+        EnrollmentData.new(enrollment_id: enrollment.id, name: 'Melonta', value: paddle.value, attribute_index: 1).save
+        EnrollmentData.new(enrollment_id: enrollment.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+        EnrollmentData.new(enrollment_id: enrollment.id, name: 'Parin nimi', value: enroller.full_name, attribute_index: 3).save
+        EnrollmentData.new(enrollment_id: enrollment.id, name: 'Parin sukupuoli', value: enroller.gender, attribute_index: 4).save
+        EnrollmentData.new(enrollment_id: enrollment.id, name: 'Parin syntymävuosi', value: enroller.birth_date.year, attribute_index: 5).save
+        EnrollmentData.new(enrollment_id: enrollment.id, name: 'Onko pari kiertäjä', value: 'Kyllä', attribute_index: 6).save
+        EnrollmentData.new(enrollment_id: enrollment.id, name: 'kk-numero', value: enroller.kk_number, attribute_index: 7).save
+        boatname = enroller.full_name + ' ' + user.full_name
+        EnrollmentData.new(enrollment_id: enrollment.id, name: 'Venekunta', value: boatname, attribute_index: 8).save
+        EnrollmentData.new(enrollment_id: other_enrollment.id, name: 'Venekunta', value: boatname, attribute_index: 8).save
+        return true
+      end
+    end
+    return false
   end
 
   def update

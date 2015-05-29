@@ -44,6 +44,9 @@ class EnrollmentMailer < ActionMailer::Base
   def rowing_enrollment_email
     @pair = @enrollment.enrollment_datas.find_by(name: 'Parin nimi').value
     @style = @enrollment.enrollment_datas.find_by(name: 'Melonta').value
+    if @pair != ''
+      @price *= 2.0
+    end
 
     mail(to: @user.email,
          subject: 'Ilmoittautuminen Kalevan Kierroksen Soutuun',
