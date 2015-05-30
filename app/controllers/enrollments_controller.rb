@@ -229,7 +229,7 @@ class EnrollmentsController < ApplicationController
         if enroller.kk_number.to_s.start_with?('33')
           kk_number = enroller.kk_number.to_s
         end
-        EnrollmentData.new(enrollment_id: enrollment.id, name: 'kk-numero', value: kk_number, attribute_index: 7).save
+        EnrollmentData.new(enrollment_id: enrollment.id, name: 'kk_numero', value: kk_number, attribute_index: 7).save
         boatname = "#{enroller.first_name[0]} #{enroller.last_name}, #{user.first_name[0]} #{user.last_name}"
         EnrollmentData.new(enrollment_id: enrollment.id, name: 'Venekunta', value: boatname, attribute_index: 8).save
         EnrollmentData.new(enrollment_id: other_enrollment.id, name:'Venekunta', value: boatname, attribute_index: 8).save
@@ -251,7 +251,7 @@ class EnrollmentsController < ApplicationController
         EnrollmentData.new(enrollment_id: enrollment.id, name: 'Parin sukupuoli', value: enroller.gender, attribute_index: 4).save
         EnrollmentData.new(enrollment_id: enrollment.id, name: 'Parin syntymävuosi', value: enroller.birth_date.year, attribute_index: 5).save
         EnrollmentData.new(enrollment_id: enrollment.id, name: 'Onko pari kiertäjä', value: 'Kyllä', attribute_index: 6).save
-        EnrollmentData.new(enrollment_id: enrollment.id, name: 'kk-numero', value: enroller.kk_number, attribute_index: 7).save
+        EnrollmentData.new(enrollment_id: enrollment.id, name: 'kk_numero', value: enroller.kk_number, attribute_index: 7).save
         boatname = "#{enroller.first_name[0]} #{enroller.last_name}, #{user.first_name[0]} #{user.last_name}"
         EnrollmentData.new(enrollment_id: enrollment.id, name: 'Venekunta', value: boatname, attribute_index: 8).save
         EnrollmentData.new(enrollment_id: other_enrollment.id, name: 'Venekunta', value: boatname, attribute_index: 8).save
