@@ -97,8 +97,12 @@ class EnrollmentsController < ApplicationController
                     redirect_to :back, flash: { error: 'Toista henkilöä ei löytynyt kannasta. Jos hän ei ole kiertäjä, jätä kk-numeron kenttä tyhjäksi.' } and return
                   end
                 else
-                  boatname = "#{current_user.first_name[0]} #{current_user.last_name}, #{pair_name[0][0]} #{pair_name[1]}"
-                  EnrollmentData.new(enrollment_id: @enrollment.id, name: 'Venekunta', value: boatname, attribute_index:8).save
+                  gender = @enrollment.enrollment_datas.find_by(name: 'Parin sukupuoli').value
+                  birth_year = @enrollment.enrollment_datas.find_by(name: 'Parin syntymävuosi').value
+                  if not create_new_user_for_outsider_rower(pair_name[0], pair_name[1], gender, birth_year, current_user, @enrollment, event)
+                    @enrollment.destroy
+                    redirect_to :back, flash: { error: 'Jokin meni pieleen. Tarkista tiedot ja yritä uudestaan.' } and return
+                  end
                 end
               end
             end
@@ -156,8 +160,32 @@ class EnrollmentsController < ApplicationController
             d.enrollment_id = @enrollment.id
             d.save
           end
-          # vuorosoudun tarkistaminen
-          #two_or_one = @enrollment.enrollment_datas.find_by(name:'Tyyli').value          
+          if event.sport_type == 'RowingEvent'
+            pair = @enrollment.enrollment_datas.find_by(name: 'Tyyli').value
+            if pair == 'Vuoro'
+              other_rower_is_user = @enrollment.enrollment_datas.find_by(name: 'Onko pari kiertäjä').value
+              if other_rower_is_user == 'Kyllä'
+                @enrollment.destroy
+                user.destroy
+                redirect_to :back, flash: { error: 'Ulkopuolisena et voi ilmoittaa kiertäjää pariksesi.' } and return
+              else
+                other_name = @enrollment.enrollment_datas.find_by(name:'Parin nimi').value
+                name_split = other_name.split(' ')
+                if name_split.length != 2
+                  @enrollment.destroy
+                  user.destroy
+                  redirect_to :back, flash: { error: 'Parin nimi ei ole kirjoitettu oikein. Kirjoita etunimi ja sukunimi välilyönnillä erotettuna' } and return
+                end
+                birth_year = @enrollment.enrollment_datas.find_by(name:'Parin syntymävuosi').value
+                gender = @enrollment.enrollment_datas.find_by(name:'Parin sukupuoli').value
+                if not create_new_user_for_outsider_rower(name_split[0], name_split[1], gender, birth_year, user, @enrollment, event)
+                  @enrollment.destroy
+                  user.destroy
+                  redirect_to :back, flash: { error: 'Jotain meni pieleen. Tarkista tietojen oikeellisuus ja yritä uudestaan.' } and return
+                end
+              end
+            end
+          end
           user.enrollments << @enrollment
           EnrollmentMailer.send_enrollment_email(user, event, @enrollment)
         else
@@ -168,6 +196,47 @@ class EnrollmentsController < ApplicationController
       redirect_to :back, flash: { error: 'Et antanut kaikkia tietoja' } and return
     end
     redirect_to :root, flash: { success: 'Ilmoittautumisesi tapahtumaan on kirjattu.' } and return
+  end
+
+  def create_new_user_for_outsider_rower(first_name, last_name, gender, birth_year, enroller, other_enrollment, event)
+    latest = 1
+    if User.last
+      latest = User.last.id + 1
+    end
+    username = "outsider#{latest}"
+    if not /\A\d{4}\z/ === birth_year
+      return false
+    end
+    birth_date = Date.parse("1.1.#{birth_year}")
+    user = User.new(username: username, first_name: first_name, last_name: last_name, gender: gender, birth_date: birth_date, email:'nn@nn.nn', password:'Passwerd1', password_confirmation:'Passwerd1', city:'nn', postal_code: '00000', street_address:'nn', phone_number:'nnnn')
+    puts 'Käyttäjä luodaan!'
+    if user.save
+      puts 'Käyttäjä luotu!'
+      enrollment = Enrollment.new(event_id: event.id, user_id: user.id)
+      if enrollment.save
+        paddle = other_enrollment.enrollment_datas.find_by name:'Melonta'
+        EnrollmentData.new(enrollment_id: enrollment.id, name: 'Melonta', value: paddle.value, attribute_index: 1).save
+        EnrollmentData.new(enrollment_id: enrollment.id, name: 'Tyyli', value: 'Vuoro', attribute_index: 2).save
+        EnrollmentData.new(enrollment_id: enrollment.id, name: 'Parin nimi', value: enroller.full_name, attribute_index: 3).save
+        EnrollmentData.new(enrollment_id: enrollment.id, name: 'Parin sukupuoli', value: enroller.gender, attribute_index: 4).save
+        EnrollmentData.new(enrollment_id: enrollment.id, name: 'Parin syntymävuosi', value: enroller.birth_date.year, attribute_index: 5).save
+        kiertaja = 'Ei'
+        if enroller.active
+          kiertaja = 'Kyllä'
+        end
+        EnrollmentData.new(enrollment_id: enrollment.id, name: 'Onko pari kiertäjä', value: kiertaja, attribute_index: 6).save
+        kk_number = ''
+        if enroller.kk_number.to_s.start_with?('33')
+          kk_number = enroller.kk_number.to_s
+        end
+        EnrollmentData.new(enrollment_id: enrollment.id, name: 'kk-numero', value: kk_number, attribute_index: 7).save
+        boatname = "#{enroller.first_name[0]} #{enroller.last_name}, #{user.first_name[0]} #{user.last_name}"
+        EnrollmentData.new(enrollment_id: enrollment.id, name: 'Venekunta', value: boatname, attribute_index: 8).save
+        EnrollmentData.new(enrollment_id: other_enrollment.id, name:'Venekunta', value: boatname, attribute_index: 8).save
+        return true
+      end
+      return false
+    end
   end
 
   def enroll_other_rower_to_event(kk_number, enroller, other_enrollment, event)
