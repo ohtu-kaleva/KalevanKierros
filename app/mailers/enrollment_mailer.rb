@@ -44,7 +44,8 @@ class EnrollmentMailer < ActionMailer::Base
   def rowing_enrollment_email
     @pair = @enrollment.enrollment_datas.find_by(name: 'Parin nimi').value
     @style = @enrollment.enrollment_datas.find_by(name: 'Melonta').value
-    if @pair != ''
+    @two_or_one = @enrollment.enrollment_datas.find_by(name: 'Tyyli').value
+    if @two_or_one == 'Vuoro'
       @price *= 2.0
     end
 

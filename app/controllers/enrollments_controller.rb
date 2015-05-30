@@ -82,11 +82,23 @@ class EnrollmentsController < ApplicationController
 
           if current_user
             if event.sport_type == 'RowingEvent'
-              other_rower = @enrollment.enrollment_datas.find_by name:'kk_numero'
-              if other_rower.value != ''
-                if not enroll_other_rower_to_event(other_rower.value, current_user, @enrollment, event)
+              style = @enrollment.enrollment_datas.find_by name:'Tyyli'
+              pair_name_datum = @enrollment.enrollment_datas.find_by name:'Parin nimi'
+              pair_name = pair_name_datum.value.split(' ')
+              if(style.value == 'Vuoro')
+                if pair_name.length != 2
                   @enrollment.destroy
-                  redirect_to :back, flash: { error: 'Toista henkilöä ei löytynyt kannasta. Jos hän ei ole kiertäjä, jätä kk-numeron kenttä tyhjäksi.' } and return
+                  redirect_to :back, flash: { error: 'Parin nimi ei ole kirjoitettu oikein. Kirjoita parisi nimeksi etunimi ja sukunimi välilyönnillä erotettuna.' } and return
+                end
+                other_rower = @enrollment.enrollment_datas.find_by name:'kk_numero'
+                if other_rower.value != ''
+                  if not enroll_other_rower_to_event(other_rower.value, current_user, @enrollment, event)
+                    @enrollment.destroy
+                    redirect_to :back, flash: { error: 'Toista henkilöä ei löytynyt kannasta. Jos hän ei ole kiertäjä, jätä kk-numeron kenttä tyhjäksi.' } and return
+                  end
+                else
+                  boatname = "#{current_user.first_name[0]} #{current_user.last_name}, #{pair_name[0][0]} #{pair_name[1]}"
+                  EnrollmentData.new(enrollment_id: @enrollment.id, name: 'Venekunta', value: boatname, attribute_index:8).save
                 end
               end
             end
@@ -144,6 +156,8 @@ class EnrollmentsController < ApplicationController
             d.enrollment_id = @enrollment.id
             d.save
           end
+          # vuorosoudun tarkistaminen
+          #two_or_one = @enrollment.enrollment_datas.find_by(name:'Tyyli').value          
           user.enrollments << @enrollment
           EnrollmentMailer.send_enrollment_email(user, event, @enrollment)
         else
@@ -169,7 +183,7 @@ class EnrollmentsController < ApplicationController
         EnrollmentData.new(enrollment_id: enrollment.id, name: 'Parin syntymävuosi', value: enroller.birth_date.year, attribute_index: 5).save
         EnrollmentData.new(enrollment_id: enrollment.id, name: 'Onko pari kiertäjä', value: 'Kyllä', attribute_index: 6).save
         EnrollmentData.new(enrollment_id: enrollment.id, name: 'kk-numero', value: enroller.kk_number, attribute_index: 7).save
-        boatname = enroller.full_name + ' ' + user.full_name
+        boatname = "#{enroller.first_name[0]} #{enroller.last_name}, #{user.first_name[0]} #{user.last_name}"
         EnrollmentData.new(enrollment_id: enrollment.id, name: 'Venekunta', value: boatname, attribute_index: 8).save
         EnrollmentData.new(enrollment_id: other_enrollment.id, name: 'Venekunta', value: boatname, attribute_index: 8).save
         return true
