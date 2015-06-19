@@ -27,6 +27,35 @@ class User < ActiveRecord::Base
     end
   end
 
+  def get_formatted_enrollment_data_for_event(id)
+    enrollment = enrollments.find_by event_id: id
+    if enrollment
+      data = enrollment.enrollment_datas.where.not(attribute_index: nil).order('attribute_index asc')
+      formatted_data = []
+      i = 0
+      data.each do |d|
+        if d.attribute_index > i + 1
+          missing = d.attribute_index - i - 1
+          missing.times do
+            formatted_data.append ''
+            i += 1
+          end
+        end
+        formatted_data.append d.value
+        i += 1
+      end
+      event = Event.find(id)
+      last_index = event.event_attributes.where.not(attribute_index: nil).order('attribute_index asc').last.attribute_index
+      missing = last_index - i
+      missing.times do
+        formatted_data.append ''  
+      end
+      formatted_data
+    else
+      return EnrollmentData.none
+    end
+  end
+
   def find_enrollment_id_by_event(id)
     id = enrollments.find_by(event_id: id)
     if id

@@ -15,7 +15,9 @@
     <% end %>
     <%= f.fields_for :enrollment do |enr| %>
         <% @attributes.each do |a| %>
-            <strong><%= a.attribute_label %></strong><br>
+            <% if a.attribute_type != "hidden" %>
+                <strong><%= a.attribute_label %></strong><br>
+            <% end %>
             <% if a.attribute_type == "select" %>
                 <%= enr.select a.name, options_for_select(a.get_options_to_form) %><br>
             <% end %>

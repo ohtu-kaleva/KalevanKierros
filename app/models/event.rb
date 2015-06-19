@@ -33,9 +33,14 @@ class Event < ActiveRecord::Base
   end
 
   def to_csv(options = {})
+    if sport_type == 'RowingEvent'
+      contestants = participating_boats
+    else
+      contestants = participants
+    end
     CSV.generate(options) do |csv|
       csv << spreadsheet_headers
-      participants.each do |participant|
+      contestants.each do |participant|
         csv << enrollment_data_as_array(participant)
       end
     end
@@ -56,6 +61,25 @@ class Event < ActiveRecord::Base
     end
   end
 
+  def participating_boats
+    participant_boats = []
+    pair_boats = {}
+    enrollments.each do |e|
+      venekunta = e.enrollment_datas.find_by name:'Venekunta'
+      if not venekunta
+        participant_boats.append(e.user)   
+      elsif pair_boats.has_key?(venekunta.value)
+        pair_boats[venekunta.value].append(e.user)
+      else
+        pair_boats[venekunta.value] = [e.user]
+      end
+    end
+    pair_boats.each do |k, v|
+      participant_boats.append(v.first)
+    end
+    participant_boats
+  end
+
   def spreadsheet_headers
     attr_names = ["ilm_nro", "Etunimi", "Sukunimi", "Sähköposti", "KK-numero"]
     event_attributes.where.not(attribute_index: nil).order('attribute_index asc').each do |attr|
@@ -67,8 +91,17 @@ class Event < ActiveRecord::Base
   def enrollment_data_as_array(user)
     user_data = user.get_enrollment_data_for_event(id)
     data_array = [user.find_enrollment_id_by_event(id), user.first_name, user.last_name, user.email, user.kk_number]
+    i = 0
     user_data.each do |piece|
+      if piece.attribute_index > i + 1
+        missing = piece.attribute_index - i - 1
+        missing.times do
+          data_array.append ''
+          i += 1
+        end
+      end
       data_array.append piece.value
+      i += 1
     end
     data_array
   end

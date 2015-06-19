@@ -57,7 +57,7 @@ class EnrollmentsController < ApplicationController
     if event
       if current_user && current_user.kk_enrollment
         data_list = []
-        attrs = event.event_attributes.select {|a| a.attribute_type != 'plain_text' }
+        attrs = event.event_attributes.select {|a| a.attribute_type != 'plain_text' and a.attribute_type != 'hidden' }
         # loop for creating information for data
         attrs.each do |a|
           if !params.has_key? a.name
@@ -139,7 +139,7 @@ class EnrollmentsController < ApplicationController
       event = Event.find_by id: params[:event_id]
       if event && event.open
         data_list = []
-        attrs = event.event_attributes.select {|a| a.attribute_type != 'plain_text' }
+        attrs = event.event_attributes.select {|a| a.attribute_type != 'plain_text' and a.attribute_type != 'hidden' }
         attrs.each do |a|
           if !params[:enrollment].has_key? a.name
             redirect_to root_path and return
@@ -330,7 +330,16 @@ class EnrollmentsController < ApplicationController
       enrollment = Enrollment.find_by id: result_hash[:ilm_nro]
       if enrollment
         if result_hash[:aika]
-        enrollment.update_attribute :time, to_seconds(result_hash[:aika])
+            enrollment.update_attribute :time, to_seconds(result_hash[:aika])
+        end
+      end
+      if event.sport_type == 'RowingEvent'
+        pair = User.find_by kk_number: result_hash[:kk_numero]
+        if pair
+            pair_enrollment = Enrollment.find_by id: pair.find_enrollment_id_by_event(event.id)
+            if result_hash[:aika]
+                pair_enrollment.update_attribute :time, to_seconds(result_hash[:aika])
+            end
         end
       end
     end

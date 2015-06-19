@@ -60,6 +60,8 @@ class EventsController < ApplicationController
         EventAttribute.create :name => 'Parin sukupuoli', :attribute_value => 'M;F', :attribute_label => 'Parisi sukupuoli.', :attribute_type => 'select', :event_id => @event.id, :attribute_index => 4
         EventAttribute.create :name => 'Parin syntymävuosi', :attribute_value => '', :attribute_label => 'Parisi syntymävuosi', :attribute_type => 'text_field', :event_id => @event.id, :attribute_index => 5
         EventAttribute.create :name => 'Onko pari kiertäjä', :attribute_value => 'Ei;Kyllä', :attribute_label => 'Onko parisi kiertäjä?', :attribute_type => 'select', :event_id => @event.id, :attribute_index => 6
+        EventAttribute.create :name => 'kk_numero', :attribute_value => '', :attribute_label => 'Jos parisi on kiertäjä, kirjoita hänen kk-numeronsa', :attribute_type => 'text_field', :event_id => @event.id, :attribute_index => 7
+        EventAttribute.create :name => 'Venekunta', :attribute_value => '', :attribute_label => 'Venekunta', :attribute_type => 'hidden', :event_id => @event.id, :attribute_index => 8
         redirect_to @event, flash: { success: 'Soututapahtuma luotu onnistuneesti.' }
       else
         render :new

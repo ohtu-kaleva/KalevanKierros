@@ -10,7 +10,7 @@ class EventAttribute < ActiveRecord::Base
 
   def attribute_type_allowed
     return if attribute_type.in? ['radio_button', 'check_box', 'text_field',
-                                  'select', 'plain_text', 'date']
+                                  'select', 'plain_text', 'date', 'hidden']
 
     errors.add(:attribute_type, 'is invalid')
   end

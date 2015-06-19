@@ -24,7 +24,9 @@
 <strong>Tapahtuman kentät:</strong><br>
 <% #form_for(@enrollment) do |e| %>
 <% @event.event_attributes.each do |f| %>
-        <strong><%= f.attribute_label %></strong>
+        <% if f.attribute_type != "hidden" %>
+            <strong><%= f.attribute_label %></strong>
+        <% end %>
         <div class="field">
         <% if f.attribute_type == "select" %>
             <%= select_tag :sel, options_for_select(f.get_options_to_form) %>

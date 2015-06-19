@@ -22,8 +22,8 @@
           <td><%= enrollment.user.full_name %></td>
           <td><%= enrollment.user.email %></td>
           <td><%= enrollment.user.kk_number %></td>
-          <% enrollment.user.get_enrollment_data_for_event(@event.id).each do |data| %>
-            <td><%= data.value %></td>
+          <% enrollment.user.get_formatted_enrollment_data_for_event(@event.id).each do |data| %>
+            <td><%= data %></td>
           <% end %>
           <td ><div class="form-group">
           <% if enrollment.time.nil? %>

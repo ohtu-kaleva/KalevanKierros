@@ -16,8 +16,9 @@
     </p>
 <div class="field">
     <% @event.event_attributes.each do |e| %>
-        <strong><%= e.attribute_label %></strong><br>
-
+        <% if e.attribute_type != "hidden" %>
+            <strong><%= e.attribute_label %></strong><br>
+        <% end %>
           <% if e.attribute_type == "select" %>
             <%= select_tag e.name, options_for_select(e.get_options_to_form) %><br>
           <% end %>
