@@ -40,21 +40,26 @@ class Event < ActiveRecord::Base
     end
     CSV.generate(options) do |csv|
       csv << spreadsheet_headers
-      contestants.each do |participant|
-        csv << enrollment_data_as_array(participant)
+      contestants.each do |contestant|
+        csv << enrollment_data_as_array(contestant)
       end
     end
   end
 
   def to_xlsx
+    if sport_type == 'RowingEvent'
+      contestants = participating_boats
+    else
+      contestants = participants
+    end
     Axlsx::Package.new do |enrollments|
       enrollments.workbook do |wb|
         wb.add_worksheet do |sheet|
           sheet.add_row
           sheet.add_row [name]
           sheet.add_row spreadsheet_headers
-          participants.each do |user|
-            sheet.add_row enrollment_data_as_array(user)
+          contestants.each do |contestant|
+            sheet.add_row enrollment_data_as_array(contestant)
           end
         end
       end
@@ -81,7 +86,7 @@ class Event < ActiveRecord::Base
   end
 
   def spreadsheet_headers
-    attr_names = ["ilm_nro", "Etunimi", "Sukunimi", "Sähköposti", "KK-numero"]
+    attr_names = ["ilm_nro", "Etunimi", "Sukunimi", "Sähköposti", "KK-numero", "Sarja"]
     event_attributes.where.not(attribute_index: nil).order('attribute_index asc').each do |attr|
       attr_names.append attr.name
     end
@@ -90,7 +95,7 @@ class Event < ActiveRecord::Base
 
   def enrollment_data_as_array(user)
     user_data = user.get_enrollment_data_for_event(id)
-    data_array = [user.find_enrollment_id_by_event(id), user.first_name, user.last_name, user.email, user.kk_number]
+    data_array = [user.find_enrollment_id_by_event(id), user.first_name, user.last_name, user.email, user.kk_number, user.define_series]
     i = 0
     user_data.each do |piece|
       if piece.attribute_index > i + 1
@@ -102,6 +107,11 @@ class Event < ActiveRecord::Base
       end
       data_array.append piece.value
       i += 1
+    end
+    last_index = event_attributes.where.not(attribute_index: nil).order('attribute_index asc').last.attribute_index
+    missing = last_index - i
+    missing.times do
+      data_array.append ''  
     end
     data_array
   end
