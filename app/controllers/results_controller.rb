@@ -21,7 +21,7 @@ class ResultsController < ApplicationController
       @res[:results] = Result.where(year: params[:year]).where.not(cycling_time: nil).where(series: search_filter).order('cycling_pos asc').pluck('name, cycling_pos as position, cycling_pts as points, cycling_time as time')
     elsif params[:type] == 'rowing'
       @laji = "Soutu"
-      @res[:results] = Result.where(year: params[:year]).where.not(rowing_time: nil).where(series: search_filter).order('rowing_pos asc').pluck('name, rowing_pos as position, rowing_pts as points, rowing_time as time')
+      @res[:results] = Result.where(year: params[:year]).where.not(rowing_time: nil).where.not(rowing_pts: nil).where(series: search_filter).order('rowing_pos asc').pluck('name, rowing_pos as position, rowing_pts as points, rowing_time as time')
     elsif params[:type] == 'orienteering'
       @laji = "Suunnistus"
       @res[:results] = Result.where(year: params[:year]).where.not(orienteering_time: nil).where(series: search_filter).order('orienteering_pos asc').pluck('name, orienteering_pos as position, orienteering_pts as points, orienteering_time as time')
@@ -332,12 +332,15 @@ class ResultsController < ApplicationController
     normal_times = unscaled_times(event)
     times_sorted = Hash[times.sort_by { |k, v| v[:time] }]
     winner_time = get_winner_time(times_sorted)
+    winner_time = BigDecimal.new(winner_time)
     position = 1
     year = event.second_end_date.year
     times_sorted.each do |number, time_and_style|
       if time_and_style[:time]
         if time_and_style[:style] != 'Melonta'
-          points = 1000 - event.factor * Math.log10(time_and_style[:time] / winner_time)
+          own_time = BigDecimal.new(time_and_style[:time])
+          points = 1000 - event.factor * Math.log10(own_time / winner_time)
+          points = BigDecimal.new(points.to_s)
           if points < 0
             points = 0
           end
@@ -370,6 +373,7 @@ class ResultsController < ApplicationController
 
   def insert_result_for_event(sport_type, number, year, points, time, position, style)
     result = Result.find_by_kk_number_and_year(number, year)
+    if result
     if sport_type == "RunningEvent"
       result.marathon_pts = points
       result.marathon_time = time
@@ -427,6 +431,7 @@ class ResultsController < ApplicationController
       result.pts_sum = totals[:total_points]
       result.save
     end
+    end
   end
 
   def check_total_events(result)
@@ -456,6 +461,9 @@ class ResultsController < ApplicationController
     if result.rowing_pts
       totals[:total_events] += 1
       totals[:total_points] += result.rowing_pts
+    end
+    if not result.rowing_pts and result.rowing_style == 'Melonta'
+      totals[:total_events] += 1
     end
     totals
   end

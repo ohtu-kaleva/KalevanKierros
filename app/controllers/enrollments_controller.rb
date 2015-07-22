@@ -337,7 +337,7 @@ class EnrollmentsController < ApplicationController
         pair = User.find_by kk_number: result_hash[:kk_numero]
         if pair
             pair_enrollment = Enrollment.find_by id: pair.find_enrollment_id_by_event(event.id)
-            if result_hash[:aika]
+            if pair_enrollment and result_hash[:aika]
                 pair_enrollment.update_attribute :time, to_seconds(result_hash[:aika])
             end
         end

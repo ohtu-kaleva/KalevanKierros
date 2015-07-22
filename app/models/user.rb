@@ -45,10 +45,12 @@ class User < ActiveRecord::Base
         i += 1
       end
       event = Event.find(id)
-      last_index = event.event_attributes.where.not(attribute_index: nil).order('attribute_index asc').last.attribute_index
-      missing = last_index - i
-      missing.times do
-        formatted_data.append ''  
+      last = event.event_attributes.where.not(attribute_index: nil).order('attribute_index asc').last
+      if last
+        missing = last.attribute_index - i
+        missing.times do
+          formatted_data.append ''  
+        end
       end
       formatted_data
     else

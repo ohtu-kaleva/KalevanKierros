@@ -108,10 +108,13 @@ class Event < ActiveRecord::Base
       data_array.append piece.value
       i += 1
     end
-    last_index = event_attributes.where.not(attribute_index: nil).order('attribute_index asc').last.attribute_index
-    missing = last_index - i
-    missing.times do
-      data_array.append ''  
+    last = event_attributes.where.not(attribute_index: nil).order('attribute_index asc').last
+    if last
+	last_index = last.attribute_index
+    	missing = last_index - i
+    	missing.times do
+      	   data_array.append ''  
+    	end
     end
     data_array
   end
