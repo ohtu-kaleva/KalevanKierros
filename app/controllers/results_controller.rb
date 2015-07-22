@@ -462,7 +462,7 @@ class ResultsController < ApplicationController
       totals[:total_events] += 1
       totals[:total_points] += result.rowing_pts
     end
-    if not result.rowing_pts and result.rowing_style == 'Melonta'
+    if result.rowing_time and result.rowing_style == 'Melonta'
       totals[:total_events] += 1
     end
     totals
