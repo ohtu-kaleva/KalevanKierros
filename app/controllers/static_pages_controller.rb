@@ -24,6 +24,6 @@ class StaticPagesController < ApplicationController
   end
 
   def ilmoittautuminen
-    @events = Event.where(open: true)
+    
   end
 end
