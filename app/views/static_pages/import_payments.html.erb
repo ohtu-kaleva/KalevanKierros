@@ -1,0 +1,9 @@
+<div class="col-lg-4">
+
+<h1>Viitemaksujen tuonti</h1>
+<p>Lue saapuneet viitemaksut tiedostosta</p>
+
+<%= form_tag import_payments_file_path, multipart:true, method: :put do %>
+  <%= file_field_tag :file %>
+  <%= submit_tag 'Lähetä tiedosto', :class => "btn btn-primary"  %>
+<% end %>

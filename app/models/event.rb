@@ -2,6 +2,7 @@ class Event < ActiveRecord::Base
   has_many :event_attributes, dependent: :destroy
   has_many :enrollments, dependent: :destroy
   has_many :participants, through: :enrollments, source: :user
+  has_many :enrollment_datas, through: :enrollments, source: :enrollment_datas
 
   validates :name, :start_date, :end_date, :second_end_date, :price, :second_price, :payment_receiver, presence: true
   validates :name, uniqueness: true

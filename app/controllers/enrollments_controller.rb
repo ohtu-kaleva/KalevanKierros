@@ -2,7 +2,7 @@ class EnrollmentsController < ApplicationController
 
   before_action :check_for_existing_enrollment, only:  [:new, :create]
   before_action :set_enrollment_or_redirect, only: [:show, :destroy, :edit]
-  before_action :redirect_if_user_not_admin, only: [:show_enrollments_for_event, :index, :show, :destroy, :update, :edit, :update_single]
+  before_action :redirect_if_user_not_admin, only: [:show_enrollments_for_event, :index, :show, :destroy, :update, :edit, :update_single, :update_payment_info]
 
   def new
     @event = Event.find_by id: params[:event_id]
@@ -300,6 +300,14 @@ class EnrollmentsController < ApplicationController
 
   def show
     @data = @enrollment.enrollment_datas
+  end
+
+  def update_payment_info
+    enrollment = Enrollment.find_by id: params[:enrollment_id]
+    if enrollment
+      enrollment.update_payments
+    end
+    redirect_to :back
   end
 
   def show_enrollments_for_event

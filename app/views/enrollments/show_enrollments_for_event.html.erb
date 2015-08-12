@@ -11,6 +11,8 @@
     <% @event.event_attributes.where.not(attribute_index: nil).order('attribute_index asc').each do |attr| %>
         <th><%= attr.name %></th>
     <% end %>
+    <th>Maksettu</th>
+    <th>Päivitä maksu</th>
     <th>Lisää aika</th>
     <th>Poista aika</th>
     <th>Peru</th>
@@ -25,6 +27,12 @@
           <% enrollment.user.get_formatted_enrollment_data_for_event(@event.id).each do |data| %>
             <td><%= data %></td>
           <% end %>
+          <td >
+          <% if enrollment.paid %>
+            Kyllä
+          <% end %>
+          </td>
+          <td><%= link_to 'Päivitä maksu', update_payment_info_path(enrollment.id), method: :put, class: "btn" %></td>  
           <td ><div class="form-group">
           <% if enrollment.time.nil? %>
             <%= text_field_tag "times[#{enrollment.id}]", nil, maxlength: 8, :class => "form-control min-width" %>
