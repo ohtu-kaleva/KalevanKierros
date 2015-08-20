@@ -2,7 +2,8 @@ class EnrollmentsController < ApplicationController
 
   before_action :check_for_existing_enrollment, only:  [:new, :create]
   before_action :set_enrollment_or_redirect, only: [:show, :destroy, :edit]
-  before_action :redirect_if_user_not_admin, only: [:show_enrollments_for_event, :index, :show, :destroy, :update, :edit, :update_single, :update_payment_info]
+  before_action :redirect_if_user_not_admin, only: [:show_enrollments_for_event, :index, :show, :destroy, :update, :edit, :update_single,
+                                                    :update_payment_info, :remove_all_payment_info_for_event]
 
   def new
     @event = Event.find_by id: params[:event_id]
@@ -308,6 +309,14 @@ class EnrollmentsController < ApplicationController
       enrollment.update_payments
     end
     redirect_to :back
+  end
+
+  def remove_all_payment_info_for_event
+    event = Event.find_by id: params[:event_id]
+    event.enrollments.each do |e|
+      e.update_attribute :paid, false
+    end
+    redirect_to :back, flash: { success: 'Tapahtuman kaikki maksutiedot poistettu' }
   end
 
   def show_enrollments_for_event

@@ -12,7 +12,7 @@
         <th><%= attr.name %></th>
     <% end %>
     <th>Maksettu</th>
-    <th>Päivitä maksu</th>
+    <th>Muuta maksutieto</th>
     <th>Lisää aika</th>
     <th>Poista aika</th>
     <th>Peru</th>
@@ -32,7 +32,7 @@
             Kyllä
           <% end %>
           </td>
-          <td><%= link_to 'Päivitä maksu', update_payment_info_path(enrollment.id), method: :put, class: "btn" %></td>  
+          <td><%= link_to 'Muuta maksutieto', update_payment_info_path(enrollment.id), method: :put, class: "btn" %></td>  
           <td ><div class="form-group">
           <% if enrollment.time.nil? %>
             <%= text_field_tag "times[#{enrollment.id}]", nil, maxlength: 8, :class => "form-control min-width" %>
@@ -49,7 +49,10 @@
   </table>
   <%= submit_tag 'Päivitä ajat', :class => "btn btn-primary" %><br>
   <% end %>
-  <style type="text/css">.min-width{min-width: 100px;}</style>
+  <style type="text/css">.min-width{min-width: 100px;}</style><br>
+  <p>
+    <%= link_to 'Poista kaikki maksutiedot', cancel_payments_path(@event.id), method:'post', :class =>'btn btn-primary' %><br>
+  </p>
   <p>
     <%= link_to 'Lataa csv-tiedostona', show_enrollments_path(@event.id, format: :csv) %><br>
     <%= link_to 'Lataa excel-tiedostona (xls)', show_enrollments_path(@event.id, format: :xls) %><br>

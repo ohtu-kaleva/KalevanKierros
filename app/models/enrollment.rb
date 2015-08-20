@@ -9,10 +9,18 @@ class Enrollment < ActiveRecord::Base
       pair = self.event.enrollment_datas.where(name: 'Venekunta').where(value: venekunta)
       pair.each do |data|
         enrollment = data.enrollment
-        enrollment.update_attribute :paid, true
+        if enrollment.paid
+          enrollment.update_attribute :paid, false
+        else
+          enrollment.update_attribute :paid, true
+        end   
       end
-    else    
-      self.update_attribute :paid, true
+    else
+      if self.paid
+        self.update_attribute :paid, false
+      else
+        self.update_attribute :paid, true
+      end
     end
   end
 end
