@@ -67,6 +67,7 @@ Rails.application.routes.draw do
   get 'event_enrollments/:event_id/single', to: 'enrollments#single'
   post 'event_enrollments/:event_id/single', to: 'enrollments#update_single'
   put 'event_enrollments/:event_id/import_csv', to: 'enrollments#import_csv', as: 'import_file'
+  post 'event_enrollments/:event_id/remove_all_payment_info_for_event', to: 'enrollments#remove_all_payment_info_for_event', as: 'cancel_payments'
   put 'enrollments/:enrollment_id', to: 'enrollments#delete_time', as: 'delete_time'
   put 'enrollments/:enrollment_id/payment', to: 'enrollments#update_payment_info', as: 'update_payment_info'
   post 'results/:event_id', to: 'results#calculate_points', as: 'calculate_points'
