@@ -110,7 +110,7 @@
           var pts = 0;
           var sport = $("#sport").val();
           if(sport === "running") {
-              var factor = parseDouble($("#running_option").val());
+              var factor = parseFloat($("#running_option").val());
               pts = 1000 - 2000 * baseTenLogarithm(yourtotal * factor / winnertotal);
           } else if(sport === "skiing") {
               var year = parseInt($("#skiing_year").val());
