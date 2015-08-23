@@ -8,6 +8,7 @@ class EnrollmentMailer < ActionMailer::Base
     @account_number = event.account_number
     @pay_day = 'heti'
     @receiver = event.payment_receiver
+    @event_name = event.name
     # Varmistetaan että päivien vertailussa verrataan tähän päivään evaluoimalla
     # Date.today aina ajettaessa send_enrollment_email
     get_this_day = lambda { Date.today }
@@ -30,6 +31,8 @@ class EnrollmentMailer < ActionMailer::Base
       orienteering_enrollment_email
     when 'CyclingEvent'
       cycling_enrollment_email
+    when ''
+      no_sport_event_enrollment_email
     end
   end
 
@@ -82,5 +85,11 @@ class EnrollmentMailer < ActionMailer::Base
     mail(to: @user.email,
          subject: 'Ilmoittautuminen Kalevan Kierroksen Pyöräilyyn',
          template_name: :cycling_enrollment_email).deliver
+  end
+
+  def no_sport_event_enrollment_email
+    mail(to: @user.email,
+      subject: 'Ilmoittautuminen',
+      template_name: :no_sport_event_email).deliver
   end
 end
