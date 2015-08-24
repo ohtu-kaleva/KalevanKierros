@@ -19,7 +19,7 @@
     <p>Sähköposti: <%= @user.email %></p>
     -----------------------------------------------------------------
     <% if !@account_number.empty? %>
-      <p>Osallistumismaksu <%= @price %> euroa maksettava viitenumerolla <%= @user.construct_reference_number %> tilille <%= @account_number %><br>
+      <p>Osallistumismaksu <%= @price %> euroa maksettava viitenumerolla <%= @enrollment.construct_reference_number %> tilille <%= @account_number %><br>
         Eräpäivä: <%= @pay_day %><br>
         Saaja: <%= @receiver %></p>
     <% end %>

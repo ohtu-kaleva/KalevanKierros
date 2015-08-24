@@ -13,7 +13,7 @@ class Enrollment < ActiveRecord::Base
           enrollment.update_attribute :paid, false
         else
           enrollment.update_attribute :paid, true
-        end   
+        end
       end
     else
       if self.paid
@@ -22,5 +22,27 @@ class Enrollment < ActiveRecord::Base
         self.update_attribute :paid, true
       end
     end
+  end
+
+  def construct_reference_number
+    factors = [7, 3, 1]
+    kk_number = self.user.kk_number.to_s
+    event_id = self.event.id.to_s
+    numberstr = "#{kk_number}#{event_id}".reverse.split('')
+    factor_counter = 0
+    sum = 0
+    numberstr.each do |n|
+      sum += n.to_i * factors[factor_counter]
+      factor_counter += 1
+      if factor_counter > 2
+        factor_counter = 0
+      end
+    end
+    next_ten = (sum / 10).round * 10 + 10
+    check_sum = next_ten - sum
+    if check_sum == 10
+      check_sum = 0
+    end
+    "#{kk_number}#{event_id}#{check_sum}"
   end
 end

@@ -14,7 +14,7 @@ Kiertäjänumero: <%= @user.kk_number %>
 Sähköposti: <%= @user.email %>
 -----------------------------------------------------------------
 <% if !@account_number.empty? %>
-    Osallistumismaksu <%= @price %> euroa maksettava viitenumerolla <%= @user.construct_reference_number %> tilille <%= @account_number %>
+    Osallistumismaksu <%= @price %> euroa maksettava viitenumerolla <%= @enrollment.construct_reference_number %> tilille <%= @account_number %>
     Eräpäivä <%= @pay_day %>
     Saaja <%= @receiver %>
 <% end %>
