@@ -30,6 +30,7 @@
 
             <% if a.attribute_type == "check_box" %>
                 <% a.get_options_to_form.each do |v| %>
+                  <%= hidden_field_tag("enrollment[#{a.name}]" + '[]') %>
                   <%= check_box_tag("enrollment[#{a.name}]" + '[]', v) %>
                   <%= label_tag(a.attribute_label, v) %><br>
                 <% end %>
