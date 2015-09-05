@@ -22,6 +22,11 @@
 <%= button_to('Näytä ilmoittautumiset', kk_enrollments_path, method: :get, :class => "btn btn-primary") %>
 
 <br>
+<b>Lataa kunniakirjat</b>
+<p>Huom. kunniakirjat voi ladata vasta kun suunnistustapahtuma on luotu.</p>
+<%= button_to('Lataa', export_diplomas_path, method: :get, :class => "btn btn-primary") %>
+
+<br>
 <b>Päivitä tulosten tiedot tilastoihin</b>
 <%= bootstrap_form_tag url: statistics_update_path, method: :post do |f| %>
   <%= f.select :year, options_for_select(@years), label: 'Vuosi' %>

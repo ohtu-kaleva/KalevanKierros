@@ -52,6 +52,8 @@ Rails.application.routes.draw do
   get 'yhteystiedot/postituslista', to: 'static_pages#postituslista'
 
 
+  get 'diplomas', to: 'printing_materials#export_diplomas', as: 'export_diplomas'
+
   get 'signup', to: 'users#new'
   get 'signin', to: 'sessions#new'
   delete 'signout', to: 'sessions#destroy'
