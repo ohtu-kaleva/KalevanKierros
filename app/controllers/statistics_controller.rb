@@ -91,7 +91,7 @@ class StatisticsController < ApplicationController
     if !@results.empty?
       if @results.any? { |r| r.orienteering_pts }
         @results.each do |result|
-          if !result.updated_to_statistics
+          if !result.updated_to_statistics and result.completed_events >= 4
             @statistic = Statistic.find_by_kk_number result.kk_number
 
             if @statistic
@@ -105,7 +105,7 @@ class StatisticsController < ApplicationController
                 @statistic.six_events_completed_count += 1
                 @statistic.prev_year_event_sum = 6
               end
-
+ 
               @statistic.total_events_completed += result.completed_events
               @statistic.pts_sum += result.pts_sum
               @statistic.prev_year_pts_sum = result.pts_sum

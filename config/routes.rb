@@ -25,6 +25,7 @@ Rails.application.routes.draw do
   post 'admin/change_cover_image', to: 'static_pages#change_cover_image'
   get 'admin/import_payments', to: 'static_pages#import_payments'
   put 'admin/import_payments_file', to: 'static_pages#import_payments_file', as: 'import_payments_file'
+  get 'admin/list_years_awards', to: 'yearly_awards#list_years_awards', as: 'years_awards'
   get 'kk_enrollments', to: 'kk_enrollments#index'
   #get 'kk_enrollments/:id', to: 'kk_enrollments#edit', as: 'edit_kk_enrollment'
   #put 'kk_enrollments/:id', to: 'kk_enrollments#update'

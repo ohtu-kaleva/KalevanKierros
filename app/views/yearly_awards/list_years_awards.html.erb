@@ -1,0 +1,74 @@
+<div class="col-lg-4">
+
+<h1>Vuoden <%= @year %> ansiomerkit</h1>
+<b>Kalevan Kierroksen Veljeskunta</b>
+
+<table class="table table-striped">
+  <thead>
+    <th>KK-numero</th>
+    <th>Nimi</th>
+    <th>Kotipaikka</th>
+    <th>Lajit</th>
+  </thead>
+  <body>
+<% @veljeskunta.each do |k, v| %>
+  <tr>
+    <td><%= k %></td>
+    <td><%= v[1].name %></td>
+    <td><%= v[0].city %></td>
+    <td><%= v[0].statistic.total_events_completed + v[1].completed_events %></td>
+  </tr>
+<% end %>
+  </body>
+</table>
+
+</br>
+<b>Kalevan Kierroksen uudet Kunniakiertäjät</b>
+
+<table class="table table-striped">
+  <thead>
+    <th>KK-numero</th>
+    <th>Nimi</th>
+    <th>Kotipaikka</th>
+    <th>Lajit</th>
+  </thead>
+  <body>
+<% @kunniakiertajat.each do |k, v| %>
+  <tr>
+    <td><%= k %></td>
+    <td><%= v[1].name %></td>
+    <td><%= v[0].city %></td>
+    <td><%= v[0].statistic.total_events_completed + v[1].completed_events %></td>
+  </tr>
+<% end %>
+  </body>
+</table>
+
+</br>
+<b>Kalevan Kierroksen uudet Ansioviirit</b>
+
+<table class="table table-striped">
+  <thead>
+    <th>KK-numero</th>
+    <th>Nimi</th>
+    <th>Kotipaikka</th>
+    <th>Lajit</th>
+  </thead>
+  <body>
+<% @ansioviirit.each do |k, v| %>
+  <tr>
+    <td><%= k %></td>
+    <td><%= v[1].name %></td>
+    <td><%= v[0].city %></td>
+    <td><%= v[0].statistic.total_events_completed + v[1].completed_events %></td>
+  </tr>
+<% end %>
+  </body>
+</table>
+
+</br>
+<b>Kalevan kierroksen kehittyjät</b>
+
+KESKEN
+
+</div>
