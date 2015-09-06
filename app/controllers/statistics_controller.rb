@@ -78,6 +78,14 @@ class StatisticsController < ApplicationController
     unless params[:year] =~ /\A\d{4}\z/
       redirect_to :root and return
     end
+
+    last_year_statistics = Statistic.where("prev_year_event_sum > ? or prev_year_pts_sum > ?", 0, 0)
+    last_year_statistics.each do |s|
+      s.prev_year_event_sum = 0
+      s.prev_year_pts_sum = 0
+      s.save
+    end
+
     @results = Result.where(year: statistic_params[:year])
 
     if !@results.empty?
