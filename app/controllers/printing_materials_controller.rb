@@ -57,6 +57,7 @@ class PrintingMaterialsController < ApplicationController
       position += 1
     end
     data << '}'
+    data = data.encode!(Encoding::ISO_8859_1)
     send_data(data, filename: 'kunniakirjat.rtf')
   end
 
