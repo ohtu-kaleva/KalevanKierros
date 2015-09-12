@@ -7,7 +7,7 @@ class PrintingMaterialsController < ApplicationController
     end
 
     year = AppSetting.find_by(name: 'KkYear').value.to_i
-    receivers = Result.where(year: year).where("completed_events >= ?", 4).order('pts_sum asc').all
+    receivers = Result.where(year: 2015).where("completed_events >= ?", 4).joins('LEFT OUTER JOIN users ON users.kk_number = results.kk_number').select("results.*, users.first_name, users.last_name").order('users.last_name asc, users.first_name asc')
 
     event_names = get_sport_event_names
 
@@ -26,7 +26,10 @@ class PrintingMaterialsController < ApplicationController
         second_space = '\sb1446'
       end
 
-      data << "\\pard\\plain\\sb6292\\tqc\\tx4134{\\plain\\tab\\fs36\\i\\b\\f1\\cf0\\cb1 #{e.name}{\\fs42\\par}}\\pard\\plain\\sb279\\tqr\\tx7826{\\plain\\tab\\fs24\\b\\f2\\cf0\\cb1 #{e.completed_events}{\\fs30\\par}}"
+      formatted_first_name = e.first_name.titleize
+      formatted_last_name = e.last_name.titleize
+
+      data << "\\pard\\plain\\sb6292\\tqc\\tx4134{\\plain\\tab\\fs36\\i\\b\\f1\\cf0\\cb1 #{formatted_last_name} #{formatted_first_name}{\\fs42\\par}}\\pard\\plain\\sb279\\tqr\\tx7826{\\plain\\tab\\fs24\\b\\f2\\cf0\\cb1 #{e.completed_events}{\\fs30\\par}}"
 
       if e.skating_pts
         data << "\\pard\\plain#{first_space}\\tx850\\tqr\\tx5212\\tqr\\tx6653\\tqr\\tx8507{\\plain\\tab\\fs20\\b\\f5\\cf0\\cb1 #{event_names[:skating]}\\plain\\tab\\fs20\\b\\f5\\cf0\\cb1 #{e.skating_pos}\\plain\\tab\\fs20\\b\\f5\\cf0\\cb1 #{seconds_to_human_form(e.skating_time)}\\plain\\tab\\fs20\\b\\f5\\cf0\\cb1 #{sprintf('%.2f', e.skating_pts)}{\\fs26\\par}}"
