@@ -7,7 +7,7 @@ class PrintingMaterialsController < ApplicationController
     end
 
     year = AppSetting.find_by(name: 'KkYear').value.to_i
-    receivers = Result.where(year: 2015).where("completed_events >= ?", 4).joins('LEFT OUTER JOIN users ON users.kk_number = results.kk_number').select("results.*, users.first_name, users.last_name").order('users.last_name asc, users.first_name asc')
+    receivers = Result.where(year: year).where("completed_events >= ?", 4).joins('LEFT OUTER JOIN users ON users.kk_number = results.kk_number').select("results.*, users.first_name, users.last_name").order('users.last_name asc, users.first_name asc')
 
     event_names = get_sport_event_names
 
