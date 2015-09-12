@@ -11,12 +11,12 @@
     <th>Lajit</th>
   </thead>
   <body>
-<% @veljeskunta.each do |k, v| %>
+<% @veljeskunta.each do |r| %>
   <tr>
-    <td><%= k %></td>
-    <td><%= v[1].name %></td>
-    <td><%= v[0].city %></td>
-    <td><%= v[0].statistic.total_events_completed + v[1].completed_events %></td>
+    <td><%= r.kk_number %></td>
+    <td><%= r.first_name + " " + r.last_name %></td>
+    <td><%= r.city %></td>
+    <td><%= r.statistic.total_events_completed + r.completed_events %></td>
   </tr>
 <% end %>
   </body>
@@ -33,12 +33,12 @@
     <th>Lajit</th>
   </thead>
   <body>
-<% @kunniakiertajat.each do |k, v| %>
+<% @kunniakiertajat.each do |r| %>
   <tr>
-    <td><%= k %></td>
-    <td><%= v[1].name %></td>
-    <td><%= v[0].city %></td>
-    <td><%= v[0].statistic.total_events_completed + v[1].completed_events %></td>
+    <td><%= r.kk_number %></td>
+    <td><%= r.first_name + " " + r.last_name %></td>
+    <td><%= r.city %></td>
+    <td><%= r.statistic.total_events_completed + r.completed_events %></td>
   </tr>
 <% end %>
   </body>
@@ -55,12 +55,12 @@
     <th>Lajit</th>
   </thead>
   <body>
-<% @ansioviirit.each do |k, v| %>
+<% @ansioviirit.each do |r| %>
   <tr>
-    <td><%= k %></td>
-    <td><%= v[1].name %></td>
-    <td><%= v[0].city %></td>
-    <td><%= v[0].statistic.total_events_completed + v[1].completed_events %></td>
+    <td><%= r.kk_number %></td>
+    <td><%= r.first_name + " " + r.last_name %></td>
+    <td><%= r.city %></td>
+    <td><%= r.statistic.total_events_completed + r.completed_events %></td>
   </tr>
 <% end %>
   </body>
@@ -69,6 +69,28 @@
 </br>
 <b>Kalevan kierroksen kehittyjät</b>
 
-KESKEN
-
+<table class="table table-striped">
+  <thead>
+    <th>KK-numero</th>
+    <th>Nimi</th>
+    <th>Kotipaikka</th>
+    <th>Pisteitä viime vuonna</th>
+    <th>Pisteitä tänä vuonna</th>
+    <th>Pistemuutos</th>
+    <th>Muutos lajia kohti</th>
+  </thead>
+  <body>
+<% @vuoden_kehittyjat.each do |r| %>
+  <tr>
+    <td><%= r.kk_number %></td>
+    <td><%= r.first_name + " " + r.last_name %></td>
+    <td><%= r.city %></td>
+    <td><%= r.pts_sum %></td>
+    <td><%= r.statistic.prev_year_pts_sum %></td>
+    <td><%= r.pts_sum - r.statistic.prev_year_pts_sum %></td>
+    <td><%= ((r.pts_sum - r.statistic.prev_year_pts_sum)/6.0).round(2) %></td>
+  </tr>
+<% end %>
+  </body>
+</table>
 </div>

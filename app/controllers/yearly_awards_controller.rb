@@ -3,72 +3,70 @@ class YearlyAwardsController < ApplicationController
 
   def list_years_awards
     @year = AppSetting.find_by(name: 'KkYear').value.to_i
-    years_results = Result.where(year: @year).all
-    users = []
-    results = {}
-    years_results.each do |r|
-      user = User.find_by(kk_number: r.kk_number)
-      users << user
-      results[user.kk_number] = r
-    end
-    @veljeskunta = get_veljeskunta_receivers(results, users)
-    @kunniakiertajat = get_kunniakiertaja_receivers(results, users)
-    @ansioviirit = get_ansioviiri_receivers(results, users)
-    @vuoden_kehittyjat = get_vuoden_kehittyja(@year, users)
+    participants = User.joins(:kk_enrollment).where.not(kk_enrollments: { id: nil }).joins('JOIN results ON results.kk_number = users.kk_number').select('users.*, results.pts_sum, results.completed_events')
+    @veljeskunta = get_veljeskunta_receivers(participants)
+    @kunniakiertajat = get_kunniakiertaja_receivers(participants)
+    @ansioviirit = get_ansioviiri_receivers(participants)
+    @vuoden_kehittyjat = get_vuoden_kehittyjat(participants)
   end
 
   private
 
-  def get_veljeskunta_receivers(results, users)
-    receivers = {}
-    users.each do |u|
-      if u.statistic.v == 0
-        if results[u.kk_number].completed_events >= 4
-          years_participated = results[u.kk_number].completed_events
-          years_participated += u.statistic.four_events_completed_count
-          years_participated += u.statistic.five_events_completed_count
-          years_participated += u.statistic.six_events_completed_count
-          if years_participated >= 25
-            receivers[u.kk_number] = [u, results[u.kk_number]]
-          end
-        end
-      end
-    end
-    receivers
-  end
-
-  def get_kunniakiertaja_receivers(results, users)
-    receivers = {}
-    users.each do |u|
-      if u.statistic.k == 0
-        if results[u.kk_number].completed_events >= 4
-          if results[u.kk_number].completed_events + u.statistic.total_events_completed >= 60
-            receivers[u.kk_number] = [u, results[u.kk_number]]
-          end
-        end
-      end
-    end
-    receivers
-  end
-
-  def get_ansioviiri_receivers(results, users)
-    receivers = {}
-    users.each do |u|
-      if u.statistic.a == 0
-        if results[u.kk_number].completed_events >= 4
-          if results[u.kk_number].completed_events + u.statistic.total_events_completed >= 30
-            receivers[u.kk_number] = [u, results[u.kk_number]]
-          end
-        end
-      end
-    end
-    receivers
-  end
-
-  def get_vuoden_kehittyja(year, users)
-    results = Result.where("year == ? and completed_events == ?", year, 6)
+  def get_veljeskunta_receivers(participants)
     receivers = []
-    #kesken
+    participants.each do |p|
+      if p.statistic.v == 0
+        if p.completed_events >= 4
+          years_participated = 1
+          years_participated += p.statistic.four_events_completed_count
+          years_participated += p.statistic.five_events_completed_count
+          years_participated += p.statistic.six_events_completed_count
+          if years_participated >= 25
+            receivers << p
+          end
+        end
+      end
+    end
     receivers
+  end
+
+  def get_kunniakiertaja_receivers(participants)
+    receivers = []
+    participants.each do |p|
+      if p.statistic.k == 0
+        if p.completed_events >= 4
+          if p.completed_events + p.statistic.total_events_completed >= 60
+            receivers << p
+          end
+        end
+      end
+    end
+    receivers
+  end
+
+  def get_ansioviiri_receivers(participants)
+    receivers = []
+    participants.each do |p|
+      if p.statistic.a == 0
+        if p.completed_events >= 4
+          if p.completed_events + p.statistic.total_events_completed >= 30
+            receivers << p
+          end
+        end
+      end
+    end
+    receivers
+  end
+
+  def get_vuoden_kehittyjat(participants)
+    receivers = []
+    participants.each do |p|
+      if p.completed_events = 6 and p.statistic.prev_year_event_sum = 6
+        if p.pts_sum > p.statistic.prev_year_pts_sum
+          receivers << p
+        end
+      end
+    end
+    receivers.sort_by{|r| r.pts_sum - r.statistic.prev_year_pts_sum}.reverse!
   end
 end

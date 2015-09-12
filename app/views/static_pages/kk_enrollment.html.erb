@@ -23,15 +23,18 @@
 
 <br>
 <b>Lataa kunniakirjat</b>
-<p>Huom. kunniakirjat voi ladata vasta kun suunnistustapahtuma on luotu.</p>
+<p>Huom. kunniakirjat voi ladata vasta kun suunnistustapahtuma on luotu. Muista tarkistaa nimien oikeinkirjoitus (etenkin moniosaiset etu- ja sukunimet) ja tiedostoformaatin oikeellisuus. Kunniakirjoihin tulostuvien tapahtumien nimet on vaihdettavissa nimeämällä itse tapahtuma uudelleen.</p>
 <%= button_to('Lataa', export_diplomas_path, method: :get, :class => "btn btn-primary") %>
 
 <br>
 <b>Listaa vuoden ansiomerkit</b>
+<p>Ansiomerkkilistaus on ladattavissa koko vuoden ajan. Lopullinen versio on saatavilla kun viimeinen osakilpailu on pisteytetty, jolloin myös vuoden kehittyjät listataan.</p>
 <%= button_to('Avaa lista', years_awards_path, method: :get, :class => "btn btn-primary") %>
 
 <br>
 <b>Päivitä tulosten tiedot tilastoihin</b>
+<p><b>Huom. kunniakirjat ja ansiomerkkilistaukset tulee ladata ja tarkistaa ennen vuoden tulosten vientiä tilastoihin.</b></p>
+<p>Uudet ansiomerkit tulee päivittää saajille käsin.</p>
 <%= bootstrap_form_tag url: statistics_update_path, method: :post do |f| %>
   <%= f.select :year, options_for_select(@years), label: 'Vuosi' %>
   <%= f.submit 'Päivitä tilastot', onclick: "return confirm('Päivitetäänkö tilastot?')" %>
