@@ -8,7 +8,7 @@ class PrintingMaterialsController < ApplicationController
 
     year = AppSetting.find_by(name: 'KkYear').value.to_i
 
-    sorted_results = Result.where(year: year).where("completed_events >= ?", 4).order('pts_sum asc').all
+    sorted_results = Result.where(year: year).where("completed_events >= ?", 4).order('completed_events desc, pts_sum desc').all
     position = 1
     positions = {}
     sorted_results.each do |r|
