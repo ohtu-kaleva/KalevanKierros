@@ -344,9 +344,11 @@ class ResultsController < ApplicationController
           if points < 0
             points = 0
           end
-          insert_result_for_event(event.sport_type, number, year, points, normal_times[number], position, time_and_style[:style])
+          result_found = insert_result_for_event(event.sport_type, number, year, points, normal_times[number], position, time_and_style[:style])
           normal_times.delete number
-          position += 1
+          if result_found
+            position += 1
+          end
         end
       end
     end
@@ -374,64 +376,68 @@ class ResultsController < ApplicationController
   def insert_result_for_event(sport_type, number, year, points, time, position, style)
     result = Result.find_by_kk_number_and_year(number, year)
     if result
-    if sport_type == "RunningEvent"
-      result.marathon_pts = points
-      result.marathon_time = time
-      result.marathon_pos = position
-      result.marathon_style = style
-      result.save
-      totals = check_total_events(result)
-      result.completed_events = totals[:total_events]
-      result.pts_sum = totals[:total_points]
-      result.save
-    elsif sport_type == "SkiingEvent"
-      result.skiing_pts = points
-      result.skiing_time = time
-      result.skiing_pos = position
-      result.skiing_style = style
-      totals = check_total_events(result)
-      result.completed_events = totals[:total_events]
-      result.pts_sum = totals[:total_points]
-      result.save
-    elsif sport_type == "SkatingEvent"
-      result.skating_pts = points
-      result.skating_time = time
-      result.skating_pos = position
-      result.save
-      totals = check_total_events(result)
-      result.completed_events = totals[:total_events]
-      result.pts_sum = totals[:total_points]
-      result.save
-    elsif sport_type == "CyclingEvent"
-      result.cycling_pts = points
-      result.cycling_time = time
-      result.cycling_pos = position
-      result.save
-      totals = check_total_events(result)
-      result.completed_events = totals[:total_events]
-      result.pts_sum = totals[:total_points]
-      result.save
-    elsif sport_type == "OrienteeringEvent"
-      result.orienteering_pts = points
-      result.orienteering_time = time
-      result.orienteering_pos = position
-      result.save
-      totals = check_total_events(result)
-      result.completed_events = totals[:total_events]
-      result.pts_sum = totals[:total_points]
-      result.save
-    elsif sport_type == "RowingEvent"
-      result.rowing_pts = points
-      result.rowing_time = time
-      result.rowing_pos = position
-      result.rowing_style = style
-      result.save
-      totals = check_total_events(result)
-      result.completed_events = totals[:total_events]
-      result.pts_sum = totals[:total_points]
-      result.save
+      if sport_type == "RunningEvent"
+        result.marathon_pts = points
+        result.marathon_time = time
+        result.marathon_pos = position
+        result.marathon_style = style
+        result.save
+        totals = check_total_events(result)
+        result.completed_events = totals[:total_events]
+        result.pts_sum = totals[:total_points]
+        result.save
+      elsif sport_type == "SkiingEvent"
+        result.skiing_pts = points
+        result.skiing_time = time
+        result.skiing_pos = position
+        result.skiing_style = style
+        totals = check_total_events(result)
+        result.completed_events = totals[:total_events]
+        result.pts_sum = totals[:total_points]
+        result.save
+      elsif sport_type == "SkatingEvent"
+        result.skating_pts = points
+        result.skating_time = time
+        result.skating_pos = position
+        result.save
+        totals = check_total_events(result)
+        result.completed_events = totals[:total_events]
+        result.pts_sum = totals[:total_points]
+        result.save
+      elsif sport_type == "CyclingEvent"
+        result.cycling_pts = points
+        result.cycling_time = time
+        result.cycling_pos = position
+        result.save
+        totals = check_total_events(result)
+        result.completed_events = totals[:total_events]
+        result.pts_sum = totals[:total_points]
+        result.save
+      elsif sport_type == "OrienteeringEvent"
+        result.orienteering_pts = points
+        result.orienteering_time = time
+        result.orienteering_pos = position
+        result.save
+        totals = check_total_events(result)
+        result.completed_events = totals[:total_events]
+        result.pts_sum = totals[:total_points]
+        result.save
+      elsif sport_type == "RowingEvent"
+        result.rowing_pts = points
+        result.rowing_time = time
+        result.rowing_pos = position
+        result.rowing_style = style
+        result.save
+        totals = check_total_events(result)
+        result.completed_events = totals[:total_events]
+        result.pts_sum = totals[:total_points]
+        result.save
+      end
+      result_found = true
+    else
+      result_found = false
     end
-    end
+    result_found
   end
 
   def check_total_events(result)
