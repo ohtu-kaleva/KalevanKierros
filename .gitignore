@@ -12,6 +12,8 @@
 /log
 /tmp
 
+/public/assets/*
+
 *.rbc
 capybara-*.html
 .rspec
