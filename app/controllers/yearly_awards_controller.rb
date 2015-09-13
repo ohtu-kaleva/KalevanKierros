@@ -61,7 +61,7 @@ class YearlyAwardsController < ApplicationController
   def get_vuoden_kehittyjat(participants)
     receivers = []
     participants.each do |p|
-      if p.completed_events = 6 and p.statistic.prev_year_event_sum = 6
+      if p.completed_events == 6 and p.statistic.prev_year_event_sum == 6
         if p.pts_sum > p.statistic.prev_year_pts_sum
           receivers << p
         end
