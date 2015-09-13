@@ -7,13 +7,20 @@ class PrintingMaterialsController < ApplicationController
     end
 
     year = AppSetting.find_by(name: 'KkYear').value.to_i
+
+    sorted_results = Result.where(year: year).where("completed_events >= ?", 4).order('pts_sum asc').all
+    position = 1
+    positions = {}
+    sorted_results.each do |r|
+      positions[r.kk_number] = position
+      position += 1
+    end
+
     receivers = Result.where(year: year).where("completed_events >= ?", 4).joins('LEFT OUTER JOIN users ON users.kk_number = results.kk_number').select("results.*, users.first_name, users.last_name").order('users.last_name asc, users.first_name asc')
 
     event_names = get_sport_event_names
 
     data = '{\rtf1\ansi\ansicpg1252\paperh16834\paperw11904\margl1417\margr1417\margt1417\margb1417\psz9{\colortbl\red0\green0\blue0;\red255\green255\blue255;}{\fonttbl\f0\fcharset0\fnil Arial;\f1\fcharset0\fnil Schneidler BT;\f2\fcharset0\fnil Times New Roman;\f3\fcharset0\fnil Arial;\f4\fcharset0\fnil Times New Roman;\f5\fcharset0\fnil Times New Roman;}'
-
-    position = 1
 
     receivers.each do |e|
       first_space = '\sb1423'
@@ -56,8 +63,8 @@ class PrintingMaterialsController < ApplicationController
         first_space = ''
       end
 
-      data << "\\pard\\plain#{second_space}\\tqr\\tx3860\\tqr\\tx7038{\\plain\\tab\\fs24\\b\\f2\\cf0\\cb1 #{sprintf('%.2f', e.pts_sum)}\\plain\\tab\\fs24\\b\\f2\\cf0\\cb1 #{position}{\\fs30\\par}}{\\page}"
-      position += 1
+      data << "\\pard\\plain#{second_space}\\tqr\\tx3860\\tqr\\tx7038{\\plain\\tab\\fs24\\b\\f2\\cf0\\cb1 #{sprintf('%.2f', e.pts_sum)}\\plain\\tab\\fs24\\b\\f2\\cf0\\cb1 #{positions[e.kk_number]}{\\fs30\\par}}{\\page}"
+
     end
     data << '}'
     data = data.encode!(Encoding::ISO_8859_1)
