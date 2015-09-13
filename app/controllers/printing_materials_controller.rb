@@ -26,8 +26,8 @@ class PrintingMaterialsController < ApplicationController
         second_space = '\sb1446'
       end
 
-      formatted_first_name = e.first_name.titleize
-      formatted_last_name = e.last_name.titleize
+      formatted_first_name = e.first_name #.titleize
+      formatted_last_name = e.last_name #.titleize
 
       data << "\\pard\\plain\\sb6292\\tqc\\tx4134{\\plain\\tab\\fs36\\i\\b\\f1\\cf0\\cb1 #{formatted_last_name} #{formatted_first_name}{\\fs42\\par}}\\pard\\plain\\sb279\\tqr\\tx7826{\\plain\\tab\\fs24\\b\\f2\\cf0\\cb1 #{e.completed_events}{\\fs30\\par}}"
 
