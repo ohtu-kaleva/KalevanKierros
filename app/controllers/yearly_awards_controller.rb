@@ -47,7 +47,7 @@ class YearlyAwardsController < ApplicationController
   def get_ansioviiri_receivers(participants)
     receivers = []
     participants.each do |p|
-      if p.statistic.a == 0
+      if p.statistic.a == 0 and p.statistic.ap == 0
         if p.completed_events >= 4
           if p.completed_events + p.statistic.total_events_completed >= 30
             receivers << p
@@ -62,9 +62,7 @@ class YearlyAwardsController < ApplicationController
     receivers = []
     participants.each do |p|
       if p.completed_events == 6 and p.statistic.prev_year_event_sum == 6
-        if p.pts_sum > p.statistic.prev_year_pts_sum
-          receivers << p
-        end
+        receivers << p
       end
     end
     receivers.sort_by{|r| r.pts_sum - r.statistic.prev_year_pts_sum}.reverse!
