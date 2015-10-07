@@ -75,7 +75,9 @@ class PrintingMaterialsController < ApplicationController
     kk_enrollments = KkEnrollment.all
     data = ''
     kk_enrollments.each do |e|
-      data << "#{e.user.first_name.titleize} #{e.user.last_name.titleize} #{e.user.street_address.titleize} #{e.user.postal_code} #{e.user.city.titleize}\n"
+      if e.user
+        data << "#{e.user.first_name.titleize} #{e.user.last_name.titleize} #{e.user.street_address.titleize} #{e.user.postal_code} #{e.user.city.titleize}\n"
+      end
     end
     send_data(data, filename: 'osoitetarrat.csv')
   end
