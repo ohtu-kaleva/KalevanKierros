@@ -27,6 +27,10 @@
 <%= button_to('Lataa', export_diplomas_path, method: :get, :class => "btn btn-primary") %>
 
 <br>
+<b>Lataa osoitetarrat ilmoittautuneille kiertäjille.</b>
+<%= button_to('Lataa', export_address_stickers_path, method: :get, :class => "btn btn-primary") %>
+
+<br>
 <b>Listaa vuoden ansiomerkit</b>
 <p>Ansiomerkkilistaus on ladattavissa koko vuoden ajan. Lopullinen versio on saatavilla kun viimeinen osakilpailu on pisteytetty, jolloin myös vuoden kehittyjät listataan.</p>
 <%= button_to('Avaa lista', years_awards_path, method: :get, :class => "btn btn-primary") %>

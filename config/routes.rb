@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   resources :event_attributes, except: [:index, :show, :new]
 
   resources :events
-
+  
   resources :users
   resources :sessions, only: [:new, :create]
   resources :enrollments, only: [:create, :index]
@@ -54,6 +54,7 @@ Rails.application.routes.draw do
 
 
   get 'diplomas', to: 'printing_materials#export_diplomas', as: 'export_diplomas'
+  get 'address_stickers', to: 'printing_materials#export_address_stickers', as: 'export_address_stickers'
 
   get 'signup', to: 'users#new'
   get 'signin', to: 'sessions#new'
@@ -79,9 +80,12 @@ Rails.application.routes.draw do
   get 'users/:id/activate', to: 'users#new_activation', as: 'activation'
   put 'users/:id/activate', to: 'users#activate'
   get 'statistics', to: 'statistics#index', as: 'statistics'
-  get 'statistics/search', to: 'statistics#index_filterable'
+  get 'statistics/search', to: 'statistics#index_filterable', as: 'statistics_filterable'
   get 'statistics/static', to: 'statistics#index_static'
   get 'statistics/:id', to: 'statistics#show', as: 'statistic'
+  delete 'statistics/:id', to: 'statistics#destroy', as: 'delete_statistic'
+  get 'statistics/:id/edit', to: 'statistics#edit', as: 'edit_statistic'
+  patch 'statistics/:id', to: 'statistics#update', as: 'update_statistic'
   get 'users/:id/statistic', to: 'statistics#join', as: 'join_statistic'
   put 'users/:id/statistic', to: 'statistics#join_user_to_existing_statistic'
   post 'statistics/update/:year', to: 'statistics#update_statistics', as: 'update_statistics'

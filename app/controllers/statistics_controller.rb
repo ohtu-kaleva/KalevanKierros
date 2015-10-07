@@ -1,5 +1,6 @@
 class StatisticsController < ApplicationController
-  before_action :redirect_if_user_not_admin, only: [:join, :join_user_to_existing_statistic,
+  before_action :set_statistic_or_redirect, only: [:show, :edit, :update, :destroy]
+  before_action :redirect_if_user_not_admin, only: [:join, :join_user_to_existing_statistic, :edit, :update, :destroy,
                                                     :update_statistics]
 
   # GET /statistics
@@ -73,6 +74,27 @@ class StatisticsController < ApplicationController
   def edit
   end
 
+  # PATCH/PUT /statistics/1
+  def update
+    if @statistic.update(statistic_params)
+      redirect_to @statistic, flash: { success: 'Tilastomerkintää muokattu onnistuneesti.' }
+    else
+      render :edit
+    end
+  end
+
+  # DELETE /statistics/1
+  def destroy
+    if not @statistic.user_id
+       redirect_to statistics_filterable_url, flash: { error: 'Tilastomerkintä on luotu ennen vuotta 2015 eikä sitä voi poistaa.' } 
+    elsif User.exists? @statistic.user_id
+      redirect_to statistics_filterable_url, flash: { error: 'Tilastomerkintään on liitetty käyttäjä. Poista käyttäjä ennen tilastomerkintää.' }  
+    else
+      @statistic.destroy
+      redirect_to statistics_filterable_url, flash: { success: 'Tilastomerkintä poistettiin onnistuneesti.' }
+    end
+  end
+
   def update_statistics
     message = {}
     unless params[:year] =~ /\A\d{4}\z/
@@ -127,6 +149,13 @@ class StatisticsController < ApplicationController
   end
 
   private
+
+  def set_statistic_or_redirect
+      @statistic = Statistic.find_by id: params[:id]
+      return if @statistic
+
+      redirect_to :root
+    end
 
   def statistic_params
     params.permit(:year, :page, :id, :statistic_id, :year)

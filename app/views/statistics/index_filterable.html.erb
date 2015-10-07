@@ -49,6 +49,8 @@
     <th>AP</th>
     <th>Kunniak.nro</th>
     <th>Veljeskunnan jäsennumero</th>
+    <% if user_is_admin? %><th></th><% end %>
+    <% if user_is_admin? %><th></th><% end %>
   </tr>
   </thead>
     <tfoot><tr>
@@ -69,6 +71,8 @@
       <th>AP</th>
       <th>Kunniak.nro</th>
       <th>Veljeskunnan jäsennumero</th>
+      <% if user_is_admin? %><th></th><% end %>
+      <% if user_is_admin? %><th></th><% end %>
     </tr>
     </tfoot>
     <tbody>
@@ -91,6 +95,8 @@
       <td><%= statistic.ap %></td>
       <td><%= statistic.k %></td>
       <td><%= statistic.v %></td>
+      <% if user_is_admin? %><td><%= link_to 'Muokkaa tilastoa', edit_statistic_path(statistic), class: "btn btn-warning btn-sm"  %></td><% end %>
+      <% if user_is_admin? %><td><%= link_to 'Poista tilasto', delete_statistic_path(statistic), method: :delete, data: { confirm: 'Oletko varma että haluat poistaa tilaston?' }, class: "btn btn-danger btn-sm" %></td><% end %>
     </tr>
   <% end %>
     </tbody>
