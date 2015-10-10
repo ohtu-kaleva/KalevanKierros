@@ -77,6 +77,8 @@ Rails.application.routes.draw do
   post 'results/:event_id', to: 'results#calculate_points', as: 'calculate_points'
   patch 'enrollment_datas/:id', to: 'enrollment_datas#update', as: 'enrollment_datum'
   get 'results/year/:year/groups', to: 'results#with_existing_group', as: 'results_by_year_and_groups'
+  get 'result/female_groups', to: 'results#with_female_group', as: 'results_for_female_groups'
+  get 'result/mixed_groups', to: 'results#with_mixed_group', as: 'results_for_mixed_groups'
   get 'users/:id/activate', to: 'users#new_activation', as: 'activation'
   put 'users/:id/activate', to: 'users#activate'
   get 'statistics', to: 'statistics#index', as: 'statistics'

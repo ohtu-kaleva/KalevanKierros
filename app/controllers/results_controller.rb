@@ -111,6 +111,104 @@ class ResultsController < ApplicationController
     end
   end
 
+  def with_female_group
+    year = AppSetting.find_by(name: 'KkYear').value.to_i
+    groups = Result.where(year: year).where.not(group: nil).order(:group).uniq.pluck(:group)
+    @group_results = {}
+    groups.each do |group|
+      if female_group?(group, year)
+        @group_results[group] = calculate_group_results(group, year)
+      end
+    end
+    @group_results = @group_results.sort_by { |k, v| v[:total] }.reverse
+    respond_to do |format|
+      format.xlsx { send_data self.group_result_to_xlsx.to_stream.read, filename: 'naisten_joukkuetulokset.xlsx' }
+    end
+  end
+
+  def with_mixed_group
+    year = AppSetting.find_by(name: 'KkYear').value.to_i
+    groups = Result.where(year: year).where.not(group: nil).order(:group).uniq.pluck(:group)
+    @group_results = {}
+    groups.each do |group|
+      if not female_group?(group, year)
+        @group_results[group] = calculate_group_results(group, year)
+      end
+    end
+    @group_results = @group_results.sort_by { |k, v| v[:total] }.reverse
+    respond_to do |format|
+      format.xlsx { send_data self.group_result_to_xlsx.to_stream.read, filename: 'sekajoukkuetulokset.xlsx' }
+    end
+  end
+
+  def female_group?(group, year)
+    member_results = Result.where(year: year).where(group: group)
+    member_results.each do |member|
+      if member.series[0,1] == 'M'
+        return false
+      end
+    end
+    return true
+  end
+
+  def group_result_to_xlsx
+    Axlsx::Package.new do |group_results|
+      group_results.workbook do |wb|
+        wb.add_worksheet do |sheet|
+          sheet.add_row
+          sheet.add_row ['', 'Joukkue', 'Pisteet', 'Jäsen', 'Luistelu', 'Hiihto', 'Juoksu', 'Soutu', 'Pyöräily', 'Suunnistus']
+          i = 1
+          @group_results.each do |group, group_results|
+            group_name = group
+            group_points = group_results[:total].round(2)
+            position = i
+            group_results[:individual_results].each do |id, individual_result|
+              sheet.add_row format_group_result_row(position, group_name, group_points, individual_result)
+              group_name = ''
+              group_points = ''
+              position = ''
+            end
+          end
+        end
+      end
+    end
+  end
+
+  def format_group_result_row(position, group_name, group_points, individual_result)
+    data = [position, group_name, group_points]
+    data << individual_result[:result][:name]
+    if individual_result[:result][:skating_pts]
+      data << individual_result[:result][:skating_pts].round(2)
+    else
+      data << 0
+    end
+    if individual_result[:result][:skiing_pts]
+      data << individual_result[:result][:skiing_pts].round(2)
+    else
+      data << 0
+    end
+    if individual_result[:result][:marathon_pts]
+      data << individual_result[:result][:marathon_pts].round(2)
+    else
+      data << 0
+    end
+    if individual_result[:result][:rowing_pts]
+      data << individual_result[:result][:rowing_pts].round(2)
+    else
+      data << 0
+    end
+    if individual_result[:result][:cycling_pts]
+      data << individual_result[:result][:cycling_pts].round(2)
+    else
+      data << 0
+    end
+    if individual_result[:result][:orienteering_pts]
+      data << individual_result[:result][:orienteering_pts].round(2)
+    else
+      data << 0
+    end
+  end
+
   def calculate_group_results(group, year)
     individual_results = Result.where(year: year).where(group: group).order(:name)
     group_results = {:total => 0, :individual_results => {}}

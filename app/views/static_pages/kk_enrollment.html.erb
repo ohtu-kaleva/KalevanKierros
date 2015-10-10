@@ -36,6 +36,11 @@
 <%= button_to('Avaa lista', years_awards_path, method: :get, :class => "btn btn-primary") %>
 
 <br>
+<b>Lataa joukkuetulokset</b><br>
+<%= button_to('Lataa sekajoukkuetulokset', results_for_mixed_groups_path(format: :xlsx), method: :get, :class => "btn btn-primary") %><br>
+<%= button_to('Lataa naisten joukkuetulokset', results_for_female_groups_path(format: :xlsx), method: :get, :class => "btn btn-primary") %>
+
+<br>
 <b>Päivitä tulosten tiedot tilastoihin</b>
 <p><b>Huom. kunniakirjat ja ansiomerkkilistaukset tulee ladata ja tarkistaa ennen vuoden tulosten vientiä tilastoihin.</b></p>
 <p>Uudet ansiomerkit tulee päivittää saajille käsin.</p>
