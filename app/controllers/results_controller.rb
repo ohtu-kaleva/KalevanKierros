@@ -154,6 +154,7 @@ class ResultsController < ApplicationController
   def group_result_to_xlsx
     Axlsx::Package.new do |group_results|
       group_results.workbook do |wb|
+        bold = wb.styles.add_style :b => true
         wb.add_worksheet do |sheet|
           sheet.add_row
           sheet.add_row ['', 'Joukkue', 'Pisteet', 'Jäsen', 'Luistelu', 'Hiihto', 'Juoksu', 'Soutu', 'Pyöräily', 'Suunnistus']
@@ -163,11 +164,12 @@ class ResultsController < ApplicationController
             group_points = group_results[:total].round(2)
             position = i
             group_results[:individual_results].each do |id, individual_result|
-              sheet.add_row format_group_result_row(position, group_name, group_points, individual_result)
+              sheet.add_row format_group_result_row(position, group_name, group_points, individual_result), style: format_highligth_row(individual_result, bold)
               group_name = ''
               group_points = ''
               position = ''
             end
+            i += 1
           end
         end
       end
@@ -206,6 +208,40 @@ class ResultsController < ApplicationController
       data << individual_result[:result][:orienteering_pts].round(2)
     else
       data << 0
+    end
+  end
+
+  def format_highligth_row(individual_result, bold)
+    data = []
+    if individual_result[:result_noted][:skating]
+      data << bold
+    else
+      data << nil
+    end
+    if individual_result[:result_noted][:skiing]
+      data << bold
+    else
+      data << nil
+    end
+    if individual_result[:result_noted][:marathon]
+      data << bold
+    else
+      data << nil
+    end
+    if individual_result[:result_noted][:rowing]
+      data << bold
+    else
+      data << nil
+    end
+    if individual_result[:result_noted][:cycling]
+      data << bold
+    else
+      data << nil
+    end
+    if individual_result[:result_noted][:orienteering]
+      data << bold
+    else
+      data << nil
     end
   end
 
