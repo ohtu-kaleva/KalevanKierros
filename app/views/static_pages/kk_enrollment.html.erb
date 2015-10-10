@@ -46,6 +46,10 @@
 <%= button_to('Lataa naisten joukkuetulokset', results_for_female_groups_path(format: :xlsx), method: :get, :class => "btn btn-primary") %>
 
 <br>
+<b>Lataa sarjakohtaiset kärkitulokset</b><br>
+<%= button_to('Lataa', top_series_results_path, method: :get, :class => "btn btn-primary") %><br>
+
+<br>
 <b>Päivitä tulosten tiedot tilastoihin</b>
 <p><b>Huom. kunniakirjat ja ansiomerkkilistaukset tulee ladata ja tarkistaa ennen vuoden tulosten vientiä tilastoihin.</b></p>
 <p>Uudet ansiomerkit tulee päivittää saajille käsin.</p>

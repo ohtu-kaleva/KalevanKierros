@@ -323,6 +323,24 @@ class ResultsController < ApplicationController
     end
   end
 
+  def top_results_for_different_series
+    year = AppSetting.find_by(name: 'KkYear').value.to_i
+    filters = form_gender_age_filter('all', 'all')
+    data = ''
+    filters.each do |filter|
+      results = Result.where(year: year).where(series: filter).order('completed_events is null, completed_events desc, pts_sum desc').take(6)
+      if results.count > 0
+        data << filter + "\n"
+      end
+      i = 1
+      results.each do |r|
+        data << i.to_s + ", " + r.completed_events.to_s + ", " + r.name + ", " + r.group + ", " + sprintf('%.2f', r.pts_sum).to_s + "\n"
+        i += 1
+      end
+    end
+    send_data(data, filename: 'sarjoittaiset_tulokset.csv')
+  end
+
   def calculate_group_results(group, year)
     individual_results = Result.where(year: year).where(group: group).order(:name)
     group_results = {:total => 0, :individual_results => {}}
