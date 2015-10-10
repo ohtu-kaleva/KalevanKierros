@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
   has_secure_password
   has_many :enrollments, dependent: :destroy
   has_many :events, through: :enrollments
-  has_one :kk_enrollment
+  has_one :kk_enrollment, dependent: :destroy
   has_one :statistic
   belongs_to :group
 
