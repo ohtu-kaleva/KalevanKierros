@@ -129,7 +129,7 @@ class ResultsController < ApplicationController
 
   def add_result_to_sheet(sheet, r, total_pos)
     if r.orienteering_pts
-      sheet.add_row [total_pos, r.name, r.group, r.pts_sum, 'Suunnistus', '', seconds_to_human_form(r.orienteering_time), r.orienteering_pos, sprintf('%.2f', r.orienteering_pts)]
+      sheet.add_row [total_pos, r.name, r.group, r.pts_sum.round(2), 'Suunnistus', '', seconds_to_human_form(r.orienteering_time), r.orienteering_pos, sprintf('%.2f', r.orienteering_pts)]
     else
       sheet.add_row [total_pos, r.name, r.group, r.pts_sum, 'Suunnistus', '', '0:00:00', '0', '0:00']
     end
