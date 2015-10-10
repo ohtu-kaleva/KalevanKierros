@@ -97,6 +97,84 @@ class ResultsController < ApplicationController
   def edit
   end
 
+  def xlsx_results_for_year_book
+    year = AppSetting.find_by(name: 'KkYear').value.to_i
+    if params[:gender] == 'kaikki'
+      @results = Result.where(year: year).where("completed_events >= ?", 4).order('completed_events desc, pts_sum desc')
+    elsif params[:gender] == 'naiset'
+      search_filter = form_gender_age_filter('N', 'all')
+      @results = Result.where(year: year).where("completed_events >= ?", 4).where(series: search_filter).order('completed_events desc, pts_sum desc')
+    else
+      @results = {}
+    end
+    respond_to do |format| 
+      format.xlsx { send_data self.individual_results_to_xlsx.to_stream.read, filename: 'henkilokohtaiset_tulokset_' + params[:gender] + '.xlsx' }
+    end
+  end
+
+  def individual_results_to_xlsx
+    Axlsx::Package.new do |individual_results|
+      individual_results.workbook do |wb|
+        wb.add_worksheet do |sheet|
+          sheet.add_row
+          i = 1
+          @results.each do |r|
+            add_result_to_sheet(sheet, r, i)
+            i += 1
+          end
+        end
+      end
+    end
+  end
+
+  def add_result_to_sheet(sheet, r, total_pos)
+    if r.orienteering_pts
+      sheet.add_row [total_pos, r.name, r.group, r.pts_sum, 'Suunnistus', '', seconds_to_human_form(r.orienteering_time), r.orienteering_pos, sprintf('%.2f', r.orienteering_pts)]
+    else
+      sheet.add_row [total_pos, r.name, r.group, r.pts_sum, 'Suunnistus', '', '0:00:00', '0', '0:00']
+    end
+    if r.cycling_pts
+      sheet.add_row ['', '', r.series, '', 'Pyöräily', '', seconds_to_human_form(r.cycling_time), r.cycling_pos, sprintf('%.2f', r.cycling_pts)]
+    else
+      sheet.add_row ['', '', r.series, '', 'Pyöräily', '', '0:00:00', '0', '0:00']
+    end
+    if r.rowing_style == 'Yksin'
+      r_style = 'Y'
+    else
+      r_style = 'V'
+    end
+    if r.rowing_pts
+      sheet.add_row ['', '', '', '', 'Soutu', r_style, seconds_to_human_form(r.rowing_time), r.rowing_pos, sprintf('%.2f', r.rowing_pts)]
+    else
+      sheet.add_row ['', '', '', '', 'Soutu', '', '0:00:00', '0', '0:00']
+    end
+    if r.marathon_style == 'maraton'
+      m_style = 'M'
+    else
+      m_style = 'PM'
+    end
+    if r.marathon_pts
+      sheet.add_row ['', '', '', '', 'Juoksu', m_style, seconds_to_human_form(r.marathon_time), r.marathon_pos, sprintf('%.2f', r.marathon_pts)]
+    else
+      sheet.add_row ['', '', '', '', 'Juoksu', '', '0:00:00', '0', '0:00']
+    end
+    if r.skiing_style == 'Perinteinen'
+      s_style = 'P'
+    else
+      s_style = 'V'
+    end
+    if r.skiing_pts
+      sheet.add_row ['', '', '', '', 'Hiihto', s_style, seconds_to_human_form(r.skiing_time), r.skiing_pos, sprintf('%.2f', r.skiing_pts)]
+    else
+      sheet.add_row ['', '', '', '', 'Hiihto', '', '0:00:00', '0', '0:00']
+    end
+    if r.skating_pts
+      sheet.add_row ['', '', '', '', 'Luistelu', '', seconds_to_human_form(r.skating_time), r.skating_pos, sprintf('%.2f', r.skating_pts)]
+    else
+      sheet.add_row ['', '', '', '', 'Luistelu', '', '0:00:00', '0', '0:00']
+    end
+  end
+
   def with_existing_group
     if not params[:year] =~ /\A\d{4}\z/
       redirect_to :root and return
