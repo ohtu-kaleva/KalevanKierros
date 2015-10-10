@@ -334,7 +334,12 @@ class ResultsController < ApplicationController
       end
       i = 1
       results.each do |r|
-        data << i.to_s + ", " + r.completed_events.to_s + ", " + r.name + ", " + r.group + ", " + sprintf('%.2f', r.pts_sum).to_s + "\n"
+        if r.group
+          group_name = r.group
+        else
+          group_name = ''
+        end
+        data << i.to_s + ", " + r.completed_events.to_s + ", " + r.name + ", " + group_name + ", " + sprintf('%.2f', r.pts_sum).to_s + "\n"
         i += 1
       end
     end
