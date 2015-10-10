@@ -212,7 +212,7 @@ class ResultsController < ApplicationController
   end
 
   def format_highligth_row(individual_result, bold)
-    data = []
+    data = [nil, nil, nil, nil]
     if individual_result[:result_noted][:skating]
       data << bold
     else
