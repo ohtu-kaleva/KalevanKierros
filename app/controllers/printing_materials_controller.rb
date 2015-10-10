@@ -72,12 +72,10 @@ class PrintingMaterialsController < ApplicationController
   end
 
   def export_address_stickers
-    kk_enrollments = KkEnrollment.all
+    participants = User.joins(:kk_enrollment).order('last_name, first_name')
     data = ''
-    kk_enrollments.each do |e|
-      if e.user
-        data << "#{e.user.first_name.titleize} #{e.user.last_name.titleize} #{e.user.street_address.titleize} #{e.user.postal_code} #{e.user.city.titleize}\n"
-      end
+    participants.each do |p|
+      data << "#{p.first_name.titleize} #{p.last_name.titleize} #{p.street_address.titleize} #{p.postal_code} #{p.city.titleize}\n"
     end
     send_data(data, filename: 'osoitetarrat.csv')
   end
