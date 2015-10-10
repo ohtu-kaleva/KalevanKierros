@@ -116,11 +116,11 @@ class ResultsController < ApplicationController
     Axlsx::Package.new do |individual_results|
       individual_results.workbook do |wb|
         wb.add_worksheet do |sheet|
-          sheet.add_row
           i = 1
           @results.each do |r|
             add_result_to_sheet(sheet, r, i)
             i += 1
+            sheet.add_row ['', '', '', '', '', '', '', '', '']
           end
         end
       end
@@ -234,7 +234,6 @@ class ResultsController < ApplicationController
       group_results.workbook do |wb|
         bold = wb.styles.add_style :b => true
         wb.add_worksheet do |sheet|
-          sheet.add_row
           sheet.add_row ['', 'Joukkue', 'Pisteet', 'Jäsen', 'Luistelu', 'Hiihto', 'Juoksu', 'Soutu', 'Pyöräily', 'Suunnistus']
           i = 1
           @group_results.each do |group, group_results|
@@ -248,6 +247,7 @@ class ResultsController < ApplicationController
               position = ''
             end
             i += 1
+            sheet.add_row ['', '', '', '', '', '', '', '', '', '']
           end
         end
       end
