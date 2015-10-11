@@ -102,14 +102,65 @@ class ResultsController < ApplicationController
     if params[:gender] == 'kaikki'
       @results = Result.where(year: year).where("completed_events >= ?", 4).order('completed_events desc, pts_sum desc')
     elsif params[:gender] == 'naiset'
-      search_filter = form_gender_age_filter('N', 'all')
-      @results = Result.where(year: year).where("completed_events >= ?", 4).where(series: search_filter).order('completed_events desc, pts_sum desc')
+      @results = form_female_results_for_year_book(year)
     else
       @results = {}
     end
     respond_to do |format| 
       format.xlsx { send_data self.individual_results_to_xlsx.to_stream.read, filename: 'henkilokohtaiset_tulokset_' + params[:gender] + '.xlsx' }
     end
+  end
+
+  def form_female_results_for_year_book(year)
+    search_filter = form_gender_age_filter('N', 'all')
+    positions = {skating: {}, skiing: {}, marathon: {}, rowing: {}, cycling: {}, orienteering: {}}
+    skating = Result.where(year: year).where.not(skating_time: nil).where(series: search_filter).order('skating_pos asc').pluck('kk_number')
+    i = 1
+    skating.each do |kk_number|
+      positions[:skating][kk_number] = i
+      i += 1
+    end
+    skiing = Result.where(year: year).where.not(skiing_time: nil).where(series: search_filter).order('skiing_pos asc').pluck('kk_number')
+    i = 1
+    skiing.each do |kk_number|
+      positions[:skiing][kk_number] = i
+      i += 1
+    end
+    marathon = Result.where(year: year).where.not(marathon_time: nil).where(series: search_filter).order('marathon_pos asc').pluck('kk_number')
+    i = 1
+    marathon.each do |kk_number|
+      positions[:marathon][kk_number] = i
+      i += 1
+    end
+    rowing = Result.where(year: year).where.not(rowing_time: nil).where.not(rowing_pts: nil).where(series: search_filter).order('rowing_pos asc').pluck('kk_number')
+    i = 1
+    rowing.each do |kk_number|
+      positions[:rowing][kk_number] = i
+      i += 1
+    end
+    cycling = Result.where(year: year).where.not(cycling_time: nil).where(series: search_filter).order('cycling_pos asc').pluck('kk_number')
+    i = 1
+    cycling.each do |kk_number|
+      positions[:cycling][kk_number] = i
+      i += 1
+    end
+    orienteering = Result.where(year: year).where.not(orienteering_time: nil).where(series: search_filter).order('orienteering_pos asc').pluck('kk_number')
+    i = 1
+    orienteering.each do |kk_number|
+      positions[:orienteering][kk_number] = i
+      i += 1
+    end
+
+    results = Result.where(year: year).where("completed_events >= ?", 4).where(series: search_filter).order('completed_events desc, pts_sum desc')
+    results.each do |r|
+      r.skating_pos = positions[:skating][r.kk_number]
+      r.skiing_pos = positions[:skiing][r.kk_number]
+      r.marathon_pos = positions[:marathon][r.kk_number]
+      r.rowing_pos = positions[:rowing][r.kk_number]
+      r.cycling_pos = positions[:cycling][r.kk_number]
+      r.orienteering_pos = positions[:orienteering][r.kk_number]
+    end
+    results
   end
 
   def individual_results_to_xlsx
