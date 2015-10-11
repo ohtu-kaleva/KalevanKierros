@@ -163,7 +163,7 @@
          @res[:results].each do |result| %>
           <% i += 1 %>
           <tr>
-            <td width="20%"><%= result[1] %>. <%= result[0] %></td>
+            <td width="20%"><%= i %>. <%= result[0] %></td>
             <td width="60%"></td>
             <td width="10%"><%= seconds_to_human_form(result[3]) %></td>
             <td colspan="3" width="10%"><%= result[2].round(2) %></td>
