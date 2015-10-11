@@ -330,7 +330,7 @@ class ResultsController < ApplicationController
     filters.each do |filter|
       results = Result.where(year: year).where(series: filter).order('completed_events is null, completed_events desc, pts_sum desc').take(6)
       if results.count > 0
-        data << filter + "\n"
+        data << filter + ",,,,\n"
       end
       i = 1
       results.each do |r|
