@@ -343,6 +343,7 @@ class ResultsController < ApplicationController
         i += 1
       end
     end
+    data = data.encode!(Encoding::UTF_8)
     send_data(data, filename: 'sarjoittaiset_tulokset.csv')
   end
 
