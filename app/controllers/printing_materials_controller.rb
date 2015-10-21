@@ -75,7 +75,7 @@ class PrintingMaterialsController < ApplicationController
     participants = User.joins(:kk_enrollment).order('last_name, first_name')
     data = ''
     participants.each do |p|
-      data << "#{p.first_name.titleize} #{p.last_name.titleize} #{p.street_address.titleize} #{p.postal_code} #{p.city.titleize}\n"
+      data << "#{p.first_name.titleize} #{p.last_name.titleize}, #{p.street_address.titleize}, #{p.postal_code}, #{p.city.titleize}\n"
     end
     data = data.encode!(Encoding::UTF_8)
     send_data(data, filename: 'osoitetarrat.csv')
