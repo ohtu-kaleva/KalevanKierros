@@ -180,14 +180,14 @@ class ResultsController < ApplicationController
 
   def add_result_to_sheet(sheet, r, total_pos)
     if r.orienteering_pts
-      sheet.add_row [total_pos, r.name, r.group, r.pts_sum.round(2), 'Suunnistus', '', seconds_to_human_form(r.orienteering_time), r.orienteering_pos, sprintf('%.2f', r.orienteering_pts)]
+      sheet.add_row [total_pos, r.name, r.group, sprintf('%.2f', r.pts_sum), 'Suunnistus', '', seconds_to_human_form(r.orienteering_time), r.orienteering_pos, sprintf('%.2f', r.orienteering_pts)]
     else
-      sheet.add_row [total_pos, r.name, r.group, r.pts_sum, 'Suunnistus', '', '0:00:00', '0', '0:00']
+      sheet.add_row [total_pos, r.name, r.group, sprintf('%.2f', r.pts_sum), 'Suunnistus', '', '0', '0', '0']
     end
     if r.cycling_pts
       sheet.add_row ['', '', r.series, '', 'Pyöräily', '', seconds_to_human_form(r.cycling_time), r.cycling_pos, sprintf('%.2f', r.cycling_pts)]
     else
-      sheet.add_row ['', '', r.series, '', 'Pyöräily', '', '0:00:00', '0', '0:00']
+      sheet.add_row ['', '', r.series, '', 'Pyöräily', '', '0', '0', '0']
     end
     if r.rowing_style == 'Yksin'
       r_style = 'Y'
@@ -197,7 +197,7 @@ class ResultsController < ApplicationController
     if r.rowing_pts
       sheet.add_row ['', '', '', '', 'Soutu', r_style, seconds_to_human_form(r.rowing_time), r.rowing_pos, sprintf('%.2f', r.rowing_pts)]
     else
-      sheet.add_row ['', '', '', '', 'Soutu', '', '0:00:00', '0', '0:00']
+      sheet.add_row ['', '', '', '', 'Soutu', '', '0', '0', '0']
     end
     if r.marathon_style == 'maraton'
       m_style = 'M'
@@ -207,7 +207,7 @@ class ResultsController < ApplicationController
     if r.marathon_pts
       sheet.add_row ['', '', '', '', 'Juoksu', m_style, seconds_to_human_form(r.marathon_time), r.marathon_pos, sprintf('%.2f', r.marathon_pts)]
     else
-      sheet.add_row ['', '', '', '', 'Juoksu', '', '0:00:00', '0', '0:00']
+      sheet.add_row ['', '', '', '', 'Juoksu', '', '0', '0', '0']
     end
     if r.skiing_style == 'Perinteinen'
       s_style = 'P'
@@ -217,12 +217,12 @@ class ResultsController < ApplicationController
     if r.skiing_pts
       sheet.add_row ['', '', '', '', 'Hiihto', s_style, seconds_to_human_form(r.skiing_time), r.skiing_pos, sprintf('%.2f', r.skiing_pts)]
     else
-      sheet.add_row ['', '', '', '', 'Hiihto', '', '0:00:00', '0', '0:00']
+      sheet.add_row ['', '', '', '', 'Hiihto', '', '0', '0', '0']
     end
     if r.skating_pts
       sheet.add_row ['', '', '', '', 'Luistelu', '', seconds_to_human_form(r.skating_time), r.skating_pos, sprintf('%.2f', r.skating_pts)]
     else
-      sheet.add_row ['', '', '', '', 'Luistelu', '', '0:00:00', '0', '0:00']
+      sheet.add_row ['', '', '', '', 'Luistelu', '', '0', '0', '0']
     end
   end
 
