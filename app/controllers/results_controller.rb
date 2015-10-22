@@ -289,10 +289,10 @@ class ResultsController < ApplicationController
           i = 1
           @group_results.each do |group, group_results|
             group_name = group
-            group_points = group_results[:total].round(2)
+            group_points = sprintf('%.2f', group_results[:total])
             position = i
             group_results[:individual_results].each do |id, individual_result|
-              sheet.add_row format_group_result_row(position, group_name, group_points, individual_result), style: format_highligth_row(individual_result, bold)
+              sheet.add_row format_group_result_row(position, group_name, group_points, individual_result), style: format_highlight_row(individual_result, bold)
               group_name = ''
               group_points = ''
               position = ''
@@ -309,38 +309,38 @@ class ResultsController < ApplicationController
     data = [position, group_name, group_points]
     data << individual_result[:result][:name]
     if individual_result[:result][:skating_pts]
-      data << individual_result[:result][:skating_pts].round(2)
+      data << sprintf('%.2f', individual_result[:result][:skating_pts])
     else
       data << 0
     end
     if individual_result[:result][:skiing_pts]
-      data << individual_result[:result][:skiing_pts].round(2)
+      data << sprintf('%.2f', individual_result[:result][:skiing_pts])
     else
       data << 0
     end
     if individual_result[:result][:marathon_pts]
-      data << individual_result[:result][:marathon_pts].round(2)
+      data << sprintf('%.2f', individual_result[:result][:marathon_pts])
     else
       data << 0
     end
     if individual_result[:result][:rowing_pts]
-      data << individual_result[:result][:rowing_pts].round(2)
+      data << sprintf('%.2f', individual_result[:result][:rowing_pts])
     else
       data << 0
     end
     if individual_result[:result][:cycling_pts]
-      data << individual_result[:result][:cycling_pts].round(2)
+      data << sprintf('%.2f', individual_result[:result][:cycling_pts])
     else
       data << 0
     end
     if individual_result[:result][:orienteering_pts]
-      data << individual_result[:result][:orienteering_pts].round(2)
+      data << sprintf('%.2f', individual_result[:result][:orienteering_pts])
     else
       data << 0
     end
   end
 
-  def format_highligth_row(individual_result, bold)
+  def format_highlight_row(individual_result, bold)
     data = [nil, nil, nil, nil]
     if individual_result[:result_noted][:skating]
       data << bold
