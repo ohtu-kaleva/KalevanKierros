@@ -47,7 +47,7 @@ class YearlyAwardsController < ApplicationController
   def get_ansioviiri_receivers(participants)
     receivers = []
     participants.each do |p|
-      if p.statistic.a == 0 and not p.statistic.ap
+      if p.statistic.a == 0 and not p.statistic.ap.blank?
         if p.completed_events >= 4
           if p.completed_events + p.statistic.total_events_completed >= 30
             receivers << p

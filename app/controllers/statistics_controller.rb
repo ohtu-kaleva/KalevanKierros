@@ -77,7 +77,7 @@ class StatisticsController < ApplicationController
   # PATCH/PUT /statistics/1
   def update
     if @statistic.update(statistic_params)
-      redirect_to @statistic, flash: { success: 'Tilastomerkintää muokattu onnistuneesti.' }
+      redirect_to statistics_filterable_url, flash: { success: 'Tilastomerkintää muokattu onnistuneesti.' }
     else
       render :edit
     end
@@ -158,6 +158,6 @@ class StatisticsController < ApplicationController
     end
 
   def statistic_params
-    params.permit(:year, :page, :id, :statistic_id, :year)
+    params.require(:statistic).permit(:year, :page, :id, :statistic_id, :kk_number, :last_name, :first_name, :city, :birth_year, :six_events_completed_count, :five_events_completed_count, :four_events_completed_count, :total_events_completed, :pts_sum, :position, :p, :a, :ap, :k, :v, :prev_year_pts_sum, :prev_year_event_sum)
   end
 end
