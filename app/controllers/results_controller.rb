@@ -166,10 +166,11 @@ class ResultsController < ApplicationController
   def individual_results_to_xlsx
     Axlsx::Package.new do |individual_results|
       individual_results.workbook do |wb|
+        normal = wb.styles.add_style :sz => 11, :format_code => '#.00'
         wb.add_worksheet do |sheet|
           i = 1
           @results.each do |r|
-            add_result_to_sheet(sheet, r, i)
+            add_result_to_sheet(sheet, r, i, normal)
             i += 1
             sheet.add_row ['', '', '', '', '', '', '', '', '']
           end
@@ -178,14 +179,14 @@ class ResultsController < ApplicationController
     end
   end
 
-  def add_result_to_sheet(sheet, r, total_pos)
+  def add_result_to_sheet(sheet, r, total_pos, style)
     if r.orienteering_pts
-      sheet.add_row [total_pos, r.name, r.group, sprintf('%.2f', r.pts_sum), 'Suunnistus', '', seconds_to_human_form(r.orienteering_time), r.orienteering_pos, sprintf('%.2f', r.orienteering_pts)]
+      sheet.add_row [total_pos, r.name, r.group, sprintf('%.2f', r.pts_sum), 'Suunnistus', '', seconds_to_human_form(r.orienteering_time), r.orienteering_pos, sprintf('%.2f', r.orienteering_pts)], style: [nil, nil, nil, style, nil, nil, nil, nil, style]
     else
-      sheet.add_row [total_pos, r.name, r.group, sprintf('%.2f', r.pts_sum), 'Suunnistus', '', '0', '0', '0']
+      sheet.add_row [total_pos, r.name, r.group, sprintf('%.2f', r.pts_sum), 'Suunnistus', '', '0', '0', '0'], style: [nil, nil, nil, style, nil, nil, nil, nil, nil]
     end
     if r.cycling_pts
-      sheet.add_row ['', '', r.series, '', 'Pyöräily', '', seconds_to_human_form(r.cycling_time), r.cycling_pos, sprintf('%.2f', r.cycling_pts)]
+      sheet.add_row ['', '', r.series, '', 'Pyöräily', '', seconds_to_human_form(r.cycling_time), r.cycling_pos, sprintf('%.2f', r.cycling_pts)], style: [nil, nil, nil, nil, nil, nil, nil, nil, style]
     else
       sheet.add_row ['', '', r.series, '', 'Pyöräily', '', '0', '0', '0']
     end
@@ -195,7 +196,7 @@ class ResultsController < ApplicationController
       r_style = 'V'
     end
     if r.rowing_pts
-      sheet.add_row ['', '', '', '', 'Soutu', r_style, seconds_to_human_form(r.rowing_time), r.rowing_pos, sprintf('%.2f', r.rowing_pts)]
+      sheet.add_row ['', '', '', '', 'Soutu', r_style, seconds_to_human_form(r.rowing_time), r.rowing_pos, sprintf('%.2f', r.rowing_pts)], style: [nil, nil, nil, nil, nil, nil, nil, nil, style]
     else
       sheet.add_row ['', '', '', '', 'Soutu', '', '0', '0', '0']
     end
@@ -205,7 +206,7 @@ class ResultsController < ApplicationController
       m_style = 'PM'
     end
     if r.marathon_pts
-      sheet.add_row ['', '', '', '', 'Juoksu', m_style, seconds_to_human_form(r.marathon_time), r.marathon_pos, sprintf('%.2f', r.marathon_pts)]
+      sheet.add_row ['', '', '', '', 'Juoksu', m_style, seconds_to_human_form(r.marathon_time), r.marathon_pos, sprintf('%.2f', r.marathon_pts)], style: [nil, nil, nil, nil, nil, nil, nil, nil, style]
     else
       sheet.add_row ['', '', '', '', 'Juoksu', '', '0', '0', '0']
     end
@@ -215,12 +216,12 @@ class ResultsController < ApplicationController
       s_style = 'V'
     end
     if r.skiing_pts
-      sheet.add_row ['', '', '', '', 'Hiihto', s_style, seconds_to_human_form(r.skiing_time), r.skiing_pos, sprintf('%.2f', r.skiing_pts)]
+      sheet.add_row ['', '', '', '', 'Hiihto', s_style, seconds_to_human_form(r.skiing_time), r.skiing_pos, sprintf('%.2f', r.skiing_pts)], style: [nil, nil, nil, nil, nil, nil, nil, nil, style]
     else
       sheet.add_row ['', '', '', '', 'Hiihto', '', '0', '0', '0']
     end
     if r.skating_pts
-      sheet.add_row ['', '', '', '', 'Luistelu', '', seconds_to_human_form(r.skating_time), r.skating_pos, sprintf('%.2f', r.skating_pts)]
+      sheet.add_row ['', '', '', '', 'Luistelu', '', seconds_to_human_form(r.skating_time), r.skating_pos, sprintf('%.2f', r.skating_pts)], style: [nil, nil, nil, nil, nil, nil, nil, nil, style]
     else
       sheet.add_row ['', '', '', '', 'Luistelu', '', '0', '0', '0']
     end
@@ -283,7 +284,8 @@ class ResultsController < ApplicationController
   def group_result_to_xlsx
     Axlsx::Package.new do |group_results|
       group_results.workbook do |wb|
-        bold = wb.styles.add_style :b => true
+        normal = wb.styles.add_style :sz => 11, :format_code => '#.00'
+        bold = wb.styles.add_style :sz => 11, :format_code => '#.00', :b => true
         wb.add_worksheet do |sheet|
           sheet.add_row ['', 'Joukkue', 'Pisteet', 'Jäsen', 'Luistelu', 'Hiihto', 'Juoksu', 'Soutu', 'Pyöräily', 'Suunnistus']
           i = 1
@@ -292,7 +294,7 @@ class ResultsController < ApplicationController
             group_points = sprintf('%.2f', group_results[:total])
             position = i
             group_results[:individual_results].each do |id, individual_result|
-              sheet.add_row format_group_result_row(position, group_name, group_points, individual_result), style: format_highlight_row(individual_result, bold)
+              sheet.add_row format_group_result_row(position, group_name, group_points, individual_result), style: format_highlight_row(individual_result, normal, bold)
               group_name = ''
               group_points = ''
               position = ''
@@ -340,35 +342,47 @@ class ResultsController < ApplicationController
     end
   end
 
-  def format_highlight_row(individual_result, bold)
-    data = [nil, nil, nil, nil]
+  def format_highlight_row(individual_result, normal, bold)
+    data = [nil, nil, normal, nil]
     if individual_result[:result_noted][:skating]
       data << bold
+    elsif individual_result[:result][:skating_pts] and individual_result[:result][:skating_pts] > 0
+      data << normal
     else
       data << nil
     end
     if individual_result[:result_noted][:skiing]
       data << bold
+    elsif individual_result[:result][:skiing_pts] and individual_result[:result][:skiing_pts] > 0
+      data << normal
     else
       data << nil
     end
     if individual_result[:result_noted][:marathon]
       data << bold
+    elsif individual_result[:result][:marathon_pts] and individual_result[:result][:marathon_pts] > 0
+      data << normal
     else
       data << nil
     end
     if individual_result[:result_noted][:rowing]
       data << bold
+    elsif individual_result[:result][:rowing_pts] and individual_result[:result][:rowing_pts] > 0
+      data << normal
     else
       data << nil
     end
     if individual_result[:result_noted][:cycling]
       data << bold
+    elsif individual_result[:result][:cycling_pts] and individual_result[:result][:cycling_pts] > 0
+      data << normal
     else
       data << nil
     end
     if individual_result[:result_noted][:orienteering]
       data << bold
+    elsif individual_result[:result][:orienteering_pts] and individual_result[:result][:orienteering_pts] > 0
+      data << normal
     else
       data << nil
     end
