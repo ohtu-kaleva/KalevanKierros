@@ -1,0 +1,40 @@
+    <%= bootstrap_form_for(@statistic) do |f| %>
+        <% if @statistic.errors.any? %>
+            <div id="error_explanation">
+              <h2><%= pluralize(@statistic.errors.count, "error") %> prohibited this statistic from being saved:</h2>
+
+              <ul>
+                <% @statistic.errors.full_messages.each do |message| %>
+                    <li><%= message %></li>
+                <% end %>
+              </ul>
+            </div>
+        <% end %>
+
+    <div class="field">
+        <%= f.number_field :position, label: 'Sijoitus' %>
+        <%= f.number_field :kk_number, label: 'KK-numero' %>
+        <%= f.text_field :last_name, label: 'Sukunimi' %>
+        <%= f.text_field :first_name, label: 'Etunimi' %>
+        <%= f.text_field :city, label: 'Paikka' %>
+        <%= f.number_field :birth_year, label: 'Vuosi' %>
+        <%= f.text_field :p, label: 'P' %>
+        <%= f.number_field :prev_year_event_sum, label: 'Edel. vuonna yht.' %>
+        <%= f.number_field :prev_year_pts_sum, label: 'Edel. vuonna pisteitä' %>
+        <%= f.number_field :six_events_completed_count, label: '6' %>
+        <%= f.number_field :five_events_completed_count, label: '5' %>
+        <%= f.number_field :four_events_completed_count, label: '4' %>
+        <%= f.number_field :total_events_completed, label: 'Yht.' %>
+        <%= f.number_field :total_events_completed, label: 'Pisteet' %>
+        <%= f.number_field :a, label: 'A.viiri' %>
+        <%= f.text_field :ap, label: 'AP' %>
+        <%= f.number_field :k, label: 'Kunniak.nro' %>
+        <%= f.number_field :v, label: 'Veljeskunnan jäsennumero' %>
+    </div>
+
+    <div class="actions">
+      <% if defined?(subpage) && subpage.to_s == 'edit' %>
+          <%= f.submit "Muokkaa", :class => "btn btn-primary" %>
+      <% end %>
+    </div>
+    <% end %>
