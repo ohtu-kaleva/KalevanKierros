@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150811151026) do
+ActiveRecord::Schema.define(version: 20151205125820) do
 
   create_table "app_settings", force: true do |t|
     t.string   "name",       null: false
@@ -52,6 +52,8 @@ ActiveRecord::Schema.define(version: 20150811151026) do
     t.string   "name"
     t.string   "attribute_label"
     t.integer  "attribute_index"
+    t.string   "payment_value",        default: ""
+    t.string   "second_payment_value", default: ""
   end
 
   add_index "event_attributes", ["event_id"], name: "index_event_attributes_on_event_id"

@@ -4,19 +4,10 @@ class EnrollmentMailer < ActionMailer::Base
   def send_enrollment_email(user, event, enrollment)
     @user = user
     @enrollment = enrollment
-    @price = event.second_price/100.0
     @account_number = event.account_number
-    @pay_day = 'heti'
     @receiver = event.payment_receiver
     @event_name = event.name
-    # Varmistetaan että päivien vertailussa verrataan tähän päivään evaluoimalla
-    # Date.today aina ajettaessa send_enrollment_email
-    get_this_day = lambda { Date.today }
-
-    if get_this_day.call <= event.end_date
-      @price = event.price/100.0
-      @pay_day = event.end_date.to_s
-    end
+    tmp = calculate_price(enrollment, event)
 
     case event.sport_type
     when 'RunningEvent'
@@ -33,6 +24,48 @@ class EnrollmentMailer < ActionMailer::Base
       cycling_enrollment_email
     when ''
       no_sport_event_enrollment_email
+    end
+  end
+
+  def calculate_price(enrollment, event)
+    # Varmistetaan että päivien vertailussa verrataan tähän päivään evaluoimalla
+    # Date.today aina ajettaessa send_enrollment_email
+    enrollment_datas = enrollment.enrollment_datas
+    get_this_day = lambda { Date.today }
+
+    if get_this_day.call <= event.end_date
+      tmp_price = event.price
+      event.event_attributes.each do |a|
+        if a.attribute_type.in? ['radio_button', 'select']
+          selection = a.attribute_value.split(';')
+          prices = a.payment_value.split(';')
+          selected = enrollment_datas.find_by(attribute_index: a.attribute_index).value
+          tmp_price = tmp_price + prices[selection.index(selected)].to_i
+        elsif a.attribute_type == 'check_box'
+          if enrollment_datas.find_by(attribute_index: a.attribute_index).value != ""
+            tmp_price = tmp_price + a.payment_value.to_i
+          end
+        end
+      end
+      @price = tmp_price/100.0
+      @pay_day = event.end_date.to_s
+
+    else
+      tmp_price = event.second_price
+      event.event_attributes.each do |a|
+        if a.attribute_type.in? ['radio_button', 'select']
+          selection = a.attribute_value.split(';')
+          prices = a.second_payment_value.split(';')
+          selected = enrollment_datas.find_by(attribute_index: a.attribute_index).value
+          tmp_price = tmp_price + prices[selection.index(selected)].to_i
+        elsif a.attribute_type == 'check_box'
+          if enrollment_datas.find_by(attribute_index: a.attribute_index).value != ""
+            tmp_price = tmp_price + a.second_payment_value.to_i
+          end
+        end
+      end
+      @price = tmp_price/100.0
+      @pay_day = 'heti'
     end
   end
 
