@@ -24,12 +24,15 @@
 <strong>Tapahtuman kentät:</strong><br>
 <% #form_for(@enrollment) do |e| %>
 <% @event.event_attributes.each do |f| %>
+        <p>
         <% if f.attribute_type != "hidden" %>
             <strong><%= f.attribute_label %></strong>
         <% end %>
         <div class="field">
         <% if f.attribute_type == "select" %>
-            <%= select_tag :sel, options_for_select(f.get_options_to_form) %>
+            <%= select_tag :sel, options_for_select(f.get_options_to_form) %><br>
+            Hinnat: <%= f.payment_value %><br>
+            Jälki-ilmoittautumisen hinnat: <%= f.second_payment_value %>
         <% end %>
 
         <% if f.attribute_type == "radio_button" %>
@@ -37,6 +40,8 @@
             <%= radio_button_tag(:sel, v) %>
             <%= label_tag(:radio, v) %><br>
         <% end %>
+        Hinnat: <%= f.payment_value %><br>
+        Jälki-ilmoittautumisen hinnat: <%= f.second_payment_value %>
         <% end %>
 
         <% if f.attribute_type == "check_box" %>
@@ -44,6 +49,8 @@
             <%= check_box_tag(:sel, v) %>
             <%= label_tag(:check, v) %><br>
         <% end %>
+        Hinnat: <%= f.payment_value %><br>
+        Jälki-ilmoittautumisen hinnat: <%= f.second_payment_value %>
         <% end %>
         <% if f.attribute_type == "text_field" %>
           <%= text_field_tag(:sel, f.attribute_value) %>
@@ -52,6 +59,7 @@
           <%= f.attribute_value %>
         <% end %>
         </div>
+        </p>
     <% end %>
 <% #end %>
 <%= link_to 'Lisää kenttä', add_event_attribute_path({:event_id => @event.id}) %> |
