@@ -70,7 +70,7 @@ class EventsController < ApplicationController
       @event = Event.new(event_params)
       @event.factor = 2800
       if @event.save
-        EventAttribute.create :name => 'Kierroslaskija', :attribute_value => 'Kyllä', :attribute_label => 'Tarvitsetko kierroslaskijan järjestäjän puolesta?', :attribute_type => 'check_box', :event_id => @event.id, :attribute_index => 1
+        #EventAttribute.create :name => 'Kierroslaskija', :attribute_value => 'Kyllä', :attribute_label => 'Tarvitsetko kierroslaskijan järjestäjän puolesta?', :attribute_type => 'check_box', :event_id => @event.id, :attribute_index => 1
         redirect_to @event, flash: { success: 'Luistelutapahtuma luotu onnistuneesti.' }
       else
         render :new

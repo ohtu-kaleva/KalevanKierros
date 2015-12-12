@@ -12,28 +12,37 @@
     <% end %>
     <p>Olet ilmoittautumassa tapahtumaan: <%= @event.name %><br>
     <strong>Tapahtuman kuvaus:</strong><br>
-      <%= @event.description %><br>
+      <%= @event.description %>
     </p>
-<div class="field">
+    <% event_price = @event.current_price %>
+    <% if event_price > 0 %>
+        <p>
+        <span id="event_price" class="hidden"><%= event_price %></span>
+        Tapahtuman osallistumismaksu on <%= "%.2f" % (event_price/100.0) %> euroa.
+        </p>
+    <% end %>
+    <div class="field">
     <% @event.event_attributes.each do |e| %>
         <% if e.attribute_type != "hidden" %>
             <strong><%= e.attribute_label %></strong><br>
         <% end %>
           <% if e.attribute_type == "select" %>
-            <%= select_tag e.name, options_for_select(e.get_options_to_form) %><br>
+            <%= select_tag(e.name, options_for_select(e.get_options_to_form), {:class => 'payfield', "data-prices" => e.get_prices.to_s}) %><br>
           <% end %>
 
           <% if e.attribute_type == "radio_button" %>
-              <% e.get_options_to_form.each do |v| %>
-                  <%= radio_button_tag(e.name, v) %>
+              <% i = 0 %>
+              <% e.get_options_to_form.each do |v, p| %>
+                  <%= radio_button_tag(e.name, p, true, {:class => 'payfield', "data-prices" => e.get_prices.to_s, "data-index" => i}) %>
                   <%= label_tag(e.attribute_label, v) %><br>
+                  <% i = i + 1 %>
               <% end %>
           <% end %>
 
           <% if e.attribute_type == "check_box" %>
-              <% e.get_options_to_form.each do |v| %>
+              <% e.get_options_to_form.each do |v, p| %>
                 <%= hidden_field_tag(e.name + '[]') %>
-                <%= check_box_tag(e.name + '[]', v) %>
+                <%= check_box_tag(e.name + '[]', v, false, {:class => 'payfield', "data-prices" => e.get_prices.to_s}) %>
                 <%= label_tag(e.attribute_label, v) %><br>
               <% end %>
           <% end %>
@@ -52,7 +61,46 @@
     <% end %>
  <%= f.hidden_field :event_id, :value => params[:event_id] %>
 </div>
+    <br>
+    <span id="price_sum"><br></span>
     <div class="actions">
       <%= f.submit 'Lähetä ilmoittautuminen eteenpäin' %>
     </div>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            updateSum();
+            $(".payfield").each(function() {
+                $(this).change(function() {
+                    updateSum();
+                });
+            });
+        
+            function updateSum() {
+                var sum = 0;
+                sum = sum + parseInt($("#event_price").html())
+                $(".payfield").each(function() {
+                    if($(this).is(":checkbox")) {
+                        if($(this).is(":checked")) {
+                            sum = sum + $(this).data("prices")[0];
+                        }
+                    } else if($(this).is("select")) {
+                        var prices = $(this).data("prices");
+                        sum = sum + prices[$(this)[0].selectedIndex];
+                    } else if($(this).is(":radio")) {
+                        var prices = $(this).data("prices");
+                        if($(this).is(":checked")) {
+                            sum = sum + $(this).data("prices")[ $(this).data('index')];
+                        }
+                    }
+                });
+                sum = sum/100
+                if(sum > 0) {
+                    $("#price_sum").html("Ilmoittautumismaksu on yhteensä " + sum.toFixed(2) + " euroa.");
+                } else {
+                    $("#price_sum").html("");
+                }
+            };     
+        });
+    </script>
 <% end %>

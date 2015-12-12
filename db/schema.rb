@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151205125820) do
+ActiveRecord::Schema.define(version: 20151212160630) do
 
   create_table "app_settings", force: true do |t|
     t.string   "name",       null: false
@@ -67,8 +67,8 @@ ActiveRecord::Schema.define(version: 20151205125820) do
     t.datetime "updated_at"
     t.boolean  "open",                                      default: false, null: false
     t.date     "second_end_date"
-    t.integer  "price"
-    t.integer  "second_price"
+    t.integer  "price",                                     default: 0
+    t.integer  "second_price",                              default: 0
     t.decimal  "penalty_factor",   precision: 16, scale: 6, default: 1.0
     t.integer  "factor"
     t.string   "sport_type"

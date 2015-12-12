@@ -4,7 +4,7 @@ class Event < ActiveRecord::Base
   has_many :participants, through: :enrollments, source: :user
   has_many :enrollment_datas, through: :enrollments, source: :enrollment_datas
 
-  validates :name, :start_date, :end_date, :second_end_date, :price, :second_price, :payment_receiver, presence: true
+  validates :name, :start_date, :end_date, :second_end_date, :payment_receiver, presence: true
   validates :name, uniqueness: true
   validate :validate_end_date
   validate :validate_second_end_date
@@ -31,6 +31,15 @@ class Event < ActiveRecord::Base
     end
 
     errors.add(:second_end_date, 'is invalid')
+  end
+
+  def current_price
+    get_this_day = lambda { Date.today }
+    if get_this_day.call <= end_date
+      return price
+    else
+      return second_price
+    end
   end
 
   def to_csv(options = {})

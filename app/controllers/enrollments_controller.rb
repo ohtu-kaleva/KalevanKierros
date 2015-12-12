@@ -62,7 +62,7 @@ class EnrollmentsController < ApplicationController
         # loop for creating information for data
         attrs.each do |a|
           if !params.has_key? a.name
-            redirect_to root_path and return
+            redirect_to root_path, flash: { error: 'Ilmoittautuminen epäonnistui. Täytä lomake uudelleen ja varmista, että pakolliset kentät on täytetty.' } and return
           end
           if params[a.name].kind_of?(Array)
             value = params[a.name].join(' ')
