@@ -1,6 +1,15 @@
 <h2>Olet ilmoittautumassa tapahtumaan: <%= @event.name %></h2>
-<strong>Täytä seuraavat tiedot oikein.</strong>
-
+<strong>Tapahtuman kuvaus:</strong><br>
+      <%= @event.description %>
+    </p>
+    <% event_price = @event.current_price %>
+    <% if event_price and event_price > 0 %>
+        <p>
+        <span id="event_price" class="hidden"><%= event_price %></span>
+        Tapahtuman osallistumismaksu on <%= "%.2f" % (event_price/100.0) %> euroa.
+        </p>
+    <% end %>
+<br><strong>Täytä seuraavat tiedot oikein.</strong>
 <%= bootstrap_form_tag(controller:'enrollments', action:'create_outsider_enrollment', method:'post') do |f| %>
     <%= f.fields_for :user do |u| %>
         <%= u.text_field :first_name, label: "Etunimi: " %>
@@ -19,19 +28,22 @@
                 <strong><%= a.attribute_label %></strong><br>
             <% end %>
             <% if a.attribute_type == "select" %>
-                <%= enr.select a.name, options_for_select(a.get_options_to_form) %><br>
+                <%= enr.select(a.name, options_for_select(a.get_options_to_form), {}, {:class => 'payfield', "data-prices" => a.get_prices.to_s}) %><br>
             <% end %>
             <% if a.attribute_type == "radio_button" %>
-                <% a.get_options_to_form.each do |v| %>
-                    <%= enr.radio_button(a.name, v) %>
-                    <%= label_tag(a.attribute_label, v) %><br>
+                <% i = 0 %>
+                <% a.get_options_to_form.each do |v, p| %>
+                    <%= enr.radio_button(a.name, p, :checked => p == a.get_options_to_form[0][1], class: "payfield", "data-prices" => a.get_prices.to_s, "data-index" => i) %>
+                    <%= label_tag(a.attribute_label, v) %>
+                    <% i = i + 1 %>
                 <% end %>
+                <br>
             <% end %>
 
             <% if a.attribute_type == "check_box" %>
-                <% a.get_options_to_form.each do |v| %>
-                  <%= hidden_field_tag("enrollment[#{a.name}]" + '[]') %>
-                  <%= check_box_tag("enrollment[#{a.name}]" + '[]', v) %>
+                <% a.get_options_to_form.each do |v, p| %>
+                  <%= hidden_field_tag("enrollment[#{a.name}]" + '[]', "", {:class => 'payfield', "data-prices" => a.get_prices.to_s}) %>
+                  <%= check_box_tag("enrollment[#{a.name}]" + '[]', p, false, {:class => 'payfield', "data-prices" => a.get_prices.to_s}) %>
                   <%= label_tag(a.attribute_label, v) %><br>
                 <% end %>
             <% end %>
@@ -49,11 +61,46 @@
             <% end %>
         <% end %>
     <% end %>
+    <span id="price_sum"></span><br>
     <%= f.submit "Ilmoittaudu", :class => "btn btn-primary" %>
 <% end %>
 
 <script type="text/javascript">
     $(document).ready(function() {
+        updateSum();
+            $(".payfield").each(function() {
+                $(this).change(function() {
+                    updateSum();
+                });
+            });
+        
+            function updateSum() {
+                var sum = 0;
+                if ($("#event_price").length) {
+                    sum = sum + parseInt($("#event_price").html())
+                }
+                $(".payfield").each(function() {
+                    if($(this).is(":checkbox")) {
+                        if($(this).is(":checked")) {
+                            sum = sum + $(this).data("prices")[0];
+                        }
+                    } else if($(this).is("select")) {
+                        var prices = $(this).data("prices");
+                        sum = sum + prices[$(this)[0].selectedIndex];
+                    } else if($(this).is(":radio")) {
+                        var prices = $(this).data("prices");
+                        if($(this).is(":checked")) {
+                            sum = sum + $(this).data("prices")[ $(this).data('index')];
+                        }
+                    }
+                });
+                sum = sum/100
+                if(sum > 0) {
+                    $("#price_sum").html("Ilmoittautumismaksu on yhteensä " + sum.toFixed(2) + " euroa.");
+                } else {
+                    $("#price_sum").html("");
+                }
+            }; 
         $('form').bootstrapValidator({
             message: 'Virheellinen syöte',
             feedbackIcons: {

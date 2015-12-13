@@ -43,7 +43,7 @@
 
           <% if e.attribute_type == "check_box" %>
               <% e.get_options_to_form.each do |v, p| %>
-                <%= hidden_field_tag(e.name + '[]') %>
+                <%= hidden_field_tag(e.name + '[]', "", {:class => 'payfield', "data-prices" => e.get_prices.to_s}) %>
                 <%= check_box_tag(e.name + '[]', p, false, {:class => 'payfield', "data-prices" => e.get_prices.to_s}) %>
                 <%= label_tag(e.attribute_label, v) %><br>
               <% end %>
@@ -64,7 +64,7 @@
  <%= f.hidden_field :event_id, :value => params[:event_id] %>
 </div>
     <br>
-    <span id="price_sum"><br></span>
+    <span id="price_sum"></span><br>
     <div class="actions">
       <%= f.submit 'Lähetä ilmoittautuminen eteenpäin' %>
     </div>

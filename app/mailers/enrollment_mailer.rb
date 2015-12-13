@@ -34,7 +34,10 @@ class EnrollmentMailer < ActionMailer::Base
     get_this_day = lambda { Date.today }
 
     if get_this_day.call <= event.end_date
-      tmp_price = event.price
+      tmp_price = 0
+      if event.price
+        tmp_price = tmp_price + event.price
+      end
       event.event_attributes.each do |a|
         if a.attribute_type.in? ['radio_button', 'select']
           selection = a.attribute_value.split(';')
@@ -51,7 +54,10 @@ class EnrollmentMailer < ActionMailer::Base
       @pay_day = event.end_date.to_s
 
     else
-      tmp_price = event.second_price
+      tmp_price = 0
+      if event.second_price
+        tmp_price = tmp_price + event.second_price
+      end
       event.event_attributes.each do |a|
         if a.attribute_type.in? ['radio_button', 'select']
           selection = a.attribute_value.split(';')
