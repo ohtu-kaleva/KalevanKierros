@@ -15,7 +15,7 @@
       <%= @event.description %>
     </p>
     <% event_price = @event.current_price %>
-    <% if event_price > 0 %>
+    <% if event_price and event_price > 0 %>
         <p>
         <span id="event_price" class="hidden"><%= event_price %></span>
         Tapahtuman osallistumismaksu on <%= "%.2f" % (event_price/100.0) %> euroa.
@@ -32,9 +32,11 @@
 
           <% if e.attribute_type == "radio_button" %>
               <% i = 0 %>
+              <% checked = true %>
               <% e.get_options_to_form.each do |v, p| %>
-                  <%= radio_button_tag(e.name, p, true, {:class => 'payfield', "data-prices" => e.get_prices.to_s, "data-index" => i}) %>
+                  <%= radio_button_tag(e.name, p, checked, {:class => 'payfield', "data-prices" => e.get_prices.to_s, "data-index" => i}) %>
                   <%= label_tag(e.attribute_label, v) %><br>
+                  <% checked = false %>
                   <% i = i + 1 %>
               <% end %>
           <% end %>
@@ -42,7 +44,7 @@
           <% if e.attribute_type == "check_box" %>
               <% e.get_options_to_form.each do |v, p| %>
                 <%= hidden_field_tag(e.name + '[]') %>
-                <%= check_box_tag(e.name + '[]', v, false, {:class => 'payfield', "data-prices" => e.get_prices.to_s}) %>
+                <%= check_box_tag(e.name + '[]', p, false, {:class => 'payfield', "data-prices" => e.get_prices.to_s}) %>
                 <%= label_tag(e.attribute_label, v) %><br>
               <% end %>
           <% end %>
@@ -78,7 +80,9 @@
         
             function updateSum() {
                 var sum = 0;
-                sum = sum + parseInt($("#event_price").html())
+                if ($("#event_price").length) {
+                    sum = sum + parseInt($("#event_price").html())
+                }
                 $(".payfield").each(function() {
                     if($(this).is(":checkbox")) {
                         if($(this).is(":checked")) {
