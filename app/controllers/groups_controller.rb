@@ -51,8 +51,7 @@ class GroupsController < ApplicationController
         init_results_entry(m)
       end
       KkEnrollmentMailer.enrollment_email_captain(@user, members.uniq, group_params[:name]).deliver
-
-      redirect_to :root, flash: { success: 'Ryhmä luotu onnistuneesti' }
+      redirect_to(@user, flash: { success: 'Ryhmä luotu onnistuneesti' }) && return
     else
       render :new
     end

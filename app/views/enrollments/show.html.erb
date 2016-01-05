@@ -2,8 +2,8 @@
 <h1><%= @enrollment.event.name %> <%= @enrollment.user.first_name %> <%= @enrollment.user.last_name %></h1>
 <table class="table table-bordered">
   <tr>
-    <th>Ilmoittautumisen tiedon otsikko</th>
-    <th>Tiedon sisältämä data</th>
+    <th>Ilmoittautumisen lisätieto</th>
+    <th>Valittu lisätieto</th>
   </tr>
 <% @data.each do |data| %>
   <tr>
@@ -12,6 +12,11 @@
   </tr>
 <% end %>
 </table>
+<% if !@account_number.empty? and @price > 0 %>
+    <p>Osallistumismaksu <%= @price %> euroa maksettava viitenumerolla <%= @reference_number %> tilille <%= @account_number %><br>
+    Eräpäivä: <%= @pay_day %><br>
+    Saaja: <%= @receiver %></p>
+<% end %>
 <%= link_to 'Takaisin', user_path(current_user) %><br>
 <% if user_is_admin? %>
   <%= link_to 'Peru ilmoittautuminen', @enrollment, method: :delete, data: { confirm: 'Oletko varma että haluat perua ilmoittautumisen?' } %>

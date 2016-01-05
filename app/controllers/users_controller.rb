@@ -17,6 +17,13 @@ class UsersController < ApplicationController
     if year
       @year = year.value
     end
+    account = AppSetting.find_by name:'KkAccountNumber'
+    @account_number = ''
+    if account
+      @account_number = account.value
+    else
+      @account_number = 'Tilinumeroa ei löytynyt'
+    end
   end
 
   # GET /users/new

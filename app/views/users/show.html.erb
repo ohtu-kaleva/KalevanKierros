@@ -11,6 +11,15 @@
   <h4>Olet ilmoittautunut seuraaviin tapahtumiin:</h4>
         <% if @kk_enrollment %>
             <p>Kalevan Kierros. Vuosi: <%= @year %></p>
+            <% if not @group.nil? and @group.user == current_user %>
+                <p>
+                    Kierrosmaksu 200 euroa maksettava viitenumerolla <%= @user.construct_reference_number %> tilille <%= @account_number %><br>
+                </p>
+            <% elsif @group.nil? %>
+                <p>
+                    Kierrosmaksu 50 euroa maksettava viitenumerolla <%= @user.construct_reference_number %> tilille <%= @account_number %>
+                </p>
+            <% end %>
         <% end %>
         <p>
           <% @enrollments.each do |enrollment|%>

@@ -45,4 +45,46 @@ class Enrollment < ActiveRecord::Base
     end
     "#{kk_number}#{event_id}#{check_sum}"
   end
+
+  def calculate_price
+    price = 0
+
+    if self.created_at <= self.event.end_date
+      if self.event.price
+        price = price + self.event.price
+      end
+      self.event.event_attributes.each do |a|
+        if a.attribute_type.in? ['radio_button', 'select']
+          selection = a.attribute_value.split(';')
+          prices = a.payment_value.split(';')
+          selected = self.enrollment_datas.find_by(attribute_index: a.attribute_index).value
+          price = price + prices[selection.index(selected)].to_i
+        elsif a.attribute_type == 'check_box'
+          if self.enrollment_datas.find_by(attribute_index: a.attribute_index).value != ""
+            price = price + a.payment_value.to_i
+          end
+        end
+      end
+      price = price/100.0
+
+    else
+      if self.event.second_price
+        price = price + self.event.second_price
+      end
+      self.event.event_attributes.each do |a|
+        if a.attribute_type.in? ['radio_button', 'select']
+          selection = a.attribute_value.split(';')
+          prices = a.second_payment_value.split(';')
+          selected = self.enrollment_datas.find_by(attribute_index: a.attribute_index).value
+          price = price + prices[selection.index(selected)].to_i
+        elsif a.attribute_type == 'check_box'
+          if self.enrollment_datas.find_by(attribute_index: a.attribute_index).value != ""
+            price = price + a.second_payment_value.to_i
+          end
+        end
+      end
+      price = price/100.0
+    end
+    price
+  end
 end

@@ -2,7 +2,7 @@ class EnrollmentsController < ApplicationController
 
   before_action :check_for_existing_enrollment, only:  [:new, :create]
   before_action :set_enrollment_or_redirect, only: [:show, :destroy, :edit]
-  before_action :redirect_if_user_not_admin, only: [:show_enrollments_for_event, :index, :show, :destroy, :update, :edit, :update_single,
+  before_action :redirect_if_user_not_admin, only: [:show_enrollments_for_event, :index, :destroy, :update, :edit, :update_single,
                                                     :update_payment_info, :remove_all_payment_info_for_event]
 
   def new
@@ -112,6 +112,7 @@ class EnrollmentsController < ApplicationController
           end
 
           flash[:success] = "Ilmoittautumisesi tapahtumaan on kirjattu."
+          redirect_to enrollment_path(@enrollment.id) and return
         else
           render :new and return
         end
@@ -300,7 +301,17 @@ class EnrollmentsController < ApplicationController
   end
 
   def show
+    @enrollment = Enrollment.find params[:enrollment_id]
     @data = @enrollment.enrollment_datas
+    @price = @enrollment.calculate_price
+    if @enrollment.created_at <= @enrollment.event.end_date
+      @pay_day = @enrollment.event.end_date.to_s
+    else
+      @pay_day = 'heti'
+    end
+    @reference_number = @enrollment.construct_reference_number
+    @receiver = @enrollment.event.payment_receiver
+    @account_number = @enrollment.event.account_number
   end
 
   def update_payment_info
@@ -396,6 +407,6 @@ class EnrollmentsController < ApplicationController
   end
 
   def enrollment_params
-    params.require(:enrollment).permit(:event_id)
+    params.require(:enrollment).permit(:enrollment_id, :event_id)
   end
 end
