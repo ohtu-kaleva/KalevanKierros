@@ -1,36 +1,39 @@
 <h2>
-  <%= link_to edit_user_path(@user) do %>
   <%= @user.first_name %> <%= @user.last_name %>
-  <% end %>
 </h2>
-<h3>Kiertäjänumerosi on: <%= @user.kk_number %></h3>
+<p> <%= link_to 'Muokkaa tietojasi', edit_user_path(@user) %></p>
+<h4>Kiertäjänumerosi on: <%= @user.kk_number %></h4>
 
 <% if not current_user.nil? and current_user.id == @user.id %>
-<% if not @enrollments.nil? or @enrollment.count > 0 %>
-
-  <h4>Olet ilmoittautunut seuraaviin tapahtumiin:</h4>
-        <% if @kk_enrollment %>
-            <p>Kalevan Kierros. Vuosi: <%= @year %></p>
-            <% if not @group.nil? and @group.user == current_user %>
-                <p>
-                    Kierrosmaksu 200 euroa maksettava viitenumerolla <%= @user.construct_reference_number %> tilille <%= @account_number %><br>
-                </p>
-            <% elsif @group.nil? %>
-                <p>
-                    Kierrosmaksu 50 euroa maksettava viitenumerolla <%= @user.construct_reference_number %> tilille <%= @account_number %>
-                </p>
-            <% end %>
+    <% if @kk_enrollment %>
+        <h4>Olet ilmoittautunut Kalevan Kierrokselle <%= @year %></h4>
+        <% if not @group.nil? and @group.user == current_user %>
+            <p>
+                Kierrosmaksu 200 euroa maksettava viitenumerolla <%= @user.construct_reference_number %> tilille <%= @account_number %><br>
+            </p>
+        <% elsif @group.nil? %>
+            <p>
+                Kierrosmaksu 50 euroa maksettava viitenumerolla <%= @user.construct_reference_number %> tilille <%= @account_number %>
+            </p>
         <% end %>
+    <% else %>
+        <% if enrollment_open? %>
+        <%= link_to('Ilmoittaudu Kalevan Kierrokselle 2016', ilmoittautuminen_path, :class => "btn btn-primary") %>
+        <% end %>
+    <% end %>
+
+    <% if not @group.nil? %>
+        <h4>Kuulut joukkueeseen: <%= link_to @group.name, group_path(@group) %></h4>
+    <% else %>
+       <p>Jos haluat kuulua joukkueeseen, pyydä joukkueesi kapteenia ilmoittamaan sinut.</p>
+    <% end %>
+
+    <% if @enrollments.count > 0 %>
+        <h4>Olet ilmoittautunut seuraaviin tapahtumiin:</h4>
         <p>
-          <% @enrollments.each do |enrollment|%>
-    <%= link_to enrollment.event.name, enrollment_path(enrollment.id), class: 'label label-primary' %><br>
-  <% end %>
-</p>
-<% end %>
-<% if not @group.nil? %>
-   <p>
-     <strong>Kuulut joukkueeseen: </strong>
-     <%= link_to @group.name, group_path(@group) %>
-   </p>
-<% end %>
+            <% @enrollments.each do |enrollment|%>
+            <%= link_to enrollment.event.name, enrollment_path(enrollment.id), class: 'label label-primary' %><br>
+            <% end %>
+        </p>
+    <% end %>
 <% end %>

@@ -23,7 +23,7 @@ class GroupsController < ApplicationController
     set_user_and_check_enrollment
 
     kk_numbers = params[:kk_numbers].select { |e| !e.empty? }
-    if kk_numbers.size < 4 || kk_numbers.size > 6
+    if kk_numbers.size > 6
       redirect_to new_group_path, flash: { error: 'Tarkista jäsenten määrä' }
       return
     end
@@ -137,7 +137,7 @@ class GroupsController < ApplicationController
     end
 
     if @user.kk_enrollment
-      redirect_to root_path, flash: { error: 'Olet jo ilmoittautunut kierrokselle' }
+      redirect_to user_path(@user.id), flash: { error: 'Olet jo ilmoittautunut kierrokselle' }
       return
     end
   end
