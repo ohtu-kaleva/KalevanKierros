@@ -108,7 +108,7 @@ class StatisticsController < ApplicationController
       s.save
     end
 
-    @results = Result.where(year: statistic_params[:year])
+    @results = Result.where(year: params[:year])
 
     if !@results.empty?
       if @results.any? { |r| r.orienteering_pts }
@@ -145,7 +145,7 @@ class StatisticsController < ApplicationController
       message[:error] = 'Tilastojen päivitys ei onnistunut.'
     end
 
-    redirect_to statistics_static_path, flash: message
+    redirect_to root_path, flash: message
   end
 
   private
