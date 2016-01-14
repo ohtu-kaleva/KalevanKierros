@@ -160,7 +160,7 @@ class KkEnrollmentsController < ApplicationController
 
     def check_enrollment
       return if !@user.kk_enrollment
-      redirect_to root_path, flash: { error: 'Olet jo ilmoittautunut kierrokselle' }
+      redirect_to user_path(@user.id), flash: { error: 'Olet jo ilmoittautunut kierrokselle' }
     end
 
 end

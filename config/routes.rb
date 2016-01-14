@@ -34,8 +34,8 @@ Rails.application.routes.draw do
   get 'users/:id/kk_enrollments/new', to: 'kk_enrollments#new', as: 'new_kk_enrollment'
   post 'users/:id/kk_enrollments/new', to: 'kk_enrollments#create'
 
-  root 'static_pages#home'
-  get 'static_pages/home'
+  root 'static_pages#etusivu2'
+  get 'static_pages/etusivu2
   #static pages
 
   get 'esittely/kalevankierros', to: 'static_pages#kalevankierros'
@@ -51,7 +51,7 @@ Rails.application.routes.draw do
   get 'yhteystiedot/seurat', to: 'static_pages#seurat'
   get 'yhteystiedot/linkkeja', to: 'static_pages#linkkeja'
   get 'yhteystiedot/postituslista', to: 'static_pages#postituslista'
-
+  get 'testi', to: 'static_pages#etusivu2'
 
   get 'diplomas', to: 'printing_materials#export_diplomas', as: 'export_diplomas'
   get 'address_stickers', to: 'printing_materials#export_address_stickers', as: 'export_address_stickers'
