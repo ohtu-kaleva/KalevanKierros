@@ -35,7 +35,7 @@ Rails.application.routes.draw do
   post 'users/:id/kk_enrollments/new', to: 'kk_enrollments#create'
 
   root 'static_pages#etusivu2'
-  get 'static_pages/etusivu2
+  get 'static_pages/etusivu2'
   #static pages
 
   get 'esittely/kalevankierros', to: 'static_pages#kalevankierros'
