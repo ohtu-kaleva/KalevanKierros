@@ -38,28 +38,23 @@ class StaticPagesController < ApplicationController
       if result_hash[:selitys] == "VIITESIIRTO"
         viite = result_hash[:viite].to_s.delete(" ")
         kk_number = viite[0..6]
-        event_id = 10 #= viite[7..viite.length-2]
+        event_id = viite[7..viite.length-2]
         user = User.find_by kk_number: kk_number.to_i
         if user
-          enrollment_id = user.find_enrollment_id_by_event(event_id)
-          if enrollment_id
-            enrollment = Enrollment.find enrollment_id
-            if enrollment
-              event = enrollment.event
-              if enrollment.created_at <= event.end_date
-                expected_value = event.price
-              else
-                expected_value = event.second_price
+          if event_id.length > 0
+            enrollment_id = user.find_enrollment_id_by_event(event_id)
+            if enrollment_id
+              enrollment = Enrollment.find enrollment_id
+              if enrollment
+                enrollment.paid = (result_hash[:mr_euroa].tr(',', '.').to_f * 100.0).to_i
+                enrollment.save
               end
-              if event.sport_type == "RowingEvent"
-                if enrollment.enrollment_datas.find_by(name: 'Tyyli').value == "Vuoro"
-                  expected_value *= 2
-                end
-              end
-              payment_amount = result_hash[:mr_euroa].tr(',', '.').to_f * 100.0
-              if expected_value == payment_amount
-                enrollment.update_payments
-              end
+            end
+          else
+            kk_enrollment = user.kk_enrollment
+            if kk_enrollment
+                kk_enrollment.paid = (result_hash[:mr_euroa].tr(',', '.').to_f * 100.0).to_i
+                kk_enrollment.save
             end
           end
         end

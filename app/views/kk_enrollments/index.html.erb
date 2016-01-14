@@ -1,22 +1,22 @@
 <div class="col-lg-12">
   <h1>Kierrosilmoittautumiset</h1>
 <p>Kierrokselle ilmoittautuneiden lista. Tällä sivulla voit päivittää henkilön maksutilanteen. Jos henkilö on joukkueen kapteeni, myös muiden joukkueen jäsenten maksutilanne päivitetään.</p>
+<%= form_tag('/kk_enrollments', method: :put) do %>
 <table id="kk_enrollments" class="table table-striped tablesorter-bootstrap">
   <thead>
     <tr>
-      <th>Viitenumero</th>
       <th>Etunimi</th>
       <th>Sukunimi</th>
       <th>Joukkue</th>
+      <th>Viitenumero</th>
+      <th>Maksettava</th>
       <th>Maksettu</th>
-      <th>Päivitä maksutilanne</th>
     </tr>
   </thead>
 
   <tbody>
     <% @kk_enrollments.each do |enrollment| %>
       <tr>
-        <td><%= enrollment.user.construct_reference_number %></td>
         <td><%= enrollment.user.first_name %></td>
         <td><%= enrollment.user.last_name %></td>
         <% if enrollment.user.group.nil? %>
@@ -24,16 +24,29 @@
         <% else %>
             <td><%= enrollment.user.group.name %></td>
         <% end %>
-        <td><%= enrollment.paid == true ? 'Kyllä' : 'Ei' %></td>
-        <% if enrollment.paid %>
-            <td>Maksettu</td>
+        <% if not enrollment.user.group.nil? and enrollment.user == enrollment.user.group.user %>
+            <td><%= enrollment.user.construct_reference_number %></td>
+            <td>200</td>
+        <% elsif enrollment.user.group.nil? %>
+            <td><%= enrollment.user.construct_reference_number %></td>
+            <td>50</td>
         <% else %>
-            <td><%= link_to 'Päivitä maksu', edit_kk_enrollment_path(enrollment) %></td>
+            <td></td>
+            <td></td>
         <% end %>
+        <td ><div class="form-group">
+          <% if enrollment.paid.nil? %>
+            <%= text_field_tag "paid[#{enrollment.id}]", nil, maxlength: 8, :class => "form-control min-width" %>
+          <% else %>
+            <%= text_field_tag "paid[#{enrollment.id}]", enrollment.paid/100.0, :class => "form-control min-width"  %>
+          <% end %>
+          </div></td>
       </tr>
     <% end %>
   </tbody>
 </table>
+<%= submit_tag 'Päivitä maksutiedot', :class => "btn btn-primary" %><br>
+<% end %>
 <br>
 <%= link_to 'Takaisin', admin_kk_enrollment_path, class: 'btn btn-primary' %>
 </div>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151212160630) do
+ActiveRecord::Schema.define(version: 20151225145923) do
 
   create_table "app_settings", force: true do |t|
     t.string   "name",       null: false
@@ -37,7 +37,7 @@ ActiveRecord::Schema.define(version: 20151212160630) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.decimal  "time"
-    t.boolean  "paid",       default: false, null: false
+    t.integer  "paid",       default: 0
   end
 
   add_index "enrollments", ["event_id"], name: "index_enrollments_on_event_id"
@@ -86,7 +86,7 @@ ActiveRecord::Schema.define(version: 20151212160630) do
 
   create_table "kk_enrollments", force: true do |t|
     t.integer  "user_id"
-    t.boolean  "paid",       default: false, null: false
+    t.integer  "paid",       default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end

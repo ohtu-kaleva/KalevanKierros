@@ -11,8 +11,9 @@
     <% @event.event_attributes.where.not(attribute_index: nil).order('attribute_index asc').each do |attr| %>
         <th><%= attr.name %></th>
     <% end %>
+    <th>Viitenumero</th>
+    <th>Maksettava</th>
     <th>Maksettu</th>
-    <th>Muuta maksutieto</th>
     <th>Lisää aika</th>
     <th>Poista aika</th>
     <th>Peru</th>
@@ -27,12 +28,15 @@
           <% enrollment.user.get_formatted_enrollment_data_for_event(@event.id).each do |data| %>
             <td><%= data %></td>
           <% end %>
-          <td >
-          <% if enrollment.paid %>
-            Kyllä
+          <td><%= enrollment.construct_reference_number %></td>
+          <td><%= enrollment.calculate_price %></td>
+          <td ><div class="form-group">
+          <% if enrollment.paid.nil? %>
+            <%= text_field_tag "paid[#{enrollment.id}]", nil, maxlength: 8, :class => "form-control min-width" %>
+          <% else %>
+            <%= text_field_tag "paid[#{enrollment.id}]", enrollment.paid/100.0, :class => "form-control min-width"  %>
           <% end %>
-          </td>
-          <td><%= link_to 'Muuta maksutieto', update_payment_info_path(enrollment.id), method: :put, class: "btn" %></td>  
+          </div></td>
           <td ><div class="form-group">
           <% if enrollment.time.nil? %>
             <%= text_field_tag "times[#{enrollment.id}]", nil, maxlength: 8, :class => "form-control min-width" %>
@@ -47,7 +51,7 @@
     <% end %>
     </tbody>
   </table>
-  <%= submit_tag 'Päivitä ajat', :class => "btn btn-primary" %><br>
+  <%= submit_tag 'Päivitä ajat ja maksutiedot', :class => "btn btn-primary" %><br>
   <% end %>
   <style type="text/css">.min-width{min-width: 100px;}</style><br>
   <p>

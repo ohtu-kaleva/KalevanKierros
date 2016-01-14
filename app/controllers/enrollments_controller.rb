@@ -273,7 +273,20 @@ class EnrollmentsController < ApplicationController
           if check_time_format(value)
             enrollment.update_attribute :time, to_seconds(value)
           else
-            message[:error] = 'Yksi tai useampi aika syötettiin virheellisessä muodossa.'
+            message[:error1] = 'Yksi tai useampi aika syötettiin virheellisessä muodossa.'
+          end
+        end
+      end
+    end
+    if params[:paid]
+      paid = params[:paid].delete_if {|key, value| value.blank? }
+      paid.each do |key, value|
+        enrollment = Enrollment.find_by id:key
+        if not enrollment.nil?
+          if is_float? value
+            enrollment.update_attribute :paid, (value.to_f * 100.0).to_i
+          else
+            message[:error2] = 'Yksi tai useampi maksutieto syötettiin virheellisessä muodossa.'
           end
         end
       end
@@ -314,18 +327,10 @@ class EnrollmentsController < ApplicationController
     @account_number = @enrollment.event.account_number
   end
 
-  def update_payment_info
-    enrollment = Enrollment.find_by id: params[:enrollment_id]
-    if enrollment
-      enrollment.update_payments
-    end
-    redirect_to :back
-  end
-
   def remove_all_payment_info_for_event
     event = Event.find_by id: params[:event_id]
     event.enrollments.each do |e|
-      e.update_attribute :paid, false
+      e.update_attribute :paid, 0
     end
     redirect_to :back, flash: { success: 'Tapahtuman kaikki maksutiedot poistettu' }
   end
@@ -379,6 +384,10 @@ class EnrollmentsController < ApplicationController
   end
 
   private
+
+  def is_float? string
+    true if Float(string) rescue false
+  end
 
   def to_seconds(a)
     format = %w{hours minutes seconds}
