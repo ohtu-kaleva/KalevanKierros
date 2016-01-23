@@ -49,7 +49,7 @@ class Enrollment < ActiveRecord::Base
   def calculate_price
     price = 0
 
-    if self.created_at <= self.event.end_date
+    if self.created_at.beginning_of_day <= self.event.end_date
       if self.event.price
         price = price + self.event.price
       end
