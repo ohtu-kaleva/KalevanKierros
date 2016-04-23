@@ -10,21 +10,21 @@
         </ul>
         </div>
     <% end %>
-    <p>Olet ilmoittautumassa tapahtumaan: <%= @event.name %><br>
-    <strong>Tapahtuman kuvaus:</strong><br>
-      <%= @event.description %>
+    <h2><%= @event.name %></h2>
+    <p>
+        <%= @event.description %>
     </p>
     <% event_price = @event.current_price %>
     <% if event_price and event_price > 0 %>
         <p>
         <span id="event_price" class="hidden"><%= event_price %></span>
-        Tapahtuman osallistumismaksu on <%= "%.2f" % (event_price/100.0) %> euroa.
+        Osallistumismaksu <%= "%.2f" % (event_price/100.0) %> euroa
         </p>
     <% end %>
     <div class="field">
     <% @event.event_attributes.each do |e| %>
         <% if e.attribute_type != "hidden" %>
-            <strong><%= e.attribute_label %></strong><br>
+            <p><%= e.attribute_label %></p>
         <% end %>
           <% if e.attribute_type == "select" %>
             <%= select_tag(e.name, options_for_select(e.get_options_to_form), {:class => 'payfield', "data-prices" => e.get_prices.to_s}) %><br>
@@ -63,10 +63,11 @@
     <% end %>
  <%= f.hidden_field :event_id, :value => params[:event_id] %>
 </div>
-    <br>
-    <span id="price_sum"></span><br>
+    <p>
+        <span id="price_sum"></span>
+    </p>
     <div class="actions">
-      <%= submit_tag 'Lähetä ilmoittautuminen eteenpäin', data: {disable_with: 'Ilmoittautuminen lähetetty'}  %>
+      <%= submit_tag 'Lähetä ilmoittautuminen eteenpäin', :class => "btn btn-primary", data: {disable_with: 'Ilmoittautuminen lähetetty'}  %>
     </div>
 
     <script type="text/javascript">
@@ -100,7 +101,7 @@
                 });
                 sum = sum/100
                 if(sum > 0) {
-                    $("#price_sum").html("Ilmoittautumismaksu on yhteensä " + sum.toFixed(2) + " euroa.");
+                    $("#price_sum").html("Yhteensä: " + sum.toFixed(2) + " euroa");
                 } else {
                     $("#price_sum").html("");
                 }
