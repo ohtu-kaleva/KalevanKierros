@@ -102,21 +102,23 @@ class KkEnrollmentsController < ApplicationController
 
   # PATCH/PUT /kk_enrollments/1
   def update
-    message = {}
-    if params[:paid]
-      paid = params[:paid].delete_if {|key, value| value.blank? }
-      paid.each do |key, value|
-        kk_enrollment = KkEnrollment.find_by id:key
-        if not kk_enrollment.nil?
-          if is_float? value
-            kk_enrollment.update_attribute :paid, (value.to_f * 100.0).to_i
-          else
-            message[:error] = 'Yksi tai useampi maksutieto syötettiin virheellisessä muodossa.'
-          end
+    @kk_enrollment = KkEnrollment.find_by id: params[:id]
+
+    if @kk_enrollment
+      if @kk_enrollment.user.group
+        group = @kk_enrollment.user.group
+        users = group.users
+        users.each do |u|
+          enr = u.kk_enrollment
+          enr.update_attribute(:paid, true)
         end
+      else
+        @kk_enrollment.update_attribute(:paid, true)
       end
+      flash[:success] = 'Ilmoittautuminen päivitettiin onnistuneesti'
     end
-    redirect_to :back, flash: message
+
+    redirect_to kk_enrollments_path
   end
 
   # DELETE /kk_enrollments/1
@@ -132,10 +134,6 @@ class KkEnrollmentsController < ApplicationController
   end
 
   private
-
-    def is_float? string
-      true if Float(string) rescue false
-    end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def kk_enrollment_params
@@ -160,7 +158,7 @@ class KkEnrollmentsController < ApplicationController
 
     def check_enrollment
       return if !@user.kk_enrollment
-      redirect_to user_path(@user.id), flash: { error: 'Olet jo ilmoittautunut kierrokselle' }
+      redirect_to root_path, flash: { error: 'Olet jo ilmoittautunut kierrokselle' }
     end
 
 end

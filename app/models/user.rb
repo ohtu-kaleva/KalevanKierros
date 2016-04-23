@@ -76,7 +76,8 @@ class User < ActiveRecord::Base
   end
 
   def define_series
-    age = Date.today.year - birth_date.year
+    year = AppSetting.find_by(name: 'KkYear').value.to_i
+    age = year - birth_date.year
     str = gender
     if age < 22
       str += 'AL22'

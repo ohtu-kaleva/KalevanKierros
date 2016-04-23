@@ -75,6 +75,7 @@ class EnrollmentsController < ApplicationController
         end
 
         @enrollment = Enrollment.new(enrollment_params)
+        @enrollment.user = current_user
         if @enrollment.save
           data_list.each do |d|
             d.enrollment_id = @enrollment.id

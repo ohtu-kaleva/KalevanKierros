@@ -2,6 +2,7 @@ class Enrollment < ActiveRecord::Base
   belongs_to :event
   belongs_to :user
   has_many :enrollment_datas, dependent: :destroy
+  before_create :check_for_existing_enrollment
 
   def update_payments
     if self.event.sport_type == "RowingEvent" and self.enrollment_datas.find_by(name: 'Tyyli').value == "Vuoro"
@@ -87,4 +88,11 @@ class Enrollment < ActiveRecord::Base
     end
     price
   end
+
+  private
+
+  def check_for_existing_enrollment
+    not self.user or not self.user.enrollments or not self.user.enrollments.find_by(event_id: self.event.id)
+  end
+
 end

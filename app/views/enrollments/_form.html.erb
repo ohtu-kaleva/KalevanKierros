@@ -66,7 +66,7 @@
     <br>
     <span id="price_sum"></span><br>
     <div class="actions">
-      <%= f.submit 'Lähetä ilmoittautuminen eteenpäin' %>
+      <%= submit_tag 'Lähetä ilmoittautuminen eteenpäin', data: {disable_with: 'Ilmoittautuminen lähetetty'}  %>
     </div>
 
     <script type="text/javascript">

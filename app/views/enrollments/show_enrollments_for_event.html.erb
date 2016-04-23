@@ -5,7 +5,8 @@
 
   <table id="eventparticipants" class="table table-striped tablesorter-bootstrap">
     <thead>
-    <th>Osallistujan nimi</th>
+    <th>Etunimi</th>
+    <th>Sukunimi</th>
     <th>Osallistujan sähköposti</th>
     <th>KK-numero</th>
     <% @event.event_attributes.where.not(attribute_index: nil).order('attribute_index asc').each do |attr| %>
@@ -22,7 +23,8 @@
     <tbody>
     <% @event.enrollments.each do |enrollment| %>
         <tr>
-          <td><%= enrollment.user.full_name %></td>
+          <td><%= enrollment.user.first_name %></td>
+          <td><%= enrollment.user.last_name %></td>
           <td><%= enrollment.user.email %></td>
           <td><%= enrollment.user.kk_number %></td>
           <% enrollment.user.get_formatted_enrollment_data_for_event(@event.id).each do |data| %>
@@ -93,10 +95,10 @@
                   });
 
                   $("#eventparticipants").tablesorter({
-                      headers: {2: {sorter:false}, 3: {sorter:false}, 4: {sorter:false}},
+                      // headers: {2: {sorter:false}, 3: {sorter:false}, 4: {sorter:false}},
                       theme: "bootstrap",
                       headerTemplate: '{content} {icon}',
-                      widgets: [ "uitheme" ]
+                      widgets: [ "uitheme", "filter" ]
                   });
               }
       );

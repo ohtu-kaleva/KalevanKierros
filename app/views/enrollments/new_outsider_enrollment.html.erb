@@ -62,7 +62,7 @@
         <% end %>
     <% end %>
     <span id="price_sum"></span><br>
-    <%= f.submit "Ilmoittaudu", :class => "btn btn-primary" %>
+    <%= submit_tag 'Lähetä ilmoittautuminen eteenpäin', data: {disable_with: 'Ilmoittautuminen lähetetty'}  %>
 <% end %>
 
 <script type="text/javascript">
