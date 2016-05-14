@@ -1,29 +1,59 @@
 <div class="col-lg-8">
-  <h1>Ilmoittautuminen</h1>
+  <h1>Ilmoittautuminen Kalevan Kierrokselle 2016</h1>
 
-  <p>Kalevan Kierrokselle ilmoittaudutaan netin kautta. Seuraavat ohjeet koskevat niin vanhoja, kuin uusia kiertäjiä.</p>
-
-  <h3>Osanottomaksuun sisältyy</h3>
-
-  <p>Mitali, diplomi, eri sarjoissa jaettavat palkinnot sekä tapaturmavakuutus, joka käsittää kaikki kuusi osakilpailua ja on voimassa kilpailujen aikana sekä välittömillä kilpailumatkoilla.</p>
-
-
-
-  <h3>Kierroksen osalajit</h3>
-
-  <p>Kalevan Kierrokseen ilmoittautumisen jälkeen ovat sitten vuorossa Kierroksen osalajit. Niihin ilmoittaudutaan ja maksetaan osallistumismaksut erikseen. Osalajien kilpailukutsut ja ilmoittautumisohjeet tulevat Kierroksen sivuille, kun osalaji alkaa olla ajankohtainen. Osakilpailuista peritään osallistumismaksu, joka on yleensä noin 35 euron suuruinen.</p>
+  <p>Kalevan Kierrokselle voi ilmoittautua joko yksilönä tai joukkueena.
+  Yksilön maksu 50 euroa, joka koostuu 20 euron jäsenmaksusta ja 30 euron yhteiskilpailumaksusta.
+  Joukkueessa voi olla 4-6 jäsentä ja maksu on 200 eur per joukkue. Osanottomaksuun sisältyy
+  mitali, diplomi, eri sarjoissa jaettavat palkinnot sekä tapaturmavakuutus, joka käsittää kaikki
+  kuusi osakilpailua ja on voimassa kilpailujen aikana sekä välittömillä kilpailumatkoilla.</p>
 
   <% if enrollment_open? %>
-    <% if current_user %>
-      <% #button_to('Ilmoittaudu kierrokselle', new_kk_enrollment_path(current_user.id), method: :get) %>
-      <%= link_to('Ilmoittaudu kierrokselle', new_kk_enrollment_path(current_user.id), :class => "btn btn-primary" ) %>
+      <% if current_user %>
+          <% if current_user.kk_enrollment.nil? %>
+            <p>Valitse yksi seuraavista:</p>
+            <p>
+              <% #button_to('En kuulu joukkueeseen ja ilmoittaudun yksilönä', new_kk_enrollment_path(current_user.id), method: :get) %>
+              <%= link_to('En kuulu joukkueeseen ja ilmoittaudun yksilönä', new_kk_enrollment_path(current_user.id), :class => "btn btn-primary" ) %>
+            </p>
+            <p>
+              <%= link_to('Olen joukkueen kapteeni ja ilmoitan joukkueen jäsenet', new_group_path(current_user.id), :class => "btn btn-primary") %>
+              <% #button_to('Olen joukkueen kapteeni ja ilmoitan joukkueen jäsenet', new_group_path(current_user.id), method: :get) %>
+            </p>
+            <p>
+              <%= link_to('Olen joukkueen jäsen ja kapteeni ilmoittaa minut', user_path(current_user), :class => "btn btn-primary") %>
+            </p>
+          <% else %>
+              <% if current_user.group.nil? %>
+                <%= link_to('Olet jo ilmoittautunut Kalevan Kierrokselle 2016', user_path(current_user), :class => "btn btn-info") %>
+              <% else %>
+                  <% if current_user.group.user === current_user %>
+                      <%= link_to('Ilmoita joukkueen jäseniä', group_path(current_user.group), :class => "btn btn-info") %>
+                  <% else %>
+                      <%= link_to('Olet jo ilmoittautunut Kalevan Kierrokselle 2016', user_path(current_user), :class => "btn btn-info") %>
+                  <% end %>
+              <% end %>
+          <% end %>
+      <% else %>
+        <p>Valitse ensin:</p>
+        <p>
+          <%= link_to('Kirjaudu - Osallistuin Kalevan Kierrokselle 2015 tai olen jo rekisteröitynyt', signin_path, :class => "btn btn-info") %>
+        </p>
+        <p>
+          <%= link_to('Rekisteröidy - En osallistunut Kalevan Kierrokselle 2015', signup_path, :class => "btn btn-info") %>
+        </p>
+      <% end %>
 
-      <%= link_to('Ilmoita joukkue', new_group_path(current_user.id), :class => "btn btn-info") %>
-      <% #button_to('Ilmoita joukkue', new_group_path(current_user.id), method: :get) %>
+  <% else %>
 
-    <% else %>
-      <%= button_to('Kirjaudu sisään ilmoittautuaksesi', signin_path, method: :get) %>
-    <% end %>
+    <%= link_to('Ilmoittautuminen Kalevan Kierrokselle 2016 on päättynyt', root_path, :class => "btn btn-info") %>
+
   <% end %>
+
+  <p></br>Jos et halua kilpailla, mutta haluat olla yhdistyksen jäsen, lähetä viestiä Mikolle: <a href="mailto:mikko.p.fagerstrom@elisanet.fi">mikko.p.fagerstrom(at)elisanet.fi</a></p>
+  <h3>Osalajit</h3>
+  <p>Kalevan Kierroksen osalajeihin ilmoittaudutaan ja maksetaan osallistumismaksut erikseen.
+  Osalajien kilpailukutsut ja ilmoittautumisohjeet tulevat Kierroksen sivuille,
+  kun osalaji alkaa olla ajankohtainen. Osakilpailuista peritään osallistumismaksu,
+  joka on yleensä noin 35 euron suuruinen.</p>
 
 </div>
