@@ -1,3 +1,472 @@
 // Place all the styles related to the StaticPages controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+h4 {
+  line-height: 1.4;
+}
+
+.cover-image {
+  background-repeat: no-repeat;
+  background-position: center center ;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  width: 100%;
+  height: 280px;
+  margin-top: -22px;
+  margin-bottom: 10px;
+}
+
+.etusivu {
+  min-height: 800px;
+  padding: 15px 0;
+}
+
+.etusivu > .tausta {
+  opacity: 0.4;
+}
+
+.osalaji {
+  min-height: 250px;
+  padding: 15px;
+}
+
+.osalaji * {
+  color: white;
+}
+
+.osalaji h4 {
+  margin-top: 0;
+}
+
+.osalaji .nappula {
+  width: 110px;
+}
+
+.tausta {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: -1;
+  margin: 5px;
+  background-repeat: no-repeat;
+  background-position: center center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  background-color: #002776;
+}
+
+.gradient {
+  background: rgba(0, 0, 0, 0.4);
+  background: -moz-linear-gradient(top, rgba(0, 0, 0, 0.5) 0%, rgba(255, 255, 255, 0) 50%);
+  background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(0, 0, 0, 0.5)), color-stop(50%, rgba(255, 255, 255, 0)));
+  background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0.5) 0%, rgba(255, 255, 255, 0) 50%);
+  background: -o-linear-gradient(top, rgba(0, 0, 0, 0.5) 0%, rgba(255, 255, 255, 0) 50%);
+  background: -ms-linear-gradient(top, rgba(0, 0, 0, 0.5) 0%, rgba(255, 255, 255, 0) 50%);
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5) 0%, rgba(255, 255, 255, 0) 50%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#000000', endColorstr='#ffffff', GradientType=0);
+  height: 100%;
+}
+
+.osalaji:hover .tausta {
+  background-image: initial;
+}
+
+.osalaji:hover .gradient {
+  opacity: 0;
+}
+
+.kk .tausta {
+  background-image: url('/download/images/KK_pysty_verkko_RGB_nega-1d76af4a229fe17ea944ce98a3fb21ec.png');
+  background-color: #002776;
+  background-size: contain;
+}
+
+.luistelu .tausta{
+  background-image: url('/download/images/luistelu.jpg');
+}
+
+.hiihto .tausta{
+  background-image: url('/download/images/hiihto.jpg');
+}
+
+.juoksu .tausta{
+  background-image: url('/download/images/juoksu.jpg');
+}
+
+.soutu .tausta{
+  background-image: url('/download/images/soutu.jpg');
+}
+
+.pyoraily .tausta{
+  background-image: url('/download/images/pyoraily.jpg');
+}
+
+.suunnistus .tausta{
+  background-image: url('/download/images/suunnistus.jpg');
+}
+
+.osalaji h3 {
+  margin-top: 16px;
+}
+
+.koti .navbar {
+  background: transparent;
+  border: 0;
+}
+
+.sivu {
+  position: relative;
+  min-height: 800px;
+}
+
+.sivu > .tausta {
+  margin: 0;
+}
+
+.sivu .teksti * {
+  color: white;
+}
+
+.sivu .container {
+  background-color: rgba(0,0,0,0.6);
+  padding: 0;
+}
+
+.sivu .kuvat {
+  padding: 0;
+}
+
+
+
+
+/* Haastekisa */
+/*-- top-grids --*/
+
+.haastekisa {
+  background-color: #002776;
+  padding-top: 15px;
+}
+.top-grids{
+  margin:1em 0;
+}
+.top-grid{
+  padding-left:0;
+  position:relative;
+}
+.shape{
+  position: absolute;
+  top: 0;
+  right: 5%;
+  overflow: hidden;
+  height: 100px;
+  width: 100px;
+  text-align: center;
+  z-index: 0;
+}
+.shape-right {
+  background: #f2c345;
+  padding: 76px 0px 11px 0;
+  width: 158px;
+  position: absolute;
+  right: -81%;
+  top: -52%;
+  z-index: 1;
+  -moz-transition: all 0.5s ease;
+  -webkit-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+  -webkit-transform: rotate(-44deg);
+  -ms-transform: rotate(-44deg);
+  transform: rotate(45deg);
+}
+.shape-right img {
+  width: 15% !important;
+  transform: rotate(27deg);
+}
+.shape-red {
+  position: absolute;
+  top: 0;
+  left: 0%;
+  overflow: hidden;
+  height: 100px;
+  width: 100px;
+  text-align: center;
+  z-index: 0;
+}
+.shape-red-left {
+  background: #ec4a41;
+  padding: 76px 0px 11px 0;
+  width: 158px;
+  position: absolute;
+  left: -81%;
+  top: -52%;
+  z-index: 1;
+  -moz-transition: all 0.5s ease;
+  -webkit-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+  -webkit-transform: rotate(-44deg);
+  -ms-transform: rotate(-44deg);
+  transform: rotate(-45deg);
+}
+.shape-red-left p{
+  color: #FFF;
+  font-size: 18px;
+  margin: 0;
+  transform: rotate(46deg);
+}
+.top-grid img{
+  width:100%;
+}
+.top-grid-bottom{
+  background:#FFF;
+  padding:1em;
+}
+.photo{
+  float:left;
+}
+.photo p{
+  color:#2a99d6;
+  font-size:14px;
+  font-weight:700;
+  margin:0;
+}
+.photo-right{
+  float:right;
+}
+.photo-right ul{
+  padding:0;
+  margin:0;
+}
+.photo-right ul li{
+  display:inline-block;
+}
+.photo-right ul li a{
+  color:#858585;
+  font-size:14px;
+  padding:0 1em;
+  background: url(../images/7.png) no-repeat 0px 5px;
+  text-decoration:none;
+}
+.photo-right ul li.comment a{
+  background: url(../images/8.png) no-repeat 0px 5px;
+}
+.top-grid-bottom a.great{
+  color:#2b3e4e;
+  font-size:15px;
+  margin:1em 0;
+  font-weight:700;
+  text-transform:uppercase;
+  line-height: 1.5em;
+  text-decoration: none;
+}
+.top-grid-bottom-grids{
+  margin-bottom:1em;
+}
+.user {
+  margin-top: 1.5em;
+}
+.user-left{
+  float:left;
+  width:14%;
+}
+.user-right{
+  float:left;
+  margin-left:1em;
+}
+.user-right a{
+  color:#858585;
+  font-size:13px;
+  font-weight:700;
+  margin:0;
+  text-decoration:none;
+}
+.user-right p {
+  font-weight:400;
+  display:block;
+  color:#858585;
+  font-size:13px;
+}
+.yellow h4{
+  color:#2b3e4e;
+  font-size:15px;
+  margin:1em 0;
+  font-weight:400;
+  line-height: 1.5em;
+}
+.yellow h4 span{
+  display:block;
+}
+.top-grid-left-user{
+  margin-top:1.2em !important;
+}
+.top-grid-last{
+  background:#FFF;
+}
+.top-grid-last-info{
+  padding: 6.2em 2em;
+}
+.top-grid-last-info h3{
+  color: #000;
+  font-size: 20px;
+  font-style: italic;
+  margin: 0;
+  text-align: center;
+  line-height: 1.5em;
+}
+.top-grid-last-info p.ancient{
+  color: #2b3e4e;
+  margin: 2em 0 0 0;
+  font-size:13px;
+  text-align:center;
+}
+.img-bottom{
+  position: absolute;
+  top: 49%;
+  right: 9%;
+}
+.img-bottom ul{
+  margin:0;
+  padding:0;
+}
+.img-bottom ul li{
+  display:inline-block;
+  margin:0;
+  float:left;
+}
+.img-bottom ul li a.icon{
+  background: url(../images/img-sprits.png) no-repeat 2px -38px;
+  width: 33px;
+  height: 33px;
+  display: block;
+}
+.img-bottom ul li a.icon:hover{
+  background: url(../images/img-sprits.png) no-repeat 2px -70px;
+}
+.img-bottom ul li a.icon1{
+  background: url(../images/img-sprits.png) no-repeat -31px -38px;
+  width: 33px;
+  height: 33px;
+  display: block;
+}
+.img-bottom ul li a.icon1:hover{
+  background: url(../images/img-sprits.png) no-repeat -31px -70px;
+}
+.img-bottom ul li a.icon2{
+  background: url(../images/img-sprits.png) no-repeat -63px -38px;
+  width: 33px;
+  height: 33px;
+  display: block;
+}
+.img-bottom ul li a.icon2:hover{
+  background: url(../images/img-sprits.png) no-repeat -63px -70px;
+}
+
+.user-left {
+  padding-bottom: 14%;
+  background-size: cover !important;
+  background-position: center !important;
+  border-radius: 50%;
+}
+
+.top-grid {
+  padding-bottom: 15px;
+}
+
+
+/* Banner */
+/*-- banner --*/
+.banner-bg {
+  margin-top: 1em;
+}
+.banner{
+  background: #002776 no-repeat center;
+  min-height:425px;
+  background-size:cover;
+}
+.text-banner {
+  min-height:225px;
+}
+.banner-info{
+  text-align:center;
+  padding-top: 12em;
+}
+.text-banner .banner-info {
+  padding-top: 6em;
+}
+.banner-info p.sup{
+  font-size:24px;
+  color:#FFF;
+  font-weight:700;
+  margin:0;
+}
+.banner-info h2{
+  color: #FFF;
+  font-size: 51px;
+  font-weight: 700;
+  margin: 0;
+}
+.banner-info p.sub{
+  font-size:24px;
+  color:#FFF;
+  margin: 0 0 .5em 0;
+}
+.banner-grids {
+  width: 30%;
+  margin: 0 auto;
+}
+.banner-left{
+  float:left;
+}
+.banner-left a.text{
+  font-size: 18px;
+  color: #FFF;
+  text-decoration:none;
+  padding-left: 1.5em;
+  margin: 0;
+  font-weight: 100;
+  background: url(../images/2.png) no-repeat 1px 6px;
+}
+.banner-right{
+  float:left;
+  margin-left: 0.5em;
+}
+.banner-right a.text{
+  font-size: 18px;
+  color: #FFF;
+  text-decoration:none;
+  padding-left: 1.5em;
+  margin: 0;
+  font-weight: 100;
+  background: url(../images/3.png) no-repeat 1px 4px;
+}
+
+.banner-back {
+  background: white;
+}
+
+.banner-text {
+  padding: 15px;
+}
+
+.top-grids > .container {
+  padding-right: 0;
+}
+
+.haastekisa > .container > h3,
+.haastekisa > .container > p,
+.haastekisa > .container > h4 {
+  color: white;
+}
+
+.joukkue {
+  height: 100px;
+  background-size: cover;
+  background-position: center;
+}
