@@ -1,18 +1,17 @@
-<h1>Olet lisäämässä jäsentä ryhmään <%= @group.name %></h1>
-
-<p>Kirjoita jäsenen kiertäjänumero kenttään.</p>
-<%= form_tag(controller: 'groups', action: 'update_user_group_relation') do %>
-<div class="input-group">
-       <span class="input-group-addon">1.</span>
-        <%= text_field_tag 'kk_number', nil, :class => "form-control autocomplete", :id => "member" %>
-       <span class="input-group-addon">&nbsp;&nbsp;&nbsp</span>
+<div class="col-lg-6">
+    <h3>Lisää jäsen joukkueeseen <%= @group.name %></h3>
+    <p>Kirjoita nimi kenttään ja valitse jäsen listasta. Jäsenen tulee olla rekisteröitynyt.</p>
+    <%= form_tag(controller: 'groups', action: 'update_user_group_relation') do %>
+        <div class="input-group">
+           <span class="input-group-addon">1.</span>
+           <%= text_field_tag 'kk_number', nil, :class => "form-control autocomplete", :id => "member" %>
+           <span class="input-group-addon">&nbsp;&nbsp;&nbsp</span>
+        </div>
+        <div class="actions">
+        <%= submit_tag 'Lisää jäsen', :class => "btn btn-primary" %>
+        </div>
+    <% end %>
 </div>
-
-<div class="actions">
-  <%= submit_tag 'Lisää jäsen', :class => "btn btn-primary" %>
-</div>
-<% end %>
-
 <script type="text/javascript">
     $("input.autocomplete").autocomplete({ delay: 50, minLength: 2, autoFocus: true,
         select: function (event, ui) {

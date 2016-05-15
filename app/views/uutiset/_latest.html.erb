@@ -1,9 +1,10 @@
-  <div style="min-height: 350px;">
-  <div style="width:100%; height: 45px; background-image: url('<%= asset_path 'palkki.png' %>'); background-repeat:  no-repeat; color: white; font-size: 18px; padding-top: 5px; margin-bottom: 4px; text-align: center;">Viimeisimmät uutiset</div>
+<div class="uutiset">
+  <h3></h3>
     <% show_latest.each do |uutiset| %>
-      <p><%= link_to raw(uutiset.title << ' <span class="newstime">(' << uutiset.created_at.strftime("%-d.%-m. %H:%M") << ')</span>'), uutiset_path(uutiset) %></p>
-  <% end %>
-
-    <hr style="border-top: 1px dotted black;" />
-  </div>
-  <style type="text/css">.newstime{font-size: small; }</style>
+      <span><%= uutiset.created_at.strftime("%-d.%-m.%-Y") %></span>
+      <p><%= link_to raw(uutiset.title), uutiset_path(uutiset) %></p>
+      <!--p><%= link_to raw(uutiset.title << ' <span
+          class="newstime">(' << uutiset.created_at.strftime("%-d.%-m. %H:%M") << ')</span>'), uutiset_path(uutiset) %></p-->
+      <% end %>
+</div>
+  <!--style type="text/css">.newstime{font-size: small; }</style-->

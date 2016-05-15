@@ -1,5 +1,5 @@
-<h1>Ilmoittautuminen Kalevan Kierrokselle <%= Date.today.year %></h1>
-<h2 color="red">HUOM! Älä ilmoittaudu tämän sivun kautta jos haluat osallistua kierrokselle joukkueen mukana. Jos ilmoittaudut tältä sivulta, sinua ei voi lisätä enää joukkueeseen.</h2>
+<h1>Ilmoittautuminen Kalevan Kierrokselle 2016</h1>
+<p>HUOM! Jos osallistut joukkueeseen, et ilmoittaudu itse vaan joukkueesi kapteeni ilmoittaa sinut.</p>
 <p>Ole hyvä ja tarkista tietosi ennen ilmoittautumista:</p>
 
 
@@ -30,5 +30,5 @@
 
 <p><%= link_to ('<span class="glyphicon glyphicon-edit"></span> Muokkaa tietoja').html_safe, edit_user_path, :class => ""%></p>
 
-<%= button_to 'Ilmoittaudu kierrokselle', url_for(controller: :kk_enrollments, action: :create ), :class => "btn btn-info" %>
+<%= button_to 'Ilmoittaudu yksilönä kierrokselle', url_for(controller: :kk_enrollments, action: :create ), :class => "btn btn-info" %>
 <%= link_to 'Takaisin', '/ilmoittautuminen', class:"btn btn-default" %>

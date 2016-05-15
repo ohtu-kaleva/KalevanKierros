@@ -1,5 +1,5 @@
 <div class="col-lg-6">
-  <% show_latest.first(2).each do |uutiset| %>
+  <% show_latest.first(10).each do |uutiset| %>
       <h2><%= uutiset.title %></h2>
 
       <p>
@@ -11,4 +11,4 @@
 </div>
 <div class="col-lg-4">
 <%= render 'latest' %>
-    </div>
+</div>
