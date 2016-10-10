@@ -3,7 +3,7 @@ class YearlyAwardsController < ApplicationController
 
   def list_years_awards
     @year = AppSetting.find_by(name: 'KkYear').value.to_i
-    participants = User.joins(:kk_enrollment).where.not(kk_enrollments: { id: nil }).joins('JOIN results ON results.kk_number = users.kk_number').select('users.*, results.pts_sum, results.completed_events')
+    participants = User.joins('JOIN results ON results.kk_number = users.kk_number AND results.year = '+ @year.to_s).select('users.*, results.pts_sum, results.completed_events')
     @veljeskunta = get_veljeskunta_receivers(participants)
     @kunniakiertajat = get_kunniakiertaja_receivers(participants)
     @ansioviirit = get_ansioviiri_receivers(participants)
