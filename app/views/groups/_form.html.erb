@@ -13,7 +13,9 @@
 
     <div class="field">
       <%= f.text_field :name, label: "Joukkueen nimi:" %><br>
-      <p>Anna jäsenten kiertäjänumerot, lisää vähintään 3 kiertäjää kapteenin lisäksi.</p><br>
+      <p>Jos kyseessä on naisjoukkue, lisää nimen perään (naisjoukkue)</p>
+      <label>Joukkueen jäsenet:</label>
+      <p>Kirjoita nimi kenttään ja valitse jäsen listasta. Jäsenen pitää olla rekisteröitynyt. Voit täydentää joukkuetta myöhemmin.</p><br>
       <div class="input-group">
         <span class="input-group-addon">1.</span>
         <%= text_field_tag 'kk_numbers[]', nil, :class => "form-control autocomplete", :id => "member1", :value => current_user.kk_number, :readonly => 1 %>

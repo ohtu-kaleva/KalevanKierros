@@ -1,6 +1,79 @@
 <h1>Kalevan kierroksen tulokset vuosittain</h1>
-<% @years.each do |year| %>
+
+<% @years.reverse.each do |year| %>
     <p style="font-size: larger;"><span style="font-weight: bold;"><%= year %></span>: <%= link_to "Henkilökohtaiset tulokset "<< year.to_s, index_by_year_path(year, "all", "all", "all") %>&nbsp;|&nbsp;<%= link_to "Joukkuetulokset " << year.to_s, results_path << '/year/' << year.to_s << '/groups' %></p>
 <% end %>
+
+<ul class="nav nav-pills">
+    <% @years.reverse.each do |year| %>
+    <li role="presentation" class="active"><a href="#"><%= year %></a></li>
+    <% end %>
+</ul>
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12">
+            <h1 class="text-center">2016</h1>
+        </div>
+        <div class="laatikko col-xs-6 col-sm-3 bg-primary">
+            <h3 class="bg-primary">Luistelu</h3>
+        </div>
+        <div class="laatikko col-xs-6 col-sm-3" style="background-image: url('download/2016/luistelu/2.JPG')">
+        </div>
+        <div class="laatikko col-xs-6 col-sm-3" style="background-image: url('download/2016/luistelu/1.JPG')">
+        </div>
+        <div class="laatikko col-xs-6 col-sm-3" style="background-image: url('download/2016/luistelu/2.JPG')">
+        </div>
+        <div class="laatikko col-xs-12 col-sm-6 bg-primary">
+            <p class="teksti">
+                Lauantaina 30. tammikuuta Oulunkylän luistelupyhätön täyttivät taas Kalevan Kiertäjät. Luistelukeskuksen käytävillä ja pukuhuoneissa oli aistittavissa ensikertalaisten jännitystä, koiranleukojen uhoa toisilleen, kilpaveikkojen kuntotason arvuuttelua ja tietysti jo oman eränsä luistelleiden vapautunutta ja tunnetusti kovaäänistä keskustelua siitä mikä meni pieleen. Kyllä joku taisi tunnustaa onnistuneensakin. Kaverin kättä paiskattiin ja kiitettiin vetoavusta taikka kattavasta selästä, jonka takana oli hyvä taittaa matkaa. Tuulenhalkojista olikin apua, kun vastainen tuuli riepotteli luistelijoita maalisuoralla koviten kai keskipäivän aikaan.
+            </p>
+        </div>
+        <div class="laatikko col-xs-6 col-sm-3" style="background-image: url('download/2016/luistelu/1.JPG')">
+        </div>
+        <div class="laatikko col-xs-6 col-sm-3" style="background-image: url('download/2016/luistelu/1.JPG')">
+        </div>
+        <div class="laatikko col-xs-6 col-sm-3" style="background-image: url('download/2016/luistelu/2.JPG')">
+        </div>
+        <div class="laatikko col-xs-6 col-sm-3" style="background-image: url('download/2016/luistelu/1.JPG')">
+        </div>
+        <div class="laatikko col-xs-12 col-sm-6 bg-primary">
+            <p class="teksti">
+                Luistelijoita oli viime vuotta enemmän ja kuuteen erään jaetut ryhmät olivatkin melkoisen täysiä. Pahemmilta vaaranpaikoilta vältyttiin, vaikka aina joku muksahti silloin tällöin takalistolleen. Aamun ensimmäisessä erässä nuori mies kaatui aseman kaarteessa ja ponnahti kesken liun samoin tein ylös päästen vielä takaisin omaan letkaan, joka oli lopettanut luistelun taivastellessaan kaatumista.
+            </p>
+        </div>
+
+        <div class="laatikko col-xs-6 col-sm-3 bg-primary">
+            <h3 class="bg-primary">Tulokset miehet</h3>
+            <p>1. Juha Prittinen	00:51:53	1000.0</p>
+            <p>2. Ossi Sippu		00:53:19	966.86</p>
+            <p>3. Juha Lehtonen		00:53:51	954.76</p>
+        </div>
+        <div class="laatikko col-xs-12 col-sm-6 bg-primary">
+            <p class="teksti">
+                Kilpailun ennakkosuosikin hermot pitivät ja Prittinen kuittasi luistelun voiton.  Prittinen voitti ajalla 51.53, eroa toiseksi tulleeseen Ossi Sippuun tuli 1.26. Naisten kisassa kovinta vauhtia piti Kirsi Korpijärvi ajalla 56.03. Toiseksi sijoittui Johanna Herranen 5.03 hävinneenä. Oman luisteluerän jälkeen hernerokkapadan äärellä nähtiin tyytyväisiä ja onnellisia urakan suorittaneita. Osaa jäi vähän harmittamaan ja ensivuodeksi tehtiinkin jo harjoittelulupauksia itselle ja uhoksi kavereille.
+            </p>
+        </div>
+        <div class="laatikko col-xs-6 col-sm-3 bg-primary">
+            <h3 class="bg-primary">Tulokset naiset</h3>
+            <p>1. Kirsi Korpijärvi		00:56:03	906.07</p>
+            <p>2. Johanna Herranen		01:01:06	801.16</p>
+            <p>3. Elina Kilpeläinen		01:04:02	744.14</p>
+        </div>
+        <div class="laatikko col-xs-12 col-sm-6 bg-primary">
+            <p class="teksti">
+                Nurmisen Jouni ei paljon rokkaa ehtinyt pistelemään poskeensa. Aikanaan tuplana pitkät matkat kiertänyt lohjalainen päätti juhlistaa juhlavuoden aloitusta luistelemalla päivän kaikki kuusi erää. Urakka on vielä ajallisestikin uskokamaton, nopeimman ajan jäädessä alle 55 minuuttia ja hitaimman 1.03 tuntumaan, voisi jäädä melko monelta tekemättä.
+            </p>
+        </div>
+        <div class="laatikko col-xs-12 col-sm-6 bg-primary">
+            <p  class="teksti">
+              Juhlavuoden kunniaksi pidettävän haastejoukkuekilpailun voitti IBD Cycling Robert Brandtin luistellessa joukkueelleen ajaksi 52.06. Itsensävoittamisen palkinnon ansaitsi Finntriathlonin Michael Quarshie, jonka luistelusuoritus kesti yli kaksi ja puolituntia. Maalissa Michael oli iloinen ja onnellinen mies. Tulipahan opeteltua matkaluistelu kilpailun aikana, mies totesi.
+           </p>
+        </div>
+        <div class="laatikko col-xs-6 col-sm-3" style="background-image: url('download/2016/luistelu/2.JPG')">
+        </div>
+
+    </div>
+</div>
 
 <%= @time %><br>

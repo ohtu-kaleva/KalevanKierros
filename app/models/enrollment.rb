@@ -58,8 +58,10 @@ class Enrollment < ActiveRecord::Base
         if a.attribute_type.in? ['radio_button', 'select']
           selection = a.attribute_value.split(';')
           prices = a.payment_value.split(';')
-          selected = self.enrollment_datas.find_by(attribute_index: a.attribute_index).value
-          price = price + prices[selection.index(selected)].to_i
+          selected = self.enrollment_datas.find_by(attribute_index: a.attribute_index)
+          if selected and selection.index(selected.value)
+            price = price + prices[selection.index(selected.value)].to_i
+          end
         elsif a.attribute_type == 'check_box'
           if self.enrollment_datas.find_by(attribute_index: a.attribute_index).value != ""
             price = price + a.payment_value.to_i
@@ -76,8 +78,11 @@ class Enrollment < ActiveRecord::Base
         if a.attribute_type.in? ['radio_button', 'select']
           selection = a.attribute_value.split(';')
           prices = a.second_payment_value.split(';')
-          selected = self.enrollment_datas.find_by(attribute_index: a.attribute_index).value
-          price = price + prices[selection.index(selected)].to_i
+          selected = self.enrollment_datas.find_by(attribute_index: a.attribute_index)
+          if selected and selection.index(selected.value)
+            price = price + prices[selection.index(selected.value)].to_i
+          end
+
         elsif a.attribute_type == 'check_box'
           if self.enrollment_datas.find_by(attribute_index: a.attribute_index).value != ""
             price = price + a.second_payment_value.to_i

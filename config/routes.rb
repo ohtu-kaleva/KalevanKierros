@@ -51,7 +51,9 @@ Rails.application.routes.draw do
   get 'yhteystiedot/seurat', to: 'static_pages#seurat'
   get 'yhteystiedot/linkkeja', to: 'static_pages#linkkeja'
   get 'yhteystiedot/postituslista', to: 'static_pages#postituslista'
-  get 'testi', to: 'static_pages#etusivu2'
+  get 'testi', to: 'static_pages#etusivu'
+
+  get 'haastekisa', to: 'static_pages#haastekisa'
 
   get 'diplomas', to: 'printing_materials#export_diplomas', as: 'export_diplomas'
   get 'address_stickers', to: 'printing_materials#export_address_stickers', as: 'export_address_stickers'

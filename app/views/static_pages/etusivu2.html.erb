@@ -1,0 +1,545 @@
+</div>
+<div class="container etusivu">
+    <div class="col-sm-6">
+        <div class="osalaji luistelu col-sm-6">
+            <div class="tausta">
+                <div class="gradient"></div>
+            </div>
+            <h4>Luistelu 30.1.2016</h4>
+            <h5>30 km, Oulunkylä, Helsinki</h5>
+            <p><a href="results/year/2016/all/all/skating" class="nappula btn btn-success">Tulokset</a></p>
+        </div>
+        <div class="osalaji hiihto col-sm-6">
+            <div class="tausta">
+                <div class="gradient"></div>
+            </div>
+            <h4>Hiihto 19.3.2016</h4>
+            <h5>45 km, Vuokatti, Sotkamo</h5>
+            <p><a href="results/year/2016/all/all/skiing" class="nappula btn btn-success">Tulokset</a></p>
+        </div>
+        <div class="osalaji juoksu col-sm-6">
+            <div class="tausta">
+                <div class="gradient"></div>
+            </div>
+            <h4>Juoksu 21.5.2016</h4>
+            <h5>21.1km/42.2km, Tuusula</h5>
+            <p><a href="results/year/2016/all/all/marathon" class="nappula btn btn-success">Tulokset</a></p>
+        </div>
+        <div class="osalaji soutu col-sm-6">
+            <div class="tausta">
+                <div class="gradient"></div>
+            </div>
+            <h4>Soutu 2.7.2016</h4>
+            <h5>30 km, Keuruu</h5>
+            <p><a href="results/year/2016/all/all/rowing" class="nappula btn btn-success">Tulokset</a></p>
+        </div>
+        <div class="osalaji pyoraily col-sm-6">
+            <div class="tausta">
+                <div class="gradient"></div>
+            </div>
+            <h4>Pyöräily 20.8.2016</h4>
+            <h5>66 km, Iitti</h5>
+            <p><a href="results/year/2016/all/all/cycling" class="nappula btn btn-success">Tulokset</a></p>
+        </div>
+        <div class="osalaji suunnistus col-sm-6">
+            <div class="tausta">
+                <div class="gradient"></div>
+            </div>
+            <h4>Suunnistus 25.9.2016</h4>
+            <h5>15 km, Hämeenkyrö</h5>
+            <p><a href="results/year/2016/all/all/orienteering" class="nappula btn btn-success">Tulokset</a></p>
+            <p><a href="events/31/enrollments/new" class="nappula btn btn-warning">Ilmoittaudu</a></p>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <h2>Kestävyysurheilun juhlaa 40 vuotta</h2>
+        <h4>Kalevan Kierros on kuuden kestävyyslajin kunto- ja kilpaurheilutapahtuma.
+            Kierros motivoi kuntoilijaa säännölliseen liikkumiseen ja koettelee urheilijaa erilaisilla vaatimuksillaan.
+            Harjoittelu ei ole yksipuolista, kun kilpailulaji vaihtuu säännöllisesti noin kahden kuukauden välein.
+        </h4>
+        <p><a href="results/year/2016/all/all/all" class="nappula btn btn-success">Tulokset 2016</a></p>
+        <h3>Kalevan Kierros 2017</h3>
+        <p>28.1.2017 Luistelu 30km, Seinäjoki<br>
+            11.3.2017 Hiihto 54km, Jyväskylä<br>
+            27.5.2017 Suunnistus 15km, Hämeenkyrö<br>
+            1.7.2017 Soutu 30km, Keuruu<br>
+            19.8.2017 Pyöräily 66km, Iitti<br>
+            23.9.2017 Juoksu 23km, Tuusula</p>
+        <h4>Ilmoittautuminen aukeaa syksyllä. Tilaa uutiskirje niin pysyt ajantasalla.</h4>
+        <h1>
+            <a href="http://kalevankierros.us13.list-manage.com/subscribe?u=3937d04e4920be337565a19e3&id=775ac349d8" class="nappula btn btn-success">Tilaa uutiskirje</a>
+        </h1>
+
+    </div>
+    <div class="col-sm-6">
+        <%= render :partial => '/uutiset/latest', locals: {show_latest: Uutiset.order('created_at desc').limit(6)} %>
+        <a href="/uutiset"><p>Kaikki uutiset</p></a>
+    </div>
+    <div class="col-sm-6">
+        <div class="col-xs-4">
+            <a href="http://www.huhtasuonhiihto2000.fi/kilpailut/neljan-vuoren-hiihto-2016/">
+                <img class="img-responsive" src="http://www.huhtasuonhiihto2000.fi/wp-content/uploads/2011/12/4vuoren_hiihto_pieni.jpg">
+            </a>
+        </div>
+        <div class="col-xs-4">
+            <a href="http://www.haastaitsesikunnolla.fi/vuokatti+hiihto">
+                <img class="img-responsive" src="<%= asset_path 'VuokattiHiihto_logo.jpg' %>">
+            </a>
+        </div>
+        <div class="col-xs-4">
+            <a href="http://www.pwt-urheilumatkat.fi">
+                <img class="img-responsive" src="download/PWTbanneri.JPG">
+            </a>
+        </div>
+        <div class="col-xs-4">
+            <a href="http://tuusulanjarvenmaraton.fi/">
+                <img class="img-responsive" src="download/tjm.png">
+            </a>
+        </div>
+    </div>
+</div>
+<div class="kk sivu">
+    <div class="tausta"></div>
+    <div class="container">
+        <div class="teksti col-sm-6">
+            <h1>Kalevan Kierros</h1>
+
+            <div>
+
+                <p>Haluatko olla hyvässä kunnossa läpi vuoden? Kaipaatko haastetta? Onko motivaatiosi hukassa? Oletko
+                    kyllästynyt liian yksipuoliseen harjoitteluun?
+                </p>
+
+                <p>Vastaus on: KALEVAN KIERROS!!
+                </p>
+
+                <h4>Kalevan kierros liikuttaa monipuolisesta kestävyyskuntoilusta
+                    kiinnostuneita jo 40. kerran vuonna 2016!</h4>
+
+
+                <p> Kalevan kierros on kuuden kestävyyslajin yhteiskilpailu,
+                    joka tarjoaa haasteita sekä tosissaan kestävyyslajeja
+                    harrastaville että tavallisille oman kunnon ylläpitämisestä
+                    kiinnostuneille liikkujille.
+                </p>
+
+                <p> Sarjat sekä miehille että naisille 5-10 vuoden välein. Joukkuekilpailu 4-6 hengen mies- ja
+                    naisjoukkueille.
+                </p>
+
+                <p> Kalevan kierrokselle osallistuminen ei edellytä
+                    kilpailutaustaa, kiinnostus kestävyyslajeihin riittää.
+                    Monipuolisen lajivalikoiman ansiosta harjoittelu on erittäin
+                    vaihtelevaa, mikä nostaa sekä kestävyys- että lihaskuntoa.
+                </p>
+
+                <h4> Jo neljä suoritettua lajia riittää hyväksyttyyn Kalevan
+                    kierroksen suoritukseen.</h4>
+            </div>
+            <h1>
+                <% if enrollment_open? %>
+                <%= link_to('Ilmoittaudu Kalevan Kierrokselle 2016', ilmoittautuminen_path, :class => "btn btn-success")
+                %>
+                <% end %>
+            </h1>
+        </div>
+        <div class="kuvat col-sm-6">
+            <img src="/download/images/kk - 10532568_799697960101867_2256739312219473748_n.jpg"
+                 class="img-responsive">
+            <img src="/download/images/kk - 11095359_821650921239904_8334362964652195810_n.jpg"
+                 class="img-responsive">
+            <img src="/download/images/kk - 11403456_911025242302471_1427476216454497313_n.jpg"
+                 class="img-responsive">
+        </div>
+    </div>
+</div>
+<div class="luistelu sivu">
+    <div class="tausta"></div>
+    <div class="container">
+        <div class="kuvat col-sm-6">
+            <img src="/download/images/luistelu - 1795730_795259453879051_6946379027604601897_n.jpg"
+                 class="img-responsive">
+            <img src="/download/images/luistelu-5221f49f1579e3aa54264d8a017891f6.jpg"
+                 class="img-responsive">
+            <img src="/download/images/luistelu - 10993078_799698196768510_748536946486221528_n.jpg"
+                 class="img-responsive">
+        </div>
+        <div class="teksti col-sm-6">
+
+            <h1>Luistelu</h1>
+
+            <div>
+                <p>
+                    Pikaluistimet soveltuvat parhaiten rataluisteluun.
+                </p>
+
+                <p>Aloittelijoille on olemassa nilkkaa tukevia malleja, joilla on
+                    aluksi helpompi pitää tasapaino.
+                </p>
+
+                <p>Viime vuosina asemansa ovat vakiinnuttaneet klaps
+                    -pikaluistimet, joissa luistimen terä on kiinni ainoastaan
+                    kärkipuolelta ja irtoaa kannasta saranan varassa.
+                </p>
+
+                <p>Luistelumonoihin kiinnitettävät retkiluistinterät soveltuvat
+                    luonnonjääluisteluun, mutta ovat käyttökelpoisia myös
+                    radalla.
+                </p>
+
+                <p>Myös hokkareilla matkasta selviää, kun sinnikkyyttä ja
+                    kärsivällisyyttä vain riittää.
+                </p>
+            </div>
+            <h1>
+                <% if enrollment_open? %>
+                <%= link_to('Ilmoittaudu Kalevan Kierrokselle 2016', ilmoittautuminen_path,
+                :class => "btn
+                btn-success")
+                %>
+                <% end %>
+            </h1>
+        </div>
+
+    </div>
+</div>
+<div class="hiihto sivu">
+    <div class="tausta"></div>
+    <div class="container">
+        <div class="teksti col-sm-6">
+            <h1>
+                Hiihto
+            </h1>
+
+            <div>
+                <p>
+                    Kierroksen hiihdon voi suorittaa joko perinteisellä tai
+                    vapaalla tyylillä.
+                </p>
+
+                <p>Lähes kaikki suomalaiset omistavat sukset, mutta
+                    suksien pitää olla sopivat ennen muuta pituudeltaan ja
+                    jäykkyydeltään.
+                </p>
+
+                <p>Suksien voiteluun löytyy ohjeita mm Startin ja Vauhdin
+                    www-sivuilta muutama päivä ennen kisaa.
+                </p>
+
+                <p>Sukset voi voiteluttaa myös paikallisessa
+                    urheiluliikkeessä tai vasta kisapaikalla.
+                </p>
+
+                <p>Hiihtoharjoittelun voi aloittaa jo syksyllä sauvalenkkien
+                    muodossa, ja hiihtämään kannattaa ryhtyä heti
+                    lumentulon myötä.
+                </p>
+
+                <p>Pitkät ja rauhalliset, peruskestävyyttä kehittävät yli 30
+                    km mittaiset lenkit ovat keskeisiä.
+                </p>
+            </div>
+            <h1>
+                <% if enrollment_open? %>
+                <%= link_to('Ilmoittaudu Kalevan Kierrokselle 2016', ilmoittautuminen_path,
+                :class => "btn
+                btn-success")
+                %>
+                <% end %>
+            </h1>
+        </div>
+        <div class="kuvat col-sm-6">
+            <img src="/download/images/hiihto - 11078189_821651561239840_8292596758819061964_n.jpg"
+                 class="img-responsive">
+
+            <img src="/download/images/hiihto - 11083941_821652767906386_3769113088583924247_n.jpg"
+                 class="img-responsive">
+
+            <img src="/download/images/hiihto - 11091472_821660341238962_2856594416647472550_n.jpg"
+                 class="img-responsive">
+        </div>
+
+    </div>
+</div>
+<div class="sivu juoksu">
+    <div class="tausta"></div>
+    <div class="container">
+        <div class="kuvat col-sm-6">
+            <img src="/download/images/juoksu - 10996952_889664964438499_1843217006504105707_n.jpg"
+                 class="img-responsive">
+
+            <img src="/download/images/juoksu - 11059965_889665087771820_3320571025006770378_n.jpg"
+                 class="img-responsive">
+
+            <img src="/download/images/juoksu - 11238271_889664777771851_758582519362702993_n.jpg"
+                 class="img-responsive">
+        </div>
+        <div class="teksti col-sm-6">
+            <h1>
+                Juoksu</h1>
+
+            <div>
+                <p>
+                    Kalevan Kierroksen juoksun voit suorittaa joko juoksemalla
+                    puolimaratonin tai maratonin.
+                </p>
+
+                <p>Matkat juostaan pääosin asfalttitiellä, jolla ei tavallisesti ole
+                    merkittäviä korkeuseroja.
+                </p>
+
+                <p>Maraton on raskas juoksu ja siihen valmistautuminen
+                    kannattaa aloittaa jo talvella.
+                </p>
+
+                <p>Koska maraton juostaan asfaltilla, myös harjoittelussa pitäisi
+                    totuttaa jalat kovaan juoksualustaan.
+                </p>
+
+                <p>Hiihdon jälkeen ei ole liikaa aikaa valmistautua maratoniin,
+                    mutta lyhyempien lenkkien ohella pitäisi pyrkiä juoksemaan
+                    myös kolme pidempää (n. 30 km) lenkkiä.
+                </p>
+
+                <p>Ohjeita maratonille valmistautumiseen löytyy nykyisin
+                    monesta paikasta, esim. Juoksufoorumi</p>
+            </div>
+            <h1>
+                <% if enrollment_open? %>
+                <%= link_to('Ilmoittaudu Kalevan Kierrokselle 2016', ilmoittautuminen_path,
+                :class => "btn
+                btn-success")
+                %>
+                <% end %>
+            </h1>
+        </div>
+
+
+
+    </div>
+</div>
+<div class="sivu soutu">
+    <div class="tausta"></div>
+    <div class="container">
+        <div class="teksti col-sm-6">
+            <h1>
+                Soutu</h1>
+
+            <div>
+                <p>
+                </p>
+
+                <p>Kierroksen soutu suoritetaan joko yksin- tai vuorosoutuna.
+                </p>
+
+                <p>Vuorosoudussa venekunnan toinen jäsen meloo toisen
+                    soutaessa.
+                </p>
+
+                <p>Soutuvene on ns. savolais-mallinen puuvene, mutta myös
+                    lasikuituveneellä saa halutessaan soutaa. Sitä ei voi
+                    kuitenkaan suositella!
+                </p>
+
+                <p>Nykyään Kalevan kierroksessa käytetyissä veneissä on lähes
+                    poikkeuksetta liukupenkki.
+                </p>
+
+                <p>Veneitä tarjotaan myös vuokralle ja käytettyjäkin veneitä on
+                    kaupan. Kannattaa seurata Kalevan kierroksen foorumia.</p>
+            </div>
+            <h1>
+                <% if enrollment_open? %>
+                <%= link_to('Ilmoittaudu Kalevan Kierrokselle 2016', ilmoittautuminen_path,
+                :class => "btn
+                btn-success")
+                %>
+                <% end %>
+            </h1>
+        </div>
+
+        <div class="kuvat col-sm-6">
+            <img src="/download/images/soutu - 11062258_911028022302193_3830446155204955714_n.jpg"
+                 class="img-responsive">
+
+            <img src="/download/images/soutu - 11231689_911027452302250_6083407395646051842_n.jpg"
+                 class="img-responsive">
+
+            <img src="/download/images/soutu - 11666019_911029482302047_5820303404096291061_n.jpg"
+                 class="img-responsive">
+        </div>
+
+    </div>
+</div>
+<div class="sivu pyoraily">
+    <div class="tausta"></div>
+    <div class="container">
+        <div class="kuvat col-sm-6">
+            <img src="/download/images/11846642_937399359665059_3705110390289199766_n.jpg"
+                 class="img-responsive">
+
+            <img src="/download/images/11880452_937408819664113_5315847374025288228_n.jpg"
+                 class="img-responsive">
+
+            <img src="/download/images/1499423_937404546331207_8747969118840022694_n.jpg"
+                 class="img-responsive">
+        </div>
+        <div class="teksti col-sm-6">
+            <h1>
+                Py&ouml;r&auml;ily</h1>
+
+            <div>
+                <p>
+                </p>
+
+                <p>Kierroksen pyöräily poljetaan aika-ajona noin 65 kilometrin
+                    matka.
+                </p>
+
+                <p>Startti tapahtuu väliaikalähdöin ja muiden pyöräilijöiden
+                    peesaaminen on kiellettyä.
+                </p>
+
+                <p>Ajoon soveltuu parhaiten kilpapyörä, mutta myös
+                    tavallisella retkipyörällä tai maastopyörällä matkasta selviää
+                    kyllä.
+                </p>
+
+                <p>Ohjaustankoon kiinnitettävä aika-ajotanko, ns. lepuuttaja,
+                    on hyvä matalan ajoasennon säilyttämiseen.
+                </p>
+
+                <p>Kypärä on pyöräilyssä pakollinen.</p>
+            </div>
+            <h1>
+                <% if enrollment_open? %>
+                <%= link_to('Ilmoittaudu Kalevan Kierrokselle 2016', ilmoittautuminen_path,
+                :class => "btn
+                btn-success")
+                %>
+                <% end %>
+            </h1>
+        </div>
+
+
+
+    </div>
+</div>
+<div class="sivu suunnistus">
+    <div class="tausta"></div>
+    <div class="container">
+        <div class="teksti col-sm-6">
+
+            <h1>Suunnistus</h1>
+
+            <div>
+                <p>
+                </p>
+
+                <p>Kierroksen suunnistuksessa radan pituus on noin 15 kilometriä.
+                    - Suunnistus juostaan yhteis- tai väliaikalähtönä.
+                </p>
+
+                <p>Vaikka metsään lähdettäisiinkin yhteislähdöllä, erilaiset hajonnat
+                    takaavat sen, että kanssakilpailijat eivät välttämättä kierrä kaikkia
+                    rastivälejä samassa järjestyksessä.
+                </p>
+
+                <p>Varusteista keskeisin on kompassi, myös suunnistuskengät ja
+                    -asu ovat suositeltavia.
+                </p>
+
+                <p>Suunnistuksessa käytetään elektronista kilpailukorttia (Emit),
+                    jonka voi kilpailussa myös vuokrata kilpailujärjestäjältä.
+                </p>
+
+                <p>Kuntorasteja järjestetään lähes kaikkialla Suomessa keväästä
+                    alkaen ja monet seurat järjestävät etenkin keväisin suunnistuskouluja
+                </p>
+            </div>
+            <h1>
+                <% if enrollment_open? %>
+                <%= link_to('Ilmoittaudu Kalevan Kierrokselle 2016', ilmoittautuminen_path,
+                :class => "btn
+                btn-success")
+                %>
+                <% end %>
+            </h1>
+        </div>
+        <div class="kuvat col-sm-6">
+            <img src="\download\images\11137139_954480061290322_7565690848653809393_n.jpg"
+                 class="img-responsive">
+
+            <img src="\download\images\12036371_954493107955684_1137944579402137908_n.jpg"
+                 class="img-responsive">
+
+            <img src="\download\images\11822803_954494524622209_5033735278889288040_n.jpg"
+                 class="img-responsive">
+        </div>
+
+    </div>
+</div>
+<div class="kk sivu">
+    <div class="tausta"></div>
+    <div class="container">
+        <div class="kuvat col-sm-6">
+            <img src="/download/images/kk - 10532568_799697960101867_2256739312219473748_n.jpg"
+                 class="img-responsive">
+            <img src="/download/images/kk - 11095359_821650921239904_8334362964652195810_n.jpg"
+                 class="img-responsive">
+            <img src="/download/images/kk - 11403456_911025242302471_1427476216454497313_n.jpg"
+                 class="img-responsive">
+        </div>
+        <div class="teksti col-sm-6">
+            <h1>Kalevan Kierros</h1>
+
+            <div>
+                <p>
+                </p>
+
+                <p>Kalevan kierroksessa vuodenaikojen mukaan vaihtuvat lajit
+                    tuovat luonnollista ja erittäin tervetullutta vaihtelua harjoitteluun.
+                </p>
+
+                <p>Harjoittelun painopistettä kannattaa siirtää aina seuraavaksi
+                    tulossa olevaan lajiin.
+                </p>
+
+                <p>Näin ollen Kalevan kierros tarjoaa erinomaiset raamit
+                    peruskuntoharjoittelulle, joka on lähes vuoden ympäri tapahtuvaa.
+                </p>
+
+                <p>Perusvoimaa parantava lihaskuntoharjoittelu kannattaa ajoittaa
+                    pääasiassa loka-joulukuuhun.
+                </p>
+
+                <p>Monipuolisuudessaan Kalevan kierros on ainutlaatuinen
+                    kokemus ja elämys!</p>
+            </div>
+            <h1>
+                <% if enrollment_open? %>
+                <%= link_to('Ilmoittaudu Kalevan Kierrokselle 2016', ilmoittautuminen_path,
+                :class => "btn
+                btn-success")
+                %>
+                <% end %>
+            </h1>
+        </div>
+
+    </div>
+    <div class="container">
+        <div class="teksti col-sm-6">
+            <h1>
+                <% if enrollment_open? %>
+                <%= link_to('Ilmoittaudu Kalevan Kierrokselle 2016', ilmoittautuminen_path,
+                :class => "btn
+                btn-success")
+                %>
+                <% end %>
+            </h1>
+        </div>
+    </div>
+
+
+
+

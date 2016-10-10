@@ -21,10 +21,11 @@
 //
 
 $brand-primary:         #002776;
+$brand-warning:         #d52b1e;
 $navbar-height:         110px;
 //$icon-font-path: '/assets/';
-$screen-sm: 992px;
-$font-size-base: 14px;
+$screen-sm:             768px;
+$font-size-base:        16px;
 $link-color:            $brand-primary !default;
 $link-hover-color:      white !default;
 
@@ -40,11 +41,10 @@ $font-family-sans-serif:  Arial, sans-serif;
 @import "bootstrap-sprockets";
 @import "bootstrap";
 @import "bootstrap/theme";
-
 @import "bootstrap/mixins";
 
 // Bootstrap body padding for fixed navbar
-body { padding-top: 112px; }
+// body { padding-top: 112px; }
 
 // Responsive styles go here in case you want them
 //@import "bootstrap-responsive";
@@ -76,17 +76,13 @@ footer {
   bottom: 0;
   width: 100%;
   /* Set the fixed height of the footer here */
-  height: 110px;
+  min-height: 110px;
   @include btn-shadow(#002776);
   filter: none;
   @include box-shadow(0 1px 10px rgba(0, 0, 0, 0.1));
 }
 p {
   font-size: 15px;
-}
-
-h2.eventtitle {
-  text-transform: uppercase;
 }
 
 a:hover, a:focus{
@@ -109,7 +105,10 @@ a:hover, a:focus{
 }
 
 
-
+.navbar {
+  border-radius: 0;
+  margin-bottom: 0;
+}
 
 .navbar a {
   font-size: 16px;
@@ -117,3 +116,55 @@ a:hover, a:focus{
 table.results tr { border-bottom: 1px solid transparent;}
 table.results tr:hover{ border-bottom: 1px solid gray;}
 table.child tr:hover{ border-bottom: 1px solid gray;}
+
+.ribbon-wrapper {
+  width: 112px;
+  height: 112px;
+  overflow: hidden;
+  position: absolute;
+  top: -3px;
+  left: -3px;
+  z-index: 9999;
+}
+
+.ribbon {
+  font: bold 15px Sans-Serif;
+  color: #333;
+  text-align: center;
+  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  -o-transform: rotate(-45deg);
+  position: relative;
+  padding: 4px 0;
+  left: -30px;
+  top: 30px;
+  width: 150px;
+  background-color: #d52b1e;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#d52b1e), to(#e52b1e));
+  background-image: -webkit-linear-gradient(top, #d52b1e, #e52b1e);
+  background-image: -moz-linear-gradient(top, #d52b1e, #e52b1e);
+  background-image: -ms-linear-gradient(top, #d52b1e, #e52b1e);
+  background-image: -o-linear-gradient(top, #d52b1e, #e52b1e);
+  color: white;
+  -webkit-box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.3);
+  box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.3);
+}
+
+.ribbon:before, .ribbon:after {
+  content: "";
+  border-top: 3px solid #6e8900;
+  border-left: 3px solid transparent;
+  border-right: 3px solid transparent;
+  position: absolute;
+  bottom: -3px;
+}
+
+.ribbon:before {
+  left: 0;
+}
+
+.ribbon:after {
+  right: 0;
+}
