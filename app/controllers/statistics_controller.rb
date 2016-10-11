@@ -38,7 +38,7 @@ class StatisticsController < ApplicationController
   end
 
   def join
-    @user = User.find_by id: statistic_params[:id]
+    @user = User.find_by id: params[:id]
     if !@user
       redirect_to :root && return
     end
@@ -56,8 +56,8 @@ class StatisticsController < ApplicationController
   end
 
   def join_user_to_existing_statistic
-    @user = User.find_by id: statistic_params[:id]
-    @statistic = Statistic.find_by id: statistic_params[:statistic_id]
+    @user = User.find_by id: params[:id]
+    @statistic = Statistic.find_by id: params[:statistic_id]
 
     if @user && @statistic
       @user.statistic.destroy unless @user.statistic.nil?

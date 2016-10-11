@@ -2,9 +2,22 @@ class UsersController < ApplicationController
   before_action :redirect_if_user_not_admin, only: [:index, :destroy]
   before_action :set_user_or_redirect, only:  [:show, :edit, :update, :destroy]
 
-  # GET /users
   def index
-    @users = User.all
+    @userInfo = []
+
+    users = User.all
+    potential_statistics = Statistic.where 'statistics.user_id IS NULL'
+    users.each do |u|
+      current_statistic = u.statistic
+
+      first_name = u.first_name.strip.downcase
+      last_name = u.last_name.strip.downcase
+      found = potential_statistics.select do |s|
+        s.first_name.strip.downcase.eql?(first_name) && s.last_name.strip.downcase.eql?(last_name)
+      end
+      joinable = (found.length > 0 and u.username[0..7] != 'outsider') ? 'K' : ''
+      @userInfo << [u, joinable]
+    end
   end
 
   # GET /users/1

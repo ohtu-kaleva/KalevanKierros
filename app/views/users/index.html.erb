@@ -21,24 +21,27 @@
       <th>Etunimi</th>
       <th>Käyttäjänimi</th>
       <th>Sähköposti</th>
+      <th>Liitettävissä tilastoon</th>
       <th></th>
     </tr>
     </thead>
     <tfoot>
-    <th>Sukunimi</th>
-    <th>Etunimi</th>
-    <th>Käyttäjänimi</th>
-    <th>Sähköposti</th>
-    <th></th>
+      <th>Sukunimi</th>
+      <th>Etunimi</th>
+      <th>Käyttäjänimi</th>
+      <th>Sähköposti</th>
+      <th>Liitettävissä tilastoon</th>
+      <th></th>
     </tfoot>
 
     <tbody>
-    <% @users.each do |user| %>
+    <% @userInfo.each do |user, joinable| %>
         <tr>
           <td><%= user.last_name %></td>
           <td><%= user.first_name %></td>
           <td><%= user.username %></td>
           <td><%= user.email %></td>
+          <td><%= joinable %></td>
           <td style="min-width: 350px; text-align: center;"><%= link_to 'Näytä', user, class: "btn btn-primary btn-sm" %>
           <%= link_to 'Liitä tilastoon', join_statistic_path(user), :'data-no-turbolink' => true, class: "btn btn-primary btn-sm" %>
           <%= link_to 'Muokkaa', edit_user_path(user), class: "btn btn-warning btn-sm" %>
@@ -87,7 +90,7 @@
                             });
 
                             $("#users").tablesorter({
-                                headers: {4: {sorter:false, filter:false} },
+                                headers: {5: {sorter:false, filter:false} },
                                 theme : "bootstrap",
                                 headerTemplate : '{content} {icon}',
                                 widgets : [ "uitheme", "filter" ]
