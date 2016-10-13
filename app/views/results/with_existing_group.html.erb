@@ -5,15 +5,25 @@
     <% @groups = @group_results %>
     <a href="?" class="btn btn-default btn-sm">Näytä pistejärjestyksessä</a>&nbsp;
     <a href="?sort=joukkueet" class="btn btn-primary btn-sm">Näytä aakkosjärjestyksessä</a>
+    <a href="?sort=naisjoukkueet" class="btn btn-default btn-sm">Näytä vain naisjoukkueet</a>
+<% elsif params[:sort] == "naisjoukkueet" %>
+    <% @groups = @group_results.select do |k, v, f| %>
+    <% f %>
+    <% end %>
+    <% @groups = @groups.sort_by { |k, v, f| v[:total] }.reverse %>
+    <a href="?" class="btn btn-default btn-sm">Näytä pistejärjestyksessä</a>&nbsp;
+    <a href="?sort=joukkueet" class="btn btn-default btn-sm">Näytä aakkosjärjestyksessä</a>
+    <a href="?sort=naisjoukkueet" class="btn btn-primary btn-sm">Näytä vain naisjoukkueet</a>
 <% else %>
-    <% @groups = @group_results.sort_by { |k, v| v[:total] }.reverse %>
+    <% @groups = @group_results.sort_by { |k, v, f| v[:total] }.reverse %>
     <a href="?" class="btn btn-primary btn-sm">Näytä pistejärjestyksessä</a>&nbsp;
     <a href="?sort=joukkueet" class="btn btn-default btn-sm">Näytä aakkosjärjestyksessä</a>
+    <a href="?sort=naisjoukkueet" class="btn btn-default btn-sm">Näytä vain naisjoukkueet</a>
 <% end %>
 <br />
 <br />
 <table class="results">
-  <% @groups.each do |name, group_results| %>
+  <% @groups.each do |name, group_results, female| %>
       <% i += 1 %>
       <tr>
         <td style="font-size: larger; width: 350px;">
@@ -21,7 +31,7 @@
             <% if params[:sort] != "joukkueet" %>
             <%= i %>.
                 <% end %>
-            <%= name %></a>
+            <%= name %><% if female %> (N)<% end %></a>
         </td>
         <td style="color: black; font-size: larger;"><%= group_results[:total].round(2) %></td>
         <td>&nbsp;</td>

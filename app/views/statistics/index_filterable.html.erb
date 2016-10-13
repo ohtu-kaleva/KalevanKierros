@@ -32,6 +32,7 @@
   <br />
   <table id="statistics" class="table table-bordered tablesorter-bootstrap" width="100%">
   <thead><tr>
+    <th>Sijoitus</th>
     <th>Numero</th>
     <th>Sukunimi</th>
     <th>Etunimi</th>
@@ -54,6 +55,7 @@
   </tr>
   </thead>
     <tfoot><tr>
+      <th>Sijoitus</th>
       <th>Numero</th>
       <th>Sukunimi</th>
       <th>Etunimi</th>
@@ -78,6 +80,7 @@
     <tbody>
   <% @statistics.each do |statistic| %>
     <tr>
+      <td><%= statistic.position %></td>
       <td><b><%= link_to "#{statistic.kk_number}", statistic_path(statistic.id) %></b></td>
       <td><%= statistic.last_name %></td>
       <td><%= statistic.first_name %></td>
@@ -148,7 +151,7 @@
                     theme : "bootstrap",
                     headerTemplate : '{content} {icon}',
                     widgets : [ "uitheme", "filter" ],
-                    sortList: [[1,2]]
+                    sortList: [[0,0]]
                 })
 
                         .tablesorterPager({

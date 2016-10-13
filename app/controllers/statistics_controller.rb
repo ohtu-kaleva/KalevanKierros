@@ -2,6 +2,7 @@ class StatisticsController < ApplicationController
   before_action :set_statistic_or_redirect, only: [:show, :edit, :update, :destroy]
   before_action :redirect_if_user_not_admin, only: [:join, :join_user_to_existing_statistic, :edit, :update, :destroy,
                                                     :update_statistics]
+  after_action :recalculate_positions, only: [:join_user_to_existing_statistic, :update, :destroy, :update_statistics]
 
   # GET /statistics
   def index
@@ -10,10 +11,10 @@ class StatisticsController < ApplicationController
 
   # GET /statistics/static
   def index_static
-    if params[:sort] == 'points'
-      @statistics = Statistic.all.order('total_events_completed desc').paginate(page: params[:page], per_page: 100)
-    else
+    if params[:sort] == 'name'
       @statistics = Statistic.all.order('last_name', 'first_name').paginate(page: params[:page], per_page: 100)
+    else
+      @statistics = Statistic.all.order('position').paginate(page: params[:page], per_page: 100)
     end
   end
 
@@ -149,6 +150,16 @@ class StatisticsController < ApplicationController
   end
 
   private
+
+  def recalculate_positions
+    @statistics = Statistic.all.order('total_events_completed desc').order('pts_sum desc')
+    i = 1
+    @statistics.each do |s|
+      s.position = i
+      s.save
+      i += 1
+    end
+  end
 
   def set_statistic_or_redirect
       @statistic = Statistic.find_by id: params[:id]

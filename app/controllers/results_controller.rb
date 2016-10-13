@@ -235,9 +235,9 @@ class ResultsController < ApplicationController
     if groups.empty?
       redirect_to :root and return
     end
-    @group_results = {}
+    @group_results = []
     groups.each do |group|
-      @group_results[group] = calculate_group_results(group, params[:year])
+      @group_results << [group, calculate_group_results(group, params[:year]), female_group?(group, params[:year])]
     end
   end
 
