@@ -12,15 +12,15 @@ class StatisticsController < ApplicationController
   # GET /statistics/static
   def index_static
     if params[:sort] == 'name'
-      @statistics = Statistic.all.order('last_name', 'first_name').paginate(page: params[:page], per_page: 100)
+      @statistics = Statistic.where('total_events_completed > 0').order('last_name', 'first_name').paginate(page: params[:page], per_page: 100)
     else
-      @statistics = Statistic.all.order('position').paginate(page: params[:page], per_page: 100)
+      @statistics = Statistic.where('total_events_completed > 0').order('position').paginate(page: params[:page], per_page: 100)
     end
   end
 
   # GET /statistics/search
   def index_filterable
-    @statistics = Statistic.all.order('last_name')
+    @statistics = Statistic.where('total_events_completed > 0').order('position')
   end
   # GET /statistics/1
   # GET /statistics/1.json
