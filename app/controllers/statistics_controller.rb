@@ -49,8 +49,9 @@ class StatisticsController < ApplicationController
 
     first_name = @user.first_name.strip.downcase
     last_name = @user.last_name.strip.downcase
+    birth_year = @current_statistic.birth_year
     @potential_statistics = @potential_statistics.select do |u|
-      u.first_name.strip.downcase.eql?(first_name) && u.last_name.strip.downcase.eql?(last_name)
+      u.first_name.strip.downcase.eql?(first_name) && u.last_name.strip.downcase.eql?(last_name) && u.birth_year == birth_year
     end
 
     @potential_statistic = @potential_statistics.first

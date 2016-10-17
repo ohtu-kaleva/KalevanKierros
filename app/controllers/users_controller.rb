@@ -9,13 +9,17 @@ class UsersController < ApplicationController
     potential_statistics = Statistic.where 'statistics.user_id IS NULL'
     users.each do |u|
       current_statistic = u.statistic
-
-      first_name = u.first_name.strip.downcase
-      last_name = u.last_name.strip.downcase
-      found = potential_statistics.select do |s|
-        s.first_name.strip.downcase.eql?(first_name) && s.last_name.strip.downcase.eql?(last_name)
+      if current_statistic
+        first_name = u.first_name.strip.downcase
+        last_name = u.last_name.strip.downcase
+        birth_year = current_statistic.birth_year
+        found = potential_statistics.select do |s|
+          s.first_name.strip.downcase.eql?(first_name) && s.last_name.strip.downcase.eql?(last_name) && s.birth_year == birth_year
+        end
+        joinable = (found.length > 0 and u.username[0..7] != 'outsider') ? 'K' : ''
+      else
+        joinable = ''
       end
-      joinable = (found.length > 0 and u.username[0..7] != 'outsider') ? 'K' : ''
       @userInfo << [u, joinable]
     end
   end
