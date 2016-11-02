@@ -13,13 +13,19 @@
 
     <div class="field">
       <%= f.text_field :name, label: "Joukkueen nimi:" %><br>
-      <p>Jos kyseessä on naisjoukkue, lisää nimen perään (naisjoukkue)</p>
+      <p class="group-information">
+        <% if(current_user.gender == 'M') %>
+	  <%= 'Joukkue on sekajoukkue. Joukkueen tyyppi määräytyy lopullisen kokoonpanon mukaisesti ja päivittyy automaattisesti.' %>    
+        <% else %>
+          <%= 'Joukkue on naisjoukkue. Joukkue näkyy naisjoukkueiden tuloslistauksessa ja joukkueen nimen perässä näytetään tunnus (N). Joukkueen tyyppi määräytyy lopullisen kokoonpanon mukaisesti ja päivittyy automaattisesti.' %>
+        <% end %>
+      </p>
       <label>Joukkueen jäsenet:</label>
       <p>Kirjoita nimi kenttään ja valitse jäsen listasta. Jäsenen pitää olla rekisteröitynyt. Voit täydentää joukkuetta myöhemmin.</p><br>
       <div class="input-group">
         <span class="input-group-addon">1.</span>
         <%= text_field_tag 'kk_numbers[]', nil, :class => "form-control autocomplete", :id => "member1", :value => current_user.kk_number, :readonly => 1 %>
-        <span class="input-group-addon"><%= current_user.first_name << " " << current_user.last_name %></span>
+        <span class="input-group-addon <%= current_user.gender %>"><%= current_user.first_name << " " << current_user.last_name %></span>
       </div>
       <div class="input-group">
         <span class="input-group-addon">2.</span>
@@ -73,6 +79,14 @@
                     var id = parent.attr('id');
                     var element = parent.next('span');
                     var name = ui.item.label.replace(/\d{2,}?\s/, "");
+		    var gender = ui.item.gender;
+                    element.addClass(gender);
+                    var males = $('.input-group-addon.M')
+                    if (males.length > 0) {
+                        $('.group-information').text('Joukkue on sekajoukkue. Joukkueen tyyppi määräytyy lopullisen kokoonpanon mukaisesti ja päivittyy automaattisesti.')
+                    } else {
+                        $('.group-information').text('Joukkue on naisjoukkue. Joukkue näkyy naisjoukkueiden tuloslistauksessa ja joukkueen nimen perässä näytetään tunnus (N). Joukkueen tyyppi määräytyy lopullisen kokoonpanon mukaisesti ja päivittyy automaattisesti.')
+                    }    
 
                     element.html(name + '&nbsp;<a href="#"><span onclick="clearInput(event, \'' + id + '\')" class="glyphicon glyphicon-remove clearmember"></span></a>');
                     parent.prop('readonly', true);
@@ -86,6 +100,13 @@
             element.prop('readonly', false);
             element.val('');
             element.next('span').html('&nbsp;&nbsp;&nbsp;');
+            element.next('span').removeClass('M N')
+            var males = $('.input-group-addon.M')
+            if (males.length > 0) {
+                $('.group-information').text('Joukkue on sekajoukkue')
+            } else {
+                $('.group-information').text('Joukkue on naisjoukkue. Joukkue näkyy naisjoukkueiden tuloslistauksessa ja joukkueen nimen perässä näytetään tunnus (N). Joukkueen tyyppi määräytyy lopullisen kokoonpanon mukaisesti ja päivittyy automaattisesti.')
+            }  
         }
 
         $(document).ready(function() {

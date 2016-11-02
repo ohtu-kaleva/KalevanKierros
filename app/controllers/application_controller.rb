@@ -30,10 +30,10 @@ class ApplicationController < ActionController::Base
     redirect_to :root unless user_is_admin?
   end
 
-  # käyttäjähaku ryhmälomakkeeseen, TODO haun rajaus
+  # käyttäjähaku ryhmälomakkeeseen
   def usersearch
-    usersearch = User.all
-    usersearch.map{|user| {:label =>  user.kk_number.to_s << ' ' << user.first_name << ' ' << user.last_name, :value => user.kk_number } }.to_json
+    usersearch = User.where.not("kk_number LIKE?", "1%")
+    usersearch.map{|user| {:label =>  user.kk_number.to_s << ' ' << user.first_name << ' ' << user.last_name, :value => user.kk_number, :gender => user.gender } }.to_json
   end
 
   def statisticsearch

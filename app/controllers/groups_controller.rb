@@ -5,7 +5,7 @@ class GroupsController < ApplicationController
 
   def new
     if enrollment_open?
-      set_user_and_check_enrollment
+      set_user
 
       @group = Group.new
       @users = User.all
@@ -20,7 +20,7 @@ class GroupsController < ApplicationController
       return
     end
 
-    set_user_and_check_enrollment
+    set_user
 
     kk_numbers = params[:kk_numbers].select { |e| !e.empty? }
     if kk_numbers.size > 6
@@ -34,9 +34,6 @@ class GroupsController < ApplicationController
       if !member
         flash[:error] = "Käyttäjää #{kk_number} ei löydy"
         redirect_to new_group_path and return
-      elsif member.kk_enrollment
-        flash[:error] = "Käyttäjä #{kk_number} on jo ilmoittautunut kierrokselle"
-        redirect_to new_group_path and return
       else
         members.append member
       end
@@ -44,11 +41,19 @@ class GroupsController < ApplicationController
 
     @group = Group.new(group_params)
     @group.user_id = @user.id
+    year = AppSetting.find_by name: 'KkYear'
     if @group.save
       members.uniq.each do |m|
         m.update_column :group_id, @group.id
-        KkEnrollment.new(user_id: m.id).save
-        init_results_entry(m)
+        if not m.kk_enrollment
+          KkEnrollment.new(user_id: m.id).save
+        end
+        res = Result.find_by kk_number: m.kk_number, year: year.value
+        if res
+          res.update_column :group, @group.name
+        else
+          init_results_entry(m)
+        end
       end
       KkEnrollmentMailer.enrollment_email_captain(@user, members.uniq, group_params[:name]).deliver
       redirect_to(@user, flash: { success: 'Ryhmä luotu onnistuneesti' }) && return
@@ -63,6 +68,8 @@ class GroupsController < ApplicationController
     if !(@users && @captain)
       redirect_to root_path and return
     end
+    year = AppSetting.find_by name: 'KkYear'
+    @isFemaleGroup = female_group?(@group.name, year.value)
     @count = @group.users.count
   end
 
@@ -80,8 +87,6 @@ class GroupsController < ApplicationController
         res.update_column :group, nil
       end
       user.update_column :group_id, nil
-      enrollment = user.kk_enrollment
-      enrollment.destroy
       redirect_to :back and return
     end
     redirect_to :back
@@ -97,21 +102,16 @@ class GroupsController < ApplicationController
       if not user.group.nil?
         redirect_to :back, flash: { error: 'Jäsenen lisääminen ei onnistunut. Jäsen kuuluu jo johonkin ryhmään.'} and return
       end
-      if user.kk_enrollment
-        redirect_to :back, flash: { error: 'Käyttäjä on jo ilmoittautunut kierrokselle!' } and return
-      else
-        user.update_column :group_id, group.id
+      if not user.kk_enrollment
         KkEnrollment.new(user_id: user.id).save
-        year = AppSetting.find_by name: 'KkYear'
-        res = Result.find_by kk_number: user.kk_number, year: year.value
-        if res
-          res.update_column :group, group.name
-        else
-          init_results_entry(user)
-        end
-        #year = AppSetting.find_by name: 'KkYear'
-        #result = Result.find_by kk_number: user.kk_number, year: year.value
-        #result.update_column :group, group.name
+      end
+      user.update_column :group_id, group.id
+      year = AppSetting.find_by name: 'KkYear'
+      res = Result.find_by kk_number: user.kk_number, year: year.value
+      if res
+        res.update_column :group, group.name
+      else
+        init_results_entry(user)
       end
       redirect_to group_path(params[:id]), flash: { success: 'Jäsen lisätty ryhmään.' } and return
     else
@@ -130,15 +130,10 @@ class GroupsController < ApplicationController
     redirect_to :root
   end
 
-  def set_user_and_check_enrollment
+  def set_user
     @user = current_user
     if !@user
       redirect_to signin_path and return
-    end
-
-    if @user.kk_enrollment
-      redirect_to user_path(@user.id), flash: { error: 'Olet jo ilmoittautunut kierrokselle' }
-      return
     end
   end
 
@@ -156,6 +151,16 @@ class GroupsController < ApplicationController
 
   def group_params
     params.require(:group).permit(:name)
+  end
+
+  def female_group?(group, year)
+    member_results = Result.where(year: year).where(group: group)
+    member_results.each do |member|
+      if member.series[0,1] == 'M'
+        return false
+      end
+    end
+    return true
   end
 
 end

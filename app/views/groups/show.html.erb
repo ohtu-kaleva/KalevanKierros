@@ -1,4 +1,11 @@
 <h3><%= @group.name %></h3>
+<p class="group-information">
+    <% if(@isFemaleGroup) %>
+	 <%= 'Joukkue on naisjoukkue. Joukkue näkyy naisjoukkueiden tuloslistauksessa ja joukkueen nimen perässä näytetään tunnus (N). Joukkueen tyyppi määräytyy lopullisen kokoonpanon mukaisesti ja päivittyy automaattisesti.' %>
+    <% else %>
+        <%= 'Joukkue on sekajoukkue. Joukkueen tyyppi määräytyy lopullisen kokoonpanon mukaisesti ja päivittyy automaattisesti.' %>  
+    <% end %>
+</p>
 <strong>Jäsenet:</strong>
 <table class="table table-bordered">
 <thead>
