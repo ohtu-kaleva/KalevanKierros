@@ -13,6 +13,6 @@ class RelayGroupMailer < ActionMailer::Base
     end
     @relay_group_members = relay_group_members
     mail(to: @user.email,
-         subject: "Joukkueilmoittautuminen Kalevan Kierrokselle #{@year.value}")
+         subject: "Viestijoukkueilmoittautuminen Kalevan Kierrokselle #{@year.value}")
   end
 end
