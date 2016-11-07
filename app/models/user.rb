@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
   has_one :kk_enrollment, dependent: :destroy
   has_one :statistic
   belongs_to :group
+  belongs_to :relay_group
 
   validates :username, uniqueness: true, length: { minimum: 3 }
   validates :first_name, presence: true

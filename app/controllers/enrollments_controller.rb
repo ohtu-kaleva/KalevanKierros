@@ -12,11 +12,6 @@ class EnrollmentsController < ApplicationController
       if !@user
         redirect_to signin_path and return
       end
-
-      if !@user.kk_enrollment
-        redirect_to root_path, flash: { notice: 'Ilmoittaudu ensin kalevan kierrokselle' }
-        return
-      end
       if Date.today < @event.start_date
         redirect_to root_path, flash: { notice: 'Tapahtumaan ei voi vielä ilmoittautua' }
         return
@@ -56,7 +51,7 @@ class EnrollmentsController < ApplicationController
   def create
     event = Event.find_by id: params[:enrollment][:event_id]
     if event
-      if current_user && current_user.kk_enrollment
+      if current_user
         data_list = []
         attrs = event.event_attributes.select {|a| a.attribute_type != 'plain_text' and a.attribute_type != 'hidden' }
         # loop for creating information for data

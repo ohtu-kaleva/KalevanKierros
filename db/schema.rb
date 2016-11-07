@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151225145923) do
+ActiveRecord::Schema.define(version: 20161106204754) do
 
   create_table "app_settings", force: true do |t|
     t.string   "name",       null: false
@@ -93,6 +93,14 @@ ActiveRecord::Schema.define(version: 20151225145923) do
 
   add_index "kk_enrollments", ["user_id"], name: "index_kk_enrollments_on_user_id", unique: true
 
+  create_table "relay_groups", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "user_id"
+    t.integer  "paid",       default: 0
+  end
+
   create_table "results", force: true do |t|
     t.string   "name"
     t.string   "city"
@@ -126,6 +134,8 @@ ActiveRecord::Schema.define(version: 20151225145923) do
     t.datetime "updated_at"
     t.integer  "kk_number",                                                      null: false
     t.boolean  "updated_to_statistics",                          default: false, null: false
+    t.string   "relay_group"
+    t.boolean  "ignore_on_statistics",                           default: false, null: false
   end
 
   create_table "statistics", force: true do |t|
@@ -176,6 +186,7 @@ ActiveRecord::Schema.define(version: 20151225145923) do
     t.boolean  "active",           default: false, null: false
     t.string   "reset_token"
     t.datetime "reset_sent_at"
+    t.integer  "relay_group_id"
   end
 
   add_index "users", ["kk_number"], name: "index_users_on_kk_number", unique: true

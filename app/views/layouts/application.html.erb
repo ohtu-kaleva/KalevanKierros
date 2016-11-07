@@ -83,6 +83,9 @@
                 <% if current_user.group %>
                     <li><%= link_to 'Joukkueesi tiedot', group_path(current_user.group) %></li>
                 <% end %>
+                <% if current_user.relay_group %>
+                    <li><%= link_to 'Viestijoukkueesi tiedot', relay_group_path(current_user.relay_group) %></li>
+                <% end %>
                 <% if current_user.statistic %>
                   <li><%= link_to 'Näytä tilasto', statistic_path(current_user.statistic.id) %></li>
                 <% end %>

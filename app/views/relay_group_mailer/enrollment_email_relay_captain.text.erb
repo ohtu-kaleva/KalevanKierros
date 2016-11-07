@@ -1,0 +1,12 @@
+Viestijoukkueilmoittautuminen Kalevan Kierrokselle <%= @year.value %>
+=================================================
+Tervetuloa Kalevan Kierrokselle <%= @user.first_name %>!
+Olet ilmoittanut viestijoukkueen Kalevan kierrokselle.
+Joukkueen tiedot:
+Nimi: <%= @relay_group.name %>
+Jäsenet:
+<% @relay_group_members.each do |m| %>
+  <%= m.kk_number %> <%= m.last_name %> <%= m.first_name %>
+<% end %>
+Viestijoukkueen kierrosmaksu 60 euroa maksettava viitenumerolla <%= @relay_group.construct_reference_number %> tilille <%= @account_number %>
+Eräpäivä: <%= @date %>

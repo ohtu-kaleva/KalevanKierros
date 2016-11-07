@@ -56,4 +56,12 @@
   kun osalaji alkaa olla ajankohtainen. Osakilpailuista peritään osallistumismaksu,
   joka on yleensä noin 35 euron suuruinen.</p>
 
+  <% if enrollment_open? %>
+    <% if current_user && current_user.relay_group.nil? %>
+      <h1>Ilmoita joukkue viestikilpailuun:</h1>
+        <p>
+          <%= link_to('Ilmoita viestijoukkue', new_relay_group_path(current_user.id), :class => "btn btn-primary") %>
+        </p>
+    <% end %>
+  <% end %>
 </div>

@@ -35,11 +35,21 @@ class KkEnrollmentsController < ApplicationController
       redirect_to root_path, flash: { error: 'Kierrokselle ei voi ilmoittautua' }
       return
     end
+    if @user.kk_enrollment
+      flash[:error] = "Olet jo ilmoittautunut kierrokselle"
+      redirect_to root_path and return
+    end
 
     @kk_enrollment = KkEnrollment.new user_id: @user.id
 
     if @kk_enrollment.save
-      init_results_entry(@user)
+      year = AppSetting.find_by name: 'KkYear'
+      res = Result.find_by kk_number: @user.kk_number, year: year.value
+      if res
+        res.update_column :ignore_on_statistics, false
+      else
+        init_results_entry(@user)
+      end
       KkEnrollmentMailer.enrollment_email(@user).deliver
       redirect_to(@user, flash: { success: 'Ilmoittautuminen onnistui' }) && return
     end

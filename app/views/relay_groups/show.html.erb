@@ -1,0 +1,28 @@
+<h3><%= @relay_group.name %></h3>
+<strong>Jäsenet:</strong>
+<table class="table table-bordered">
+<thead>
+<tr>
+    <th>Nimi</th>
+    <th>Sähköposti</th>
+    <th>Kiertäjänumero</th>
+    <th></th>
+</tr>
+</thead>
+<tbody>
+  <% @users.each do |u| %>
+<tr>
+  <td><%= u.full_name %></td>
+  <td><%= u.email %></td>
+  <td><%= u.kk_number %></td>
+  <td><%= link_to 'Poista jäsen joukkueesta', delete_user_from_relay_group_path(@relay_group.id, user_id: u.id), method:'PUT' %></td>
+</tr>
+<% end %>
+</tbody>
+</table>
+<strong>Kapteeni: <%= @captain.full_name %></strong>
+<p>
+    <% if not current_user.nil? and @captain == current_user or user_is_admin? and @count < 6 %>
+        <%= link_to 'Lisää uusi jäsen', add_user_to_relay_group_path(@relay_group.id) %>
+    <% end %>
+</p>

@@ -1,0 +1,49 @@
+<div class="col-lg-6">
+    <h3>Lisää jäsen joukkueeseen <%= @relay_group.name %></h3>
+    <p>Kirjoita nimi kenttään ja valitse jäsen listasta. Jäsenen tulee olla rekisteröitynyt.</p>
+    <%= form_tag(controller: 'relay_groups', action: 'update_user_relay_group_relation') do %>
+        <div class="input-group">
+           <span class="input-group-addon">1.</span>
+           <%= text_field_tag 'kk_number', nil, :class => "form-control autocomplete", :id => "member" %>
+           <span class="input-group-addon">&nbsp;&nbsp;&nbsp</span>
+        </div>
+        <div class="actions">
+        <%= submit_tag 'Lisää jäsen', :class => "btn btn-primary" %>
+        </div>
+    <% end %>
+</div>
+<script type="text/javascript">
+    $("input.autocomplete").autocomplete({ delay: 50, minLength: 2, autoFocus: true,
+        select: function (event, ui) {
+            var exists = false;
+            $('input[name="kk_number"]').each(function () {
+                if ($(this).val().toString() == ui.item.value.toString() && $(this).attr('readonly') ) {
+                    exists = true;
+                }
+            });
+            if (exists) {
+                alert('Kiertäjä on jo listalla');
+                event.preventDefault();
+                ui.item.value = null;
+                return false;
+            }
+            else {
+                var parent = $(event.target);
+                var id = parent.attr('id');
+                var element = parent.next('span');
+                var name = ui.item.label.replace(/\d{2,}?\s/, "");
+
+                element.html(name + '&nbsp;<a href="#"><span onclick="clearInput(event, \'' + id + '\')" class="glyphicon glyphicon-remove clearmember"></span></a>');
+                parent.prop('readonly', true);
+                parent.parent().next().children('input').focus();
+            }
+        },
+        source: <%= raw(usersearch) %>});
+    function clearInput(event, id){
+        event.preventDefault();
+        var element = $('#' + id);
+        element.prop('readonly', false);
+        element.val('');
+        element.next('span').html('&nbsp;&nbsp;&nbsp;');
+    }
+</script>

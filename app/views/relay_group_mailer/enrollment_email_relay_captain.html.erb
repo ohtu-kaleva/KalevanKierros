@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Viestijoukkueilmoittautuminen Kalevan Kierrokselle <%= @year.value %></h1>
+    <p>Tervetuloa Kalevan Kierrokselle <%= @user.first_name %>!<p>
+        <p>Olet ilmoittanut viestijoukkueen Kalevan kierrokselle.</p>
+        <p>Joukkueen tiedot:</p>
+        <p>Nimi: <%= @relay_group.name %></p>
+        <p>Jäsenet:</p>
+        <% @relay_group_members.each do |m| %>
+          <p><%= m.kk_number %> <%= m.last_name %> <%= m.first_name %></p>
+        <% end %>
+    <p>Viestijoukkueen kierrosmaksu 60 euroa maksettava viitenumerolla <%= @relay_group.construct_reference_number %> tilille <%= @account_number %><br>
+    Eräpäivä: <%= @date %></p>
+  </body>
+</html>
