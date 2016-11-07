@@ -1,7 +1,7 @@
 class GroupsController < ApplicationController
   include InitResultsEntry
   before_action :set_group_or_redirect, only: [:show, :add_user_to_group, :delete_user_from_group]
-  before_action :redirect_if_user_not_captain_or_admin, only: [:add_user_to_group, :update_user_group_relation, :delete_user_from_group, :show]
+  before_action :redirect_if_user_not_captain_or_admin, only: [:add_user_to_group, :update_user_group_relation, :delete_user_from_group]
 
   def new
     if enrollment_open?

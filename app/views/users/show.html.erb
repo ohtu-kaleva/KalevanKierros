@@ -28,6 +28,10 @@
        <p>Jos haluat kuulua joukkueeseen, pyydä joukkueesi kapteenia ilmoittamaan sinut.</p>
     <% end %>
 
+    <% if not @relay_group.nil? %>
+        <h4>Kuulut viestijoukkueeseen: <%= link_to @relay_group.name, relay_group_path(@relay_group) %></h4>
+    <% end %>
+
     <% if @enrollments.count > 0 %>
         <h4>Olet ilmoittautunut seuraaviin tapahtumiin:</h4>
         <p>

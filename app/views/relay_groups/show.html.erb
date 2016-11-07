@@ -15,7 +15,11 @@
   <td><%= u.full_name %></td>
   <td><%= u.email %></td>
   <td><%= u.kk_number %></td>
-  <td><%= link_to 'Poista jäsen joukkueesta', delete_user_from_relay_group_path(@relay_group.id, user_id: u.id), method:'PUT' %></td>
+  <% if not current_user.nil? and @captain == current_user or user_is_admin? %>
+     <td><%= link_to 'Poista jäsen joukkueesta', delete_user_from_relay_group_path(@relay_group.id, user_id: u.id), method:'PUT' %></td>
+  <% elsif %>
+    <td></td>
+  <% end %>
 </tr>
 <% end %>
 </tbody>

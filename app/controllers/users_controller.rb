@@ -28,6 +28,7 @@ class UsersController < ApplicationController
   def show
     @enrollments = @user.enrollments
     @group = @user.group
+    @relay_group = @user.relay_group
     @kk_enrollment = @user.kk_enrollment
     year = AppSetting.find_by name: 'KkYear'
     @year = ''
