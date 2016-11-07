@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   resources :sessions, only: [:new, :create]
   resources :enrollments, only: [:create, :index]
   resources :groups, only: [:new, :create, :show]
+  resources :relay_groups, only: [:new, :create, :show]
   resources :kk_enrollments, only: [:show, :update, :edit]
   resources :password_resets, only: [:new, :create, :edit, :update]
   get 'enrollments/:enrollment_id/edit', to: 'enrollments#edit', as: 'edit_enrollment'
@@ -68,6 +69,10 @@ Rails.application.routes.draw do
   get 'groups/:id/add_user', to: 'groups#add_user_to_group', as: 'add_user_to_group'
   post 'groups/:id/add_user', to: 'groups#update_user_group_relation'
   put 'groups/:id', to: 'groups#delete_user_from_group', as: 'delete_user_from_group'
+  get 'relay_groups', to: 'relay_groups#index'
+  get 'relay_groups/:id/add_user', to: 'relay_groups#add_user_to_relay_group', as: 'add_user_to_relay_group'
+  post 'relay_groups/:id/add_user', to: 'relay_groups#update_user_relay_group_relation'
+  put 'relay_groups/:id', to: 'relay_groups#delete_user_from_relay_group', as: 'delete_user_from_relay_group'
   get 'event_enrollments/:event_id/', to: 'enrollments#show_enrollments_for_event', as: 'show_enrollments'
   put 'event_enrollments/', to:'enrollments#update', as: 'add_times_and_payment_info'
   put 'kk_enrollments/', to:'kk_enrollments#update', as: 'add_payment_info'
