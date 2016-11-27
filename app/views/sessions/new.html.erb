@@ -2,7 +2,7 @@
   <div class="bs-component">
     <h1>Kirjaudu</h1>
 
-    <%= bootstrap_form_tag url: sessions_path do |f| %>
+    <%= bootstrap_form_tag url: sessions_path(redirect: @redirect, id: @id) do |f| %>
         <%= f.text_field :username, label: "Käyttäjätunnus: " %>
         <%= f.password_field :password, label: "Salasana: " %>
         <%= f.submit "Kirjaudu sisään", class: "btn btn-primary" %>

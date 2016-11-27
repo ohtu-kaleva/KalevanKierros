@@ -10,7 +10,7 @@ class EnrollmentsController < ApplicationController
     if @event
       @user = current_user
       if !@user
-        redirect_to signin_path and return
+        redirect_to signin_path(redirect: 'event', id: @event.id) and return
       end
       if Date.today < @event.start_date
         redirect_to root_path, flash: { notice: 'Tapahtumaan ei voi vielä ilmoittautua' }
@@ -394,7 +394,7 @@ class EnrollmentsController < ApplicationController
   def check_for_existing_enrollment
     if current_user
       if current_user.enrollments and current_user.enrollments.find_by(event_id: params[:event_id])
-        redirect_to root_path, flash: { error: "Olet jo ilmoittautunut tapahtumaan." }
+        redirect_to user_path(current_user), flash: { error: "Olet jo ilmoittautunut tapahtumaan." }
       end
     end
   end

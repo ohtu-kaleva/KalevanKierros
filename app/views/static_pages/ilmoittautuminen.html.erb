@@ -38,7 +38,7 @@
       <% else %>
         <p>Valitse ensin:</p>
         <p>
-          <%= link_to('Kirjaudu - Osallistuin Kalevan Kierrokselle 2015 tai olen jo rekisteröitynyt', signin_path, :class => "btn btn-info") %>
+          <%= link_to('Kirjaudu - Osallistuin Kalevan Kierrokselle 2015 tai olen jo rekisteröitynyt', signin_path(redirect: 'kkenrollment'), :class => "btn btn-info") %>
         </p>
         <p>
           <%= link_to('Rekisteröidy - En osallistunut Kalevan Kierrokselle 2015', signup_path, :class => "btn btn-info") %>
