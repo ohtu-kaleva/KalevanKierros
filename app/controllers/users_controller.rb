@@ -60,7 +60,7 @@ class UsersController < ApplicationController
 
     if @user.save
       UserMailer.registration_activation_email(@user).deliver
-      redirect_to root_url, flash: { success: 'Käyttäjätunnus luotu, aktivoi tunnus sähköpostiin lähetettyjen ohjeiden mukaan.' }
+      redirect_to ilmoittautuminen_path, flash: { success: 'Käyttäjätunnus luotu, aktivoi tunnus sähköpostiin lähetettyjen ohjeiden mukaan.' }
     else
       render :new
     end
@@ -118,7 +118,7 @@ class UsersController < ApplicationController
         end
       end
     end
-    redirect_to :root
+    redirect_to ilmoittautuminen_path, flash: { success: 'Käyttäjä aktivoitu' }
   end
 
   private
