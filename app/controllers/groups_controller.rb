@@ -34,6 +34,9 @@ class GroupsController < ApplicationController
       if !member
         flash[:error] = "Käyttäjää #{kk_number} ei löydy"
         redirect_to new_group_path and return
+      elsif not member.group.nil? or not member.relay_group.nil?
+        flash[:error] = "Käyttäjä #{kk_number} on jo liitetty joukkueseen"
+        redirect_to new_group_path and return
       else
         members.append member
       end
@@ -100,7 +103,7 @@ class GroupsController < ApplicationController
       if enrollment_deadline_gone? and not user_is_admin?
         redirect_to :back, flash: { error: 'Joukkueeseen ei voi enää lisätä henkilöitä.' } and return
       end
-      if not user.group.nil?
+      if not user.group.nil? or not user.relay_group.nil?
         redirect_to :back, flash: { error: 'Jäsenen lisääminen ei onnistunut. Jäsen kuuluu jo johonkin ryhmään.'} and return
       end
       if not user.kk_enrollment
