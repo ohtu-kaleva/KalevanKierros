@@ -96,8 +96,10 @@ class User < ActiveRecord::Base
       str += '65'
     elsif age < 75
       str += '70'
-    else
+    elsif age < 80
       str += '75'
+    else
+      str += '80'
     end
     str
   end
