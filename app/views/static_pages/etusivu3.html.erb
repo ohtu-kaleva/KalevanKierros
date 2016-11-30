@@ -1,35 +1,37 @@
 </div>
 <div class="container etusivu">
-    <h3><a href="http://kalevankierros.us13.list-manage.com/subscribe?u=3937d04e4920be337565a19e3&id=775ac349d8" class="nappula btn btn-success">Tilaa uutiskirje</a></h3>
-    <h3><%= link_to 'Tapahtumat', events_path %></h3>
-    <h3><%= link_to 'Tulokset', results_path %></h3>
-    <h3><a href="/statistics">Tilastot</a></h3>
-    <h3><a href="/esittely/pistelasku">Pistelasku</a></h3>
-    <% if current_user.nil? %>
-    <h3><%= link_to 'Kirjaudu', signin_path %></h3>
-    <h3><%= link_to 'Rekisteröidy', signup_path %></h3>
-    <% else %>
-    <h3><%= link_to 'Muuta tietojasi', edit_user_path(current_user) %></h3>
-    <h3><%= link_to 'Tarkastele ilmoittautumisiasi', user_path(current_user) %></h3>
-    <% if current_user.group %>
-    <h3><%= link_to 'Joukkueesi tiedot', group_path(current_user.group) %></h3>
-    <% end %>
-    <% if current_user.relay_group %>
-    <h3><%= link_to 'Viestijoukkueesi tiedot', relay_group_path(current_user.relay_group) %></h3>
-    <% end %>
-    <% if current_user.statistic %>
-    <h3><%= link_to 'Näytä tilasto', statistic_path(current_user.statistic.id) %></h3>
-    <% end %>
-    <h3><%= link_to 'Kirjaudu ulos', signout_path, :method => 'delete' %></h3>
-    <% end %>
-    <% if user_is_admin? %>
-    <h3><%= link_to 'Hallinnoi käyttäjiä', users_path %></h3>
-    <h3><%= link_to 'Luo uusi tapahtuma', new_event_path %></h3>
-    <h3><%= link_to 'Listaa tapahtumat', events_path %></h3>
-    <h3><%= link_to 'Hallinnoi uutisia', uutiset_index_url %></h3>
-    <h3><%= link_to 'Ilmoittautuneet tapahtumittain', enrollments_path %></h3>
-    <h3><%= link_to 'Kierroksen hallinta', admin_kk_enrollment_path %></h3>
-    <h3><%= link_to 'Vaihda kansikuva', admin_cover_image_path %></h3>
-    <h3><%= link_to 'Lue viitemaksut', admin_import_payments_path %></h3>
-    <% end %>
-
+    <div class="col-sm-12">
+        <h4><a href="http://kalevankierros.us13.list-manage.com/subscribe?u=3937d04e4920be337565a19e3&id=775ac349d8">Tilaa uutiskirje</a></h4>
+        <h4><%= link_to 'Tapahtumat', events_path %></h4>
+        <h4><%= link_to 'Tulokset', results_path %></h4>
+        <h4><a href="/statistics">Tilastot</a></h4>
+        <h4><a href="/esittely/pistelasku">Pistelasku</a></h4>
+        <% if current_user.nil? %>
+            <h4><%= link_to 'Kirjaudu', signin_path %></h4>
+            <h4><%= link_to 'Rekisteröidy', signup_path %></h4>
+        <% else %>
+            <h4><%= link_to 'Muuta tietojasi', edit_user_path(current_user) %></h4>
+            <h4><%= link_to 'Tarkastele ilmoittautumisiasi', user_path(current_user) %></h4>
+            <% if current_user.group %>
+                <h4><%= link_to 'Joukkueesi tiedot', group_path(current_user.group) %></h4>
+            <% end %>
+            <% if current_user.relay_group %>
+                <h4><%= link_to 'Viestijoukkueesi tiedot', relay_group_path(current_user.relay_group) %></h4>
+            <% end %>
+            <% if current_user.statistic %>
+                <h4><%= link_to 'Näytä tilasto', statistic_path(current_user.statistic.id) %></h4>
+            <% end %>
+            <h4><%= link_to 'Kirjaudu ulos', signout_path, :method => 'delete', :class => "btn btn-default" %></h4>
+        <% end %>
+        <% if user_is_admin? %>
+            <h2>Ylläpito</h2>
+            <h4><%= link_to 'Hallinnoi käyttäjiä', users_path %></h4>
+            <h4><%= link_to 'Luo uusi tapahtuma', new_event_path %></h4>
+            <h4><%= link_to 'Listaa tapahtumat', events_path %></h4>
+            <h4><%= link_to 'Hallinnoi uutisia', uutiset_index_url %></h4>
+            <h4><%= link_to 'Ilmoittautuneet tapahtumittain', enrollments_path %></h4>
+            <h4><%= link_to 'Kierroksen hallinta', admin_kk_enrollment_path %></h4>
+            <h4><%= link_to 'Vaihda kansikuva', admin_cover_image_path %></h4>
+            <h4><%= link_to 'Lue viitemaksut', admin_import_payments_path %></h4>
+        <% end %>
+    </div>
