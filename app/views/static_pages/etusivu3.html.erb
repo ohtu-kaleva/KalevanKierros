@@ -7,7 +7,7 @@
         <h4><a href="/statistics">Tilastot</a></h4>
         <h4><a href="/esittely/pistelasku">Pistelasku</a></h4>
         <% if current_user.nil? %>
-            <h4><%= link_to 'Kirjaudu', signin_path %></h4>
+            <h4><%= link_to 'Kirjaudu', signin_path, :class => "btn btn-primary" %></h4>
             <h4><%= link_to 'Rekisteröidy', signup_path %></h4>
         <% else %>
             <h4><%= link_to 'Muuta tietojasi', edit_user_path(current_user) %></h4>
@@ -21,7 +21,7 @@
             <% if current_user.statistic %>
                 <h4><%= link_to 'Näytä tilasto', statistic_path(current_user.statistic.id) %></h4>
             <% end %>
-            <h4><%= link_to 'Kirjaudu ulos', signout_path, :method => 'delete', :class => "btn btn-default" %></h4>
+            <h4><%= link_to 'Kirjaudu ulos', signout_path, :method => 'delete', :class => "btn btn-primary" %></h4>
         <% end %>
         <% if user_is_admin? %>
             <h2>Ylläpito</h2>
