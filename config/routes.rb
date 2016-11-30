@@ -53,6 +53,7 @@ Rails.application.routes.draw do
   get 'yhteystiedot/linkkeja', to: 'static_pages#linkkeja'
   get 'yhteystiedot/postituslista', to: 'static_pages#postituslista'
   get 'testi', to: 'static_pages#etusivu'
+  get 'tiedot', to: 'static_pages#etusivu3'
 
   get 'haastekisa', to: 'static_pages#haastekisa'
 
