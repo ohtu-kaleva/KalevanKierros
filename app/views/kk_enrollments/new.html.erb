@@ -1,7 +1,5 @@
-<h1>Ilmoittautuminen Kalevan Kierrokselle 2016</h1>
-<p>HUOM! Jos osallistut joukkueeseen, et ilmoittaudu itse vaan joukkueesi kapteeni ilmoittaa sinut.</p>
+<h2>Ilmoittaudu Kalevan kierroksen yksilökilpailuun</h2>
 <p>Ole hyvä ja tarkista tietosi ennen ilmoittautumista:</p>
-
 
 <div class="field">
   <label class="control-label" for="user_name">Nimi: </label>
@@ -20,15 +18,12 @@
 
 <style type="text/css">
   div.field > label{
+      display: inline;
       font-weight: normal;
   }
     div.field > p {
-        margin-top: -5px;
         font-size: 16px;
     }
 </style>
-
-<p><%= link_to ('<span class="glyphicon glyphicon-edit"></span> Muokkaa tietoja').html_safe, edit_user_path, :class => ""%></p>
-
-<%= button_to 'Ilmoittaudu yksilönä kierrokselle', url_for(controller: :kk_enrollments, action: :create ), :class => "btn btn-info" %>
-<%= link_to 'Takaisin', '/ilmoittautuminen', class:"btn btn-default" %>
+<span><%= link_to 'Muokkaa tietojasi', edit_user_path, :class => "btn btn-default" %> </span>
+<span><%= button_to 'Ilmoittaudu yksilökilpailuun', url_for(controller: :kk_enrollments, action: :create ), :class => "btn btn-primary" %></span>
