@@ -11,6 +11,7 @@
         <h4>Et ole ilmoittautunut Kalevan Kierrokselle <%= @year %></h4>
         <a href="http://sivut.kalevankierros.fi/ilmoittaudu/" class="nappula btn btn-primary">Ilmoittaudu</a>
     <% end %>
+    <br/>
 
     <% if not @group.nil? %>
         <h4>Kuulut joukkueeseen: <%= link_to @group.name, group_path(@group) %></h4>
@@ -21,6 +22,7 @@
         <% else %>
             <p>Joukkueesi kierrosmaksu 200 euroa sisältää Kalevan kierroksen jäsenmaksusi ja yksilökilpailumaksun.</p>
         <% end %>
+        <br/>
     <% end %>
 
     <% if not @relay_group.nil? %>
@@ -30,6 +32,7 @@
             <p>Viestikilpailumaksu 60 euroa maksettava viitenumerolla <%= @user.construct_reference_number %> tilille <%= @account_number %></p>
             <p>Maksu ei sisällä Kalevan kierroksen jäsenmaksuja eikä yksilökilpailumaksuja.</p>
         <% end %>
+        <br/>
     <% end %>
 
     <% if @group.nil? and @relay_group.nil? %>
