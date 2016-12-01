@@ -25,7 +25,7 @@
     <% end %>
 
     <% if @enrollments.count > 0 %>
-        <h3>Olet ilmoittautunut seuraaviin tapahtumiin:</h3>
+        <h4>Olet ilmoittautunut seuraaviin tapahtumiin:</h4>
         <% @enrollments.reverse.each do |enrollment|%>
             <p><%= link_to enrollment.event.name, enrollment_path(enrollment.id) %> ></p>
         <% end %>
