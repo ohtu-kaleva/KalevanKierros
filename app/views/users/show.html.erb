@@ -1,4 +1,5 @@
-<h2><%= link_to @user.first_name @user.last_name, edit_user_path(@user) %></h2>
+<h2><%= @user.first_name %> <%= @user.last_name %> ></h2>
+<p><%= link_to 'Muokkaa tietojasi', edit_user_path(@user) %></p><br/>
 <% if not current_user.nil? and current_user.id == @user.id %>
     <% if @kk_enrollment %>
         <h4>Olet ilmoittautunut Kalevan Kierrokselle <%= @year %></h4>
