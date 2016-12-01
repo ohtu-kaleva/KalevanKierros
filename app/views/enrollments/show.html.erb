@@ -1,24 +1,25 @@
 <div class="col-lg-6">
-<h1><%= @enrollment.event.name %> <%= @enrollment.user.first_name %> <%= @enrollment.user.last_name %></h1>
-<table class="table table-bordered">
-  <tr>
-    <th>Ilmoittautumisen lisätieto</th>
-    <th>Valittu lisätieto</th>
-  </tr>
-<% @data.each do |data| %>
-  <tr>
-    <td><%= data.name %></td>
-    <td><%= data.value %></td>
-  </tr>
-<% end %>
-</table>
-<% if !@account_number.empty? and @price > 0 %>
-    <p>Osallistumismaksu <%= @price %> euroa maksettava viitenumerolla <%= @reference_number %> tilille <%= @account_number %><br>
-    Eräpäivä: <%= @pay_day %><br>
-    Saaja: <%= @receiver %></p>
-<% end %>
-<%= link_to 'Takaisin', user_path(current_user) %><br>
-<% if user_is_admin? %>
-  <%= link_to 'Peru ilmoittautuminen', @enrollment, method: :delete, data: { confirm: 'Oletko varma että haluat perua ilmoittautumisen?' } %>
-<% end %>
+    <h2><%= @enrollment.event.name %></h2>
+    <p><%= @enrollment.user.first_name %> <%= @enrollment.user.last_name %></p>
+    <h3>Ilmoittautumistiedot</h3>
+    <table class="table table-bordered">
+    <% @data.each do |data| %>
+      <tr>
+        <td><%= data.name %></td>
+        <td><%= data.value %></td>
+      </tr>
+    <% end %>
+    </table>
+    <% if !@account_number.empty? and @price > 0 %>
+        <h3>Maksutiedot</h3>
+        <p>Tilinumero: <%= @account_number %></p>
+        <p>Saaja: <%= @receiver %></p>
+        <p>Viitenumero: <%= @reference_number %></p>
+        <p>Osallistumismaksu: <%= @price %> euroa</p>
+        <p>Eräpäivä: <%= @pay_day %></p>
+    <% end %>
+    <h3><%= link_to 'Takaisin', user_path(current_user), :class => "btn btn-success" %></h3>
+    <% if user_is_admin? %>
+      <%= link_to 'Peru ilmoittautuminen', @enrollment, method: :delete, data: { confirm: 'Oletko varma että haluat perua ilmoittautumisen?' } %>
+    <% end %>
 </div>
