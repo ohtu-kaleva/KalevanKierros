@@ -1,6 +1,4 @@
-<h2><%= @user.first_name %> <%= @user.last_name %></h2>
-<p>Kiertäjänumerosi on: <%= @user.kk_number %></p>
-
+<h2><%= link_to @user.first_name %>' '<%= @user.last_name %>, edit_user_path(@user), :class => "btn btn-primary"  %></h2>
 <% if not current_user.nil? and current_user.id == @user.id %>
     <% if @kk_enrollment %>
         <h4>Olet ilmoittautunut Kalevan Kierrokselle <%= @year %></h4>
@@ -13,15 +11,16 @@
     <% end %>
 
     <% if not @group.nil? %>
-        <h4>Kuulut joukkueeseen: <%= link_to @group.name, group_path(@group) %></h4>
+        <h4>Kuulut joukkueeseen: <%= link_to @group.name, group_path(@group) %> ></h4>
         <% if not @group.nil? and @group.user == current_user %>
+            <p>Olet joukkueen kapteeni.</p>
             <p>Joukkueen kierrosmaksu 200 euroa maksettava viitenumerolla <%= @user.construct_reference_number %> tilille <%= @account_number %><br></p>
             <p>Sisältää joukkueen jäsenten kierrosmaksut.</p>
         <% end %>
     <% end %>
 
     <% if not @relay_group.nil? %>
-        <h4>Kuulut viestijoukkueeseen: <%= link_to @relay_group.name, relay_group_path(@relay_group) %></h4>
+        <h4>Kuulut viestijoukkueeseen: <%= link_to @relay_group.name, relay_group_path(@relay_group) %> ></h4>
         <% if not @relay_group.nil? and @relay_group.user == current_user %>
             <p>Viestikilpailumaksu 60 euroa maksettava viitenumerolla <%= @user.construct_reference_number %> tilille <%= @account_number %></p>
         <% end %>
@@ -40,5 +39,3 @@
         <% end %>
     <% end %>
 <% end %>
-
-<h4><%= link_to 'Muokkaa tietojasi', edit_user_path(@user), :class => "btn btn-primary"  %></h4>
