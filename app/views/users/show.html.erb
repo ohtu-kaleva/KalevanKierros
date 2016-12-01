@@ -1,43 +1,35 @@
-<h2>
-  <%= @user.first_name %> <%= @user.last_name %>
-</h2>
-<p> <%= link_to 'Muokkaa tietojasi', edit_user_path(@user) %></p>
+<h2><%= @user.first_name %> <%= @user.last_name %></h2>
 <h4>Kiertäjänumerosi on: <%= @user.kk_number %></h4>
 
 <% if not current_user.nil? and current_user.id == @user.id %>
     <% if @kk_enrollment %>
         <h4>Olet ilmoittautunut Kalevan Kierrokselle <%= @year %></h4>
-        <% if not @group.nil? and @group.user == current_user %>
-            <p>
-                Kierrosmaksu 200 euroa maksettava viitenumerolla <%= @user.construct_reference_number %> tilille <%= @account_number %><br>
-            </p>
-        <% elsif @group.nil? %>
-            <p>
-                Kierrosmaksu 50 euroa maksettava viitenumerolla <%= @user.construct_reference_number %> tilille <%= @account_number %>
-            </p>
-        <% end %>
-    <% else %>
-        <% if enrollment_open? %>
-        <%= link_to('Ilmoittaudu Kalevan Kierrokselle 2016', ilmoittautuminen_path, :class => "btn btn-primary") %>
+        <% if @group.nil? %>
+            <p>Yksilön kierrosmaksu 50 euroa maksettava viitenumerolla <%= @user.construct_reference_number %> tilille <%= @account_number %></p>
         <% end %>
     <% end %>
 
     <% if not @group.nil? %>
         <h4>Kuulut joukkueeseen: <%= link_to @group.name, group_path(@group) %></h4>
-    <% else %>
-       <p>Jos haluat kuulua joukkueeseen, pyydä joukkueesi kapteenia ilmoittamaan sinut.</p>
+        <% if not @group.nil? and @group.user == current_user %>
+            <p>Joukkueen kierrosmaksu 200 euroa maksettava viitenumerolla <%= @user.construct_reference_number %> tilille <%= @account_number %><br></p>
+            <p>Huom. Sisältää joukkueen jäsenten kierrosmaksut.</p>
+        <% end %>
     <% end %>
 
     <% if not @relay_group.nil? %>
         <h4>Kuulut viestijoukkueeseen: <%= link_to @relay_group.name, relay_group_path(@relay_group) %></h4>
+        <% if not @relay_group.nil? and @relay_group.user == current_user %>
+            <p>Viestikilpailumaksu 60 euroa maksettava viitenumerolla <%= @user.construct_reference_number %> tilille <%= @account_number %></p>
+        <% end %>
     <% end %>
 
     <% if @enrollments.count > 0 %>
-        <h4>Olet ilmoittautunut seuraaviin tapahtumiin:</h4>
-        <p>
-            <% @enrollments.each do |enrollment|%>
-            <%= link_to enrollment.event.name, enrollment_path(enrollment.id), class: 'label label-primary' %><br>
-            <% end %>
-        </p>
+        <h2>Olet ilmoittautunut seuraaviin tapahtumiin:</h2>
+        <% @enrollments.each do |enrollment|%>
+            <h4><%= link_to enrollment.event.name, enrollment_path(enrollment.id) %></h4>
+        <% end %>
     <% end %>
 <% end %>
+
+<h2> <%= link_to 'Muokkaa tietojasi', edit_user_path(@user), :class => "btn btn-primary"  %></h2>
