@@ -1,7 +1,7 @@
 <div class="col-lg-6">
     <h2><%= @enrollment.event.name %></h2>
-    <p><%= @enrollment.user.first_name %> <%= @enrollment.user.last_name %></p>
-    <h3>Ilmoittautumistiedot</h3>
+    <h4><%= @enrollment.user.first_name %> <%= @enrollment.user.last_name %></h4>
+    <h4>Ilmoittautumistiedot</h4>
     <table class="table table-bordered">
     <% @data.each do |data| %>
       <tr>
@@ -18,7 +18,7 @@
         <p>Osallistumismaksu: <%= @price %> euroa</p>
         <p>Eräpäivä: <%= @pay_day %></p>
     <% end %>
-    <h3><%= link_to 'Takaisin', user_path(current_user), :class => "btn btn-success" %></h3>
+    <h4><%= link_to 'Takaisin', user_path(current_user), :class => "btn btn-primary" %></h4>
     <% if user_is_admin? %>
       <%= link_to 'Peru ilmoittautuminen', @enrollment, method: :delete, data: { confirm: 'Oletko varma että haluat perua ilmoittautumisen?' } %>
     <% end %>
