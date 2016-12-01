@@ -9,7 +9,7 @@
         <% end %>
     <% else %>
         <h4>Et ole ilmoittautunut Kalevan Kierrokselle <%= @year %></h4>
-        <a href="http://sivut.kalevankierros.fi/ilmoittaudu/" class="nappula btn btn-primary">Ilmoittaudu</a>
+        <h4><a href="http://sivut.kalevankierros.fi/ilmoittaudu/" class="nappula btn btn-primary">Ilmoittaudu</a></h4>
     <% end %>
     <br/>
 
@@ -38,7 +38,8 @@
     <% if @group.nil? and @relay_group.nil? %>
         <h4>Et kuulu vielä joukkueeseen</h4>
         <p>Kerää viisi kaveriasi mukaan ja osallistukaa Kalevan kierrokseen joukkueena tai viestinä.</p>
-        <a href="http://sivut.kalevankierros.fi/ilmoittaudu/" class="nappula btn btn-primary">Ilmoita joukkue</a>
+        <h4><a href="http://sivut.kalevankierros.fi/ilmoittaudu/" class="nappula btn btn-primary">Ilmoita joukkue</a></h4>
+        <br/>
     <% end %>
 
     <% if @enrollments.count > 0 %>
