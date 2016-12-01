@@ -1,4 +1,4 @@
-<h2><%= @user.first_name %> <%= @user.last_name %></h2>
+<h2><%= @user.first_name %> <%= @user.last_name %></h2><span><%= link_to 'Muokkaa tietojasi', edit_user_path(@user)  %></span>
 <h4>Kiertäjänumerosi on: <%= @user.kk_number %></h4>
 
 <% if not current_user.nil? and current_user.id == @user.id %>
@@ -25,11 +25,9 @@
     <% end %>
 
     <% if @enrollments.count > 0 %>
-        <h2>Olet ilmoittautunut seuraaviin tapahtumiin:</h2>
-        <% @enrollments.each do |enrollment|%>
-            <h4><%= link_to enrollment.event.name, enrollment_path(enrollment.id) %></h4>
+        <h3>Olet ilmoittautunut seuraaviin tapahtumiin:</h3>
+        <% @enrollments.reverse.each do |enrollment|%>
+            <p><%= link_to enrollment.event.name, enrollment_path(enrollment.id) %> ></p>
         <% end %>
     <% end %>
 <% end %>
-
-<h2> <%= link_to 'Muokkaa tietojasi', edit_user_path(@user), :class => "btn btn-primary"  %></h2>
