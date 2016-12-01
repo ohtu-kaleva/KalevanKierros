@@ -1,4 +1,4 @@
-<h2>Ilmoittaudu Kalevan kierroksen yksilökilpailuun</h2>
+<h2>Ilmoittaudu yksilökilpailuun</h2>
 <p>Ole hyvä ja tarkista tietosi ennen ilmoittautumista:</p>
 
 <div class="field">
@@ -25,5 +25,5 @@
         font-size: 16px;
     }
 </style>
-<span><%= link_to 'Muokkaa tietojasi', edit_user_path, :class => "btn btn-default" %> </span>
-<span><%= button_to 'Ilmoittaudu yksilökilpailuun', url_for(controller: :kk_enrollments, action: :create ), :class => "btn btn-primary" %></span>
+<h4><%= link_to 'Muokkaa tietojasi', edit_user_path, :class => "btn btn-default" %> </h4>
+<h4><%= button_to 'Ilmoittaudu yksilökilpailuun', url_for(controller: :kk_enrollments, action: :create ), :class => "btn btn-primary" %></h4>
