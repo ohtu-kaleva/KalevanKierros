@@ -7,13 +7,16 @@
         <% if @group.nil? %>
             <p>Yksilön kierrosmaksu 50 euroa maksettava viitenumerolla <%= @user.construct_reference_number %> tilille <%= @account_number %></p>
         <% end %>
+    <% else %>
+        <h4>Et ole ilmoittautunut Kalevan Kierrokselle <%= @year %></h4>
+        <a href="http://sivut.kalevankierros.fi/ilmoittaudu/" class="nappula btn btn-primary">Ilmoittaudu</a>
     <% end %>
 
     <% if not @group.nil? %>
         <h4>Kuulut joukkueeseen: <%= link_to @group.name, group_path(@group) %></h4>
         <% if not @group.nil? and @group.user == current_user %>
             <p>Joukkueen kierrosmaksu 200 euroa maksettava viitenumerolla <%= @user.construct_reference_number %> tilille <%= @account_number %><br></p>
-            <p>Huom. Sisältää joukkueen jäsenten kierrosmaksut.</p>
+            <p>Sisältää joukkueen jäsenten kierrosmaksut.</p>
         <% end %>
     <% end %>
 
@@ -22,6 +25,12 @@
         <% if not @relay_group.nil? and @relay_group.user == current_user %>
             <p>Viestikilpailumaksu 60 euroa maksettava viitenumerolla <%= @user.construct_reference_number %> tilille <%= @account_number %></p>
         <% end %>
+    <% end %>
+
+    <% if @relay_group.nil? and @relay_group.nil? %>
+        <h4>Et kuulu vielä joukkueeseen.</h4>
+        <p>Kerää viisi kaveriasi mukaan ja osallistukaa Kalevan kierrokseen joukkueena tai viestinä.</p>
+        <a href="http://sivut.kalevankierros.fi/ilmoittaudu/" class="nappula btn btn-primary">Ilmoita joukkue</a>
     <% end %>
 
     <% if @enrollments.count > 0 %>
