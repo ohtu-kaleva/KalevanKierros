@@ -1,6 +1,6 @@
 <div class="col-lg-6">
     <h2><%= @enrollment.event.name %></h2>
-    <h4><%= @enrollment.user.first_name %> <%= @enrollment.user.last_name %></h4>
+    <h3><%= @enrollment.user.first_name %> <%= @enrollment.user.last_name %></h3>
     <h4>Ilmoittautumistiedot</h4>
     <table class="table table-bordered">
     <% @data.each do |data| %>
@@ -11,7 +11,7 @@
     <% end %>
     </table>
     <% if !@account_number.empty? and @price > 0 %>
-        <h3>Maksutiedot</h3>
+        <h4>Maksutiedot</h4>
         <p>Tilinumero: <%= @account_number %></p>
         <p>Saaja: <%= @receiver %></p>
         <p>Viitenumero: <%= @reference_number %></p>

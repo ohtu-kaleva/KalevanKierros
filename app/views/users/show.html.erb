@@ -1,5 +1,5 @@
-<h2><%= @user.first_name %> <%= @user.last_name %></h2><span><%= link_to 'Muokkaa tietojasi', edit_user_path(@user)  %></span>
-<h4>Kiertäjänumerosi on: <%= @user.kk_number %></h4>
+<h2><%= @user.first_name %> <%= @user.last_name %></h2>
+<p>Kiertäjänumerosi on: <%= @user.kk_number %></p>
 
 <% if not current_user.nil? and current_user.id == @user.id %>
     <% if @kk_enrollment %>
@@ -31,3 +31,5 @@
         <% end %>
     <% end %>
 <% end %>
+
+<h4><%= link_to 'Muokkaa tietojasi', edit_user_path(@user), :class => "btn btn-primary"  %></h4>
