@@ -41,16 +41,16 @@
             <li class="dropdown">
               <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="adminmenu">Omat tiedot <span class="caret"></span></a>
               <ul class="dropdown-menu" aria-labelledby="omat tiedot">
-                <li><%= link_to 'Muuta tietojasi', edit_user_path(current_user) %></li>
-                <li><%= link_to 'Tarkastele ilmoittautumisiasi', user_path(current_user) %></li>
+                <li><%= link_to 'Omat tiedot', edit_user_path(current_user) %></li>
+                <li><%= link_to 'Omat ilmoittautumiset', user_path(current_user) %></li>
                 <% if current_user.group %>
-                    <li><%= link_to 'Joukkueesi tiedot', group_path(current_user.group) %></li>
+                    <li><%= link_to 'Joukkueen tiedot', group_path(current_user.group) %></li>
                 <% end %>
                 <% if current_user.relay_group %>
-                    <li><%= link_to 'Viestijoukkueesi tiedot', relay_group_path(current_user.relay_group) %></li>
+                    <li><%= link_to 'Viestijoukkueen tiedot', relay_group_path(current_user.relay_group) %></li>
                 <% end %>
                 <% if current_user.statistic %>
-                  <li><%= link_to 'Näytä tilasto', statistic_path(current_user.statistic.id) %></li>
+                  <li><%= link_to 'Oma tilasto', statistic_path(current_user.statistic.id) %></li>
                 <% end %>
                 <li class="divider"></li>
                 <li><%= link_to 'Kirjaudu ulos', signout_path, :method => 'delete' %></li>
