@@ -1,14 +1,6 @@
     <%= bootstrap_form_for(@user) do |f| %>
         <% if @user.errors.any? %>
-            <div id="error_explanation">
-              <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
-
-              <ul>
-                <% @user.errors.full_messages.each do |message| %>
-                    <li><%= message %></li>
-                <% end %>
-              </ul>
-            </div>
+            <p class="alert alert-danger fade in"><%= Lisää puuttuvat tiedot</p>
         <% end %>
 
         <%= f.text_field :first_name, label: "Etunimi: " %>
@@ -28,7 +20,7 @@
         <%= f.password_field :password_confirmation, label: "Salasana uudestaan: " %>
 
         <% if defined?(subpage) && subpage.to_s == 'edit' %>
-            <%= f.submit "Tallenna", :class => "btn btn-primary" %>
+            <%= f.submit "Tallenna muutokset", :class => "btn btn-primary" %>
         <% else %>
             <%= f.submit "Rekisteröidy kiertäjäksi", :class => "btn btn-primary" %>
         <% end %>
