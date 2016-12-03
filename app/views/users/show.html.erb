@@ -15,8 +15,8 @@
            <% end %>
         </p>
     <% else %>
-        <p>Et ole vielä ilmoittautunut Kalevan kierroksen yksilökilpailuun <%= @year %>.</p>
-        <h4><%= link_to('Ilmoittaudu', new_kk_enrollment_path(current_user.id), :class => "btn btn-primary" ) %></h4>
+        <p>Et ole vielä ilmoittautunut Kalevan kierroksen yksilökilpailuun <%= @year %>. Kalevan kierros on kuuden lajin yhteiskilpailu. Jo neljä lajia riittää hyväksyttyyn suoritukseen.</p>
+        <h4><%= link_to('Ilmoittaudu yksilökilpailuun', new_kk_enrollment_path(current_user.id), :class => "btn btn-primary" ) %></h4>
     <% end %>
 
     <% if @enrollments.count > 0 %>
