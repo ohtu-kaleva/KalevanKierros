@@ -1,5 +1,7 @@
-<h3><%= @relay_group.name %></h3>
-<strong>Jäsenet:</strong>
+<h2><%= @relay_group.name %></h2>
+<p>Joukkue osallistuu viestikilpailuun.</p>
+<p>Kapteeni: <%= @captain.full_name %></p>
+<p>Jäsenet:</p>
 <table class="table table-bordered">
 <thead>
 <tr>
@@ -16,7 +18,7 @@
   <td><%= u.email %></td>
   <td><%= u.kk_number %></td>
   <% if not current_user.nil? and @captain == current_user or user_is_admin? %>
-     <td><%= link_to 'Poista jäsen joukkueesta', delete_user_from_relay_group_path(@relay_group.id, user_id: u.id), method:'PUT' %></td>
+     <td><%= link_to 'Poista jäsen', delete_user_from_relay_group_path(@relay_group.id, user_id: u.id), method:'PUT' %></td>
   <% elsif %>
     <td></td>
   <% end %>
@@ -24,9 +26,10 @@
 <% end %>
 </tbody>
 </table>
-<strong>Kapteeni: <%= @captain.full_name %></strong>
-<p>
+<h4>
     <% if not current_user.nil? and @captain == current_user or user_is_admin? and @count < 6 %>
-        <%= link_to 'Lisää uusi jäsen', add_user_to_relay_group_path(@relay_group.id) %>
+        <%= link_to 'Lisää uusi jäsen', add_user_to_relay_group_path(@relay_group.id), , :class => "btn btn-success" %>
     <% end %>
-</p>
+</h4>
+<h1><a href="http://sivut.kalevankierros.fi/" class="btn btn-default">Takaisin etusivulle</a></h1>
+
