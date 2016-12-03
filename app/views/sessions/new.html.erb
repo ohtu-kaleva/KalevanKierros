@@ -8,8 +8,9 @@
         <% end %>
     </div>
     <p>
-        <%= link_to 'Unohditko salasanasi?', new_password_reset_path %>
+        <%= link_to 'Unohditko salasanasi?', new_password_reset_path %><br/>
         <a href="mailto:kayttajatunnus@kalevankierros.fi?subject=[KK]Unohdin käyttäjätunnukseni">Unohditko käyttäjätunnuksesi?</a>
     </p>
-    <h1><%= link_to 'Oletko uusi kiertäjä? Rekisteröidy', signup_path, :class => "btn btn-default" %></h1>
+    <p>Oletko uusi kiertäjä?</p>
+    <p><%= link_to 'Rekisteröidy kiertäjäksi', signup_path, :class => "btn btn-default" %></p>
 </div>
