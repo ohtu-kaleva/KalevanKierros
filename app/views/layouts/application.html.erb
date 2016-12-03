@@ -30,7 +30,6 @@
         <li><a href="http://sivut.kalevankierros.fi/ilmoittaudu/">Ilmoittaudu</a></li>
         <li><%= link_to 'Tulokset', results_path %></li>
         <li><a href="http://www.kalevankierros.fi/phpbb/index.php">Forum</a></li>
-        <li><a href="http://sivut.kalevankierros.fi/kalevan-kierros/">Kalevan kierros</a></li>
       </ul>
 
       <ul class="nav navbar-nav navbar-right">
@@ -38,24 +37,8 @@
             <li><%= link_to 'Kirjaudu', signin_path %></li>
             <li><%= link_to 'Rekisteröidy', signup_path %></li>
         <% else %>
-            <li class="dropdown">
-              <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="adminmenu">Omat tiedot <span class="caret"></span></a>
-              <ul class="dropdown-menu" aria-labelledby="omat tiedot">
-                <li><%= link_to 'Omat tiedot', edit_user_path(current_user) %></li>
-                <li><%= link_to 'Omat ilmoittautumiset', user_path(current_user) %></li>
-                <% if current_user.group %>
-                    <li><%= link_to 'Joukkueen tiedot', group_path(current_user.group) %></li>
-                <% end %>
-                <% if current_user.relay_group %>
-                    <li><%= link_to 'Viestijoukkueen tiedot', relay_group_path(current_user.relay_group) %></li>
-                <% end %>
-                <% if current_user.statistic %>
-                  <li><%= link_to 'Oma tilasto', statistic_path(current_user.statistic.id) %></li>
-                <% end %>
-                <li class="divider"></li>
-                <li><%= link_to 'Kirjaudu ulos', signout_path, :method => 'delete' %></li>
-              </ul>
-            </li>
+            <li><%= link_to 'Omat tiedot', user_path(current_user) %></li>
+            <li><%= link_to 'Kirjaudu ulos', signout_path, :method => 'delete' %></li>
         <% end %>
         <% if user_is_admin? %>
         <li class="dropdown">
