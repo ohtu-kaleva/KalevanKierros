@@ -7,6 +7,8 @@ käyttäjätunnuksellesi uuden salasanan.</p>
   <div class="form-group">
     <%= label_tag 'Käyttäjätunnus', nil, :class => "control-label" %>
     <%= text_field_tag :username, "", class: 'form-control' %>
+  </div>
+  <div class="form-group">
     <%= label_tag 'Sähköposti', nil, :class => "control-label" %>
     <%= text_field_tag :email, "", class: 'form-control' %>
     <h1><%= submit_tag 'Lähetä uusi salasana', class: "btn btn-primary" %></h1>
