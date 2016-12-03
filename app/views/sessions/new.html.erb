@@ -4,7 +4,7 @@
         <%= bootstrap_form_tag url: sessions_path(redirect: @redirect, id: @id) do |f| %>
             <%= f.text_field :username, label: "Käyttäjätunnus: " %>
             <%= f.password_field :password, label: "Salasana: " %>
-            <h4><%= f.submit "Kirjaudu sisään", class: "btn btn-primary" %></h4>
+            <h1><%= f.submit "Kirjaudu sisään", class: "btn btn-primary" %></h1>
         <% end %>
     </div>
     <p>
