@@ -2,11 +2,11 @@
     <h3>Lisää jäsen joukkueeseen <%= @relay_group.name %></h3>
     <p>Kirjoita nimi kenttään ja valitse jäsen listasta. Jäsenen tulee olla rekisteröitynyt.</p>
     <%= form_tag(controller: 'relay_groups', action: 'update_user_relay_group_relation') do %>
-        <div class="input-group">
-            <span class="input-group-addon">1.</span>
+        <div class="input-group jasen">
+            <span class="input-group-addon jasen-jarjestys">1.</span>
             <%= text_field_tag 'kk_number', nil, :class => "form-control autocomplete jasen-numero", :id => "member" %>
-            <span class="input-group-addon">&nbsp;&nbsp;&nbsp</span>
-            <span class="actions">
+            <span class="input-group-addon jasen-nimi">&nbsp;&nbsp;&nbsp</span>
+            <span class="actions jasen-lisaa">
                 <%= submit_tag 'Lisää jäsen', :class => "btn btn-primary" %>
             </span>
         </div>
