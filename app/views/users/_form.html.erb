@@ -28,7 +28,7 @@
         <%= f.password_field :password_confirmation, label: "Salasana uudestaan: " %>
 
         <% if defined?(subpage) && subpage.to_s == 'edit' %>
-            <%= f.submit "Muokkaa tietoja", :class => "btn btn-primary" %>
+            <%= f.submit "Tallenna", :class => "btn btn-primary" %>
         <% else %>
             <%= f.submit "Rekisteröidy", :class => "btn btn-primary" %>
         <% end %>
