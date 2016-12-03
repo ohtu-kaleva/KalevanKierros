@@ -7,10 +7,9 @@
             <%= f.submit "Kirjaudu sisään", class: "btn btn-primary" %>
         <% end %>
     </div>
-    <p><%= link_to 'Unohditko salasanasi?', new_password_reset_path %></p>
     <p>
+        <%= link_to 'Unohditko salasanasi?', new_password_reset_path %>
         <a href="mailto:kayttajatunnus@kalevankierros.fi?subject=[KK]Unohdin käyttäjätunnukseni">Unohditko käyttäjätunnuksesi?</a>
     </p>
-    <p>Oletko uusi kiertäjä?</p>
-    <h4><%= link_to 'Rekisteröidy', signup_path, :class => "btn btn-default" %></h4>
+    <h1><%= link_to 'Oletko uusi kiertäjä? Rekisteröidy', signup_path, :class => "btn btn-default" %></h1>
 </div>
