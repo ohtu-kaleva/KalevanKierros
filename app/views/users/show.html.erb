@@ -24,7 +24,7 @@
         </p>
     <% else %>
         <p>Et ole vielä ilmoittautunut Kalevan Kierroksen yksilökilpailuun <%= @year %>.</p>
-        <h4><a href="http://kalevankierros.fi/ilmoittaudu/" class="nappula btn btn-primary">Ilmoittaudu</a></h4>
+        <h4><%= link_to('Ilmoittaudu', new_kk_enrollment_path(current_user.id), :class => "btn btn-primary" ) %></h4>
     <% end %>
 
     <% if not @group.nil? %>
