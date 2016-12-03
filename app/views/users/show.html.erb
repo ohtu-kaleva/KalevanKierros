@@ -1,8 +1,9 @@
 <h2><%= @user.first_name %> <%= @user.last_name %></h2>
-<p><%= link_to 'Muokkaa tietojasi', edit_user_path(@user) %></p><br/>
+<p><%= link_to 'Muokkaa tietojasi', edit_user_path(@user), :class => "btn btn-default" %></p><br/>
 <% if not current_user.nil? and current_user.id == @user.id %>
     <% if current_user.statistic and false %>
         <p><%= link_to 'Oma tilasto', statistic_path(current_user.statistic.id), :class => "btn btn-primary" %></p>
+        <br/>
     <% end %>
 
     <% if @enrollments.count > 0 %>
@@ -28,9 +29,8 @@
     <% if not @group.nil? %>
         <h4>Kuulut joukkueeseen: @group.name</h4>
         <% if not @group.nil? and @group.user == current_user %>
-            <p>Olet joukkueen kapteeni.</p>
             <p>
-                Joukkueen kierrosmaksu 200 euroa maksettava viitenumerolla <%= @user.construct_reference_number %>
+                Olet joukkueen kapteeni. Joukkueen kierrosmaksu 200 euroa maksettava viitenumerolla <%= @user.construct_reference_number %>
                 Kalevan kierros ry tilille <%= @account_number %>.
                 Maksu sisältää jäsenien jäsenmaksut ja yksilökilpailumaksut.
             </p>
@@ -42,12 +42,12 @@
     <% end %>
 
     <% if not @relay_group.nil? %>
-        <h4>Kuulut viestijoukkueeseen: @relay_group.name</h4>
+        <h4>Kuulut viestijoukkueeseen: <% @relay_group.name %></h4>
         <% if not @relay_group.nil? and @relay_group.user == current_user %>
-            <p>Olet viestijoukkueen kapteeni.</p>
             <p>
-                Viestikilpailumaksu 60 euroa maksettava viitenumerolla <%= @user.construct_reference_number %>
-                Kalevan kierros ry tilille <%= @account_number %>. Maksu ei sisällä Kalevan kierroksen jäsenmaksuja eikä yksilökilpailumaksuja.</p>
+                Olet viestijoukkueen kapteeni. Viestikilpailumaksu 60 euroa maksettava viitenumerolla <%= @user.construct_reference_number %>
+                Kalevan kierros ry tilille <%= @account_number %>. Maksu ei sisällä Kalevan kierroksen jäsenmaksuja eikä yksilökilpailumaksuja.
+            </p>
         <% end %>
         <h4><%= link_to "Joukkueen sivu", relay_group_path(@relay_group), :class => "btn btn-primary" %></h4>
         <br/>
