@@ -28,7 +28,7 @@
 </table>
 <h4>
     <% if not current_user.nil? and @captain == current_user or user_is_admin? and @count < 6 %>
-        <%= link_to 'Lisää uusi jäsen', add_user_to_relay_group_path(@relay_group.id), , :class => "btn btn-success" %>
+        <%= link_to 'Lisää uusi jäsen', add_user_to_relay_group_path(@relay_group.id), :class => "btn btn-success" %>
     <% end %>
 </h4>
 <h1><a href="http://sivut.kalevankierros.fi/" class="btn btn-default">Takaisin etusivulle</a></h1>
