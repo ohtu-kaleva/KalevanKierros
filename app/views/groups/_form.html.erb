@@ -25,7 +25,7 @@
       <div class="input-group jasen">
         <span class="input-group-addon jasen-jarjestys">1.</span>
         <%= text_field_tag 'kk_numbers[]', nil, :class => "form-control autocomplete jasen-numero", :id => "member1", :value => current_user.kk_number, :readonly => 1 %>
-        <span class="input-group-addon <%= current_user.gender %>"><%= current_user.first_name << " " << current_user.last_name %></span>
+        <span class="input-group-addon jasen-nimi <%= current_user.gender %>"><%= current_user.first_name << " " << current_user.last_name %></span>
       </div>
       <div class="input-group jasen">
         <span class="input-group-addon jasen-jarjestys">2.</span>
