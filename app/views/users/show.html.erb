@@ -15,12 +15,10 @@
 
     <% if @kk_enrollment %>
         <p>
-            Olet ilmoittautunut Kalevan Kierrokselle <%= @year %>.
+            Olet ilmoittautunut Kalevan Kierroksen yksilökilpailuun <%= @year %>.
             <% if @group.nil? %>
-                Kierrosmaksu 50 euroa maksettava viitenumerolla <%= @user.construct_reference_number %> tilille <%= @account_number %>.
-                Maksu sisältää Kalevan kierroksen jäsenmaksun 20 euroa ja yhteiskilpailumaksun 30 euroa.
-           <% else %>
-                Joukkueesi kierrosmaksu sisältää Kalevan kierroksen jäsenmaksusi 20 euroa ja yhteiskilpailumaksusi.
+                Kierrosmaksu 50 euroa on maksettava viitenumerolla <%= @user.construct_reference_number %> Kalevan kierros ryn tilille <%= @account_number %>.
+                Maksu sisältää Kalevan kierros ryn jäsenmaksun 20 euroa ja yhteiskilpailumaksun 30 euroa.
            <% end %>
         </p>
     <% else %>
@@ -33,9 +31,9 @@
         <h4>Kuulut joukkueeseen: <%= @group.name %></h4>
         <% if not @group.nil? and @group.user == current_user %>
             <p>
-                Olet joukkueen kapteeni. Joukkueen kierrosmaksu 200 euroa maksettava viitenumerolla <%= @user.construct_reference_number %>
+                Olet joukkueen kapteeni. Joukkueen kierrosmaksu 200 euroa on maksettava viitenumerolla <%= @user.construct_reference_number %>
                 Kalevan kierros ry tilille <%= @account_number %>.
-                Maksu sisältää jäsenien jäsenmaksut ja yksilökilpailumaksut.
+                Maksu sisältää joukkueen jäsenten jäsenmaksut ja yksilökilpailumaksut.
             </p>
         <% else %>
             <p>Joukkueesi kierrosmaksu 200 euroa sisältää Kalevan kierroksen jäsenmaksusi ja yksilökilpailumaksun.</p>
