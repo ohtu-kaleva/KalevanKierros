@@ -1,30 +1,17 @@
-<h2>Lisää jäsen</h2>
-<p>Joukkue: <%= @relay_group.name %></p>
-<p>Kirjoita nimi kenttään ja valitse jäsen listasta. Jäsenen tulee olla rekisteröitynyt.</p>
-<%= form_tag(controller: 'relay_groups', action: 'update_user_relay_group_relation') do %>
-    <div class="input-group jasen">
-        <%= text_field_tag 'kk_number', nil, :class => "form-control autocomplete jasen-numero", :id => "member" %>
-        <span class="input-group-addon jasen-nimi">&nbsp;&nbsp;&nbsp</span>
-        <span class="actions jasen-lisaa">
-            <%= submit_tag 'Lisää jäsen', :class => "btn btn-success" %>
-        </span>
-    </div>
-
-<% end %>
-<h1><%= link_to 'Takaisin', group_path(@group), :class => "btn btn-default"  %></h1>
-
-<style>
-    .jasen-numero {
-        box-shadow: none;
-    }
-    .jasen-nimi {
-        border-radius: 0;
-    }
-    .jasen-lisaa {
-        float: left;
-        margin-left: 1em;
-    }
-</style>
+<div class="col-lg-6">
+    <h3>Lisää jäsen joukkueeseen <%= @relay_group.name %></h3>
+    <p>Kirjoita nimi kenttään ja valitse jäsen listasta. Jäsenen tulee olla rekisteröitynyt.</p>
+    <%= form_tag(controller: 'relay_groups', action: 'update_user_relay_group_relation') do %>
+        <div class="input-group">
+           <span class="input-group-addon">1.</span>
+           <%= text_field_tag 'kk_number', nil, :class => "form-control autocomplete", :id => "member" %>
+           <span class="input-group-addon">&nbsp;&nbsp;&nbsp</span>
+        </div>
+        <div class="actions">
+        <%= submit_tag 'Lisää jäsen', :class => "btn btn-primary" %>
+        </div>
+    <% end %>
+</div>
 <script type="text/javascript">
     $("input.autocomplete").autocomplete({ delay: 50, minLength: 2, autoFocus: true,
         select: function (event, ui) {
