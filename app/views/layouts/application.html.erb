@@ -78,24 +78,13 @@
     <%= yield %>
 </div>
 
-<% if user_is_admin? %>
-    <style>
-      @media (min-width: 992px) {
-        .container {
-           width: 100%;
-        }
-      }
-    </style>
-<% else %>
-    <style>
-        @media (min-width: 992px) {
-            .container {
-                width: 750px;
-            }
-        }
-    </style>
-<% end %>
-
+<style>
+  @media (min-width: 992px) {
+    .container {
+       width: 750px;
+    }
+  }
+</style>
 <script type="text/javascript">
     if (navigator.userAgent.match(/IEMobile\/10\.0/)) {
         var msViewportStyle = document.createElement('style')
