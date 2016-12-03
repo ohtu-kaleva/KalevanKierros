@@ -1,41 +1,55 @@
 <h2><%= @user.first_name %> <%= @user.last_name %></h2>
 <p><%= link_to 'Muokkaa tietojasi', edit_user_path(@user) %></p><br/>
 <% if not current_user.nil? and current_user.id == @user.id %>
-    <% if current_user.statistic %>
-        <p><%= link_to 'Oma tilasto', statistic_path(current_user.statistic.id) %></p>
+    <% if current_user.statistic and false %>
+        <p><%= link_to 'Oma tilasto', statistic_path(current_user.statistic.id), :class => "btn btn-primary" %></p>
+    <% end %>
+
+    <% if @enrollments.count > 0 %>
+        <h4>Olet ilmoittautunut seuraaviin tapahtumiin:</h4>
+        <% @enrollments.reverse.each do |enrollment|%>
+            <p><%= link_to enrollment.event.name, enrollment_path(enrollment.id) %> ></p>
+        <% end %>
+        <br/>
     <% end %>
 
     <% if @kk_enrollment %>
-        <p>Olet ilmoittautunut Kalevan Kierrokselle <%= @year %></p>
+        <h4>Olet ilmoittautunut Kalevan Kierrokselle <%= @year %></h4>
         <% if @group.nil? %>
             <p>Kierrosmaksu 50 euroa maksettava viitenumerolla <%= @user.construct_reference_number %> tilille <%= @account_number %></p>
             <p>Maksu sisältää Kalevan kierroksen jäsenmaksun 20 euroa ja yhteiskilpailumaksun 30 euroa.</p>
         <% end %>
     <% else %>
-        <h4>Et ole vielä ilmoittautunut Kalevan Kierrokselle <%= @year %></h4>
+        <p>Et ole vielä ilmoittautunut Kalevan Kierrokselle <%= @year %>.</p>
         <h4><a href="http://sivut.kalevankierros.fi/ilmoittaudu/" class="nappula btn btn-primary">Ilmoittaudu</a></h4>
     <% end %>
     <br/>
 
     <% if not @group.nil? %>
-        <h4>Kuulut joukkueeseen: <%= link_to @group.name, group_path(@group) %></h4>
+        <h4>Kuulut joukkueeseen: @group.name</h4>
         <% if not @group.nil? and @group.user == current_user %>
             <p>Olet joukkueen kapteeni.</p>
-            <p>Joukkueen kierrosmaksu 200 euroa maksettava viitenumerolla <%= @user.construct_reference_number %> tilille <%= @account_number %>.<br></p>
-            <p>Maksu sisältää joukkueen jäsenille Kalevan kierroksen jäsenmaksun 20 euroa ja yksilökilpailumaksun.</p>
+            <p>
+                Joukkueen kierrosmaksu 200 euroa maksettava viitenumerolla <%= @user.construct_reference_number %>
+                Kalevan kierros ry tilille <%= @account_number %>.
+                Maksu sisältää jäsenien jäsenmaksut ja yksilökilpailumaksut.
+            </p>
         <% else %>
             <p>Joukkueesi kierrosmaksu 200 euroa sisältää Kalevan kierroksen jäsenmaksusi ja yksilökilpailumaksun.</p>
         <% end %>
+        <h4><%= link_to "Joukkueen sivu", group_path(@group), :class => "btn btn-primary" %></h4>
         <br/>
     <% end %>
 
     <% if not @relay_group.nil? %>
-        <h4>Kuulut viestijoukkueeseen: <%= link_to @relay_group.name, relay_group_path(@relay_group) %></h4>
+        <h4>Kuulut viestijoukkueeseen: @relay_group.name</h4>
         <% if not @relay_group.nil? and @relay_group.user == current_user %>
             <p>Olet viestijoukkueen kapteeni.</p>
-            <p>Viestikilpailumaksu 60 euroa maksettava viitenumerolla <%= @user.construct_reference_number %> tilille <%= @account_number %></p>
-            <p>Maksu ei sisällä Kalevan kierroksen jäsenmaksuja eikä yksilökilpailumaksuja.</p>
+            <p>
+                Viestikilpailumaksu 60 euroa maksettava viitenumerolla <%= @user.construct_reference_number %>
+                Kalevan kierros ry tilille <%= @account_number %>. Maksu ei sisällä Kalevan kierroksen jäsenmaksuja eikä yksilökilpailumaksuja.</p>
         <% end %>
+        <h4><%= link_to "Joukkueen sivu", relay_group_path(@relay_group), :class => "btn btn-primary" %></h4>
         <br/>
     <% end %>
 
@@ -44,12 +58,5 @@
         <p>Kerää viisi kaveriasi mukaan ja osallistukaa Kalevan kierrokseen joukkueena tai viestinä.</p>
         <h4><a href="http://sivut.kalevankierros.fi/ilmoittaudu/" class="nappula btn btn-primary">Ilmoita joukkue</a></h4>
         <br/>
-    <% end %>
-
-    <% if @enrollments.count > 0 %>
-        <h4>Olet ilmoittautunut seuraaviin tapahtumiin:</h4>
-        <% @enrollments.reverse.each do |enrollment|%>
-            <p><%= link_to enrollment.event.name, enrollment_path(enrollment.id) %> ></p>
-        <% end %>
     <% end %>
 <% end %>
