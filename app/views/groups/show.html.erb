@@ -1,19 +1,22 @@
 <h3><%= @group.name %></h3>
 <p class="group-information">
-    <% if(@isFemaleGroup) %>
-	 <%= 'Joukkue on naisjoukkue. Joukkue näkyy naisjoukkueiden tuloslistauksessa ja joukkueen nimen perässä näytetään tunnus (N). Joukkueen tyyppi määräytyy lopullisen kokoonpanon mukaisesti ja päivittyy automaattisesti.' %>
-    <% else %>
-        <%= 'Joukkue on sekajoukkue. Joukkueen tyyppi määräytyy lopullisen kokoonpanon mukaisesti ja päivittyy automaattisesti.' %>  
-    <% end %>
+    <span>Joukkue osallistuu joukkuekilpailuun ja on </span>
+    <span>
+        <% if(@isFemaleGroup) %>
+	        <%= 'naisjoukkue' %>
+        <% else %>
+            <%= 'sekajoukkue' %>
+        <% end %>
+    </span>
+    <span>. Joukkueen tyyppi määräytyy lopullisen kokoonpanon mukaisesti.</span>
 </p>
-<strong>Jäsenet:</strong>
+<h4>Jäsenet:</h4>
 <table class="table table-bordered">
 <thead>
 <tr>
     <th>Nimi</th>
     <th>Sähköposti</th>
     <th>Kiertäjänumero</th>
-    <th></th>
 </tr>
 </thead>
 <tbody>
@@ -23,17 +26,17 @@
   <td><%= u.email %></td>
   <td><%= u.kk_number %></td>
   <% if not current_user.nil? and @captain == current_user or user_is_admin? %>
-     <td><%= link_to 'Poista jäsen joukkueesta', delete_user_from_group_path(@group.id, user_id: u.id), method:'PUT' %></td>
-  <% elsif %>
-    <td></td>
+     <h4><%= link_to 'Poista jäsen joukkueesta', delete_user_from_group_path(@group.id, user_id: u.id), method:'PUT', :class => "btn btn-warning" %></h4>
   <% end %>
 </tr>
 <% end %>
 </tbody>
 </table>
-<strong>Kapteeni: <%= @captain.full_name %></strong>
-<p>
+<h4>Kapteeni: <%= @captain.full_name %></h4>
+<h4>
     <% if not current_user.nil? and @captain == current_user or user_is_admin? and @count < 6 %>
-        <%= link_to 'Lisää uusi jäsen', add_user_to_group_path(@group.id) %>
+        <%= link_to 'Lisää uusi jäsen', add_user_to_group_path(@group.id), :class => "btn btn-success" %>
     <% end %>
-</p>
+</h4>
+<h1><a href="http://sivut.kalevankierros.fi/" class="btn btn-default">Takaisin etusivulle</a></h1>
+
