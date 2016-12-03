@@ -52,7 +52,9 @@
           <li><%= link_to 'Rekisteröidy', signup_path %></li>
           <li><%= link_to 'Kirjaudu', signin_path %></li>
         <% else %>
-          <li><%= link_to 'Omat tiedot', user_path(current_user) %></li>
+          <% if not user_is_admin? %>
+            <li><%= link_to 'Omat tiedot', user_path(current_user) %></li>
+          <% end %>
           <li><%= link_to 'Kirjaudu ulos', signout_path, :method => 'delete' %></li>
         <% end %>
       </ul>
@@ -79,7 +81,7 @@
 <style>
   @media (min-width: 992px) {
     .container {
-       width: 750px !important;
+       width: 750px;
     }
   }
 </style>
