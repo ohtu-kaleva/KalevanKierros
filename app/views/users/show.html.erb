@@ -7,6 +7,7 @@
     <% end %>
 
     <% if @enrollments.count > 0 %>
+        <br/>
         <h4>Olet ilmoittautunut seuraaviin tapahtumiin:</h4>
         <% @enrollments.reverse.each do |enrollment|%>
             <p><%= link_to enrollment.event.name, enrollment_path(enrollment.id) %> ></p>
@@ -25,9 +26,9 @@
         <p>Et ole vielä ilmoittautunut Kalevan Kierroksen yksilökilpailuun <%= @year %>.</p>
         <h4><a href="http://kalevankierros.fi/ilmoittaudu/" class="nappula btn btn-primary">Ilmoittaudu</a></h4>
     <% end %>
-    <br/>
 
     <% if not @group.nil? %>
+        <br/>
         <h4>Kuulut joukkueeseen: <%= @group.name %></h4>
         <% if not @group.nil? and @group.user == current_user %>
             <p>
@@ -39,10 +40,10 @@
             <p>Joukkueesi kierrosmaksu 200 euroa sisältää Kalevan kierroksen jäsenmaksusi ja yksilökilpailumaksun.</p>
         <% end %>
         <h4><%= link_to "Joukkueen sivu", group_path(@group), :class => "btn btn-primary" %></h4>
-        <br/>
     <% end %>
 
     <% if not @relay_group.nil? %>
+        <br/>
         <h4>Kuulut viestijoukkueeseen: <%= @relay_group.name %></h4>
         <% if not @relay_group.nil? and @relay_group.user == current_user %>
             <p>
@@ -51,14 +52,13 @@
             </p>
         <% end %>
         <h4><%= link_to "Joukkueen sivu", relay_group_path(@relay_group), :class => "btn btn-primary" %></h4>
-        <br/>
     <% end %>
 
     <% if @group.nil? and @relay_group.nil? %>
+        <br/>
         <h4>Et kuulu vielä joukkueeseen</h4>
         <p>Kerää viisi kaveriasi mukaan ja osallistukaa Kalevan kierrokseen joukkueena tai viestinä.</p>
         <h4><a href="http://kalevankierros.fi/ilmoittaudu/" class="nappula btn btn-primary">Ilmoita joukkue</a></h4>
-        <br/>
     <% end %>
 <% end %>
 <h1><a href="http://kalevankierros.fi/" class="btn btn-default">Takaisin etusivulle</a></h1>
