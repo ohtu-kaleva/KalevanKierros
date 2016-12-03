@@ -1,4 +1,4 @@
-<h3><%= @group.name %></h3>
+<h2><%= @group.name %></h2>
 <p class="group-information">
     <span>Joukkue osallistuu joukkuekilpailuun ja on </span>
     <span>
@@ -10,8 +10,8 @@
     </span>
     <span>Joukkueen tyyppi määräytyy lopullisen kokoonpanon mukaisesti.</span>
 </p>
-<h4>Kapteeni: <%= @captain.full_name %></h4>
-<h4>Jäsenet:</h4>
+<p>Kapteeni: <%= @captain.full_name %></p>
+<p>Jäsenet:</p>
 <table class="table table-bordered">
 <tbody>
   <% @users.each do |u| %>
