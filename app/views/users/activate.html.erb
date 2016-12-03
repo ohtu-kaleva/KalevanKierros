@@ -1,12 +1,12 @@
-<div class="col-lg-4">
+<div class="col-md-8">
   <div class="bs-component">
-    <h1>Kirjaudu sisään</h1>
+    <h2>Kirjaudu sisään</h2>
 
     <%= bootstrap_form_tag url: activation_path, method: :put do |f| %>
         <%= f.text_field :username, label: "Käyttäjätunnus: " %>
         <%= f.password_field :password, label: "Salasana: " %>
         <%= f.hidden_field :activation_token, value: @user.activation_token %>
-        <%= f.submit "Kirjaudu sisään" %>
+        <h1><%= f.submit "Kirjaudu sisään", :class => 'btn btn-primary' %></h1>
     <% end %>
   </div>
 </div>
