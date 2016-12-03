@@ -58,7 +58,10 @@
         <br/>
         <h4>Et kuulu vielä joukkueeseen</h4>
         <p>Kerää viisi kaveriasi mukaan ja osallistukaa Kalevan kierrokseen joukkueena tai viestinä.</p>
-        <h4><a href="http://kalevankierros.fi/ilmoittaudu/" class="nappula btn btn-primary">Ilmoita joukkue</a></h4>
+        <h4>
+            <%= link_to('Ilmoita joukkue', new_group_path(current_user.id), :class => "btn btn-primary") %>
+            <%= link_to('Ilmoita viestijoukkue', new_relay_group_path(current_user.id), :class => "btn btn-primary") %>
+        </h4>
     <% end %>
 <% end %>
 <h1><a href="http://kalevankierros.fi/" class="btn btn-default">Takaisin etusivulle</a></h1>
