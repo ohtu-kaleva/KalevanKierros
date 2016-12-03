@@ -1,6 +1,6 @@
     <%= bootstrap_form_for(@user) do |f| %>
         <% if @user.errors.any? %>
-            <p class="alert alert-danger fade in"><%= Lisää puuttuvat tiedot</p>
+            <p class="alert alert-danger fade in">Lisää puuttuvat tiedot</p>
         <% end %>
 
         <%= f.text_field :first_name, label: "Etunimi: " %>
