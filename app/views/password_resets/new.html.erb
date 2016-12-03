@@ -3,14 +3,12 @@
 käyttäjätunnuksesi ja sähköpostiosoitteesi. Lähetämme sinulle viestin, jonka avulla voit määritellä
 käyttäjätunnuksellesi uuden salasanan.</p>
 
-<div class="col-md-8">
 <%= form_tag('/password_resets') do %>
   <div class="form-group">
-    <label class="control-label"><%= label_tag 'Käyttäjätunnus' %></label>
-    <div class="form-control"><%= text_field_tag :username %></div>
-    <label class="control-label"><%= label_tag 'Sähköposti' %></label>
-    <div class="form-control"><%= text_field_tag :email %></div>
+    <%= label_tag 'Käyttäjätunnus', nil, :class => "control-label" %>
+    <%= text_field_tag :username, "", class: 'form-control' %>
+    <%= label_tag 'Sähköposti', nil, :class => "control-label" %>
+    <%= text_field_tag :email, "", class: 'form-control' %>
     <h1><%= submit_tag 'Lähetä uusi salasana', class: "btn btn-primary" %></h1>
   </div>
 <% end %>
-</div>
