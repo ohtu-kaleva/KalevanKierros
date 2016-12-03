@@ -3,5 +3,7 @@
   <h4>Kk-numerosi: <%= @user.kk_number %></h4>
 
 <%= render 'form', :subpage => 'edit' %>
-
+  <h1>
+    <%= link_to('Takaisin', user_path(current_user), :class => "btn btn-default") %>
+  </h1>
 </div>
