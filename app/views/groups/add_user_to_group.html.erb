@@ -3,16 +3,40 @@
     <h4>Joukkue: <%= @group.name %></h4>
     <p>Kirjoita nimi kenttään ja valitse jäsen listasta. Jäsenen tulee olla rekisteröitynyt.</p>
     <%= form_tag(controller: 'groups', action: 'update_user_group_relation') do %>
-        <div class="input-group">
-           <span class="input-group-addon">1.</span>
-           <%= text_field_tag 'kk_number', nil, :class => "form-control autocomplete", :id => "member", :placeholder => "Kirjoita tähän" %>
-           <span class="input-group-addon">&nbsp;&nbsp;&nbsp</span>
-            <span class="actions">
+        <div class="input-group jasen">
+           <span class="input-group-addon jasen-jarjestys">1.</span>
+           <%= text_field_tag 'kk_number', nil, :class => "form-control autocomplete jasen-numero", :id => "member", :placeholder => "Kirjoita tähän" %>
+           <span class="input-group-addon jasen-nimi">&nbsp;&nbsp;&nbsp</span>
+            <span class="actions jasen-lisaa">
                 <%= submit_tag 'Lisää jäsen', :class => "btn btn-success" %>
             </span>
         </div>
     <% end %>
 </div>
+
+<style>
+    .jasen {
+        border: 1px solid #cccccc;
+        margin-bottom: -1px;
+    }
+    .jasen-numero {
+        border: 0;
+        box-shadow: none;
+    }
+    .jasen-nimi {
+        border: 0;
+        border-radious: 0;
+    }
+    .jasen-jarjestys {
+        border-radius: 0;
+        border: 0;
+    }
+    .jasen-lisaa {
+        float: left;
+        margin-left: 1em;
+    }
+</style>
+
 <script type="text/javascript">
     $("input.autocomplete").autocomplete({ delay: 50, minLength: 2, autoFocus: true,
         select: function (event, ui) {
