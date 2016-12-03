@@ -33,13 +33,6 @@
       </ul>
 
       <ul class="nav navbar-nav navbar-right">
-        <% if current_user.nil? %>
-            <li><%= link_to 'Rekisteröidy', signup_path %></li>
-            <li><%= link_to 'Kirjaudu', signin_path %></li>
-        <% else %>
-            <li><%= link_to 'Omat tiedot', user_path(current_user) %></li>
-            <li><%= link_to 'Kirjaudu ulos', signout_path, :method => 'delete' %></li>
-        <% end %>
         <% if user_is_admin? %>
         <li class="dropdown">
           <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="adminmenu">Ylläpito <span class="caret"></span></a>
@@ -54,6 +47,13 @@
             <li><%= link_to 'Lue viitemaksut', admin_import_payments_path %></li>
           </ul>
         </li>
+        <% end %>
+        <% if current_user.nil? %>
+          <li><%= link_to 'Rekisteröidy', signup_path %></li>
+          <li><%= link_to 'Kirjaudu', signin_path %></li>
+        <% else %>
+          <li><%= link_to 'Omat tiedot', user_path(current_user) %></li>
+          <li><%= link_to 'Kirjaudu ulos', signout_path, :method => 'delete' %></li>
         <% end %>
       </ul>
 
