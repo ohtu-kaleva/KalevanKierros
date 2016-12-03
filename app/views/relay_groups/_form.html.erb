@@ -15,34 +15,34 @@
       <h4><%= f.text_field :name, label: "Joukkueen nimi:" %></h4>
       <h4>Joukkueen jäsenet:</h4>
       <p>Kirjoita nimi kenttään ja valitse joukkueen jäsen listasta. Jäsenen pitää olla rekisteröitynyt. Voit täydentää joukkuetta myöhemmin.</p><br>
-      <div class="input-group">
-        <span class="input-group-addon">1.</span>
-        <%= text_field_tag 'kk_numbers[]', nil, :class => "form-control autocomplete", :id => "member1", :value => current_user.kk_number, :readonly => 1 %>
+      <div class="input-group jasen">
+        <span class="input-group-addon jasen-jarjestys">1.</span>
+        <%= text_field_tag 'kk_numbers[]', nil, :class => "form-control autocomplete jasen-numero", :id => "member1", :value => current_user.kk_number, :readonly => 1 %>
         <span class="input-group-addon jasen-nimi"><%= current_user.first_name << " " << current_user.last_name %></span>
       </div>
-      <div class="input-group">
-        <span class="input-group-addon">2.</span>
-        <%= text_field_tag 'kk_numbers[]', nil, :class => "form-control autocomplete", :id => "member2" %>
+      <div class="input-group jasen">
+        <span class="input-group-addon jasen-jarjestys">2.</span>
+        <%= text_field_tag 'kk_numbers[]', nil, :class => "form-control autocomplete jasen-numero", :id => "member2", :placeholder => "Kirjoita nimi tähän" %>
         <span class="input-group-addon jasen-nimi">&nbsp;&nbsp;&nbsp</span>
       </div>
-      <div class="input-group">
-        <span class="input-group-addon">3.</span>
-        <%= text_field_tag 'kk_numbers[]', nil, :class => "form-control autocomplete", :id => "member3"  %>
+      <div class="input-group jasen">
+        <span class="input-group-addon jasen-jarjestys">3.</span>
+        <%= text_field_tag 'kk_numbers[]', nil, :class => "form-control autocomplete jasen-numero", :id => "member3", :placeholder => "Kirjoita nimi tähän"  %>
         <span class="input-group-addon jasen-nimi">&nbsp;&nbsp;&nbsp</span>
       </div>
-      <div class="input-group">
-        <span class="input-group-addon">4.</span>
-        <%= text_field_tag 'kk_numbers[]', nil, :class => "form-control autocomplete", :id => "member4"  %>
+      <div class="input-group jasen">
+        <span class="input-group-addon jasen-jarjestys">4.</span>
+        <%= text_field_tag 'kk_numbers[]', nil, :class => "form-control autocomplete jasen-numero", :id => "member4", :placeholder => "Kirjoita nimi tähän"  %>
         <span class="input-group-addon jasen-nimi">&nbsp;&nbsp;&nbsp</span>
       </div>
-      <div class="input-group">
-        <span class="input-group-addon">5.</span>
-        <%= text_field_tag 'kk_numbers[]', nil, :class => "form-control autocomplete", :id => "member5"  %>
+      <div class="input-group jasen">
+        <span class="input-group-addon jasen-jarjestys">5.</span>
+        <%= text_field_tag 'kk_numbers[]', nil, :class => "form-control autocomplete jasen-numero", :id => "member5", :placeholder => "Kirjoita nimi tähän"  %>
         <span class="input-group-addon jasen-nimi">&nbsp;&nbsp;&nbsp; </span>
       </div>
-      <div class="input-group">
-        <span class="input-group-addon">6.</span>
-        <%= text_field_tag 'kk_numbers[]', nil, :class => "form-control autocomplete", :id => "member6"  %>
+      <div class="input-group jasen">
+        <span class="input-group-addon jasen-jarjestys">6.</span>
+        <%= text_field_tag 'kk_numbers[]', nil, :class => "form-control autocomplete jasen-numero", :id => "member6", :placeholder => "Kirjoita nimi tähän"  %>
         <span class="input-group-addon jasen-nimi">&nbsp;&nbsp;&nbsp;</span>
       </div><br/>
       <br>
@@ -53,9 +53,20 @@
     </div>
 
     <style>
-        .input-group-addon {
+        .jasen {
+            border: 1px solid #cccccc;
+            margin-bottom: -1px;
+        }
+        .jasen-numero {
             border: 0;
-            box-shadow: 0;
+            box-shadow: none;
+        }
+        .jasen-nimi {
+            border: 0;
+            border-radious: 0;
+        }
+        .jasen-jarjestys {
+            border-radius: 0;
         }
     </style>
 
