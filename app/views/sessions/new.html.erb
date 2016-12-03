@@ -1,6 +1,7 @@
-<div class="col-md-8">
+<div class="col-md-6">
     <div class="bs-component">
         <h2>Kirjaudu sisään</h2>
+        <br/>
         <%= bootstrap_form_tag url: sessions_path(redirect: @redirect, id: @id) do |f| %>
             <%= f.text_field :username, label: "Käyttäjätunnus: " %>
             <%= f.password_field :password, label: "Salasana: " %>
