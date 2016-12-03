@@ -1,7 +1,9 @@
-<h1>Salasanan uusiminen</h1>
-<%= bootstrap_form_for @user, url: password_reset_path(params[:id]) do |f| %>
-  <%= f.password_field :password, label:'Salasana' %>
-  <%= f.password_field :password_confirmation, label:'Salasana uudestaan' %>
-  <%= hidden_field_tag :reset_token, params[:reset_token] %>
-  <%= f.submit 'Uusi salasana', class:"btn btn-primary" %>
-<% end %>
+<div class="col-md-8">
+  <h2>Salasanan uusiminen</h2>
+  <%= bootstrap_form_for @user, url: password_reset_path(params[:id]) do |f| %>
+    <%= f.password_field :password, label:'Salasana' %>
+    <%= f.password_field :password_confirmation, label:'Salasana uudestaan' %>
+    <%= hidden_field_tag :reset_token, params[:reset_token] %>
+    <%= f.submit 'Uusi salasana', class:"btn btn-primary" %>
+  <% end %>
+</div>

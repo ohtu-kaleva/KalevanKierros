@@ -1,16 +1,18 @@
-<h2>Uusi salasana</h2>
-<p>Jos olet unohtanut salasanasi, voimme auttaa sinua luomaan uuden. Kirjoita alla oleviin kenttiin
-käyttäjätunnuksesi ja sähköpostiosoitteesi. Lähetämme sinulle viestin, jonka avulla voit määritellä
-käyttäjätunnuksellesi uuden salasanan.</p>
+<div class="col-md-8">
+  <h2>Uusi salasana</h2>
+  <p>Jos olet unohtanut salasanasi, voimme auttaa sinua luomaan uuden. Kirjoita alla oleviin kenttiin
+  käyttäjätunnuksesi ja sähköpostiosoitteesi. Lähetämme sinulle viestin, jonka avulla voit määritellä
+  käyttäjätunnuksellesi uuden salasanan.</p>
 
-<%= form_tag('/password_resets') do %>
-  <div class="form-group">
-    <%= label_tag 'Käyttäjätunnus', nil, :class => "control-label" %>
-    <%= text_field_tag :username, "", class: 'form-control' %>
-  </div>
-  <div class="form-group">
-    <%= label_tag 'Sähköposti', nil, :class => "control-label" %>
-    <%= text_field_tag :email, "", class: 'form-control' %>
-    <h1><%= submit_tag 'Lähetä uusi salasana', class: "btn btn-primary" %></h1>
-  </div>
-<% end %>
+  <%= form_tag('/password_resets') do %>
+    <div class="form-group">
+      <%= label_tag 'Käyttäjätunnus', nil, :class => "control-label" %>
+      <%= text_field_tag :username, "", class: 'form-control' %>
+    </div>
+    <div class="form-group">
+      <%= label_tag 'Sähköposti', nil, :class => "control-label" %>
+      <%= text_field_tag :email, "", class: 'form-control' %>
+      <h1><%= submit_tag 'Lähetä uusi salasana', class: "btn btn-primary" %></h1>
+    </div>
+  <% end %>
+</div>
