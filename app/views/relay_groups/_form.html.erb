@@ -4,9 +4,9 @@
           <h2><%= pluralize(@relay_group.errors.count, "error") %> prohibited this relay group from being saved:</h2>
 
           <ul>
-              <% @relay_group.errors.full_messages.each do |message| %>
+            <% @relay_group.errors.full_messages.each do |message| %>
                 <li><%= message %></li>
-              <% end %>
+            <% end %>
           </ul>
         </div>
     <% end %>
@@ -16,34 +16,34 @@
       <h4>Joukkueen jäsenet</h4>
       <p>Kirjoita nimi kenttään ja valitse joukkueen jäsen listasta. Jäsenen pitää olla rekisteröitynyt. Voit täydentää joukkuetta myöhemmin.</p><br>
       <div class="input-group">
-          <span class="input-group-addon">1.</span>
-          <span class="input-group-addon"><%= current_user.first_name << " " << current_user.last_name %></span>
-          <%= text_field_tag 'kk_numbers[]', nil, :class => "form-control autocomplete", :id => "member1", :value => current_user.kk_number, :readonly => 1 %>
+        <span class="input-group-addon">1.</span>
+        <%= text_field_tag 'kk_numbers[]', nil, :class => "form-control autocomplete", :id => "member1", :value => current_user.kk_number, :readonly => 1 %>
+        <span class="input-group-addon"><%= current_user.first_name << " " << current_user.last_name %></span>
       </div>
       <div class="input-group">
-          <span class="input-group-addon">2.</span>
-          <span class="input-group-addon">&nbsp;&nbsp;&nbsp</span>
-          <%= text_field_tag 'kk_numbers[]', nil, :class => "form-control autocomplete", :id => "member2" %>
+        <span class="input-group-addon">2.</span>
+        <%= text_field_tag 'kk_numbers[]', nil, :class => "form-control autocomplete", :id => "member2" %>
+        <span class="input-group-addon">&nbsp;&nbsp;&nbsp</span>
       </div>
       <div class="input-group">
         <span class="input-group-addon">3.</span>
-          <span class="input-group-addon">&nbsp;&nbsp;&nbsp</span>
         <%= text_field_tag 'kk_numbers[]', nil, :class => "form-control autocomplete", :id => "member3"  %>
+        <span class="input-group-addon">&nbsp;&nbsp;&nbsp</span>
       </div>
       <div class="input-group">
         <span class="input-group-addon">4.</span>
-          <span class="input-group-addon">&nbsp;&nbsp;&nbsp</span>
         <%= text_field_tag 'kk_numbers[]', nil, :class => "form-control autocomplete", :id => "member4"  %>
+        <span class="input-group-addon">&nbsp;&nbsp;&nbsp</span>
       </div>
       <div class="input-group">
         <span class="input-group-addon">5.</span>
-          <span class="input-group-addon">&nbsp;&nbsp;&nbsp; </span>
         <%= text_field_tag 'kk_numbers[]', nil, :class => "form-control autocomplete", :id => "member5"  %>
+        <span class="input-group-addon">&nbsp;&nbsp;&nbsp; </span>
       </div>
       <div class="input-group">
-          <span class="input-group-addon">&nbsp;&nbsp;&nbsp;</span>
         <span class="input-group-addon">6.</span>
         <%= text_field_tag 'kk_numbers[]', nil, :class => "form-control autocomplete", :id => "member6"  %>
+        <span class="input-group-addon">&nbsp;&nbsp;&nbsp;</span>
       </div><br/>
       <br>
     </div>
