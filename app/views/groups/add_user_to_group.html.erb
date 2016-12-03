@@ -1,6 +1,6 @@
 <div class="col-lg-6">
-    <h3>Lisää jäsen</h3>
-    <h4>Joukkue: <%= @group.name %></h4>
+    <h2>Lisää jäsen</h2>
+    <p>Joukkue: <%= @group.name %></p>
     <p>Kirjoita nimi kenttään ja valitse jäsen listasta. Jäsenen tulee olla rekisteröitynyt.</p>
     <%= form_tag(controller: 'groups', action: 'update_user_group_relation') do %>
         <div class="input-group jasen">
