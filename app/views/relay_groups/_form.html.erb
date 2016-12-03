@@ -17,33 +17,33 @@
       <p>Kirjoita nimi kenttään ja valitse joukkueen jäsen listasta. Jäsenen pitää olla rekisteröitynyt. Voit täydentää joukkuetta myöhemmin.</p><br>
       <div class="input-group">
         <span class="input-group-addon">1.</span>
-          <span class="input-group-addon jasen-nimi"><%= current_user.first_name << " " << current_user.last_name %></span>
         <%= text_field_tag 'kk_numbers[]', nil, :class => "form-control autocomplete", :id => "member1", :value => current_user.kk_number, :readonly => 1 %>
+        <span class="input-group-addon jasen-nimi"><%= current_user.first_name << " " << current_user.last_name %></span>
       </div>
       <div class="input-group">
         <span class="input-group-addon">2.</span>
-          <span class="input-group-addon jasen-nimi">&nbsp;&nbsp;&nbsp</span>
-          <%= text_field_tag 'kk_numbers[]', nil, :class => "form-control autocomplete", :id => "member2" %>
+        <%= text_field_tag 'kk_numbers[]', nil, :class => "form-control autocomplete", :id => "member2" %>
+        <span class="input-group-addon jasen-nimi">&nbsp;&nbsp;&nbsp</span>
       </div>
       <div class="input-group">
         <span class="input-group-addon">3.</span>
-          <span class="input-group-addon jasen-nimi">&nbsp;&nbsp;&nbsp</span>
-          <%= text_field_tag 'kk_numbers[]', nil, :class => "form-control autocomplete", :id => "member3"  %>
+        <%= text_field_tag 'kk_numbers[]', nil, :class => "form-control autocomplete", :id => "member3"  %>
+        <span class="input-group-addon jasen-nimi">&nbsp;&nbsp;&nbsp</span>
       </div>
       <div class="input-group">
         <span class="input-group-addon">4.</span>
-          <span class="input-group-addon jasen-nimi">&nbsp;&nbsp;&nbsp</span>
-          <%= text_field_tag 'kk_numbers[]', nil, :class => "form-control autocomplete", :id => "member4"  %>
+        <%= text_field_tag 'kk_numbers[]', nil, :class => "form-control autocomplete", :id => "member4"  %>
+        <span class="input-group-addon jasen-nimi">&nbsp;&nbsp;&nbsp</span>
       </div>
       <div class="input-group">
         <span class="input-group-addon">5.</span>
-          <span class="input-group-addon jasen-nimi">&nbsp;&nbsp;&nbsp; </span>
         <%= text_field_tag 'kk_numbers[]', nil, :class => "form-control autocomplete", :id => "member5"  %>
+        <span class="input-group-addon jasen-nimi">&nbsp;&nbsp;&nbsp; </span>
       </div>
       <div class="input-group">
         <span class="input-group-addon">6.</span>
-          <span class="input-group-addon jasen-nimi">&nbsp;&nbsp;&nbsp;</span>
         <%= text_field_tag 'kk_numbers[]', nil, :class => "form-control autocomplete", :id => "member6"  %>
+        <span class="input-group-addon jasen-nimi">&nbsp;&nbsp;&nbsp;</span>
       </div><br/>
       <br>
     </div>
@@ -77,7 +77,7 @@
                 else {
                     var parent = $(event.target);
                     var id = parent.attr('id');
-                    var element = parent.previous('span');
+                    var element = parent.next('span');
                     var name = ui.item.label.replace(/\d{2,}?\s/, "");
                     element.html(name + '&nbsp;<a href="#"><span onclick="clearInput(event, \'' + id + '\')" class="glyphicon glyphicon-remove clearmember"></span></a>');
                     parent.prop('readonly', true);
@@ -90,7 +90,7 @@
             var element = $('#' + id);
             element.prop('readonly', false);
             element.val('');
-            element.previous('span').html('&nbsp;&nbsp;&nbsp;');
+            element.next('span').html('&nbsp;&nbsp;&nbsp;');
         }
 
         $(document).ready(function() {
