@@ -1,5 +1,5 @@
 <h2><%= @user.first_name %> <%= @user.last_name %></h2>
-<p><%= link_to 'Muokkaa tietojasi', edit_user_path(@user), :class => "btn btn-default" %></p><br/>
+<p><%= link_to 'Muokkaa tietojasi', edit_user_path(@user), :class => "btn btn-default" %></p>
 <% if not current_user.nil? and current_user.id == @user.id %>
     <% if current_user.statistic and false %>
         <p><%= link_to 'Oma tilasto', statistic_path(current_user.statistic.id), :class => "btn btn-primary" %></p>
@@ -19,6 +19,8 @@
             <% if @group.nil? %>
                 Kierrosmaksu 50 euroa maksettava viitenumerolla <%= @user.construct_reference_number %> tilille <%= @account_number %>.
                 Maksu sisältää Kalevan kierroksen jäsenmaksun 20 euroa ja yhteiskilpailumaksun 30 euroa.
+           <% else %>
+                Joukkueesi kierrosmaksu sisältää Kalevan kierroksen jäsenmaksusi 20 euroa ja yhteiskilpailumaksusi.
            <% end %>
         </p>
     <% else %>
