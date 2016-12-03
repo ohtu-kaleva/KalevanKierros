@@ -33,7 +33,7 @@
             <p>
                 Olet joukkueen kapteeni. Joukkueen kierrosmaksu 200 euroa on maksettava viitenumerolla <%= @user.construct_reference_number %>
                 Kalevan kierros ry tilille <%= @account_number %>.
-                Maksu sisältää joukkueen jäsenten jäsenmaksut ja yksilökilpailumaksut.
+                Maksu sisältää joukkueen jäsenien yksilökilpailumaksut ja Kalevan kierros ryn jäsenmaksut.
             </p>
         <% else %>
             <p>Joukkueesi kierrosmaksu 200 euroa sisältää Kalevan kierroksen jäsenmaksusi ja yksilökilpailumaksun.</p>
@@ -46,8 +46,8 @@
         <h4>Kuulut viestijoukkueeseen: <%= @relay_group.name %></h4>
         <% if not @relay_group.nil? and @relay_group.user == current_user %>
             <p>
-                Olet viestijoukkueen kapteeni. Viestikilpailumaksu 60 euroa maksettava viitenumerolla <%= @user.construct_reference_number %>
-                Kalevan kierros ry tilille <%= @account_number %>. Maksu ei sisällä Kalevan kierroksen jäsenmaksuja eikä yksilökilpailumaksuja.
+                Olet viestijoukkueen kapteeni. Viestikilpailumaksu 60 euroa on maksettava viitenumerolla <%= @user.construct_reference_number %>
+                Kalevan kierros ryn tilille <%= @account_number %>. Maksu ei sisällä Kalevan kierroksen jäsenmaksuja eikä yksilökilpailumaksuja.
             </p>
         <% end %>
         <h4><%= link_to "Joukkueen sivu", relay_group_path(@relay_group), :class => "btn btn-primary" %></h4>
