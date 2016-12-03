@@ -76,6 +76,13 @@
     <%= yield %>
 </div>
 
+<style>
+  @media (min-width: 992px) {
+    .container {
+       width: 750px !important;
+    }
+  }
+</style>
 <script type="text/javascript">
     if (navigator.userAgent.match(/IEMobile\/10\.0/)) {
         var msViewportStyle = document.createElement('style')
