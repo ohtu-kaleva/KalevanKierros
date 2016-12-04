@@ -41,7 +41,7 @@ class RelayGroupsController < ApplicationController
         redirect_to new_relay_group_path and return
       elsif not member.group.nil? or not member.relay_group.nil?
         flash[:error] = "Käyttäjä #{kk_number} on jo liitetty joukkueseen"
-        redirect_to new_group_path and return
+        redirect_to new_relay_group_path and return
       else
         members.append member
       end
