@@ -1,5 +1,6 @@
 class RelayGroupsController < ApplicationController
   include InitResultsEntry
+  before_action :authenticate
   before_action :set_relay_group_or_redirect, only: [:show, :add_user_to_relay_group, :delete_user_from_relay_group]
   before_action :redirect_if_user_not_captain_or_admin, only: [:add_user_to_relay_group, :update_user_relay_group_relation, :delete_user_from_relay_group]
 
@@ -133,9 +134,6 @@ class RelayGroupsController < ApplicationController
 
   def set_user
     @user = current_user
-    if !@user
-      redirect_to signin_path and return
-    end
   end
 
   def redirect_if_user_not_captain_or_admin
