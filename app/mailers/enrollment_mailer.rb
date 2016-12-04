@@ -1,5 +1,5 @@
 class EnrollmentMailer < ActionMailer::Base
-  default from: "#{ActionMailer::Base.smtp_settings[:kk_sender_address]}"
+  default from: "#{ActionMailer::Base.smtp_settings[:kk_sender_name]} <#{ActionMailer::Base.smtp_settings[:kk_sender_address]}>"
 
   def send_enrollment_email(user, event, enrollment)
     @user = user

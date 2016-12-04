@@ -1,5 +1,5 @@
 class UserMailer < ActionMailer::Base
-  default from: "#{ActionMailer::Base.smtp_settings[:kk_sender_address]}"
+  default from: "#{ActionMailer::Base.smtp_settings[:kk_sender_name]} <#{ActionMailer::Base.smtp_settings[:kk_sender_address]}>"
 
   def registration_activation_email(user, redirect_url)
     @user = user
