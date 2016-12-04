@@ -8,6 +8,6 @@
     <p>Käyttäjätunnus: <%= @user.username %></p>
     <p>Etunimi: <%= @user.first_name %></p>
     <p>Sukunimi: <%= @user.last_name %></p>
-    <%= link_to 'Kirjaudu sisään tästä linkistä aktivoidaksesi tunnuksen', activation_url(id: @user.id, activation_token: @user.activation_token) %>
+    <%= link_to 'Kirjaudu sisään tästä linkistä aktivoidaksesi tunnuksen', activation_url(id: @user.id, activation_token: @user.activation_token, redirect_url: @redirect_url) %>
   </body>
 </html>

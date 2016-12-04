@@ -58,9 +58,11 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     @user.generate_activation_token
-
+    if not session.nil? and not session[:redirect_url].nil?
+      redirect_url = session[:redirect_url]
+    end
     if @user.save
-      UserMailer.registration_activation_email(@user).deliver
+      UserMailer.registration_activation_email(@user, redirect_url).deliver
       redirect_to ilmoittautuminen_path, flash: { success: 'Käyttäjätunnus luotu, aktivoi tunnus sähköpostiin lähetettyjen ohjeiden mukaan.' }
     else
       render :new
@@ -89,37 +91,23 @@ class UsersController < ApplicationController
   end
 
   def new_activation
-    if !current_user
-      @user = User.find_by id: params[:id]
-      if @user && !@user.active
-        if @user.activation_token == params[:activation_token]
-          render :activate
-          return
-        end
-      end
+    @user = User.find_by id: params[:id]
+    session[:redirect_url] = params[:redirect_url]
+    if @user and !@user.active and @user.activation_token == params[:activation_token]
+      render :activate and return
+    else
+      redirect_to after_activation_path(id: @user.id, redirect_url: params[:redirect_url]), flash: { success: 'Käyttäjä on jo aktivoitu' } and return
     end
-    redirect_to :root
   end
 
   def activate
-    if !current_user
-      @user = User.find_by id: params[:id]
-      if @user && !@user.active
-        if @user.username == params[:username] && (@user.authenticate params[:password])
-          if @user.activation_token == params[:activation_token]
-            @user.update_attribute(:active, true)
-            @user.update_attribute :kk_number, generate_kk_number(@user)
-            init_statistic_entry @user
-            session[:user_id] = @user.id
-            flash[:success] = "Tervetuloa " + @user.first_name
-          end
-        else
-          flash[:error] = "Tarkista käyttäjätunnus ja salasana!"
-          redirect_to :back && return
-        end
-      end
+    @user = User.find_by id: params[:id]
+    if @user and !@user.active and @user.activation_token == params[:activation_token]
+      @user.update_attribute(:active, true)
+      @user.update_attribute :kk_number, generate_kk_number(@user)
+      init_statistic_entry @user
     end
-    redirect_to ilmoittautuminen_path, flash: { success: 'Käyttäjä aktivoitu' }
+    redirect_to after_activation_path(id: @user.id, redirect_url: params[:redirect_url]), flash: { success: 'Käyttäjä aktivoitu' }
   end
 
   private

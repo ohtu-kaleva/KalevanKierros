@@ -2,4 +2,4 @@ Vahvista rekisteröityminen
 Käyttäjätunnus: <%= @user.username %>
 Etunimi: <%= @user.first_name %>
 Sukunimi: <%= @user.last_name %>
-<%= link_to 'Kirjadu sisään tästä linkistä aktivoidaksesi tunnuksen', activation_url(id: @user.id, activation_token: @user.activation_token) %>
+<%= link_to 'Kirjadu sisään tästä linkistä aktivoidaksesi tunnuksen', activation_url(id: @user.id, activation_token: @user.activation_token, redirect_url: @redirect_url) %>
