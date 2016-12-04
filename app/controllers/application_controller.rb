@@ -6,6 +6,13 @@ class ApplicationController < ActionController::Base
   helper_method :current_user, :user_is_admin?, :redirect_if_user_not_admin, :usersearch,
                 :enrollment_open?, :seconds_to_human_form, :eventusersearch, :statisticsearch, :enrollment_deadline_gone?
 
+  def authenticate
+    if not current_user
+      session[:redirect_url] = request.url
+      redirect_to signin_path
+    end
+  end
+
   def current_user
     return nil if session[:user_id].nil?
 

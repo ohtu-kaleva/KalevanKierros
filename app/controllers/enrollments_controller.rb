@@ -1,5 +1,7 @@
 class EnrollmentsController < ApplicationController
 
+  before_action :authenticate, only: [:new, :create, :show, :show_enrollments_for_event, :index, :destroy, :update, :edit, :update_single,
+                                     :update_payment_info, :remove_all_payment_info_for_event]
   before_action :check_for_existing_enrollment, only:  [:new, :create]
   before_action :set_enrollment_or_redirect, only: [:show, :destroy, :edit]
   before_action :redirect_if_user_not_admin, only: [:show_enrollments_for_event, :index, :destroy, :update, :edit, :update_single,
@@ -9,9 +11,6 @@ class EnrollmentsController < ApplicationController
     @event = Event.find_by id: params[:event_id]
     if @event
       @user = current_user
-      if !@user
-        redirect_to signin_path(redirect: 'event', id: @event.id) and return
-      end
       if Date.today < @event.start_date
         redirect_to root_path, flash: { notice: 'Tapahtumaan ei voi vielä ilmoittautua' }
         return

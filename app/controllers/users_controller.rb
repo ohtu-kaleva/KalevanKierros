@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_action :authenticate, only: [:show, :edit, :update, :destroy]
   before_action :redirect_if_user_not_admin, only: [:index, :destroy]
   before_action :set_user_or_redirect, only:  [:show, :edit, :update, :destroy]
 

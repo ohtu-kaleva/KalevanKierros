@@ -1,5 +1,6 @@
 class KkEnrollmentsController < ApplicationController
   include InitResultsEntry
+  before_action :authenticate
   before_action :redirect_if_user_not_admin, except: [:new, :create]
   before_action :set_user, only: [:new, :create]
   before_action :check_enrollment, only: [:new, :create]
@@ -154,8 +155,6 @@ class KkEnrollmentsController < ApplicationController
 
     def set_user
       @user = current_user
-      return if @user
-      redirect_to signin_path
     end
 
     def set_kk_enrollment_or_redirect
