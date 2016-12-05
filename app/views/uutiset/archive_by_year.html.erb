@@ -1,4 +1,4 @@
-<div class="col-lg-6">
+<div class="col-md-8">
   <h1>Uutisarkisto <%= params[:year] %></h1>
   <% @uutiset.each do |uutiset| %>
   <h4><%= link_to uutiset.title, uutiset %> (<%= uutiset.created_at.strftime("%-d.%-m.%-Y %H:%M") %>)
