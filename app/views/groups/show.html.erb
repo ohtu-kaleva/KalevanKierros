@@ -31,5 +31,6 @@
         <%= link_to 'Lisää uusi jäsen', add_user_to_group_path(@group.id), :class => "btn btn-success" %>
     <% end %>
 </h4>
+<h4><%= link_to 'Omat tiedot', user_path(current_user), :class => "btn btn-primary" %></h4>
 <h1><a href="http://kalevankierros.fi/" class="btn btn-default">Takaisin etusivulle</a></h1>
 
