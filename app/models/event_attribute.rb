@@ -17,7 +17,7 @@ class EventAttribute < ActiveRecord::Base
     i = 0
     values.each do |v|
       if prices[i] and prices[i].to_i > 0
-        options << [v + ", " + format_price(prices[i]) + " euroa", v]
+        options << [v + " (" + format_price(prices[i]) + " euroa)", v]
       else
         options << [v, v]
       end
@@ -47,7 +47,6 @@ class EventAttribute < ActiveRecord::Base
   def format_price(price_string)
     price = "%.2f" % (price_string.to_f/100.0)
     price = price.to_s
-    price.sub!('.', ',')
   end
 
   def attribute_type_allowed
