@@ -27,14 +27,15 @@
         <% if e.attribute_type != "hidden" %>
             <p><%= e.attribute_label %></p>
         <% end %>
-        <p>
-          <% if e.attribute_type == "select" %>
+
+        <% if e.attribute_type == "select" %>
+          <p>
             <%= select_tag(e.name, options_for_select(e.get_options_to_form), {:class => 'payfield', "data-prices" => e.get_prices.to_s}) %><br>
-          <% end %>
-        </p>
-        <p>
-          <% if e.attribute_type == "radio_button" %>
-              <% i = 0 %>
+          </p>
+        <% end %>
+        <% if e.attribute_type == "radio_button" %>
+          <p>
+            <% i = 0 %>
               <% checked = true %>
               <% e.get_options_to_form.each do |v, p| %>
                   <%= radio_button_tag(e.name, p, checked, {:class => 'payfield', "data-prices" => e.get_prices.to_s, "data-index" => i}) %>
@@ -42,38 +43,38 @@
                   <% checked = false %>
                   <% i = i + 1 %>
               <% end %>
-          <% end %>
-        </p>
-        <p>
-          <% if e.attribute_type == "check_box" %>
-              <% e.get_options_to_form.each do |v, p| %>
+          </p>
+        <% end %>
+        <% if e.attribute_type == "check_box" %>
+          <p>
+            <% e.get_options_to_form.each do |v, p| %>
                 <%= hidden_field_tag(e.name + '[]', "", {:class => 'payfield', "data-prices" => e.get_prices.to_s}) %>
                 <%= check_box_tag(e.name + '[]', p, false, {:class => 'payfield', "data-prices" => e.get_prices.to_s}) %>
                 <%= label_tag(e.attribute_label, v) %><br>
               <% end %>
-          <% end %>
-        </p>
+          </p>
+        <% end %>
+        <% if e.attribute_type == "text_field" %>
         <p>
-          <% if e.attribute_type == "text_field" %>
-            <%= text_field_tag(e.name, e.attribute_value) %><br>
-          <% end %>
-        </p>
-        <p>
-          <% if e.attribute_type == "plain_text" %>
-            <%= e.attribute_value %>
-          <% end %>
-        </p>
-        <p>
-          <% if e.attribute_type == "date" %>
-            <%= date_select(e.name, nil) %>
-          <% end %>
+            <%= text_field_tag(e.name, e.attribute_value) %>
         </p>
         <% end %>
- <%= f.hidden_field :event_id, :value => params[:event_id] %>
-</div>
-    <p>
+        <% if e.attribute_type == "plain_text" %>
+          <p>
+            <%= e.attribute_value %>
+          </p>
+        <% end %>
+        <% if e.attribute_type == "date" %>
+          <p>
+            <%= date_select(e.name, nil) %>
+          </p>
+        <% end %>
+    <% end %>
+    <%= f.hidden_field :event_id, :value => params[:event_id] %>
+    </div>
+    <h3>
         <span id="price_sum"></span>
-    </p>
+    </h3>
     <div class="actions">
       <%= submit_tag 'Lähetä ilmoittautuminen eteenpäin', :class => "btn btn-primary", data: {disable_with: 'Ilmoittautuminen lähetetty'}  %>
     </div>
