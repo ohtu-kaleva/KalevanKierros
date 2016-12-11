@@ -72,12 +72,12 @@
     <% end %>
     <%= f.hidden_field :event_id, :value => params[:event_id] %>
     </div>
-    <h3>
+    <h4>
         <span id="price_sum"></span>
-    </h3>
-    <div class="actions">
-      <%= submit_tag 'Lähetä ilmoittautuminen eteenpäin', :class => "btn btn-primary", data: {disable_with: 'Ilmoittautuminen lähetetty'}  %>
-    </div>
+    </h4>
+    <h1 class="actions">
+      <%= submit_tag 'Ilmoittaudu tapahtumaan', :class => "btn btn-success", data: {disable_with: 'Ilmoittautuminen lähetetty'}  %>
+    </h1>
 
     <script type="text/javascript">
         $(document).ready(function() {
