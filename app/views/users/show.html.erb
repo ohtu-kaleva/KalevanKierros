@@ -7,8 +7,8 @@
     <% end %>
 
     <% if @kk_enrollment %>
+        <h4>Olet ilmoittautunut Kalevan kierroksen yksilökilpailuun <%= @year %></h4>
         <p>
-            Olet ilmoittautunut Kalevan kierroksen yksilökilpailuun <%= @year %>.
             <% if @group.nil? %>
                 Kierrosmaksu 50 euroa on maksettava viitenumerolla <%= @user.construct_reference_number %> Kalevan kierros ryn tilille <%= @account_number %>.
                 Maksu sisältää Kalevan kierros ryn jäsenmaksun 20 euroa ja yhteiskilpailumaksun 30 euroa.
