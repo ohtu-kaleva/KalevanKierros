@@ -11,14 +11,15 @@
         </div>
     <% end %>
     <h2><%= @event.name %></h2>
-    <p>
+    <p style="white-space: pre-wrap;">
         <%= @event.description %>
     </p>
     <% event_price = @event.current_price %>
     <% if event_price and event_price > 0 %>
         <p>
-        <span id="event_price" class="hidden"><%= event_price %></span>
-        Osallistumismaksu <%= "%.2f" % (event_price/100.0) %> euroa
+            <input type="radio" checked="true"/>
+            <span id="event_price" class="hidden"><%= event_price %></span>
+            Osallistumismaksu (<%= "%.2f" % (event_price/100.0) %> euroa)
         </p>
     <% end %>
     <div class="field">
