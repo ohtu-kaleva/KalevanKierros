@@ -24,14 +24,15 @@
     <div class="field">
       <%= f.text_field :attribute_value, label: 'Kirjoita valintavaihtoehdot puolipisteellä eroteltuna:' %>
     </div>
-    <p>
-      Kirjoita valintaan liittyvä maksu sentteinä. Monivalinnan tapauksessa anna maksu puolipisteellä eroteltuna vastaavassa järjestyksessä kuin yllä. Jos valintaan ei liity maksua, voit jättää seuraavat tyhjäksi.
-    </p>
-    <div class="field">
-      <%= f.text_field :payment_value, label: 'Normaalin ilmoittautumisen hinnat:' %>
-    </div>
-    <div class="field">
-      <%= f.text_field :second_payment_value, label: 'Jälki-ilmoittautumisen hinnat:' %>
+    <div>
+        <label>Kirjoita valintaan liittyvä maksu sentteinä.</label>
+        <span>Monivalinnan tapauksessa anna maksu puolipisteellä eroteltuna vastaavassa järjestyksessä kuin yllä. Jos valintaan ei liity maksua, voit jättää seuraavat tyhjäksi.</span>
+        <span class="field">
+          <%= f.text_field :payment_value, label: 'Normaali ilmoittautuminen (sentteinä):' %>
+        </span>
+        <span class="field">
+          <%= f.text_field :second_payment_value, label: 'Jälki-ilmoittautuminen (sentteinä):' %>
+        </span>
     </div>
 
     <%= f.hidden_field :event_id, :value => params[:event_id] %>

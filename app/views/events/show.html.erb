@@ -20,7 +20,7 @@
 
     <% if Date.today <= @event.second_end_date && Date.today >= @event.start_date %>
         <p>
-            <%= link_to 'Ilmoittaudu tapahtumaan', add_enrollment_path({:event_id => @event.id}), :class => "btn btn-primary" %>
+            <%= link_to 'Näytä ilmoittautumistiedot', add_enrollment_path({:event_id => @event.id}), :class => "btn btn-primary" %>
         </p>
     <% else %>
         <strong>Tapahtuman ilmoittautuminen on sulkeutunut.</strong>
