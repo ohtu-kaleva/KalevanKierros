@@ -2,26 +2,20 @@
 <div class="container etusivu">
     <div class="col-sm-12">
         <h4><a href="http://kalevankierros.us13.list-manage.com/subscribe?u=3937d04e4920be337565a19e3&id=775ac349d8">Tilaa uutiskirje</a></h4>
-        <h4><%= link_to 'Tapahtumat', events_path %></h4>
         <h4><%= link_to 'Tulokset', results_path %></h4>
         <h4><a href="/statistics">Tilastot</a></h4>
         <h4><a href="/esittely/pistelasku">Pistelasku</a></h4>
-        <% if current_user.nil? %>
-            <h4><%= link_to 'Kirjaudu', signin_path, :class => "btn btn-primary" %></h4>
-            <h4><%= link_to 'Rekisteröidy', signup_path %></h4>
-        <% else %>
-            <h4><%= link_to 'Muuta tietojasi', edit_user_path(current_user) %></h4>
-            <h4><%= link_to 'Tarkastele ilmoittautumisiasi', user_path(current_user) %></h4>
+        <% if not current_user.nil? %>
+            <h4><%= link_to 'Omat tiedot', user_path(current_user) %></h4>
             <% if current_user.group %>
-                <h4><%= link_to 'Joukkueesi tiedot', group_path(current_user.group) %></h4>
+                <h4><%= link_to 'Joukkueen sivu', group_path(current_user.group) %></h4>
             <% end %>
             <% if current_user.relay_group %>
-                <h4><%= link_to 'Viestijoukkueesi tiedot', relay_group_path(current_user.relay_group) %></h4>
+                <h4><%= link_to 'Viestijoukkueen sivu', relay_group_path(current_user.relay_group) %></h4>
             <% end %>
             <% if current_user.statistic %>
                 <h4><%= link_to 'Näytä tilasto', statistic_path(current_user.statistic.id) %></h4>
             <% end %>
-            <h4><%= link_to 'Kirjaudu ulos', signout_path, :method => 'delete', :class => "btn btn-primary" %></h4>
         <% end %>
         <% if user_is_admin? %>
             <h2>Ylläpito</h2>
@@ -35,3 +29,5 @@
             <h4><%= link_to 'Lue viitemaksut', admin_import_payments_path %></h4>
         <% end %>
     </div>
+    <h1><a href="http://kalevankierros.fi/" class="btn btn-default">Takaisin etusivulle</a></h1>
+
