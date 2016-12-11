@@ -5,8 +5,9 @@
     <table class="table table-bordered">
     <% @data.each do |data| %>
       <tr>
-        <td><%= data.name %></td>
-        <td><%= data.value %></td>
+        <% id data.value %>
+            <td><%= data.value %></td>
+        <% end %>
       </tr>
     <% end %>
     </table>
