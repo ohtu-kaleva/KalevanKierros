@@ -13,13 +13,13 @@
     <% end %>
 
     <div class="field">
-      <%= f.text_field :name, label: 'Kysymyksen nimi (ei näy lomakkeella)' %>
-    </div>
-    <div class="field">
-      <%= f.text_field :attribute_label, label: 'Kysymyksen otsikko lomakkeella (tarvitaan lähinnä monivalinta kysymyksiin)' %>
+      <%= f.text_field :name, label: 'Kysymyksen tunniste (ei näy lomakkeella)' %>
     </div>
     <div class="field">
       <%= f.select :attribute_type, options_for_select(@attribute_types), label: 'Valitse kysymyksen tyyppi' %>
+    </div>
+    <div class="field">
+        <%= f.text_field :attribute_label, label: 'Kysymyksen otsikko (näkyy monivalinta, alasvetovalikko, tekstikenttä ja päivämääräksymyksissä)' %>
     </div>
     <div class="field">
       <%= f.text_field :attribute_value, label: 'Kirjoita valintavaihtoehdot puolipisteellä eroteltuna:' %>

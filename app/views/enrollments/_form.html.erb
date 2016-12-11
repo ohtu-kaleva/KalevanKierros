@@ -24,16 +24,14 @@
     <% end %>
     <div class="field">
     <% @event.event_attributes.each do |e| %>
-        <% if e.attribute_type == "select" or e.attribute_type == "radio_button" %>
-            <p><%= e.attribute_label %></p>
-        <% end %>
-
         <% if e.attribute_type == "select" %>
+          <p><%= e.attribute_label %></p>
           <p>
             <%= select_tag(e.name, options_for_select(e.get_options_to_form), {:class => 'payfield', "data-prices" => e.get_prices.to_s}) %><br>
           </p>
         <% end %>
         <% if e.attribute_type == "radio_button" %>
+          <p><%= e.attribute_label %></p>
           <p>
             <% i = 0 %>
               <% checked = true %>
@@ -55,9 +53,10 @@
           </p>
         <% end %>
         <% if e.attribute_type == "text_field" %>
-        <p>
-            <%= text_field_tag(e.name, e.attribute_value) %>
-        </p>
+            <p><%= e.attribute_label %></p>
+            <p>
+                <%= text_field_tag(e.name, e.attribute_value) %>
+            </p>
         <% end %>
         <% if e.attribute_type == "plain_text" %>
           <p>
@@ -65,6 +64,7 @@
           </p>
         <% end %>
         <% if e.attribute_type == "date" %>
+          <p><%= e.attribute_label %></p>
           <p>
             <%= date_select(e.name, nil) %>
           </p>
