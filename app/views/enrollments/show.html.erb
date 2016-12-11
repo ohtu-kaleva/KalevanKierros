@@ -5,7 +5,7 @@
     <table class="table table-bordered">
     <% @data.each do |data| %>
       <tr>
-        <% id data.value %>
+        <% if data.value %>
             <td><%= data.value %></td>
         <% end %>
       </tr>
