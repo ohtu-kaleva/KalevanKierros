@@ -18,7 +18,7 @@
         <p>Osallistumismaksu: <%= @price %> euroa</p>
         <p>Eräpäivä: <%= @pay_day %></p>
     <% end %>
-    <h4><%= link_to 'Omat tiedot', user_path(current_user), :class => "btn btn-primary" %></h4>
+    <h1><%= link_to 'Omiin tietoihin', user_path(current_user), :class => "btn btn-primary" %></h1>
     <% if user_is_admin? %>
       <%= link_to 'Peru ilmoittautuminen', @enrollment, method: :delete, data: { confirm: 'Oletko varma että haluat perua ilmoittautumisen?' } %>
     <% end %>
