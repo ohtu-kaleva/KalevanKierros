@@ -36,7 +36,7 @@
               <% checked = true %>
               <% e.get_options_to_form.each do |v, p| %>
                   <%= radio_button_tag(e.name, p, checked, {:class => 'payfield', "data-prices" => e.get_prices.to_s, "data-index" => i}) %>
-                  <%= label_tag(e.attribute_label '()', v) %><br>
+                  <%= label_tag(e.attribute_label, v) %><br>
                   <% checked = false %>
                   <% i = i + 1 %>
               <% end %>
