@@ -42,7 +42,7 @@ class EventAttributesController < ApplicationController
   # DELETE /event_attributes/1
   def destroy
     @event_attribute.destroy
-    redirect_to event_attributes_url, flash: { success: 'Valinta poistettiin onniistuneesti.' }
+    redirect_to event_attributes_url, flash: { success: 'Valinta poistettiin onnistuneesti.' }
   end
 
   private
@@ -56,8 +56,8 @@ class EventAttributesController < ApplicationController
     end
 
     def set_attribute_types
-      @attribute_types = [['Valintanappi', 'radio_button'], ['Valintalaatikko', 'check_box'], ['Tekstikenttä', 'text_field'], ['Pudotusvalikko', 'select'],
-                          ['Tekstilaatikko', 'plain_text']]
+      @attribute_types = [['Monivalintanappi', 'radio_button'], ['Valintaruutu', 'check_box'], ['Tekstikenttä', 'text_field'], ['Pudotusvalikko', 'select'],
+                          ['Otsikko tai kuvaus', 'plain_text']]
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

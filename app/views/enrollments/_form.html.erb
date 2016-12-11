@@ -24,7 +24,7 @@
     <% end %>
     <div class="field">
     <% @event.event_attributes.each do |e| %>
-        <% if e.attribute_type != "hidden" %>
+        <% if e.attribute_type == "select" or e.attribute_type == "radio_button" %>
             <p><%= e.attribute_label %></p>
         <% end %>
 
