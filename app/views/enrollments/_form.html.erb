@@ -27,10 +27,12 @@
         <% if e.attribute_type != "hidden" %>
             <p><%= e.attribute_label %></p>
         <% end %>
+        <p>
           <% if e.attribute_type == "select" %>
             <%= select_tag(e.name, options_for_select(e.get_options_to_form), {:class => 'payfield', "data-prices" => e.get_prices.to_s}) %><br>
           <% end %>
-
+        </p>
+        <p>
           <% if e.attribute_type == "radio_button" %>
               <% i = 0 %>
               <% checked = true %>
@@ -41,7 +43,8 @@
                   <% i = i + 1 %>
               <% end %>
           <% end %>
-
+        </p>
+        <p>
           <% if e.attribute_type == "check_box" %>
               <% e.get_options_to_form.each do |v, p| %>
                 <%= hidden_field_tag(e.name + '[]', "", {:class => 'payfield', "data-prices" => e.get_prices.to_s}) %>
@@ -49,19 +52,23 @@
                 <%= label_tag(e.attribute_label, v) %><br>
               <% end %>
           <% end %>
-
+        </p>
+        <p>
           <% if e.attribute_type == "text_field" %>
             <%= text_field_tag(e.name, e.attribute_value) %><br>
           <% end %>
-
+        </p>
+        <p>
           <% if e.attribute_type == "plain_text" %>
             <%= e.attribute_value %>
           <% end %>
-
+        </p>
+        <p>
           <% if e.attribute_type == "date" %>
             <%= date_select(e.name, nil) %>
           <% end %>
-    <% end %>
+        </p>
+        <% end %>
  <%= f.hidden_field :event_id, :value => params[:event_id] %>
 </div>
     <p>
