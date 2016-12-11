@@ -1,16 +1,11 @@
 
     <h2><%= @enrollment.event.name %></h2>
     <h3><%= @enrollment.user.first_name %> <%= @enrollment.user.last_name %></h3>
-    <h4>Ilmoittautumistiedot</h4>
-    <table class="table table-bordered">
     <% @data.each do |data| %>
-      <tr>
         <% if data.value %>
-            <td><%= data.value %></td>
+            <p><%= data.value %></p>
         <% end %>
-      </tr>
     <% end %>
-    </table>
     <% if !@account_number.empty? and @price > 0 %>
         <h4>Maksutiedot</h4>
         <p>Tilinumero: <%= @account_number %></p>
