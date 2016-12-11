@@ -13,19 +13,19 @@
     <% end %>
 
     <div class="field">
-      <%= f.text_field :name, label: 'Kentän nimi' %>
+      <%= f.text_field :name, label: 'Kysymyksen nimi (ei näyt lomakkeella)' %>
     </div>
     <div class="field">
-      <%= f.text_field :attribute_label, label: 'Kentän otsikko' %>
+      <%= f.text_field :attribute_label, label: 'Kysymyksen otsikko lomakkeella (tarvitaan lähinnä monivalinta kysymyksiin)' %>
     </div>
     <div class="field">
-      <%= f.select :attribute_type, options_for_select(@attribute_types), label: 'Valitse kentän tyyppi' %>
+      <%= f.select :attribute_type, options_for_select(@attribute_types), label: 'Valitse kysymyksen tyyppi' %>
     </div>
     <div class="field">
-      <%= f.text_field :attribute_value, label: 'Kirjoita kentän valinnat puolipisteellä eroteltuna:' %>
+      <%= f.text_field :attribute_value, label: 'Kirjoita valintavaihtoehdot puolipisteellä eroteltuna:' %>
     </div>
     <p>
-      Kirjoita kenttään liittyvien maksujen arvo sentteinä. Monivalinnan tapauksessa anna arvot puolipisteellä eroteltuna vastaavassa järjestyksessä kuin yllä. Jos kenttään ei liity maksua, voit jättää seuraavat tyhjäksi.
+      Kirjoita valintaan liittyvä maksu sentteinä. Monivalinnan tapauksessa anna maksu puolipisteellä eroteltuna vastaavassa järjestyksessä kuin yllä. Jos valintaan ei liity maksua, voit jättää seuraavat tyhjäksi.
     </p>
     <div class="field">
       <%= f.text_field :payment_value, label: 'Normaalin ilmoittautumisen hinnat:' %>
