@@ -92,7 +92,6 @@ Rails.application.routes.draw do
   get 'results/individual/series', to: 'results#top_results_for_different_series', as: 'top_series_results'
   get 'users/:id/activate', to: 'users#new_activation', as: 'activation'
   put 'users/:id/activate', to: 'users#activate'
-  get 'users/:id/after_activation', to: 'users#after_activation', as: 'after_activation'
   get 'statistics', to: 'statistics#index', as: 'statistics'
   get 'statistics/search', to: 'statistics#index_filterable', as: 'statistics_filterable'
   get 'statistics/static', to: 'statistics#index_static'

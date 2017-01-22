@@ -1,10 +1,12 @@
 <div class="col-md-8">
   <div class="bs-component">
-    <h2>Aktivoi käyttäjätili</h2>
+    <h2>Aktivoi tili kirjautumalla sisään</h2>
 
     <%= bootstrap_form_tag url: activation_path, method: :put do |f| %>
+	<%= f.text_field :username, label: "Käyttäjätunnus: " %>
+        <%= f.password_field :password, label: "Salasana: " %>
         <%= f.hidden_field :activation_token, value: @user.activation_token %>
-        <h1><%= f.submit "Aktivoi tili", :class => 'btn btn-primary', data: {disable_with: 'Tili aktivoitu'} %></h1>
+        <h1><%= f.submit "Kirjaudu sisään", :class => 'btn btn-primary' %></h1>
     <% end %>
   </div>
 </div>

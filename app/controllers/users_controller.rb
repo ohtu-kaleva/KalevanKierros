@@ -63,7 +63,7 @@ class UsersController < ApplicationController
     end
     if @user.save
       UserMailer.registration_activation_email(@user, redirect_url).deliver
-      redirect_to ilmoittautuminen_path, flash: { success: 'Käyttäjätunnus luotu, aktivoi tunnus sähköpostiin lähetettyjen ohjeiden mukaan.' }
+      redirect_to signin_path, flash: { success: 'Käyttäjätunnus luotu, aktivoi tunnus sähköpostiin lähetettyjen ohjeiden mukaan.' }
     else
       render :new
     end
@@ -93,21 +93,40 @@ class UsersController < ApplicationController
   def new_activation
     @user = User.find_by id: params[:id]
     session[:redirect_url] = params[:redirect_url]
-    if @user and !@user.active and @user.activation_token == params[:activation_token]
+    if !current_user and @user and !@user.active and @user.activation_token == params[:activation_token]
       render :activate and return
+    elsif current_user and @user and @user.active and not params[:redirect_url].nil?
+      redirect_to params[:redirect_url]
+    elsif current_user and @user and @user.active
+      redirect_to user_path(current_user)
     else
-      redirect_to after_activation_path(id: @user.id, redirect_url: params[:redirect_url]), flash: { success: 'Käyttäjä on jo aktivoitu' } and return
+      redirect_to signin_path
     end
   end
 
   def activate
-    @user = User.find_by id: params[:id]
-    if @user and !@user.active and @user.activation_token == params[:activation_token]
-      @user.update_attribute(:active, true)
-      @user.update_attribute :kk_number, generate_kk_number(@user)
-      init_statistic_entry @user
+    if !current_user
+      @user = User.find_by id: params[:id]
+      if @user && !@user.active
+        if @user.username == params[:username] && (@user.authenticate params[:password])
+          if @user.activation_token == params[:activation_token]
+            @user.update_attribute(:active, true)
+            @user.update_attribute :kk_number, generate_kk_number(@user)
+            init_statistic_entry @user
+            session[:user_id] = @user.id
+            flash[:success] = "Tervetuloa " + @user.first_name
+          end
+        else
+          flash[:error] = "Tarkista käyttäjätunnus ja salasana!"
+          redirect_to :back && return
+        end
+      end
     end
-    redirect_to after_activation_path(id: @user.id, redirect_url: params[:redirect_url]), flash: { success: 'Käyttäjä aktivoitu' }
+    if not session.nil? and not session[:redirect_url].nil?
+      redirect_to session[:redirect_url], flash: { success: 'Käyttäjä aktivoitu' }
+    else
+      redirect_to user_path(current_user), flash: { success: 'Käyttäjä aktivoitu' }
+    end
   end
 
   private
