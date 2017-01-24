@@ -1,0 +1,118 @@
+<h1>Vuoden <%= params[:year] %> viestijoukkuetulokset</h1>
+<p>Klikkaamalla joukkueen nimeä näet joukkueen jäsenten pisteet. Voit järjestää joukkueet aakkosjärjestykseen tai pistejärjestykseen alla olevilla napeilla.</p>
+<% i = 0 %>
+<% if params[:sort] == "joukkueet" %>
+    <% @groups = @group_results %>
+    <a href="?" class="btn btn-default btn-sm">Näytä pistejärjestyksessä</a>&nbsp;
+    <a href="?sort=joukkueet" class="btn btn-primary btn-sm">Näytä aakkosjärjestyksessä</a>
+    <a href="?sort=naisjoukkueet" class="btn btn-default btn-sm">Näytä vain naisjoukkueet</a>
+<% elsif params[:sort] == "naisjoukkueet" %>
+    <% @groups = @group_results.select do |k, v, f| %>
+    <% f %>
+    <% end %>
+    <% @groups = @groups.sort_by { |k, v, f| v[:total] }.reverse %>
+    <a href="?" class="btn btn-default btn-sm">Näytä pistejärjestyksessä</a>&nbsp;
+    <a href="?sort=joukkueet" class="btn btn-default btn-sm">Näytä aakkosjärjestyksessä</a>
+    <a href="?sort=naisjoukkueet" class="btn btn-primary btn-sm">Näytä vain naisjoukkueet</a>
+<% else %>
+    <% @groups = @group_results.sort_by { |k, v, f| v[:total] }.reverse %>
+    <a href="?" class="btn btn-primary btn-sm">Näytä pistejärjestyksessä</a>&nbsp;
+    <a href="?sort=joukkueet" class="btn btn-default btn-sm">Näytä aakkosjärjestyksessä</a>
+    <a href="?sort=naisjoukkueet" class="btn btn-default btn-sm">Näytä vain naisjoukkueet</a>
+<% end %>
+<br />
+<br />
+<table class="results">
+  <% @groups.each do |name, group_results, female| %>
+      <% i += 1 %>
+      <tr>
+        <td style="font-size: larger; width: 350px;">
+          <a href="#" onclick="event.preventDefault(); $('#stat<%= i %>').toggle()">
+            <% if params[:sort] != "joukkueet" %>
+            <%= i %>.
+                <% end %>
+            <%= name %><% if female %> (N)<% end %></a>
+        </td>
+        <td style="color: black; font-size: larger;"><%= group_results[:total].round(2) %></td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td colspan="8">
+          <table style="display: none;" class="table" id="stat<%= i %>">
+            <tr>
+              <th>Nimi</th>
+              <th>Yhteensä</th>
+              <th>Luistelu</th>
+              <th>Hiihto</th>
+              <th>Juoksu</th>
+              <th>Soutu</th>
+              <th>Pyöräily</th>
+              <th>Suunnistus</th>
+            </tr>
+            <% group_results[:individual_results].each do |id, individual_result| %>
+                <tr>
+                  <td><%= individual_result[:result][:name] %></td>
+                  <td><%= individual_result[:sum_of_noted_results].round(2) %></td>
+                  <% if individual_result[:result][:skating_relay_pts].nil? %>
+                      <td>Ei tulosta</td>
+                  <% else %>
+                      <td noted="<%= individual_result[:result_noted][:skating] %>"><%= individual_result[:result][:skating_relay_pts].round(2) %></td>
+                  <% end %>
+                  <% if individual_result[:result][:skiing_relay_pts].nil? %>
+                      <td>Ei tulosta</td>
+                  <% else %>
+                      <td noted="<%= individual_result[:result_noted][:skiing] %>"><%= individual_result[:result][:skiing_relay_pts].round(2) %></td>
+                  <% end %>
+                  <% if individual_result[:result][:marathon_relay_pts].nil? %>
+                      <td>Ei tulosta</td>
+                  <% else %>
+                      <td noted="<%= individual_result[:result_noted][:marathon] %>"><%= individual_result[:result][:marathon_relay_pts].round(2) %></td>
+                  <% end %>
+                  <% if individual_result[:result][:rowing_relay_pts].nil? %>
+                      <td>Ei tulosta</td>
+                  <% else %>
+                      <td noted="<%= individual_result[:result_noted][:rowing] %>"><%= individual_result[:result][:rowing_relay_pts].round(2) %></td>
+                  <% end %>
+                  <% if individual_result[:result][:cycling_relay_pts].nil? %>
+                      <td>Ei tulosta</td>
+                  <% else %>
+                      <td noted="<%= individual_result[:result_noted][:cycling] %>"><%= individual_result[:result][:cycling_relay_pts].round(2) %></td>
+                  <% end %>
+                  <% if individual_result[:result][:orienteering_relay_pts].nil? %>
+                      <td>Ei tulosta</td>
+                  <% else %>
+                      <td noted="<%= individual_result[:result_noted][:orienteering] %>"><%= individual_result[:result][:orienteering_relay_pts].round(2) %></td>
+                  <% end %>
+            <% end %>
+            </td></tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td><%= group_results[:skating_sum].round(2) %></td>
+              <td><%= group_results[:skiing_sum].round(2) %></td>
+              <td><%= group_results[:marathon_sum].round(2) %></td>
+              <td><%= group_results[:rowing_sum].round(2) %></td>
+              <td><%= group_results[:cycling_sum].round(2) %></td>
+              <td><%= group_results[:orienteering_sum].round(2) %></td>
+            </tr>
+            </td>
+          </table>
+      </tr>
+  <% end %>
+</table>
+<style type="text/css">
+    table.results {
+        width: 100%;
+        max-width: 100%;
+        margin-bottom: 20px
+    }
+
+    table.child {
+        margin-top: 5px;
+        margin-bottom: 20px;
+        float: right;
+    }
+    td[noted="true"] {
+        background-color: red;
+    }
+</style>

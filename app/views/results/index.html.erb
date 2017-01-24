@@ -1,7 +1,7 @@
 <h3>Kalevan kierroksen tulokset vuosittain</h3>
 
 <% @years.reverse.each do |year| %>
-<p style="font-size: larger;"><span style="font-weight: bold;"><%= year %></span>: <%= link_to "Henkilökohtaiset tulokset "<< year.to_s, index_by_year_path(year, "all", "all", "all") %>&nbsp;|&nbsp;<%= link_to "Joukkuetulokset " << year.to_s, results_path << '/year/' << year.to_s << '/groups' %></p>
+<p style="font-size: larger;"><span style="font-weight: bold;"><%= year %></span>: <%= link_to "Henkilökohtaiset tulokset "<< year.to_s, index_by_year_path(year, "all", "all", "all") %>&nbsp;|&nbsp;<%= link_to "Joukkuetulokset " << year.to_s, results_path << '/year/' << year.to_s << '/groups' %><% if year >= 2017 %>&nbsp|&nbsp;<%= link_to "Viestijoukkuetulokset " << year.to_s, results_path << '/year/' << year.to_s << '/relay_groups' %><% end %></p>
 <% end %>
 
 <h3>Kalevan kierroksen tilastot</h3>

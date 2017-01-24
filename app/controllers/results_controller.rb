@@ -15,25 +15,25 @@ class ResultsController < ApplicationController
     @res = {}
     @res[:series] = existing_age_series(params[:year])
     if params[:type] == 'all'
-      @res[:results] = Result.where(year: params[:year]).where(series: search_filter).order('completed_events is null, completed_events desc, pts_sum desc')
+      @res[:results] = Result.where(year: params[:year]).where(ignore_on_statistics: false).where(series: search_filter).order('completed_events is null, completed_events desc, pts_sum desc')
     elsif params[:type] == 'cycling'
       @laji = "Pyöräily"
-      @res[:results] = Result.where(year: params[:year]).where.not(cycling_time: nil).where(series: search_filter).order('cycling_pos asc').pluck('name, cycling_pos as position, cycling_pts as points, cycling_time as time')
+      @res[:results] = Result.where(year: params[:year]).where(ignore_on_statistics: false).where.not(cycling_time: nil).where(series: search_filter).order('cycling_pos asc').pluck('name, cycling_pos as position, cycling_pts as points, cycling_time as time')
     elsif params[:type] == 'rowing'
       @laji = "Soutu"
-      @res[:results] = Result.where(year: params[:year]).where.not(rowing_time: nil).where.not(rowing_pts: nil).where(series: search_filter).order('rowing_pos asc').pluck('name, rowing_pos as position, rowing_pts as points, rowing_time as time')
+      @res[:results] = Result.where(year: params[:year]).where(ignore_on_statistics: false).where.not(rowing_time: nil).where.not(rowing_pts: nil).where(series: search_filter).order('rowing_pos asc').pluck('name, rowing_pos as position, rowing_pts as points, rowing_time as time')
     elsif params[:type] == 'orienteering'
       @laji = "Suunnistus"
-      @res[:results] = Result.where(year: params[:year]).where.not(orienteering_time: nil).where(series: search_filter).order('orienteering_pos asc').pluck('name, orienteering_pos as position, orienteering_pts as points, orienteering_time as time')
+      @res[:results] = Result.where(year: params[:year]).where(ignore_on_statistics: false).where.not(orienteering_time: nil).where(series: search_filter).order('orienteering_pos asc').pluck('name, orienteering_pos as position, orienteering_pts as points, orienteering_time as time')
     elsif params[:type] == 'skiing'
       @laji = "Hiihto"
-      @res[:results] = Result.where(year: params[:year]).where.not(skiing_time: nil).where(series: search_filter).order('skiing_pos asc').pluck('name, skiing_pos as position, skiing_pts as points, skiing_time as time')
+      @res[:results] = Result.where(year: params[:year]).where(ignore_on_statistics: false).where.not(skiing_time: nil).where(series: search_filter).order('skiing_pos asc').pluck('name, skiing_pos as position, skiing_pts as points, skiing_time as time')
     elsif params[:type] == 'skating'
       @laji = "Luistelu"
-      @res[:results] = Result.where(year: params[:year]).where.not(skating_time: nil).where(series: search_filter).order('skating_pos asc').pluck('name, skating_pos as position, skating_pts as points, skating_time as time')
+      @res[:results] = Result.where(year: params[:year]).where(ignore_on_statistics: false).where.not(skating_time: nil).where(series: search_filter).order('skating_pos asc').pluck('name, skating_pos as position, skating_pts as points, skating_time as time')
     elsif params[:type] == 'marathon'
       @laji = "Juoksu"
-      @res[:results] = Result.where(year: params[:year]).where.not(marathon_time: nil).where(series: search_filter).order('marathon_pos asc').pluck('name, marathon_pos as position, marathon_pts as points, marathon_time as time')
+      @res[:results] = Result.where(year: params[:year]).where(ignore_on_statistics: false).where.not(marathon_time: nil).where(series: search_filter).order('marathon_pos asc').pluck('name, marathon_pos as position, marathon_pts as points, marathon_time as time')
     else
       redirect_to :root and return
     end
@@ -70,7 +70,7 @@ class ResultsController < ApplicationController
   end
 
   def existing_age_series(year)
-    series = Result.where(year: year).select('series').uniq
+    series = Result.where(year: year).where(ignore_on_statistics: false).select('series').uniq
     age_series = []
     series.each do |s|
       series_string = s[:series].to_s
@@ -100,7 +100,7 @@ class ResultsController < ApplicationController
   def xlsx_results_for_year_book
     year = AppSetting.find_by(name: 'KkYear').value.to_i
     if params[:gender] == 'kaikki'
-      @results = Result.where(year: year).where("completed_events >= ?", 4).order('completed_events desc, pts_sum desc')
+      @results = Result.where(year: year).where(ignore_on_statistics: false).where("completed_events >= ?", 4).order('completed_events desc, pts_sum desc')
     elsif params[:gender] == 'naiset'
       @results = form_female_results_for_year_book(year)
     else
@@ -114,44 +114,44 @@ class ResultsController < ApplicationController
   def form_female_results_for_year_book(year)
     search_filter = form_gender_age_filter('N', 'all')
     positions = {skating: {}, skiing: {}, marathon: {}, rowing: {}, cycling: {}, orienteering: {}}
-    skating = Result.where(year: year).where.not(skating_time: nil).where(series: search_filter).order('skating_pos asc').pluck('kk_number')
+    skating = Result.where(year: year).where(ignore_on_statistics: false).where.not(skating_time: nil).where(series: search_filter).order('skating_pos asc').pluck('kk_number')
     i = 1
     skating.each do |kk_number|
       positions[:skating][kk_number] = i
       i += 1
     end
-    skiing = Result.where(year: year).where.not(skiing_time: nil).where(series: search_filter).order('skiing_pos asc').pluck('kk_number')
+    skiing = Result.where(year: year).where(ignore_on_statistics: false).where.not(skiing_time: nil).where(series: search_filter).order('skiing_pos asc').pluck('kk_number')
     i = 1
     skiing.each do |kk_number|
       positions[:skiing][kk_number] = i
       i += 1
     end
-    marathon = Result.where(year: year).where.not(marathon_time: nil).where(series: search_filter).order('marathon_pos asc').pluck('kk_number')
+    marathon = Result.where(year: year).where(ignore_on_statistics: false).where.not(marathon_time: nil).where(series: search_filter).order('marathon_pos asc').pluck('kk_number')
     i = 1
     marathon.each do |kk_number|
       positions[:marathon][kk_number] = i
       i += 1
     end
-    rowing = Result.where(year: year).where.not(rowing_time: nil).where.not(rowing_pts: nil).where(series: search_filter).order('rowing_pos asc').pluck('kk_number')
+    rowing = Result.where(year: year).where(ignore_on_statistics: false).where.not(rowing_time: nil).where.not(rowing_pts: nil).where(series: search_filter).order('rowing_pos asc').pluck('kk_number')
     i = 1
     rowing.each do |kk_number|
       positions[:rowing][kk_number] = i
       i += 1
     end
-    cycling = Result.where(year: year).where.not(cycling_time: nil).where(series: search_filter).order('cycling_pos asc').pluck('kk_number')
+    cycling = Result.where(year: year).where(ignore_on_statistics: false).where.not(cycling_time: nil).where(series: search_filter).order('cycling_pos asc').pluck('kk_number')
     i = 1
     cycling.each do |kk_number|
       positions[:cycling][kk_number] = i
       i += 1
     end
-    orienteering = Result.where(year: year).where.not(orienteering_time: nil).where(series: search_filter).order('orienteering_pos asc').pluck('kk_number')
+    orienteering = Result.where(year: year).where(ignore_on_statistics: false).where.not(orienteering_time: nil).where(series: search_filter).order('orienteering_pos asc').pluck('kk_number')
     i = 1
     orienteering.each do |kk_number|
       positions[:orienteering][kk_number] = i
       i += 1
     end
 
-    results = Result.where(year: year).where("completed_events >= ?", 4).where(series: search_filter).order('completed_events desc, pts_sum desc')
+    results = Result.where(year: year).where(ignore_on_statistics: false).where("completed_events >= ?", 4).where(series: search_filter).order('completed_events desc, pts_sum desc')
     results.each do |r|
       r.skating_pos = positions[:skating][r.kk_number]
       r.skiing_pos = positions[:skiing][r.kk_number]
@@ -237,17 +237,31 @@ class ResultsController < ApplicationController
     end
     @group_results = []
     groups.each do |group|
-      @group_results << [group, calculate_group_results(group, params[:year]), female_group?(group, params[:year])]
+      @group_results << [group, calculate_group_results(false, group, params[:year]), female_group?(group, params[:year])]
+    end
+  end
+
+  def with_existing_relay_group
+    if not params[:year] =~ /\A\d{4}\z/
+      redirect_to :root and return
+    end
+    groups = Result.where(year: params[:year]).where.not(relay_group: nil).order(:relay_group).uniq.pluck(:relay_group)
+    if groups.empty?
+      redirect_to :root and return
+    end
+    @group_results = []
+    groups.each do |group|
+      @group_results << [group, calculate_group_results(true, group, params[:year]), female_relay_group?(group, params[:year])]
     end
   end
 
   def with_female_group
     year = AppSetting.find_by(name: 'KkYear').value.to_i
-    groups = Result.where(year: year).where.not(group: nil).order(:group).uniq.pluck(:group)
+    groups = Result.where(year: year).where(ignore_on_statistics: false).where.not(group: nil).order(:group).uniq.pluck(:group)
     @group_results = {}
     groups.each do |group|
       if female_group?(group, year)
-        @group_results[group] = calculate_group_results(group, year)
+        @group_results[group] = calculate_group_results(false, group, year)
       end
     end
     @group_results = @group_results.sort_by { |k, v| v[:total] }.reverse
@@ -258,11 +272,11 @@ class ResultsController < ApplicationController
 
   def with_mixed_group
     year = AppSetting.find_by(name: 'KkYear').value.to_i
-    groups = Result.where(year: year).where.not(group: nil).order(:group).uniq.pluck(:group)
+    groups = Result.where(year: year).where(ignore_on_statistics: false).where.not(group: nil).order(:group).uniq.pluck(:group)
     @group_results = {}
     groups.each do |group|
       if not female_group?(group, year)
-        @group_results[group] = calculate_group_results(group, year)
+        @group_results[group] = calculate_group_results(false, group, year)
       end
     end
     @group_results = @group_results.sort_by { |k, v| v[:total] }.reverse
@@ -273,6 +287,16 @@ class ResultsController < ApplicationController
 
   def female_group?(group, year)
     member_results = Result.where(year: year).where(group: group)
+    member_results.each do |member|
+      if member.series[0,1] == 'M'
+        return false
+      end
+    end
+    return true
+  end
+
+  def female_relay_group?(group, year)
+    member_results = Result.where(year: year).where(relay_group: group)
     member_results.each do |member|
       if member.series[0,1] == 'M'
         return false
@@ -393,7 +417,7 @@ class ResultsController < ApplicationController
     filters = form_gender_age_filter('all', 'all')
     data = ''
     filters.each do |filter|
-      results = Result.where(year: year).where(series: filter).order('completed_events is null, completed_events desc, pts_sum desc').take(6)
+      results = Result.where(year: year).where(ignore_on_statistics: false).where(series: filter).order('completed_events is null, completed_events desc, pts_sum desc').take(6)
       if results.count > 0
         data << filter + ",,,,\n"
       end
@@ -412,8 +436,12 @@ class ResultsController < ApplicationController
     send_data(data, filename: 'sarjoittaiset_tulokset.csv')
   end
 
-  def calculate_group_results(group, year)
-    individual_results = Result.where(year: year).where(group: group).order(:name)
+  def calculate_group_results(is_relay, group, year)
+    if is_relay
+      individual_results = Result.where(year: year).where(relay_group: group).order(:name)
+    else
+      individual_results = Result.where(year: year).where(group: group).order(:name)
+    end
     group_results = {:total => 0, :individual_results => {}}
     marathon_points = {}
     skiing_points = {}
@@ -426,22 +454,34 @@ class ResultsController < ApplicationController
       group_results[:individual_results][result.id][:result] = result
       group_results[:individual_results][result.id][:result_noted] = {:marathon => false, :skiing => false, :orienteering => false, :skating => false, :cycling => false, :rowing => false}
       group_results[:individual_results][result.id][:sum_of_noted_results] = 0
-      if result.marathon_pts
+      if is_relay and result.marathon_relay_pts
+        marathon_points[result.id] = result.marathon_relay_pts
+      elsif not is_relay and result.marathon_pts
         marathon_points[result.id] = result.marathon_pts
       end
-      if result.skiing_pts
+      if is_relay and result.skiing_relay_pts
+        skiing_points[result.id] = result.skiing_relay_pts
+      elsif not is_relay and result.skiing_pts
         skiing_points[result.id] = result.skiing_pts
       end
-      if result.orienteering_pts
+      if is_relay and result.orienteering_relay_pts
+        orienteering_points[result.id] = result.orienteering_relay_pts
+      elsif not is_relay and result.orienteering_pts
         orienteering_points[result.id] = result.orienteering_pts
       end
-      if result.skating_pts
+      if is_relay and result.skating_relay_pts
+        skating_points[result.id] = result.skating_relay_pts
+      elsif not is_relay and result.skating_pts
         skating_points[result.id] = result.skating_pts
       end
-      if result.cycling_pts
+      if is_relay and result.cycling_relay_pts
+        cycling_points[result.id] = result.cycling_relay_pts
+      elsif not is_relay and result.cycling_pts
         cycling_points[result.id] = result.cycling_pts
       end
-      if result.rowing_pts
+      if is_relay and result.rowing_relay_pts
+        rowing_points[result.id] = result.rowing_relay_pts
+      elsif not is_relay and result.rowing_pts
         rowing_points[result.id] = result.rowing_pts
       end
     end
@@ -452,8 +492,13 @@ class ResultsController < ApplicationController
     cycling_points = cycling_points.sort_by { |k, v| v }.reverse!
     rowing_points = rowing_points.sort_by { |k, v| v }.reverse!
     sport_sum = 0
+    if is_relay
+      num_counted = 1
+    else
+      num_counted = 4
+    end
     if marathon_points.count > 0
-      marathon_points = Hash[marathon_points.take(4)]
+      marathon_points = Hash[marathon_points.take(num_counted)]
       marathon_points.each do |id, points|
         sport_sum += points
         group_results[:individual_results][id][:result_noted][:marathon] = true
@@ -464,7 +509,7 @@ class ResultsController < ApplicationController
     group_results[:marathon_sum] = sport_sum
     sport_sum = 0
     if skiing_points.count > 0
-      skiing_points = Hash[skiing_points.take(4)]
+      skiing_points = Hash[skiing_points.take(num_counted)]
       skiing_points.each do |id, points|
         sport_sum += points
         group_results[:individual_results][id][:result_noted][:skiing] = true
@@ -475,7 +520,7 @@ class ResultsController < ApplicationController
     group_results[:skiing_sum] = sport_sum
     sport_sum = 0
     if orienteering_points.count > 0
-      orienteering_points = Hash[orienteering_points.take(4)]
+      orienteering_points = Hash[orienteering_points.take(num_counted)]
       orienteering_points.each do |id, points|
         sport_sum += points
         group_results[:individual_results][id][:result_noted][:orienteering] = true
@@ -486,7 +531,7 @@ class ResultsController < ApplicationController
     group_results[:orienteering_sum] = sport_sum
     sport_sum = 0
     if skating_points.count > 0
-      skating_points = Hash[skating_points.take(4)]
+      skating_points = Hash[skating_points.take(num_counted)]
       skating_points.each do |id, points|
         sport_sum += points
         group_results[:individual_results][id][:result_noted][:skating] = true
@@ -497,7 +542,7 @@ class ResultsController < ApplicationController
     group_results[:skating_sum] = sport_sum
     sport_sum = 0
     if cycling_points.count > 0
-      cycling_points = Hash[cycling_points.take(4)]
+      cycling_points = Hash[cycling_points.take(num_counted)]
       cycling_points.each do |id, points|
         sport_sum += points
         group_results[:individual_results][id][:result_noted][:cycling] = true
@@ -508,7 +553,7 @@ class ResultsController < ApplicationController
     group_results[:cycling_sum] = sport_sum
     sport_sum = 0
     if rowing_points.count > 0
-      rowing_points = Hash[rowing_points.take(4)]
+      rowing_points = Hash[rowing_points.take(num_counted)]
       rowing_points.each do |id, points|
         sport_sum += points
         group_results[:individual_results][id][:result_noted][:rowing] = true
@@ -546,11 +591,14 @@ class ResultsController < ApplicationController
     redirect_to results_url, notice: 'Result was successfully destroyed.'
   end
 
-  def scale_times(event)
+  def scale_times(event, ignored)
     enrollments = event.enrollments.where.not(time: nil)
     temp_times = {}
     if event.sport_type == 'RunningEvent'
       enrollments.each do |e|
+	if ignored.include? e.user.kk_number
+	  next
+        end
         attr = e.enrollment_datas.find_by name: 'Tyyppi'
         if attr.value == 'puolimaraton'
             temp_times[e.user.kk_number] = {}
@@ -564,6 +612,9 @@ class ResultsController < ApplicationController
       end
     elsif event.sport_type == 'SkiingEvent'
       enrollments.each do |e|
+        if ignored.include? e.user.kk_number
+	  next
+        end
         attr = e.enrollment_datas.find_by name: 'Tyyli'
         if attr.value == 'Vapaa'
           temp_times[e.user.kk_number] = {}
@@ -577,6 +628,9 @@ class ResultsController < ApplicationController
       end
     elsif event.sport_type == 'RowingEvent'
       enrollments.each do |e|
+        if ignored.include? e.user.kk_number
+	  next
+        end
         temp_times[e.user.kk_number] = {}
         paddle = e.enrollment_datas.find_by name: 'Melonta'
         style = e.enrollment_datas.find_by name: 'Tyyli'
@@ -599,6 +653,9 @@ class ResultsController < ApplicationController
       end
     else
       enrollments.each do |e|
+        if ignored.include? e.user.kk_number
+	  next
+        end
         temp_times[e.user.kk_number] = {}
         temp_times[e.user.kk_number][:time] = e.time
         temp_times[e.user.kk_number][:style] = ''
@@ -618,10 +675,13 @@ class ResultsController < ApplicationController
     false
   end
 
-  def unscaled_times(event)
+  def unscaled_times(event, ignored)
     enrollments = event.enrollments
     temp_times = {}
     enrollments.each do |e|
+      if ignored.include? e.user.kk_number
+	next
+      end
       temp_times[e.user.kk_number] = e.time
     end
     temp_times
@@ -629,13 +689,31 @@ class ResultsController < ApplicationController
 
   def calculate_points
     event = Event.find_by id: params[:event_id]
-    times = scale_times(event)
-    normal_times = unscaled_times(event)
+    year = event.second_end_date.year
+
+    # Calculate for normal competition. Ignores relay only results.
+    ignored = Result.where(year: year).where(ignore_on_statistics: true).pluck(:kk_number)
+    calculate_points_for_normal_or_relay(false, event, year, ignored)
+
+    # Calculate for relay competition. Ignore those competitors who are not in a relay group.
+    ignored = Result.where(year: year).where(relay_group: nil).pluck(:kk_number)
+    calculate_points_for_normal_or_relay(true, event, year, ignored)
+
+    redirect_to results_path
+  end
+	
+
+  def calculate_points_for_normal_or_relay(is_relay, event, year, ignored)
+    times = scale_times(event, ignored)
+    if times.empty?
+      # No results in this competition
+      return
+    end
+    normal_times = unscaled_times(event, ignored)
     times_sorted = Hash[times.sort_by { |k, v| v[:time] }]
     winner_time = get_winner_time(times_sorted)
     winner_time = BigDecimal.new(winner_time)
     position = 1
-    year = event.second_end_date.year
     times_sorted.each do |number, time_and_style|
       if time_and_style[:time]
         if time_and_style[:style] != 'Melonta'
@@ -645,7 +723,7 @@ class ResultsController < ApplicationController
           if points < 0
             points = 0
           end
-          result_found = insert_result_for_event(event.sport_type, number, year, points, normal_times[number], position, time_and_style[:style])
+          result_found = insert_result_for_event(is_relay, event.sport_type, number, year, points, normal_times[number], position, time_and_style[:style])
           normal_times.delete number
           if result_found
             position += 1
@@ -655,12 +733,11 @@ class ResultsController < ApplicationController
     end
     normal_times.each do |number, time|
       if event.sport_type == 'RowingEvent' and not time.nil?
-        insert_result_for_event(event.sport_type, number, year, nil, time, nil, 'Melonta')
+        insert_result_for_event(is_relay, event.sport_type, number, year, nil, time, nil, 'Melonta')
       else
-        insert_result_for_event(event.sport_type, number, year, nil, nil, nil, nil)
+        insert_result_for_event(is_relay, event.sport_type, number, year, nil, nil, nil, nil)
       end
     end
-    redirect_to results_path
   end
 
   def get_winner_time(times)
@@ -674,64 +751,113 @@ class ResultsController < ApplicationController
     winner_time
   end
 
-  def insert_result_for_event(sport_type, number, year, points, time, position, style)
+  def insert_result_for_event(is_relay, sport_type, number, year, points, time, position, style)
     result = Result.find_by_kk_number_and_year(number, year)
     if result
       if sport_type == "RunningEvent"
-        result.marathon_pts = points
         result.marathon_time = time
-        result.marathon_pos = position
         result.marathon_style = style
-        result.save
-        totals = check_total_events(result)
-        result.completed_events = totals[:total_events]
-        result.pts_sum = totals[:total_points]
+        if is_relay
+          result.marathon_relay_pts = points
+          result.marathon_relay_pos = position
+	  result.save
+          totals = check_total_relay_events(result)
+          result.relay_pts_sum = totals[:total_points]
+        else
+          result.marathon_pts = points
+          result.marathon_pos = position
+          result.save
+          totals = check_total_events(result)
+          result.completed_events = totals[:total_events]
+          result.pts_sum = totals[:total_points]
+        end
         result.save
       elsif sport_type == "SkiingEvent"
-        result.skiing_pts = points
         result.skiing_time = time
-        result.skiing_pos = position
         result.skiing_style = style
-        totals = check_total_events(result)
-        result.completed_events = totals[:total_events]
-        result.pts_sum = totals[:total_points]
+        if is_relay
+          result.skiing_relay_pts = points
+          result.skiing_relay_pos = position
+	  result.save
+          totals = check_total_relay_events(result)
+          result.relay_pts_sum = totals[:total_points]
+        else
+          result.skiing_pts = points
+          result.skiing_pos = position
+          result.save
+          totals = check_total_events(result)
+          result.completed_events = totals[:total_events]
+          result.pts_sum = totals[:total_points]
+        end
         result.save
       elsif sport_type == "SkatingEvent"
-        result.skating_pts = points
         result.skating_time = time
-        result.skating_pos = position
-        result.save
-        totals = check_total_events(result)
-        result.completed_events = totals[:total_events]
-        result.pts_sum = totals[:total_points]
+        if is_relay
+          result.skating_relay_pts = points
+          result.skating_relay_pos = position
+	  result.save
+          totals = check_total_relay_events(result)
+          result.relay_pts_sum = totals[:total_points]
+        else
+          result.skating_pts = points
+          result.skating_pos = position
+          result.save
+          totals = check_total_events(result)
+          result.completed_events = totals[:total_events]
+          result.pts_sum = totals[:total_points]
+        end
         result.save
       elsif sport_type == "CyclingEvent"
-        result.cycling_pts = points
         result.cycling_time = time
-        result.cycling_pos = position
-        result.save
-        totals = check_total_events(result)
-        result.completed_events = totals[:total_events]
-        result.pts_sum = totals[:total_points]
+        if is_relay
+          result.cycling_relay_pts = points
+          result.cycling_relay_pos = position
+	  result.save
+          totals = check_total_relay_events(result)
+          result.relay_pts_sum = totals[:total_points]
+        else
+          result.cycling_pts = points
+          result.cycling_pos = position
+          result.save
+          totals = check_total_events(result)
+          result.completed_events = totals[:total_events]
+          result.pts_sum = totals[:total_points]
+        end
         result.save
       elsif sport_type == "OrienteeringEvent"
-        result.orienteering_pts = points
         result.orienteering_time = time
-        result.orienteering_pos = position
-        result.save
-        totals = check_total_events(result)
-        result.completed_events = totals[:total_events]
-        result.pts_sum = totals[:total_points]
+        if is_relay
+          result.orienteering_relay_pts = points
+          result.orienteering_relay_pos = position
+	  result.save
+          totals = check_total_relay_events(result)
+          result.relay_pts_sum = totals[:total_points]
+        else
+          result.orienteering_pts = points
+          result.orienteering_pos = position
+          result.save
+          totals = check_total_events(result)
+          result.completed_events = totals[:total_events]
+          result.pts_sum = totals[:total_points]
+        end
         result.save
       elsif sport_type == "RowingEvent"
-        result.rowing_pts = points
         result.rowing_time = time
-        result.rowing_pos = position
         result.rowing_style = style
-        result.save
-        totals = check_total_events(result)
-        result.completed_events = totals[:total_events]
-        result.pts_sum = totals[:total_points]
+        if is_relay
+          result.rowing_relay_pts = points
+          result.rowing_relay_pos = position
+	  result.save
+          totals = check_total_relay_events(result)
+          result.relay_pts_sum = totals[:total_points]
+        else
+          result.rowing_pts = points
+          result.rowing_pos = position
+          result.save
+          totals = check_total_events(result)
+          result.completed_events = totals[:total_events]
+          result.pts_sum = totals[:total_points]
+        end
         result.save
       end
       result_found = true
@@ -768,6 +894,40 @@ class ResultsController < ApplicationController
     if result.rowing_pts
       totals[:total_events] += 1
       totals[:total_points] += result.rowing_pts
+    end
+    if result.rowing_time and result.rowing_style == 'Melonta'
+      totals[:total_events] += 1
+    end
+    totals
+  end
+
+  def check_total_relay_events(result)
+    totals = {}
+    totals[:total_events] = 0
+    totals[:total_points] = 0
+    if result.marathon_relay_pts
+      totals[:total_events] += 1
+      totals[:total_points] += result.marathon_relay_pts
+    end
+    if result.skiing_relay_pts
+      totals[:total_events] += 1
+      totals[:total_points] += result.skiing_relay_pts
+    end
+    if result.skating_relay_pts
+      totals[:total_events] += 1
+      totals[:total_points] += result.skating_relay_pts
+    end
+    if result.cycling_relay_pts
+      totals[:total_events] += 1
+      totals[:total_points] += result.cycling_relay_pts
+    end
+    if result.orienteering_relay_pts
+      totals[:total_events] += 1
+      totals[:total_points] += result.orienteering_relay_pts
+    end
+    if result.rowing_relay_pts
+      totals[:total_events] += 1
+      totals[:total_points] += result.rowing_relay_pts
     end
     if result.rowing_time and result.rowing_style == 'Melonta'
       totals[:total_events] += 1
