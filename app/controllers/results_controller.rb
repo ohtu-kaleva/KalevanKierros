@@ -1,6 +1,6 @@
 class ResultsController < ApplicationController
   before_action :set_result_or_redirect, only: [:show, :edit, :update, :destroy]
-  before_action :redirect_if_user_not_admin, except: [:index, :index_by_year, :with_existing_group]
+  before_action :redirect_if_user_not_admin, except: [:index, :index_by_year, :with_existing_group, :with_existing_relay_group]
 
   # GET /results
   def index
