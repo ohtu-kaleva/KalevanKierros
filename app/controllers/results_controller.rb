@@ -705,13 +705,13 @@ class ResultsController < ApplicationController
 
   def calculate_points_for_normal_or_relay(is_relay, event, year, ignored)
     times = scale_times(event, ignored)
-    if times.empty?
+    normal_times = unscaled_times(event, ignored)
+    times_sorted = Hash[times.sort_by { |k, v| v[:time] }]
+    winner_time = get_winner_time(times_sorted, year)
+    if winner_time.nil?
       # No results in this competition
       return
     end
-    normal_times = unscaled_times(event, ignored)
-    times_sorted = Hash[times.sort_by { |k, v| v[:time] }]
-    winner_time = get_winner_time(times_sorted)
     winner_time = BigDecimal.new(winner_time)
     position = 1
     times_sorted.each do |number, time_and_style|
@@ -740,10 +740,11 @@ class ResultsController < ApplicationController
     end
   end
 
-  def get_winner_time(times)
+  def get_winner_time(times, year)
     winner_time = nil
     times.each do |k, v|
-      if v[:style] != 'Melonta'
+      result = Result.find_by_kk_number_and_year(k, year)
+      if v[:style] != 'Melonta' and not result.nil? and not result.ignore_on_statistics
         winner_time = v[:time]
         break
       end
