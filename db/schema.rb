@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161106204754) do
+ActiveRecord::Schema.define(version: 20170123182808) do
 
   create_table "app_settings", force: true do |t|
     t.string   "name",       null: false
@@ -107,18 +107,18 @@ ActiveRecord::Schema.define(version: 20161106204754) do
     t.string   "group"
     t.integer  "year"
     t.string   "series"
-    t.decimal  "orienteering_pts",      precision: 16, scale: 6
-    t.decimal  "skiing_pts",            precision: 16, scale: 6
-    t.decimal  "marathon_pts",          precision: 16, scale: 6
-    t.decimal  "rowing_pts",            precision: 16, scale: 6
-    t.decimal  "cycling_pts",           precision: 16, scale: 6
-    t.decimal  "skating_pts",           precision: 16, scale: 6
-    t.decimal  "orienteering_time",     precision: 16, scale: 6
-    t.decimal  "skiing_time",           precision: 16, scale: 6
-    t.decimal  "marathon_time",         precision: 16, scale: 6
-    t.decimal  "rowing_time",           precision: 16, scale: 6
-    t.decimal  "cycling_time",          precision: 16, scale: 6
-    t.decimal  "skating_time",          precision: 16, scale: 6
+    t.decimal  "orienteering_pts",       precision: 16, scale: 6
+    t.decimal  "skiing_pts",             precision: 16, scale: 6
+    t.decimal  "marathon_pts",           precision: 16, scale: 6
+    t.decimal  "rowing_pts",             precision: 16, scale: 6
+    t.decimal  "cycling_pts",            precision: 16, scale: 6
+    t.decimal  "skating_pts",            precision: 16, scale: 6
+    t.decimal  "orienteering_time",      precision: 16, scale: 6
+    t.decimal  "skiing_time",            precision: 16, scale: 6
+    t.decimal  "marathon_time",          precision: 16, scale: 6
+    t.decimal  "rowing_time",            precision: 16, scale: 6
+    t.decimal  "cycling_time",           precision: 16, scale: 6
+    t.decimal  "skating_time",           precision: 16, scale: 6
     t.integer  "orienteering_pos"
     t.integer  "skiing_pos"
     t.integer  "marathon_pos"
@@ -128,14 +128,27 @@ ActiveRecord::Schema.define(version: 20161106204754) do
     t.string   "marathon_style"
     t.string   "rowing_style"
     t.string   "skiing_style"
-    t.decimal  "pts_sum",               precision: 16, scale: 6, default: 0.0,   null: false
-    t.integer  "completed_events",                               default: 0,     null: false
+    t.decimal  "pts_sum",                precision: 16, scale: 6, default: 0.0,   null: false
+    t.integer  "completed_events",                                default: 0,     null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "kk_number",                                                      null: false
-    t.boolean  "updated_to_statistics",                          default: false, null: false
+    t.integer  "kk_number",                                                       null: false
+    t.boolean  "updated_to_statistics",                           default: false, null: false
     t.string   "relay_group"
-    t.boolean  "ignore_on_statistics",                           default: false, null: false
+    t.boolean  "ignore_on_statistics",                            default: false, null: false
+    t.decimal  "orienteering_relay_pts"
+    t.decimal  "skiing_relay_pts"
+    t.decimal  "marathon_relay_pts"
+    t.decimal  "rowing_relay_pts"
+    t.decimal  "cycling_relay_pts"
+    t.decimal  "skating_relay_pts"
+    t.integer  "orienteering_relay_pos"
+    t.integer  "skiing_relay_pos"
+    t.integer  "marathon_relay_pos"
+    t.integer  "rowing_relay_pos"
+    t.integer  "cycling_relay_pos"
+    t.integer  "skating_relay_pos"
+    t.decimal  "relay_pts_sum"
   end
 
   create_table "statistics", force: true do |t|
