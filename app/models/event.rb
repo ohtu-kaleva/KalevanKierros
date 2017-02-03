@@ -96,7 +96,7 @@ class Event < ActiveRecord::Base
   end
 
   def spreadsheet_headers
-    attr_names = ["ilm_nro", "Etunimi", "Sukunimi", "Sähköposti", "KK-numero", "Sarja"]
+    attr_names = ["ilm_nro", "Etunimi", "Sukunimi", "Sähköposti", "KK-numero", "Sarja", "Vuosi", "Osoite", "Postinumero", "Postitoimipaikka"]
     event_attributes.where.not(attribute_index: nil).order('attribute_index asc').each do |attr|
       attr_names.append attr.name
     end
@@ -105,7 +105,7 @@ class Event < ActiveRecord::Base
 
   def enrollment_data_as_array(user)
     user_data = user.get_enrollment_data_for_event(id)
-    data_array = [user.find_enrollment_id_by_event(id), user.first_name, user.last_name, user.email, user.kk_number, user.define_series]
+    data_array = [user.find_enrollment_id_by_event(id), user.first_name, user.last_name, user.email, user.kk_number, user.define_series, user.birth_date.year, user.street_address, user.postal_code, user.city]
     i = 0
     user_data.each do |piece|
       if piece.attribute_index > i + 1
