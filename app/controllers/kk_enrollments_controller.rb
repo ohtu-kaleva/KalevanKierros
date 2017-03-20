@@ -9,6 +9,12 @@ class KkEnrollmentsController < ApplicationController
   # GET /kk_enrollments
   def index
     @kk_enrollments = KkEnrollment.all
+    year = AppSetting.find_by name: 'KkYear'
+    respond_to do |format|
+      format.html
+      format.csv { send_data to_csv, :filename => year.value + "_kierrosilmoittautumiset.csv" }
+      format.xlsx { send_data to_xlsx.to_stream.read, :filename => year.value + "_kierrosilmoittautumiset.xlsx" }
+    end
   end
 
   # GET /kk_enrollments/1
@@ -172,4 +178,49 @@ class KkEnrollmentsController < ApplicationController
       redirect_to user_path(@user.id), flash: { error: 'Olet jo ilmoittautunut kierrokselle' }
     end
 
+    def to_csv(options = {})
+      CSV.generate(options) do |csv|
+        csv << spreadsheet_headers
+        @kk_enrollments.each do |kk_enrollment|
+          csv << enrollment_data_as_array(kk_enrollment)
+        end
+      end
+    end
+
+    def to_xlsx
+      Axlsx::Package.new do |kk_enrollments|
+        kk_enrollments.workbook do |wb|
+          wb.add_worksheet do |sheet|
+            sheet.add_row spreadsheet_headers
+            @kk_enrollments.each do |kk_enrollment|
+              sheet.add_row enrollment_data_as_array(kk_enrollment)
+            end
+          end
+        end
+      end
+    end
+
+    def spreadsheet_headers
+      attr_names = ["ilm_nro", "Etunimi", "Sukunimi", "Joukkue", "Sähköposti", "KK-numero", "Sarja", "Vuosi", "Osoite", "Postinumero", "Postitoimipaikka", "Viitenumero", "Maksettava", "Maksettu"]
+    end
+
+    def enrollment_data_as_array(kk_enrollment)
+      user = kk_enrollment.user
+
+      if not user.group.nil? and user == user.group.user
+        price = 200
+      elsif user.group.nil?
+        price = 50
+      end
+
+      if user.group.nil?
+        group_name = ""
+      else
+        group_name = user.group.name
+      end
+
+      data_array = [kk_enrollment.id, user.first_name, user.last_name, group_name, user.email, user.kk_number, user.define_series, user.birth_date.year, user.street_address, user.postal_code, user.city, user.construct_reference_number, price, kk_enrollment.paid/100.0]
+
+      data_array
+    end
 end

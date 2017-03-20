@@ -48,6 +48,11 @@
 <%= submit_tag 'Päivitä maksutiedot', :class => "btn btn-primary" %><br>
 <% end %>
 <br>
+<p>
+  <%= link_to 'Lataa csv-tiedostona', kk_enrollments_path(format: :csv), method: :get %><br>
+  <%= link_to 'Lataa excel-tiedostona (xlsx)', kk_enrollments_path(format: :xlsx), method: :get %><br>
+</p>
+<br>
 <%= link_to 'Takaisin', admin_kk_enrollment_path, class: 'btn btn-primary' %>
 </div>
 
