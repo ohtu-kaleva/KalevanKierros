@@ -693,21 +693,28 @@ class ResultsController < ApplicationController
 
     # Calculate for normal competition. Ignores relay only results.
     ignored = Result.where(year: year).where(ignore_on_statistics: true).pluck(:kk_number)
-    calculate_points_for_normal_or_relay(false, event, year, ignored)
+    times = scale_times(event, ignored)
+    normal_times = unscaled_times(event, ignored)
+    times_sorted = Hash[times.sort_by { |k, v| v[:time] }]
+
+    # Victors time.
+    winner_time = get_winner_time(times_sorted, year)
+
+    calculate_points_for_normal_or_relay(false, event, year, winner_time, normal_times, times_sorted)
 
     # Calculate for relay competition. Ignore those competitors who are not in a relay group.
     ignored = Result.where(year: year).where(relay_group: nil).pluck(:kk_number)
-    calculate_points_for_normal_or_relay(true, event, year, ignored)
+    times = scale_times(event, ignored)
+    normal_times = unscaled_times(event, ignored)
+    times_sorted = Hash[times.sort_by { |k, v| v[:time] }]
+
+    calculate_points_for_normal_or_relay(true, event, year, winner_time, normal_times, times_sorted)
 
     redirect_to results_path
   end
 	
 
-  def calculate_points_for_normal_or_relay(is_relay, event, year, ignored)
-    times = scale_times(event, ignored)
-    normal_times = unscaled_times(event, ignored)
-    times_sorted = Hash[times.sort_by { |k, v| v[:time] }]
-    winner_time = get_winner_time(times_sorted, year)
+  def calculate_points_for_normal_or_relay(is_relay, event, year, winner_time, normal_times, times_sorted)
     if winner_time.nil?
       # No results in this competition
       return

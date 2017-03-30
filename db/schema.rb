@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170123182808) do
+ActiveRecord::Schema.define(version: 20170330171158) do
 
   create_table "app_settings", force: true do |t|
     t.string   "name",       null: false
@@ -38,6 +38,7 @@ ActiveRecord::Schema.define(version: 20170123182808) do
     t.datetime "updated_at"
     t.decimal  "time"
     t.integer  "paid",       default: 0
+    t.date     "value_date"
   end
 
   add_index "enrollments", ["event_id"], name: "index_enrollments_on_event_id"
@@ -89,6 +90,7 @@ ActiveRecord::Schema.define(version: 20170123182808) do
     t.integer  "paid",       default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.date     "value_date"
   end
 
   add_index "kk_enrollments", ["user_id"], name: "index_kk_enrollments_on_user_id", unique: true
@@ -99,6 +101,7 @@ ActiveRecord::Schema.define(version: 20170123182808) do
     t.datetime "updated_at"
     t.integer  "user_id"
     t.integer  "paid",       default: 0
+    t.date     "value_date"
   end
 
   create_table "results", force: true do |t|
@@ -136,19 +139,19 @@ ActiveRecord::Schema.define(version: 20170123182808) do
     t.boolean  "updated_to_statistics",                           default: false, null: false
     t.string   "relay_group"
     t.boolean  "ignore_on_statistics",                            default: false, null: false
-    t.decimal  "orienteering_relay_pts"
-    t.decimal  "skiing_relay_pts"
-    t.decimal  "marathon_relay_pts"
-    t.decimal  "rowing_relay_pts"
-    t.decimal  "cycling_relay_pts"
-    t.decimal  "skating_relay_pts"
+    t.decimal  "orienteering_relay_pts", precision: 16, scale: 6
+    t.decimal  "skiing_relay_pts",       precision: 16, scale: 6
+    t.decimal  "marathon_relay_pts",     precision: 16, scale: 6
+    t.decimal  "rowing_relay_pts",       precision: 16, scale: 6
+    t.decimal  "cycling_relay_pts",      precision: 16, scale: 6
+    t.decimal  "skating_relay_pts",      precision: 16, scale: 6
     t.integer  "orienteering_relay_pos"
     t.integer  "skiing_relay_pos"
     t.integer  "marathon_relay_pos"
     t.integer  "rowing_relay_pos"
     t.integer  "cycling_relay_pos"
     t.integer  "skating_relay_pos"
-    t.decimal  "relay_pts_sum"
+    t.decimal  "relay_pts_sum",          precision: 16, scale: 6
   end
 
   create_table "statistics", force: true do |t|
