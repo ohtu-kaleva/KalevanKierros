@@ -218,7 +218,7 @@ class KkEnrollmentsController < ApplicationController
     end
 
     def spreadsheet_headers
-      attr_names = ["ilm_nro", "Etunimi", "Sukunimi", "Joukkue", "Sähköposti", "KK-numero", "Sarja", "Vuosi", "Osoite", "Postinumero", "Postitoimipaikka", "Viitenumero", "Maksettava", "Maksettu"]
+      attr_names = ["ilm_nro", "Etunimi", "Sukunimi", "Joukkue", "Sähköposti", "KK-numero", "Sarja", "Vuosi", "Osoite", "Postinumero", "Postitoimipaikka", "Viitenumero", "Maksettava", "Maksettu", "Arvopäivä"]
     end
 
     def enrollment_data_as_array(kk_enrollment)
@@ -236,7 +236,13 @@ class KkEnrollmentsController < ApplicationController
         group_name = user.group.name
       end
 
-      data_array = [kk_enrollment.id, user.first_name, user.last_name, group_name, user.email, user.kk_number, user.define_series, user.birth_date.year, user.street_address, user.postal_code, user.city, user.construct_reference_number, price, kk_enrollment.paid/100.0]
+      if kk_enrollment.value_date.nil?
+        value_date = ""
+      else
+        value_date = kk_enrollment.value_date.strftime("%d.%m.%Y")
+      end
+
+      data_array = [kk_enrollment.id, user.first_name, user.last_name, group_name, user.email, user.kk_number, user.define_series, user.birth_date.year, user.street_address, user.postal_code, user.city, user.construct_reference_number, price, kk_enrollment.paid/100.0, value_date]
 
       data_array
     end
