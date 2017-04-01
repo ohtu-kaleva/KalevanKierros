@@ -98,20 +98,27 @@ class ResultsController < ApplicationController
   end
 
   def xlsx_results_for_year_book
-    year = AppSetting.find_by(name: 'KkYear').value.to_i
+    if params[:year].nil?
+      year = AppSetting.find_by(name: 'KkYear').value.to_i
+      min_completed = 4
+    else
+      year = params[:year]
+      min_completed = 0
+    end
+
     if params[:gender] == 'kaikki'
-      @results = Result.where(year: year).where(ignore_on_statistics: false).where("completed_events >= ?", 4).order('completed_events desc, pts_sum desc')
+      @results = Result.where(year: year).where(ignore_on_statistics: false).where("completed_events >= ?", min_completed).order('completed_events desc, pts_sum desc')
     elsif params[:gender] == 'naiset'
-      @results = form_female_results_for_year_book(year)
+      @results = form_female_results_for_year_book(year, min_completed)
     else
       @results = {}
     end
     respond_to do |format| 
-      format.xlsx { send_data self.individual_results_to_xlsx.to_stream.read, filename: 'henkilokohtaiset_tulokset_' + params[:gender] + '.xlsx' }
+      format.xlsx { send_data self.individual_results_to_xlsx.to_stream.read, filename: 'henkilokohtaiset_tulokset_' + year.to_s + '_' + params[:gender] + '.xlsx' }
     end
   end
 
-  def form_female_results_for_year_book(year)
+  def form_female_results_for_year_book(year, min_completed)
     search_filter = form_gender_age_filter('N', 'all')
     positions = {skating: {}, skiing: {}, marathon: {}, rowing: {}, cycling: {}, orienteering: {}}
     skating = Result.where(year: year).where(ignore_on_statistics: false).where.not(skating_time: nil).where(series: search_filter).order('skating_pos asc').pluck('kk_number')
@@ -151,7 +158,7 @@ class ResultsController < ApplicationController
       i += 1
     end
 
-    results = Result.where(year: year).where(ignore_on_statistics: false).where("completed_events >= ?", 4).where(series: search_filter).order('completed_events desc, pts_sum desc')
+    results = Result.where(year: year).where(ignore_on_statistics: false).where("completed_events >= ?", min_completed).where(series: search_filter).order('completed_events desc, pts_sum desc')
     results.each do |r|
       r.skating_pos = positions[:skating][r.kk_number]
       r.skiing_pos = positions[:skiing][r.kk_number]

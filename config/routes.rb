@@ -90,7 +90,7 @@ Rails.application.routes.draw do
   get 'results/groups/female_groups', to: 'results#with_female_group', as: 'results_for_female_groups'
   get 'results/groups/mixed_groups', to: 'results#with_mixed_group', as: 'results_for_mixed_groups'
   get 'results/year/:year/relay_groups', to: 'results#with_existing_relay_group', as: 'results_by_year_and_relay_groups'
-  get 'results/passed_participants_for_year_book/:gender', to: 'results#xlsx_results_for_year_book', as: 'individual_results_to_year_book'
+  get 'results/xlsx/participants_for_year_book', to: 'results#xlsx_results_for_year_book', as: 'individual_results_to_year_book'
   get 'results/individual/series', to: 'results#top_results_for_different_series', as: 'top_series_results'
   get 'users/:id/activate', to: 'users#new_activation', as: 'activation'
   put 'users/:id/activate', to: 'users#activate'

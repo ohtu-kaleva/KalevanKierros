@@ -37,9 +37,20 @@
 <%= button_to('Avaa lista', years_awards_path, method: :get, :class => "btn btn-primary") %>
 
 <br>
-<b>Lataa henkilökohtaiset tulokset</b><br>
-<%= button_to('Lataa kaikki tulokset', individual_results_to_year_book_path(gender: "kaikki", format: :xlsx), method: :get, :class => "btn btn-primary") %><br>
-<%= button_to('Lataa naisten tulokset', individual_results_to_year_book_path(gender: "naiset", format: :xlsx), method: :get, :class => "btn btn-primary") %>
+<b>Lataa henkilökohtaiset tulokset vuosikirjaan</b><br>
+<%= button_to('Lataa kaikki tulokset', individual_results_to_year_book_path, params: {format: :xlsx, gender: "kaikki"}, method: :get, :class => "btn btn-primary") %><br>
+<%= button_to('Lataa naisten tulokset', individual_results_to_year_book_path, params: {format: :xlsx, gender: "naiset"}, method: :get, :class => "btn btn-primary") %>
+
+<br>
+<b>Lataa kaikki henkilökohtaiset tulokset valitulle vuodelle</b><br>
+<%= form_tag(individual_results_to_year_book_path, {method: :get}) do %>
+  <%= label_tag :year, 'Vuosi:' %><br>
+  <%= number_field_tag :year, Date.today.year %><br>
+  <%= label_tag :gender, 'Rajaa sukupuolen mukaan:' %><br>
+  <%= select_tag :gender, options_for_select(["kaikki", "naiset"]) %><br>
+  <%= hidden_field_tag :format, :xlsx %>
+  <%= submit_tag('Lataa tulokset', :class => "btn btn-primary") %>
+<% end %>
 
 <br>
 <b>Lataa joukkuetulokset</b><br>
