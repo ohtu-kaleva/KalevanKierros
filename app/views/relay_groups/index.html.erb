@@ -2,7 +2,7 @@
   <h1>Viestijoukkueilmoittautumiset</h1>
 <p>Viestijoukkueisiin ilmoittautuneiden lista.</p>
 <%= form_tag('/relay_groups', method: :put) do %>
-<table id="kk_enrollments" class="table table-striped tablesorter-bootstrap">
+<table id="relay_groups" class="table table-striped tablesorter-bootstrap">
   <thead>
     <tr>
       <th>Etunimi</th>
@@ -11,6 +11,7 @@
       <th>Viitenumero</th>
       <th>Maksettava</th>
       <th>Maksettu</th>
+      <th>Arvopäivä&nbsp;&nbsp;</th>
     </tr>
   </thead>
 
@@ -36,10 +37,17 @@
             <%= text_field_tag "paid[#{user.relay_group.id}]", nil, maxlength: 8, :class => "form-control min-width" %>
           <% elsif not user.relay_group.nil? and user == user.relay_group.user and not user.relay_group.paid.nil? %>
             <%= text_field_tag "paid[#{user.relay_group.id}]", user.relay_group.paid/100.0, :class => "form-control min-width"  %>
-          <% else %>
-            <td></td>
           <% end %>
-          </div></td>
+          </div>
+        </td>
+        <td ><div class="form-group">
+          <% if not user.relay_group.nil? and user == user.relay_group.user and user.relay_group.value_date.nil? %>
+            <%= text_field_tag "value_date[#{user.relay_group.id}]", nil, :class => "form-control min-width" %>
+          <% elsif not user.relay_group.nil? and user == user.relay_group.user and not user.relay_group.value_date.nil? %>
+            <%= text_field_tag "value_date[#{user.relay_group.id}]", user.relay_group.value_date.strftime("%d.%m.%Y"), :class => "form-control"  %>
+          <% end %>
+          </div>
+        </td>
       </tr>
     <% end %>
   </tbody>

@@ -77,6 +77,7 @@ Rails.application.routes.draw do
   get 'event_enrollments/:event_id/', to: 'enrollments#show_enrollments_for_event', as: 'show_enrollments'
   put 'event_enrollments/', to:'enrollments#update', as: 'add_times_and_payment_info'
   put 'kk_enrollments/', to:'kk_enrollments#update', as: 'add_payment_info'
+  put 'relay_groups/', to:'relay_groups#update', as: 'add_relay_payment_info'
   get 'event_enrollments/:event_id/single', to: 'enrollments#single'
   post 'event_enrollments/:event_id/single', to: 'enrollments#update_single'
   put 'event_enrollments/:event_id/import_csv', to: 'enrollments#import_csv', as: 'import_file'

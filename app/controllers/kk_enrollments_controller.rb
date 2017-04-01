@@ -133,6 +133,19 @@ class KkEnrollmentsController < ApplicationController
         end
       end
     end
+    if params[:value_date]
+      value_date = params[:value_date].delete_if {|key, value| value.blank? }
+      value_date.each do |key, value|
+        kk_enrollment = KkEnrollment.find_by id:key
+        if not kk_enrollment.nil?
+          if is_date? value
+            kk_enrollment.update_attribute :value_date, Date::strptime(value, "%d.%m.%Y")
+          else
+            message[:error] = 'Yksi tai useampi päivämäärä syötettiin virheellisessä muodossa.'
+          end
+        end
+      end
+    end
     redirect_to :back, flash: message
   end
 
@@ -152,6 +165,10 @@ class KkEnrollmentsController < ApplicationController
 
     def is_float? string
       true if Float(string) rescue false
+    end
+
+    def is_date? string
+      true if Date::strptime(string, "%d.%m.%Y") rescue false
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

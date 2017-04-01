@@ -3,6 +3,7 @@ class RelayGroupsController < ApplicationController
   before_action :authenticate
   before_action :set_relay_group_or_redirect, only: [:show, :add_user_to_relay_group, :delete_user_from_relay_group]
   before_action :redirect_if_user_not_captain_or_admin, only: [:add_user_to_relay_group, :update_user_relay_group_relation, :delete_user_from_relay_group]
+  before_action :redirect_if_user_not_admin, only: [:update]
 
   def index
     @users = User.where.not(relay_group: nil)
@@ -122,9 +123,45 @@ class RelayGroupsController < ApplicationController
   end
 
   def update
+    message = {}
+    if params[:paid]
+      paid = params[:paid].delete_if {|key, value| value.blank? }
+      paid.each do |key, value|
+        relay_group = RelayGroup.find_by id:key
+        if not relay_group.nil?
+          if is_float? value
+            relay_group.update_attribute :paid, (value.to_f * 100.0).to_i
+          else
+            message[:error] = 'Yksi tai useampi maksutieto syötettiin virheellisessä muodossa.'
+          end
+        end
+      end
+    end
+    if params[:value_date]
+      value_date = params[:value_date].delete_if {|key, value| value.blank? }
+      value_date.each do |key, value|
+        relay_group = RelayGroup.find_by id:key
+        if not relay_group.nil?
+          if is_date? value
+            relay_group.update_attribute :value_date, Date::strptime(value, "%d.%m.%Y")
+          else
+            message[:error] = 'Yksi tai useampi päivämäärä syötettiin virheellisessä muodossa.'
+          end
+        end
+      end
+    end
+    redirect_to :back, flash: message
   end
 
   private
+
+  def is_float? string
+    true if Float(string) rescue false
+  end
+
+  def is_date? string
+    true if Date::strptime(string, "%d.%m.%Y") rescue false
+  end
 
   def set_relay_group_or_redirect
     @relay_group = RelayGroup.find_by id: params[:id]

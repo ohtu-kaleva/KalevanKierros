@@ -286,6 +286,19 @@ class EnrollmentsController < ApplicationController
         end
       end
     end
+    if params[:value_date]
+      value_date = params[:value_date].delete_if {|key, value| value.blank? }
+      value_date.each do |key, value|
+        enrollment = Enrollment.find_by id:key
+        if not enrollment.nil?
+          if is_date? value
+            enrollment.update_attribute :value_date, Date::strptime(value, "%d.%m.%Y")
+          else
+            message[:error] = 'Yksi tai useampi päivämäärä syötettiin virheellisessä muodossa.'
+          end
+        end
+      end
+    end
     redirect_to :back, flash: message
   end
 
@@ -382,6 +395,10 @@ class EnrollmentsController < ApplicationController
 
   def is_float? string
     true if Float(string) rescue false
+  end
+
+  def is_date? string
+    true if Date::strptime(string, "%d.%m.%Y") rescue false
   end
 
   def to_seconds(a)

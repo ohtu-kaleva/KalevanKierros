@@ -15,6 +15,7 @@
     <th>Viitenumero</th>
     <th>Maksettava</th>
     <th>Maksettu</th>
+    <th>Arvopäivä&nbsp;&nbsp;&nbsp;</th>
     <th>Lisää aika</th>
     <th>Poista aika</th>
     <th>Peru</th>
@@ -39,6 +40,14 @@
             <%= text_field_tag "paid[#{enrollment.id}]", enrollment.paid/100.0, :class => "form-control min-width"  %>
           <% end %>
           </div></td>
+          <td><div class="form-group">
+          <% if enrollment.value_date.nil? %>
+            <%= text_field_tag "value_date[#{enrollment.id}]", nil, :class => "form-control min-width" %>
+          <% else %>
+            <%= text_field_tag "value_date[#{enrollment.id}]", enrollment.value_date.strftime("%d.%m.%Y"), :class => "form-control"  %>
+          <% end %>
+          </div>
+          </td>
           <td ><div class="form-group">
           <% if enrollment.time.nil? %>
             <%= text_field_tag "times[#{enrollment.id}]", nil, maxlength: 8, :class => "form-control min-width" %>
