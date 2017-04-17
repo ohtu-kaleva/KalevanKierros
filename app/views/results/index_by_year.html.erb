@@ -1,6 +1,5 @@
 <h2>Vuoden <%= params[:year] %> tulokset</h2>
 <div>
- <div class="col-sm-3">
   <select id="selector1" class="form-control input-sm <% unless params[:type].eql?("all") %>selected<% end %>">
     <option value="all" <% if params[:type] == "all" then %> selected <% end %>>Kaikki lajit</option>
     <option value="skating" <% if params[:type] == "skating" then %> selected <% end %>>Luistelu</option>
@@ -10,15 +9,11 @@
     <option value="cycling" <% if params[:type] == "cycling" then %> selected <% end %>>Pyöräily</option>
     <option value="marathon" <% if params[:type] == "marathon" then %> selected <% end %>>Juoksu</option>
   </select>
- </div>
- <div class="col-sm-3">
   <select id="selector2" class="form-control input-sm <% unless params[:gender].eql?("all") %>selected<% end %>">
     <option value="all" <% if params[:gender] == "all" then %> selected <% end %>>Miehet ja naiset</option>
     <option value="M" <% if params[:gender] == "M" then %> selected <% end %>>Miehet</option>
     <option value="N" <% if params[:gender] == "N" then %> selected <% end %>>Naiset</option>
   </select>
- </div>
- <div class="col-sm-3">
   <select id="selector3" class="form-control input-sm <% unless params[:age_group].eql?("all") %>selected<% end %>">
     <option value="all">Kaikki ikäsarjat</option>
     <% @res[:series].each do |s| %>
@@ -29,11 +24,8 @@
         <% end %>
     <% end %>
   </select>
- </div>
- <div class="col-sm-3">
   <% unless params[:type].eql?("all") and params[:gender].eql?("all") and params[:age_group].eql?("all") then %>
       <a href="/results/year/<%= params[:year]%>/all/all/all" class="btn btn-default btn-sm">Nollaa hakuehdot</a><% end %>
- </div>
   <style type="text/css">select.selected{box-shadow: 0 1px 10px red;}select.form-control{max-width: 100px; display: inline;}</style>
   <script type="text/javascript">
       $( "#selector1" ).change(function() {
