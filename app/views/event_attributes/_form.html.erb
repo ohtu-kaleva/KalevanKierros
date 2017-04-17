@@ -16,13 +16,13 @@
       <%= f.text_field :name, label: 'Kysymyksen tunniste (ei näy lomakkeella)' %>
     </div>
     <div class="field">
-      <%= f.select :attribute_type, options_for_select(@attribute_types), label: 'Valitse kysymyksen tyyppi' %>
+      <%= f.select :attribute_type, options_for_select(@attribute_types), label: 'Valitse kysymyksen tyyppi (suosi valintaruutua)' %>
     </div>
     <div class="field">
-        <%= f.text_field :attribute_label, label: 'Kysymyksen otsikko (näkyy monivalinta, alasvetovalikko, tekstikenttä ja päivämääräksymyksissä)' %>
+        <%= f.text_field :attribute_label, label: 'Otsikko tyyliin "Pasta Party" (näkyy vain monivalinta-, alasvetovalikko-, tekstikenttä- ja päivämääräksymyksissä)' %>
     </div>
     <div class="field">
-      <%= f.text_field :attribute_value, label: 'Kirjoita valintavaihtoehdot puolipisteellä eroteltuna:' %>
+      <%= f.text_field :attribute_value, label: 'Kirjoita valintavaihtoehdot puolipisteellä eroteltuna tyyliin: "Haluan osallistua Pasta Partyyn"' %>
     </div>
     <div>
         <label>Valintaan liittyvä maksu</label>
