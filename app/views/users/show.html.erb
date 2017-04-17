@@ -1,10 +1,9 @@
 <p>Ilmoittautumiset</p>
 <h2 style="margin-top: 0;"><%= @user.first_name %> <%= @user.last_name %></h2>
-<br/>
 <% if not current_user.nil? and current_user.id == @user.id %>
     <% if @enrollments.count > 0 %>
         <% @enrollments.reverse.each do |enrollment|%>
-            <h4><%= link_to enrollment.event.name, enrollment_path(enrollment.id) %></h4>
+            <h4><%= link_to enrollment.event.name, enrollment_path(enrollment.id) %> ></h4>
         <% end %>
     <% end %>
 
