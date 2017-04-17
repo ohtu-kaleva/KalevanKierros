@@ -1,5 +1,5 @@
 <p>Ilmoittautumiset</p>
-<h2><%= @user.first_name %> <%= @user.last_name %></h2>
+<h2 style="margin-top: 0;"><%= @user.first_name %> <%= @user.last_name %></h2>
 <br/>
 <% if not current_user.nil? and current_user.id == @user.id %>
     <% if @enrollments.count > 0 %>

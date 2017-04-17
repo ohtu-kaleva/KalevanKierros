@@ -3,7 +3,7 @@
     <div class="col-sm-12">
         <% if not current_user.nil? %>
             <p>Omat tiedot</p>
-            <h2><%= current_user.first_name %> <%= current_user.last_name %></h2>
+            <h2 style="margin-top: 0;"><%= current_user.first_name %> <%= current_user.last_name %></h2>
             <br/>
             <h4><%= link_to 'Ilmoittautumiset', user_path(current_user) %></h4>
             <% if current_user.group %>
