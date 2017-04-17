@@ -153,8 +153,8 @@
     <table class="results" width="80%">
       <tr style="font-size: 14px;">
         <td width="30%">Nimi</td>
-        <td width="10%">Sarja</td>
-        <td width="30%">Tyyli</td>
+        <td width="20%">Sarja</td>
+        <td width="20%">Tyyli</td>
         <td width="20%">Aika</td>
         <td width="10%">Pisteet</td>
       </tr>
@@ -164,8 +164,8 @@
           <% i += 1 %>
           <tr>
             <td width="30%"><%= i %>. <%= result[0] %></td>
-            <td width="10%"><%= result[5] %></td>
-            <td width="30%"><%= result[4] %></td>
+            <td width="20%"><%= result[5] %></td>
+            <td width="20%"><%= result[4] %></td>
             <td width="20%"><%= seconds_to_human_form(result[3]) %></td>
             <td width="10%"><%= result[2].round(2) %></td>
           </tr>
