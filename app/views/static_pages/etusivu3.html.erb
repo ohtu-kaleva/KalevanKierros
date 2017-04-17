@@ -1,12 +1,8 @@
 </div>
 <div class="container etusivu">
     <div class="col-sm-12">
-        <h4><a href="http://kalevankierros.us13.list-manage.com/subscribe?u=3937d04e4920be337565a19e3&id=775ac349d8">Tilaa uutiskirje</a></h4>
-        <h4><%= link_to 'Tulokset', results_path %></h4>
-        <h4><a href="/statistics">Tilastot</a></h4>
-        <h4><a href="/esittely/pistelasku">Pistelasku</a></h4>
         <% if not current_user.nil? %>
-            <h4><%= link_to 'Omat tiedot', user_path(current_user) %></h4>
+            <h4><%= link_to 'Ilmoittautumiset', user_path(current_user) %></h4>
             <% if current_user.group %>
                 <h4><%= link_to 'Joukkueen sivu', group_path(current_user.group) %></h4>
             <% end %>
@@ -16,6 +12,7 @@
             <% if current_user.statistic %>
                 <h4><%= link_to 'Näytä tilasto', statistic_path(current_user.statistic.id) %></h4>
             <% end %>
+            <h4><%= link_to 'Muokkaa yhteystietojasi', edit_user_path(current_user) %></h4>
         <% end %>
         <% if user_is_admin? %>
             <h2>Ylläpito</h2>
