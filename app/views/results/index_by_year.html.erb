@@ -82,10 +82,10 @@
         <table style="display: none; background-color: #f0f0f0;" class="results child" id="stat<%= i %>">
             <tr style="border-bottom: 1px solid black;">
               <td width="30%">Laji</td>
-              <td width="25%">Tyyli</td>
-              <td width="15%">Sijoitus</td>
-              <td width="15%">Aika</td>
-              <td width="15%">Pisteet</td>
+              <td width="30%">Tyyli</td>
+              <td width="10%">Sijoitus</td>
+              <td width="20%">Aika</td>
+              <td width="10%">Pisteet</td>
             </tr>
           <tr>
               <td>Luistelu</td>
@@ -124,10 +124,10 @@
           </tr>
           <tr>
               <td width="30%">Suunnistus</td>
-              <td width="25%"></td>
-              <td width="15%"><%= result.orienteering_pos %></td>
-              <td width="15%"><%= seconds_to_human_form(result.orienteering_time) %></td>
-              <td width="15%"><% unless result.orienteering_pts.nil? then %><%=result.orienteering_pts.round(2) %> <% end %></td>
+              <td width="30%"></td>
+              <td width="10%"><%= result.orienteering_pos %></td>
+              <td width="20%"><%= seconds_to_human_form(result.orienteering_time) %></td>
+              <td width="10%"><% unless result.orienteering_pts.nil? then %><%=result.orienteering_pts.round(2) %> <% end %></td>
           </tr>
         </table>
       </td></tr>
