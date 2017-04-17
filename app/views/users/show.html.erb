@@ -1,15 +1,14 @@
 <p>Ilmoittautumiset</p>
 <h2><%= @user.first_name %> <%= @user.last_name %></h2>
+<br/>
 <% if not current_user.nil? and current_user.id == @user.id %>
     <% if @enrollments.count > 0 %>
-        <br/>
         <% @enrollments.reverse.each do |enrollment|%>
             <h4><%= link_to enrollment.event.name, enrollment_path(enrollment.id) %></h4>
         <% end %>
     <% end %>
 
     <% if @kk_enrollment %>
-        <br/>
         <h4>Kalevan Kierroksen yksilökilpailu <%= @year %></h4>
         <p>
             <% if @group.nil? %>
@@ -23,7 +22,6 @@
     <% end %>
 
     <% if not @group.nil? %>
-        <br/>
         <h4>Kalevan Kierroksen joukkuekilpailu <%= @group.name %></h4>
         <% if not @group.nil? and @group.user == current_user %>
             <p>
@@ -37,7 +35,6 @@
     <% end %>
 
     <% if not @relay_group.nil? %>
-        <br/>
         <h4>Kalevan Kierroksen viestijoukkue <%= @relay_group.name %></h4>
         <% if not @relay_group.nil? and @relay_group.user == current_user %>
             <p>
@@ -48,7 +45,6 @@
     <% end %>
 
     <% if @group.nil? and @relay_group.nil? %>
-        <br/>
         <h4>Et kuulu vielä joukkueeseen</h4>
         <p>Kerää viisi kaveriasi mukaan ja osallistukaa Kalevan kierrokseen joukkueena tai viestinä.</p>
         <h4>
