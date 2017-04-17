@@ -105,12 +105,12 @@
               <td><% unless result.skiing_pts.nil? then %><%=result.skiing_pts.round(2) %> <% end %></td>
           </tr>
           <tr>
-            <td></td>
-            <td>Maraton</td>
-            <td><%= result.marathon_style %></td>
-            <td><%= result.marathon_pos %></td>
-            <td><%= seconds_to_human_form(result.marathon_time) %></td>
-            <td><% unless result.marathon_pts.nil? then %><%=result.marathon_pts.round(2) %> <% end %></td>
+            <td width="5%"></td>
+            <td width="25%">Suunnistus</td>
+            <td width="25%"></td>
+            <td width="15%"><%= result.orienteering_pos %></td>
+            <td width="20%"><%= seconds_to_human_form(result.orienteering_time) %></td>
+            <td width="10%"><% unless result.orienteering_pts.nil? then %><%=result.orienteering_pts.round(2) %> <% end %></td>
           </tr>
           <tr>
               <td></td>
@@ -129,12 +129,12 @@
               <td><% unless result.cycling_pts.nil? then %><%=result.cycling_pts.round(2) %> <% end %></td>
           </tr>
           <tr>
-              <td width="5%"></td>
-              <td width="25%">Suunnistus</td>
-              <td width="25%"></td>
-              <td width="15%"><%= result.orienteering_pos %></td>
-              <td width="20%"><%= seconds_to_human_form(result.orienteering_time) %></td>
-              <td width="10%"><% unless result.orienteering_pts.nil? then %><%=result.orienteering_pts.round(2) %> <% end %></td>
+              <td></td>
+              <td>Maraton</td>
+              <td><%= result.marathon_style %></td>
+              <td><%= result.marathon_pos %></td>
+              <td><%= seconds_to_human_form(result.marathon_time) %></td>
+              <td><% unless result.marathon_pts.nil? then %><%=result.marathon_pts.round(2) %> <% end %></td>
           </tr>
         </table>
       </td></tr>
@@ -151,21 +151,21 @@
 
 <% else %>
     <table class="results" width="80%">
-      <tr style="height: 50px; vertical-align: top;">
-        <td width="20%">Sijoitus / Kilpailija</td>
-        <td width="60%"></td>
-        <td width="10%">Loppuaika</td>
-        <td colspan="3" width="10%">Lajipisteet</td>
+      <tr style="font-size: 14px;">
+        <td width="30%">Nimi</td>
+        <td width="40%"></td>
+        <td width="10%">Aika</td>
+        <td width="10%">Pisteet</td>
       </tr>
 
       <% i = 0
          @res[:results].each do |result| %>
           <% i += 1 %>
           <tr>
-            <td width="20%"><%= i %>. <%= result[0] %></td>
-            <td width="60%"></td>
+            <td width="30%"><%= i %>. <%= result[0] %></td>
+            <td width="40%"></td>
             <td width="10%"><%= seconds_to_human_form(result[3]) %></td>
-            <td colspan="3" width="10%"><%= result[2].round(2) %></td>
+            <td width="10%"><%= result[2].round(2) %></td>
           </tr>
 
       <% end %>
