@@ -18,22 +18,22 @@ class ResultsController < ApplicationController
       @res[:results] = Result.where(year: params[:year]).where(ignore_on_statistics: false).where(series: search_filter).order('completed_events is null, completed_events desc, pts_sum desc')
     elsif params[:type] == 'cycling'
       @laji = "Pyöräily"
-      @res[:results] = Result.where(year: params[:year]).where(ignore_on_statistics: false).where.not(cycling_time: nil).where(series: search_filter).order('cycling_pos asc').pluck('name, cycling_pos as position, cycling_pts as points, cycling_time as time')
+      @res[:results] = Result.where(year: params[:year]).where(ignore_on_statistics: false).where.not(cycling_time: nil).where(series: search_filter).order('cycling_pos asc').pluck('name, cycling_pos as position, cycling_pts as points, cycling_time as time, null as style')
     elsif params[:type] == 'rowing'
       @laji = "Soutu"
-      @res[:results] = Result.where(year: params[:year]).where(ignore_on_statistics: false).where.not(rowing_time: nil).where.not(rowing_pts: nil).where(series: search_filter).order('rowing_pos asc').pluck('name, rowing_pos as position, rowing_pts as points, rowing_time as time')
+      @res[:results] = Result.where(year: params[:year]).where(ignore_on_statistics: false).where.not(rowing_time: nil).where.not(rowing_pts: nil).where(series: search_filter).order('rowing_pos asc').pluck('name, rowing_pos as position, rowing_pts as points, rowing_time as time, rowing_style as style')
     elsif params[:type] == 'orienteering'
       @laji = "Suunnistus"
-      @res[:results] = Result.where(year: params[:year]).where(ignore_on_statistics: false).where.not(orienteering_time: nil).where(series: search_filter).order('orienteering_pos asc').pluck('name, orienteering_pos as position, orienteering_pts as points, orienteering_time as time')
+      @res[:results] = Result.where(year: params[:year]).where(ignore_on_statistics: false).where.not(orienteering_time: nil).where(series: search_filter).order('orienteering_pos asc').pluck('name, orienteering_pos as position, orienteering_pts as points, orienteering_time as time, null as style')
     elsif params[:type] == 'skiing'
       @laji = "Hiihto"
-      @res[:results] = Result.where(year: params[:year]).where(ignore_on_statistics: false).where.not(skiing_time: nil).where(series: search_filter).order('skiing_pos asc').pluck('name, skiing_pos as position, skiing_pts as points, skiing_time as time')
+      @res[:results] = Result.where(year: params[:year]).where(ignore_on_statistics: false).where.not(skiing_time: nil).where(series: search_filter).order('skiing_pos asc').pluck('name, skiing_pos as position, skiing_pts as points, skiing_time as time, skiing_style as style')
     elsif params[:type] == 'skating'
       @laji = "Luistelu"
-      @res[:results] = Result.where(year: params[:year]).where(ignore_on_statistics: false).where.not(skating_time: nil).where(series: search_filter).order('skating_pos asc').pluck('name, skating_pos as position, skating_pts as points, skating_time as time')
+      @res[:results] = Result.where(year: params[:year]).where(ignore_on_statistics: false).where.not(skating_time: nil).where(series: search_filter).order('skating_pos asc').pluck('name, skating_pos as position, skating_pts as points, skating_time as time, null as style')
     elsif params[:type] == 'marathon'
       @laji = "Juoksu"
-      @res[:results] = Result.where(year: params[:year]).where(ignore_on_statistics: false).where.not(marathon_time: nil).where(series: search_filter).order('marathon_pos asc').pluck('name, marathon_pos as position, marathon_pts as points, marathon_time as time')
+      @res[:results] = Result.where(year: params[:year]).where(ignore_on_statistics: false).where.not(marathon_time: nil).where(series: search_filter).order('marathon_pos asc').pluck('name, marathon_pos as position, marathon_pts as points, marathon_time as time, marathon_style as style')
     else
       redirect_to :root and return
     end
