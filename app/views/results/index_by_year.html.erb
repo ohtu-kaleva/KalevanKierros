@@ -1,4 +1,4 @@
-<h2>Vuoden <%= params[:year] %> tulokset</h2>
+<h3>Vuoden <%= params[:year] %> tulokset</h3>
 <div>
   <select id="selector1" style="width: initial; max-width: initial;" class="form-control input-sm <% unless params[:type].eql?("all") %>selected<% end %>">
     <option value="all" <% if params[:type] == "all" then %> selected <% end %>>Kaikki lajit</option>
@@ -51,12 +51,13 @@
 </div>
 
 <% if params[:type] == "all" then %>
-<p>Klikkaamalla kilpailijan nimeä näet tarkemmat suoritustiedot.</p>
+  <div style="padding: 14px 0; font-size: 14px;">Klikkaamalla kilpailijan nimeä näet tarkemmat suoritustiedot.</div>
+
 <table class="results">
   <tr style="height: 50px; vertical-align: top;">
-    <td width="20%">Sijoitus / Kilpailija</td>
-    <td width="60%">Joukkue</td>
-    <td width="10%">Suoritettuja lajeja</td>
+    <td width="30%">Nimi</td>
+    <td width="40%">Joukkue</td>
+    <td width="10%">Lajit</td>
     <td colspan="3" width="10%">Yhteispisteet</td>
     <% if user_is_admin? %>
     <td width="10%">Muokkaa</td>
@@ -68,7 +69,7 @@
       <% i += 1 %>
       <tr>
         <td width="20%"><%= i %>. <a href="#" onclick="event.preventDefault(); $('#stat<%= i %>').toggle()"><%= result.name %></a></td>
-        <td width="60%"><%= result.group %></td>
+        <td width="50%"><%= result.group %></td>
         <td width="10%"><%= result.completed_events %></td>
         <td colspan="3" width="10%"><% unless result.pts_sum.nil? then %><%= result.pts_sum.round(2) %> <% end %></td>
         <% if user_is_admin? %>
