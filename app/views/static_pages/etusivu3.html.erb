@@ -4,15 +4,15 @@
         <% if not current_user.nil? %>
             <h4><%= link_to 'Ilmoittautumiset', user_path(current_user) %></h4>
             <% if current_user.group %>
-                <h4><%= link_to 'Joukkueen sivu', group_path(current_user.group) %></h4>
+                <h4><%= link_to 'Joukkue', group_path(current_user.group) %></h4>
             <% end %>
             <% if current_user.relay_group %>
-                <h4><%= link_to 'Viestijoukkueen sivu', relay_group_path(current_user.relay_group) %></h4>
+                <h4><%= link_to 'Viestijoukkue', relay_group_path(current_user.relay_group) %></h4>
             <% end %>
             <% if current_user.statistic %>
-                <h4><%= link_to 'Näytä tilasto', statistic_path(current_user.statistic.id) %></h4>
+                <h4><%= link_to 'Oma tilasto', statistic_path(current_user.statistic.id) %></h4>
             <% end %>
-            <h4><%= link_to 'Muokkaa yhteystietojasi', edit_user_path(current_user) %></h4>
+            <h4><%= link_to 'Yhteystiedot', edit_user_path(current_user) %></h4>
         <% end %>
         <% if user_is_admin? %>
             <h2>Ylläpito</h2>
