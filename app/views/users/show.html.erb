@@ -1,8 +1,16 @@
+<p>Ilmoittautumiset</p>
 <h2><%= @user.first_name %> <%= @user.last_name %></h2>
-<h4>Ilmoittautumiset</h4>
 <% if not current_user.nil? and current_user.id == @user.id %>
+    <% if @enrollments.count > 0 %>
+        <br/>
+        <% @enrollments.reverse.each do |enrollment|%>
+            <h4><%= link_to enrollment.event.name, enrollment_path(enrollment.id) %></h4>
+        <% end %>
+    <% end %>
+
     <% if @kk_enrollment %>
-        <h4>Kalevan kierroksen yksilökilpailuu <%= @year %></h4>
+        <br/>
+        <h4>Kalevan Kierroksen yksilökilpailu <%= @year %></h4>
         <p>
             <% if @group.nil? %>
                 Kierrosmaksu 50 euroa on maksettava viitenumerolla <%= @user.construct_reference_number %> Kalevan kierros ryn tilille <%= @account_number %>.
@@ -14,16 +22,9 @@
         <h4><%= link_to('Ilmoittaudu yksilökilpailuun', new_kk_enrollment_path(current_user.id), :class => "btn btn-primary" ) %></h4>
     <% end %>
 
-    <% if @enrollments.count > 0 %>
-        <br/>
-        <% @enrollments.reverse.each do |enrollment|%>
-            <h4><%= link_to enrollment.event.name, enrollment_path(enrollment.id) %></h4>
-        <% end %>
-    <% end %>
-
     <% if not @group.nil? %>
         <br/>
-        <h4>Joukkue <%= @group.name %></h4>
+        <h4>Kalevan Kierroksen joukkuekilpailu <%= @group.name %></h4>
         <% if not @group.nil? and @group.user == current_user %>
             <p>
                 Olet joukkueen kapteeni. Joukkueen kierrosmaksu 200 euroa on maksettava viitenumerolla <%= @user.construct_reference_number %>
@@ -37,7 +38,7 @@
 
     <% if not @relay_group.nil? %>
         <br/>
-        <h4>Viestijoukkue <%= @relay_group.name %></h4>
+        <h4>Kalevan Kierroksen viestijoukkue <%= @relay_group.name %></h4>
         <% if not @relay_group.nil? and @relay_group.user == current_user %>
             <p>
                 Olet viestijoukkueen kapteeni. Viestikilpailumaksu 60 euroa on maksettava viitenumerolla <%= @user.construct_reference_number %>
