@@ -79,15 +79,17 @@
         <% end %>
       </tr>
       <tr><td colspan="5">
-        <table style="display: none; background-color: #f0f0f0;" class="results child" id="stat<%= i %>">
+        <table style="display: none; margin-top: 20px;" class="results child" id="stat<%= i %>">
             <tr style="border-bottom: 1px solid black;">
-              <td width="30%">Laji</td>
+              <td width="5%"></td>
+              <td width="25%">Laji</td>
               <td width="30%">Tyyli</td>
               <td width="10%">Sijoitus</td>
               <td width="20%">Aika</td>
               <td width="10%">Pisteet</td>
             </tr>
           <tr>
+              <td></td>
               <td>Luistelu</td>
               <td></td>
               <td><%= result.skating_pos %></td>
@@ -95,6 +97,7 @@
               <td><% unless result.skating_pts.nil? then %><%=result.skating_pts.round(2) %> <% end %></td>
           </tr>
           <tr>
+              <td></td>
               <td>Hiihto</td>
               <td><%= result.skiing_style %></td>
               <td><%= result.skiing_pos %></td>
@@ -102,6 +105,7 @@
               <td><% unless result.skiing_pts.nil? then %><%=result.skiing_pts.round(2) %> <% end %></td>
           </tr>
           <tr>
+            <td></td>
             <td>Maraton</td>
             <td><%= result.marathon_style %></td>
             <td><%= result.marathon_pos %></td>
@@ -109,6 +113,7 @@
             <td><% unless result.marathon_pts.nil? then %><%=result.marathon_pts.round(2) %> <% end %></td>
           </tr>
           <tr>
+              <td></td>
               <td>Soutu</td>
               <td><%= result.rowing_style %></td>
               <td><%= result.rowing_pos %></td>
@@ -116,6 +121,7 @@
               <td><% unless result.rowing_pts.nil? then %><%=result.rowing_pts.round(2) %> <% end %></td>
           </tr>
           <tr>
+              <td></td>
               <td>Pyöräily</td>
               <td></td>
               <td><%= result.cycling_pos %></td>
@@ -123,7 +129,8 @@
               <td><% unless result.cycling_pts.nil? then %><%=result.cycling_pts.round(2) %> <% end %></td>
           </tr>
           <tr>
-              <td width="30%">Suunnistus</td>
+              <td width="5%"></td>
+              <td width="25%">Suunnistus</td>
               <td width="30%"></td>
               <td width="10%"><%= result.orienteering_pos %></td>
               <td width="20%"><%= seconds_to_human_form(result.orienteering_time) %></td>
