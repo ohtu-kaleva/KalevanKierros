@@ -2,19 +2,18 @@
 <div class="container etusivu">
     <div class="col-sm-12">
         <% if not current_user.nil? %>
-            <p>Omat tiedot</p>
             <h2><%= current_user.first_name %> <%= current_user.last_name %></h2>
-            <p><%= link_to 'Omat ilmoittautumiset', user_path(current_user) %></p>
+            <p><%= link_to 'Ilmoittautumiset', user_path(current_user) %></p>
             <% if current_user.group %>
-                <p><%= link_to 'Oma joukkue', group_path(current_user.group) %></p>
+                <p><%= link_to 'Joukkue', group_path(current_user.group) %></p>
             <% end %>
             <% if current_user.relay_group %>
-                <p><%= link_to 'Oma viestijoukkue', relay_group_path(current_user.relay_group) %></p>
+                <p><%= link_to 'Viestijoukkue', relay_group_path(current_user.relay_group) %></p>
             <% end %>
             <% if current_user.statistic %>
-                <p><%= link_to 'Omat tilasto', statistic_path(current_user.statistic.id) %></p>
+                <p><%= link_to 'Tilastot', statistic_path(current_user.statistic.id) %></p>
             <% end %>
-            <p><%= link_to 'Omat yhteystiedot', edit_user_path(current_user) %></p>
+            <p><%= link_to 'Yhteystiedot', edit_user_path(current_user) %></p>
         <% end %>
         <% if user_is_admin? %>
             <h2>Ylläpito</h2>
