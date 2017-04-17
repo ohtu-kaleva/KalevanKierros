@@ -54,11 +54,12 @@
   <div style="padding: 14px 0; font-size: 14px;">Klikkaamalla kilpailijan nimeä näet tarkemmat suoritustiedot.</div>
 
 <table class="results">
-  <tr style="height: 50px; vertical-align: top;">
+  <tr style="height: 30px; ">
     <td width="30%">Nimi</td>
     <td width="40%">Joukkue</td>
+    <td width="10%">Sarja</td>
     <td width="10%">Lajit</td>
-    <td colspan="3" width="10%">Yhteispisteet</td>
+    <td colspan="3" width="10%">Pisteet</td>
     <% if user_is_admin? %>
     <td width="10%">Muokkaa</td>
     <% end %>
@@ -68,8 +69,9 @@
      @res[:results].each do |result| %>
       <% i += 1 %>
       <tr>
-        <td width="20%"><%= i %>. <a href="#" onclick="event.preventDefault(); $('#stat<%= i %>').toggle()"><%= result.name %></a></td>
-        <td width="50%"><%= result.group %></td>
+        <td width="30%"><%= i %>. <a href="#" onclick="event.preventDefault(); $('#stat<%= i %>').toggle()"><%= result.name %></a></td>
+        <td width="40%"><%= result.group %></td>
+        <td width="10%"><%= result.series %></td>
         <td width="10%"><%= result.completed_events %></td>
         <td colspan="3" width="10%"><% unless result.pts_sum.nil? then %><%= result.pts_sum.round(2) %> <% end %></td>
         <% if user_is_admin? %>
