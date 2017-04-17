@@ -1,5 +1,5 @@
 <h3>Vuoden <%= params[:year] %> tulokset</h3>
-<div>
+<div style="margin-bottom: 16px;">
   <select id="selector1" style="width: initial; max-width: initial;" class="form-control input-sm <% unless params[:type].eql?("all") %>selected<% end %>">
     <option value="all" <% if params[:type] == "all" then %> selected <% end %>>Kaikki lajit</option>
     <option value="skating" <% if params[:type] == "skating" then %> selected <% end %>>Luistelu</option>
@@ -51,7 +51,7 @@
 </div>
 
 <% if params[:type] == "all" then %>
-  <div style="padding: 14px 0; font-size: 14px;">Klikkaamalla kilpailijan nimeä näet tarkemmat suoritustiedot.</div>
+  <div style="margin-bottom: 16px; font-size: 14px;">Klikkaamalla kilpailijan nimeä näet tarkemmat suoritustiedot.</div>
 
 <table class="results">
   <tr style="font-size: 14px; ">
