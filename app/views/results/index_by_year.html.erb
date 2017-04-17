@@ -78,56 +78,56 @@
         <td width="10%"><%= link_to 'Muokkaa', edit_result_path(result) %></td>
         <% end %>
       </tr>
-      <tr><td colspan="4">
+      <tr><td colspan="5">
         <table style="display: none; background-color: #f0f0f0;" class="results child" id="stat<%= i %>">
             <tr style="border-bottom: 1px solid black;">
-              <th width="30%">Laji</th>
+              <td width="30%">Laji</td>
               <td width="20%">Tyyli</td>
               <td width="20%">Aika</td>
-              <td width="10%">Sijoitus</td>
-              <td width="10%">Pistemäärä</td>
+              <td width="10%">Pisteet</td>
+              <td width="20%">Sijoitus</td>
             </tr>
           <tr>
-              <th>Luistelu</th>
+              <td>Luistelu</td>
               <td></td>
               <td><%= seconds_to_human_form(result.skating_time) %></td>
-              <td><%= result.skating_pos %></td>
               <td><% unless result.skating_pts.nil? then %><%=result.skating_pts.round(2) %> <% end %></td>
+              <td><%= result.skating_pos %></td>
           </tr>
           <tr>
-              <th>Hiihto</th>
+              <td>Hiihto</td>
               <td><%= result.skiing_style %></td>
               <td><%= seconds_to_human_form(result.skiing_time) %></td>
-              <td><%= result.skiing_pos %></td>
               <td><% unless result.skiing_pts.nil? then %><%=result.skiing_pts.round(2) %> <% end %></td>
+              <td><%= result.skiing_pos %></td>
           </tr>
           <tr>
-            <th>Maraton</th>
+            <td>Maraton</td>
             <td><%= result.marathon_style %></td>
             <td><%= seconds_to_human_form(result.marathon_time) %></td>
-            <td><%= result.marathon_pos %></td>
             <td><% unless result.marathon_pts.nil? then %><%=result.marathon_pts.round(2) %> <% end %></td>
+            <td><%= result.marathon_pos %></td>
           </tr>
           <tr>
-              <th>Soutu</th>
+              <td>Soutu</td>
               <td><%= result.rowing_style %></td>
               <td><%= seconds_to_human_form(result.rowing_time) %></td>
-              <td><%= result.rowing_pos %></td>
               <td><% unless result.rowing_pts.nil? then %><%=result.rowing_pts.round(2) %> <% end %></td>
+              <td><%= result.rowing_pos %></td>
           </tr>
           <tr>
-              <th>Pyöräily</th>
+              <td>Pyöräily</td>
               <td></td>
               <td><%= seconds_to_human_form(result.cycling_time) %></td>
-              <td><%= result.cycling_pos %></td>
               <td><% unless result.cycling_pts.nil? then %><%=result.cycling_pts.round(2) %> <% end %></td>
+              <td><%= result.cycling_pos %></td>
           </tr>
           <tr>
-              <th width="40%">Suunnistus</th>
+              <td width="40%">Suunnistus</td>
               <td width="20%"></td>
               <td width="20%"><%= seconds_to_human_form(result.orienteering_time) %></td>
-              <td width="10%"><%= result.orienteering_pos %></td>
               <td width="10%"><% unless result.orienteering_pts.nil? then %><%=result.orienteering_pts.round(2) %> <% end %></td>
+              <td width="20%"><%= result.orienteering_pos %></td>
           </tr>
         </table>
       </td></tr>
