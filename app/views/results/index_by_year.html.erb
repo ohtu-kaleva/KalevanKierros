@@ -24,8 +24,6 @@
         <% end %>
     <% end %>
   </select>
-  <% unless params[:type].eql?("all") and params[:gender].eql?("all") and params[:age_group].eql?("all") then %>
-      <a href="/results/year/<%= params[:year]%>/all/all/all" class="btn btn-default btn-sm">Nollaa hakuehdot</a><% end %>
   <style type="text/css">select.selected{box-shadow: 0 1px 10px red;}select.form-control{max-width: 100px; display: inline;}</style>
   <script type="text/javascript">
       $( "#selector1" ).change(function() {
