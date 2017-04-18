@@ -15,6 +15,11 @@
                 <h4><%= link_to 'Tilastot >', statistic_path(current_user.statistic.id) %></h4>
             <% end %>
             <h4><%= link_to 'Yhteystiedot >', edit_user_path(current_user) %></h4>
+        <% else %>
+            <h2>Omat tiedot</2>
+            <h1><%= link_to 'Kirjaudu nähdäksesi tietosi', signin_path, :class => "btn btn-primary" %></h1>
+            <p>Oletko uusi kiertäjä?</p>
+            <h1><%= link_to 'Rekisteröidy kiertäjäksi', signup_path, :class => "btn btn-default" %></h1>
         <% end %>
         <% if user_is_admin? %>
             <h2>Ylläpito</h2>
