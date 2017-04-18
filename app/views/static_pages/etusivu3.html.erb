@@ -17,6 +17,7 @@
             <h4><%= link_to 'Yhteystiedot >', edit_user_path(current_user) %></h4>
         <% else %>
             <h2>Omat tiedot</2>
+            <p>Näet omat ilmoittautumiset, joukkuetiedot, tilastot ja yhteystiedot kirjautumalla.</p>
             <h1><%= link_to 'Kirjaudu', signin_path, :class => "btn btn-primary" %></h1>
         <% end %>
         <% if user_is_admin? %>
