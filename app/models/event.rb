@@ -96,7 +96,7 @@ class Event < ActiveRecord::Base
   end
 
   def spreadsheet_headers
-    attr_names = ["ilm_nro", "Etunimi", "Sukunimi", "Sähköposti", "KK-numero", "Sarja", "Vuosi", "Osoite", "Postinumero", "Postitoimipaikka"]
+    attr_names = ["ilm_nro", "Etunimi", "Sukunimi", "Sähköposti", "KK-numero", "Sarja", "Vuosi", "Osoite", "Postinumero", "Postitoimipaikka", "Viitenumero", "Maksettava", "Maksettu", "Arvopäivä"]
     event_attributes.where.not(attribute_index: nil).order('attribute_index asc').each do |attr|
       attr_names.append attr.name
     end
@@ -104,9 +104,25 @@ class Event < ActiveRecord::Base
   end
 
   def enrollment_data_as_array(user)
-    user_data = user.get_enrollment_data_for_event(id)
-    data_array = [user.find_enrollment_id_by_event(id), user.first_name, user.last_name, user.email, user.kk_number, user.define_series, user.birth_date.year, user.street_address, user.postal_code, user.city]
+    enrollment_id = user.find_enrollment_id_by_event(id)
+
+    enrollment = Enrollment.find(enrollment_id)
+    if enrollment.paid.nil?
+      paid = ''
+    else
+      paid = enrollment.paid/100.0
+    end
+
+    if enrollment.value_date.nil?
+      value_date = ''
+    else
+      value_date = enrollment.value_date.strftime("%d.%m.%Y")
+    end
+
+    data_array = [enrollment_id, user.first_name, user.last_name, user.email, user.kk_number, user.define_series, user.birth_date.year, user.street_address, user.postal_code, user.city, enrollment.construct_reference_number, enrollment.calculate_price, paid, value_date]
+
     i = 0
+    user_data = user.get_enrollment_data_for_event(id)
     user_data.each do |piece|
       if piece.attribute_index > i + 1
         missing = piece.attribute_index - i - 1
