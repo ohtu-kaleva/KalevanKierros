@@ -23,7 +23,7 @@
         </p>
     <% end %>
     <div class="field">
-    <% @event.event_attributes.each do |e| %>
+    <% @event.event_attributes.where(removed: false).each do |e| %>
         <% if e.attribute_type == "select" %>
           <p><%= e.attribute_label %></p>
           <p>

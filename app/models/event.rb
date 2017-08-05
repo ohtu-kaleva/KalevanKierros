@@ -97,7 +97,7 @@ class Event < ActiveRecord::Base
 
   def spreadsheet_headers
     attr_names = ["ilm_nro", "Etunimi", "Sukunimi", "Sähköposti", "KK-numero", "Sarja", "Vuosi", "Osoite", "Postinumero", "Postitoimipaikka", "Viitenumero", "Maksettava", "Maksettu", "Arvopäivä"]
-    event_attributes.where.not(attribute_index: nil).order('attribute_index asc').each do |attr|
+    event_attributes.where(removed: false).where.not(attribute_index: nil).order('attribute_index asc').each do |attr|
       attr_names.append attr.name
     end
     attr_names.append 'Aika'
@@ -127,19 +127,26 @@ class Event < ActiveRecord::Base
       if piece.attribute_index > i + 1
         missing = piece.attribute_index - i - 1
         missing.times do
-          data_array.append ''
+          if not event_attributes.find_by(attribute_index: i + 1).removed
+            data_array.append ''
+          end
           i += 1
         end
       end
-      data_array.append piece.value
+
       i += 1
+      if not event_attributes.find_by(attribute_index: piece.attribute_index).removed
+        data_array.append piece.value
+      end
     end
-    last = event_attributes.where.not(attribute_index: nil).order('attribute_index asc').last
+    last = event_attributes.where(removed: false).where.not(attribute_index: nil).order('attribute_index asc').last
     if last
 	last_index = last.attribute_index
     	missing = last_index - i
     	missing.times do
-      	   data_array.append ''  
+      	  if not event_attributes.find_by(attribute_index: i + 1).removed
+            data_array.append ''
+          end
     	end
     end
     data_array

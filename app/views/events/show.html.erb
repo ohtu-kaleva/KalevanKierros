@@ -40,8 +40,8 @@
 
         <strong>Tapahtuman kentät:</strong><br>
         <% #form_for(@enrollment) do |e| %>
-        <% @event.event_attributes.each do |f| %>
-                <p>
+        <% @event.event_attributes.where(removed: false).each do |f| %>
+                <div style="background-color: rgba(255, 0, 0, 0.2); margin: 0 0 10px 0;">
                 <% if f.attribute_type != "hidden" %>
                     <strong><%= f.attribute_label %></strong>
                 <% end %>
@@ -80,7 +80,8 @@
                   <%= f.attribute_value %>
                 <% end %>
                 </div>
-                </p>
+		<%= link_to 'Poista kenttä', remove_event_attribute_path({:event_id => @event.id, :id => f.id}), :method => :post, :class => "btn btn-primary" %>
+                </div>
             <% end %>
         <% #end %>
         <p><span id="price_sum"></span></p>

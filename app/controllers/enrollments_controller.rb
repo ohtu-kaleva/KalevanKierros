@@ -52,7 +52,7 @@ class EnrollmentsController < ApplicationController
     if event
       if current_user
         data_list = []
-        attrs = event.event_attributes.select {|a| a.attribute_type != 'plain_text' and a.attribute_type != 'hidden' }
+        attrs = event.event_attributes.select {|a| a.attribute_type != 'plain_text' and a.attribute_type != 'hidden' and a.removed == false }
         # loop for creating information for data
         attrs.each do |a|
           if !params.has_key? a.name
@@ -136,7 +136,7 @@ class EnrollmentsController < ApplicationController
       event = Event.find_by id: params[:event_id]
       if event && event.open
         data_list = []
-        attrs = event.event_attributes.select {|a| a.attribute_type != 'plain_text' and a.attribute_type != 'hidden' }
+        attrs = event.event_attributes.select {|a| a.attribute_type != 'plain_text' and a.attribute_type != 'hidden' and a.removed == false }
         attrs.each do |a|
           if !params[:enrollment].has_key? a.name
             redirect_to root_path and return

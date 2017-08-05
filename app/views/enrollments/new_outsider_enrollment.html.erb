@@ -23,7 +23,7 @@
         <%= u.text_field :city, label: "Postitoimipaikka: " %>
     <% end %>
     <%= f.fields_for :enrollment do |enr| %>
-        <% @attributes.each do |a| %>
+        <% @attributes.where(removed: false).each do |a| %>
             <% if a.attribute_type != "hidden" %>
                 <strong><%= a.attribute_label %></strong><br>
             <% end %>

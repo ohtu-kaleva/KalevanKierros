@@ -1,6 +1,6 @@
 class EventAttributesController < ApplicationController
   before_action :redirect_if_user_not_admin
-  before_action :set_event_attribute_or_redirect, only: [:edit, :update, :destroy]
+  before_action :set_event_attribute_or_redirect, only: [:edit, :update, :remove, :destroy]
   before_action :set_attribute_types, only: [:new, :edit]
 
   # GET /event_attributes/1
@@ -28,6 +28,12 @@ class EventAttributesController < ApplicationController
       params[:event_id] = event_attribute_params[:event_id]
       render :new
     end
+  end
+
+  def remove
+    @event_attribute.removed = true
+    @event_attribute.save
+    redirect_to :back, flash: { success: 'Kenttä poistettiin onnistuneesti.' }
   end
 
   # PATCH/PUT /event_attributes/1

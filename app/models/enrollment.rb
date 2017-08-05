@@ -54,7 +54,7 @@ class Enrollment < ActiveRecord::Base
       if self.event.price
         price = price + self.event.price
       end
-      self.event.event_attributes.each do |a|
+      self.event.event_attributes.where(removed: false).each do |a|
         if a.attribute_type.in? ['radio_button', 'select']
           selection = a.attribute_value.split(';')
           prices = a.payment_value.split(';')
@@ -63,7 +63,8 @@ class Enrollment < ActiveRecord::Base
             price = price + prices[selection.index(selected.value)].to_i
           end
         elsif a.attribute_type == 'check_box'
-          if self.enrollment_datas.find_by(attribute_index: a.attribute_index).value != ""
+          attribute = self.enrollment_datas.find_by(attribute_index: a.attribute_index)
+          if attribute && attribute.value != ""
             price = price + a.payment_value.to_i
           end
         end
@@ -74,7 +75,7 @@ class Enrollment < ActiveRecord::Base
       if self.event.second_price
         price = price + self.event.second_price
       end
-      self.event.event_attributes.each do |a|
+      self.event.event_attributes.where(removed: false).each do |a|
         if a.attribute_type.in? ['radio_button', 'select']
           selection = a.attribute_value.split(';')
           prices = a.second_payment_value.split(';')
@@ -84,7 +85,8 @@ class Enrollment < ActiveRecord::Base
           end
 
         elsif a.attribute_type == 'check_box'
-          if self.enrollment_datas.find_by(attribute_index: a.attribute_index).value != ""
+          attribute = self.enrollment_datas.find_by(attribute_index: a.attribute_index)
+          if attribute && attribute.value != ""
             price = price + a.second_payment_value.to_i
           end
         end

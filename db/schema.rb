@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170330171158) do
+ActiveRecord::Schema.define(version: 20170805133358) do
 
   create_table "app_settings", force: true do |t|
     t.string   "name",       null: false
@@ -55,6 +55,7 @@ ActiveRecord::Schema.define(version: 20170330171158) do
     t.integer  "attribute_index"
     t.string   "payment_value",        default: ""
     t.string   "second_payment_value", default: ""
+    t.boolean  "removed",              default: false, null: false
   end
 
   add_index "event_attributes", ["event_id"], name: "index_event_attributes_on_event_id"

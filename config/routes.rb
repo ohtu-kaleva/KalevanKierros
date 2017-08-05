@@ -64,6 +64,7 @@ Rails.application.routes.draw do
   get 'signin', to: 'sessions#new'
   delete 'signout', to: 'sessions#destroy'
   get 'events/:event_id/event_attributes/new', to: 'event_attributes#new', as: 'add_event_attribute'
+  post 'events/:event_id/event_attributes/:id', to: 'event_attributes#remove', as: 'remove_event_attribute'
   get 'events/:event_id/enrollments/new', to: 'enrollments#new', as: 'add_enrollment'
   get 'enrollments/:enrollment_id', to: 'enrollments#show', as: 'enrollment'
   delete 'enrollments/:enrollment_id', to: 'enrollments#destroy', as: 'delete_enrollment'

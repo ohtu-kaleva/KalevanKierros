@@ -9,7 +9,7 @@
     <th>Sukunimi</th>
     <th>Osallistujan sähköposti</th>
     <th>KK-numero</th>
-    <% @event.event_attributes.where.not(attribute_index: nil).order('attribute_index asc').each do |attr| %>
+    <% @event.event_attributes.where(removed: false).where.not(attribute_index: nil).order('attribute_index asc').each do |attr| %>
         <th><%= attr.name %></th>
     <% end %>
     <th>Viitenumero</th>
