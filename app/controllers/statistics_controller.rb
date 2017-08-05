@@ -25,7 +25,7 @@ class StatisticsController < ApplicationController
   # GET /statistics/1
   # GET /statistics/1.json
   def show
-    @statistic = Statistic.find_by id: statistic_params[:id]
+    @statistic = Statistic.find_by id: params[:id]
 
     respond_to do |format|
       if @statistic
