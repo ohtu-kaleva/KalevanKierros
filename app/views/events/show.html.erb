@@ -80,7 +80,7 @@
                   <%= f.attribute_value %>
                 <% end %>
                 </div>
-		<%= link_to 'Poista kenttä', remove_event_attribute_path({:event_id => @event.id, :id => f.id}), :method => :post, :class => "btn btn-primary" %>
+		<%= link_to 'Poista kenttä', remove_event_attribute_path({:event_id => @event.id, :id => f.id}), :method => :post, :class => "btn btn-primary", :data => {:confirm => 'Haluatko varmati poistaa kentän?'} %>
                 </div>
             <% end %>
         <% #end %>
