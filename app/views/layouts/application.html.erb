@@ -28,8 +28,21 @@
       <ul class="nav navbar-nav">
         <li><a href="http://kalevankierros.fi/">Etusivu</a></li>
         <li><a href="http://kalevankierros.fi/ilmoittaudu/">Ilmoittaudu</a></li>
-        <li><%= link_to 'Tulokset', results_path %></li>
-        <li><a href="http://tiedot.kalevankierros.fi/phpbb/index.php">Forum</a></li>
+        <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="kiertajille">Kiertäjille <span class="caret"></span></a>
+          <ul class="dropdown-menu" aria-labelledby="kiertajille">
+            <li><a href="http://kalevankierros.fi/kiertajille#tapahtumat">Tapahtumat</a></li>
+            <li><%= link_to 'Tulokset', results_path %></li>
+            <li><a href="http://kalevankierros.fi/kiertajille#keskustelut">Keskustelut</a></li>
+            <li><a href="http://tiedot.kalevankierros.fi/phpbb/index.php">Forum</a></li>
+            <li><a href="http://kalevankierros.fi/kiertajille#hallitus">Hallitus</a></li>
+            <li><a href="http://kalevankierros.fi/kiertajille#asusteet">Asusteet</a></li>
+            <li><%= link_to 'Omat tiedot', signin_path %></li>
+            <li><a href="http://kalevankierros.fi/kiertajille#historia">Historia</a></li>
+            <li><a href="http://kalevankierros.fi/kiertajille#pisteet">Pisteiden laskeminen</a></li>
+            <li><a href="http://kalevankierros.fi/kiertajille#saannot">Säännöt</a></li>
+          </ul>
+        </li>
       </ul>
 
       <ul class="nav navbar-nav navbar-right">
