@@ -3,8 +3,9 @@
 <% @years.reverse.each do |year| %>
 <p style="font-size: larger;">
     <span style="font-weight: bold;"><%= year %></span>:
-    <%= link_to "Henkilökohtainen "<< '', index_by_year_path(year, "all", "all", "all") %>&nbsp;|&nbsp;
-    <%= link_to "Joukkue " << '', results_path << '/year/' << year.to_s << '/groups' %>
+    <%= link_to "Kiertäjät "<< '', index_by_year_path(year, "all", "all", "all") %>&nbsp;|&nbsp;
+    <%= link_to "Naiset "<< '', index_by_year_path(year, "N", "all", "all") %>&nbsp;|&nbsp;
+    <%= link_to "Joukkueet " << '', results_path << '/year/' << year.to_s << '/groups' %>
     <% if year >= 2017 %>&nbsp|&nbsp;
         <%= link_to "Viesti " << '', results_path << '/year/' << year.to_s << '/relay_groups' %>
     <% end %>
