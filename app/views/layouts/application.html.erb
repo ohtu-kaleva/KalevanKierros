@@ -26,24 +26,10 @@
     </div>
     <div class="navbar-collapse collapse" id="navbar-main">
       <ul class="nav navbar-nav">
-        <li><a href="http://kalevankierros.fi/">Etusivu</a></li>
+        <li><a href="http://kalevankierros.fi/esittely/">Esittely</a></li>
         <li><a href="http://kalevankierros.fi/ilmoittaudu/">Ilmoittaudu</a></li>
         <li><%= link_to 'Tulokset', results_path %></li>
-        <li class="dropdown">
-          <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="kiertajille">Kiertäjille <span class="caret"></span></a>
-          <ul class="dropdown-menu" aria-labelledby="kiertajille">
-            <li><a href="http://kalevankierros.fi/kiertajille#tapahtumat">Tapahtumat</a></li>
-            <li><%= link_to 'Tulokset', results_path %></li>
-            <li><a href="http://kalevankierros.fi/kiertajille#keskustelut">Keskustelut</a></li>
-            <li><a href="http://tiedot.kalevankierros.fi/phpbb/index.php">Forum</a></li>
-            <li><a href="http://kalevankierros.fi/kiertajille#hallitus">Hallitus</a></li>
-            <li><a href="http://kalevankierros.fi/kiertajille#asusteet">Asusteet</a></li>
-            <li><%= link_to 'Omat tiedot', signin_path %></li>
-            <li><a href="http://kalevankierros.fi/kiertajille#historia">Historia</a></li>
-            <li><a href="http://kalevankierros.fi/kiertajille#pistelasku">Pistelasku</a></li>
-            <li><a href="http://kalevankierros.fi/kiertajille#saannot">Säännöt</a></li>
-          </ul>
-        </li>
+        <li><a href="http://kalevankierros.fi/kiertajille/">Kiertäjille</a></li>
       </ul>
 
       <ul class="nav navbar-nav navbar-right">
@@ -63,12 +49,8 @@
         </li>
         <% end %>
         <% if current_user.nil? %>
-          <li><%= link_to 'Rekisteröidy', signup_path %></li>
           <li><%= link_to 'Kirjaudu', signin_path %></li>
         <% else %>
-          <% if not user_is_admin? %>
-            <li><a href="http://tiedot.kalevankierros.fi/">Omat tiedot</a></li>
-          <% end %>
           <li><%= link_to 'Kirjaudu ulos', signout_path, :method => 'delete' %></li>
         <% end %>
       </ul>
