@@ -187,10 +187,15 @@ class ResultsController < ApplicationController
   end
 
   def add_result_to_sheet(sheet, r, total_pos, style)
-    if r.orienteering_pts
-      sheet.add_row [total_pos, r.name, r.group, sprintf('%.2f', r.pts_sum), 'Suunnistus', '', seconds_to_human_form(r.orienteering_time), r.orienteering_pos, sprintf('%.2f', r.orienteering_pts)], style: [nil, nil, nil, style, nil, nil, nil, nil, style]
+    if r.marathon_style == 'maraton'
+      m_style = 'M'
     else
-      sheet.add_row [total_pos, r.name, r.group, sprintf('%.2f', r.pts_sum), 'Suunnistus', '', '0', '0', '0'], style: [nil, nil, nil, style, nil, nil, nil, nil, nil]
+      m_style = 'PM'
+    end
+    if r.marathon_pts
+      sheet.add_row ['', '', '', '', 'Juoksu', m_style, seconds_to_human_form(r.marathon_time), r.marathon_pos, sprintf('%.2f', r.marathon_pts)], style: [nil, nil, nil, nil, nil, nil, nil, nil, style]
+    else
+      sheet.add_row ['', '', '', '', 'Juoksu', '', '0', '0', '0']
     end
     if r.cycling_pts
       sheet.add_row ['', '', r.series, '', 'Pyöräily', '', seconds_to_human_form(r.cycling_time), r.cycling_pos, sprintf('%.2f', r.cycling_pts)], style: [nil, nil, nil, nil, nil, nil, nil, nil, style]
@@ -207,15 +212,10 @@ class ResultsController < ApplicationController
     else
       sheet.add_row ['', '', '', '', 'Soutu', '', '0', '0', '0']
     end
-    if r.marathon_style == 'maraton'
-      m_style = 'M'
+    if r.orienteering_pts
+      sheet.add_row [total_pos, r.name, r.group, sprintf('%.2f', r.pts_sum), 'Suunnistus', '', seconds_to_human_form(r.orienteering_time), r.orienteering_pos, sprintf('%.2f', r.orienteering_pts)], style: [nil, nil, nil, style, nil, nil, nil, nil, style]
     else
-      m_style = 'PM'
-    end
-    if r.marathon_pts
-      sheet.add_row ['', '', '', '', 'Juoksu', m_style, seconds_to_human_form(r.marathon_time), r.marathon_pos, sprintf('%.2f', r.marathon_pts)], style: [nil, nil, nil, nil, nil, nil, nil, nil, style]
-    else
-      sheet.add_row ['', '', '', '', 'Juoksu', '', '0', '0', '0']
+      sheet.add_row [total_pos, r.name, r.group, sprintf('%.2f', r.pts_sum), 'Suunnistus', '', '0', '0', '0'], style: [nil, nil, nil, style, nil, nil, nil, nil, nil]
     end
     if r.skiing_style == 'Perinteinen'
       s_style = 'P'
@@ -318,7 +318,7 @@ class ResultsController < ApplicationController
         normal = wb.styles.add_style :sz => 11, :format_code => '#.00'
         bold = wb.styles.add_style :sz => 11, :format_code => '#.00', :b => true
         wb.add_worksheet do |sheet|
-          sheet.add_row ['', 'Joukkue', 'Pisteet', 'Jäsen', 'Luistelu', 'Hiihto', 'Juoksu', 'Soutu', 'Pyöräily', 'Suunnistus']
+          sheet.add_row ['', 'Joukkue', 'Pisteet', 'Jäsen', 'Luistelu', 'Hiihto', 'Suunnistus', 'Soutu', 'Pyöräily', 'Juoksu']
           i = 1
           @group_results.each do |group, group_results|
             group_name = group
@@ -351,8 +351,8 @@ class ResultsController < ApplicationController
     else
       data << 0
     end
-    if individual_result[:result][:marathon_pts]
-      data << sprintf('%.2f', individual_result[:result][:marathon_pts])
+    if individual_result[:result][:orienteering_pts]
+      data << sprintf('%.2f', individual_result[:result][:orienteering_pts])
     else
       data << 0
     end
@@ -366,8 +366,8 @@ class ResultsController < ApplicationController
     else
       data << 0
     end
-    if individual_result[:result][:orienteering_pts]
-      data << sprintf('%.2f', individual_result[:result][:orienteering_pts])
+	if individual_result[:result][:marathon_pts]
+      data << sprintf('%.2f', individual_result[:result][:marathon_pts])
     else
       data << 0
     end
@@ -389,9 +389,9 @@ class ResultsController < ApplicationController
     else
       data << nil
     end
-    if individual_result[:result_noted][:marathon]
+	if individual_result[:result_noted][:orienteering]
       data << bold
-    elsif individual_result[:result][:marathon_pts] and individual_result[:result][:marathon_pts] > 0
+    elsif individual_result[:result][:orienteering_pts] and individual_result[:result][:orienteering_pts] > 0
       data << normal
     else
       data << nil
@@ -410,9 +410,9 @@ class ResultsController < ApplicationController
     else
       data << nil
     end
-    if individual_result[:result_noted][:orienteering]
+    if individual_result[:result_noted][:marathon]
       data << bold
-    elsif individual_result[:result][:orienteering_pts] and individual_result[:result][:orienteering_pts] > 0
+    elsif individual_result[:result][:marathon_pts] and individual_result[:result][:marathon_pts] > 0
       data << normal
     else
       data << nil

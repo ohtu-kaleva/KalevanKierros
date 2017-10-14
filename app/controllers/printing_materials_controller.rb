@@ -46,8 +46,8 @@ class PrintingMaterialsController < ApplicationController
         data << "\\pard\\plain#{first_space}\\tx850\\tqr\\tx5212\\tqr\\tx6653\\tqr\\tx8507{\\plain\\tab\\fs20\\b\\f5\\cf0\\cb1 #{event_names[:skiing]}\\plain\\tab\\fs20\\b\\f5\\cf0\\cb1 #{e.skiing_pos}\\plain\\tab\\fs20\\b\\f5\\cf0\\cb1 #{seconds_to_human_form(e.skiing_time)}\\plain\\tab\\fs20\\b\\f5\\cf0\\cb1 #{sprintf('%.2f', e.skiing_pts)}{\\fs26\\par}}"
         first_space = ''
       end
-      if e.marathon_pts
-        data << "\\pard\\plain#{first_space}\\tx850\\tqr\\tx5212\\tqr\\tx6653\\tqr\\tx8507{\\plain\\tab\\fs20\\b\\f5\\cf0\\cb1 #{event_names[:marathon]}\\plain\\tab\\fs20\\b\\f5\\cf0\\cb1 #{e.marathon_pos}\\plain\\tab\\fs20\\b\\f5\\cf0\\cb1 #{seconds_to_human_form(e.marathon_time)}\\plain\\tab\\fs20\\b\\f5\\cf0\\cb1 #{sprintf('%.2f', e.marathon_pts)}{\\fs26\\par}}"
+      if e.orienteering_pts
+        data << "\\pard\\plain#{first_space}\\tx850\\tqr\\tx5212\\tqr\\tx6653\\tqr\\tx8507{\\plain\\tab\\fs20\\b\\f5\\cf0\\cb1 #{event_names[:orienteering]}\\plain\\tab\\fs20\\b\\f5\\cf0\\cb1 #{e.orienteering_pos}\\plain\\tab\\fs20\\b\\f5\\cf0\\cb1 #{seconds_to_human_form(e.orienteering_time)}\\plain\\tab\\fs20\\b\\f5\\cf0\\cb1 #{sprintf('%.2f', e.orienteering_pts)}{\\fs26\\par}}"
         first_space = ''
       end
       if e.rowing_pts
@@ -58,8 +58,8 @@ class PrintingMaterialsController < ApplicationController
         data << "\\pard\\plain#{first_space}\\tx850\\tqr\\tx5212\\tqr\\tx6653\\tqr\\tx8507{\\plain\\tab\\fs20\\b\\f5\\cf0\\cb1 #{event_names[:cycling]}\\plain\\tab\\fs20\\b\\f5\\cf0\\cb1 #{e.cycling_pos}\\plain\\tab\\fs20\\b\\f5\\cf0\\cb1 #{seconds_to_human_form(e.cycling_time)}\\plain\\tab\\fs20\\b\\f5\\cf0\\cb1 #{sprintf('%.2f', e.cycling_pts)}{\\fs26\\par}}"
         first_space = ''
       end
-      if e.orienteering_pts
-        data << "\\pard\\plain#{first_space}\\tx850\\tqr\\tx5212\\tqr\\tx6653\\tqr\\tx8507{\\plain\\tab\\fs20\\b\\f5\\cf0\\cb1 #{event_names[:orienteering]}\\plain\\tab\\fs20\\b\\f5\\cf0\\cb1 #{e.orienteering_pos}\\plain\\tab\\fs20\\b\\f5\\cf0\\cb1 #{seconds_to_human_form(e.orienteering_time)}\\plain\\tab\\fs20\\b\\f5\\cf0\\cb1 #{sprintf('%.2f', e.orienteering_pts)}{\\fs26\\par}}"
+      if e.marathon_pts
+        data << "\\pard\\plain#{first_space}\\tx850\\tqr\\tx5212\\tqr\\tx6653\\tqr\\tx8507{\\plain\\tab\\fs20\\b\\f5\\cf0\\cb1 #{event_names[:marathon]}\\plain\\tab\\fs20\\b\\f5\\cf0\\cb1 #{e.marathon_pos}\\plain\\tab\\fs20\\b\\f5\\cf0\\cb1 #{seconds_to_human_form(e.marathon_time)}\\plain\\tab\\fs20\\b\\f5\\cf0\\cb1 #{sprintf('%.2f', e.marathon_pts)}{\\fs26\\par}}"
         first_space = ''
       end
 
