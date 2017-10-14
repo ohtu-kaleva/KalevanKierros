@@ -193,9 +193,9 @@ class ResultsController < ApplicationController
       m_style = 'PM'
     end
     if r.marathon_pts
-      sheet.add_row ['', '', '', '', 'Juoksu', m_style, seconds_to_human_form(r.marathon_time), r.marathon_pos, sprintf('%.2f', r.marathon_pts)], style: [nil, nil, nil, nil, nil, nil, nil, nil, style]
+      sheet.add_row [total_pos, r.name, r.group, sprintf('%.2f', r.pts_sum), 'Juoksu', m_style, seconds_to_human_form(r.marathon_time), r.marathon_pos, sprintf('%.2f', r.marathon_pts)], style: [nil, nil, nil, nil, nil, nil, nil, nil, style]
     else
-      sheet.add_row ['', '', '', '', 'Juoksu', '', '0', '0', '0']
+      sheet.add_row [total_pos, r.name, r.group, sprintf('%.2f', r.pts_sum), 'Juoksu', '', '0', '0', '0']
     end
     if r.cycling_pts
       sheet.add_row ['', '', r.series, '', 'Pyöräily', '', seconds_to_human_form(r.cycling_time), r.cycling_pos, sprintf('%.2f', r.cycling_pts)], style: [nil, nil, nil, nil, nil, nil, nil, nil, style]
@@ -213,9 +213,9 @@ class ResultsController < ApplicationController
       sheet.add_row ['', '', '', '', 'Soutu', '', '0', '0', '0']
     end
     if r.orienteering_pts
-      sheet.add_row [total_pos, r.name, r.group, sprintf('%.2f', r.pts_sum), 'Suunnistus', '', seconds_to_human_form(r.orienteering_time), r.orienteering_pos, sprintf('%.2f', r.orienteering_pts)], style: [nil, nil, nil, style, nil, nil, nil, nil, style]
+      sheet.add_row ['', '', '', '', 'Suunnistus', '', seconds_to_human_form(r.orienteering_time), r.orienteering_pos, sprintf('%.2f', r.orienteering_pts)], style: [nil, nil, nil, style, nil, nil, nil, nil, style]
     else
-      sheet.add_row [total_pos, r.name, r.group, sprintf('%.2f', r.pts_sum), 'Suunnistus', '', '0', '0', '0'], style: [nil, nil, nil, style, nil, nil, nil, nil, nil]
+      sheet.add_row ['', '', '', '', 'Suunnistus', '', '0', '0', '0'], style: [nil, nil, nil, style, nil, nil, nil, nil, nil]
     end
     if r.skiing_style == 'Perinteinen'
       s_style = 'P'
