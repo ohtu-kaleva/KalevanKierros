@@ -5,7 +5,8 @@
     <span style="font-weight: bold;"><%= year %></span>:
     <%= link_to "Kiertäjät "<< '', index_by_year_path(year, "all", "all", "all") %>&nbsp;|&nbsp;
     <%= link_to "Naiset "<< '', index_by_year_path(year, "N", "all", "all") %>&nbsp;|&nbsp;
-    <%= link_to "Joukkueet " << '', results_path << '/year/' << year.to_s << '/groups' %>
+    <%= link_to "Joukkueet " << '', results_path << '/year/' << year.to_s << '/groups' %>&nbsp;|&nbsp;
+    <%= link_to "Naisjoukkueet " << '', results_path << '/year/' << year.to_s << '/groups?sort=naisjoukkueet' %>
     <% if year >= 2017 %>&nbsp|&nbsp;
         <%= link_to "Viesti " << '', results_path << '/year/' << year.to_s << '/relay_groups' %>
     <% end %>
@@ -27,26 +28,24 @@
     <a href="http://tiedot.kalevankierros.fi/vanhat_sivut/datafiles/userfiles/File/tulokset/2013/laji6_kierros_joukkuetulokset_naiset.html">Naisjoukkueet</a>
 </p>
 <p style="font-size: larger;">
-    <span style="font-weight: bold;">2012 Täysmatka</span>:
+    <span style="font-weight: bold;">2012</span>:&nbsp;
+    Täysmatka:&nbsp;
     <a href="http://tiedot.kalevankierros.fi/vanhat_sivut/datafiles/userfiles/File/tulokset/2012/laji6_kierros_tulokset.html">Kiertäjät</a>&nbsp;|&nbsp;
     <a href="http://tiedot.kalevankierros.fi/vanhat_sivut/datafiles/userfiles/File/tulokset/2012/laji6_kierros_tulokset_Naiset.html">Naiset</a>&nbsp;|&nbsp;
     <a href="http://tiedot.kalevankierros.fi/vanhat_sivut/datafiles/userfiles/File/tulokset/2012/laji6_kierros_tulokset.html">Joukkueet</a>&nbsp;|&nbsp;
-</p>
-<p style="font-size: larger;">
-    <span style="font-weight: bold;">2012 Puolimatka</span>:
+    Puolimatka:&nbsp;
     <a href="http://tiedot.kalevankierros.fi/vanhat_sivut/datafiles/userfiles/File/tulokset/2012/laji6_puolikas_tulokset.html">Kiertäjät</a>&nbsp;|&nbsp;
     <a href="http://tiedot.kalevankierros.fi/vanhat_sivut/datafiles/userfiles/File/tulokset/2012/laji6_puolikas_tulokset-naiset.html">Naiset</a>&nbsp;|&nbsp;
     <a href="http://tiedot.kalevankierros.fi/vanhat_sivut/datafiles/userfiles/File/tulokset/2012/laji6_puolikas_joukkuetulokset.html">Joukkueet</a>&nbsp;|&nbsp;
     <a href="http://tiedot.kalevankierros.fi/vanhat_sivut/datafiles/userfiles/File/tulokset/2012/laji6_puolikas_joukkuetulokset_naiset.html">Naisjoukkueet</a>
 </p>
 <p style="font-size: larger;">
-    <span style="font-weight: bold;">2011 Täysmatka</span>:
+    <span style="font-weight: bold;">2011</span>:&nbsp;
+    Täysmatka:&nbsp;
     <a href="http://tiedot.kalevankierros.fi/vanhat_sivut/datafiles/userfiles/File/tulokset/2011/laji6_kierros_tulokset.html">Kiertäjät</a>&nbsp;|&nbsp;
     <a href="http://tiedot.kalevankierros.fi/vanhat_sivut/datafiles/userfiles/File/tulokset/2011/laji6_kierros_tulokset_Naiset.html">Naiset</a>&nbsp;|&nbsp;
     <a href="http://tiedot.kalevankierros.fi/vanhat_sivut/datafiles/userfiles/File/tulokset/2011/laji6_kierros_tulokset.html">Joukkueet</a>&nbsp;|&nbsp;
-</p>
-<p style="font-size: larger;">
-    <span style="font-weight: bold;">2011 Puolimatka</span>:
+    Puolimatka:&nbsp;
     <a href="http://tiedot.kalevankierros.fi/vanhat_sivut/datafiles/userfiles/File/tulokset/2011/laji6_puolikas_tulokset.html">Kiertäjät</a>&nbsp;|&nbsp;
     <a href="http://tiedot.kalevankierros.fi/vanhat_sivut/datafiles/userfiles/File/tulokset/2011/laji6_puolikas_tulokset-naiset.html">Naiset</a>&nbsp;|&nbsp;
     <a href="http://tiedot.kalevankierros.fi/vanhat_sivut/datafiles/userfiles/File/tulokset/2011/laji6_puolikas_joukkuetulokset.html">Joukkueet</a>&nbsp;|&nbsp;
