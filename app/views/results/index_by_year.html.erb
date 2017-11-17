@@ -70,7 +70,7 @@
       <% i += 1 %>
       <tr>
         <td width="30%"><%= i %>. <a href="#" onclick="event.preventDefault(); $('#stat<%= i %>').toggle()"><%= result.name %></a></td>
-        <td width="40%"><%= result.group %>/<%= result.city %></td>
+        <td width="40%"><%= result.group %> / <%= result.city %></td>
         <td width="10%"><%= result.series %></td>
         <td width="10%"><%= result.completed_events %></td>
         <td colspan="3" width="10%"><% unless result.pts_sum.nil? then %><%= result.pts_sum.round(2) %> <% end %></td>
