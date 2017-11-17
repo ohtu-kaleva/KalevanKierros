@@ -4,7 +4,7 @@
         <% if not current_user.nil? %>
             <p>Omat tiedot</p>
             <h2 style="margin-top: 0;"><%= current_user.first_name %> <%= current_user.last_name %></h2>
-            <h4>Kiertäjänumerosi: <%= current_user.kk_number %></h4>
+            <p>Kiertäjänumerosi: <%= current_user.kk_number %></p>
             <h4><%= link_to 'Ilmoittautumiset >', user_path(current_user) %></h4>
             <% if current_user.group %>
                 <h4><%= link_to 'Joukkue >', group_path(current_user.group) %></h4>
