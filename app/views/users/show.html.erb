@@ -45,10 +45,10 @@
 
     <% if @group.nil? and @relay_group.nil? %>
         <h4>Et kuulu vielä joukkueeseen</h4>
-        <p>Kerää viisi kaveriasi mukaan ja osallistukaa Kalevan kierrokseen joukkueena tai viestinä.</p>
+        <p>Kerää viisi kaveriasi mukaan ja osallistukaa Kalevan kierrokseen joukkueena.</p>
         <h4>
             <%= link_to('Ilmoita joukkue', new_group_path(current_user.id), :class => "btn btn-primary") %>
-            <%= link_to('Ilmoita viestijoukkue', new_relay_group_path(current_user.id), :class => "btn btn-primary") %>
+            <!--%= link_to('Ilmoita viestijoukkue', new_relay_group_path(current_user.id), :class => "btn btn-primary") %-->
         </h4>
     <% end %>
 <% end %>
