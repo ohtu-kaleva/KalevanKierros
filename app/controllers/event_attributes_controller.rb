@@ -33,7 +33,7 @@ class EventAttributesController < ApplicationController
   def remove
     @event_attribute.removed = true
     @event_attribute.save
-    redirect_to :back, flash: { success: 'Kenttä poistettiin onnistuneesti.' }
+    redirect_back(fallback_location: root_path, flash: { success: 'Kenttä poistettiin onnistuneesti.' })
   end
 
   # PATCH/PUT /event_attributes/1

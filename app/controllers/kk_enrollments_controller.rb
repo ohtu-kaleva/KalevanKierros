@@ -146,7 +146,7 @@ class KkEnrollmentsController < ApplicationController
         end
       end
     end
-    redirect_to :back, flash: message
+    redirect_back(fallback_location: root_path, flash: message)
   end
 
   # DELETE /kk_enrollments/1

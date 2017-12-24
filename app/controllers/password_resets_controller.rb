@@ -17,7 +17,7 @@ class PasswordResetsController < ApplicationController
       UserMailer.reset_password_email(user).deliver
       redirect_to :root, flash: { success: "Antamaasi sähköpostiosoitteeseen: #{user.email} on lähetetty viesti. Seuraa siinä näkyviä ohjeita." } and return
     end
-    redirect_to :back, flash: { error: 'Käyttäjätunnus tai sähköposti ei täsmää olemassaolevia käyttäjiä.' } and return
+    redirect_back(fallback_location: root_path, flash: { error: 'Käyttäjätunnus tai sähköposti ei täsmää olemassaolevia käyttäjiä.' }) and return
   end
 
   def update
@@ -26,7 +26,7 @@ class PasswordResetsController < ApplicationController
       @user.update_column :reset_sent_at, nil
       redirect_to :root, flash: { success: 'Salasanasi on vaihdettu. Voit nyt kirjautua sisään uuden salasanan avulla' } and return
     end
-    redirect_to :back, flash: { error: 'Uusi salasanasi ei ollut tarpeeksi vahva.' }  and return
+    redirect_back(fallback_location: root_path, flash: { error: 'Uusi salasanasi ei ollut tarpeeksi vahva.' })  and return
   end
 
   private

@@ -118,7 +118,7 @@ class UsersController < ApplicationController
           end
         else
           flash[:error] = "Tarkista käyttäjätunnus ja salasana!"
-          redirect_to :back && return
+          redirect_back(fallback_location: root_path) && return
         end
       end
     end

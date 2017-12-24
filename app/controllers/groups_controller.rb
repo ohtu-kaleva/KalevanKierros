@@ -86,16 +86,16 @@ class GroupsController < ApplicationController
     user = User.find_by id: params[:user_id]
     if user
       if @group.user == user
-        redirect_to :back, flash: { error: 'Joukkueen kapteenia ei voi poistaa' } and return
+        redirect_back(fallback_location: root_path, flash: { error: 'Joukkueen kapteenia ei voi poistaa' }) and return
       end
       res = Result.find_by kk_number: user.kk_number
       if res
         res.update_column :group, nil
       end
       user.update_column :group_id, nil
-      redirect_to :back and return
+      redirect_back(fallback_location: root_path) and return
     end
-    redirect_to :back
+    redirect_back(fallback_location: root_path)
   end
 
   def update_user_group_relation
@@ -103,10 +103,10 @@ class GroupsController < ApplicationController
     user = User.find_by kk_number: params[:kk_number]
     if not group.nil? and not user.nil? and group.users.count < 6
       if enrollment_deadline_gone? and not user_is_admin?
-        redirect_to :back, flash: { error: 'Joukkueeseen ei voi enää lisätä henkilöitä.' } and return
+        redirect_back(fallback_location: root_path, flash: { error: 'Joukkueeseen ei voi enää lisätä henkilöitä.' }) and return
       end
       if not user.group.nil? or not user.relay_group.nil?
-        redirect_to :back, flash: { error: 'Jäsenen lisääminen ei onnistunut. Jäsen kuuluu jo johonkin ryhmään.'} and return
+        redirect_back(fallback_location: root_path, flash: { error: 'Jäsenen lisääminen ei onnistunut. Jäsen kuuluu jo johonkin ryhmään.'}) and return
       end
       if not user.kk_enrollment
         KkEnrollment.new(user_id: user.id).save
@@ -122,7 +122,7 @@ class GroupsController < ApplicationController
       end
       redirect_to group_path(params[:id]), flash: { success: 'Jäsen lisätty ryhmään.' } and return
     else
-      redirect_to :back, flash: { error: 'Jäsenen lisääminen ei onnistunut.' }
+      redirect_back(fallback_location: root_path, flash: { error: 'Jäsenen lisääminen ei onnistunut.' })
     end
   end
 

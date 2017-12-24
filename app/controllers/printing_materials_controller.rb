@@ -3,7 +3,7 @@ class PrintingMaterialsController < ApplicationController
 
   def export_diplomas
     if !orienteering_exists?
-      redirect_to :back, flash: {error: 'Tämän vuoden suunnistustapahtumaa ei ole vielä luotu.' } and return
+      redirect_back(fallback_location: root_path, flash: {error: 'Tämän vuoden suunnistustapahtumaa ei ole vielä luotu.'}) and return
     end
 
     year = AppSetting.find_by(name: 'KkYear').value.to_i

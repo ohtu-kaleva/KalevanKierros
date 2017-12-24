@@ -25,7 +25,7 @@ class SessionsController < ApplicationController
       end
     end
 
-    redirect_to :back, flash: error_message
+    redirect_back(fallback_location: root_path, flash: error_message)
   end
 
   def destroy

@@ -84,20 +84,20 @@ class EnrollmentsController < ApplicationController
               if(style.value == 'Vuoro')
                 if pair_name.length != 2
                   @enrollment.destroy
-                  redirect_to :back, flash: { error: 'Parin nimi ei ole kirjoitettu oikein. Kirjoita parisi nimeksi etunimi ja sukunimi välilyönnillä erotettuna.' } and return
+                  redirect_back(fallback_location: root_path, flash: { error: 'Parin nimi ei ole kirjoitettu oikein. Kirjoita parisi nimeksi etunimi ja sukunimi välilyönnillä erotettuna.' }) and return
                 end
                 other_rower = @enrollment.enrollment_datas.find_by name:'kk_numero'
                 if other_rower.value != ''
                   if not enroll_other_rower_to_event(other_rower.value, current_user, @enrollment, event)
                     @enrollment.destroy
-                    redirect_to :back, flash: { error: 'Toista henkilöä ei löytynyt kannasta. Jos hän ei ole kiertäjä, jätä kk-numeron kenttä tyhjäksi.' } and return
+                    redirect_back(fallback_location: root_path, flash: { error: 'Toista henkilöä ei löytynyt kannasta. Jos hän ei ole kiertäjä, jätä kk-numeron kenttä tyhjäksi.' }) and return
                   end
                 else
                   gender = @enrollment.enrollment_datas.find_by(name: 'Parin sukupuoli').value
                   birth_year = @enrollment.enrollment_datas.find_by(name: 'Parin syntymävuosi').value
                   if not create_new_user_for_outsider_rower(pair_name[0], pair_name[1], gender, birth_year, current_user, @enrollment, event)
                     @enrollment.destroy
-                    redirect_to :back, flash: { error: 'Jokin meni pieleen. Tarkista tiedot ja yritä uudestaan.' } and return
+                    redirect_back(fallback_location: root_path, flash: { error: 'Jokin meni pieleen. Tarkista tiedot ja yritä uudestaan.' }) and return
                   end
                 end
               end
@@ -164,21 +164,21 @@ class EnrollmentsController < ApplicationController
               if other_rower_is_user == 'Kyllä'
                 @enrollment.destroy
                 user.destroy
-                redirect_to :back, flash: { error: 'Ulkopuolisena et voi ilmoittaa kiertäjää pariksesi.' } and return
+                redirect_back(fallback_location: root_path, flash: { error: 'Ulkopuolisena et voi ilmoittaa kiertäjää pariksesi.' }) and return
               else
                 other_name = @enrollment.enrollment_datas.find_by(name:'Parin nimi').value
                 name_split = other_name.split(' ')
                 if name_split.length != 2
                   @enrollment.destroy
                   user.destroy
-                  redirect_to :back, flash: { error: 'Parin nimi ei ole kirjoitettu oikein. Kirjoita etunimi ja sukunimi välilyönnillä erotettuna' } and return
+                  redirect_back(fallback_location: root_path, flash: { error: 'Parin nimi ei ole kirjoitettu oikein. Kirjoita etunimi ja sukunimi välilyönnillä erotettuna' }) and return
                 end
                 birth_year = @enrollment.enrollment_datas.find_by(name:'Parin syntymävuosi').value
                 gender = @enrollment.enrollment_datas.find_by(name:'Parin sukupuoli').value
                 if not create_new_user_for_outsider_rower(name_split[0], name_split[1], gender, birth_year, user, @enrollment, event)
                   @enrollment.destroy
                   user.destroy
-                  redirect_to :back, flash: { error: 'Jotain meni pieleen. Tarkista tietojen oikeellisuus ja yritä uudestaan.' } and return
+                  redirect_back(fallback_location: root_path, flash: { error: 'Jotain meni pieleen. Tarkista tietojen oikeellisuus ja yritä uudestaan.' }) and return
                 end
               end
             end
@@ -186,11 +186,11 @@ class EnrollmentsController < ApplicationController
           user.enrollments << @enrollment
           EnrollmentMailer.send_enrollment_email(user, event, @enrollment)
         else
-          redirect_to :back, flash: { error: 'Jotain meni pieleen' } and return
+          redirect_back(fallback_location: root_path, flash: { error: 'Jotain meni pieleen' }) and return
         end
       end
     else
-      redirect_to :back, flash: { error: 'Et antanut kaikkia tietoja' } and return
+      redirect_back(fallback_location: root_path, flash: { error: 'Et antanut kaikkia tietoja' }) and return
     end
     redirect_to :root, flash: { success: 'Ilmoittautumisesi tapahtumaan on kirjattu.' } and return
   end
@@ -299,7 +299,7 @@ class EnrollmentsController < ApplicationController
         end
       end
     end
-    redirect_to :back, flash: message
+    redirect_back(fallback_location: root_path, flash: message)
   end
 
   def update_single
@@ -308,7 +308,7 @@ class EnrollmentsController < ApplicationController
       enrollment = Enrollment.find_by user_id: user.id, event_id: params[:event_id]
       enrollment.update_attribute :time, to_seconds(params[:times])
       render :nothing => true, status: 200
-      #redirect_to :back
+      #redirect_back(fallback_location: root_path)
     end
 
   end
@@ -318,7 +318,7 @@ class EnrollmentsController < ApplicationController
     if enrollment
       enrollment.update_attribute :time, nil
     end
-    redirect_to :back
+    redirect_back(fallback_location: root_path)
   end
 
   def show
@@ -340,7 +340,7 @@ class EnrollmentsController < ApplicationController
     event.enrollments.each do |e|
       e.update_attribute :paid, 0
     end
-    redirect_to :back, flash: { success: 'Tapahtuman kaikki maksutiedot poistettu' }
+    redirect_back(fallback_location: root_path, flash: { success: 'Tapahtuman kaikki maksutiedot poistettu' })
   end
 
   def show_enrollments_for_event
