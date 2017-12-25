@@ -1,3 +1,3 @@
-class AppSetting < ActiveRecord::Base
+class AppSetting < ApplicationRecord
   validates :name, uniqueness: true
 end

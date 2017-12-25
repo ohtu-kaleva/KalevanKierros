@@ -1,4 +1,4 @@
-class EventAttribute < ActiveRecord::Base
+class EventAttribute < ApplicationRecord
   belongs_to :event
   validates :attribute_type, :name, :attribute_label, presence: true,
                              allow_blank: false

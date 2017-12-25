@@ -1,3 +1,3 @@
-class KkEnrollment < ActiveRecord::Base
+class KkEnrollment < ApplicationRecord
   belongs_to :user
 end

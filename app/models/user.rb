@@ -1,4 +1,4 @@
-class User < ActiveRecord::Base
+class User < ApplicationRecord
   has_secure_password
   has_many :enrollments, dependent: :destroy
   has_many :events, through: :enrollments
@@ -57,7 +57,7 @@ class User < ActiveRecord::Base
       if last
         missing = last.attribute_index - i
         missing.times do
-          formatted_data.append ''  
+          formatted_data.append ''
         end
       end
       formatted_data

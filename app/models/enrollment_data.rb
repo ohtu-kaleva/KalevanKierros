@@ -1,3 +1,3 @@
-class EnrollmentData < ActiveRecord::Base
+class EnrollmentData < ApplicationRecord
   belongs_to :enrollment
 end

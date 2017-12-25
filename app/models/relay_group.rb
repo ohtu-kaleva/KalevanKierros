@@ -1,4 +1,4 @@
-class RelayGroup < ActiveRecord::Base
+class RelayGroup < ApplicationRecord
   has_many :users
   belongs_to :user
   validates :name, uniqueness: true

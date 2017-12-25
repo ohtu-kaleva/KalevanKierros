@@ -1,4 +1,4 @@
-class Enrollment < ActiveRecord::Base
+class Enrollment < ApplicationRecord
   belongs_to :event
   belongs_to :user
   has_many :enrollment_datas, dependent: :destroy

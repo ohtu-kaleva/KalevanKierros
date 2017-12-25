@@ -1,4 +1,4 @@
-class Event < ActiveRecord::Base
+class Event < ApplicationRecord
   has_many :event_attributes, dependent: :destroy
   has_many :enrollments, dependent: :destroy
   has_many :participants, through: :enrollments, source: :user
@@ -82,7 +82,7 @@ class Event < ActiveRecord::Base
     enrollments.each do |e|
       venekunta = e.enrollment_datas.find_by name:'Venekunta'
       if not venekunta
-        participant_boats.append(e.user)   
+        participant_boats.append(e.user)
       elsif pair_boats.has_key?(venekunta.value)
         pair_boats[venekunta.value].append(e.user)
       else
