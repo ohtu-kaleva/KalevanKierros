@@ -70,7 +70,7 @@ class ResultsController < ApplicationController
   end
 
   def existing_age_series(year)
-    series = Result.where(year: year).where(ignore_on_statistics: false).select('series').uniq
+    series = Result.where(year: year).where(ignore_on_statistics: false).select('series').distinct
     age_series = []
     series.each do |s|
       series_string = s[:series].to_s
@@ -113,7 +113,7 @@ class ResultsController < ApplicationController
     else
       @results = {}
     end
-    respond_to do |format| 
+    respond_to do |format|
       format.xlsx { send_data self.individual_results_to_xlsx.to_stream.read, filename: 'henkilokohtaiset_tulokset_' + year.to_s + '_' + params[:gender] + '.xlsx' }
     end
   end
@@ -238,7 +238,7 @@ class ResultsController < ApplicationController
     if not params[:year] =~ /\A\d{4}\z/
       redirect_to :root and return
     end
-    groups = Result.where(year: params[:year]).where.not(group: nil).order(:group).uniq.pluck(:group)
+    groups = Result.where(year: params[:year]).where.not(group: nil).order(:group).distinct.pluck(:group)
     if groups.empty?
       redirect_to :root and return
     end
@@ -252,7 +252,7 @@ class ResultsController < ApplicationController
     if not params[:year] =~ /\A\d{4}\z/
       redirect_to :root and return
     end
-    groups = Result.where(year: params[:year]).where.not(relay_group: nil).order(:relay_group).uniq.pluck(:relay_group)
+    groups = Result.where(year: params[:year]).where.not(relay_group: nil).order(:relay_group).distinct.pluck(:relay_group)
     if groups.empty?
       redirect_to :root and return
     end
@@ -264,7 +264,7 @@ class ResultsController < ApplicationController
 
   def with_female_group
     year = AppSetting.find_by(name: 'KkYear').value.to_i
-    groups = Result.where(year: year).where(ignore_on_statistics: false).where.not(group: nil).order(:group).uniq.pluck(:group)
+    groups = Result.where(year: year).where(ignore_on_statistics: false).where.not(group: nil).order(:group).distinct.pluck(:group)
     @group_results = {}
     groups.each do |group|
       if female_group?(group, year)
@@ -279,7 +279,7 @@ class ResultsController < ApplicationController
 
   def with_mixed_group
     year = AppSetting.find_by(name: 'KkYear').value.to_i
-    groups = Result.where(year: year).where(ignore_on_statistics: false).where.not(group: nil).order(:group).uniq.pluck(:group)
+    groups = Result.where(year: year).where(ignore_on_statistics: false).where.not(group: nil).order(:group).distinct.pluck(:group)
     @group_results = {}
     groups.each do |group|
       if not female_group?(group, year)
@@ -719,7 +719,7 @@ class ResultsController < ApplicationController
 
     redirect_to results_path
   end
-	
+
 
   def calculate_points_for_normal_or_relay(is_relay, event, year, winner_time, normal_times, times_sorted)
     if winner_time.nil?

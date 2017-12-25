@@ -19,14 +19,14 @@ class StaticPagesController < ApplicationController
   end
 
   def kk_enrollment
-    @years = Result.uniq.pluck :year
+    @years = Result.distinct.pluck :year
     @account_number = AppSetting.find_by name: 'KkAccountNumber'
     @kk_year = AppSetting.find_by name: 'KkYear'
     @deadline = AppSetting.find_by name: 'Enrollment_Deadline'
   end
 
   def ilmoittautuminen
-    
+
   end
 
   def import_payments_file
