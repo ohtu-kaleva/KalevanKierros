@@ -49,71 +49,105 @@ class EnrollmentsController < ApplicationController
 
   def create
     event = Event.find_by id: params[:enrollment][:event_id]
-    if event
-      if current_user
-        data_list = []
-        attrs = event.event_attributes.select {|a| a.attribute_type != 'plain_text' and a.attribute_type != 'hidden' and a.removed == false }
-        # loop for creating information for data
-        attrs.each do |a|
-          if !params.has_key? a.name
-            redirect_to root_path, flash: { error: 'Ilmoittautuminen epäonnistui. Täytä lomake uudelleen ja varmista, että pakolliset kentät on täytetty.' } and return
-          end
-          if params[a.name].kind_of?(Array)
-            value = params[a.name].join(' ')
-            attribute_index = EventAttribute.where(event_id: event.id).where(name: a.name).first.attribute_index
-            data_list.append(EnrollmentData.new(name:a.name, value:value, attribute_index: attribute_index))
-          else
-            attribute_index = EventAttribute.where(event_id: event.id).where(name: a.name).first.attribute_index
-            data_list.append(EnrollmentData.new(name:a.name, value:params[a.name], attribute_index: attribute_index))
-          end
+    user  = current_user
+    if event && user
+      create_enrollment(event, user, enrollment_params, params, true)
+    else
+      redirect_to root_path
+    end
+  end
+
+  def create_enrollment(event, user, enrollment_values, values, user_generated)
+    data_list = []
+    attrs = event.event_attributes.select {|a| a.attribute_type != 'plain_text' and a.attribute_type != 'hidden' and a.removed == false }
+    # loop for creating information for data
+    attrs.each do |a|
+      if user_generated
+        attribute_key = a.name
+      else
+        attribute_key = a.name.downcase.to_sym
+      end
+
+      if !values.has_key? attribute_key
+        if user_generated
+          redirect_to root_path, flash: { error: 'Ilmoittautuminen epäonnistui. Täytä lomake uudelleen ja varmista, että pakolliset kentät on täytetty.' }
         end
-
-        @enrollment = Enrollment.new(enrollment_params)
-        @enrollment.user = current_user
-        if @enrollment.save
-          data_list.each do |d|
-            d.enrollment_id = @enrollment.id
-            d.save
-          end
-
-          if current_user
-            if event.sport_type == 'RowingEvent'
-              style = @enrollment.enrollment_datas.find_by name:'Tyyli'
-              pair_name_datum = @enrollment.enrollment_datas.find_by name:'Parin nimi'
-              pair_name = pair_name_datum.value.split(' ')
-              if(style.value == 'Vuoro')
-                if pair_name.length != 2
-                  @enrollment.destroy
-                  redirect_back(fallback_location: root_path, flash: { error: 'Parin nimi ei ole kirjoitettu oikein. Kirjoita parisi nimeksi etunimi ja sukunimi välilyönnillä erotettuna.' }) and return
-                end
-                other_rower = @enrollment.enrollment_datas.find_by name:'kk_numero'
-                if other_rower.value != ''
-                  if not enroll_other_rower_to_event(other_rower.value, current_user, @enrollment, event)
-                    @enrollment.destroy
-                    redirect_back(fallback_location: root_path, flash: { error: 'Toista henkilöä ei löytynyt kannasta. Jos hän ei ole kiertäjä, jätä kk-numeron kenttä tyhjäksi.' }) and return
-                  end
-                else
-                  gender = @enrollment.enrollment_datas.find_by(name: 'Parin sukupuoli').value
-                  birth_year = @enrollment.enrollment_datas.find_by(name: 'Parin syntymävuosi').value
-                  if not create_new_user_for_outsider_rower(pair_name[0], pair_name[1], gender, birth_year, current_user, @enrollment, event)
-                    @enrollment.destroy
-                    redirect_back(fallback_location: root_path, flash: { error: 'Jokin meni pieleen. Tarkista tiedot ja yritä uudestaan.' }) and return
-                  end
-                end
-              end
-            end
-            current_user.enrollments << @enrollment
-            EnrollmentMailer.send_enrollment_email(current_user, event, @enrollment)
-          end
-
-          flash[:success] = "Ilmoittautumisesi tapahtumaan on kirjattu."
-          redirect_to enrollment_path(@enrollment.id) and return
-        else
-          render :new and return
-        end
+        return
+      end
+      if values[attribute_key].kind_of?(Array)
+        value = values[attribute_key].join(' ')
+        attribute_index = EventAttribute.where(event_id: event.id).where(name: a.name).first.attribute_index
+        data_list.append(EnrollmentData.new(name: a.name, value: value, attribute_index: attribute_index))
+      else
+        attribute_index = EventAttribute.where(event_id: event.id).where(name: a.name).first.attribute_index
+        data_list.append(EnrollmentData.new(name: a.name, value: values[attribute_key], attribute_index: attribute_index))
       end
     end
-    redirect_to root_path
+
+    @enrollment = Enrollment.new(enrollment_values)
+    @enrollment.user = user
+
+    if !user_generated && values[:aika]
+      @enrollment.time = to_seconds(values[:aika])
+    end
+
+    if @enrollment.save
+      data_list.each do |d|
+        d.enrollment_id = @enrollment.id
+        d.save
+      end
+
+      if user
+        if event.sport_type == 'RowingEvent'
+          style = @enrollment.enrollment_datas.find_by name:'Tyyli'
+          pair_name_datum = @enrollment.enrollment_datas.find_by name:'Parin nimi'
+          pair_name = pair_name_datum.value.split(' ')
+          if(style.value == 'Vuoro')
+            if pair_name.length != 2
+              @enrollment.destroy
+              if user_generated
+                redirect_back(fallback_location: root_path, flash: { error: 'Parin nimi ei ole kirjoitettu oikein. Kirjoita parisi nimeksi etunimi ja sukunimi välilyönnillä erotettuna.' })
+              end
+              return
+            end
+            other_rower = @enrollment.enrollment_datas.find_by name:'kk_numero'
+            if other_rower.value != ''
+              if not enroll_other_rower_to_event(other_rower.value, user, @enrollment, event)
+                @enrollment.destroy
+                if user_generated
+                  redirect_back(fallback_location: root_path, flash: { error: 'Toista henkilöä ei löytynyt kannasta. Jos hän ei ole kiertäjä, jätä kk-numeron kenttä tyhjäksi.' })
+                end
+                return
+              end
+            else
+              gender = @enrollment.enrollment_datas.find_by(name: 'Parin sukupuoli').value
+              birth_year = @enrollment.enrollment_datas.find_by(name: 'Parin syntymävuosi').value
+              if not create_new_user_for_outsider_rower(pair_name[0], pair_name[1], gender, birth_year, user, @enrollment, event)
+                @enrollment.destroy
+                if user_generated
+                  redirect_back(fallback_location: root_path, flash: { error: 'Jokin meni pieleen. Tarkista tiedot ja yritä uudestaan.' })
+                end
+                return
+              end
+            end
+          end
+        end
+        user.enrollments << @enrollment
+        if user_generated
+          EnrollmentMailer.send_enrollment_email(user, event, @enrollment)
+        end
+      end
+
+      if user_generated
+        flash[:success] = "Ilmoittautumisesi tapahtumaan on kirjattu."
+        redirect_to enrollment_path(@enrollment.id)
+      end
+    else
+      if user_generated
+        render :new
+      end
+      return
+    end
   end
 
   def create_outsider_enrollment
@@ -361,26 +395,42 @@ class EnrollmentsController < ApplicationController
 
   def import_csv
     event = Event.find_by id: params[:event_id]
+
+    if event.nil?
+      redirect_to root_path, flash: { error: "Tapahtumaa ei löydy" }
+      return
+    end
+
     file = params[:file]
     if file.nil?
       redirect_to show_enrollments_path(params[:event_id]), flash: { error: "Ei valittua tiedostoa!" }
       return
     end
+
     CSV.foreach(file.path, headers: true, header_converters: :symbol) do |row|
       result_hash = row.to_hash
-      enrollment = Enrollment.find_by id: result_hash[:ilm_nro]
-      if enrollment
-        if result_hash[:aika]
+      user = User.find_by kk_number: result_hash[:kknumero]
+
+      if user
+        enrollment = Enrollment.find_by user_id: user.id
+
+        if enrollment
+          if result_hash[:aika]
             enrollment.update_attribute :time, to_seconds(result_hash[:aika])
-        end
-      end
-      if event.sport_type == 'RowingEvent'
-        pair = User.find_by kk_number: result_hash[:kk_numero]
-        if pair
-            pair_enrollment = Enrollment.find_by id: pair.find_enrollment_id_by_event(event.id)
-            if pair_enrollment and result_hash[:aika]
+          end
+
+          if event.sport_type == 'RowingEvent'
+            pair = User.find_by kk_number: result_hash[:kk_numero]
+            if pair
+              pair_enrollment = Enrollment.find_by id: pair.find_enrollment_id_by_event(event.id)
+              if pair_enrollment and result_hash[:aika]
                 pair_enrollment.update_attribute :time, to_seconds(result_hash[:aika])
+              end
             end
+          end
+        else
+          enrollment_attributes = {event_id: event.id, user_id: user.id}
+          create_enrollment(event, user, enrollment_attributes, result_hash, false)
         end
       end
     end
