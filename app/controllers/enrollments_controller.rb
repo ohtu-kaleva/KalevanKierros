@@ -91,6 +91,14 @@ class EnrollmentsController < ApplicationController
       @enrollment.time = to_seconds(values[:aika])
     end
 
+    if !user_generated && values[:maksettu] && (is_float? values[:maksettu])
+      @enrollment.paid = (values[:maksettu].to_f * 100.0).to_i
+    end
+
+    if !user_generated && values[:arvopiv] && (is_date? values[:arvopiv])
+      @enrollment.value_date = Date::strptime(values[:arvopiv], "%d.%m.%Y")
+    end
+
     if @enrollment.save
       data_list.each do |d|
         d.enrollment_id = @enrollment.id
@@ -417,6 +425,14 @@ class EnrollmentsController < ApplicationController
         if enrollment
           if result_hash[:aika]
             enrollment.update_attribute :time, to_seconds(result_hash[:aika])
+          end
+
+          if is_float? result_hash[:maksettu]
+            enrollment.update_attribute(:paid, (result_hash[:maksettu].to_f * 100.0).to_i)
+          end
+
+          if is_date? result_hash[:arvopiv]
+            enrollment.update_attribute(:value_date, Date::strptime(result_hash[:arvopiv], "%d.%m.%Y"))
           end
 
           if event.sport_type == 'RowingEvent'
