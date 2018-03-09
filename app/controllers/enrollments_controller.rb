@@ -420,8 +420,7 @@ class EnrollmentsController < ApplicationController
       user = User.find_by kk_number: result_hash[:kknumero]
 
       if user
-        enrollment = Enrollment.find_by user_id: user.id
-
+        enrollment = event.enrollments.find_by user_id: user.id
         if enrollment
           if result_hash[:aika]
             enrollment.update_attribute :time, to_seconds(result_hash[:aika])
