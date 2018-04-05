@@ -142,7 +142,7 @@ class EnrollmentsController < ApplicationController
         end
         user.enrollments << @enrollment
         if user_generated
-          EnrollmentMailer.send_enrollment_email(user, event, @enrollment)
+          EnrollmentMailer.send_enrollment_email(user, event, @enrollment).deliver
         end
       end
 

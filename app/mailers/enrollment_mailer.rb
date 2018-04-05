@@ -8,7 +8,7 @@ class EnrollmentMailer < ActionMailer::Base
     @receiver = event.payment_receiver
     @event_name = event.name
     @price = enrollment.calculate_price
-    
+
     if enrollment.created_at <= enrollment.event.end_date
       @pay_day = enrollment.event.end_date.to_s
     else
@@ -38,7 +38,7 @@ class EnrollmentMailer < ActionMailer::Base
 
     mail(to: @user.email,
          subject: 'Ilmoittautuminen Kalevan Kierroksen Juoksuun',
-         template_name: :running_enrollment_email).deliver
+         template_name: :running_enrollment_email)
   end
 
   def rowing_enrollment_email
@@ -51,7 +51,7 @@ class EnrollmentMailer < ActionMailer::Base
 
     mail(to: @user.email,
          subject: 'Ilmoittautuminen Kalevan Kierroksen Soutuun',
-         template_name: :rowing_enrollment_email).deliver
+         template_name: :rowing_enrollment_email)
   end
 
   def skating_enrollment_email
@@ -59,7 +59,7 @@ class EnrollmentMailer < ActionMailer::Base
 
     mail(to: @user.email,
          subject: 'Ilmoittautuminen Kalevan Kierroksen Luisteluun',
-         template_name: :skating_enrollment_email).deliver
+         template_name: :skating_enrollment_email)
   end
 
   def skiing_enrollment_email
@@ -67,7 +67,7 @@ class EnrollmentMailer < ActionMailer::Base
 
     mail(to: @user.email,
          subject: 'Ilmoittautuminen Kalevan Kierroksen Hiihtoon',
-         template_name: :skiing_enrollment_email).deliver
+         template_name: :skiing_enrollment_email)
   end
 
   def orienteering_enrollment_email
@@ -75,18 +75,18 @@ class EnrollmentMailer < ActionMailer::Base
 
     mail(to: @user.email,
          subject: 'Ilmoittautuminen Kalevan Kierroksen Suunnistukseen',
-         template_name: :orienteering_enrollment_email).deliver
+         template_name: :orienteering_enrollment_email)
   end
 
   def cycling_enrollment_email
     mail(to: @user.email,
          subject: 'Ilmoittautuminen Kalevan Kierroksen Pyöräilyyn',
-         template_name: :cycling_enrollment_email).deliver
+         template_name: :cycling_enrollment_email)
   end
 
   def no_sport_event_enrollment_email
     mail(to: @user.email,
       subject: 'Ilmoittautuminen',
-      template_name: :no_sport_event_email).deliver
+      template_name: :no_sport_event_email)
   end
 end
