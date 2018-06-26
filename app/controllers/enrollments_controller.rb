@@ -109,9 +109,9 @@ class EnrollmentsController < ApplicationController
         if event.sport_type == 'RowingEvent'
           style = @enrollment.enrollment_datas.find_by name:'Tyyli'
           pair_name_datum = @enrollment.enrollment_datas.find_by name:'Parin nimi'
-          pair_name = pair_name_datum.value.split(' ')
+          pair_name = pair_name_datum.value&.split(' ')
           if(style.value == 'Vuoro')
-            if pair_name.length != 2
+            if user_generated && pair_name.length != 2
               @enrollment.destroy
               if user_generated
                 redirect_back(fallback_location: root_path, flash: { error: 'Parin nimi ei ole kirjoitettu oikein. Kirjoita parisi nimeksi etunimi ja sukunimi välilyönnillä erotettuna.' })
@@ -445,6 +445,15 @@ class EnrollmentsController < ApplicationController
           end
         else
           enrollment_attributes = {event_id: event.id, user_id: user.id}
+          if event.sport_type == 'RowingEvent'
+            result_hash['parin nimi'.to_sym] = result_hash[:parin_nimi]
+            result_hash['parin sukupuoli'.to_sym] = result_hash[:parin_sukupuoli]
+            result_hash['parin syntymävuosi'.to_sym] = result_hash[:parin_syntymvuosi]
+            result_hash['onko pari kiertäjä'.to_sym] = result_hash[:onko_pari_kiertj]
+            if result_hash[:melonta] != 'Melonta'
+              result_hash[:melonta] = 'Soutu'
+            end
+          end
           create_enrollment(event, user, enrollment_attributes, result_hash, false)
         end
       end
